@@ -17,7 +17,7 @@
         //var primePromise;
         var $q = common.$q;
         
-
+        //this si a very important 
         var getTrendsByEventId = function (id, trendsObservable) {
 
             var query = EntityQuery.from('GetTrendsByEventId')
@@ -36,12 +36,29 @@
                 }
             }
         };
+        
+        var getResourceById = function (resourceId) {
+            var query = EntityQuery.from('resources')
+                .where('id', '==', resourceId);
+
+            return manager.executeQuery(query);
+            //    .then(querySucceeded);
+            //    //.fail(queryFailed);
+
+            //function querySucceeded(data) {
+            //    if (resourceObservable) {
+            //        resourceObservable(data.results[0]);
+            //    }
+            //}
+        };
+
 
         var service = {
             getPeople: getPeople,
             getReportsByOwnerId: getReportsByOwnerId,
             createResource: createResource,
-            getTrendsByEventId:getTrendsByEventId,
+            getTrendsByEventId: getTrendsByEventId,
+            getResourceById: getResourceById,
             getMessageCount: getMessageCount
         };
 
@@ -66,9 +83,9 @@
         
         function createResource() {
             log('woo hoo resource!!');
-            //return manager.createEntity('Resource', { ownerId: 1 });
-            var resource = { name: 'John', email: 'joe@jope.com', phone: 23323232325, location: 'Florida' };
-            return $q.when(resource);
+            return manager.createEntity('Resource', { ownerId: 1 });
+            //var resource = { name: 'John', email: 'joe@jope.com', phone: 23323232325, location: 'Florida' };
+            //return $q.when(resource);
         };
         
         //function getTrendsByEventId(id, trendsObservable) {

@@ -20,8 +20,9 @@
         }
         
         function createResource() {
-            return datacontext.createResource()
+            return datacontext.getResourceById(1)
                 .then(function (data) {
+                    log('made it ehre!');
                     vm.resource = data;
                     //applyFilter();
                     return vm.resource;
