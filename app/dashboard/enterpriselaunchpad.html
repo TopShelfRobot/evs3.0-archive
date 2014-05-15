@@ -1,0 +1,69 @@
+
+<div class="row">
+  <div class="col-lg-4">
+    <div class="gridStyle" ng-grid="eventgrid"></div>
+    <div id="capgauge"></div>
+    <hr>
+    <section id="pies" class="well">
+      <div class="row">
+        <h4 class="text-center">Revenue and Expenses</h4>
+        <div class="col-lg-6">
+          <div id="pie1" class="small-chart"></div>
+        </div>
+        <div class="col-lg-6">
+          <div id="pie2" class="small-chart"></div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-6">
+          <div id="pie3" class="small-chart"></div>
+        </div>
+        <div class="col-lg-6">
+          <div id="pie4" class="small-chart"></div>
+        </div>
+      </div>
+    </section>
+    <section id="demographics" class="text-center well">
+      <div class="row">
+        <h4>Total Number of Participants</h4>
+        <h2>5,000</h2>
+        <div class="col-lg-6"> <img src="img/femaleicon.png" width="115" height="115" alt=""/>
+          <h2>1,500</h2>
+        </div>
+        <div class="col-lg-6"> <img src="img/maleicon.png" width="114" height="114" alt=""/>
+          <h2>3,500</h2>
+        </div>
+      </div>
+    </section>
+  </div>
+  <!-- /col-lg-4 /white -->
+  <div class="col-lg-8">
+    <section id="totals" class="well">
+      <h3 class="text-center">Financial Summary</h3>
+      <div class="row text-center">
+        <div class="col-lg-3">
+          <h1>Total YTD</h1>
+        </div>
+        <div class="col-lg-3">
+          <h4>Total Revenue</h4>
+          <h2>$40000</h2>
+        </div>
+        <div class="col-lg-3">
+          <h4 class="danger">Total Expenses</h4>
+          <h2 class="danger">$10000</h2>
+        </div>
+        <div class="col-lg-3">
+          <h4>Total Profit</h4>
+          <h2>$30000</h2>
+        </div>
+      </div>
+      <br>
+      <div id="everythingchart"></div>
+    </section>
+    <section id="notifications" class="well">
+      <h3 class="text-center stretch">Notification Center</h3>
+      <div class="gridStyle" ng-grid="notificationsgrid"></div>
+    </section>
+    <br>
+  </div>
+</div>

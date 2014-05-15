@@ -1,0 +1,383 @@
+<div class="row">
+  <div class="col-lg-12">
+    <h1>Owner Setup</h1>
+    <p class="text-muted">Manage your information.</p>
+    <br>
+    <tabset justified="true"> <tab heading="Information"> <br>
+      <form class="form-horizontal">
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="form-group">
+              <label class="col-lg-6 control-label">Name</label>
+              <div class="col-lg-6">
+                <input type="text" class="form-control" data-bind="value: name" />
+              </div>
+            </div>
+            <!--/field -->
+            <div class="form-group" ng-controller="FileUploadCtrl">
+              <label for="imagePath" class="col-lg-6 control-label">Image Upload:</label>
+              <div class="col-lg-6">
+                <label class="btn btn-primary">
+                  <input type="file" ng-file-select="onFileSelect($files)" style="display:none;">
+                  Upload Image </label>
+                <br>
+                <br>
+                <div ng-controller="UploadProgressCtrl">
+                  <progressbar class="progress-striped active" value="dynamic" type="{{type}}"></progressbar>
+                </div>
+              </div>
+            </div>
+            <!-- /field -->
+            <div class="form-group">
+              <label class="col-lg-6 control-label">Email</label>
+              <div class="col-lg-6">
+                <input type="text" class="form-control" data-bind="value: email" />
+              </div>
+            </div>
+            <!--/field -->
+            <div class="form-group">
+              <label class="col-lg-6 control-label">Email Sender Address</label>
+              <div class="col-lg-6">
+                <input type="text" class="form-control" data-bind="value: sendMailEmailAddress" />
+              </div>
+            </div>
+            <!-- /field -->
+            <div class="form-group">
+              <label class="col-lg-6 control-label">Email Subject</label>
+              <div class="col-lg-6">
+                <input type="text" class="form-control" data-bind="value: sendConfirmEmailSubject" />
+              </div>
+            </div>
+            <!--/field -->
+            <div class="form-group">
+              <label class="col-lg-6 control-label">Email Image HTML</label>
+              <div class="col-lg-6">
+                <input type="text" class="form-control" data-bind="value: sendImageHtml" />
+              </div>
+            </div>
+            <!--/field -->
+
+          </div>
+          <div class="col-lg-6">
+            <div class="form-group">
+              <label class="col-lg-6 control-label">Terms and Conditions</label>
+              <div class="col-lg-6">
+                <textarea class="form-control" rows="3" data-bind="value: termsText"></textarea>
+              </div>
+            </div>
+            <!--/field -->
+            <div class="form-group">
+              <label class="col-lg-6 control-label">Refund Policy</label>
+              <div class="col-lg-6">
+                <textarea class="form-control" rows="3" data-bind="value: refundsText"></textarea>
+              </div>
+            </div>
+            <!--/field -->
+            <div class="form-group">
+              <label class="col-lg-6 control-label">Name For Event</label>
+              <div class="col-lg-6">
+                <input type="text" class="form-control" data-bind="value: eventureName" />
+              </div>
+            </div>
+            <!--/field -->
+            <div class="form-group">
+              <label class="col-lg-6 control-label">Name For Listing</label>
+              <div class="col-lg-6">
+                <input type="text" class="form-control" data-bind="value: listingName" />
+              </div>
+            </div>
+            <!--/field -->
+            <div class="form-group">
+              <label class="col-lg-6 control-label">Name For Group</label>
+              <div class="col-lg-6">
+                <input type="text" class="form-control" data-bind="value: groupName" />
+              </div>
+            </div>
+            <!--/field -->
+            <div class="form-group">
+              <label class="col-lg-6 control-label">List Statement</label>
+              <div class="col-lg-6">
+                <input type="text" class="form-control" data-bind="value: listStatement" />
+              </div>
+            </div>
+            <!-- /field -->
+          </div>
+        </div>
+      </form>
+      <div class="row">
+        <div class="col-lg-12">
+          <button class="btn btn-success pull-right">Save Changes</button>
+        </div>
+      </div>
+      </tab>
+      <!-- end Information -->
+
+      <tab heading="Rules"> <br>
+      <form class="form-horizontal">
+        <div class="row">
+          <div class="col-lg-6">
+          <p class="text-muted text-center">Cart Rules</p>
+            <hr>
+            <div class="form-group">
+              <label for="SingleFee" class="col-lg-6 control-label">Single Fee for all Registrations:</label>
+              <div class="col-lg-6">
+                <div class="btn-group" ng-controller="SingleFeeForAllRegsCtrl">
+                  <button type="button" class="btn btn-default" ng-model="radioModel" btn-radio="'Yes'">Yes</button>
+                  <button type="button" class="btn btn-default" ng-model="radioModel" btn-radio="'No'">No</button>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="MultiDiscount" class="col-lg-6 control-label">Multiple Discount:</label>
+              <div class="col-lg-6">
+                <div class="btn-group" ng-controller="MultiDiscountCtrl">
+                  <button type="button" class="btn btn-default" ng-model="radioModel" btn-radio="'Yes'">Yes</button>
+                  <button type="button" class="btn btn-default" ng-model="radioModel" btn-radio="'No'">No</button>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="AllFour" class="col-lg-6 control-label">All Four:</label>
+              <div class="col-lg-6">
+                <div class="btn-group" ng-controller="AllFourCtrl">
+                  <button type="button" class="btn btn-default" ng-model="radioModel" btn-radio="'Yes'">Yes</button>
+                  <button type="button" class="btn btn-default" ng-model="radioModel" btn-radio="'No'">No</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <p class="text-muted text-center">Menu Control</p>
+            <hr>
+            <div class="form-group">
+              <label for="DisplayEnterprise" class="col-lg-6 control-label">Display Enterprise:</label>
+              <div class="col-lg-6">
+                <div class="btn-group" ng-controller="EnterpriseDisplayCtrl">
+                  <button type="button" class="btn btn-default" ng-model="radioModel" btn-radio="'Yes'">Yes</button>
+                  <button type="button" class="btn btn-default" ng-model="radioModel" btn-radio="'No'">No</button>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="DisplayEventure" class="col-lg-6 control-label">Display Eventure:</label>
+              <div class="col-lg-6">
+                <div class="btn-group" ng-controller="EventureDisplayCtrl">
+                  <button type="button" class="btn btn-default" ng-model="radioModel" btn-radio="'Yes'">Yes</button>
+                  <button type="button" class="btn btn-default" ng-model="radioModel" btn-radio="'No'">No</button>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="DisplayParticipant" class="col-lg-6 control-label">Display Participant:</label>
+              <div class="col-lg-6">
+                <div class="btn-group" ng-controller="ParticipantDisplayCtrl">
+                  <button type="button" class="btn btn-default" ng-model="radioModel" btn-radio="'Yes'">Yes</button>
+                  <button type="button" class="btn btn-default" ng-model="radioModel" btn-radio="'No'">No</button>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="DisplayCoupon" class="col-lg-6 control-label">Display Coupon:</label>
+              <div class="col-lg-6">
+                <div class="btn-group" ng-controller="CouponDisplayCtrl">
+                  <button type="button" class="btn btn-default" ng-model="radioModel" btn-radio="'Yes'">Yes</button>
+                  <button type="button" class="btn btn-default" ng-model="radioModel" btn-radio="'No'">No</button>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="DisplayResource" class="col-lg-6 control-label">Display Resource:</label>
+              <div class="col-lg-6">
+                <div class="btn-group" ng-controller="ResourceDisplayCtrl">
+                  <button type="button" class="btn btn-default" ng-model="radioModel" btn-radio="'Yes'">Yes</button>
+                  <button type="button" class="btn btn-default" ng-model="radioModel" btn-radio="'No'">No</button>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="DisplayReporting" class="col-lg-6 control-label">Display Reporting:</label>
+              <div class="col-lg-6">
+                <div class="btn-group" ng-controller="ReportingDisplayCtrl">
+                  <button type="button" class="btn btn-default" ng-model="radioModel" btn-radio="'Yes'">Yes</button>
+                  <button type="button" class="btn btn-default" ng-model="radioModel" btn-radio="'No'">No</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+      <div class="row">
+        <div class="col-lg-12">
+          <button class="btn btn-success pull-right">Save Changes</button>
+        </div>
+      </div>
+      </tab>
+      <!-- end Cart Rules -->
+
+      <tab heading="Reporting">
+      <div class="row">
+        <div class="col-lg-12">
+          <h3>Reports</h3>
+          <table class="table table-striped"  data-bind="with: reports">
+            <thead>
+              <tr>
+                <th />
+                <th>Name</th>
+                <th>Report URL</th>
+                <th>Icon Image</th>
+                <th />
+                <th class="text-center">Active</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><input type="hidden" data-bind="value: id" /></td>
+                <td><input type="text" class="form-control" data-bind="value: name" /></td>
+                <td><input type="text" class="form-control" data-bind="value: reportUrl" /></td>
+                <td><input type="text" class="form-control" data-bind="value: IconImageName" /></td>
+                <td><input type="hidden" class="form-control" data-bind="value: ownerId" /></td>
+                <td class="text-center"><div class="btn-group" ng-controller="ActiveCtrl">
+                  <button type="button" class="btn btn-default" ng-model="radioModel" btn-radio="'Yes'">Yes</button>
+                  <button type="button" class="btn btn-default" ng-model="radioModel" btn-radio="'No'">No</button>
+                </div></td>
+              </tr>
+            </tbody>
+          </table>
+          <button class="btn btn-primary" data-bind="click: $parent.clickAddReport" type="button">Add Report</button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-12">
+          <button class="btn btn-success pull-right">Save Changes</button>
+        </div>
+      </div>
+      </tab>
+      <!-- end Reporting -->
+
+      <tab heading="Payment & Technical"> <br>
+      <form class="form-horizontal">
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="form-group">
+              <label class="col-lg-6 control-label">Id</label>
+              <div class="col-lg-6">
+                <input type="text" class="form-control" disabled data-bind="value: id" />
+              </div>
+            </div>
+            <!--/field -->
+            <div class="form-group">
+              <label class="col-lg-6 control-label">Owner GUID</label>
+              <div class="col-lg-6">
+                <input type="text" class="form-control" disabled data-bind="value: ownerGuid" />
+              </div>
+            </div>
+            <!--/field -->
+            <div class="form-group">
+              <label class="col-lg-6 control-label">Access Token</label>
+              <div class="col-lg-6">
+                <input type="text" class="form-control" disabled data-bind="value: accessToken" />
+              </div>
+            </div>
+            <!--/field -->
+            <div class="form-group">
+              <label class="col-lg-6 control-label">Refresh Token</label>
+              <div class="col-lg-6">
+                <input type="text" class="form-control" disabled data-bind="value: refreshToken" />
+              </div>
+            </div>
+            <!--/field -->
+            <div class="form-group">
+              <label class="col-lg-6 control-label">Stripe Publishable Key</label>
+              <div class="col-lg-6">
+                <input type="text" class="form-control" disabled data-bind="value: stripePublishableKey" />
+              </div>
+            </div>
+            <!--/field -->
+            <div class="form-group">
+              <label class="col-lg-6 control-label">Stripe User Id</label>
+              <div class="col-lg-6">
+                <input type="text" class="form-control" disabled data-bind="value: stripeUserId" />
+              </div>
+            </div>
+            <!--/field -->
+            <div class="form-group">
+              <label class="col-lg-6 control-label">Scope</label>
+              <div class="col-lg-6">
+                <input type="text" class="form-control" disabled data-bind="value: scope" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-lg-6 control-label">Facebook App ID</label>
+              <div class="col-lg-6">
+                <input type="text" class="form-control" data-bind="value: facebookAppId" />
+              </div>
+            </div>
+            <!--/field -->
+            <div class="form-group">
+              <label class="col-lg-6 control-label">Facebook App Secret ID</label>
+              <div class="col-lg-6">
+                <input type="text" class="form-control" data-bind="value: facebookAppSecretId" />
+              </div>
+            </div>
+            <!--/field -->
+            <div class="form-group">
+              <label for="StripeConnect" class="col-lg-6 control-label">Stripe Connect Live:</label>
+              <div class="col-lg-6">
+                <div class="btn-group" ng-controller="StripeConnectLiveCtrl">
+                  <button type="button" class="btn btn-default" ng-model="radioModel" btn-radio="'Yes'">Yes</button>
+                  <button type="button" class="btn btn-default" ng-model="radioModel" btn-radio="'No'">No</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="form-group">
+              <label class="col-lg-6 control-label">Card Processor Fee Percent</label>
+              <div class="col-lg-6">
+                <input type="number" class="form-control" data-bind="value: cardProcessorFeePercentPerCharge" />
+              </div>
+            </div>
+            <!--/field -->
+            <div class="form-group">
+              <label class="col-lg-6 control-label">Card Processor Fee In Cents</label>
+              <div class="col-lg-6">
+                <input type="number" class="form-control" data-bind="value: cardProcessorFeeFlatPerChargeInCents" />
+              </div>
+            </div>
+            <!--/field -->
+            <div class="form-group">
+              <label class="col-lg-6 control-label">Local Fee Percent Of Charge</label>
+              <div class="col-lg-6">
+                <input type="number" class="form-control" data-bind="value: localFeePercentOfCharge" />
+              </div>
+            </div>
+            <!--/field -->
+            <div class="form-group">
+              <label class="col-lg-6 control-label">Local Fee In Cents</label>
+              <div class="col-lg-6">
+                <input type="number" class="form-control" data-bind="value: localFeeFlatPerPerChargeInCents" />
+              </div>
+            </div>
+            <!--/field -->
+            <div class="form-group">
+              <label class="col-lg-6 control-label">Single Fee Cart Rule Percent</label>
+              <div class="col-lg-6">
+                <input type="text" class="form-control" data-bind="value: addSingleFeeForAllRegsPercent" />
+              </div>
+            </div>
+            <!--/field -->
+
+          </div>
+        </div>
+      </form>
+      <div class="row">
+        <div class="col-lg-12">
+          <button class="btn btn-success pull-right">Save Changes</button>
+        </div>
+      </div>
+      </tab>
+      <!-- end Payment & Technical -->
+
+    </tabset>
+  </div>
+</div>

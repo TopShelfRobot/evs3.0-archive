@@ -1,0 +1,98 @@
+﻿<!DOCTYPE html>
+<html data-ng-app="dashboard">
+<head>
+    <style>
+        /* This helps the ng-show/ng-hide animations start at the right place. */
+        /* Since Angular has this but needs to load, this gives us the class early. */
+        .ng-hide {
+            display: none!important;
+        }
+    </style>
+
+    <title>Eventure Sports | Event Management Platform</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
+    <link rel="icon" type="image/png" href="/back-favicon.png" />
+    <!--<link href="content/ie10mobile.css" rel="stylesheet" />-->
+    <link href="content/bootstrap.css" rel="stylesheet" />
+    <link href="content/bootstrapnav.css" rel="stylesheet" />
+    <link href="content/bootstrapoverrides.css" rel="stylesheet" />
+    <link href="content/app.css" rel="stylesheet" />
+    <link href="content/toastr.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div>
+        <div data-ng-include="'/app/layout/shell.html'"></div>
+        <div id="splash-page" data-ng-show="false">
+            <div class="page-splash">
+                <div class="page-splash-message">
+                   Eventure Sports
+                </div>
+                <div class="progress progress-striped active page-progress-bar">
+                    <div class="bar"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <span data-cc-scroll-to-top></span>
+
+<!--    <script src="app/common/angular-file-upload-shim.min.js"></script>-->
+
+    <!-- Vendor Scripts -->
+    <script src="scripts/jquery-2.0.3.js"></script>
+    <script src="scripts/angular.js"></script>
+    <script src="scripts/angular-animate.js"></script>
+    <script src="scripts/angular-route.js"></script>
+    <script src="scripts/angular-sanitize.js"></script>
+    <script src="Scripts/breeze.debug.js"></script>
+     <script src="scripts/breeze.angular.js"></script>
+    <script src="scripts/bootstrap.js"></script>
+    <script src="scripts/toastr.js"></script>
+    <script src="scripts/moment.js"></script>
+    <script src="scripts/ui-bootstrap-tpls-0.10.0.js"></script>
+    <script src="scripts/spin.js"></script>
+<!--    	<script src="scripts/q.js"></script>-->
+	<script src="scripts/breeze.debug.js"></script>
+	<script src="scripts/breeze.directives.validation.js"></script>
+<!--	<script src="scripts/breeze.to$q.js"></script>-->
+	<script src="scripts/breeze.saveErrorExtensions.js"></script>
+
+    <!-- Bootstrapping -->
+    <script src="app/app.js"></script>
+    <script src="app/config.js"></script>
+    <script src="app/config.exceptionHandler.js"></script>
+    <script src="app/config.route.js"></script>
+
+    <!-- common Modules -->
+    <script src="app/common/common.js"></script>
+    <script src="app/common/logger.js"></script>
+    <script src="app/common/spinner.js"></script>
+<!--    <script src="app/common/angular-file-upload.min.js"></script>-->
+
+    <!-- common.bootstrap Modules -->
+    <script src="app/common/bootstrap/bootstrap.dialog.js"></script>
+
+    <!-- app -->
+    <script src="app/admin/admin.js"></script>
+    <script src="app/dashboard/setup/setresource.js"></script>
+    <script src="app/dashboard/dashboard.js"></script>
+    <script src="app/layout/shell.js"></script>
+    <script src="app/layout/topnav.js"></script>
+    <script src="app/dashboard/reporting.js"></script>
+<!--    <script src="app/controllers.js"></script>-->
+
+    <!-- app Services -->
+    <script src="app/services/datacontext.js"></script>
+    <script src="app/services/directives.js"></script>
+    
+	<script src="app/services/entityManagerFactory.js"></script>
+	<script src="app/services/model.js"></script>
+	<script src="app/services/routemediator.js"></script>
+
+
+</body>
+
+</html>
+

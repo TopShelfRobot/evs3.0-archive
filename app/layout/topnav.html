@@ -1,0 +1,16 @@
+﻿<div class="navbar navbar-default navbar-fixed-top" data-ng-controller="topnav as vm">
+    <div class="navbar-header">
+        <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".navbar-collapse"><span class="sr-only">Toggle</span> <span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
+        <a href="#/" class="navbar-brand">Eventure Sports</a>
+    </div>
+    <nav class="collapse navbar-collapse" role="navigation">
+        <ul class="nav navbar-nav">
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+              <li class="fade-selection-animation" data-ng-class="vm.isCurrent(r)"
+                data-ng-repeat="r in vm.navRoutes">
+                <a href="#{{r.url}}" data-ng-bind-html="r.config.settings.content"></a>
+            </li>
+        </ul>
+    </nav>
+</div>

@@ -1,0 +1,75 @@
+/* app css stylesheet */
+.nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
+.navbar-nav > li > a.active {
+  color:#444444;
+}
+}
+.tooltip-inner {
+  padding:10px;
+}
+
+.gridStyle {
+    border: 1px solid rgb(212,212,212);
+    height: 390px
+}
+
+.danger {
+  color:#d9534f;
+}
+
+.warning {
+  color:#f0ad4e;
+}
+
+.success {
+  color:#5cb85c;
+}
+
+.info {
+  color:#5bc0de;
+}
+
+.primary {
+  color:#428bca;
+}
+
+/* Report Layout */
+.report-icons {
+    overflow: hidden;
+}
+
+.report-icons > .report-icons-list {
+    padding-left: 0;
+    list-style: none;
+}
+
+.report-icons > .report-icons-list > li {
+    float: left;
+    width: 25%;
+    margin:0px 0px 20px;
+}
+
+.report-icons > .report-icons-list > li > img.report-icon {
+  display:inline-block;
+}
+.report-icons > .report-icons-list > li > h4.report-title {
+  margin-top:10px;
+  font-weight:bold;
+}
+
+/* Mobile */
+@media (max-width:768px) {
+  .report-icons > .report-icons-list > li {
+    float:none;
+    width:100% !important;
+  }
+ }
+
+/* Tablet devices */
+@media (max-width:998px) {
+  .report-icons > .report-icons-list > li {
+    width: 50%;
+  }
+ }
+
+/* End Report Layout */
