@@ -1,7 +1,7 @@
 ﻿(function () {
     'use strict';
 
-    var app = angular.module('dashboard');
+    var app = angular.module('app');
 
     // Configure Toastr
     toastr.options.timeOut = 4000;

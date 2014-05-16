@@ -1,7 +1,7 @@
 ﻿(function () {
     'use strict';
     var controllerId = 'dashboard';
-    angular.module('dashboard').controller(controllerId, ['common', 'datacontext', dashboard]);
+    angular.module('app').controller(controllerId, ['common', 'datacontext', dashboard]);
 
     function dashboard(common, datacontext) {
         var getLogFn = common.logger.getLogFn;
@@ -30,7 +30,7 @@
             title: 'Code Camp',
             description: 'Code Camp is a community event where developers learn from fellow developers. All are welcome to attend and speak. Code Camp is free, by and for the deveoper community, and occurs on the weekends.'
         };
-        vm.title = 'Dashboard';
+        vm.title = 'app';
 
         activate();
 

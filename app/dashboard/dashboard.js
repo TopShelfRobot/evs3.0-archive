@@ -1,7 +1,7 @@
 ﻿(function () {
     'use strict';
     var controllerId = 'dashboard';
-    angular.module('dashboard').controller(controllerId, ['common', 'datacontext', dashboard]);
+    angular.module('app').controller(controllerId, ['common', 'datacontext', dashboard]);
 
     function dashboard(common, datacontext) {
         var getLogFn = common.logger.getLogFn;
@@ -14,7 +14,7 @@
         };
         vm.messageCount = 0;
         vm.people = [];
-        vm.title = 'Dashboard';
+        vm.title = 'app';
 
         activate();
 

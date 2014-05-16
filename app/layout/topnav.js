@@ -2,7 +2,7 @@
     'use strict';
 
     var controllerId = 'topnav';
-    angular.module('dashboard').controller(controllerId,
+    angular.module('app').controller(controllerId,
         ['$route', 'config', 'routes', topnav]);
 
     function topnav($route, config, routes) {

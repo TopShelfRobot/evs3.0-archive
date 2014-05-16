@@ -1,7 +1,7 @@
 ﻿(function () {
     'use strict';
     var controllerId = 'reporting';
-    angular.module('dashboard').controller(controllerId, ['common', 'datacontext', reporting]);
+    angular.module('app').controller(controllerId, ['common', 'datacontext', reporting]);
 
     function reporting(common, datacontext) {
         var getLogFn = common.logger.getLogFn;
@@ -11,7 +11,7 @@
         
         //vm.messageCount = 0;
         //vm.people = [];
-        //vm.title = 'Dashboard';
+        vm.title = 'app';
         
         vm.reports = [];
 
@@ -25,9 +25,14 @@
         }
 
       function getReports() {
-            return datacontext.getReportsByOwnerId().then(function (data) {
-                return vm.reports = data;
-            });
-        }
+          return datacontext.getReportsByOwnerId(1)
+              .then(function (data) {
+                  vm.reports = data;
+                  return vm.reports;
+              });
+      }
+        
+     
+
     }
 })();

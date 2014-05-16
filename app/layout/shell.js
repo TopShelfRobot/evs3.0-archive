@@ -2,7 +2,7 @@
     'use strict';
 
     var controllerId = 'shell';
-    angular.module('dashboard').controller(controllerId,
+    angular.module('app').controller(controllerId,
         ['$rootScope', 'common', 'config', shell]);
 
     function shell($rootScope, common, config) {

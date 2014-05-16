@@ -1,7 +1,7 @@
 ﻿(function() {
     'use strict';
 
-    var app = angular.module('dashboard');
+    var app = angular.module('app');
 
     app.directive('ccImgPerson', ['config', function (config) {
         //Usage:

@@ -2,21 +2,21 @@
     'use strict';
 
     var serviceId = 'datacontext';
-    angular.module('dashboard').factory(serviceId,
+    angular.module('app').factory(serviceId,
         ['common', 'entityManagerFactory', 'model', datacontext]);
 
     function datacontext(common, emFactory, model) {
-       // var Predicate = breeze.Predicate;
+        var Predicate = breeze.Predicate;
         var EntityQuery = breeze.EntityQuery;
-        //var entityNames = model.entityNames;
+        var entityNames = model.entityNames;
         var getLogFn = common.logger.getLogFn;
         var log = getLogFn(serviceId);
-        //var logError = getLogFn(serviceId, 'error');
-        //var logSuccess = getLogFn(serviceId, 'success');
+        var logError = getLogFn(serviceId, 'error');
+        var logSuccess = getLogFn(serviceId, 'success');
         var manager = emFactory.newManager();
-        //var primePromise;
-        var $q = common.$q;
-        
+        var primePromise;
+        //var $q = common.$q;
+
         //this si a very important 
         var getTrendsByEventId = function (id, trendsObservable) {
 
@@ -36,12 +36,13 @@
                 }
             }
         };
-        
+
         var getResourceById = function (resourceId) {
             var query = EntityQuery.from('resources')
                 .where('id', '==', resourceId);
 
             return manager.executeQuery(query);
+            //return manager.executeQuery(query);
             //    .then(querySucceeded);
             //    //.fail(queryFailed);
 
@@ -65,7 +66,7 @@
         return service;
 
         function getMessageCount() { return $q.when(72); }
-        
+
 
 
         function getPeople() {
@@ -80,14 +81,14 @@
             ];
             return $q.when(people);
         }
-        
+
         function createResource() {
             log('woo hoo resource!!');
             return manager.createEntity('Resource', { ownerId: 1 });
             //var resource = { name: 'John', email: 'joe@jope.com', phone: 23323232325, location: 'Florida' };
             //return $q.when(resource);
         };
-        
+
         //function getTrendsByEventId(id, trendsObservable) {
 
         //    var query = EntityQuery.from('GetTrendsByEventId')
@@ -106,29 +107,26 @@
         //        }
         //    }
         //};
-        
-        function getReportsByOwnerId (ownerId, reportsObservable) {
-            log('woo hoo!!');
+
+        function getReportsByOwnerId(ownerId) {
+            //log('woo hoo!!');
+            
+            var reports = [];
+            
             var predicate = breeze.Predicate;
             var p1 = new predicate("active", "==", true);
             var p2 = new predicate("ownerId", "==", ownerId);
-
             var query = EntityQuery.from('Reports')
             .where(p1.and(p2));
 
-
             return manager.executeQuery(query)
-               .then(querySucceeded)
-               .fail(queryFailed);
+                .then(querySucceeded);
+            //   .fail(queryFailed);
 
             function querySucceeded(data) {
-                if (reportsObservable) {
-                    reportsObservable(data.results);
-                }
-                //log('Retrieved [EventuresObservable] from rds',data, true);
+                reports = data.results;
+                return reports;
             }
-
         };
-
     }
 })();
