@@ -3,9 +3,9 @@
 
     var serviceId = 'datacontext';
     angular.module('app').factory(serviceId,
-        ['common', 'entityManagerFactory', 'model', datacontext]);
+        ['common', 'entityManagerFactory', 'model', 'breeze', datacontext]);
 
-    function datacontext(common, emFactory, model) {
+    function datacontext(common, emFactory, model, breeze) {
         var Predicate = breeze.Predicate;
         var EntityQuery = breeze.EntityQuery;
         var entityNames = model.entityNames;
@@ -17,7 +17,7 @@
         var primePromise;
         //var $q = common.$q;
 
-        //this si a very important 
+        //this si a very important
         var getTrendsByEventId = function (id, trendsObservable) {
 
             var query = EntityQuery.from('GetTrendsByEventId')
@@ -110,9 +110,9 @@
 
         function getReportsByOwnerId(ownerId) {
             //log('woo hoo!!');
-            
+
             var reports = [];
-            
+
             var predicate = breeze.Predicate;
             var p1 = new predicate("active", "==", true);
             var p2 = new predicate("ownerId", "==", ownerId);
