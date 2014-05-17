@@ -1,7 +1,7 @@
 (function(){
 
 
-    function Model(){
+    function Model($q){
 
         console.log("RegistrationModel Entered");
 
@@ -15,9 +15,13 @@
         model.totalCost = 400;
         model.currentlyPaid = 200;
 
+        model.makeTeam = function(){
+            return $q.when(true);
+        }
+
         return model;
     }
 
-    angular.module("app").service("RegistrationModel", Model);
+    angular.module("app").service("RegistrationModel", ["$q", Model]);
 
 })();

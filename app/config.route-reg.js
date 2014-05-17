@@ -19,16 +19,6 @@
     function getRoutes() {
         return [
             {
-                url: '/eventure/:eventureId/list/:listId/create-team',
-                config: {
-                    title: 'Create Team',
-                    templateUrl: 'app/registration/createteam.template.html',
-                    settings: {
-                        nav: 1,
-                        content: 'Enterprise'
-                    }
-                }
-            }, {
                 url: '/eventure',
                 config: {
                     title: 'Eventure',
@@ -49,7 +39,17 @@
                     }
                 }
             }, {
-                url: '/team-payment',
+                url: '/eventure/:eventureId/list/:listId/team',
+                config: {
+                    title: 'Create Team',
+                    templateUrl: 'app/registration/createteam.template.html',
+                    settings: {
+                        nav: 1,
+                        content: 'Enterprise'
+                    }
+                }
+            }, {
+                url: '/eventure/:eventureId/list/:listId/team/:teamId/payment',
                 config: {
                     title: 'Team Payment',
                     templateUrl: 'app/registration/teampayment.template.html',
