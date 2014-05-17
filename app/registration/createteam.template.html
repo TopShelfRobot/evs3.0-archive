@@ -1,5 +1,5 @@
 
-  <div class="container" id="content">
+  <div class="container" id="content" ng-controller="CreateTeamController">
     <div class="row">
       <div class="col-lg-12 text-center">
         <img class="logo" src="img/logo.png">
@@ -11,7 +11,8 @@
       <div class="col-lg-6 col-lg-offset-3">
         <h4>Team Name</h4>
        <!-- do we need to check for duplicate names?-->
-        <input type="text" class="form-control" name="TeamName" id="TeamName" placeholder="Choose a name for your team.">
+        <input type="text" class="form-control" name="TeamName" id="TeamName" placeholder="Choose a name for your team."
+            ng-model="teamName">
       </div>
     </div>
     <br>
@@ -28,12 +29,23 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
+              <tr ng-repeat="player in players">
                 <td>
-                  <input type="text" class="form-control" placeholder="Enter the full name of the person you would like to invite." />
+                  <input ng-model="player.name" type="text" class="form-control" placeholder="Enter the full name of the person you would like to invite." />
                 </td>
                 <td>
-                  <input type="email" class="form-control" placeholder="Enter a valid email address for the person you would like to invite." />
+                  <input ng-model="player.email" type="email" class="form-control" placeholder="Enter a valid email address for the person you would like to invite." />
+                </td>
+                <td>
+                  <input type="hidden" class="form-control" />
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <input ng-model="addName" type="text" class="form-control" placeholder="Enter the full name of the person you would like to invite." />
+                </td>
+                <td>
+                  <input ng-model="addEmail" type="email" class="form-control" placeholder="Enter a valid email address for the person you would like to invite." />
                 </td>
                 <td>
                   <input type="hidden" class="form-control" />
@@ -41,13 +53,13 @@
               </tr>
             </tbody>
           </table>
-          <button class="btn btn-primary">Add New Member</button>
+          <button class="btn btn-primary" ng-click="addPlayer(addName, addEmail)">Add New Member</button>
         </div>
       </form>
     </div>
     <div class="row">
       <div class="col-md-3 col-lg-2 col-md-offset-9 col-lg-offset-10 clearfix">
-        <a href="teampayment.html" class="btn btn-success btn-block pull-right">Send Team Invitations</a>
+        <a href="#/team-payment" class="btn btn-success btn-block pull-right">Send Team Invitations</a>
       </div>
     </div>
   </div>

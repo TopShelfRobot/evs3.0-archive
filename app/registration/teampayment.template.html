@@ -1,10 +1,10 @@
-  <div class="container" id="content">
+  <div class="container" id="content" ng-controller="TeamPaymentController">
     <div class="row">
       <div class="col-lg-12 text-center">
         <img class="logo" src="img/logo.png">
         <h3>One last step.</h3>
         <hr>
-        <h3>Team Mockingbird <br> has a remaining balance of $400.00.</h3>
+        <h3>Team {{teamName}} <br> has a remaining balance of {{remaining() | currency}}.</h3>
         <p class="text-muted">You can pay whatever you desire, but your team must have the balanced paid in full in order to participate.</p>
       </div>
     </div>
@@ -16,7 +16,7 @@
             <label for="Amount">What would you like to pay?</label>
             <p class="input-group">
               <span class="input-group-addon">$</span>
-              <input type="text" class="form-control" name="Amount" id="Amount" placeholder="0.00" />
+              <input ng-model="userPaying" type="text" class="form-control" name="Amount" id="Amount" placeholder="0.00" />
             </p>
             <p class="help-block">We suggest you pay $40.00.</p>
           </div>

@@ -19,7 +19,7 @@
     function getRoutes() {
         return [
             {
-                url: '/create-team',
+                url: '/eventure/:eventureId/list/:listId/create-team',
                 config: {
                     title: 'Create Team',
                     templateUrl: 'app/registration/createteam.template.html',
@@ -39,7 +39,7 @@
                     }
                 }
             }, {
-                url: '/eventure-list',
+                url: '/eventure/:eventureId/list',
                 config: {
                     title: 'Eventure List',
                     templateUrl: 'app/registration/eventurelist.template.html',
