@@ -199,4 +199,27 @@
             attrs.$set('class', 'widget-head');
         }
     });
+
+    app.directive('cartView', ["$compile", function ($compile) {
+
+        var directive = {
+            restrict: 'A',
+            template: '<span class="badge pull-right">{{cart.length}}</span> \
+                <i class="glyphicon glyphicon-shopping-cart"></i>&nbsp; \
+                <div id="pop-over-content" style="display:none"><ul><li ng-repeat="item in cart">{{item.name}}</li></ul></div>',
+            link: function (scope, el, attrs) {
+
+                $(el).popover({
+                    trigger: 'click',
+                    html: true,
+                    content: function(){
+                        return $("#pop-over-content").html();
+                    },
+                    placement: "bottom",
+                });
+            }
+        };
+        return directive;
+    }]);
+
 })();

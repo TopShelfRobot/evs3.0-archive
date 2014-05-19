@@ -1,4 +1,4 @@
-<nav class="navbar navbar-default" role="navigation">
+<nav class="navbar navbar-default" role="navigation" ng-controller="Header">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
@@ -8,7 +8,9 @@
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="reg-navbar">
         <ul class="nav navbar-nav navbar-right">
-          <li class="hidden-xs hidden-sm visible-md visible-lg"><a href="#" id="shopping-cart"><span class="badge pull-right">1</span><i class="glyphicon glyphicon-shopping-cart"></i>&nbsp; </a></li>
+          <li class="hidden-xs hidden-sm visible-md visible-lg">
+              <a cart-view></a>
+          </li>
           <li class="hidden-lg hidden-md visible-xs visible-sm"><a href="carttable.html"><i class="glyphicon glyphicon-shopping-cart"></i>&nbsp;<span class="badge">1</span></a></li>
           <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-cog"></i><b class="caret"></b></a>
             <ul class="dropdown-menu">
