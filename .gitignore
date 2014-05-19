@@ -179,8 +179,10 @@ Desktop.ini
 # Recycle Bin used on file shares
 $RECYCLE.BIN/
 
-# Mac crap
+# OS generated files #
+######################
 .DS_Store
+.DS_Store?
 
 
 #############
