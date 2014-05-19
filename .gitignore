@@ -28,11 +28,6 @@ local.properties
 # PDT-specific
 .buildpath
 
-#Wil specific layout files
-index.html
-shell.html
-topnav.html
-sidebar.html
 
 
 #################
@@ -220,9 +215,3 @@ pip-log.txt
 
 #Mr Developer
 .mr.developer.cfg
-
-app/layout/shell.html
-
-app/layout/sidebar.html
-
-index.html
