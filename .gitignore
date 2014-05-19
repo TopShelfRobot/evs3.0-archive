@@ -28,6 +28,12 @@ local.properties
 # PDT-specific
 .buildpath
 
+#Wil specific layout files
+index.html
+shell.html
+topnav.html
+sidebar.html
+
 
 #################
 ## Visual Studio
@@ -179,8 +185,7 @@ Desktop.ini
 # Recycle Bin used on file shares
 $RECYCLE.BIN/
 
-# OS generated files #
-######################
+# Mac crap
 .DS_Store
 .DS_Store?
 
