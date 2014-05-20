@@ -76,6 +76,26 @@
                 }
         };
         
+        var getEventuresByOwnerId = function (ownerId) {
+
+            var predicate = breeze.Predicate;
+            var p1 = new predicate("active", "==", true);
+            var p2 = new predicate("ownerId", "==", ownerId);
+
+            var query = EntityQuery.from('Eventures')
+            .where(p1.and(p2))
+            .orderBy('sortOrder');
+
+            return manager.executeQuery(query)
+               .then(querySucceeded)
+               .fail(queryFailed);
+
+            function querySucceeded(data) {
+                return data.results;
+            }
+
+        };
+        
         var getFirstEventureByOwnerId = function () {
 
             var predicate = breeze.Predicate;
@@ -702,6 +722,20 @@
             }
         };
         
+          var getOrderByRegistrationId = function (regId) {
+
+            var query = EntityQuery.from('OrderByRegistrationId')
+                .withParameters({ id: regId });
+
+            return manager.executeQuery(query)
+                .then(querySucceeded)
+                .fail(queryFailed);
+
+            function querySucceeded(data) {
+                return data.results[0];
+            }
+        };
+        
         var createPlanItem = function (eventureId) {
            
             return manager.createEntity('EventurePlanItem',
@@ -982,7 +1016,6 @@
             primeData: primeData,
             saveChanges: saveChanges,
             
-            getMessageCount: getMessageCount,
             getPeople: getPeople
         };
 
