@@ -2,8 +2,8 @@
 <head>
   <meta charset="UTF-8">
   <title>Eventure Sports | Registration</title>
-  <link rel="stylesheet" type="text/css" href="../Content/bootstrap.css">
-  <link rel="stylesheet" type="text/css" href="../Content/registration.css">
+  <link rel="stylesheet" type="text/css" href="/Content/bootstrap.css">
+  <link rel="stylesheet" type="text/css" href="/Content/registration.css">
 
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
@@ -104,53 +104,53 @@
     </div>
   </div>
   <!-- Vendor Scripts -->
-  <script src="scripts/jquery-2.0.3.js"></script>
-  <script src="scripts/angular.js"></script>
-  <script src="scripts/angular-animate.js"></script>
-  <script src="scripts/angular-route.js"></script>
-  <script src="scripts/angular-sanitize.js"></script>
-  <script src="Scripts/breeze.debug.js"></script>
-  <script src="scripts/breeze.angular.js"></script>
-  <script src="scripts/bootstrap.js"></script>
-  <script src="scripts/toastr.js"></script>
-  <script src="scripts/moment.js"></script>
-  <script src="scripts/modernizr.custom.js"></script>
-  <script src="scripts/toucheffects.js"></script>
-  <script src="scripts/ui-bootstrap-tpls-0.10.0.js"></script>
-  <script src="scripts/spin.js"></script>
-  <script src="scripts/breeze.debug.js"></script>
-  <script src="scripts/breeze.directives.validation.js"></script>
-  <script src="scripts/breeze.saveErrorExtensions.js"></script>
+  <script src="/scripts/jquery-2.0.3.js"></script>
+  <script src="/scripts/angular.js"></script>
+  <script src="/scripts/angular-animate.js"></script>
+  <script src="/scripts/angular-route.js"></script>
+  <script src="/scripts/angular-sanitize.js"></script>
+  <script src="/scripts/breeze.debug.js"></script>
+  <script src="/scripts/breeze.angular.js"></script>
+  <script src="/scripts/bootstrap.js"></script>
+  <script src="/scripts/toastr.js"></script>
+  <script src="/scripts/moment.js"></script>
+  <script src="/scripts/modernizr.custom.js"></script>
+  <script src="/scripts/toucheffects.js"></script>
+  <script src="/scripts/ui-bootstrap-tpls-0.10.0.js"></script>
+  <script src="/scripts/spin.js"></script>
+  <script src="/scripts/breeze.debug.js"></script>
+  <script src="/scripts/breeze.directives.validation.js"></script>
+  <script src="/scripts/breeze.saveErrorExtensions.js"></script>
 
 
   <!-- Bootstrapping -->
-  <script src="app/app.js"></script>
-  <script src="app/config.js"></script>
-  <script src="app/config.exceptionHandler.js"></script>
-  <script src="app/config.route.js"></script>
+  <script src="/app/app.js"></script>
+  <script src="/app/config.js"></script>
+  <script src="/app/config.exceptionHandler.js"></script>
+  <script src="/app/config.route.js"></script>
 
   <!-- common Modules -->
-  <script src="app/common/common.js"></script>
-  <script src="app/common/logger.js"></script>
-  <script src="app/common/spinner.js"></script>
+  <script src="/app/common/common.js"></script>
+  <script src="/app/common/logger.js"></script>
+  <script src="/app/common/spinner.js"></script>
 
   <!-- common.bootstrap Modules -->
-  <script src="app/common/bootstrap/bootstrap.dialog.js"></script>
+  <script src="/app/common/bootstrap/bootstrap.dialog.js"></script>
 
   <!-- app -->
-  <script src="app/admin/admin.js"></script>
-  <script src="app/dashboard/setup/setresource.js"></script>
-  <script src="app/dashboard/dashboard.js"></script>
-  <script src="app/layout/shell.js"></script>
-  <script src="app/layout/topnav.js"></script>
-  <script src="app/dashboard/reporting.js"></script>
+  <script src="/app/admin/admin.js"></script>
+  <script src="/app/dashboard/setup/setresource.js"></script>
+  <script src="/app/dashboard/dashboard.js"></script>
+  <script src="/app/layout/shell.js"></script>
+  <script src="/app/layout/topnav.js"></script>
+  <script src="/app/dashboard/reporting.js"></script>
 
   <!-- app Services -->
-  <script src="app/services/datacontext.js"></script>
-  <script src="app/services/directives.js"></script>
-  <script src="app/services/entityManagerFactory.js"></script>
-  <script src="app/services/model.js"></script>
-  <script src="app/services/routemediator.js"></script>
+  <script src="/app/services/datacontext.js"></script>
+  <script src="/app/services/directives.js"></script>
+  <script src="/app/services/entityManagerFactory.js"></script>
+  <script src="/app/services/model.js"></script>
+  <script src="/app/services/routemediator.js"></script>
 
   <script>
   $( document ).ready(function() {
@@ -160,18 +160,26 @@
       "placement":'bottom',
       "container":'#shopping-cart',
       "content": function(){
-        var div_id =  "cart-list" + $.now();
+        //var div_id =  "cart-list" + $.now();
         return details_in_popup($(this).attr('href'), 'cart-list')
-      }});
+      }
+    });
 
-      function details_in_popup(link, div_id){
+    function details_in_popup(link, div_id){
         $.ajax({
           url: 'carttable.html',
           success: function(response){
-            $('#'+div_id).html(response)}});
-            return '<div id="'+ 'cart-list' +'">Loading...</div>'
+            $('#'+div_id).html(response)
           }
         });
+
+        setTimeout(function(){
+            $('#'+div_id).html("butts");
+        }, 3000);
+
+        return '<div id="'+ 'cart-list' +'">Loading...</div>'
+    }
+  });
         </script>
       </body>
       </html>
