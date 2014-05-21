@@ -30,7 +30,15 @@
         ];
 
         model.getEventures = function(){
-            return q.when(eventures);
+
+            var query = breeze.EntityQuery
+                .from("Eventures")
+                // .select("id", "name", "dateEventure", "imageFileName", "desc");
+
+            // return q.when(eventures);
+            return manager.executeQuery(query).then(function(data){
+                return data.results;
+            });
         };
 
         model.getEventure = function(id){
@@ -38,7 +46,15 @@
         }
 
         model.getEventureList = function(id){
-            return q.when(list);
+
+            var query = breeze.EntityQuery
+                .from("EventureLists")
+                .where("eventureId", "==", id);
+
+            // return q.when(list);
+            return manager.executeQuery(query).then(function(data){
+                return data.results;
+            });
         }
 
         return model;
