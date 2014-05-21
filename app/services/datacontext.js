@@ -16,7 +16,7 @@
         var manager = emFactory.newManager();
         var primePromise;
         //var $q = common.$q;
-        
+
         var getOwnerById = function (id) {
 
             var query = EntityQuery.from('Owners')
@@ -30,7 +30,7 @@
                 return data.results[0];
             }
         };
-        
+
         var getOwnerByGuid = function (guid) {
 
             var query = EntityQuery.from('Owners')
@@ -44,9 +44,9 @@
                 return data.results[0];
             }
         };
-        
+
         var getOwnerInfo = function (email, ownerId) {
-          
+
             var query = EntityQuery.from('GetOwnerInfo')
                 .withParameters({
                     email: email,
@@ -61,7 +61,7 @@
                 return data.results[0];
             }
         };
-        
+
         var getEventureById = function (id) {
 
             var query = EntityQuery.from('Eventures')
@@ -75,27 +75,27 @@
                     return data.results[0];
                 }
         };
-        
+
         var getEventuresByOwnerId = function (ownerId) {
 
-            var predicate = breeze.Predicate;
-            var p1 = new predicate("active", "==", true);
-            var p2 = new predicate("ownerId", "==", ownerId);
+            var predicate = Predicate.create("active", "==", true)
+            .and("ownerId", "==", ownerId);
 
             var query = EntityQuery.from('Eventures')
-            .where(p1.and(p2))
-            .orderBy('sortOrder');
+            .where(predicate)
+            .orderBy('sortOrder')
+            .to$q(querySucceeded, queryFailed)
 
-            return manager.executeQuery(query)
-               .then(querySucceeded)
-               .fail(queryFailed);
+            //return manager.executeQuery(query)
+            //   .then(querySucceeded)
+            //   .fail(queryFailed);
 
             function querySucceeded(data) {
                 return data.results;
             }
 
         };
-        
+
         var getFirstEventureByOwnerId = function () {
 
             var predicate = breeze.Predicate;
@@ -115,12 +115,12 @@
                 return data.results[0];
             }
         };
-        
+
         var createEventure = function () {
-          
+
             return manager.createEntity('Eventure', { imageFileName: "", ownerId: config.ownerId, dateTransferCutoff: moment().format("MM/DD/YYYY"), dateDeferralCutoff: moment().format("MM/DD/YYYY"), dateEventure: moment().format("MM/DD/YYYY") });
         };
-        
+
         var getEventureListById = function (id) {
 
             var query = EntityQuery.from('EventureLists')
@@ -136,7 +136,7 @@
             }
 
         };
-        
+
         var getEventureListsByEventureId = function (eventureId) {
 
             var query = EntityQuery.from('EventureListsByEventureId')
@@ -151,7 +151,7 @@
                 return data.results;
             }
         };
-        
+
         var getEventureListsByOwnerId = function (ownerId) {
 
             var query = EntityQuery.from('EventureListsByOwnerId')
@@ -166,15 +166,15 @@
                 return data.results;
             }
         };
-        
-        var createEventureList = function (eventureId) {  
-        
+
+        var createEventureList = function (eventureId) {
+
             return manager.createEntity('EventureList',
                 { eventureId: eventureId, dateEventureList: moment().format("MM/DD/YYYY"), dateBeginReg: moment().format("MM/DD/YYYY"), dateEndReg: moment().format("MM/DD/YYYY"), imageFileName: "" });
         };
-        
+
        var getGroupsByEventureListId = function (eventureListId) {
-         
+
             var query = EntityQuery.from('EventureGroups')
                 .where('eventureListId', '==', eventureListId)
                 .orderBy('sortOrder');
@@ -186,8 +186,8 @@
             function querySucceeded(data) {
                 return data.results;
             }
-        };  
-        
+        };
+
         var getGroupsActiveByEventureListId = function (eventureListId) {
 
             var query = EntityQuery.from('GroupsBelowCapacity')
@@ -201,15 +201,15 @@
                 return data.results;
             }
         };
-        
+
         var createGroup = function (eventureListId) {
-          
+
             return manager.createEntity('EventureGroup',
                 { eventureListId: eventureListId, active: true });
         };
-        
-         var createTransfer = function (regId, oldListId, newListId, answerId, partId) { 
-         
+
+         var createTransfer = function (regId, oldListId, newListId, answerId, partId) {
+
             log('regId: ' + regId, null, 'dc', true);
             log('oldListId: ' + oldListId, null, 'dc', true);
             log('newListId: ' + newListId, null, 'dc', true);
@@ -218,7 +218,7 @@
             return manager.createEntity('EventureTransfer',
                 { registrationId: regId, eventureListIdFrom: oldListId, eventureListIdTo: newListId, stockAnswerSetId: answerId, isComplete: false, participantId: partId, dateCreated: moment().format("MM/DD/YYYY") });
         };
-        
+
         var getTransferInfoById = function (transferId) {
 
             var query = EntityQuery.from('GetTransferInfo')
@@ -234,9 +234,9 @@
                 return data.results[0];
             }
         };
-        
+
         var getTransferById = function (id) {
-          
+
             var query = EntityQuery.from('EventureTransfers')
                 .where('id', '==', id);
 
@@ -248,7 +248,7 @@
                 return data.results[0];
             }
         };
-        
+
         var getParticipantById = function (partId) {
 
             var query = EntityQuery.from('Participants')
@@ -262,7 +262,7 @@
                 return data.results[0];
             }
         };
-        
+
         var getParticipantByEmailAddress = function (partEmail, ownerId) {
 
             var predicate = breeze.Predicate;
@@ -280,9 +280,9 @@
                 return data.results[0];
             }
         };
-        
+
         var getParticipantsByHouseId = function (houseId) {
-          
+
             var query = EntityQuery.from('ParticipantsByHouseId')
                 .withParameters({
                     houseId: houseId
@@ -296,15 +296,15 @@
                 return data.results;
             }
         };
-        
+
         var createParticipant = function (ownerId, email, houseId) {
-          
+
             return manager.createEntity('Participant',
                 { dateBirth: moment().format("MM/DD/YYYY"), ownerId: ownerId, email: email, houseId: houseId, country: "US" });
         };
-        
+
          var getRegistrationById = function (registrationId, registrationObservable) {
-           
+
             var query = EntityQuery.from('Registrations')
                 .where('id', '==', registrationId);
 
@@ -316,7 +316,7 @@
                 return data.results[0];
             }
         };
-        
+
          var getRegEditDisplayInfoById = function (registrationId) {
 
             var query = EntityQuery.from('GetRegEditDisplayInfo')
@@ -332,9 +332,9 @@
                 return data.results[0];
             }
         };
-        
+
         var getAddonsByEventureId = function (eventureId) {
-            
+
             var predicate = breeze.Predicate;
             var p1 = new predicate("addonTypeLinkId", "==", eventureId);
             var p2 = new predicate("addonType", "==", 'eventfee');
@@ -351,7 +351,7 @@
                 return data.results;
             }
         };
-        
+
         var getAddonsByEventureListId = function (eventureListId) {
 
             var predicate = breeze.Predicate;
@@ -370,9 +370,9 @@
                 return data.results;
             }
         };
-        
+
         var getAddonById = function (addonId) {
-          
+
             var query = EntityQuery.from('Addons')
                 .where('id', '==', addonId);
 
@@ -384,13 +384,13 @@
                 return data.results[0];
             }
         };
-        
+
         var createAddon = function (ownerId) {
             return manager.createEntity('Addon', { addonType: 'eventfee', ownerId: ownerId });
         };
-        
+
         var getCouponById = function (couponId) {
-          
+
             var query = EntityQuery.from('Coupons')
                 .where('id', '==', couponId);
 
@@ -402,14 +402,14 @@
                 return data.results[0];
             }
         };
-        
+
         var createCoupon = function (ownerId) {
-          
+
             return manager.createEntity('Coupon', { dateStart: moment().format("MM/DD/YYYY"), dateEnd: moment().format("MM/DD/YYYY"), couponType: 'owner', ownerId: ownerId });
         };
-        
+
         var validateCoupon = function (couponCode, participantId, eventureListId) {
-          
+
             var query = EntityQuery.from('ValidateCoupon')
                 .withParameters({
                     couponCode: couponCode,
@@ -425,7 +425,7 @@
                 return data.results[0];
             }
         };
-        
+
         var getFeeSchedulesByEventureListId = function (eventureListId) {
 
             var query = EntityQuery.from('FeeSchedules')//;
@@ -439,30 +439,38 @@
                 return data.results;
             }
         };
-        
+
         var createFeeSchedule = function () {
             return manager.createEntity('FeeSchedule', { dateBegin: moment().format("MM/DD/YYYY") });
         };
-        
+
         var getReportsByOwnerId = function(ownerId) {
 
-            var predicate = breeze.Predicate;
-            var p1 = new predicate("active", "==", true);
-            var p2 = new predicate("ownerId", "==", ownerId);
-            var query = EntityQuery.from('Reports')
-            .where(p1.and(p2));
+            var predicate = Predicate.create("active", "==", true)
+            .and("ownerId", "==", ownerId);
 
-            return manager.executeQuery(query)
-                .then(querySucceeded)
-                .fail(queryFailed);
+            var query = EntityQuery.from('Reports')
+            .where(predicate)
+            .then(querySucceeded)
+            .fail(queryFailed);
+
+          //  var predicate = breeze.Predicate;
+          //  var p1 = new predicate("active", "==", true);
+          //  var p2 = new predicate("ownerId", "==", ownerId);
+          //  var query = EntityQuery.from('Reports')
+          //  .where(p1.and(p2));
+
+          //  return manager.executeQuery(query)
+          //      .then(querySucceeded)
+          //      .fail(queryFailed);
 
             function querySucceeded(data) {
                 return data.results;
             }
         };
-        
+
         var getStockAnswerSetByEventureListId = function (eventureListId) {
-          
+
             var query = EntityQuery.from('StockAnswerSets')
                 .where('registrationId', '==', eventureListId);
 
@@ -474,7 +482,7 @@
                 return data.results[0];
             }
         };
-        
+
         var getStockAnswerSetByRegistrationId = function (stockAnswerSetId) {
 
             var query = EntityQuery.from('StockAnswerSets')
@@ -488,9 +496,9 @@
                 return data.results[0];
             }
         };
-        
+
         var getStockQuestionSetByEventureListId = function (eventureListId) {
-          
+
             var query = EntityQuery.from('StockQuestionSets')
                 .where('eventureListId', '==', eventureListId);
 
@@ -502,9 +510,9 @@
                 return data.results[0];
             }
         };
-        
+
         var getStockQuestionSetByRegistrationId = function (registrationId) {
-          
+
             var query = EntityQuery.from('StockQuestionSets')
                 .where('registrationId', '==', registrationId);
 
@@ -516,12 +524,12 @@
                 return data.results[0];
             }
         };
-        
+
         var createStockQuestionSet = function (eventureListId) {
-          
+
             return manager.createEntity('StockQuestionSet', { eventureListId: eventureListId });
         };
-        
+
         var getExpensesByEventureId = function (eventureId) {
 
             var query = EntityQuery.from('Expense')
@@ -535,19 +543,19 @@
                 return data.results;
             }
         };
-        
+
         var createExpense = function (eventureId) {
-          
+
             return manager.createEntity('EventureExpense', { eventureId: eventureId });
         };
-        
+
         var createResourceItem = function (resourceId) {
-          
+
             return manager.createEntity('ResourceItem', { resourceId: resourceId, ownerId: config.ownerId, active: true });
         };
-        
+
         var getResourceItemById = function (resourceItemId) {
-          
+
             var query = EntityQuery.from('ResourceItems')
             .where('id', '==', resourceItemId);
 
@@ -559,7 +567,7 @@
                 return data.results[0];
             }
         };
-        
+
         var getResourceServicesByOwnerId = function (ownerId) {
 
             var query = EntityQuery.from('GetResourceServicesByOwnerId')
@@ -573,9 +581,9 @@
                 return data.results;
             }
         };
-        
+
         var getResourceById = function (resourceId) {
-          
+
             var query = EntityQuery.from('resources')
                 .where('id', '==', resourceId);
 
@@ -587,9 +595,9 @@
                return data.results[0];
             }
         };
-        
+
          var getResourcesByOwnerId = function (ownerId) {
-           
+
             var query = EntityQuery.from('resources')
                 .where('ownerId', '==', ownerId);
 
@@ -601,16 +609,16 @@
                 return data.results;
             }
         };
-        
+
          var createResourceItemCategory = function () {
-           
+
             return manager.createEntity('ResourceItemCategory', { ownerId: config.ownerId });
         };
 
         var createResource = function () {
             return manager.createEntity('Resource', { ownerId: config.ownerId });
         };
-        
+
         var getResourceItemCategoriesByOwnerId = function (ownerId, isOnlyActive) {
 
             var predicate = breeze.Predicate;
@@ -636,9 +644,9 @@
                 return data.results;
             }
         };
-        
+
          var getResourceItemsByOwnerId = function (ownerId) {
-           
+
             var predicate = breeze.Predicate;
             var p1 = new predicate("active", "==", true);
             var p2 = new predicate("ownerId", "==", ownerId);
@@ -654,7 +662,7 @@
                 return data.results;
             }
         };
-        
+
         var getClientResourcesByOwnerId = function (ownerId, resouceType) {
 
             var predicate = breeze.Predicate;
@@ -672,9 +680,9 @@
                 return data.results;
             }
         };
-        
+
         var getEventureServicesByEventureId = function (eventureId) {
-           
+
             var query = EntityQuery.from('EventureServices')
                 .where('eventureId', '==', eventureId);
 
@@ -686,13 +694,13 @@
                 return data.results;
             }
         };
-        
-        var createEventureService = function (eventureId) { 
-        
+
+        var createEventureService = function (eventureId) {
+
             return manager.createEntity('EventureService',
                 { eventureId: eventureId, active: true });
         };
-        
+
         var getClientById = function (id) {
 
             var query = EntityQuery.from('Clients')
@@ -707,7 +715,7 @@
             }
 
         };
-        
+
         var getOrderById = function (Id) {
 
             var query = EntityQuery.from('OrderById')
@@ -721,7 +729,7 @@
                 return data.results[0];
             }
         };
-        
+
           var getOrderByRegistrationId = function (regId) {
 
             var query = EntityQuery.from('OrderByRegistrationId')
@@ -735,9 +743,9 @@
                 return data.results[0];
             }
         };
-        
+
         var createPlanItem = function (eventureId) {
-           
+
             return manager.createEntity('EventurePlanItem',
                 { eventureId: eventureId, dateDue: moment().format("MM/DD/YYYY") });
         };
@@ -755,9 +763,9 @@
                 return data.results[0];
             }
         };
-        
+
         var getRegDataByOwnerId = function (ownerId) {
-          
+
             var query = EntityQuery.from('GetRegsRevByOwner')
                 .withParameters({
                     id: ownerId
@@ -771,9 +779,9 @@
                 return data.results[0];
             }
         };
-        
+
         var getCapacityByOwnerId = function (ownerId) {
-          
+
             var query = EntityQuery.from('GetCapacityByOwnerId')
                 .withParameters({
                     id: ownerId
@@ -787,9 +795,9 @@
                 return data.results[0];
             }
         };
-        
+
         var getCapacityByEventureListId = function (eventureListId) {
-          
+
             var query = EntityQuery.from('GetCapacityByEventureListId')
                 .withParameters({
                     id: eventureListId
@@ -803,9 +811,9 @@
                 return data.results[0];
             }
         };
-        
+
         var getCapacityByEventureId = function (eventureId) {
-          
+
             var query = EntityQuery.from('GetCapacityByEventureId')
                 .withParameters({
                     id: eventureId
@@ -819,7 +827,7 @@
                 return data.results[0];
             }
         };
-                
+
         var getTrendsByEventId = function (id) {
 
             var query = EntityQuery.from('GetTrendsByEventId')
@@ -835,7 +843,7 @@
                 return data.results[0];
             }
         };
-        
+
          //generic
         function saveEntity(masterEntity) {
             return manager.saveChanges()
@@ -852,7 +860,7 @@
                 throw error; // so caller can see failure
             }
         }
-        
+
         function describeSaveOperation(entity) {
             var statename = entity.entityAspect.entityState.name.toLowerCase();
             var typeName = entity.entityType.shortName;
@@ -860,7 +868,7 @@
             title = title ? (" '" + title + "'") : "";
             return statename + " " + typeName + title;
         }
-        
+
         function getErrorMessage(error) {
             var reason = error.message;
             if (reason.match(/validation error/i)) {
@@ -868,17 +876,17 @@
             }
             return reason;
         }
-        
+
         function getValidationErrorMessage(error) {
             try { // return the first error message
                 var firstItem = error.entitiesWithErrors[0];
                 var firstError = firstItem.entityAspect.getValidationErrors()[0];
                 return firstError.errorMessage;
-            } catch (e) { // ignore problem extracting error message 
+            } catch (e) { // ignore problem extracting error message
                 return "validation error";
             }
         }
-        
+
         function getErrorMessages(error) {
             var msg = error.message;
             if (msg.match(/validation error/i)) {
@@ -886,7 +894,7 @@
             }
             return msg;
         }
-        
+
         function getValidationMessages(error) {
             try {
                 //foreach entity with a validation error
@@ -901,7 +909,7 @@
             catch (e) { }
             return 'validation error';
         }
-        
+
         var saveChanges = function () {
             return manager.saveChanges()
                 .then(saveSucceeded)
@@ -917,7 +925,7 @@
                 throw error;
             }
         };
-        
+
         var primeData = function () {
             return Q.all([getEventures()]);   //Q wraps data call in promise  //, getCartItems()
         };
@@ -1015,13 +1023,13 @@
             //generic
             primeData: primeData,
             saveChanges: saveChanges,
-            
+
             getPeople: getPeople
         };
 
         return service;
 
-         //#region Internal methods        
+         //#region Internal methods
         function configureBreezeManager() {
             breeze.NamingConvention.camelCase.setAsDefault();
             var mgr = new breeze.EntityManager(config.remoteServiceName);
@@ -1043,7 +1051,7 @@
         function logError(msg, error) {
             logger.logError(msg, error, system.getModuleId(datacontext), true);
         }
-        //#endregion 
+        //#endregion
 
         function getPeople() {
             var people = [
@@ -1057,6 +1065,6 @@
             ];
             return $q.when(people);
         }
-        
+
     }
 })();
