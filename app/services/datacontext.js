@@ -15,7 +15,7 @@
         //var logSuccess = getLogFn(serviceId, 'success');
         //var primePromise;
         //var entityNames = model.entityNames;
-        
+
         var getOwnerById = function (id) {
 
             var query = entityQuery.from('Owners')
@@ -74,16 +74,17 @@
         var getEventuresByOwnerId = function (ownerId) {
 
             var pred = predicate.create("active", "==", true)
-            .and("ownerId", "==", ownerId);
+              .and("ownerId", "==", ownerId);
 
             return entityQuery.from('Eventures')
                 .where(pred)
                 .orderBy('sortOrder')
+                .using(manager).execute()
                 .then(querySucceeded, _queryFailed);
 
             //return manager.executeQuery(query)
             //   .then(querySucceeded, _queryFailed);
-            //   
+            //
 
             function querySucceeded(data) {
                 return data.results;
@@ -93,17 +94,15 @@
 
         var getFirstEventureByOwnerId = function () {
 
-            var pred = breeze.predicate;
-            var p1 = new pred("ownerId", "==", config.ownerId);
-            var p2 = new pred("active", "==", true);
+            var pred = predicate.create("ownerId", "==", config.ownerId)
+              .and("active", "==", true);
 
-            var query = entityQuery.from('Eventures')
-                 .where(p1.and(p2))
+            return entityQuery.from('Eventures')
+                 .where(pred)
                  .orderBy("active desc", "id")
-                .take(1);
-
-            return manager.executeQuery(query)
-               .then(querySucceeded, _queryFailed);
+                 .take(1)
+                 .using(manager).execute()
+                 .then(querySucceeded, _queryFailed);
 
             function querySucceeded(data) {
                 return data.results[0];
@@ -251,15 +250,13 @@
 
         var getParticipantByEmailAddress = function (partEmail, ownerId) {
 
-            var pred = breeze.predicate;
-            var p1 = new pred("email", "==", partEmail);
-            var p2 = new pred("ownerId", "==", ownerId);
+            var pred = predicate.create("email", "==", partEmail)
+              .and("ownerId", "==", ownerId);
 
-            var query = entityQuery.from('Participants')
-            .where(p1.and(p2));
-
-            return manager.executeQuery(query)
-               .then(querySucceeded, _queryFailed);
+            return entityQuery.from('Participants')
+              .where(pred)
+              .using(manager).execute()
+              .then(querySucceeded, _queryFailed);
 
             function querySucceeded(data) {
                 return data.results[0];
@@ -317,16 +314,14 @@
 
         var getAddonsByEventureId = function (eventureId) {
 
-            var pred = breeze.predicate;
-            var p1 = new pred("addonTypeLinkId", "==", eventureId);
-            var p2 = new pred("addonType", "==", 'eventfee');
-            var p3 = new pred("active", "==", true);
+            var pred = predicate.create("addonTypeLinkId", "==", eventureId)
+              .and("addonType", "==", 'eventfee')
+              .and("active", "==", true);
 
-            var query = entityQuery.from('Addons')
-            .where(pred.and([p1, p2, p3]));
-
-            return manager.executeQuery(query)
-               .then(querySucceeded, _queryFailed);
+            return entityQuery.from('Addons')
+              .where(pred)
+              .using(manager).execute()
+              .then(querySucceeded, _queryFailed);
 
             function querySucceeded(data) {
                 return data.results;
@@ -335,16 +330,14 @@
 
         var getAddonsByEventureListId = function (eventureListId) {
 
-            var pred = breeze.predicate;
-            var p1 = new pred("addonTypeLinkId", "==", eventureListId);
-            var p2 = new pred("addonType", "==", 'listfee');
-            var p3 = new pred("active", "==", true);
+            var pred = predicate.create("addonTypeLinkId", "==", eventureListId)
+              .and("addonType", "==", 'listfee')
+              .and("active", "==", true);
 
-            var query = entityQuery.from('Addons')
-            .where(pred.and([p1, p2, p3]));
-
-            return manager.executeQuery(query)
-               .then(querySucceeded, _queryFailed);
+            return entityQuery.from('Addons')
+              .where(pred)
+              .using(manager).execute()
+              .then(querySucceeded, _queryFailed);
 
             function querySucceeded(data) {
                 return data.results;
@@ -567,23 +560,21 @@
         };
 
         var getResourceItemCategoriesByOwnerId = function (ownerId, isOnlyActive) {
-            var pred = breeze.predicate;
-            var p1 = new pred("ownerId", "==", ownerId);
+            var pred; // = predicate.create("ownerId", "==", ownerId);
 
-            var query;
             if (isOnlyActive) {
-                var p2 = new pred("active", "==", true);
-                query = entityQuery.from('ResourceItemCategories')
-                .where(p1.and(p2));
+                pred = predicate.create("ownerId", "==", ownerId)
+                  .and("active", "==", true);
+
             } else {
                 {
-                    query = entityQuery.from('ResourceItemCategories')
-                        .where(p1);
+                  pred = predicate.create("ownerId", "==", ownerId);
                 }
             }
-
-            return manager.executeQuery(query)
-                .then(querySucceeded, _queryFailed);
+            return entityQuery.from('ResourceItemCategories')
+            .where(pred)
+            .using(manager).execute()
+            .then(querySucceeded, _queryFailed);
 
 
             function querySucceeded(data) {
@@ -593,15 +584,13 @@
 
         var getResourceItemsByOwnerId = function (ownerId) {
 
-            var pred = breeze.predicate;
-            var p1 = new pred("active", "==", true);
-            var p2 = new pred("ownerId", "==", ownerId);
+            var pred = predicate.create("active", "==", true)
+              .and("ownerId", "==", ownerId);
 
-            var query = entityQuery.from('ResourceItems')
-           .where(p1.and(p2));
-
-            return manager.executeQuery(query)
-                .then(querySucceeded, _queryFailed);
+            return entityQuery.from('ResourceItems')
+              .where(pred)
+              .using(manager).execute()
+              .then(querySucceeded, _queryFailed);
 
 
             function querySucceeded(data) {
@@ -611,16 +600,13 @@
 
         var getClientResourcesByOwnerId = function (ownerId, resouceType) {
 
-            var pred = breeze.predicate;
-            var p1 = new pred("resourceType", "==", resouceType);
-            var p2 = new pred("ownerId", "==", ownerId);
+            var pred = predicate.create("resourceType", "==", resouceType)
+              .and("ownerId", "==", ownerId);
 
-            var query = entityQuery.from('Resources')
-                .where(p1.and(p2));
-
-            return manager.executeQuery(query)
+            return entityQuery.from('Resources')
+                .where(pred)
+                .using(manager).execute()
                 .then(querySucceeded, _queryFailed);
-
 
             function querySucceeded(data) {
                 return data.results;
@@ -962,7 +948,7 @@
         return service;
 
         //#region Internal methods
-     
+
         function _queryFailed(error) {
             var msg = 'Error retreiving data. ' + error.message;
             //log.logError(msg, error, system.getModuleId(datacontext), true);
