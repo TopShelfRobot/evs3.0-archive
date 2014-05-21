@@ -4,30 +4,25 @@
     var serviceId = 'datacontext';
     angular.module('app').factory(serviceId,
         ['common', 'entityManagerFactory', 'model', 'breeze', datacontext]);
-    
-
-    //wil here
 
     function datacontext(common, emFactory, model, breeze) {
-        var Predicate = breeze.Predicate;
-        var EntityQuery = breeze.EntityQuery;
-        var entityNames = model.entityNames;
+        var predicate = breeze.Predicate;
+        var entityQuery = breeze.EntityQuery;
+        var manager = emFactory.newManager();
         var getLogFn = common.logger.getLogFn;
         var log = getLogFn(serviceId);
         var logError = getLogFn(serviceId, 'error');
-        var logSuccess = getLogFn(serviceId, 'success');
-        var manager = emFactory.newManager();
-        var primePromise;
-        //var $q = common.$q;
-
+        //var logSuccess = getLogFn(serviceId, 'success');
+        //var primePromise;
+        //var entityNames = model.entityNames;
+        
         var getOwnerById = function (id) {
 
-            var query = EntityQuery.from('Owners')
+            var query = entityQuery.from('Owners')
                 .where('id', '==', id);
 
             return manager.executeQuery(query)
-                .then(querySucceeded)
-                .fail(queryFailed);
+                .then(querySucceeded, _queryFailed);
 
             function querySucceeded(data) {
                 return data.results[0];
@@ -36,12 +31,11 @@
 
         var getOwnerByGuid = function (guid) {
 
-            var query = EntityQuery.from('Owners')
+            var query = entityQuery.from('Owners')
                .where('ownerGuid', '==', guid);
 
             return manager.executeQuery(query)
-                .then(querySucceeded)
-                .fail(queryFailed);
+                .then(querySucceeded, _queryFailed);
 
             function querySucceeded(data) {
                 return data.results[0];
@@ -50,15 +44,14 @@
 
         var getOwnerInfo = function (email, ownerId) {
 
-            var query = EntityQuery.from('GetOwnerInfo')
+            var query = entityQuery.from('GetOwnerInfo')
                 .withParameters({
                     email: email,
                     ownerGuid: ownerId
                 });
 
             return manager.executeQuery(query)
-                .then(querySucceeded)
-                .fail(queryFailed);
+                .then(querySucceeded, _queryFailed);
 
             function querySucceeded(data) {
                 return data.results[0];
@@ -67,31 +60,30 @@
 
         var getEventureById = function (id) {
 
-            var query = EntityQuery.from('Eventures')
+            var query = entityQuery.from('Eventures')
                 .where("id", "==", id);
 
             return manager.executeQuery(query)
-               .then(querySucceeded)
-               .fail(queryFailed);
+               .then(querySucceeded, _queryFailed);
 
             function querySucceeded(data) {
-                    return data.results[0];
-                }
+                return data.results[0];
+            }
         };
 
         var getEventuresByOwnerId = function (ownerId) {
 
-            var predicate = Predicate.create("active", "==", true)
+            var pred = predicate.create("active", "==", true)
             .and("ownerId", "==", ownerId);
 
-            var query = EntityQuery.from('Eventures')
-            .where(predicate)
-            .orderBy('sortOrder')
-            .to$q(querySucceeded, queryFailed)
+            return entityQuery.from('Eventures')
+                .where(pred)
+                .orderBy('sortOrder')
+                .then(querySucceeded, _queryFailed);
 
             //return manager.executeQuery(query)
-            //   .then(querySucceeded)
-            //   .fail(queryFailed);
+            //   .then(querySucceeded, _queryFailed);
+            //   
 
             function querySucceeded(data) {
                 return data.results;
@@ -101,18 +93,17 @@
 
         var getFirstEventureByOwnerId = function () {
 
-            var predicate = breeze.Predicate;
-            var p1 = new predicate("ownerId", "==", config.ownerId);
-            var p2 = new predicate("active", "==", true);
+            var pred = breeze.predicate;
+            var p1 = new pred("ownerId", "==", config.ownerId);
+            var p2 = new pred("active", "==", true);
 
-            var query = EntityQuery.from('Eventures')
+            var query = entityQuery.from('Eventures')
                  .where(p1.and(p2))
                  .orderBy("active desc", "id")
                 .take(1);
 
             return manager.executeQuery(query)
-               .then(querySucceeded)
-               .fail(queryFailed);
+               .then(querySucceeded, _queryFailed);
 
             function querySucceeded(data) {
                 return data.results[0];
@@ -126,13 +117,12 @@
 
         var getEventureListById = function (id) {
 
-            var query = EntityQuery.from('EventureLists')
+            var query = entityQuery.from('EventureLists')
                 .where('id', '==', id)
                 .orderBy('sortOrder');
 
             return manager.executeQuery(query)
-               .then(querySucceeded)
-               .fail(queryFailed);
+               .then(querySucceeded, _queryFailed);
 
             function querySucceeded(data) {
                 return data.results[0];
@@ -142,13 +132,12 @@
 
         var getEventureListsByEventureId = function (eventureId) {
 
-            var query = EntityQuery.from('EventureListsByEventureId')
+            var query = entityQuery.from('EventureListsByEventureId')
                 .withParameters({ eventureId: eventureId })
                 .orderBy('sortOrder');
 
             return manager.executeQuery(query)
-                .then(querySucceeded)
-                .fail(queryFailed);
+                .then(querySucceeded, _queryFailed);
 
             function querySucceeded(data) {
                 return data.results;
@@ -157,13 +146,12 @@
 
         var getEventureListsByOwnerId = function (ownerId) {
 
-            var query = EntityQuery.from('EventureListsByOwnerId')
+            var query = entityQuery.from('EventureListsByOwnerId')
                 .withParameters({ ownerId: ownerId })
                 .orderBy('sortOrder');
 
             return manager.executeQuery(query)
-                .then(querySucceeded)
-                .fail(queryFailed);
+                .then(querySucceeded, _queryFailed);
 
             function querySucceeded(data) {
                 return data.results;
@@ -176,15 +164,14 @@
                 { eventureId: eventureId, dateEventureList: moment().format("MM/DD/YYYY"), dateBeginReg: moment().format("MM/DD/YYYY"), dateEndReg: moment().format("MM/DD/YYYY"), imageFileName: "" });
         };
 
-       var getGroupsByEventureListId = function (eventureListId) {
+        var getGroupsByEventureListId = function (eventureListId) {
 
-            var query = EntityQuery.from('EventureGroups')
+            var query = entityQuery.from('EventureGroups')
                 .where('eventureListId', '==', eventureListId)
                 .orderBy('sortOrder');
 
             return manager.executeQuery(query)
-                .then(querySucceeded)
-                .fail(queryFailed);
+                .then(querySucceeded, _queryFailed);
 
             function querySucceeded(data) {
                 return data.results;
@@ -193,12 +180,11 @@
 
         var getGroupsActiveByEventureListId = function (eventureListId) {
 
-            var query = EntityQuery.from('GroupsBelowCapacity')
+            var query = entityQuery.from('GroupsBelowCapacity')
                  .withParameters({ listId: eventureListId });
 
             return manager.executeQuery(query)
-                .then(querySucceeded)
-                .fail(queryFailed);
+                .then(querySucceeded, _queryFailed);
 
             function querySucceeded(data) {
                 return data.results;
@@ -211,27 +197,26 @@
                 { eventureListId: eventureListId, active: true });
         };
 
-         var createTransfer = function (regId, oldListId, newListId, answerId, partId) {
+        var createTransfer = function (regId, oldListId, newListId, answerId, partId) {
 
-            log('regId: ' + regId, null, 'dc', true);
-            log('oldListId: ' + oldListId, null, 'dc', true);
-            log('newListId: ' + newListId, null, 'dc', true);
-            log('answerId: ' + answerId, null, 'dc', true);
-            log('partId: ' + partId, null, 'dc', true);
+            //log('regId: ' + regId, null, 'dc', true);
+            //log('oldListId: ' + oldListId, null, 'dc', true);
+            //log('newListId: ' + newListId, null, 'dc', true);
+            //log('answerId: ' + answerId, null, 'dc', true);
+            //log('partId: ' + partId, null, 'dc', true);
             return manager.createEntity('EventureTransfer',
                 { registrationId: regId, eventureListIdFrom: oldListId, eventureListIdTo: newListId, stockAnswerSetId: answerId, isComplete: false, participantId: partId, dateCreated: moment().format("MM/DD/YYYY") });
         };
 
         var getTransferInfoById = function (transferId) {
 
-            var query = EntityQuery.from('GetTransferInfo')
+            var query = entityQuery.from('GetTransferInfo')
                 .withParameters({
                     id: transferId
                 });
 
             return manager.executeQuery(query)
-                .then(querySucceeded)
-                .fail(queryFailed);
+                .then(querySucceeded, _queryFailed);
 
             function querySucceeded(data) {
                 return data.results[0];
@@ -240,12 +225,11 @@
 
         var getTransferById = function (id) {
 
-            var query = EntityQuery.from('EventureTransfers')
+            var query = entityQuery.from('EventureTransfers')
                 .where('id', '==', id);
 
             return manager.executeQuery(query)
-               .then(querySucceeded)
-               .fail(queryFailed);
+               .then(querySucceeded, _queryFailed);
 
             function querySucceeded(data) {
                 return data.results[0];
@@ -254,12 +238,11 @@
 
         var getParticipantById = function (partId) {
 
-            var query = EntityQuery.from('Participants')
+            var query = entityQuery.from('Participants')
                 .where('id', '==', partId);
 
             return manager.executeQuery(query)
-               .then(querySucceeded)
-               .fail(queryFailed);
+               .then(querySucceeded, _queryFailed);
 
             function querySucceeded(data) {
                 return data.results[0];
@@ -268,16 +251,15 @@
 
         var getParticipantByEmailAddress = function (partEmail, ownerId) {
 
-            var predicate = breeze.Predicate;
-            var p1 = new predicate("email", "==", partEmail);
-            var p2 = new predicate("ownerId", "==", ownerId);
+            var pred = breeze.predicate;
+            var p1 = new pred("email", "==", partEmail);
+            var p2 = new pred("ownerId", "==", ownerId);
 
-            var query = EntityQuery.from('Participants')
+            var query = entityQuery.from('Participants')
             .where(p1.and(p2));
 
             return manager.executeQuery(query)
-               .then(querySucceeded)
-               .fail(queryFailed);
+               .then(querySucceeded, _queryFailed);
 
             function querySucceeded(data) {
                 return data.results[0];
@@ -286,14 +268,13 @@
 
         var getParticipantsByHouseId = function (houseId) {
 
-            var query = EntityQuery.from('ParticipantsByHouseId')
+            var query = entityQuery.from('ParticipantsByHouseId')
                 .withParameters({
                     houseId: houseId
                 });
 
             return manager.executeQuery(query)
-               .then(querySucceeded)
-               .fail(queryFailed);
+               .then(querySucceeded, _queryFailed);
 
             function querySucceeded(data) {
                 return data.results;
@@ -306,30 +287,28 @@
                 { dateBirth: moment().format("MM/DD/YYYY"), ownerId: ownerId, email: email, houseId: houseId, country: "US" });
         };
 
-         var getRegistrationById = function (registrationId, registrationObservable) {
+        var getRegistrationById = function (registrationId, registrationObservable) {
 
-            var query = EntityQuery.from('Registrations')
+            var query = entityQuery.from('Registrations')
                 .where('id', '==', registrationId);
 
             return manager.executeQuery(query)
-                .then(querySucceeded)
-                .fail(queryFailed);
+                .then(querySucceeded, _queryFailed);
 
             function querySucceeded(data) {
                 return data.results[0];
             }
         };
 
-         var getRegEditDisplayInfoById = function (registrationId) {
+        var getRegEditDisplayInfoById = function (registrationId) {
 
-            var query = EntityQuery.from('GetRegEditDisplayInfo')
+            var query = entityQuery.from('GetRegEditDisplayInfo')
                 .withParameters({
                     id: registrationId
                 });
 
             return manager.executeQuery(query)
-                .then(querySucceeded)
-                .fail(queryFailed);
+                .then(querySucceeded, _queryFailed);
 
             function querySucceeded(data) {
                 return data.results[0];
@@ -338,17 +317,16 @@
 
         var getAddonsByEventureId = function (eventureId) {
 
-            var predicate = breeze.Predicate;
-            var p1 = new predicate("addonTypeLinkId", "==", eventureId);
-            var p2 = new predicate("addonType", "==", 'eventfee');
-            var p3 = new predicate("active", "==", true);
+            var pred = breeze.predicate;
+            var p1 = new pred("addonTypeLinkId", "==", eventureId);
+            var p2 = new pred("addonType", "==", 'eventfee');
+            var p3 = new pred("active", "==", true);
 
-            var query = EntityQuery.from('Addons')
-            .where(predicate.and([p1, p2, p3]));
+            var query = entityQuery.from('Addons')
+            .where(pred.and([p1, p2, p3]));
 
             return manager.executeQuery(query)
-               .then(querySucceeded)
-               .fail(queryFailed);
+               .then(querySucceeded, _queryFailed);
 
             function querySucceeded(data) {
                 return data.results;
@@ -357,17 +335,16 @@
 
         var getAddonsByEventureListId = function (eventureListId) {
 
-            var predicate = breeze.Predicate;
-            var p1 = new predicate("addonTypeLinkId", "==", eventureListId);
-            var p2 = new predicate("addonType", "==", 'listfee');
-            var p3 = new predicate("active", "==", true);
+            var pred = breeze.predicate;
+            var p1 = new pred("addonTypeLinkId", "==", eventureListId);
+            var p2 = new pred("addonType", "==", 'listfee');
+            var p3 = new pred("active", "==", true);
 
-            var query = EntityQuery.from('Addons')
-            .where(predicate.and([p1, p2, p3]));
+            var query = entityQuery.from('Addons')
+            .where(pred.and([p1, p2, p3]));
 
             return manager.executeQuery(query)
-               .then(querySucceeded)
-               .fail(queryFailed);
+               .then(querySucceeded, _queryFailed);
 
             function querySucceeded(data) {
                 return data.results;
@@ -376,12 +353,11 @@
 
         var getAddonById = function (addonId) {
 
-            var query = EntityQuery.from('Addons')
+            var query = entityQuery.from('Addons')
                 .where('id', '==', addonId);
 
             return manager.executeQuery(query)
-                .then(querySucceeded)
-                .fail(queryFailed);
+                .then(querySucceeded, _queryFailed);
 
             function querySucceeded(data) {
                 return data.results[0];
@@ -394,12 +370,11 @@
 
         var getCouponById = function (couponId) {
 
-            var query = EntityQuery.from('Coupons')
+            var query = entityQuery.from('Coupons')
                 .where('id', '==', couponId);
 
             return manager.executeQuery(query)
-                .then(querySucceeded)
-                .fail(queryFailed);
+                .then(querySucceeded, _queryFailed);
 
             function querySucceeded(data) {
                 return data.results[0];
@@ -407,13 +382,12 @@
         };
 
         var createCoupon = function (ownerId) {
-
             return manager.createEntity('Coupon', { dateStart: moment().format("MM/DD/YYYY"), dateEnd: moment().format("MM/DD/YYYY"), couponType: 'owner', ownerId: ownerId });
         };
 
         var validateCoupon = function (couponCode, participantId, eventureListId) {
 
-            var query = EntityQuery.from('ValidateCoupon')
+            var query = entityQuery.from('ValidateCoupon')
                 .withParameters({
                     couponCode: couponCode,
                     participantId: participantId,
@@ -421,8 +395,7 @@
                 });
 
             return manager.executeQuery(query)
-                .then(querySucceeded)
-                .fail(queryFailed);
+                .then(querySucceeded, _queryFailed);
 
             function querySucceeded(data) {
                 return data.results[0];
@@ -431,12 +404,11 @@
 
         var getFeeSchedulesByEventureListId = function (eventureListId) {
 
-            var query = EntityQuery.from('FeeSchedules')//;
+            var query = entityQuery.from('FeeSchedules')//;
                 .where('eventureListId', '==', eventureListId);
 
             return manager.executeQuery(query)
-                .then(querySucceeded)
-                .fail(queryFailed);
+                .then(querySucceeded, _queryFailed);
 
             function querySucceeded(data) {
                 return data.results;
@@ -447,39 +419,28 @@
             return manager.createEntity('FeeSchedule', { dateBegin: moment().format("MM/DD/YYYY") });
         };
 
-        var getReportsByOwnerId = function(ownerId) {
+        var getReportsByOwnerId = function (ownerId) {
 
-            var predicate = Predicate.create("active", "==", true)
-            .and("ownerId", "==", ownerId);
-
-            var query = EntityQuery.from('Reports')
-            .where(predicate)
-            .then(querySucceeded)
-            .fail(queryFailed);
-
-          //  var predicate = breeze.Predicate;
-          //  var p1 = new predicate("active", "==", true);
-          //  var p2 = new predicate("ownerId", "==", ownerId);
-          //  var query = EntityQuery.from('Reports')
-          //  .where(p1.and(p2));
-
-          //  return manager.executeQuery(query)
-          //      .then(querySucceeded)
-          //      .fail(queryFailed);
+            var pred = predicate.create("active", "==", true)
+                                    .and("ownerId", "==", ownerId);
+            return entityQuery.from('Reports')
+                .where(pred)
+                .using(manager).execute()
+                .then(querySucceeded, _queryFailed);
 
             function querySucceeded(data) {
                 return data.results;
             }
+
         };
 
         var getStockAnswerSetByEventureListId = function (eventureListId) {
 
-            var query = EntityQuery.from('StockAnswerSets')
+            var query = entityQuery.from('StockAnswerSets')
                 .where('registrationId', '==', eventureListId);
 
             return manager.executeQuery(query)
-                .then(querySucceeded)
-                .fail(queryFailed);
+                .then(querySucceeded, queryFailed);
 
             function querySucceeded(data) {
                 return data.results[0];
@@ -487,13 +448,11 @@
         };
 
         var getStockAnswerSetByRegistrationId = function (stockAnswerSetId) {
-
-            var query = EntityQuery.from('StockAnswerSets')
+            var query = entityQuery.from('StockAnswerSets')
                 .where('id', '==', stockAnswerSetId);
 
             return manager.executeQuery(query)
-                .then(querySucceeded)
-                .fail(queryFailed);
+                .then(querySucceeded, _queryFailed);
 
             function querySucceeded(data) {
                 return data.results[0];
@@ -501,13 +460,11 @@
         };
 
         var getStockQuestionSetByEventureListId = function (eventureListId) {
-
-            var query = EntityQuery.from('StockQuestionSets')
+            var query = entityQuery.from('StockQuestionSets')
                 .where('eventureListId', '==', eventureListId);
 
             return manager.executeQuery(query)
-                .then(querySucceeded)
-                .fail(queryFailed);
+                .then(querySucceeded, _queryFailed);
 
             function querySucceeded(data) {
                 return data.results[0];
@@ -515,13 +472,11 @@
         };
 
         var getStockQuestionSetByRegistrationId = function (registrationId) {
-
-            var query = EntityQuery.from('StockQuestionSets')
+            var query = entityQuery.from('StockQuestionSets')
                 .where('registrationId', '==', registrationId);
 
             return manager.executeQuery(query)
-                .then(querySucceeded)
-                .fail(queryFailed);
+                .then(querySucceeded, _queryFailed);
 
             function querySucceeded(data) {
                 return data.results[0];
@@ -529,18 +484,16 @@
         };
 
         var createStockQuestionSet = function (eventureListId) {
-
             return manager.createEntity('StockQuestionSet', { eventureListId: eventureListId });
         };
 
         var getExpensesByEventureId = function (eventureId) {
 
-            var query = EntityQuery.from('Expense')
+            var query = entityQuery.from('Expense')
                 .where('eventureId', '==', eventureId);
 
             return manager.executeQuery(query)
-                .then(querySucceeded)
-                .fail(queryFailed);
+                .then(querySucceeded, _queryFailed);
 
             function querySucceeded(data) {
                 return data.results;
@@ -548,23 +501,20 @@
         };
 
         var createExpense = function (eventureId) {
-
             return manager.createEntity('EventureExpense', { eventureId: eventureId });
         };
 
         var createResourceItem = function (resourceId) {
-
             return manager.createEntity('ResourceItem', { resourceId: resourceId, ownerId: config.ownerId, active: true });
         };
 
         var getResourceItemById = function (resourceItemId) {
 
-            var query = EntityQuery.from('ResourceItems')
+            var query = entityQuery.from('ResourceItems')
             .where('id', '==', resourceItemId);
 
             return manager.executeQuery(query)
-                .then(querySucceeded)
-                .fail(queryFailed);
+                .then(querySucceeded, _queryFailed);
 
             function querySucceeded(data) {
                 return data.results[0];
@@ -573,12 +523,11 @@
 
         var getResourceServicesByOwnerId = function (ownerId) {
 
-            var query = EntityQuery.from('GetResourceServicesByOwnerId')
+            var query = entityQuery.from('GetResourceServicesByOwnerId')
                 .withParameters({ id: ownerId });
 
             return manager.executeQuery(query)
-                .then(querySucceeded)
-                .fail(queryFailed);
+                .then(querySucceeded, _queryFailed);
 
             function querySucceeded(data) {
                 return data.results;
@@ -586,35 +535,30 @@
         };
 
         var getResourceById = function (resourceId) {
-
-            var query = EntityQuery.from('resources')
+            var query = entityQuery.from('resources')
                 .where('id', '==', resourceId);
 
             return manager.executeQuery(query)
-               .then(querySucceeded)
-               .fail(queryFailed);
+               .then(querySucceeded, _queryFailed);
 
             function querySucceeded(data) {
-               return data.results[0];
+                return data.results[0];
             }
         };
 
-         var getResourcesByOwnerId = function (ownerId) {
-
-            var query = EntityQuery.from('resources')
+        var getResourcesByOwnerId = function (ownerId) {
+            var query = entityQuery.from('resources')
                 .where('ownerId', '==', ownerId);
 
             return manager.executeQuery(query)
-                .then(querySucceeded)
-                .fail(queryFailed);
+                .then(querySucceeded, _queryFailed);
 
             function querySucceeded(data) {
                 return data.results;
             }
         };
 
-         var createResourceItemCategory = function () {
-
+        var createResourceItemCategory = function () {
             return manager.createEntity('ResourceItemCategory', { ownerId: config.ownerId });
         };
 
@@ -623,43 +567,42 @@
         };
 
         var getResourceItemCategoriesByOwnerId = function (ownerId, isOnlyActive) {
-
-            var predicate = breeze.Predicate;
-            var p1 = new predicate("ownerId", "==", ownerId);
+            var pred = breeze.predicate;
+            var p1 = new pred("ownerId", "==", ownerId);
 
             var query;
             if (isOnlyActive) {
-                var p2 = new predicate("active", "==", true);
-                query = EntityQuery.from('ResourceItemCategories')
+                var p2 = new pred("active", "==", true);
+                query = entityQuery.from('ResourceItemCategories')
                 .where(p1.and(p2));
             } else {
                 {
-                    query = EntityQuery.from('ResourceItemCategories')
+                    query = entityQuery.from('ResourceItemCategories')
                         .where(p1);
                 }
             }
 
             return manager.executeQuery(query)
-                .then(querySucceeded)
-                .fail(queryFailed);
+                .then(querySucceeded, _queryFailed);
+
 
             function querySucceeded(data) {
                 return data.results;
             }
         };
 
-         var getResourceItemsByOwnerId = function (ownerId) {
+        var getResourceItemsByOwnerId = function (ownerId) {
 
-            var predicate = breeze.Predicate;
-            var p1 = new predicate("active", "==", true);
-            var p2 = new predicate("ownerId", "==", ownerId);
+            var pred = breeze.predicate;
+            var p1 = new pred("active", "==", true);
+            var p2 = new pred("ownerId", "==", ownerId);
 
-            var query = EntityQuery.from('ResourceItems')
+            var query = entityQuery.from('ResourceItems')
            .where(p1.and(p2));
 
             return manager.executeQuery(query)
-                .then(querySucceeded)
-                .fail(queryFailed);
+                .then(querySucceeded, _queryFailed);
+
 
             function querySucceeded(data) {
                 return data.results;
@@ -668,16 +611,16 @@
 
         var getClientResourcesByOwnerId = function (ownerId, resouceType) {
 
-            var predicate = breeze.Predicate;
-            var p1 = new predicate("resourceType", "==", resouceType);
-            var p2 = new predicate("ownerId", "==", ownerId);
+            var pred = breeze.predicate;
+            var p1 = new pred("resourceType", "==", resouceType);
+            var p2 = new pred("ownerId", "==", ownerId);
 
-            var query = EntityQuery.from('Resources')
+            var query = entityQuery.from('Resources')
                 .where(p1.and(p2));
 
             return manager.executeQuery(query)
-                .then(querySucceeded)
-                .fail(queryFailed);
+                .then(querySucceeded, _queryFailed);
+
 
             function querySucceeded(data) {
                 return data.results;
@@ -686,12 +629,12 @@
 
         var getEventureServicesByEventureId = function (eventureId) {
 
-            var query = EntityQuery.from('EventureServices')
+            var query = entityQuery.from('EventureServices')
                 .where('eventureId', '==', eventureId);
 
             return manager.executeQuery(query)
-               .then(querySucceeded)
-               .fail(queryFailed);
+               .then(querySucceeded, _queryFailed);
+
 
             function querySucceeded(data) {
                 return data.results;
@@ -699,48 +642,41 @@
         };
 
         var createEventureService = function (eventureId) {
-
             return manager.createEntity('EventureService',
                 { eventureId: eventureId, active: true });
         };
 
         var getClientById = function (id) {
-
-            var query = EntityQuery.from('Clients')
+            var query = entityQuery.from('Clients')
                 .where('id', '==', id);
 
             return manager.executeQuery(query)
-                .then(querySucceeded)
-                .fail(queryFailed);
+                .then(querySucceeded, _queryFailed);
 
             function querySucceeded(data) {
                 return data.results[0];
             }
-
         };
 
         var getOrderById = function (Id) {
-
-            var query = EntityQuery.from('OrderById')
+            var query = entityQuery.from('OrderById')
                 .withParameters({ id: Id });
 
             return manager.executeQuery(query)
-                .then(querySucceeded)
-                .fail(queryFailed);
+                .then(querySucceeded, _queryFailed);
 
             function querySucceeded(data) {
                 return data.results[0];
             }
         };
 
-          var getOrderByRegistrationId = function (regId) {
+        var getOrderByRegistrationId = function (regId) {
 
-            var query = EntityQuery.from('OrderByRegistrationId')
+            var query = entityQuery.from('OrderByRegistrationId')
                 .withParameters({ id: regId });
 
             return manager.executeQuery(query)
-                .then(querySucceeded)
-                .fail(queryFailed);
+                .then(querySucceeded, _queryFailed);
 
             function querySucceeded(data) {
                 return data.results[0];
@@ -748,19 +684,18 @@
         };
 
         var createPlanItem = function (eventureId) {
-
             return manager.createEntity('EventurePlanItem',
                 { eventureId: eventureId, dateDue: moment().format("MM/DD/YYYY") });
         };
 
         var getPlanItemById = function (planItemId) {
 
-            var query = EntityQuery.from('EventurePlanItems')
+            var query = entityQuery.from('EventurePlanItems')
                 .where('id', '==', planItemId);
 
             return manager.executeQuery(query)
-                .then(querySucceeded)
-                .fail(queryFailed);
+                .then(querySucceeded, _queryFailed);
+
 
             function querySucceeded(data) {
                 return data.results[0];
@@ -769,14 +704,13 @@
 
         var getRegDataByOwnerId = function (ownerId) {
 
-            var query = EntityQuery.from('GetRegsRevByOwner')
+            var query = entityQuery.from('GetRegsRevByOwner')
                 .withParameters({
                     id: ownerId
                 });
 
             return manager.executeQuery(query)
-                .then(querySucceeded)
-                .fail(queryFailed);
+                .then(querySucceeded, _queryFailed);
 
             function querySucceeded(data) {
                 return data.results[0];
@@ -785,14 +719,13 @@
 
         var getCapacityByOwnerId = function (ownerId) {
 
-            var query = EntityQuery.from('GetCapacityByOwnerId')
+            var query = entityQuery.from('GetCapacityByOwnerId')
                 .withParameters({
                     id: ownerId
                 });
 
             return manager.executeQuery(query)
-                .then(querySucceeded)
-                .fail(queryFailed);
+                .then(querySucceeded, _queryFailed);
 
             function querySucceeded(data) {
                 return data.results[0];
@@ -801,14 +734,13 @@
 
         var getCapacityByEventureListId = function (eventureListId) {
 
-            var query = EntityQuery.from('GetCapacityByEventureListId')
+            var query = entityQuery.from('GetCapacityByEventureListId')
                 .withParameters({
                     id: eventureListId
                 });
 
             return manager.executeQuery(query)
-                .then(querySucceeded)
-                .fail(queryFailed);
+                .then(querySucceeded, _queryFailed);
 
             function querySucceeded(data) {
                 return data.results[0];
@@ -817,14 +749,13 @@
 
         var getCapacityByEventureId = function (eventureId) {
 
-            var query = EntityQuery.from('GetCapacityByEventureId')
+            var query = entityQuery.from('GetCapacityByEventureId')
                 .withParameters({
                     id: eventureId
                 });
 
             return manager.executeQuery(query)
-                .then(querySucceeded)
-                .fail(queryFailed);
+                .then(querySucceeded, _queryFailed);
 
             function querySucceeded(data) {
                 return data.results[0];
@@ -833,21 +764,21 @@
 
         var getTrendsByEventId = function (id) {
 
-            var query = EntityQuery.from('GetTrendsByEventId')
+            var query = entityQuery.from('GetTrendsByEventId')
                 .withParameters({
                     id: id
                 });
 
             return manager.executeQuery(query)
-                .then(querySucceeded)
-                .fail(queryFailed);
+                .then(querySucceeded, _queryFailed);
+
 
             function querySucceeded(data) {
                 return data.results[0];
             }
         };
 
-         //generic
+        //generic
         function saveEntity(masterEntity) {
             return manager.saveChanges()
                         .fail(saveFailed);
@@ -933,9 +864,8 @@
             return Q.all([getEventures()]);   //Q wraps data call in promise  //, getCartItems()
         };
 
-
         var service = {
-             //Eventure
+            //Eventure
             createEventure: createEventure,
             getEventureById: getEventureById,
             getFirstEventureByOwnerId: getFirstEventureByOwnerId,
@@ -1021,53 +951,52 @@
             getCapacityByOwnerId: getCapacityByOwnerId,
             getTrendsByEventId: getTrendsByEventId,
 
+            //reports
             getReportsByOwnerId: getReportsByOwnerId,
 
             //generic
             primeData: primeData,
             saveChanges: saveChanges,
-
-            getPeople: getPeople
         };
 
         return service;
 
-         //#region Internal methods
-        function configureBreezeManager() {
-            breeze.NamingConvention.camelCase.setAsDefault();
-            var mgr = new breeze.EntityManager(config.remoteServiceName);
-            model.configureMetadataStore(mgr.metadataStore);
-            return mgr;
-        }
-
-        function queryFailed(error) {
+        //#region Internal methods
+     
+        function _queryFailed(error) {
             var msg = 'Error retreiving data. ' + error.message;
-            logger.logError(msg, error, system.getModuleId(datacontext), true);
-            //logError(msg, error);
+            //log.logError(msg, error, system.getModuleId(datacontext), true);
+            log.logError(msg, error, 'datacontext', true);
             throw error;
         }
-
-        function log(msg, data, showToast) {
-            logger.log(msg, data, system.getModuleId(datacontext), showToast);
-        }
-
-        function logError(msg, error) {
-            logger.logError(msg, error, system.getModuleId(datacontext), true);
-        }
-        //#endregion
-
-        function getPeople() {
-            var people = [
-                { firstName: 'John', lastName: 'Papa', age: 25, location: 'Florida' },
-                { firstName: 'Ward', lastName: 'Bell', age: 31, location: 'California' },
-                { firstName: 'Colleen', lastName: 'Jones', age: 21, location: 'New York' },
-                { firstName: 'Madelyn', lastName: 'Green', age: 18, location: 'North Dakota' },
-                { firstName: 'Ella', lastName: 'Jobs', age: 18, location: 'South Dakota' },
-                { firstName: 'Landon', lastName: 'Gates', age: 11, location: 'South Carolina' },
-                { firstName: 'Haley', lastName: 'Guthrie', age: 35, location: 'Wyoming' }
-            ];
-            return $q.when(people);
-        }
-
-    }
+   }
 })();
+
+//function getPeople() {
+//    var people = [
+//        { firstName: 'John', lastName: 'Papa', age: 25, location: 'Florida' },
+//        { firstName: 'Ward', lastName: 'Bell', age: 31, location: 'California' },
+//        { firstName: 'Colleen', lastName: 'Jones', age: 21, location: 'New York' },
+//        { firstName: 'Madelyn', lastName: 'Green', age: 18, location: 'North Dakota' },
+//        { firstName: 'Ella', lastName: 'Jobs', age: 18, location: 'South Dakota' },
+//        { firstName: 'Landon', lastName: 'Gates', age: 11, location: 'South Carolina' },
+//        { firstName: 'Haley', lastName: 'Guthrie', age: 35, location: 'Wyoming' }
+//    ];
+//    return $q.when(people);
+//}
+
+//function configureBreezeManager() {
+//    breeze.NamingConvention.camelCase.setAsDefault();
+//    var mgr = new breeze.EntityManager(config.remoteServiceName);
+//    model.configureMetadataStore(mgr.metadataStore);
+//    return mgr;
+//}
+
+//function log(msg, data, showToast) {
+//    logger.log(msg, data, system.getModuleId(datacontext), showToast);
+//}
+
+//function logError(msg, error) {
+//    logger.logError(msg, error, system.getModuleId(datacontext), true);
+//}
+//#endregion
