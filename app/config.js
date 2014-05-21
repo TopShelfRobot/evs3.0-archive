@@ -9,7 +9,7 @@
 
     // For use with the HotTowel-Angular-Breeze add-on that uses Breeze
     //var remoteServiceName = 'breeze/Breeze';
-    var remoteServiceName = 'http://test.eventuresports.info/breeze/breeze/';
+    var remoteServiceName = 'http://test30.eventuresports.info/breeze/breeze/';
         
     var events = {
         controllerActivateSuccess: 'controller.activateSuccess',
