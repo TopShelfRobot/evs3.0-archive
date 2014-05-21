@@ -16,7 +16,6 @@
                     </div>
                 </div>
                 <!-- /field -->
-                {{ vm.resource.name }}
                 <div class="form-group">
                     <label for="emailAddress" class="col-lg-6 control-label">Email Address:</label>
                     <div class="col-lg-6">
@@ -24,7 +23,6 @@
                     </div>
                 </div>
                 <!-- /field -->
-
             </div>
 
             <div class="col-lg-6">
@@ -39,15 +37,13 @@
                 <div class="form-group">
                     <label for="Type" class="col-lg-6 control-label">Type:</label>
                     <div class="col-lg-6">
-                       <!-- <select name="Type" class="form-control" data-bind="value: resourceType" />
-
-                        <option>Contractor</option>
-                        <option>Employee</option>
-                        <option>Vendor</option>
-                        <option>Client</option>
-                        <option>Service</option>
+                       <select name="Type" class="form-control" data-ng-model="vm.resource.resourceType">
+                        <option data-ng-selected="Contractor">Contractor</option>
+                        <option data-ng-selected="Employee">Employee</option>
+                        <option data-ng-selected="Vendor">Vendor</option>
+                        <option data-ng-selected="Client">Client</option>
+                        <option data-ng-selected="Service">Service</option>
                         </select>
-       -->
                     </div>
                 </div>
                 <!-- /field -->
@@ -60,4 +56,3 @@
         </div>
     </div>
 </section>
-

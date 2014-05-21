@@ -24,7 +24,7 @@
 
 <body>
     <div>
-        <div data-ng-include="'/app/layout/shell.html'"></div>
+        <div data-ng-include="'/app/layout/reg-shell.html'"></div>
         <div id="splash-page" data-ng-show="false">
             <div class="page-splash">
                 <div class="page-splash-message">
@@ -59,40 +59,39 @@
 
     <!--<script src="scripts/breeze.to$q.shim.js"></script>-->   <!-- Needed only if you are using to$q -->
 
-
-
     <!-- Bootstrapping -->
     <script src="app/app.js"></script>
     <script src="app/config.js"></script>
     <script src="app/config.exceptionHandler.js"></script>
-    <script src="app/config.route.js"></script>
+    <script src="app/config.route-reg.js"></script>
 
     <!-- common Modules -->
     <script src="app/common/common.js"></script>
     <script src="app/common/logger.js"></script>
     <script src="app/common/spinner.js"></script>
-    <!--    <script src="app/common/angular-file-upload.min.js"></script>-->
 
     <!-- common.bootstrap Modules -->
     <script src="app/common/bootstrap/bootstrap.dialog.js"></script>
 
     <!-- app -->
-    <script src="app/admin/admin.js"></script>
-    <script src="app/dashboard/setup/setresource.js"></script>
-    <script src="app/dashboard/dashboard.js"></script>
+    <script src="app/layout/registrationHeaderController.js"></script>
     <script src="app/layout/shell.js"></script>
     <script src="app/layout/topnav.js"></script>
     <script src="app/dashboard/reporting.js"></script>
-    <!--    <script src="app/controllers.js"></script>-->
+    <script src="app/registration/createteamController.js"></script>
+    <script src="app/registration/teampaymentController.js"></script>
+    <script src="app/registration/eventureController.js"></script>
+    <script src="app/registration/eventureListController.js"></script>
 
     <!-- app Services -->
     <script src="app/services/datacontext.js"></script>
     <script src="app/services/directives.js"></script>
+    <script src="app/services/registrationModel.js"></script>
+    <script src="app/services/eventureModel.js"></script>
 
     <script src="app/services/entityManagerFactory.js"></script>
     <script src="app/services/model.js"></script>
     <script src="app/services/routemediator.js"></script>
-
 
 </body>
 

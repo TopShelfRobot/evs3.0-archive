@@ -8,18 +8,15 @@
         var log = getLogFn(controllerId);
 
         var vm = this;
-        
-        //vm.messageCount = 0;
-        //vm.people = [];
+
         vm.title = 'app';
-        
+
         vm.reports = [];
 
         activate();
 
         function activate() {
             //var promises = [getMessageCount(), getPeople()];
-            log('Activated reporting View11111111111111111111111');
             common.activateController(getReports(), controllerId)
                 .then(function () { log('Activated reporting View'); });
         }
@@ -31,8 +28,8 @@
                   return vm.reports;
               });
       }
-        
-     
+
+
 
     }
 })();

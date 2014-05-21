@@ -7,7 +7,7 @@
             <hr>
             <div class="report-icons">
                <ul class="report-icons-list">
-                    <li class="text-center" data-ng-repeat="r in vm.reports"><img class="report-icon img-responsive" src="content/img/participants.jpg" alt="" /><h4 class="report-title">{{ r.name }}</h4></li>
+                    <li class="text-center" data-ng-repeat="r in vm.reports"><img class="report-icon img-responsive" ng-src="content/images/{{r.iconImageName}}" alt="" /><h4 class="report-title">{{ r.name }}</h4></li>
                    
             </ul>
                 
@@ -15,8 +15,4 @@
         </div>
     </div>
 </section>
-<!--
-    <a data-bind="attr: { href: 'https://reg.headfirstperformance.com/ReportServer/Pages/ReportViewer.aspx?' + reportUrl() }"> <img class="reporticon" data-bind="attr: { src: '/Content/images/' + iconImageName() } " alt="" /> <br>
-                                                                                                                                                                                                                                  <h3 class="report-title" data-bind="text: name"></h3>
-    </a> -->
 
