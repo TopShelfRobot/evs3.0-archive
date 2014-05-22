@@ -1,20 +1,23 @@
 (function(){
 
-    function controller(scope, model){
-        console.log("TeamPaymentController entered");
+    function controller(scope, eventureModel, cartModel){
 
-        console.log("model:", model);
+        console.log("cartModel:", cartModel);
 
-        scope.teamName = model.teamName;
+        scope.teamName = cartModel.teamName;
 
-        scope.remaining = function(){
-            return model.totalCost - model.currentlyPaid;
-        }
+        scope.remaining;
+        console.log(cartModel.eventureId, cartModel.eventureListId);
+        eventureModel.getEventureListItem(cartModel.eventureId, cartModel.eventureListId)
+            .then(function(item){
+                scope.remaining = item.currentFee - cartModel.currentlyPaid;
+            });
 
         scope.userPaying = model.userPaying;
     }
 
 
-    angular.module("app").controller("TeamPaymentController", ["$scope", "RegistrationModel", controller]);
+    angular.module("app").controller("TeamPaymentController",
+        ["$scope", "EventureModel", "RegistrationCartModel", controller]);
 
 })();

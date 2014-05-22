@@ -1,8 +1,8 @@
 (function(){
 
     function controller(scope, $location, cartModel){
-        console.log("CreateTeamController here");
 
+        console.log("cartModel:", cartModel);
         scope.teamName = cartModel.teamName;
         scope.players = cartModel.teamMembers;
 
@@ -13,6 +13,7 @@
         }
 
         scope.makeTeam = function(){
+            cartModel.teamName = scope.teamName;
             $location.path("/eventure/1/list/1/team/" + cartModel.teamId + "/payment");
         }
     }

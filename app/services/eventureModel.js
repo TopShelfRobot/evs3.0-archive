@@ -43,7 +43,7 @@
             return q.when(eventures[id - 1]);
         }
 
-        model.getEventureList = function(id){
+        model.getEventureListAll = function(id){
 
             var query = breeze.EntityQuery
                 .from("EventureLists")
@@ -52,6 +52,19 @@
             // return q.when(list);
             return manager.executeQuery(query).then(function(data){
                 return data.results;
+            });
+        }
+
+        model.getEventureListItem = function(eventureId, listId){
+
+            var query = breeze.EntityQuery
+                .from("EventureLists")
+                .where("eventureId", "==", eventureId)
+                .where("id", "==", listId);
+
+            // return q.when(list);
+            return manager.executeQuery(query).then(function(data){
+                return data.results[0];
             });
         }
 

@@ -11,6 +11,7 @@
         model.teamName;
         model.teamMembers = [];
         model.teamId = "tbd";
+        model.currentlyPaid = 0;
         model.allowZeroPayment = false;
 
         model.addTeamMember = function(name, email){

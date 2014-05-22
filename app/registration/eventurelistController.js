@@ -2,13 +2,14 @@
 
     function controller(scope, $location, $routeParams, eModel, regModel, cartModel, partModel){
 
+        console.log("cartModel:", cartModel);
 
         eModel.getEventure($routeParams.eventureId)
             .then(function(eventure){
                 scope.eventure = eventure;
             });
 
-        eModel.getEventureList($routeParams.eventureId)
+        eModel.getEventureListAll($routeParams.eventureId)
             .then(function(list){
                 scope.list = list;
                 scope.selection = scope.list[0];
@@ -22,6 +23,8 @@
 
         scope.register = function(eventureId, listId){
             cartModel.participantId = scope.participantId;
+            cartModel.eventureId = eventureId;
+            cartModel.eventureListId = listId;
             $location.path("/eventure/" + eventureId + "/list/" + listId + "/team");
         }
     }
