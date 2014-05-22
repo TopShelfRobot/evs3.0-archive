@@ -17,7 +17,7 @@
                   <br>
                   <span class="list-description">{{selection.desc}}<span>
                   <br>
-                  <a ng-href="#/eventure/{{eventure.id}}/list/{{selection.id}}/team" class="btn btn-default hidden-xs">Register</a>
+                  <a ng-click="register(eventure.id, selection.id)" class="btn btn-default hidden-xs">Register</a>
                 </figcaption>
     					</figure>
             </li>
@@ -48,8 +48,8 @@
                 <li class="participant">
                   <div class="radio">
                     <label>
-                      <input type="radio" name="participant" id="optionsRadios1" value="option1" checked>
-                      Wil Goolsby
+                      <div ng-repeat="part in participants"><input type="radio" name="participant" value="{{part.id}}" ng-model="$parent.participantId">
+                      {{part.firstName}} {{part.lastName}}</div>
                     </label>
                   </div>
                 </li>
