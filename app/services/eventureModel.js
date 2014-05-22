@@ -3,8 +3,6 @@
 
     function Model(q, emFactory, breeze){
 
-        console.log("EventureModel Entered");
-
         var manager = emFactory.newManager();
 
         model = {};
