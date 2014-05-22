@@ -1,6 +1,6 @@
 (function(){
 
-    function controller(scope, eModel, regModel){
+    function controller(scope, $location, $anchorScroll, eModel, regModel){
 
         var all = [];
         var viewLength = 10;
@@ -15,6 +15,9 @@
             if(all.length >= (currentPage + 1) * viewLength){
                 currentPage++;
                 scope.eventures = all.slice(currentPage * viewLength, (currentPage + 1) * viewLength);
+                $location.hash("top");
+                $anchorScroll()
+                $location.hash("");
             }
         }
 
@@ -22,10 +25,13 @@
             if(currentPage != 0){
                 currentPage--;
                 scope.eventures = all.slice(currentPage * viewLength, (currentPage + 1) * viewLength);
+                $location.hash("top");
+                $anchorScroll()
+                $location.hash("");
             }
         }
     }
 
-    angular.module("app").controller("EventureController", ["$scope", "EventureModel", "RegistrationModel", controller]);
+    angular.module("app").controller("EventureController", ["$scope", "$location", "$anchorScroll", "EventureModel", "RegistrationModel", controller]);
 
 })();
