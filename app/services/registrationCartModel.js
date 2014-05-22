@@ -4,11 +4,11 @@
 
         var model = {};
 
-        model.eventureId;
-        model.eventureListId;
-        model.participantId;
+        model.eventureId = 1;
+        model.eventureListId = 2;
+        model.participantId = 3306;
         model.waiverSigned = false;
-        model.teamName;
+        model.teamName = "butts";
         model.teamMembers = [];
         model.teamId = "tbd";
         model.currentlyPaid = 0;

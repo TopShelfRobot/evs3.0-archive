@@ -10,10 +10,20 @@
         console.log(cartModel.eventureId, cartModel.eventureListId);
         eventureModel.getEventureListItem(cartModel.eventureId, cartModel.eventureListId)
             .then(function(item){
-                scope.remaining = item.currentFee - cartModel.currentlyPaid;
+                if(item)
+                    scope.remaining = item.currentFee - cartModel.currentlyPaid;
             });
 
-        scope.userPaying = model.userPaying;
+        scope.allowZeroPayment = cartModel.allowZeroPayment;
+        scope.waiverSigned = cartModel.waiverSigned;
+
+        scope.errorMessage = "";
+
+        scope.completeRegistration = function(){
+            cartModel.waiverSigned = scope.waiverSigned;
+
+            console.log("wiaverSIgned", cartModel.waiverSigned);
+        }
     }
 
 

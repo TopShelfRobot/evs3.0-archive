@@ -7,39 +7,26 @@
 
         model = {};
 
-        var eventures = [
-            {id : 1, name : "Kids Soccer", logo : "/img/kids.png", date : "always", location : "Mockingbird Valley"},
-            {id : 2, name : "Adult Soccer", logo : "/img/adult.png", date : "always", location : "Mockingbird Valley"}
-        ];
-
-        var list = [
-            {
-                id : 1,
-                name : "Monday Premier",
-                logo : "/img/premier.png",
-                description : "some long text that describes the premier league. ",
-            },
-            {
-                id : 2,
-                name : "Tuesday Rec",
-                logo : "/img/rec.png",
-                description : "some long text that describes the recreation league. "
-            }
-        ];
-
         model.getEventures = function(){
 
             var query = breeze.EntityQuery
                 .from("Eventures")
-                // .select("id", "name", "dateEventure", "imageFileName", "desc");
 
-            // return q.when(eventures);
             return manager.executeQuery(query).then(function(data){
                 return data.results;
             });
         };
 
         model.getEventure = function(id){
+
+            var query = breeze.EntityQuery
+                .from("Eventures")
+                .where("id", "==", id);
+
+            return manager.executeQuery(query).then(function(data){
+                return data.results[0];
+            });
+
             return q.when(eventures[id - 1]);
         }
 
@@ -49,7 +36,6 @@
                 .from("EventureLists")
                 .where("eventureId", "==", id);
 
-            // return q.when(list);
             return manager.executeQuery(query).then(function(data){
                 return data.results;
             });
@@ -62,7 +48,6 @@
                 .where("eventureId", "==", eventureId)
                 .where("id", "==", listId);
 
-            // return q.when(list);
             return manager.executeQuery(query).then(function(data){
                 return data.results[0];
             });

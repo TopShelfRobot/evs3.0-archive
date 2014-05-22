@@ -4,7 +4,7 @@
         <img class="logo" src="img/logo.png">
         <h3>One last step.</h3>
         <hr>
-        <h3>Team {{teamName}} <br> has a remaining balance of {{remaining | currency}}.</h3>
+        <h3>Team {{teamName}} <br> has a remaining balance of {{remaining || 1000 | currency}}.</h3>
         <p class="text-muted">You can pay whatever you desire, but your team must have the balanced paid in full in order to participate.</p>
       </div>
     </div>
@@ -30,12 +30,12 @@
         </div>
         <div class="col-sm-7">
           <br><br>
-          <label class="checkbox">
+          <label class="checkbox" ng-show="allowZeroPayment">
             <input type="checkbox" data-bind="checked: isTerms">
             I am paying an amount of $0.00 and understand my team is still responsible for the full amount.
           </label>
           <label class="checkbox">
-            <input type="checkbox" data-bind="checked: isTerms">
+            <input type="checkbox" data-bind="checked: isTerms" ng-model="waiverSigned">
             I have read and agree to the
             <a id="terms" data-contents="{{show.msg}}" rel="popover">Terms and Conditions</a>,
             <a id="refund">Refund Policy</a>,
@@ -48,7 +48,7 @@
       <div class="row">
         <div class="col-lg-12">
           <div class="form-group has-error text-center">
-            <span class="col-lg-12 payment-errors help-block lead">Sorry! Your card was declined.</span>
+            <span class="col-lg-12 payment-errors help-block lead">{{errorMessage}}</span>
           </div>
         </div>
       </div>
@@ -124,7 +124,7 @@
     </form>
     <div class="row">
       <div class="col-lg-2 col-lg-offset-10 clearfix">
-        <button type="button" class="btn btn-success btn-block pull-right">Complete Registration</button>
+        <button type="button" class="btn btn-success btn-block pull-right" ng-disabled="waiverSigned == false" ng-click="completeRegistration()">Complete Registration</button>
       </div>
     </div>
   </div>
