@@ -1,27 +1,22 @@
 (function(){
 
-    function controller(scope, $location, model){
+    function controller(scope, $location, cartModel){
         console.log("CreateTeamController here");
 
-        scope.teamName = model.teamName;
-
-        scope.players = model.players;
+        scope.teamName = cartModel.teamName;
+        scope.players = cartModel.teamMembers;
 
         scope.addPlayer = function(name, email){
-            // push it to the array
-            model.players.push({name : name, email : email});
-            // clear the input boxes
+            cartModel.addTeamMember(name, email);
             scope.addName = "";
-            scope.addEmail = "";
+            scope.addEmail ="";
         }
 
         scope.makeTeam = function(){
-            model.makeTeam()
-                .then(function(){
-                    $location.path("/eventure/1/list/1/team/1/payment");
-                });
+            $location.path("/eventure/1/list/1/team/" + cartModel.teamId + "/payment");
         }
     }
 
-    angular.module("app").controller("CreateTeamController", ["$scope", "$location", "RegistrationModel", controller]);
+    angular.module("app").controller("CreateTeamController",
+        ["$scope", "$location", "RegistrationCartModel", controller]);
 })();

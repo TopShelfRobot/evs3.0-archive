@@ -21,7 +21,7 @@
             });
 
         scope.register = function(eventureId, listId){
-            cartModel.participantId = participantId;
+            cartModel.participantId = scope.participantId;
             $location.path("/eventure/" + eventureId + "/list/" + listId + "/team");
         }
     }
