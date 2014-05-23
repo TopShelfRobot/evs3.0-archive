@@ -26,7 +26,7 @@
         <div class="col-sm-5">
           <h3>Payment Information</h3>
           <p class="text-muted">We accept all major credit and debit cards</p>
-          <img src="img/creditcards.png" /><br>
+          <img src="/Content/images/creditcards.png" /><br>
         </div>
         <div class="col-sm-7">
           <br><br>
@@ -56,19 +56,19 @@
         <div class="col-lg-3">
           <div class="form-group">
             <label for="CardName">Name on card</label>
-            <input type="text" size="20" autocomplete="off" class="form-control" name="CardName" data-stripe="name" />
+            <input type="text" size="20" autocomplete="off" class="form-control" name="CardName" ng-model="name" />
           </div>
         </div>
         <div class="col-lg-3">
           <div class="form-group">
             <label for="CardNumber">Card Number</label>
-            <input type="text" size="20" autocomplete="off" class="form-control" name="CardNumber" data-stripe="number" />
+            <input type="text" size="20" autocomplete="off" class="form-control" name="CardNumber" ng-model="number" />
           </div>
         </div>
         <div class="col-lg-3">
           <div class="form-group">
             <label for="CardCvc">CVC</label>
-            <input type="text" size="3" autocomplete="off" class="form-control" name="CardCvc" data-stripe="cvc" />
+            <input type="text" size="3" autocomplete="off" class="form-control" name="CardCvc" ng-model="cvc" />
             <p class="help-block">3 digit number on the back of your card.</p>
           </div>
         </div>
@@ -77,7 +77,7 @@
             <label for="CardExpiration">Expiration (MM/YYYY)</label>
             <div class="row">
               <div class="col-sm-6">
-                <select class="form-control" data-stripe="exp-month">
+                <select class="form-control" ng-model="expMonth">
                   <option value="1" selected="selected">01</option>
                   <option value="2">02</option>
                   <option value="3">03</option>
@@ -94,7 +94,7 @@
               </div>
               <br class="visible-xs">
               <div class="col-sm-6">
-                <select class="form-control" data-stripe="exp-year">
+                <select class="form-control" ng-model="expYear">
                   <option value="2014" selected="selected">2014</option>
                   <option value="2015">2015</option>
                   <option value="2016">2016</option>

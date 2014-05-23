@@ -1,6 +1,6 @@
 (function(){
 
-    function Model($q){
+    function Model($http){
 
         var model = {};
 
@@ -18,16 +18,29 @@
             model.teamMembers.push({name : name, email: email});
         }
 
-        model.getPaymentToken = function(total, name, cardNumber, cardCVC, expireMonth, expireYear){
-            return $q.when({id : "123435"});
-        }
+        // Submits orders to be processed by the backend.
+        model.submitOrder = function(token, value){
+            console.log("token value:", token, value);
+            var order = {
+                token : token,
+                eventureId : model.eventureId,
+                eventureListId : model.eventureListId,
+                participantId : model.participantId,
+                teamName : model.teamName,
+                teamMembers : model.teamMembers,
+                payment : value
+            };
 
-        model.submitOrder = function(total, teamCaptainId, teamMembers, teamName){
-            return $q.when({id : "123435"});
+            console.log(order);
+            return $http.post("/api/teamCreation", order, {headers : {"Content-Type" : "application/json"}})
+            // expected response:
+            // var response = {
+            //     teamId : "1233534656"
+            // }
         }
 
         return model;
     }
 
-    angular.module("app").service("RegistrationCartModel", ["$q", Model]);
+    angular.module("app").service("RegistrationCartModel", ["$http", "StripeService", Model]);
 })()
