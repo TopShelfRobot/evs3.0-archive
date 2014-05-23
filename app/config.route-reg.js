@@ -22,7 +22,7 @@
                 url: '/eventure',
                 config: {
                     title: 'Eventure',
-                    templateUrl: 'app/registration/eventure.template.html',
+                    templateUrl: 'app/registration/eventure.part.html',
                     settings: {
                         nav: 2,
                         content: 'Events'
@@ -32,7 +32,7 @@
                 url: '/eventure/:eventureId/list',
                 config: {
                     title: 'Eventure List',
-                    templateUrl: 'app/registration/eventurelist.template.html',
+                    templateUrl: 'app/registration/eventurelist.part.html',
                     settings: {
                         nav: 3,
                         content: 'Participants'
@@ -42,7 +42,7 @@
                 url: '/eventure/:eventureId/list/:listId/team',
                 config: {
                     title: 'Create Team',
-                    templateUrl: 'app/registration/createteam.template.html',
+                    templateUrl: 'app/registration/createteam.part.html',
                     settings: {
                         nav: 1,
                         content: 'Enterprise'
@@ -52,7 +52,7 @@
                 url: '/eventure/:eventureId/list/:listId/team/:teamId/payment',
                 config: {
                     title: 'Team Payment',
-                    templateUrl: 'app/registration/teampayment.template.html',
+                    templateUrl: 'app/registration/teampayment.part.html',
                     settings: {
                         nav: 4,
                         content: 'Coupons & Addons'

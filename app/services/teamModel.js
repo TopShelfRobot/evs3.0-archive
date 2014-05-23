@@ -3,7 +3,7 @@
 
     function Model($q){
 
-        console.log("RegistrationModel Entered");
+        console.log("TeamModel Entered");
 
         model = {};
 
@@ -22,6 +22,6 @@
         return model;
     }
 
-    angular.module("app").service("RegistrationModel", ["$q", Model]);
+    angular.module("app").service("TeamModel", ["$q", Model]);
 
 })();
