@@ -1,27 +1,24 @@
 (function(){
 
 
-    function Model($q){
+    function Model($q, emFactory, breeze){
+        var manager = emFactory.newManager();
+        var model = {};
 
-        console.log("TeamModel Entered");
+        model.getTeamById = function(id){
+            var query = breeze.EntityQuery()
+                .from("Teams").
+                .where("id", "==", id);
 
-        model = {};
-
-        model.teamName = "Banditos";
-
-        model.players = [{name : "Bill Burke", email : "billstron@gmail.com"},
-            {name : "Mike Boone", email : "boone@gmail.com"}];
-
-        model.totalCost = 400;
-        model.currentlyPaid = 200;
-
-        model.makeTeam = function(){
-            return $q.when(true);
+            return manager.execute(query)
+                then(function(response){
+                    return response.results[0];
+                });
         }
 
         return model;
     }
 
-    angular.module("app").service("TeamModel", ["$q", Model]);
+    angular.module("app").service("TeamModel", ["$q", "entityManagerFactory", "breeze", Model]);
 
 })();

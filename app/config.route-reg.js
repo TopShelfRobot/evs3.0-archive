@@ -59,6 +59,12 @@
                     }
                 }
             },{
+                url: '/eventure/:eventureId/list/:listId/team/:teamId/member/:memberId/payment',
+                config: {
+                    title: 'Member Payment',
+                    templateUrl: 'app/registration/memberPayment.part.html'
+                }
+            },{
                 url: '/kitchensink',
                 config: {
                     title: 'Kitchen Sink',
