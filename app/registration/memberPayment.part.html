@@ -10,10 +10,6 @@
     </div>
     <hr>
 
-    <div data-ng-include="'/app/registration/payment.part.html'"></div>
-    <div class="row">
-      <div class="col-lg-2 col-lg-offset-10 clearfix">
-        <button type="button" class="btn btn-success btn-block pull-right" ng-disabled="waiverSigned == false" ng-click="completeRegistration()">Complete Registration</button>
-      </div>
-    </div>
+    <div ng-include="'/app/registration/payment.part.html'"></div>
+
   </div>

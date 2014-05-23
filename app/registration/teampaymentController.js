@@ -15,7 +15,7 @@
             });
 
         $scope.allowZeroPayment = cartModel.allowZeroPayment;
-        $scope.waiverSigned = cartModel.waiverSigned;
+        // $scope.waiverSigned = cartModel.waiverSigned;
 
         $scope.errorMessage = "";
 

@@ -5,7 +5,7 @@
             <label for="Amount">What would you like to pay?</label>
             <p class="input-group">
               <span class="input-group-addon">$</span>
-              <input ng-model="userPaying" type="text" class="form-control" name="Amount" id="Amount" placeholder="0.00" />
+              <input ng-model="$parent.userPaying" type="text" class="form-control" name="Amount" id="Amount" placeholder="0.00" />
             </p>
             <p class="help-block">We suggest you pay $40.00.</p>
           </div>
@@ -19,12 +19,12 @@
         </div>
         <div class="col-sm-7">
           <br><br>
-          <label class="checkbox" ng-show="allowZeroPayment">
-            <input type="checkbox" data-bind="checked: isTerms">
+          <label class="checkbox" ng-show="$parent.allowZeroPayment">
+            <input type="checkbox" data-bind="checked: isTerms" ng-model="$parent.fullPaymentRequired">
             I am paying an amount of $0.00 and understand my team is still responsible for the full amount.
           </label>
           <label class="checkbox">
-            <input type="checkbox" data-bind="checked: isTerms" ng-model="waiverSigned">
+            <input type="checkbox" data-bind="checked: isTerms" ng-model="$parent.waiverSigned">
             I have read and agree to the
             <a id="terms" data-contents="{{show.msg}}" rel="popover">Terms and Conditions</a>,
             <a id="refund">Refund Policy</a>,
@@ -37,7 +37,7 @@
       <div class="row">
         <div class="col-lg-12">
           <div class="form-group has-error text-center">
-            <span class="col-lg-12 payment-errors help-block lead">{{errorMessage}}</span>
+            <span class="col-lg-12 payment-errors help-block lead">{{$parent.errorMessage}}</span>
           </div>
         </div>
       </div>
@@ -45,19 +45,19 @@
         <div class="col-lg-3">
           <div class="form-group">
             <label for="CardName">Name on card</label>
-            <input type="text" size="20" autocomplete="off" class="form-control" name="CardName" ng-model="name" />
+            <input type="text" size="20" autocomplete="off" class="form-control" name="CardName" ng-model="$parent.name" />
           </div>
         </div>
         <div class="col-lg-3">
           <div class="form-group">
             <label for="CardNumber">Card Number</label>
-            <input type="text" size="20" autocomplete="off" class="form-control" name="CardNumber" ng-model="number" />
+            <input type="text" size="20" autocomplete="off" class="form-control" name="CardNumber" ng-model="$parent.number" />
           </div>
         </div>
         <div class="col-lg-3">
           <div class="form-group">
             <label for="CardCvc">CVC</label>
-            <input type="text" size="3" autocomplete="off" class="form-control" name="CardCvc" ng-model="cvc" />
+            <input type="text" size="3" autocomplete="off" class="form-control" name="CardCvc" ng-model="$parent.cvc" />
             <p class="help-block">3 digit number on the back of your card.</p>
           </div>
         </div>
@@ -66,7 +66,7 @@
             <label for="CardExpiration">Expiration (MM/YYYY)</label>
             <div class="row">
               <div class="col-sm-6">
-                <select class="form-control" ng-model="expMonth">
+                <select class="form-control" ng-model="$parent.expMonth">
                   <option value="1" selected="selected">01</option>
                   <option value="2">02</option>
                   <option value="3">03</option>
@@ -83,7 +83,7 @@
               </div>
               <br class="visible-xs">
               <div class="col-sm-6">
-                <select class="form-control" ng-model="expYear">
+                <select class="form-control" ng-model="$parent.expYear">
                   <option value="2014" selected="selected">2014</option>
                   <option value="2015">2015</option>
                   <option value="2016">2016</option>
@@ -111,3 +111,8 @@
         </div>
       </div>
     </form>
+    <div class="row">
+      <div class="col-lg-2 col-lg-offset-10 clearfix">
+        <button type="button" class="btn btn-success btn-block pull-right" ng-disabled="(!$parent.waiverSigned) || ($parent.userPaying == 0 && !$parent.fullPaymentRequired)" ng-click="$parent.completeRegistration()">Complete Registration</button>
+      </div>
+    </div>
