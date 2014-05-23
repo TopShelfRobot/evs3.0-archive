@@ -1,15 +1,15 @@
 (function(){
 
-    function controller(scope, $params, eModel, regModel, partModel){
+    function controller(scope, $location, $routeParams, eModel, regModel, cartModel, partModel){
 
+        console.log("cartModel:", cartModel);
 
-        eModel.getEventure($params.eventureId)
+        eModel.getEventure($routeParams.eventureId)
             .then(function(eventure){
-                console.log("here:", eventure);
                 scope.eventure = eventure;
             });
 
-        eModel.getEventureList($params.eventureId)
+        eModel.getEventureListAll($routeParams.eventureId)
             .then(function(list){
                 scope.list = list;
                 scope.selection = scope.list[0];
@@ -17,11 +17,21 @@
 
         partModel.getAll()
             .then(function(list){
-                console.log("participants:", list);
+                scope.participantId = list[0].houseId;
+                scope.participants = list;
             });
 
+        scope.register = function(eventureId, listId){
+            cartModel.participantId = scope.participantId;
+            cartModel.eventureId = eventureId;
+            cartModel.eventureListId = listId;
+            $location.path("/eventure/" + eventureId + "/list/" + listId + "/team");
+        }
     }
 
-    angular.module("app").controller("EventureListController", ["$scope", "$routeParams", "EventureModel", "RegistrationModel", "ParticipantModel", controller]);
+    angular.module("app").controller("EventureListController",
+        ["$scope", "$location", "$routeParams",
+            "EventureModel", "RegistrationModel",
+            "RegistrationCartModel", "ParticipantModel", controller]);
 
 })();

@@ -5,12 +5,12 @@
 
         model = {};
 
-        model.houseId = 3306;
+        model.id = 3306;
 
         model.getAll = function(){
             var query = breeze.EntityQuery
                 .from("Participants")
-                .where("houseId", "==", model.houseId);
+                .where("houseId", "==", model.id);
 
             return manager.executeQuery(query).then(function(data){
                 return data.results;
