@@ -1,23 +1,13 @@
 (function(){
 
-    function controller($scope, $location, Stripe, eventureModel, cartModel){
+    function Controller($scope, TeamModel, Stripe, cartModel){
+        var controller = {};
 
-        console.log("cartModel:", cartModel);
-
-        $scope.teamName = cartModel.teamName;
-
-        $scope.remaining;
-        console.log(cartModel.eventureId, cartModel.eventureListId);
-        eventureModel.getEventureListItem(cartModel.eventureId, cartModel.eventureListId)
-            .then(function(item){
-                if(item)
-                    $scope.remaining = item.currentFee - cartModel.currentlyPaid;
-            });
+        console.log("MemberPaymentController:", $scope);
 
         $scope.allowZeroPayment = cartModel.allowZeroPayment;
-        // $scope.waiverSigned = cartModel.waiverSigned;
-
-        $scope.errorMessage = "";
+        $scope.waiverSigned = false;
+        $scope.userPaying = 30;
 
         $scope.completeRegistration = function(){
             cartModel.waiverSigned = $scope.waiverSigned;
@@ -30,6 +20,7 @@
                     exp_year: $scope.expYear
                 })
                 .then(function(token){
+                    console.log("$scope.userPaying", $scope.userPaying);
                     return cartModel.submitOrder(token, $scope.userPaying);
                 })
                 .then(function(response){
@@ -39,11 +30,16 @@
                     $scope.errorMessage = "There was an error with your transaction:" + msg.toString();
                 });
         }
+
+        TeamModel.getTeamById(2)
+            .then(function(team){
+                console.log("team:", team);
+                $scope.teamName = team.name;
+            });
+
+        return controller;
     }
 
-    angular.module("app").controller("TeamPaymentController",
-        ["$scope", "$location",
-            "StripeService", "EventureModel", "RegistrationCartModel",
-            controller]);
-
+    angular.module("app").controller("MemberPaymentController",
+        ["$scope", "TeamModel", "StripeService", "MemberCartModel", Controller]);
 })();

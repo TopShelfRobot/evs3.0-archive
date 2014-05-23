@@ -52,11 +52,17 @@
                 url: '/eventure/:eventureId/list/:listId/team/:teamId/payment',
                 config: {
                     title: 'Team Payment',
-                    templateUrl: 'app/registration/teampayment.part.html',
+                    templateUrl: 'app/registration/teamPayment.part.html',
                     settings: {
                         nav: 4,
                         content: 'Coupons & Addons'
                     }
+                }
+            },{
+                url: '/eventure/:eventureId/list/:listId/team/:teamId/member/:memberId/payment',
+                config: {
+                    title: 'Member Payment',
+                    templateUrl: 'app/registration/memberPayment.part.html'
                 }
             },{
                 url: '/kitchensink',
