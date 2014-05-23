@@ -1,14 +1,14 @@
 (function(){
 
-    function Model($http){
+    function Model($http, $routeParams){
 
         var model = {};
 
-        model.eventureId = 1;
-        model.eventureListId = 2;
-        model.participantId = 3306;
+        model.eventureId = $routeParams.eventureId || null;
+        model.eventureListId = $routeParams.listId || null;
+        model.participantId = $routeParams.uid || null;
         model.waiverSigned = false;
-        model.teamName = "butts";
+        model.teamName;
         model.teamMembers = [];
         model.teamId = "tbd";
         model.currentlyPaid = 0;
@@ -42,5 +42,5 @@
         return model;
     }
 
-    angular.module("app").service("RegistrationCartModel", ["$http", "StripeService", Model]);
+    angular.module("app").service("RegistrationCartModel", ["$http", "$routeParams", "StripeService", Model]);
 })()

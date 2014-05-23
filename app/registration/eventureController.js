@@ -1,6 +1,6 @@
 (function(){
 
-    function controller(scope, $location, $anchorScroll, eModel, regModel){
+    function controller(scope, $location, $anchorScroll, eModel){
 
         var all = [];
         var viewLength = 10;
@@ -32,6 +32,6 @@
         }
     }
 
-    angular.module("app").controller("EventureController", ["$scope", "$location", "$anchorScroll", "EventureModel", "RegistrationModel", controller]);
+    angular.module("app").controller("EventureController", ["$scope", "$location", "$anchorScroll", "EventureModel", controller]);
 
 })();

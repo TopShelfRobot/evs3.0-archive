@@ -1,6 +1,6 @@
 (function(){
 
-    function controller(scope, $location, $routeParams, eModel, regModel, cartModel, partModel){
+    function controller(scope, $location, $routeParams, eModel,  cartModel, partModel){
 
         console.log("cartModel:", cartModel);
 
@@ -25,13 +25,14 @@
             cartModel.participantId = scope.participantId;
             cartModel.eventureId = eventureId;
             cartModel.eventureListId = listId;
-            $location.path("/eventure/" + eventureId + "/list/" + listId + "/team");
+            $location.path("/eventure/" + eventureId + "/list/" + listId + "/team")
+                .search("uid", scope.participantId);
         }
     }
 
     angular.module("app").controller("EventureListController",
         ["$scope", "$location", "$routeParams",
-            "EventureModel", "RegistrationModel",
-            "RegistrationCartModel", "ParticipantModel", controller]);
+            "EventureModel", "RegistrationCartModel", "ParticipantModel",
+            controller]);
 
 })();
