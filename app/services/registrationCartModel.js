@@ -14,10 +14,6 @@
         model.currentlyPaid = 0;
         model.allowZeroPayment = false;
 
-        model.addTeamMember = function(name, email){
-            model.teamMembers.push({name : name, email: email});
-        }
-
         // Submits orders to be processed by the backend.
         model.submitOrder = function(token, value){
             console.log("token value:", token, value);
