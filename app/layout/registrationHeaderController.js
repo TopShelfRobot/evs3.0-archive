@@ -1,17 +1,13 @@
 (function(){
 
-    function controller($scope, $interval){
+    function controller($scope){
 
         $scope.cart = [
             {name : "butts"}
         ];
 
-        $interval(function(){
-            $scope.cart.push({name : "butts"});
-        }, 2000);
-
     }
 
-    angular.module("app").controller("Header", ["$scope", "$interval", controller]);
+    angular.module("app").controller("Header", ["$scope", controller]);
 
 })();
