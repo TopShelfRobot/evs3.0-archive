@@ -2,7 +2,7 @@
     'use strict';
 
     var app = angular.module('app');
-    
+
     app.directive('json', function () {
         return {
             restrict: 'A', // only activate on element attribute
@@ -238,23 +238,29 @@
         }
     });
 
-    app.directive('cartView', ["$compile", function ($compile) {
+    app.directive('cartView', ["$compile", "$http", function ($compile, $http) {
 
         var directive = {
             restrict: 'A',
-            template: '<span class="badge pull-right">{{cart.length}}</span> \
-                <i class="glyphicon glyphicon-shopping-cart"></i>&nbsp; \
-                <div id="pop-over-content" style="display:none"><ul><li ng-repeat="item in cart">{{item.name}}</li></ul></div>',
+            transclude : true,
+            scope : { cart : "=cartView"},
+            template: '<span ng-transclude></span>',
             link: function (scope, el, attrs) {
+                $http.get('/app/layout/cartView.html')
+                    .then(function(response){
+                        var part = response.data;
+                        var fn = $compile(part);
+                        var out = fn(scope);
+                        $(el).popover({
+                            trigger: 'click',
+                            html: true,
+                            content: function(){
+                                return out.html();
+                            },
+                            placement: "bottom",
+                        });
+                    });
 
-                $(el).popover({
-                    trigger: 'click',
-                    html: true,
-                    content: function(){
-                        return $("#pop-over-content").html();
-                    },
-                    placement: "bottom",
-                });
             }
         };
         return directive;
