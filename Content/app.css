@@ -3,7 +3,7 @@
 .navbar-nav > li > a.active {
   color:#444444;
 }
-}
+
 .tooltip-inner {
   padding:10px;
 }
@@ -40,6 +40,14 @@
   color:#4e4e4e;
 }
 
+.k-grid-content a.btn-success,
+.k-grid-content a.btn-info,
+.k-grid-content a.btn-primary,
+.k-grid-content a.btn-warning,
+.k-grid-content a.btn-danger {
+  color:#ffffff;
+}
+
 /* Report Layout */
 .report-icons {
     overflow: hidden;
@@ -53,7 +61,7 @@
 .report-icons > .report-icons-list > li {
     float: left;
     width: 25%;
-    margin:0px 0px 20px;
+    margin:0 0 20px;
 }
 
 .report-icons > .report-icons-list > li > img.report-icon {
