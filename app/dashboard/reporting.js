@@ -31,8 +31,5 @@
                   return vm.reports;
               });
       }
-
-
-
     }
 })();
