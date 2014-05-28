@@ -8,15 +8,15 @@
 
         var service = {};
 
-        service.createToken = function(form){
+        service.createToken = function(form) {
             console.log("form:", form);
             var response = {
-                error : null,
+                error: null,
                 //error.message = "Don't be a dummy!",
-                id : "aweoijh2345oiert5jkadgf"
+                id: "aweoijh2345oiert5jkadgf"
             };
             return $q.when(response.id);
-        }
+        };
 
         return service;
     }
