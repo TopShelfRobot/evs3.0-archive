@@ -1,51 +1,53 @@
-<div class="row">
-  <div class="col-lg-10">
-    <h1>Louisville 10k <small>6/1/2015</small></h1>
-  </div>
-  <div class="col-lg-2">
-    <p class="text-muted text-right">Owned Race</p>
-    <button class="btn btn-default pull-right" data-bind="click: clickViewRegistrations" type="button">View Registrations</button>
-  </div>
-</div>
-<br>
-<div class="row">
-  <div class="col-lg-12">
-    <section id="registrationscontent">
-      <div id="regchart" class="gridStyle" ng-grid="notificationsgrid"></div>
-    </section>
-  </div>
-</div>
-<div class="row">
-  <div class="col-lg-12">
-    <section id="groupcontent">
-      <div id="groupchart" style="max-height: 650px;"></div>
-    </section>
-  </div>
-</div>
-<hr>
-<div class="row">
-  <div class="col-lg-6">
-    <h3>Capacity: 20&nbsp;/&nbsp;100</h3>
-    <div id="gauge-container">
-      <div id="gauge"></div>
+<section data-ng-controller="">
+  <div class="row">
+    <div class="col-lg-10">
+      <h1>Louisville 10k <small>6/1/2015</small></h1>
+    </div>
+    <div class="col-lg-2">
+      <p class="text-muted text-right">Owned Race</p>
+      <button class="btn btn-default pull-right" data-bind="click: clickViewRegistrations" type="button">View Registrations</button>
     </div>
   </div>
-  <div class="col-lg-6">
-    <div>
-      <table class="table table-condensed table-striped">
-        <thead>
-          <tr>
-            <th class="col-lg-4">Fee</th>
-            <th class="col-lg-8">Increase Date</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>$</td>
-            <td></td>
-          </tr>
-        </tbody>
-      </table>
+  <br>
+  <div class="row">
+    <div class="col-lg-12">
+      <section id="registrationscontent">
+        <div id="regchart" class="gridStyle" ng-grid="notificationsgrid"></div>
+      </section>
     </div>
   </div>
-</div>
+  <div class="row">
+    <div class="col-lg-12">
+      <section id="groupcontent">
+        <div id="groupchart" style="max-height: 650px;"></div>
+      </section>
+    </div>
+  </div>
+  <hr>
+  <div class="row">
+    <div class="col-lg-6">
+      <h3>Capacity: 20&nbsp;/&nbsp;100</h3>
+      <div id="gauge-container">
+        <div id="gauge"></div>
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <div>
+        <table class="table table-condensed table-striped">
+          <thead>
+            <tr>
+              <th class="col-lg-4">Fee</th>
+              <th class="col-lg-8">Increase Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>$</td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
