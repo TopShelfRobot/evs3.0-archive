@@ -47,6 +47,7 @@
     <Content Include="app\admin\setowner.html" />
     <Content Include="app\admin\setowner.js" />
     <Content Include="app\config.route-reg.js" />
+    <Content Include="app\dashboard\couponaddon.js" />
     <Content Include="app\dashboard\eventurecenter.js" />
     <Content Include="app\dashboard\eventuredetail.js" />
     <Content Include="app\dashboard\partcenter.js" />
@@ -62,6 +63,11 @@
     <Content Include="app\dashboard\setup\setlist.js" />
     <Content Include="app\dashboard\setup\setresourceitem.js" />
     <Content Include="app\dashboard\setup\setresourceitemcategory.js" />
+    <Content Include="app\layout\cartView.html" />
+    <Content Include="app\layout\reg-footer.html" />
+    <Content Include="app\layout\reg-header.html" />
+    <Content Include="app\layout\reg-shell.html" />
+    <Content Include="app\layout\registrationHeaderController.js" />
     <Content Include="app\registration\createteam.part.html" />
     <Content Include="app\registration\createteamController.js" />
     <Content Include="app\registration\eventure.part.html" />
@@ -174,6 +180,7 @@
     <Content Include="Scripts\breeze.saveErrorExtensions.js" />
     <Content Include="Scripts\jquery-2.0.3.js" />
     <Content Include="Scripts\jquery-2.0.3.min.js" />
+    <Content Include="Scripts\modernizr.custom.js" />
     <Content Include="Scripts\moment-with-langs.js" />
     <Content Include="Scripts\moment-with-langs.min.js" />
     <Content Include="Scripts\moment.js" />
@@ -182,6 +189,7 @@
     <Content Include="Scripts\spin.min.js" />
     <Content Include="Scripts\toastr.js" />
     <Content Include="Scripts\toastr.min.js" />
+    <Content Include="Scripts\toucheffects.js" />
     <Content Include="Scripts\ui-bootstrap-tpls-0.10.0.js" />
     <Content Include="Scripts\ui-bootstrap-tpls-0.10.0.min.js" />
     <Content Include="Web.config" />

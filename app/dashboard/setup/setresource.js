@@ -22,12 +22,8 @@
         function getResource() {
             return datacontext.getResourceById(1)
                 .then(function (data) {
-                    log('made it here!');
-                    //log('made it here!' + data.results[0].email);
-                    vm.resource = data.results[0];
-                    //vm.resource = data;
-                    //applyFilter();
-                    return vm.resource;
+                   //applyFilter();
+                    return vm.resource = data;
                 });
         }
 
