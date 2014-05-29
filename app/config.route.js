@@ -102,7 +102,7 @@
                     templateUrl: 'app/dashboard/eventuredetail.html'
                 }
             }, {
-                url: '/resourcedetail',
+                url: '/resourcedetail/:resourceId',
                 config: {
                     title: 'Resource Detail',
                     templateUrl: 'app/dashboard/resourcedetail.html'

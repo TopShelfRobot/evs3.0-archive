@@ -1,14 +1,15 @@
 (function () {
     'use strict';
     var controllerId = 'resourcecenter';
-    angular.module('app').controller(controllerId, ['common', 'datacontext', resourcecenter]);
+    angular.module('app').controller(controllerId, ['common', 'config', resourcecenter]);
 
-    function resourcecenter(common) {
+    function resourcecenter(common, config) {
         var getLogFn = common.logger.getLogFn;
         var log = getLogFn(controllerId);
 
         var vm = this;
         vm.title = 'app';
+        vm.ownerId = config.owner.ownerId;
 
         activate();
 
@@ -20,8 +21,9 @@
 
         function createResourceGrid() {
 
-            var resourceApi = '/kendo/Resources/GetResourcesByOwnerId/' + config.ownerId;
-
+            //var resourceApi = '/kendo/Resources/GetResourcesByOwnerId/' + vm.ownerId;
+            var resourceApi = config.remoteApiName + 'Resources/GetResourcesByOwnerId/' + vm.ownerId;
+            
             vm.resourceGridOptions = {
                 dataSource: {
                     type: "json",
@@ -33,7 +35,7 @@
                     serverSorting: true
                 },
                 height: 430,
-                change: onChange,
+                //change: onChange,
                 selectable: "single cell",
                 sortable: true,
                 pageable: true,
@@ -65,8 +67,10 @@
                            //template: '<a href="\\\#eventuredetail/#=Id#">#=DisplayHeading#</a>',
                 ]
             };
-            vm.detailGridOptions = function(dataitem) {
-                var resourceApi = '/kendo/Resources/GetResourceItemsByResourceId/' + e.data.Id;
+            vm.detailGridOptions = function(e) {
+                //var resourceApi = '/kendo/Resources/GetResourceItemsByResourceId/' + e.data.Id;
+                var resourceApi = 'http://test30.eventuresports.info/kendo/Resources/GetResourceItemsByResourceId/' + e.Id;
+
                 return {
                     dataSource: {
                         type: "json",
