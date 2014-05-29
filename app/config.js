@@ -10,6 +10,7 @@
     // For use with the HotTowel-Angular-Breeze add-on that uses Breeze
     //var remoteServiceName = 'breeze/Breeze';
     var remoteServiceName = 'http://test30.eventuresports.info/breeze/breeze/';
+    var remoteApiName = 'http://test30.eventuresports.info/kendo/';
     var events = {
         controllerActivateSuccess: 'controller.activateSuccess',
         spinnerToggle: 'spinner.toggle'
@@ -19,6 +20,50 @@
         imageBasePath: '../content/images/photos/',
         unknownPersonImageSource: 'unknown_person.jpg'
     };
+    
+    var owner = {
+        ownerId: 1,
+        houseEmail: 0,
+        guid: 0,
+        logoImageName: '/Content/images/logo.png',
+
+        houseId: 0,    //this will be set by shell
+        mr_houseId: 0,
+        houseName: "",
+        accessType: "none",
+        isReg: false,
+
+        isHeadfirst: false,
+        isSportsComm: false,
+
+        wizard: true,
+        wizEventureId: 0,
+        wizEventureListId: 0,
+
+        isGroupRequired: false,
+
+        multItemDiscount: false,
+        fourDeLisDiscount: false,
+
+        isAddSingleFeeForAllRegs: false,
+        addSingleFeeForAllRegsPercent: 0,
+        addSingleFeeType: '',
+        addSingleFeeForAllRegsFlat: 0,
+
+        eventureName: 'Event',
+        listName: 'List',
+        groupName: 'Group',
+        partButtonText: 'Select PArty!',
+
+        listStatement: 'Select a desired start time',
+
+        isEnterpriseDisplayedOnMenu: true,
+        isEventureDisplayedOnMenu: true,
+        isPartDisplayedOnMenu: true,
+        isCouponDisplayedOnMenu: true,
+        isResourceDisplayedOnMenu: true,
+        isReportingDisplayedOnMenu: true
+    };
 
     var config = {
         appErrorPrefix: '[evs Error] ', //Configure the exceptionHandler decorator
@@ -26,7 +71,9 @@
         events: events,
         remoteServiceName: remoteServiceName,
         imageSettings: imageSettings,
-        version: '3.0.0'
+        version: '3.0.0',
+        remoteApiName: remoteApiName,
+        owner: owner
     };
 
     app.value('config', config);

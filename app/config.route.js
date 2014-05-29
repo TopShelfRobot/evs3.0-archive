@@ -62,7 +62,7 @@
                     }
                 }
             }, {
-                url: '/resources',
+                url: '/resourcecenter',
                 config: {
                     title: 'Resources',
                     templateUrl: 'app/dashboard/resourcecenter.html',
@@ -96,13 +96,13 @@
                     templateUrl: 'app/dashboard/enterpriseeventure.html'
                 }
             }, {
-                url: '/eventuredetail',
+                url: '/eventuredetail/:eventureId',
                 config: {
                     title: 'Eventure Detail',
                     templateUrl: 'app/dashboard/eventuredetail.html'
                 }
             }, {
-                url: '/resourcedetail',
+                url: '/resourcedetail/:resourceId',
                 config: {
                     title: 'Resource Detail',
                     templateUrl: 'app/dashboard/resourcedetail.html'
@@ -141,6 +141,12 @@
                 url: '/seteventure',
                 config: {
                     title: 'Create An Event',
+                    templateUrl: 'app/dashboard/setup/seteventure.html'
+                }
+            }, {
+                url: '/seteventure/:eventureId',
+                config: {
+                    title: 'Edit Your Event',
                     templateUrl: 'app/dashboard/setup/seteventure.html'
                 }
             }, {

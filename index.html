@@ -13,7 +13,14 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
     <link rel="icon" type="image/png" href="/back-favicon.png" />
-    <!--<link href="content/ie10mobile.css" rel="stylesheet" />-->
+
+    <link href="//cdn.kendostatic.com/2014.1.318/styles/kendo.common.min.css" rel="stylesheet" type="text/css" />
+    <link href="//cdn.kendostatic.com/2014.1.318/styles/kendo.bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="//cdn.kendostatic.com/2014.1.318/styles/kendo.bootstrap.mobile.min.css" rel="stylesheet" type="text/css" />
+    <link href="//cdn.kendostatic.com/2014.1.318/styles/kendo.dataviz.min.css" rel="stylesheet" type="text/css" />
+    <link href="//cdn.kendostatic.com/2014.1.318/styles/kendo.dataviz.default.min.css" rel="stylesheet" type="text/css" />
+
+
     <link href="content/bootstrap.css" rel="stylesheet" />
     <link href="content/bootstrapnav.css" rel="stylesheet" />
     <link href="content/bootstrapoverrides.css" rel="stylesheet" />
@@ -43,6 +50,7 @@
 
     <!-- Vendor Scripts -->
     <script src="scripts/jquery-2.0.3.js"></script>
+    <script src="//cdn.kendostatic.com/2014.1.318/js/kendo.all.min.js"></script>
     <script src="scripts/angular.js"></script>
     <script src="scripts/angular-animate.js"></script>
     <script src="scripts/angular-route.js"></script>
@@ -56,10 +64,7 @@
     <script src="scripts/breeze.angular.js"></script>
     <script src="scripts/breeze.directives.js"></script>
     <script src="scripts/breeze.saveErrorExtensions.js"></script>
-
-    <!--<script src="scripts/breeze.to$q.shim.js"></script>-->   <!-- Needed only if you are using to$q -->
-
-
+    <script src="scripts/angular-kendo.js"></script>
 
     <!-- Bootstrapping -->
     <script src="app/app.js"></script>
@@ -83,8 +88,13 @@
     <script src="app/layout/shell.js"></script>
     <script src="app/layout/topnav.js"></script>
     <script src="app/dashboard/reporting.js"></script>
-    <!--    <script src="app/controllers.js"></script>-->
-
+    <script src="app/dashboard/eventurecenter.js"></script>
+    <script src="app/dashboard/eventuredetail.js"></script>
+    <script src="app/dashboard/partcenter.js"></script>
+    <script src="app/dashboard/resourcecenter.js"></script>
+    <script src="app/dashboard/resourcedetail.js"></script>
+    <script src="app/dashboard/couponaddon.js"></script>
+    
     <!-- app Services -->
     <script src="app/services/datacontext.js"></script>
     <script src="app/services/directives.js"></script>

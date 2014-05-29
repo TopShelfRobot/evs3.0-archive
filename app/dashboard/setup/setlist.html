@@ -1,161 +1,163 @@
-<div class="row">
-  <div class="col-lg-12">
-    <div class="text-right"> <a href="#/eventure" class="danger"><i class="glyphicon glyphicon-ban-circle"></i></a> </div>
-  </div>
-</div>
-<div class="row">
-  <form class="form-horizontal">
-    <legend >Listing Setup</legend>
-    <div class="col-sm-6">
-      <div class="form-group">
-        <label for="ListingName" class="col-lg-6 control-label">Listing Name:</label>
-        <div class="col-lg-6">
-          <input type="text" class="form-control" name="ListingName"placeholder="Listing Name" required />
-        </div>
-      </div>
-      <!-- /field -->
-      
-      <div class="form-group">
-        <label for="ListingDisplayName" class="col-lg-6 control-label">Listing Display Name:</label>
-        <div class="col-lg-6">
-          <input type="text" class="form-control" name="ListingDisplayName" placeholder="Listing Display Name" required />
-        </div>
-      </div>
-      <!-- /field -->
-      
-      <div class="form-group" ng-controller="listingDateCtrl">
-        <label for="listingdate" class="col-lg-6 control-label">Listing Date:</label>
-        <div class="col-lg-6">
-          <p class="input-group">
-            <input type="text"name="DateListing"  class="form-control" datepicker-popup="{{format}}" ng-model="dt" is-open="opened" min="minDate" max="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" close-text="Close" />
-            <span class="input-group-btn">
-            <button class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
-            </span> </p>
-        </div>
-      </div>
-      <!-- /field -->
-      
-      <div class="form-group">
-        <label for="DisplayOrder" class="col-lg-6 control-label">Display Order:</label>
-        <div class="col-lg-6">
-          <input type="number" class="form-control" name="DisplayOrder" data-bind="value: sortOrder">
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="ListingDescription" class="col-lg-6 control-label">Listing Description:</label>
-        <div class="col-lg-6">
-          <textarea class="form-control" name="ListingDescription" rows="5" placeholder="Please enter a listing description."></textarea>
-        </div>
-      </div>
-      <!-- /field -->
-      
-      <div class="form-group">
-        <label for="Terms" class="col-lg-6 control-label">Waiver:</label>
-        <div class="col-lg-6">
-          <textarea class="form-control" name="Terms" rows="5" placeholder="Please enter your waiver." required></textarea>
-        </div>
-      </div>
-      <!-- /field -->
-      
-      <div class="form-group" ng-controller="FileUploadCtrl">
-        <label for="imagePath" class="col-lg-6 control-label">Image Upload:</label>
-        <div class="col-lg-6">
-          <label class="btn btn-primary">
-            <input type="file" ng-file-select="onFileSelect($files)" style="display:none;" />
-            Upload Image </label>
-          <br>
-          <br>
-          <div ng-controller="UploadProgressCtrl">
-            <progressbar class="progress-striped active" value="dynamic" type="{{type}}"></progressbar>
-          </div>
-        </div>
-      </div>
-      <!-- /field --> 
+<section data-ng-controller="">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="text-right"> <a href="#/eventure" class="danger"><i class="glyphicon glyphicon-ban-circle"></i></a> </div>
     </div>
-    <div class="col-sm-6">
-      <div class="form-group" ng-controller="regOpenDateCtrl">
-        <label for="RegOpenDate" class="col-lg-6 control-label">Registration Opens:</label>
-        <div class="col-lg-6">
-          <p class="input-group">
-            <input type="text"name="RegOpenDate"  class="form-control" datepicker-popup="{{format}}" ng-model="dt" is-open="opened" min="minDate" max="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" close-text="Close" />
-            <span class="input-group-btn">
-            <button class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
-            </span> </p>
-        </div>
-      </div>
-      <!-- /field -->
-      
-      <div class="form-group" ng-controller="regCloseDateCtrl">
-        <label for="RegCloseDate" class="col-lg-6 control-label">Registration Closes:</label>
-        <div class="col-lg-6">
-          <p class="input-group">
-            <input type="text"name="RegCloseDate"  class="form-control" datepicker-popup="{{format}}" ng-model="dt" is-open="opened" min="minDate" max="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" close-text="Close" />
-            <span class="input-group-btn">
-            <button class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
-            </span> </p>
-        </div>
-      </div>
-      <!-- /field -->
-      
-      <div class="form-group">
-        <label for="Capacity" class="col-lg-6 control-label">Capacity:</label>
-        <div class="col-lg-6">
-          <input type="number" class="form-control" name="Capacity" data-bind="value: capacity" min="1" required />
-        </div>
-      </div>
-      <!-- /field -->
-      
-      <div class="form-group">
-        <label for="CurrentFee" class="col-lg-6 control-label">Current Fee:</label>
-        <div class="col-lg-6">
-          <div class="input-group"> <span class="input-group-addon">$</span>
-            <input type="text" class="form-control" name="CurrentFee" data-bind="value: currentFee" placeholder="0.00" min="1" required>
-          </div>
-        </div>
-      </div>
-      <!-- /field -->
-      
-      <div class="form-group">
-        <label for="MinAge" class="col-lg-6 control-label">Minimum Age:</label>
-        <div class="col-lg-6">
-          <input type="number" class="form-control" name="MinAge" data-bind="value: minAge" />
-        </div>
-      </div>
-      <!-- /field -->
-      
-      <div class="form-group">
-        <label for="MaxAge" class="col-lg-6 control-label">Maximum Age:</label>
-        <div class="col-lg-6">
-          <input type="number" class="form-control" name="MaxAge" data-bind="value: maxAge" />
-        </div>
-      </div>
-      <!-- /field -->
-      
-      <div class="form-group"  ng-controller="TimepickerDemoCtrl">
-        <label for="MaxRunTime" class="col-lg-6 control-label" style="padding-top:40px;">Max Run Time:</label>
-        <div class="col-lg-6">
-          <div ng-model="mytime" ng-change="changed()" style="display:inline-block;">
-            <timepicker hour-step="hstep" minute-step="mstep" show-meridian="false"></timepicker>
-          </div>
-        </div>
-      </div>
-      <!-- /field -->
-      
-      <div class="form-group">
-        <label for="" class="col-lg-6 control-label">Active Event:</label>
-        <div class="col-lg-6">
-          <div class="btn-group" ng-controller="ActiveCtrl">
-            <button type="button" class="btn btn-default" ng-model="radioModel" btn-radio="'Yes'">Yes</button>
-            <button type="button" class="btn btn-default" ng-model="radioModel" btn-radio="'No'">No</button>
-          </div>
-        </div>
-      </div>
-      <!-- /field --> 
-    </div>
-  </form>
-</div>
-<div class="row">
-  <div class="col-lg-12">
-    <a href="#/setclient" class="btn btn-success btn-lg pull-right">Next</a>
   </div>
-</div>
+  <div class="row">
+    <form class="form-horizontal">
+      <legend >Listing Setup</legend>
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="ListingName" class="col-lg-6 control-label">Listing Name:</label>
+          <div class="col-lg-6">
+            <input type="text" class="form-control" name="ListingName"placeholder="Listing Name" required />
+          </div>
+        </div>
+        <!-- /field -->
+
+        <div class="form-group">
+          <label for="ListingDisplayName" class="col-lg-6 control-label">Listing Display Name:</label>
+          <div class="col-lg-6">
+            <input type="text" class="form-control" name="ListingDisplayName" placeholder="Listing Display Name" required />
+          </div>
+        </div>
+        <!-- /field -->
+
+        <div class="form-group" ng-controller="listingDateCtrl">
+          <label for="listingdate" class="col-lg-6 control-label">Listing Date:</label>
+          <div class="col-lg-6">
+            <p class="input-group">
+              <input type="text"name="DateListing"  class="form-control" datepicker-popup="{{format}}" ng-model="dt" is-open="opened" min="minDate" max="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" close-text="Close" />
+              <span class="input-group-btn">
+              <button class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+              </span> </p>
+          </div>
+        </div>
+        <!-- /field -->
+
+        <div class="form-group">
+          <label for="DisplayOrder" class="col-lg-6 control-label">Display Order:</label>
+          <div class="col-lg-6">
+            <input type="number" class="form-control" name="DisplayOrder" data-bind="value: sortOrder">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="ListingDescription" class="col-lg-6 control-label">Listing Description:</label>
+          <div class="col-lg-6">
+            <textarea class="form-control" name="ListingDescription" rows="5" placeholder="Please enter a listing description."></textarea>
+          </div>
+        </div>
+        <!-- /field -->
+
+        <div class="form-group">
+          <label for="Terms" class="col-lg-6 control-label">Waiver:</label>
+          <div class="col-lg-6">
+            <textarea class="form-control" name="Terms" rows="5" placeholder="Please enter your waiver." required></textarea>
+          </div>
+        </div>
+        <!-- /field -->
+
+        <div class="form-group" ng-controller="FileUploadCtrl">
+          <label for="imagePath" class="col-lg-6 control-label">Image Upload:</label>
+          <div class="col-lg-6">
+            <label class="btn btn-primary">
+              <input type="file" ng-file-select="onFileSelect($files)" style="display:none;" />
+              Upload Image </label>
+            <br>
+            <br>
+            <div ng-controller="UploadProgressCtrl">
+              <progressbar class="progress-striped active" value="dynamic" type="{{type}}"></progressbar>
+            </div>
+          </div>
+        </div>
+        <!-- /field -->
+      </div>
+      <div class="col-sm-6">
+        <div class="form-group" ng-controller="regOpenDateCtrl">
+          <label for="RegOpenDate" class="col-lg-6 control-label">Registration Opens:</label>
+          <div class="col-lg-6">
+            <p class="input-group">
+              <input type="text"name="RegOpenDate"  class="form-control" datepicker-popup="{{format}}" ng-model="dt" is-open="opened" min="minDate" max="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" close-text="Close" />
+              <span class="input-group-btn">
+              <button class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+              </span> </p>
+          </div>
+        </div>
+        <!-- /field -->
+
+        <div class="form-group" ng-controller="regCloseDateCtrl">
+          <label for="RegCloseDate" class="col-lg-6 control-label">Registration Closes:</label>
+          <div class="col-lg-6">
+            <p class="input-group">
+              <input type="text"name="RegCloseDate"  class="form-control" datepicker-popup="{{format}}" ng-model="dt" is-open="opened" min="minDate" max="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" close-text="Close" />
+              <span class="input-group-btn">
+              <button class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+              </span> </p>
+          </div>
+        </div>
+        <!-- /field -->
+
+        <div class="form-group">
+          <label for="Capacity" class="col-lg-6 control-label">Capacity:</label>
+          <div class="col-lg-6">
+            <input type="number" class="form-control" name="Capacity" data-bind="value: capacity" min="1" required />
+          </div>
+        </div>
+        <!-- /field -->
+
+        <div class="form-group">
+          <label for="CurrentFee" class="col-lg-6 control-label">Current Fee:</label>
+          <div class="col-lg-6">
+            <div class="input-group"> <span class="input-group-addon">$</span>
+              <input type="text" class="form-control" name="CurrentFee" data-bind="value: currentFee" placeholder="0.00" min="1" required>
+            </div>
+          </div>
+        </div>
+        <!-- /field -->
+
+        <div class="form-group">
+          <label for="MinAge" class="col-lg-6 control-label">Minimum Age:</label>
+          <div class="col-lg-6">
+            <input type="number" class="form-control" name="MinAge" data-bind="value: minAge" />
+          </div>
+        </div>
+        <!-- /field -->
+
+        <div class="form-group">
+          <label for="MaxAge" class="col-lg-6 control-label">Maximum Age:</label>
+          <div class="col-lg-6">
+            <input type="number" class="form-control" name="MaxAge" data-bind="value: maxAge" />
+          </div>
+        </div>
+        <!-- /field -->
+
+        <div class="form-group"  ng-controller="TimepickerDemoCtrl">
+          <label for="MaxRunTime" class="col-lg-6 control-label" style="padding-top:40px;">Max Run Time:</label>
+          <div class="col-lg-6">
+            <div ng-model="mytime" ng-change="changed()" style="display:inline-block;">
+              <timepicker hour-step="hstep" minute-step="mstep" show-meridian="false"></timepicker>
+            </div>
+          </div>
+        </div>
+        <!-- /field -->
+
+        <div class="form-group">
+          <label for="" class="col-lg-6 control-label">Active Event:</label>
+          <div class="col-lg-6">
+            <div class="btn-group" ng-controller="ActiveCtrl">
+              <button type="button" class="btn btn-default" ng-model="radioModel" btn-radio="'Yes'">Yes</button>
+              <button type="button" class="btn btn-default" ng-model="radioModel" btn-radio="'No'">No</button>
+            </div>
+          </div>
+        </div>
+        <!-- /field -->
+      </div>
+    </form>
+  </div>
+  <div class="row">
+    <div class="col-lg-12">
+      <a href="#/setclient" class="btn btn-success btn-lg pull-right">Next</a>
+    </div>
+  </div>
+</section>
