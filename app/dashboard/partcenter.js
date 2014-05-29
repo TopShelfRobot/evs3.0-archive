@@ -56,13 +56,13 @@
             },{
                 title: "",
                 width: "120px",
-                template:'<a class="btn btn-default btn-block" href="\\\#userprofile/#=Id#">Edit</a>'
+                template:'<a class="btn btn-default btn-block" href="\\\#profile/#=Id#">Edit</a>'
             }]
           };
 
-          vm.detailGridOptions = function(dataItem) {
+          vm.detailGridOptions = function(e) {
 
-            var regapi = 'http://test30.eventuresports.info/kendo/Registrations/GetRegistrationsByPartId/' + dataItem.Id;
+            var regapi = 'http://test30.eventuresports.info/kendo/Registrations/GetRegistrationsByPartId/' + e.Id;
 
             return {
                 dataSource: {

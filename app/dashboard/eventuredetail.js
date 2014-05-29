@@ -26,8 +26,7 @@
         function getEventure() {
           return datacontext.getEventureById(62)
             .then(function (data) {
-                vm.eventure = data;
-                return vm.eventure;
+                return vm.eventure = data;
             });
         }
 
