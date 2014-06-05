@@ -1,37 +1,52 @@
 (function () {
     'use strict';
 
-    var controllerId = 'eventuredetail';
-    angular.module('app').controller(controllerId, ['common', 'datacontext', eventuredetail]);
+    var controllerId = 'listingdetail';
+    angular.module('app').controller(controllerId, ['common', 'datacontext', listingdetail]);
 
-    function eventuredetail(common, datacontext) {
+    function listingdetail(common, datacontext) {
         var getLogFn = common.logger.getLogFn;
         var log = getLogFn(controllerId);
 
         var vm = this;
-        vm.title = 'Eventure Detail';
-        vm.eventure = {};
+        vm.title = 'Listing Detail';
+        vm.listing = {};
         vm.registrations = {};
         vm.capacity = {};
-        vm.gauge = {};
+        vm.fees = {};
+
+        vm.listingId = 141;
 
         activate();
 
         function activate() {
-          var promises = [getEventure(), Registrations(), Capacity(), ListingsGrid(), ExpenseGrid(), EventPlanGrid(), ParticipantGrid()];
+          var promises = [getListing(), Registrations(), Capacity(), FeeSchedule(), Groups(), ParticipantGrid()];
 
           common.activateController(promises, controllerId)
-              .then(function() { log('Activated Eventure Detail View'); }); }
+              .then(function() { log('Activated Listing Detail View'); }); }
 
-        function getEventure() {
-          return datacontext.getEventureById(62)
+        function getListing() {
+          return datacontext.getEventureListById(vm.listingId)
             .then(function (data) {
-                return vm.eventure = data;
+                return vm.listing = data;
+            });
+        }
+
+        function Capacity() {
+          return datacontext.getCapacityByEventureListId(vm.listingId)
+            .then(function (data) {
+              return vm.capacity = data;
+            });
+        }
+        function FeeSchedule() {
+          return datacontext.getFeeSchedulesByEventureListId(vm.listingId)
+            .then(function (data) {
+              return vm.fees = data;
             });
         }
 
         function Registrations() {
-          var regapi = 'http://test30.eventuresports.info/kendo/Registrations/GetEventureGraph/62';
+          var regapi = 'http://test30.eventuresports.info/kendo/Registrations/GetEventureListGraph/' + vm.listingId;
 
           vm.registrations = {
             theme: "bootstrap",
@@ -44,7 +59,7 @@
               }
             },
             title: {
-              text: "Registrations YTD"
+              text: "Registrations by Month"
             },
             legend: {
               position: "bottom"
@@ -68,15 +83,62 @@
               majorGridLines: {
                   visible: false
               }
+            },
+            tooltip: {
+                visible: true,
+                format: "{0}%",
+                template: "#= series.name #: #= value #"
             }
           };
         }
 
-        function Capacity() {
-          return datacontext.getCapacityByEventureId(62)
-            .then(function (data) {
-              return vm.capacity = data;
-            });
+        function Groups() {
+          var groupapi = 'http://test30.eventuresports.info/kendo/Registrations/GetEventureGroupGraphByList/' + vm.listingId;
+
+          vm.groups = {
+            theme: "bootstrap",
+            dataSource: {
+              transport: {
+                  read: {
+                      url: groupapi,
+                      dataType: "json"
+                  }
+              }
+            },
+            title: {
+              text: "Registrations by Group"
+            },
+            legend: {
+              position: "bottom"
+            },
+            series: [{
+              name: "Group Count",
+              field: "regCount",
+              colorField: "userColor",
+              tooltip: { visible: true }
+            }],
+            seriesClick: function(e) {
+              var url = '#partcenter/group/' + e.dataItem.id;
+              log('url' + url);
+            },
+            valueAxis: {
+              name: "regCount",
+              labels: {
+                  format: "{0}"
+              }
+            },
+            categoryAxis: {
+              field: "groupName",
+              majorGridLines: {
+                  visible: false
+              }
+            },
+            tooltip: {
+                visible: true,
+                format: "{0}%",
+                template: "#= series.name #: #= value #"
+            }
+          };
         }
 
         function ListingsGrid() {
@@ -131,111 +193,9 @@
           };
         }
 
-        function ExpenseGrid() {
-
-          var expenseapi = 'http://test30.eventuresports.info/kendo/Resources/GetExpensesByEventureId/62';
-          vm.expenseGridOptions = {
-            dataSource: {
-                type: "json",
-                transport: {
-                    read: expenseapi
-                },
-                pageSize: 10,
-                serverPaging: false,
-                serverSorting: false
-            },
-            sortable: true,
-            pageable: true,
-            columns: [{
-                        field: "item",
-                        title: "Item",
-                        width: 200
-                    },
-                    {
-                        field: "category",
-                        title: "Category",
-                        width: 140,
-                        filterable: false
-                    },
-                    {
-                        field: "Cost",
-                        title: "Cost",
-                        width: 140,
-                        filterable: false
-                    },
-                    {
-                        field: "CostType",
-                        title: "Type",
-                        width: 140,
-                        filterable: false
-                    },
-                    {
-                        field: "PerRegNumber",
-                        title: "Formula",
-                        width: 140,
-                        filterable: false
-            }]
-          };
-        }
-
-        function EventPlanGrid() {
-
-          var status = [{
-                "value": true,
-                "text": "Yes"
-              },
-              {
-                "value": false,
-                "text": "No"
-              }
-          ];
-
-          var eventplanapi = 'http://test30.eventuresports.info/kendo/Resources/GetNotificationsByEventureId/62';
-          vm.eventPlanGridOptions = {
-            dataSource: {
-                type: "json",
-                transport: {
-                    read: eventplanapi
-                },
-                pageSize: 10,
-                serverPaging: false,
-                serverSorting: false
-            },
-            sortable: true,
-            pageable: true,
-            columns: [{
-                        field: "Task",
-                        title: "Task"
-                    },
-                    {
-                        field: "Resource",
-                        title: "Resouce"
-                    },
-                    {
-                        field: "DateDue",
-                        title: "Due Date",
-                        format: "{0:MM/dd/yyyy}",
-                        width: 140
-                    },
-                    {
-                        field: "IsCompleted",
-                        title: "Completed",
-                        width: 140,
-                        values: status,
-                        filterable: false
-                    },
-                    {
-                        title: "",
-                        width: 100,
-                        filterable: false,
-                        template: '<a class="btn btn-default btn-block" href="\\\#seteventplan/id/#=Id#">Edit</a>'
-            }]
-          };
-        }
-
         function ParticipantGrid() {
 
-          var participantapi = 'http://test30.eventuresports.info/kendo/Participants/GetRegisteredParticipantsByEventureId/62';
+          var participantapi = 'http://test30.eventuresports.info/kendo/Participants/GetRegisteredParticipantsByEventureListId/' + vm.listingId;
           vm.participantGridOptions = {
             dataSource: {
                 type: "json",

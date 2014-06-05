@@ -17,7 +17,8 @@
         'breeze.angular',    // configures breeze for an angular app
         'breeze.directives', // contains the breeze validation directive (zValidate)
         'ui.bootstrap',      // ui-bootstrap (ex: carousel, pagination, dialog)
-        'kendo.directives'   // kendo-angular (grid, dataviz)
+        'kendo.directives',   // kendo-angular (grid, dataviz)
+        'angularMoment'      // Date and Time Format
     ]);
 
     // Handle routing errors and success events.
