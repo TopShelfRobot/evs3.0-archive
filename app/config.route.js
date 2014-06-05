@@ -84,7 +84,7 @@
                 }
             },
             {
-                url: '/elistcenter',
+                url: '/elistcenter/:listingId',
                 config: {
                     title: 'Listing Workcenter',
                     templateUrl: 'app/dashboard/elistcenter.html'
