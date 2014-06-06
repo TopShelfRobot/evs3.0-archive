@@ -23,7 +23,12 @@
           var promises = [getListing(), Registrations(), Capacity(), FeeSchedule(), Groups(), ParticipantGrid()];
 
           common.activateController(promises, controllerId)
-              .then(function() { log('Activated Listing Detail View'); }); }
+              .then(function() { log('Activated Listing Detail View'); });
+          }
+
+        vm.resize = function setChartSize() {
+            $("#groupchart").data("kendoChart").resize();
+        }
 
         function getListing() {
           return datacontext.getEventureListById(vm.listingId)
