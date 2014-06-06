@@ -3,9 +3,9 @@
 
     var serviceId = 'datacontext';
     angular.module('app').factory(serviceId,
-        ['common', 'entityManagerFactory', 'model', 'breeze', datacontext]);
+        ['common', 'entityManagerFactory', 'model', 'breeze', 'config', datacontext]);
 
-    function datacontext(common, emFactory, model, breeze) {
+    function datacontext(common, emFactory, model, breeze, config) {
         var predicate = breeze.Predicate;
         var entityQuery = breeze.EntityQuery;
         var manager = emFactory.newManager();

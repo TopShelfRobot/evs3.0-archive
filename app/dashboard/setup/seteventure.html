@@ -24,7 +24,7 @@
           <label for="DateEventure" class="col-lg-6 control-label">Eventure Date (sorting/display until):</label>
           <div class="col-lg-6">
             <p class="input-group">
-              <input type="moment" name="DateEventure"  class="form-control" datepicker-popup="{{vm.format}}" ng-model="vm.dateEventure" view-format="{MMddyyyy:ss}" is-open="vm.eventureOpen" min="minDate" max="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" close-text="Close" />
+              <input type="text" name="DateEventure"  class="form-control" datepicker-popup="{{vm.format}}" ng-model="vm.eventure.dateEventure" is-open="vm.eventureOpen" min="minDate" max="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" close-text="Close" />
               <span class="input-group-btn">
               <button class="btn btn-default" ng-click="vm.open($event, 'eventureOpen')"><i class="glyphicon glyphicon-calendar"></i></button>
               </span> </p>
@@ -93,7 +93,7 @@
           <label for="TransferFeeCutoff" class="col-lg-6 control-label">Transfer Cutoff:</label>
           <div class="col-lg-6">
             <p class="input-group">
-              <input type="text"name="transfercutoff"  class="form-control" datepicker-popup="{{vm.format}}" ng-model="vm.dateTransfer" is-open="vm.transferOpen" min="minDate" max="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" close-text="Close" />
+              <input type="text"name="transfercutoff"  class="form-control" datepicker-popup="{{vm.format}}" ng-model="vm.eventure.dateTransferCutoff" is-open="vm.transferOpen" min="minDate" max="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" close-text="Close" />
               <span class="input-group-btn">
               <button class="btn btn-default" ng-click="vm.open($event, 'transferOpen')"><i class="glyphicon glyphicon-calendar"></i></button>
               </span> </p>
@@ -120,7 +120,7 @@
           <label for="DeferralFeeCutoff" class="col-lg-6 control-label">Deferral Cutoff:</label>
           <div class="col-lg-6">
             <p class="input-group">
-              <input type="text"name="DeferralFeeCutoff"  class="form-control" datepicker-popup="{{vm.format}}" ng-model="vm.dateDeferral" is-open="vm.deferralOpened" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
+              <input type="text"name="DeferralFeeCutoff"  class="form-control" datepicker-popup="{{vm.format}}" ng-model="vm.eventure.dateDeferralCutoff" is-open="vm.deferralOpened" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
               <span class="input-group-btn">
               <button class="btn btn-default" ng-click="vm.open($event, 'deferralOpened')"><i class="glyphicon glyphicon-calendar"></i></button>
               </span> </p>
