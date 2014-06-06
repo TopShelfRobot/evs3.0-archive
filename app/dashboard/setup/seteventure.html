@@ -1,4 +1,4 @@
-<section data-ng-controller="">
+<section data-ng-controller="seteventure as vm">
   <div class="row">
     <div class="col-lg-12" data-bind="with: eventure">
       <div class="text-right"><a href="#/eventure" class="danger"><i class="glyphicon glyphicon-ban-circle"></i></a> </div>
@@ -11,38 +11,38 @@
         <div class="form-group">
           <label for="EventName" class="col-lg-6 control-label">Event Name:</label>
           <div class="col-lg-6">
-            <input type="text" class="form-control" name="EventName" data-bind="value: name" placeholder="Event Name" required>
+            <input type="text" class="form-control" name="EventName" ng-model="vm.eventure.name" required>
           </div>
         </div>
         <div class="form-group">
           <label for="EventDisplayName" class="col-lg-6 control-label">Event Display Name:</label>
           <div class="col-lg-6">
-            <input type="text" class="form-control" name="EventDisplayName" data-bind="value: displayHeading" placeholder="Event Display Name" required>
+            <input type="text" class="form-control" name="EventDisplayName" ng-model="vm.eventure.displayHeading" placeholder="Event Display Name" required>
           </div>
         </div>
-        <div class="form-group" ng-controller="eventureDateCtrl">
+        <div class="form-group">
           <label for="DateEventure" class="col-lg-6 control-label">Eventure Date (sorting/display until):</label>
           <div class="col-lg-6">
             <p class="input-group">
-              <input type="text"name="DateEventure"  class="form-control" datepicker-popup="{{format}}" ng-model="dt" is-open="opened" min="minDate" max="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" close-text="Close" />
+              <input type="moment" name="DateEventure"  class="form-control" datepicker-popup="{{vm.format}}" ng-model="vm.dateEventure" view-format="{MMddyyyy:ss}" is-open="vm.eventureOpen" min="minDate" max="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" close-text="Close" />
               <span class="input-group-btn">
-              <button class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+              <button class="btn btn-default" ng-click="vm.open($event, 'eventureOpen')"><i class="glyphicon glyphicon-calendar"></i></button>
               </span> </p>
           </div>
         </div>
         <div class="form-group">
           <label for="eventdate" class="col-lg-6 control-label">Display Date Text:</label>
           <div class="col-lg-6">
-            <input type="text" class="form-control" name="eventdate" data-bind="value: displayDate" placeholder="Display Date Text" required>
+            <input type="text" class="form-control" name="eventdate" ng-model="vm.eventure.displayDate" placeholder="Display Date Text" required>
           </div>
         </div>
         <div class="form-group">
           <label for="EventDescription" class="col-lg-6 control-label">Event Description:</label>
           <div class="col-lg-6">
-            <textarea class="form-control" name="EventDescription" required data-bind="value: desc" rows="5"  placeholder="Please enter a description for your event."></textarea>
+            <textarea class="form-control" name="EventDescription" required ng-model="vm.eventure.desc" rows="5"  placeholder="Please enter a description for your event."></textarea>
           </div>
         </div>
-        <div class="form-group" ng-controller="FileUploadCtrl">
+        <div class="form-group">
           <label for="imagePath" class="col-lg-6 control-label">Image Upload:</label>
           <div class="col-lg-6">
             <label class="btn btn-primary">
@@ -50,7 +50,7 @@
               Upload Image </label>
             <br>
             <br>
-            <div ng-controller="UploadProgressCtrl">
+            <div>
               <progressbar class="progress-striped active" value="dynamic" type="{{type}}"></progressbar>
             </div>
           </div>
@@ -58,7 +58,7 @@
         <div class="form-group">
           <label for="DisplayOrder" class="col-lg-6 control-label">Display Order:</label>
           <div class="col-lg-6">
-            <input type="number" class="form-control" name="DisplayOrder" data-bind="value: sortOrder" placeholder="1">
+            <input type="number" class="form-control" name="DisplayOrder" ng-model="vm.eventure.sortOrder" placeholder="1">
           </div>
         </div>
       </div>
@@ -66,7 +66,7 @@
         <div class="form-group">
           <label for="Refunds" class="col-lg-6 control-label">Allow Refunds:</label>
           <div class="col-lg-6">
-            <div class="btn-group" ng-controller="RefundCtrl">
+            <div class="btn-group">
               <button type="button" class="btn btn-default" ng-model="radioModel" btn-radio="'Yes'">Yes</button>
               <button type="button" class="btn btn-default" ng-model="radioModel" btn-radio="'No'">No</button>
             </div>
@@ -75,7 +75,7 @@
         <div class="form-group">
           <label for="Transfers" class="col-lg-6 control-label">Allow Transfers:</label>
           <div class="col-lg-6">
-            <div class="btn-group" ng-controller="TransferCtrl">
+            <div class="btn-group">
               <button type="button" class="btn btn-default" ng-model="radioModel" btn-radio="'Yes'">Yes</button>
               <button type="button" class="btn btn-default" ng-model="radioModel" btn-radio="'No'">No</button>
             </div>
@@ -85,24 +85,24 @@
           <label for="TransferFee" class="col-lg-6 control-label">Transfer Fee:</label>
           <div class="col-lg-6">
             <div class="input-group"> <span class="input-group-addon">$</span>
-              <input type="number" class="form-control" name="TransferFee" data-bind="value: transferFee" placeholder="0.00">
+              <input type="number" class="form-control" name="TransferFee" ng-model="vm.eventure.transferFee" placeholder="0.00">
             </div>
           </div>
         </div>
-        <div class="form-group" ng-controller="transferDateCtrl">
+        <div class="form-group">
           <label for="TransferFeeCutoff" class="col-lg-6 control-label">Transfer Cutoff:</label>
           <div class="col-lg-6">
             <p class="input-group">
-              <input type="text"name="transfercutoff"  class="form-control" datepicker-popup="{{format}}" ng-model="dt" is-open="opened" min="minDate" max="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" close-text="Close" />
+              <input type="text"name="transfercutoff"  class="form-control" datepicker-popup="{{vm.format}}" ng-model="vm.dateTransfer" is-open="vm.transferOpen" min="minDate" max="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" close-text="Close" />
               <span class="input-group-btn">
-              <button class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+              <button class="btn btn-default" ng-click="vm.open($event, 'transferOpen')"><i class="glyphicon glyphicon-calendar"></i></button>
               </span> </p>
           </div>
         </div>
         <div class="form-group">
           <label for="Deferrals" class="col-lg-6 control-label">Allow Deferrals:</label>
           <div class="col-lg-6">
-            <div class="btn-group" ng-controller="DeferralCtrl">
+            <div class="btn-group">
               <button type="button" class="btn btn-default" ng-model="radioModel" btn-radio="'Yes'">Yes</button>
               <button type="button" class="btn btn-default" ng-model="radioModel" btn-radio="'No'">No</button>
             </div>
@@ -112,24 +112,24 @@
           <label for="DeferralFee" class="col-lg-6 control-label">Deferral Fee:</label>
           <div class="col-lg-6">
             <div class="input-group"> <span class="input-group-addon">$</span>
-              <input type="number" class="form-control" name="DeferralFee" data-bind="value: deferralFee" placeholder="0.00">
+              <input type="number" class="form-control" name="DeferralFee" ng-model="vm.eventure.deferralFee" placeholder="0.00">
             </div>
           </div>
         </div>
-        <div class="form-group" ng-controller="deferralDateCtrl">
+        <div class="form-group">
           <label for="DeferralFeeCutoff" class="col-lg-6 control-label">Deferral Cutoff:</label>
           <div class="col-lg-6">
             <p class="input-group">
-              <input type="text"name="DeferralFeeCutoff"  class="form-control" datepicker-popup="{{format}}" ng-model="dt" is-open="opened" min="minDate" max="'2015-06-22'" datepicker-options="dateOptions" ng-required="true" date-disabled="disabled(date, mode)" close-text="Close" />
+              <input type="text"name="DeferralFeeCutoff"  class="form-control" datepicker-popup="{{vm.format}}" ng-model="vm.dateDeferral" is-open="vm.deferralOpened" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
               <span class="input-group-btn">
-              <button class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+              <button class="btn btn-default" ng-click="vm.open($event, 'deferralOpened')"><i class="glyphicon glyphicon-calendar"></i></button>
               </span> </p>
           </div>
         </div>
         <div class="form-group">
           <label for="" class="col-lg-6 control-label">Group Required:</label>
           <div class="col-lg-6">
-            <div class="btn-group" ng-controller="GroupCtrl">
+            <div class="btn-group">
               <button type="button" class="btn btn-default" ng-model="radioModel" btn-radio="'Yes'">Yes</button>
               <button type="button" class="btn btn-default" ng-model="radioModel" btn-radio="'No'">No</button>
             </div>
@@ -138,7 +138,7 @@
         <div class="form-group">
           <label for="" class="col-lg-6 control-label">Managed Event:</label>
           <div class="col-lg-6">
-            <div class="btn-group" ng-controller="ManagedCtrl">
+            <div class="btn-group">
               <button type="button" class="btn btn-default" ng-model="radioModel" btn-radio="'Yes'">Yes</button>
               <button type="button" class="btn btn-default" ng-model="radioModel" btn-radio="'No'">No</button>
             </div>
@@ -147,7 +147,7 @@
         <div class="form-group">
           <label for="" class="col-lg-6 control-label">Active Event:</label>
           <div class="col-lg-6">
-            <div class="btn-group" ng-controller="ActiveCtrl">
+            <div class="btn-group">
               <button type="button" class="btn btn-default" ng-model="radioModel" btn-radio="'Yes'">Yes</button>
               <button type="button" class="btn btn-default" ng-model="radioModel" btn-radio="'No'">No</button>
             </div>

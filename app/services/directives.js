@@ -39,8 +39,6 @@
         };
     });
 
-
-
     app.directive('ccImgPerson', ['config', function (config) {
         //Usage:
         //<img data-cc-img-person="{{s.speaker.imageSource}}"/>
@@ -59,7 +57,6 @@
             });
         }
     }]);
-
 
     app.directive('ccSidebar', function () {
         // Opens and clsoes the sidebar menu.
@@ -98,7 +95,6 @@
             }
         }
     });
-
 
     app.directive('ccWidgetClose', function () {
         // Usage:

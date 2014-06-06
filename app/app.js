@@ -18,7 +18,8 @@
         'breeze.directives', // contains the breeze validation directive (zValidate)
         'ui.bootstrap',      // ui-bootstrap (ex: carousel, pagination, dialog)
         'kendo.directives',   // kendo-angular (grid, dataviz)
-        'angularMoment'      // Date and Time Format
+        'angularMoment',      // Date and Time Format
+        'moment'             //input directive --angular-moment-input //https://github.com/orcasnet/angular-momentjs/blob/master/dist/angular-moment.js
     ]);
 
     // Handle routing errors and success events.
