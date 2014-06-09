@@ -67,8 +67,8 @@
           <label for="Refunds" class="col-lg-6 control-label">Allow Refunds:</label>
           <div class="col-lg-6">
             <div class="btn-group">
-              <button type="button" class="btn btn-default" ng-model="radioModel" btn-radio="'Yes'">Yes</button>
-              <button type="button" class="btn btn-default" ng-model="radioModel" btn-radio="'No'">No</button>
+              <button type="button" class="btn btn-default" ng-model="vm.eventure.refundsAllowed" btn-radio="true">Yes</button>
+              <button type="button" class="btn btn-default" ng-model="vm.eventure.refundsAllowed" btn-radio="false">No</button>
             </div>
           </div>
         </div>
@@ -76,8 +76,8 @@
           <label for="Transfers" class="col-lg-6 control-label">Allow Transfers:</label>
           <div class="col-lg-6">
             <div class="btn-group">
-              <button type="button" class="btn btn-default" ng-model="radioModel" btn-radio="'Yes'">Yes</button>
-              <button type="button" class="btn btn-default" ng-model="radioModel" btn-radio="'No'">No</button>
+              <button type="button" class="btn btn-default" ng-model="vm.eventure.transfersAllowed" btn-radio="true">Yes</button>
+              <button type="button" class="btn btn-default" ng-model="vm.eventure.transfersAllowed" btn-radio="false">No</button>
             </div>
           </div>
         </div>
@@ -103,8 +103,8 @@
           <label for="Deferrals" class="col-lg-6 control-label">Allow Deferrals:</label>
           <div class="col-lg-6">
             <div class="btn-group">
-              <button type="button" class="btn btn-default" ng-model="radioModel" btn-radio="'Yes'">Yes</button>
-              <button type="button" class="btn btn-default" ng-model="radioModel" btn-radio="'No'">No</button>
+              <button type="button" class="btn btn-default" ng-model="vm.eventure.deferralsAllowed" btn-radio="true">Yes</button>
+              <button type="button" class="btn btn-default" ng-model="vm.eventure.deferralsAllowed" btn-radio="false">No</button>
             </div>
           </div>
         </div>
@@ -130,8 +130,8 @@
           <label for="" class="col-lg-6 control-label">Group Required:</label>
           <div class="col-lg-6">
             <div class="btn-group">
-              <button type="button" class="btn btn-default" ng-model="radioModel" btn-radio="'Yes'">Yes</button>
-              <button type="button" class="btn btn-default" ng-model="radioModel" btn-radio="'No'">No</button>
+              <button type="button" class="btn btn-default" ng-model="vm.eventure.isGroupRequired" btn-radio="true">Yes</button>
+              <button type="button" class="btn btn-default" ng-model="vm.eventure.isGroupRequired" btn-radio="false">No</button>
             </div>
           </div>
         </div>
@@ -139,8 +139,8 @@
           <label for="" class="col-lg-6 control-label">Managed Event:</label>
           <div class="col-lg-6">
             <div class="btn-group">
-              <button type="button" class="btn btn-default" ng-model="radioModel" btn-radio="'Yes'">Yes</button>
-              <button type="button" class="btn btn-default" ng-model="radioModel" btn-radio="'No'">No</button>
+              <button type="button" class="btn btn-default" ng-model="vm.eventure.managed" btn-radio="true">Yes</button>
+              <button type="button" class="btn btn-default" ng-model="vm.eventure.managed" btn-radio="false">No</button>
             </div>
           </div>
         </div>
@@ -148,8 +148,8 @@
           <label for="" class="col-lg-6 control-label">Active Event:</label>
           <div class="col-lg-6">
             <div class="btn-group">
-              <button type="button" class="btn btn-default" ng-model="radioModel" btn-radio="'Yes'">Yes</button>
-              <button type="button" class="btn btn-default" ng-model="radioModel" btn-radio="'No'">No</button>
+              <button type="button" class="btn btn-default" ng-model="vm.eventure.active" btn-radio="true">Yes</button>
+              <button type="button" class="btn btn-default" ng-model="vm.eventure.active" btn-radio="false">No</button>
             </div>
           </div>
         </div>
