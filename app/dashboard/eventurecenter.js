@@ -1,9 +1,9 @@
 (function () {
     'use strict';
     var controllerId = 'eventurecenter';
-    angular.module('app').controller(controllerId, ['common', 'datacontext', eventurecenter]);
+    angular.module('app').controller(controllerId, ['common', 'datacontext', 'config', eventurecenter]);
 
-    function eventurecenter(common, datacontext) {
+    function eventurecenter(common, datacontext, config) {
         var getLogFn = common.logger.getLogFn;
         var log = getLogFn(controllerId);
 
@@ -33,7 +33,7 @@
             "text": "Inactive"
           }];
 
-          var eventureapi = 'http://test30.eventuresports.info/kendo/eventures/GetAllEventuresByOwnerId/' + vm.ownerId;
+          var eventureapi = config.remoteApiName + 'eventures/GetAllEventuresByOwnerId/' + vm.ownerId;
           vm.eventureGridOptions = {
             dataSource: {
                 type: "json",

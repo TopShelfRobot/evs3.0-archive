@@ -9,8 +9,8 @@
 
     // For use with the HotTowel-Angular-Breeze add-on that uses Breeze
     //var remoteServiceName = 'breeze/Breeze';
-    var remoteServiceName = 'http://test30.eventuresports.info/breeze/breeze/';
-    var remoteApiName = 'http://test30.eventuresports.info/kendo/';
+    var remoteServiceName = 'http://evs30api.eventuresports.info/breeze/breeze/';
+    var remoteApiName = 'http://evs30api.eventuresports.info/kendo/';
     var events = {
         controllerActivateSuccess: 'controller.activateSuccess',
         spinnerToggle: 'spinner.toggle'
@@ -20,7 +20,7 @@
         imageBasePath: '../content/images/photos/',
         unknownPersonImageSource: 'unknown_person.jpg'
     };
-    
+
     var owner = {
         ownerId: 1,
         houseEmail: 0,
