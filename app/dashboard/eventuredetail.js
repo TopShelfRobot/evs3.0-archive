@@ -101,7 +101,9 @@
                     model: {
                         fields: {
                             Active: { type: "boolean" },
-                            DisplayDate: { type: "text" },
+                            DateEventureList: { type: "date" },
+                            DateBeginReg: { type: "date" },
+                            DateEndReg: { type: "date" },
                             Id: { type: "number" },
                             Name: { type: "string" }
                         }
@@ -117,9 +119,20 @@
                 title: "Listing",
                 template: '<a href="\\\#elistcenter/#=Id#">#=Name#</a>'
             },{
-                field: "DisplayDate",
+                field: "DateEventureList",
                 title: "Date",
-                width: "220px"
+                width: "220px",
+                format: "{0:MM/dd/yyyy}"
+            },{
+                field: "DateBeginReg",
+                title: "Registration Begins",
+                width: "220px",
+                format: "{0:MM/dd/yyyy}"
+            },{
+                field: "DateEndReg",
+                title: "Registration Ends",
+                width: "220px",
+                format: "{0:MM/dd/yyyy}"
             },{
                 field: "Active",
                 width: "100px",
