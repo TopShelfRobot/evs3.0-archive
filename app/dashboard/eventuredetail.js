@@ -2,9 +2,9 @@
     'use strict';
 
     var controllerId = 'eventuredetail';
-    angular.module('app').controller(controllerId, ['common', 'datacontext', eventuredetail]);
+    angular.module('app').controller(controllerId, ['$routeParams', 'common', 'datacontext', 'config', eventuredetail]);
 
-    function eventuredetail(common, datacontext) {
+    function eventuredetail($routeParams, common, datacontext, config) {
         var getLogFn = common.logger.getLogFn;
         var log = getLogFn(controllerId);
 
@@ -14,6 +14,7 @@
         vm.registrations = {};
         vm.capacity = {};
         vm.gauge = {};
+        vm.eventureId = $routeParams.eventureId;
 
         activate();
 
@@ -24,14 +25,14 @@
               .then(function() { log('Activated Eventure Detail View'); }); }
 
         function getEventure() {
-          return datacontext.getEventureById(62)
+          return datacontext.getEventureById(vm.eventureId)
             .then(function (data) {
                 return vm.eventure = data;
             });
         }
 
         function Registrations() {
-          var regapi = 'http://test30.eventuresports.info/kendo/Registrations/GetEventureGraph/62';
+          var regapi = config.remoteApiName +'Registrations/GetEventureGraph/' + vm.eventureId;
 
           vm.registrations = {
             theme: "bootstrap",
@@ -73,7 +74,7 @@
         }
 
         function Capacity() {
-          return datacontext.getCapacityByEventureId(62)
+          return datacontext.getCapacityByEventureId(vm.eventureId)
             .then(function (data) {
               return vm.capacity = data;
             });
@@ -89,7 +90,7 @@
             "text": "Inactive"
           }];
 
-          var eventurelistapi = 'http://test30.eventuresports.info/kendo/EventureLists/getEventureListsByEventureId/62';
+          var eventurelistapi = config.remoteApiName + 'EventureLists/getEventureListsByEventureId/' + vm.eventureId;
           vm.eventureListGridOptions = {
             dataSource: {
                 type: "json",
@@ -133,7 +134,7 @@
 
         function ExpenseGrid() {
 
-          var expenseapi = 'http://test30.eventuresports.info/kendo/Resources/GetExpensesByEventureId/62';
+          var expenseapi = config.remoteApiName + 'Resources/GetExpensesByEventureId/' + vm.eventureId;
           vm.expenseGridOptions = {
             dataSource: {
                 type: "json",
@@ -190,7 +191,7 @@
               }
           ];
 
-          var eventplanapi = 'http://test30.eventuresports.info/kendo/Resources/GetNotificationsByEventureId/62';
+          var eventplanapi = config.remoteApiName + 'Resources/GetNotificationsByEventureId/' + vm.eventureId;
           vm.eventPlanGridOptions = {
             dataSource: {
                 type: "json",
@@ -235,7 +236,7 @@
 
         function ParticipantGrid() {
 
-          var participantapi = 'http://test30.eventuresports.info/kendo/Participants/GetRegisteredParticipantsByEventureId/62';
+          var participantapi = config.remoteApiName + 'Participants/GetRegisteredParticipantsByEventureId/' + vm.eventureId;
           vm.participantGridOptions = {
             dataSource: {
                 type: "json",
