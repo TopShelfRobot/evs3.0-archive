@@ -32,8 +32,6 @@ html, body {
   position: absolute;
   right: 0;
   top: 0;
-  background-color:#2a2725;
-  background: linear-gradient(to right,#3a3633 93%,#2a2725 100%);
 }
 .divider {
   margin-top: 32px;
@@ -47,32 +45,25 @@ html, body {
   padding: 0;
   padding-top: 55px;
   height: 100%;
-  border-right: 1px solid #525252;
-  -webkit-box-shadow: inset -7px 0px 8px 0px rgba(0, 0, 0, 0.4);
-  -moz-box-shadow:    inset -7px 0px 8px 0px rgba(0, 0, 0, 0.4);
-  box-shadow:         inset -7px 0px 8px 0px rgba(0, 0, 0, 0.4);
+  border-right: 1px solid #d6d6d6;
+  background-color:#ecf0f1;
+  background: linear-gradient(to bottom right,#ffffff 13%,#ecf0f1 100%);
+  background: -webkit-linear-gradient(top left,#ffffff 13%,#ecf0f1 100%);
 }
 #sidebar, #sidebar a {
-  color: #a8a8a8;
-  font-size:14px;
+  color: #222222;
+  font-size:.95em;
   line-height:normal;
   font-weight:400;
 }
-#sidebar .nav > .sidebar-logo {
-  border: solid transparent;
-  border-width: 1px 0;
-  -webkit-box-shadow: inset 1px 1px 0 rgba(0,0,0,.1),inset 0 -1px 0 rgba(0,0,0,.07);
-  box-shadow: inset 1px 1px 0 rgba(0,0,0,.1),inset 0 -1px 0 rgba(0,0,0,.07);
-  width: 100%;
-  margin: 0 0 10px !important;
-  border-bottom: 1px solid #525151;
-}
 #sidebar .nav > .sidebar-logo > .sidebar-img {
-  width:80%;
-  margin:0 10% 5%;
+  width:90%;
+  margin:5%;
 }
 #sidebar .nav > li > a > .glyphicon {
-  margin-right:7px;
+  margin: 10px;
+  font-size: 2em;
+  color: #494949;
 }
 
 .navbar-fixed-top .navbar-collapse, .navbar-static-top .navbar-collapse, .navbar-fixed-bottom .navbar-collapse {
@@ -80,8 +71,6 @@ html, body {
 }
 
 #sidebar .nav li>a:hover {
-  color:#ecf0f1;
-  background: transparent;
   border-left:9px solid #428bca;
 }
 
@@ -100,13 +89,13 @@ html, body {
     transition: all 0.25s ease-out;
   }
   .row-offcanvas-left.active {
-    left: 30%;
+    left: 16.666666%;
   }
   .row-offcanvas-left.active .sidebar-offcanvas {
-    left: -30%;
+    left: -16.666666%;
     position: absolute;
     top: 0;
-    width: 30%;
+    width: 16.666666%;
   }
   #sidebar, #sidebar a {
     font-size:12px;
@@ -124,7 +113,7 @@ html, body {
    padding-right:20px !important;
   }
   #sidebar .nav > li > .sidebar-img {
-    width:80%;
-    margin:0 auto 5%;
+    width:90%;
+    margin:5%;
   }
 }
