@@ -27,7 +27,9 @@
           }
 
         vm.resize = function setChartSize() {
-            $("#groupchart").data("kendoChart").resize();
+            if($("#groupchart") && $("#groupchart").data && $("#groupchart").data("kendoChart")){
+                $("#groupchart").data("kendoChart").resize();
+            }
         }
 
         function getListing() {
