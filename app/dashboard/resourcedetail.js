@@ -42,7 +42,7 @@
 
         function createresourceDetailGrid() {
 
-            var resourceApi = config.remoteApiName + 'Resources/GetResourceItemsByResourceId/' + resourceId;
+            var resourceApi = config.remoteApiName + 'Resources/GetResourceItemsByResourceId/' + vm.resourceId;
             //alert(ResourceApi);
 
             vm.resourceDetailGridOptions = {

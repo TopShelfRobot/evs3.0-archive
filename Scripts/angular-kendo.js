@@ -58,8 +58,9 @@
         kOptions    : true,
         kRebind     : true,
         kNgModel    : true,
+        kNgDelay    : true,
       };
-      return function(scope, element, attrs, widget) {
+      return function(scope, element, attrs, widget, origAttr) {
         var role = widget.replace(/^kendo/, '');
         var options = angular.extend({}, scope.$eval(attrs.kOptions));
         $.each(attrs, function(name, value) {
@@ -88,29 +89,29 @@
           options.dataSource = factories.dataSource(scope, element, attrs, role);
         }
 
-        options.$angular = true;
+        options.$angular = [ scope ];
         var ctor = $(element)[widget];
         if (!ctor) {
           console.error("Could not find: " + widget);
           return null;
         }
         var object = ctor.call(element, OPTIONS_NOW = options).data(widget);
-        exposeWidget(object, scope, attrs, widget);
+        exposeWidget(object, scope, attrs, widget, origAttr);
         scope.$emit("kendoWidgetCreated", object);
         return object;
       };
     }())
   };
 
-  function exposeWidget(widget, scope, attrs, kendoWidget) {
-    if (attrs[kendoWidget]) {
+  function exposeWidget(widget, scope, attrs, kendoWidget, origAttr) {
+    if (attrs[origAttr]) {
       // expose the widget object
-      var set = parse(attrs[kendoWidget]).assign;
+      var set = parse(attrs[origAttr]).assign;
       if (set) {
         // set the value of the expression to the kendo widget object to expose its api
         set(scope, widget);
       } else {
-        throw new Error( kendoWidget + ' attribute used but expression in it is not assignable: ' + attrs[kendoWidget]);
+        throw new Error(origAttr + ' attribute used but expression in it is not assignable: ' + attrs[kendoWidget]);
       }
     }
   }
@@ -128,7 +129,7 @@
 
     var KENDO_COUNT = 0;
 
-    var create = function(role) {
+    var create = function(role, origAttr) {
 
       return {
         // Parse the directive for attributes and classes
@@ -183,7 +184,19 @@
 
           ++KENDO_COUNT;
 
-          timeout(function() {
+          var kNgDelay = attrs.kNgDelay;
+
+          timeout(function createIt() {
+            if (kNgDelay) return (function(){
+              var unregister = scope.$watch(kNgDelay, function(newValue, oldValue){
+                if (newValue !== oldValue) {
+                  unregister();
+                  kNgDelay = null;
+                  timeout(createIt); // XXX: won't work without `timeout` ;-\
+                }
+              }, true);
+            })();
+
             // if k-rebind attribute is provided, rebind the kendo widget when
             // the watched value changes
             if (attrs.kRebind) {
@@ -217,15 +230,20 @@
               }, true); // watch for object equality. Use native or simple values.
             }
 
-            var widget = factories.widget(scope, element, attrs, role);
+            var widget = factories.widget(scope, element, attrs, role, origAttr);
             setupBindings();
 
             var prev_destroy = null;
             function setupBindings() {
 
               var isFormField = /^(input|select|textarea)$/i.test(element[0].tagName);
+              function formValue(el) {
+                if (/checkbox|radio/i.test(element.attr("type")))
+                  return element.prop("checked");
+                return element.val();
+              }
               function value() {
-                return isFormField ? element.val() : widget.value();
+                return isFormField ? formValue(element) : widget.value();
               }
 
               // Cleanup after ourselves
@@ -414,7 +432,7 @@
         module.directive(name, [
           "directiveFactory",
           function(directiveFactory) {
-            return directiveFactory.create(widget);
+            return directiveFactory.create(widget, name);
           }
         ]);
       }
@@ -517,6 +535,7 @@
     OPTIONS_NOW = null;
     var self = this.self;
     if (options && options.$angular) {
+      self.$angular_scope = options.$angular[0];
       // call before/after hooks only for widgets instantiated by angular-kendo
       self.$angular_beforeCreate(element, options);
       this.next();
@@ -530,7 +549,7 @@
   defadvice("ui.Widget", BEFORE, function(element, options) {
     var self = this.self;
     if (options && !$.isArray(options)) {
-      var scope = angular.element(element).scope();
+      var scope = self.$angular_scope;
       for (var i = self.events.length; --i >= 0;) {
         var event = self.events[i];
         var handler = options[event];
@@ -849,6 +868,16 @@
     }
   });
 
+  defadvice("ui.Grid", "_footer", function(){
+    this.next();
+    var self = this.self;
+    var scope = angular.element(self.element).scope();
+    if (scope) {
+      compile(self.footer)(scope);
+      digest(scope);
+    }
+  });
+
   defadvice("ui.editor.Toolbar", "render", function(){
     this.next();
     var self = this.self;
@@ -993,7 +1022,7 @@
         });
         var destroy = function(ev){
           var editScope = self.$editScope;
-          if (editScope !== scope) {
+          if (editScope && editScope !== scope) {
             destroyScope(editScope, ev.container);
             self.$editScope = null;
           }
@@ -1084,6 +1113,12 @@
       });
     });
   }
+
+  defadvice("mobile.ui.Switch", "value", function(){
+    var self = this.self;
+    var ret = self.check.apply(self, arguments);
+    return ret;
+  });
 
 }, typeof define == 'function' && define.amd ? define : function(_, f){ f(jQuery, angular, kendo); });
 

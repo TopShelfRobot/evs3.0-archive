@@ -1,9 +1,9 @@
 (function () {
     'use strict';
     var controllerId = 'couponaddon';
-    angular.module('app').controller(controllerId, ['common', 'datacontext', couponaddon]);
+    angular.module('app').controller(controllerId, ['config', 'common', 'datacontext', couponaddon]);
 
-    function couponaddon(common, datacontext) {
+    function couponaddon(config, common, datacontext) {
         var getLogFn = common.logger.getLogFn;
         var log = getLogFn(controllerId);
 
@@ -36,7 +36,7 @@
             "text": "Inactive"
           }];
 
-          var couponapi = 'http://test30.eventuresports.info/kendo/Coupon/GetCouponsByOwnerId/' + vm.ownerId;
+          var couponapi = config.remoteApiName + 'Coupon/GetCouponsByOwnerId/' + vm.ownerId;
           vm.couponGridOptions = {
             dataSource: {
                 type: "json",
@@ -81,7 +81,7 @@
             "text": "Inactive"
           }];
 
-          var addonapi = 'http://test30.eventuresports.info/kendo/Addon/GetAddonsByOwnerId/' + vm.ownerId;
+          var addonapi = config.remoteApiName + 'Addon/GetAddonsByOwnerId/' + vm.ownerId;
 
           vm.addonGridOptions = {
             dataSource: {

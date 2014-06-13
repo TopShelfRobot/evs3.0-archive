@@ -2,9 +2,9 @@
     'use strict';
 
     var controllerId = 'listingdetail';
-    angular.module('app').controller(controllerId, ['common', 'datacontext', listingdetail]);
+    angular.module('app').controller(controllerId, ['$routeParams', 'config', 'common', 'datacontext', listingdetail]);
 
-    function listingdetail(common, datacontext) {
+    function listingdetail($routeParams, config, common, datacontext) {
         var getLogFn = common.logger.getLogFn;
         var log = getLogFn(controllerId);
 
@@ -15,22 +15,22 @@
         vm.capacity = {};
         vm.fees = {};
 
-        vm.listingId = 141;
+        vm.listingId = $routeParams.listingId || 0;;
 
         activate();
 
         function activate() {
-          var promises = [getListing(), Registrations(), Capacity(), FeeSchedule(), Groups(), ParticipantGrid()];
+          var promises = [getListing(), Registrations(), Capacity(), FeeSchedule(), ParticipantGrid()];
 
           common.activateController(promises, controllerId)
               .then(function() { log('Activated Listing Detail View'); });
           }
 
-        vm.resize = function setChartSize() {
-            if($("#groupchart") && $("#groupchart").data && $("#groupchart").data("kendoChart")){
-                $("#groupchart").data("kendoChart").resize();
-            }
-        }
+      //  vm.resize = function setChartSize() {
+      //      if($("#groupchart") && $("#groupchart").data && $("#groupchart").data("kendoChart")){
+      //          $("#groupchart").data("kendoChart").resize();
+      //      }
+      //  }
 
         function getListing() {
           return datacontext.getEventureListById(vm.listingId)
@@ -53,7 +53,7 @@
         }
 
         function Registrations() {
-          var regapi = 'http://test30.eventuresports.info/kendo/Registrations/GetEventureListGraph/' + vm.listingId;
+          var regapi = config.remoteApiName + 'Registrations/GetEventureListGraph/' + vm.listingId;
 
           vm.registrations = {
             theme: "bootstrap",
@@ -99,8 +99,8 @@
           };
         }
 
-        function Groups() {
-          var groupapi = 'http://test30.eventuresports.info/kendo/Registrations/GetEventureGroupGraphByList/' + vm.listingId;
+        vm.Groups = function() {
+          var groupapi = config.remoteApiName + 'Registrations/GetEventureGroupGraphByList/' + vm.listingId;
 
           vm.groups = {
             theme: "bootstrap",
@@ -158,7 +158,7 @@
             "text": "Inactive"
           }];
 
-          var eventurelistapi = 'http://test30.eventuresports.info/kendo/EventureLists/getEventureListsByEventureId/62';
+          var eventurelistapi = config.remoteApiName + 'EventureLists/getEventureListsByEventureId/' + vm.listingId;
           vm.eventureListGridOptions = {
             dataSource: {
                 type: "json",
@@ -202,7 +202,7 @@
 
         function ParticipantGrid() {
 
-          var participantapi = 'http://test30.eventuresports.info/kendo/Participants/GetRegisteredParticipantsByEventureListId/' + vm.listingId;
+          var participantapi = config.remoteApiName +  'Participants/GetRegisteredParticipantsByEventureListId/' + vm.listingId;
           vm.participantGridOptions = {
             dataSource: {
                 type: "json",

@@ -23,7 +23,7 @@
 
             //var resourceApi = '/kendo/Resources/GetResourcesByOwnerId/' + vm.ownerId;
             var resourceApi = config.remoteApiName + 'Resources/GetResourcesByOwnerId/' + vm.ownerId;
-            
+
             vm.resourceGridOptions = {
                 dataSource: {
                     type: "json",
@@ -69,7 +69,7 @@
             };
             vm.detailGridOptions = function(e) {
                 //var resourceApi = '/kendo/Resources/GetResourceItemsByResourceId/' + e.data.Id;
-                var resourceApi = 'http://test30.eventuresports.info/kendo/Resources/GetResourceItemsByResourceId/' + e.Id;
+                var resourceApi = config.remoteApiName + 'Resources/GetResourceItemsByResourceId/' + e.Id;
 
                 return {
                     dataSource: {
@@ -104,7 +104,7 @@
                         { field: "Cost", title: "Cost", width: "70px" },
                         { field: "Category", title: "Category", width: "100px" },
                         { title: "", width: 100, template: '<button class="btn btn-primary btn-small btn-block fancyboxeditlist fancybox.iframe" href="\\\#setresourceitem/#=Id#">Edit</button>' }
-                        //,{ title: "", width: 100, template: '<button class="btn btn-danger btn-small btn-block fancyboxeditlist fancybox.iframe" href="\\\#setresourceitem/#=Id#">Delete</button>'} 
+                        //,{ title: "", width: 100, template: '<button class="btn btn-danger btn-small btn-block fancyboxeditlist fancybox.iframe" href="\\\#setresourceitem/#=Id#">Delete</button>'}
                     ]
                 };
             };

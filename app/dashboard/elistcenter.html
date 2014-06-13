@@ -19,12 +19,12 @@
         </div>
       </div>
     </tab>
-    <tab heading="Groups" select="vm.resize()">
+    <tab heading="Groups" ng-click="vm.Groups()">
       <br>
       <div class="row">
         <div class="col-lg-12">
           <section id="groupcontent">
-            <div id="groupchart" kendo-chart k-options="vm.groups"></div>
+            <div id="groupchart" kendo-chart k-options="vm.groups" k-ng-delay="vm.groups"></div>
           </section>
         </div>
       </div>

@@ -1,9 +1,9 @@
 (function () {
     'use strict';
     var controllerId = 'partcenter';
-    angular.module('app').controller(controllerId, ['common', 'datacontext', partcenter]);
+    angular.module('app').controller(controllerId, ['common', 'datacontext', 'config', partcenter]);
 
-    function partcenter(common, datacontext) {
+    function partcenter(common, datacontext, config) {
         var getLogFn = common.logger.getLogFn;
         var log = getLogFn(controllerId);
 
@@ -25,7 +25,7 @@
 
         function ParticipantGrid() {
 
-          var partapi = 'http://test30.eventuresports.info/kendo/Participants/GetParticipantsByOwnerId/' + vm.ownerId;
+          var partapi = config.remoteApiName + 'Participants/GetParticipantsByOwnerId/' + vm.ownerId;
 
           vm.participantGridOptions = {
             dataSource: {
@@ -62,7 +62,7 @@
 
           vm.detailGridOptions = function(e) {
 
-            var regapi = 'http://test30.eventuresports.info/kendo/Registrations/GetRegistrationsByPartId/' + e.Id;
+            var regapi = config.remoteApiName + 'Registrations/GetRegistrationsByPartId/' + e.Id;
 
             return {
                 dataSource: {
