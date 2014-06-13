@@ -32,10 +32,13 @@
 <body>
     <div>
         <div data-ng-include="'/app/layout/shell.html'"></div>
-        <div id="splash-page" data-ng-show="false">
-            <div class="page-splash">
-                <div class="page-splash-message">
-                    Eventure Sports
+        <div id="splash-page" data-ng-show="false" class="container">
+          <div class="row"
+            <div class="page-splash col-lg-12">
+                <div class="page-splash-message text-center">
+                    <img class="img-responsive" src="/Content/images/logo.png">
+                    <br>
+                    <h1>Loading...</h1>
                 </div>
                 <div class="progress progress-striped active page-progress-bar">
                     <div class="bar"></div>

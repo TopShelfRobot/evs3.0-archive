@@ -47,6 +47,16 @@
 .k-grid-content a.btn-danger {
   color:#ffffff;
 }
+/* Loading Page */
+.page-splash-message {
+    margin-top:70px;
+}
+.page-splash-message > * {
+    margin:25px 0;
+}
+.page-splash-message > img {
+    margin:25px auto;
+}
 
 /* Report Layout */
 .report-icons {
