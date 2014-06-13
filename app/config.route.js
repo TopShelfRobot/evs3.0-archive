@@ -108,6 +108,12 @@
                     templateUrl: 'app/dashboard/resourcedetail.html'
                 }
             }, {
+                url: '/manreg',
+                config: {
+                    title: 'Manual Registration',
+                    templateUrl: 'app/dashboard/manreg.html'
+                }
+            },{
                 url: '/setowner',
                 config: {
                     title: 'Owner Setup',

@@ -16,7 +16,7 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-lg-4">
+          <div class="col-md-4">
             <div id="snapshotdata">
               <h3 class="text-center">Registration Trends</h3>
               <ul class="list-group">
@@ -33,17 +33,17 @@
               <h3 class="text-center">Capacity: <small>{{ vm.capacity.regs }}&nbsp;/&nbsp;{{ vm.capacity.capacity }}</small></h3>
               <br>
               <div class="row">
-                <div class="col-lg-6">
+                <div class="col-xs-6">
                   <button class="btn btn-info btn-block">Add a Listing</button>
                 </div>
-                <div class="col-lg-6">
+                <div class="col-xs-6">
                   <button class="btn btn-primary btn-block">Edit Event</button>
                 </div>
               </div>
             </div>
           </div>
-          <div class="col-lg-8">
-            <div id="regchart" kendo-chart k-options="vm.registrations"></div>
+          <div class="col-md-8">
+            <div id="regchart" kendo-chart k-options="vm.registrations" class="hidden-xs"></div>
           </div>
         </div>
         <div class="row">
