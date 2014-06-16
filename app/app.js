@@ -11,14 +11,15 @@
         // Custom modules
         'common',           // common functions, logger, spinner
         'common.bootstrap', // bootstrap dialog wrapper functions
-        'angularFileUpload',// file upload functions
+
 
         // 3rd Party Modules
         'breeze.angular',    // configures breeze for an angular app
         'breeze.directives', // contains the breeze validation directive (zValidate)
         'ui.bootstrap',      // ui-bootstrap (ex: carousel, pagination, dialog)
         'kendo.directives',  // kendo-angular (grid, dataviz)
-        'angularMoment'      // Date and Time Format
+        'angularMoment',     // Date and Time Format
+        'angularFileUpload'  // file upload functions
 
     ]);
 

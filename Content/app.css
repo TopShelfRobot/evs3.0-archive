@@ -28,6 +28,7 @@
   color:#428bca;
 }
 
+
 /* Kendo Styles */
 .k-grid-header .k-header, .k-grid-header .k-header .k-link {
   font-weight:bold;
@@ -110,6 +111,15 @@
   }
   .kendo-chart {
     max-width:718px;
+  }
+  .table-responsive .input-group {
+    width:200px;
+  }
+  .table-responsive input {
+    width:200px;
+  }
+  .table-responsive .btn-group {
+    width:100px;
   }
  }
 
