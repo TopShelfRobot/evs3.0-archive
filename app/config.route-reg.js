@@ -65,6 +65,30 @@
                     templateUrl: 'app/registration/memberPayment.part.html'
                 }
             },{
+                url: '/create-participant',
+                config: {
+                    title: 'Participant',
+                    templateUrl: 'app/registration/setparticipant.part.html'
+                }
+            },{
+                url: '/questions',
+                config: {
+                    title: 'Questions',
+                    templateUrl: 'app/registration/questions.part.html'
+                }
+            },{
+                url: '/confirm',
+                config: {
+                    title: 'Confirm',
+                    templateUrl: 'app/registration/confirm.part.html'
+                }
+            },{
+                url: '/receipt',
+                config: {
+                    title: 'Receipt',
+                    templateUrl: 'app/registration/receipt.part.html'
+                }
+            },{
                 url: '/kitchensink',
                 config: {
                     title: 'Kitchen Sink',
