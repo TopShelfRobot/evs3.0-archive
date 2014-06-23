@@ -160,7 +160,7 @@
               var fileReader = new FileReader();
                     fileReader.onload = function(e) {
                     vm.upload[index] = $upload.http({
-                      url: 'upload',
+                      url: '/Content/images',
                   headers: {'Content-Type': vm.selectedFiles[index].type},
                   data: e.target.result
                     }).then(function(response) {
