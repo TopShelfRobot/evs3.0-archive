@@ -5,7 +5,7 @@
 
         model = {};
 
-        model.id = 3306;
+        model.id = 13;
 
         model.getAll = function() {
             var query = breeze.EntityQuery
