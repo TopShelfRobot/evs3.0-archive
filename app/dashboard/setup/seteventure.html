@@ -81,7 +81,7 @@
             </div>
           </div>
         </div>
-        <div class="form-group">
+        <div class="form-group" ng-show="vm.eventure.transfersAllowed">
           <label for="TransferFee" class="col-lg-6 control-label">Transfer Fee:</label>
           <div class="col-lg-6">
             <div class="input-group"> <span class="input-group-addon">$</span>
@@ -89,7 +89,7 @@
             </div>
           </div>
         </div>
-        <div class="form-group">
+        <div class="form-group" ng-show="vm.eventure.transfersAllowed">
           <label for="TransferFeeCutoff" class="col-lg-6 control-label">Transfer Cutoff:</label>
           <div class="col-lg-6">
             <p class="input-group">
@@ -108,7 +108,7 @@
             </div>
           </div>
         </div>
-        <div class="form-group">
+        <div class="form-group" ng-show="vm.eventure.deferralsAllowed">
           <label for="DeferralFee" class="col-lg-6 control-label">Deferral Fee:</label>
           <div class="col-lg-6">
             <div class="input-group"> <span class="input-group-addon">$</span>
@@ -116,7 +116,7 @@
             </div>
           </div>
         </div>
-        <div class="form-group">
+        <div class="form-group" ng-show="vm.eventure.deferralsAllowed">
           <label for="DeferralFeeCutoff" class="col-lg-6 control-label">Deferral Cutoff:</label>
           <div class="col-lg-6">
             <p class="input-group">
