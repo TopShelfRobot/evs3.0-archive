@@ -22,14 +22,14 @@
 
         $scope.register = function(eventure, eventureList){
             cartModel.currentParticipantId = $scope.participantId;
-            cartModel.currentEventureId = eventure.id;
-            cartModel.currentEventureListId = eventureList.id;
+            cartModel.currentEventure = eventure;
+            cartModel.currentEventureList = eventureList;
 			
-			if(eventure.asdf){
-	            $location.path("/eventure/" + cartModel.currentEventureId + "/list/" + cartModel.currentEventureListId + "/team")
+			if(eventure.IsTeam){
+	            $location.path("/eventure/" + cartModel.currentEventure.id + "/list/" + cartModel.currentEventureList.id + "/team")
 	                .search("uid", cartModel.currentParticipantId);
 			}else{
-	            $location.path("/eventure/" + cartModel.currentEventureId + "/list/" + cartModel.currentEventureListId + "/questions")
+	            $location.path("/eventure/" + cartModel.currentEventure.id + "/list/" + cartModel.currentEventureList.id + "/questions")
 	                .search("uid", cartModel.currentParticipantId);
 			}
         }
