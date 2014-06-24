@@ -15,7 +15,7 @@
         model.allowZeroPayment = false;
 
         // Submits orders to be processed by the backend.
-        model.submitOrder = function(token, value){
+        model.submitOrder = function(token, value) {
             // var order = {
             //     token : token,
             //     eventureId : model.eventureId,
@@ -25,30 +25,30 @@
             //     teamMembers : model.teamMembers,
             //     payment : value
             // };
-			
-			var order = {
-				orderAmount : Number(value),
-				orderToken : token,
-				orderHouseId : model.participantId,
-				ownerId : 1,
-				regs : [
-					{
-						eventureListId: model.eventureListId,
-						partId: model.participantId, 
-						fee : Number(value),
-						quantitiy : 1,
-						orderType : "teamreg"
-					}
-				]
-			};
-			
+
+            var order = {
+                orderAmount: Number(value),
+                orderToken: token,
+                orderHouseId: model.participantId,
+                ownerId: 1,
+                regs: [
+                    {
+                        eventureListId: model.eventureListId,
+                        partId: model.participantId,
+                        fee: Number(value),
+                        quantitiy: 1,
+                        orderType: "teamreg"
+                    }
+                ]
+            };
+            alert('sending order');
             console.log(order);
-			return $http.post("http://evs30api.eventuresports.info/api/payment/postteam", order)
+            return $http.post("http://evs30api.eventuresports.info/api/Payment/PostTest", order);
             // expected response:
             // var response = {
             //     teamId : "1233534656"
             // }
-        }
+        };
 
         return model;
     }

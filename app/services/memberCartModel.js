@@ -12,26 +12,26 @@
         model.allowZeroPayment = true;
 
         // Submits orders to be processed by the backend.
-        model.submitOrder = function(token, value){
+        model.submitOrder = function(token, value) {
             console.log("token value:", token, value);
             var order = {
-                token : token,
-                eventureId : model.eventureId,
-                eventureListId : model.eventureListId,
-                participantId : model.participantId,
-                payment : value
+                token: token,
+                eventureId: model.eventureId,
+                eventureListId: model.eventureListId,
+                participantId: model.participantId,
+                payment: value
             };
 
-            var uri = "/api/team/" + model.teamId + "/member/" + model.memberId +"/payment";
+            var uri = "/api/team/" + model.teamId + "/member/" + model.memberId + "/payment";
 
             console.log(order, uri);
             return $http.post(uri,
-                order, {headers : {"Content-Type" : "application/json"}});
+                order, { headers: { "Content-Type": "application/json" } });
             // expected response:
             // var response = {
             //     teamId : "1233534656"
             // }
-        }
+        };
 
         return model;
     }
