@@ -69,6 +69,7 @@
     <Content Include="app\layout\reg-header.html" />
     <Content Include="app\layout\reg-shell.html" />
     <Content Include="app\layout\registrationHeaderController.js" />
+    <Content Include="app\registration\confirm.part.html" />
     <Content Include="app\registration\createteam.part.html" />
     <Content Include="app\registration\createteamController.js" />
     <Content Include="app\registration\eventure.part.html" />
@@ -79,6 +80,9 @@
     <Content Include="app\registration\memberPayment.part.html" />
     <Content Include="app\registration\memberPaymentController.js" />
     <Content Include="app\registration\payment.part.html" />
+    <Content Include="app\registration\questions.part.html" />
+    <Content Include="app\registration\receipt.part.html" />
+    <Content Include="app\registration\setparticipant.part.html" />
     <Content Include="app\registration\teamPayment.part.html" />
     <Content Include="app\registration\teampaymentController.js" />
     <Content Include="app\services\eventureModel.js" />
