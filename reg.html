@@ -29,22 +29,21 @@
 </head>
 
 <body>
-    <div>
         <div data-ng-include="'/app/layout/reg-shell.html'"></div>
         <div id="splash-page" data-ng-show="false">
-            <div class="page-splash">
-                <div class="page-splash-message">
-                    Eventure Sports
-                </div>
-                <div class="progress progress-striped active page-progress-bar">
-                    <div class="bar"></div>
+            <div class="row">
+                <div class="page-splash col-lg-12">
+                    <div class="page-splash-message text-center">
+                        <img class="img-responsive" src="/Content/images/logo.png">
+                        <br>
+                        <h1>Loading...</h1>
+                    </div>
+                    <div class="progress progress-striped active page-progress-bar">
+                        <div class="bar"></div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-
-    <span data-cc-scroll-to-top></span>
-
     <script src="/Scripts/modernizr.custom.js"></script>
     <script src="/Scripts/toucheffects.js"></script>
 
@@ -68,7 +67,7 @@
     <script src="scripts/breeze.saveErrorExtensions.js"></script>
     <script src="//cdn.kendostatic.com/2014.1.318/js/kendo.all.min.js"></script>
     <script src="scripts/angular-kendo.js"></script>
-	<script src="scripts/angular-file-upload.min.js"></script>
+    <script src="scripts/angular-file-upload.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-moment/0.7.1/angular-moment.min.js"></script>
 
     <!--<script src="scripts/breeze.to$q.shim.js"></script>-->   <!-- Needed only if you are using to$q -->

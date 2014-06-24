@@ -14,6 +14,13 @@
   background-color:#5cb85c;
 }
 
+.credit-card-header::before {
+  content: url('../../Content/images/creditcards.png');
+  padding:5px;
+  height:19px;
+  width:126px;
+}
+
 /* Tile Layout */
 .grid {
 	padding: 20px;
@@ -246,6 +253,18 @@ div.popover.fade.bottom.in {
 	opacity: 1;
 }
 
+@media (max-width:768px) {
+  .table-responsive .input-group {
+    width:200px;
+  }
+  .table-responsive input {
+    width:200px;
+  }
+  .table-responsive .btn-group {
+    width:100px;
+  }
+ }
+
 
 @media screen and (max-width: 480px) {
   .grid {
@@ -275,7 +294,7 @@ div.popover.fade.bottom.in {
 #footer {
   background-color:#444444;
   color:#666666;
-  height: 200px;
+  min-height: 200px;
   padding-top:30px;
 }
 
