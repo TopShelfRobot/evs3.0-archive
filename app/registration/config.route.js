@@ -89,6 +89,12 @@
                     templateUrl: 'app/registration/views/receipt.part.html'
                 }
             },{
+                url: '/user-profile',
+                config: {
+                    title: 'User Profile',
+                    templateUrl: 'app/registration/profile.part.html'
+                }
+            },{
                 url: '/kitchensink',
                 config: {
                     title: 'Kitchen Sink',
