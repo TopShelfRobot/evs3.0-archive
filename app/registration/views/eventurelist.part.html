@@ -17,7 +17,7 @@
                   <br>
                   <span class="list-description">{{selection.desc}}<span>
                   <br>
-                  <a ng-click="register(eventure.id, selection.id)" class="btn btn-default hidden-xs">Register</a>
+                  <a ng-click="register(eventure, selection)" class="btn btn-default hidden-xs">Register</a>
                 </figcaption>
     					</figure>
             </li>
@@ -25,7 +25,7 @@
         </div>
 
         <div class="col-md-4 col-lg-4">
-          <h1 class="text-center">{{selection.currentFee}}</h1>
+          <h1 class="text-center">{{selection.currentFee | currency}}</h1>
           <a href="regcreateteam.html" class="btn btn-success visible-xs">Register</a>
           <br>
           <div class="panel panel-default">
