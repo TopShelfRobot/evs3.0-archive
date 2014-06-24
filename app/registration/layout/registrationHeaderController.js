@@ -8,6 +8,6 @@
 
     }
 
-    angular.module("app").controller("Header", ["$scope", controller]);
+    angular.module("evReg").controller("Header", ["$scope", controller]);
 
 })();
