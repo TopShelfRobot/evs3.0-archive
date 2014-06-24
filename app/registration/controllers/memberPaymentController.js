@@ -40,6 +40,6 @@
         return controller;
     }
 
-    angular.module("app").controller("MemberPaymentController",
+    angular.module("evReg").controller("MemberPaymentController",
         ["$scope", "TeamModel", "StripeService", "MemberCartModel", Controller]);
 })();

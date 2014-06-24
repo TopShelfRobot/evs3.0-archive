@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html data-ng-app="app">
+<html data-ng-app="evReg">
 <head>
     <style>
         /* This helps the ng-show/ng-hide animations start at the right place. */
@@ -72,49 +72,48 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-moment/0.7.1/angular-moment.min.js"></script>
 
     <!--<script src="scripts/breeze.to$q.shim.js"></script>-->   <!-- Needed only if you are using to$q -->
+	
+    <!-- common Modules -->
+    <script src="app/common/common.js"></script>
+    <script src="app/common/logger.js"></script>
+    <script src="app/common/spinner.js"></script>
+	
+    <!-- common.bootstrap Modules -->
+    <script src="app/common/bootstrap/bootstrap.dialog.js"></script>
 
     <!-- Bootstrapping -->
     <script src="app/app.js"></script>
     <script src="app/config.js"></script>
     <script src="app/config.exceptionHandler.js"></script>
-    <script src="app/registration/config.route.js"></script>
 
-    <!-- common Modules -->
-    <script src="app/common/common.js"></script>
-    <script src="app/common/logger.js"></script>
-    <script src="app/common/spinner.js"></script>
-
-    <!-- common.bootstrap Modules -->
-    <script src="app/common/bootstrap/bootstrap.dialog.js"></script>
-
-    <!-- app -->
-    <script src="app/layout/registrationHeaderController.js"></script>
+    <!-- layout -->
     <script src="app/layout/shell.js"></script>
     <script src="app/layout/topnav.js"></script>
     <script src="app/dashboard/reporting.js"></script>
+
+    <!-- app Services -->
+    <script src="app/services/datacontext.js"></script>
+    <script src="app/services/directives.js"></script>
+    <script src="app/services/entityManagerFactory.js"></script>
+    <script src="app/services/model.js"></script>
+    <script src="app/services/routemediator.js"></script>
+
+    <!-- registration -->
+	<script src="app/registration/app.js"></script>
+	<script src="app/registration/config.route.js"></script>
+	<script src="app/layout/registrationHeaderController.js"></script>
     <script src="app/registration/controllers/createteamController.js"></script>
     <script src="app/registration/controllers/teampaymentController.js"></script>
     <script src="app/registration/controllers/eventureController.js"></script>
     <script src="app/registration/controllers/eventureListController.js"></script>
     <script src="app/registration/controllers/memberPaymentController.js"></script>
     <script src="app/registration/controllers/setParticipantController.js"></script>
-
-    <!-- app Services -->
-    <script src="app/services/datacontext.js"></script>
-    <script src="app/services/directives.js"></script>
-    <script src="app/services/StripeService.js"></script>
-
-    <!-- models -->
+	<script src="app/registration/services/StripeService.js"></script>
     <script src="app/registration/models/teamModel.js"></script>
     <script src="app/registration/models/eventureModel.js"></script>
     <script src="app/registration/models/participantModel.js"></script>
     <script src="app/registration/models/registrationCartModel.js"></script>
     <script src="app/registration/models/memberCartModel.js"></script>
-
-
-    <script src="app/services/entityManagerFactory.js"></script>
-    <script src="app/services/model.js"></script>
-    <script src="app/services/routemediator.js"></script>
 
 </body>
 

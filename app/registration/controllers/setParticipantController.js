@@ -5,5 +5,5 @@
 		
 	}
 	
-	angular.module("app").controller("setParticipant", ["$scope", Controller]);
+	angular.module("evReg").controller("setParticipant", ["$scope", Controller]);
 })();

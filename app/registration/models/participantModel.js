@@ -18,5 +18,5 @@
         };
         return model;
     }
-    angular.module("app").service("ParticipantModel", ["$q", "entityManagerFactory", "breeze", Model])
+    angular.module("evReg").service("ParticipantModel", ["$q", "entityManagerFactory", "breeze", Model])
 })();

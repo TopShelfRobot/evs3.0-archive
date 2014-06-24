@@ -56,6 +56,6 @@
         return model;
     }
 
-    angular.module("app").service("EventureModel", ["$q", "entityManagerFactory", "breeze", Model]);
+    angular.module("evReg").service("EventureModel", ["$q", "entityManagerFactory", "breeze", Model]);
 
 })();

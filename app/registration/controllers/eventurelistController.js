@@ -30,7 +30,7 @@
         }
     }
 
-    angular.module("app").controller("EventureListController",
+    angular.module("evReg").controller("EventureListController",
         ["$scope", "$location", "$routeParams",
             "EventureModel", "RegistrationCartModel", "ParticipantModel",
             controller]);

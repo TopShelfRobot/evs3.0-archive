@@ -1,7 +1,7 @@
 ﻿(function () {
     'use strict';
 
-    var app = angular.module('app');
+    var app = angular.module('evReg');
 
     // Collect the routes
     app.constant('routes', getRoutes());

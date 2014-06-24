@@ -53,5 +53,5 @@
         return model;
     }
 
-    angular.module("app").service("RegistrationCartModel", ["$http", "$routeParams", "config", Model]);
+    angular.module("evReg").service("RegistrationCartModel", ["$http", "$routeParams", "config", Model]);
 })()

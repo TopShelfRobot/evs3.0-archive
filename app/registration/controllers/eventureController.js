@@ -32,6 +32,6 @@
         }
     }
 
-    angular.module("app").controller("EventureController", ["$scope", "$location", "$anchorScroll", "EventureModel", controller]);
+    angular.module("evReg").controller("EventureController", ["$scope", "$location", "$anchorScroll", "EventureModel", controller]);
 
 })();
