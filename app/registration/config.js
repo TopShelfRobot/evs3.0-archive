@@ -82,9 +82,11 @@
     }]);
 
     //#region Configure the common services via commonConfig
-    app.config(['commonConfigProvider', function (cfg) {
+    app.config(['commonConfigProvider', "$httpProvider", function (cfg, $httpProvider) {
         cfg.config.controllerActivateSuccessEvent = config.events.controllerActivateSuccess;
         cfg.config.spinnerToggleEvent = config.events.spinnerToggle;
+		$httpProvider.defaults.useXDomain = true;
+        delete $httpProvider.defaults.headers.common['X-Requested-With'];
     }]);
     //#endregion
 })();

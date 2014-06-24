@@ -16,25 +16,26 @@
                         <div class="form-group">
                             <label for="FirstName" class="col-lg-5 control-label">First Name</label>
                             <div class="col-lg-7">
-                                <input type="text" name="FirstName" class="form-control" ng-model="firstName" required>
+                                <input type="text" name="FirstName" class="form-control" ng-model="participant.firstName" required>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="LastName" class="col-lg-5 control-label">Last Name</label>
                             <div class="col-lg-7">
-                                <input type="text" class="form-control" name="LastName" ng-model="lastName" required>
+                                <input type="text" class="form-control" name="LastName" ng-model="participant.lastName" required>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="Birthdate" class="col-lg-5 control-label">Date Of Birth</label>
                             <div class="col-lg-7">
-                                <input class="form-control" name="Birthdate" ng-model="dateBirth" required>
+								 <!-- <datepicker ng-model="participant.dateBirth" min-date="minDate" show-weeks="true" class="well well-sm"></datepicker> -->
+                                <input class="form-control" name="Birthdate" ng-model="participant.dateBirth" date-input required>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="Gender" class="col-lg-5 control-label">Gender</label>
                             <div class="col-lg-7">
-                                <select class="form-control" name="Gender" ng-model="gender" required>
+                                <select class="form-control" name="Gender" ng-model="participant.gender" required>
                                     <option value="F">Female</option>
                                     <option value="M">Male</option>
                                 </select>
@@ -43,7 +44,7 @@
                         <div class="form-group">
                             <label for="EmailAddress" class="col-lg-5 control-label">Email Address</label>
                             <div class="col-lg-7">
-                                <input type="email" class="form-control" id="EmailAddress" name="EmailAddress" ng-model="email" required>
+                                <input type="email" class="form-control" id="EmailAddress" name="EmailAddress" ng-model="participant.email" required>
                             </div>
                         </div>
                     </div>
@@ -51,20 +52,20 @@
                         <div class="form-group">
                             <label for="StreetAddress" class="col-lg-5 control-label">Street Address</label>
                             <div class="col-lg-7">
-                                <input type="text" class="form-control" id="StreetAddress" name="StreetAddress" ng-model="street1" required>
+                                <input type="text" class="form-control" id="StreetAddress" name="StreetAddress" ng-model="participant.street1" required>
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label for="City" class="col-lg-5 control-label">City</label>
                             <div class="col-lg-7">
-                                <input type="text" class="form-control" id="City" name="City" data-bind="value: city" ng-model="city" required>
+                                <input type="text" class="form-control" id="City" name="City" data-bind="value: city" ng-model="participant.city" required>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="State" class="col-lg-5 control-label">State</label>
                             <div class="col-lg-7">
-                                <select class="form-control" name="State" data-bind="value: state" ng-model="state" required>
+                                <select class="form-control" name="State" data-bind="value: state" ng-model="participant.state" required>
                                     <option value="AK">AK</option>
                                     <option value="AL">AL</option>
                                     <option value="AR">AR</option>
@@ -128,13 +129,13 @@
                         <div class="form-group">
                             <label for="ZipCode" class="col-lg-5 control-label">Zip Code</label>
                             <div class="col-lg-7">
-                                <input type="text" class="form-control" id="ZipCode" name="ZipCode" minlength="5" ng-model="zip" required>
+                                <input type="text" class="form-control" id="ZipCode" name="ZipCode" minlength="5" ng-model="participant.zip" required>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="CellPhone" class="col-lg-5 control-label">Cell Phone</label>
                             <div class="col-lg-7">
-                                <input type="tel" class="form-control" id="CellPhone" name="CellPhone" ng-model="phoneMobile" required>
+                                <input type="tel" class="form-control" id="CellPhone" name="CellPhone" ng-model="participant.phoneMobile" required>
                             </div>
                         </div>
                         <button class="btn btn-success pull-right" ng-click="submit()">Save Changes</button>

@@ -6,12 +6,7 @@
 		// console.log("config:", config);
 		datacontext.getParticipantById(config.owner.houseId)
 			.then(function(part){
-				console.log(part);
-				for(var key in part){
-					$scope[key] = part[key];
-				}
-				
-				part.firstName = "bill";
+				$scope.participant = part;
 			});
 		
 		$scope.submit = function(){
