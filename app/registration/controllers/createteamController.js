@@ -47,6 +47,6 @@
         };
     }
 
-    angular.module("app").controller("CreateTeamController",
+    angular.module("evReg").controller("CreateTeamController",
         ["$scope", "$location", "RegistrationCartModel", controller]);
 })();

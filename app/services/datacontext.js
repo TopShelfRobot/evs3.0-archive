@@ -831,10 +831,6 @@
         }
 
         var saveChanges = function () {
-            return manager.saveChanges()
-                .then(saveSucceeded)
-                .fail(saveFailed);
-
             function saveSucceeded(saveResult) {
             }
 
@@ -844,6 +840,10 @@
                 error.message = msg;
                 throw error;
             }
+			
+            return manager.saveChanges()
+                .then(saveSucceeded)
+                .catch(saveFailed);
         };
 
         var primeData = function () {

@@ -1,7 +1,7 @@
 ﻿(function () {
     'use strict';
 
-    var app = angular.module('app');
+    var app = angular.module('evReg');
 
     // Collect the routes
     app.constant('routes', getRoutes());
@@ -22,7 +22,7 @@
                 url: '/eventure',
                 config: {
                     title: 'Eventure',
-                    templateUrl: 'app/registration/eventure.part.html',
+                    templateUrl: 'app/registration/views/eventure.part.html',
                     settings: {
                         nav: 2,
                         content: 'Events'
@@ -32,7 +32,7 @@
                 url: '/eventure/:eventureId/list',
                 config: {
                     title: 'Eventure List',
-                    templateUrl: 'app/registration/eventurelist.part.html',
+                    templateUrl: 'app/registration/views/eventurelist.part.html',
                     settings: {
                         nav: 3,
                         content: 'Participants'
@@ -42,7 +42,7 @@
                 url: '/eventure/:eventureId/list/:listId/team',
                 config: {
                     title: 'Create Team',
-                    templateUrl: 'app/registration/createteam.part.html',
+                    templateUrl: 'app/registration/views/createteam.part.html',
                     settings: {
                         nav: 1,
                         content: 'Enterprise'
@@ -52,7 +52,7 @@
                 url: '/eventure/:eventureId/list/:listId/team/:teamId/payment',
                 config: {
                     title: 'Team Payment',
-                    templateUrl: 'app/registration/teamPayment.part.html',
+                    templateUrl: 'app/registration/views/teamPayment.part.html',
                     settings: {
                         nav: 4,
                         content: 'Coupons & Addons'
@@ -62,31 +62,31 @@
                 url: '/eventure/:eventureId/list/:listId/team/:teamId/member/:memberId/payment',
                 config: {
                     title: 'Member Payment',
-                    templateUrl: 'app/registration/memberPayment.part.html'
+                    templateUrl: 'app/registration/views/memberPayment.part.html'
                 }
             },{
-                url: '/create-participant',
+                url: '/participant',
                 config: {
                     title: 'Participant',
-                    templateUrl: 'app/registration/setparticipant.part.html'
+                    templateUrl: 'app/registration/views/setparticipant.part.html'
                 }
             },{
-                url: '/questions',
+                url: '/eventure/:eventureId/list/:listId/questions',
                 config: {
                     title: 'Questions',
-                    templateUrl: 'app/registration/questions.part.html'
+                    templateUrl: 'app/registration/views/questions.part.html'
                 }
             },{
-                url: '/confirm',
+                url: '/eventure/:eventureId/list/:listId/confirm',
                 config: {
                     title: 'Confirm',
-                    templateUrl: 'app/registration/confirm.part.html'
+                    templateUrl: 'app/registration/views/confirm.part.html'
                 }
             },{
-                url: '/receipt',
+                url: '/receipt/:receiptId',
                 config: {
                     title: 'Receipt',
-                    templateUrl: 'app/registration/receipt.part.html'
+                    templateUrl: 'app/registration/views/receipt.part.html'
                 }
             },{
                 url: '/user-profile',
@@ -98,7 +98,7 @@
                 url: '/kitchensink',
                 config: {
                     title: 'Kitchen Sink',
-                    templateUrl: 'app/registration/kitchensink.html'
+                    templateUrl: 'app/registration/views/kitchensink.html'
                 }
             }
         ];

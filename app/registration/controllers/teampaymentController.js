@@ -41,7 +41,7 @@
         };
     }
 
-    angular.module("app").controller("TeamPaymentController",
+    angular.module("evReg").controller("TeamPaymentController",
         ["$scope", "$location",
             "StripeService", "EventureModel", "RegistrationCartModel",
             controller]);

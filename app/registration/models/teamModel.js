@@ -19,6 +19,6 @@
         return model;
     }
 
-    angular.module("app").service("TeamModel", ["entityManagerFactory", "breeze", Model]);
+    angular.module("evReg").service("TeamModel", ["entityManagerFactory", "breeze", Model]);
 
 })();
