@@ -13,6 +13,8 @@
         model.teamId = "tbd";
         model.currentlyPaid = 0;
         model.allowZeroPayment = false;
+		
+		
 
         // Submits orders to be processed by the backend.
         model.submitOrder = function(token, value) {
