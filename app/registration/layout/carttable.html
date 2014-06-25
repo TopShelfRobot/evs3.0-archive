@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Untitled Document</title>
+<link href="Bootstrap/css/bootstrap.css" type="text/css" rel="stylesheet">
+<link href="css/newreg.css" type="text/css" rel="stylesheet">
+</head>
+
+<body>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th class="col-lg-5">Event</th>
+            <th class="col-lg-5">Listing</th>
+            <th class="col-lg-1">Price</th>
+            <th class="col-lg-1" />
+          </tr>
+        </thead>
+        <tbody data-role="listview" data-bind="foreach: cart.registrations" data-template="large-cart-item">
+          <tr>
+            <td><span class="product-name" data-bind="text: displayEvent">Bluegrass Festival</span></td>
+            <td><span class="product-name" data-bind="text: displayList">10k</span></td>
+            <td>$<span class="product-name" data-bind="text: fee">140.00</span></td>
+            <td><button type="button" class="close remove-item">&times;</button></td>
+          </tr>
+        </tbody>
+      </table>
+      <hr>
+      <a class="btn btn-warning btn-block" href="carttable.html">Checkout</a>
+</body>
+</html>

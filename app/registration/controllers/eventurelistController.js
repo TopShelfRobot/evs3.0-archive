@@ -2,6 +2,8 @@
 
     function controller($scope, $location, $routeParams, config, cartModel, datacontext){
 		
+		$scope.cart = cartModel;
+		
 		datacontext.getEventureById($routeParams.eventureId)
 	        .then(function(item){
 	            $scope.eventure = item;
@@ -16,26 +18,26 @@
 		datacontext.getParticipantsByHouseId(config.owner.houseId)
 	        .then(function(list){
 				
-	            $scope.participantId = list[0].houseId;
+				$scope.selectedParticipant = list[0]
 	            $scope.participants = list;
 	        });
 
-        $scope.register = function(eventure, eventureList){
-            cartModel.currentParticipantId = $scope.participantId;
-            cartModel.currentEventure = eventure;
-            cartModel.currentEventureList = eventureList;
+        $scope.register = function(eventure, eventureList, participant){
+            cartModel.setCurrentParticipant(participant);
+            cartModel.setCurrentEventure(eventure);
+            cartModel.setCurrentEventureList(eventureList);
 			
 			if(eventure.IsTeam){
-	            $location.path("/eventure/" + cartModel.currentEventure.id + "/list/" + cartModel.currentEventureList.id + "/team")
-	                .search("uid", cartModel.currentParticipantId);
+	            $location.path("/eventure/" + eventure.id + "/list/" + eventureList.id + "/team")
+	                .search("uid", participant.id);
 			}else{
-	            $location.path("/eventure/" + cartModel.currentEventure.id + "/list/" + cartModel.currentEventureList.id + "/questions")
-	                .search("uid", cartModel.currentParticipantId);
+	            $location.path("/eventure/" + eventure.id + "/list/" + eventureList.id + "/questions")
+	                .search("uid", participant.id);
 			}
         }
     }
 
     angular.module("evReg").controller("EventureListController",
-        ["$scope", "$location", "$routeParams", "config", "RegistrationCartModel", "datacontext", controller]);
+        ["$scope", "$location", "$routeParams", "config", "CartModel", "datacontext", controller]);
 
 })();

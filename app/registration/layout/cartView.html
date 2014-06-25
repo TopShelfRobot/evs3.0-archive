@@ -1,5 +1,24 @@
 <div>
-    <ul>
-        <li ng-repeat='c in cart'>{{c.name}}</li>
-    </ul>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th class="col-lg-5">Event</th>
+          <th class="col-lg-5">Listing</th>
+          <th class="col-lg-1">Price</th>
+          <th class="col-lg-1" />
+        </tr>
+      </thead>
+      <tbody data-role="listview" data-template="large-cart-item">
+        <tr ng-repeat='reg in cart.registrations'>
+          <td><span class="product-name">Bluegrass Festival</span></td>
+          <td><span class="product-name">10k</span></td>
+          <td>$<span class="product-name">140.00</span></td>
+          <td><button type="button" class="close remove-item">&times;</button></td>
+        </tr>
+      </tbody>
+    </table>
+    <hr>
+    <a class="btn btn-warning btn-block" href="carttable.html">Checkout</a>
+	
+	
 </div>

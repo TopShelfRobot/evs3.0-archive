@@ -17,7 +17,6 @@
         me.group2Id = group2Id;
         me.stockAnswerSet = stockAnswerSet;
         me.quantity = quantity;
-
         me.lineTotal = quantity * fee;
     };
 
@@ -50,19 +49,44 @@
         var surcharges = [];
 
         //temp cart registration
-        var currentName = ko.observable("");
-        var currentDisplayEvent = ko.observable("");
-        var currentDisplayList = ko.observable("");
-        var currentImage = ko.observable("");
-        var currentEmail = ko.observable("");
-        var currentFee = ko.observable("");
-        var currentEventureId = ko.observable("");
-        var currentEventureListId = ko.observable("");
-        var currentGroupId = ko.observable("");
-        var currentGroup2Id = ko.observable("");
-        var currentPartId = ko.observable("");
-        var currentStockAnswerSet = ko.observable("");
-        var currentQuantity = ko.observable("");
+		var currentParticipant = null;
+		var currentEventure = null;
+		var currentEventureList = null;
+		
+        var currentName = null;
+        var currentDisplayEvent = null;
+        var currentDisplayList = null;
+        var currentImage = null;
+        var currentEmail = null;
+        var currentFee = null;
+        var currentEventureId = null;
+        var currentEventureListId = null;
+        var currentGroupId = null;
+        var currentGroup2Id = null;
+        var currentPartId = null;
+        var currentStockAnswerSet = null;
+        var currentQuantity = null;
+		
+		var setCurrentParticipant = function(part){
+			vm.currentName = config.regName; // TODO: check on this
+			vm.currentPartId = part.id;
+			vm.currentParticipant = part;
+		};
+		
+		var setCurrentEventure = function(eventure){
+			vm.currentEventure = eventure;
+            vm.currentEventureId = eventure.id
+			vm.currentDisplayEvent = eventure.name;
+		};
+		
+		var setCurrentEventureList = function(list){
+			vm.currentEventureList = list;
+            vm.currentEventureListId = list.id;
+            vm.currentDisplayList = list.name;
+            vm.currentFee = list.currentFee;
+            vm.currentImage = list.imageName;
+            vm.currentQuantity = 1; // TODO: check on this
+		};
 
         var addSurcharge = function (desc, amount, chargeType, listid, partid, couponId) {
             surcharges.push(new surcharge(desc, amount, chargeType, listid, partid, couponId));
@@ -80,9 +104,9 @@
                     // otherwise it's a eventreu rule any you should look for matching
                     // eventureIds
                     if (isListRule) {
-                        process = registrations()[i].eventureListId == registrations()[regIndex].eventureListId;
+                        process = registrations[i].eventureListId == registrations[regIndex].eventureListId;
                     } else {
-                        process = registrations()[i].eventureId == registrations()[regIndex].eventureId;
+                        process = registrations[i].eventureId == registrations[regIndex].eventureId;
                     }
                     // if you havae found one, then you are done (because extras don't make sense)
                     // but if you haven't found one, one might still be lurking in the list.
@@ -96,9 +120,9 @@
 
             var isRegDupe = false;
             if (!config.isDuplicateOrderAllowed) {
-                for (var i = 0; i < registrations().length; i++) {
-                    var currentReg = registrations()[i];
-                    if (currentEventureListId() == currentReg.eventureListId && currentPartId() == currentReg.partId) {
+                for (var i = 0; i < registrations.length; i++) {
+                    var currentReg = registrations[i];
+                    if (currentEventureListId == currentReg.eventureListId && currentPartId == currentReg.partId) {
                         alert('Duplicate Registration.  Removed from cart.');
                         isRegDupe = true;
                     }
@@ -107,87 +131,87 @@
 
             if (!isRegDupe) {
 				
-                registrations.push(new registration(currentDisplayEvent(), currentDisplayList(), currentImage(), currentEmail(), currentFee(), currentEventureId(), currentEventureListId(), currentPartId(), currentName(), currentStockAnswerSet(), currentGroupId(), currentGroup2Id(), currentQuantity()));
-                cartIsVisible(true);
+                registrations.push(new registration(currentDisplayEvent, currentDisplayList, currentImage, currentEmail, currentFee, currentEventureId, currentEventureListId, currentPartId, currentName, currentStockAnswerSet, currentGroupId, currentGroup2Id, currentQuantity));
+                cartIsVisible = true;
 
                 //mjb these two need to be one function with addon passed in
 				var afterGetListAddons = function() {
-                    for (var i = 0; i < listAddons().length; i++) {
-                        var current = listAddons()[i];
+                    for (var i = 0; i < listAddons.length; i++) {
+                        var current = listAddons[i];
                         var amount = 0;
                         var processAddon = true;
-                        if (current.isUsat())  // = true then{
+                        if (current.isUsat)  // = true then{
                         {
-                            if (currentStockAnswerSet().usat.length > 1)
+                            if (currentStockAnswerSet.usat.length > 1)
                                 processAddon = true;
                             else
                                 processAddon = false;
                         }
-                        if (current.isShirtUpgrade())  // = true then{
+                        if (current.isShirtUpgrade)  // = true then{
                         {
-                            if (currentStockAnswerSet().shirtUpgrade == "Yes")
+                            if (currentStockAnswerSet.shirtUpgrade == "Yes")
                                 processAddon = true;
                             else
                                 processAddon = false;
                         }
 
                         // process the sibling discount only if it is set.
-                        if(current.isSiblingDiscount && current.isSiblingDiscount()){
-                            processAddon = shouldProcessSiblingDiscount(registrations().length - 1, current, true);
+                        if(current.isSiblingDiscount && current.isSiblingDiscount){
+                            processAddon = shouldProcessSiblingDiscount(registrations.length - 1, current, true);
                         }
 
                         if (processAddon) {
-                            if (current.amountTypeId() == 1) { //%
-                                amount = Math.round(current.amount() * currentFee() * currentQuantity()) / 100;
+                            if (current.amountTypeId == 1) { //%
+                                amount = Math.round(current.amount * currentFee * currentQuantity) / 100;
                             } else { //currently only % and $
-                                amount = current.amount();
+                                amount = current.amount;
                             }
-                            surcharges.push(new surcharge(current.addonDesc(), amount, current.addonType(), current.addonTypeLinkId(), currentPartId(), 0, current));
+                            surcharges.push(new surcharge(current.addonDesc, amount, current.addonType, current.addonTypeLinkId, currentPartId, 0, current));
                         }
                     }
                 };
 
                 var afterGetEventAddons = function() {
-                    for (var i = 0; i < eventAddons().length; i++) {
-                        var current = eventAddons()[i];
+                    for (var i = 0; i < eventAddons.length; i++) {
+                        var current = eventAddons[i];
                         var amount = 0;
                         var processAddon = true;
-                        if (current.isUsat())
+                        if (current.isUsat)
                         {
-                            if (currentStockAnswerSet().usat.length > 1)
+                            if (currentStockAnswerSet.usat.length > 1)
                                 processAddon = true;
                             else
                                 processAddon = false;
                         }
-                        if (current.isShirtUpgrade())  
+                        if (current.isShirtUpgrade)  
                         {
-                            if (currentStockAnswerSet().shirtUpgrade == "Yes")
+                            if (currentStockAnswerSet.shirtUpgrade == "Yes")
                                 processAddon = true;
                             else
                                 processAddon = false;
                         }
 
                         // process the sibling discount only if set
-                        if(current.isSiblingDiscount && current.isSiblingDiscount()){
-                            processAddon = shouldProcessSiblingDiscount(registrations().length - 1, current, false);
+                        if(current.isSiblingDiscount && current.isSiblingDiscount){
+                            processAddon = shouldProcessSiblingDiscount(registrations.length - 1, current, false);
                         }
 
                         if (processAddon) {
-                            if (current.amountTypeId() == 1) { //%
-                                amount = Math.round(current.amount() * currentFee() * currentQuantity()) / 100;
+                            if (current.amountTypeId == 1) { //%
+                                amount = Math.round(current.amount * currentFee * currentQuantity) / 100;
                             } else { //currently only % and $
-                                amount = current.amount();
+                                amount = current.amount;
                             }
-                            surcharges.push(new surcharge(current.addonDesc(), amount, current.addonType(), current.addonTypeLinkId(), currentPartId(), 0, current));
+                            surcharges.push(new surcharge(current.addonDesc, amount, current.addonType, current.addonTypeLinkId, currentPartId, 0, current));
                         }
                     }
                 }
 				
-                var listAddons = ko.observableArray();
+                var listAddons = [];
                 datacontext.getAddonsByEventureListId(config.regEventureListId, listAddons)
                     .then(afterGetListAddons);
 
-                var eventAddons = ko.observableArray();
+                var eventAddons = [];
                 datacontext.getAddonsByEventureId(config.regEventureId, eventAddons)
                     .then(afterGetEventAddons);  
             }
@@ -197,8 +221,8 @@
 
             //clear all rules
             var temp = [];
-            for (var j = 0; j < surcharges().length; j++) {
-                var currCharge = surcharges()[j];
+            for (var j = 0; j < surcharges.length; j++) {
+                var currCharge = surcharges[j];
 
                 if (currCharge.chargeType != 'cartRule') {
                     temp.push(currCharge);
@@ -211,8 +235,8 @@
             var regTotalAmount = 0;
             var multiEvents = {};
 
-            for (var i = 0; i < registrations().length; i++) {
-                var currentReg = registrations()[i];
+            for (var i = 0; i < registrations.length; i++) {
+                var currentReg = registrations[i];
 
 
                 if (config.fourDeLisDiscount) {
@@ -274,8 +298,8 @@
 
         var removeCoupons = function () {
             //mjb need to check for surcharges and remove them
-            for (var j = 0; j < surcharges().length; j++) {
-                var currCharge = surcharges()[j];
+            for (var j = 0; j < surcharges.length; j++) {
+                var currCharge = surcharges[j];
                 if (currCharge.chargeType == 'coupon') {
                     surcharges.splice(j, 1);
                     break;
@@ -284,8 +308,8 @@
         };
 
         var removeRegistration = function (selectedItem) {
-            for (var i = 0; i < registrations().length; i++) {
-                var current = registrations()[i];
+            for (var i = 0; i < registrations.length; i++) {
+                var current = registrations[i];
                 if (current === selectedItem) {
                     registrations.splice(i, 1);
                     break;
@@ -294,8 +318,8 @@
 
             //check for surcharges and remove them
             var removeList = [];
-            for (var j = 0; j < surcharges().length; j++) {
-                var currCharge = surcharges()[j];
+            for (var j = 0; j < surcharges.length; j++) {
+                var currCharge = surcharges[j];
 
                 //look for list surcharges to delete
                 if (currCharge.listId == selectedItem.eventureListId && currCharge.partId == selectedItem.partId && currCharge.chargeType == "listfee") {
@@ -317,28 +341,28 @@
 			//check for leftover sibling discounts.
 			//make a list of duplicate sibling discounts
             var sibDisc = {};
-            for(var i = 0; i < surcharges().length; i++){
-                if(surcharges()[i].context && surcharges()[i].context.isSiblingDiscount && surcharges()[i].context.isSiblingDiscount()){
-                    addon = surcharges()[i].context;
-                    if(typeof sibDisc[addon.id()] == "undefined"){
-                        sibDisc[addon.id()] = [];
+            for(var i = 0; i < surcharges.length; i++){
+                if(surcharges[i].context && surcharges[i].context.isSiblingDiscount && surcharges[i].context.isSiblingDiscount){
+                    addon = surcharges[i].context;
+                    if(typeof sibDisc[addon.id] == "undefined"){
+                        sibDisc[addon.id] = [];
                     }
-                    sibDisc[addon.id()].push(addon);
+                    sibDisc[addon.id].push(addon);
                 }
             }
             // check the items in the list for reconsiliation against the registrations
             for(var id in sibDisc){
                 // figur eout what you are matching against
-                var listId = sibDisc[id][0].addonTypeLinkId();
+                var listId = sibDisc[id][0].addonTypeLinkId;
                 var listVar = "eventureId";
-                if(sibDisc[id][0].addonType() == "listfee"){
+                if(sibDisc[id][0].addonType == "listfee"){
                     listVar = "eventureListId";
                 }
                 // make a list of the registrations that match the sibling discount addon
                 var regList = [];
-                for(var i = 0; i < registrations().length; i++){
-                    if(registrations()[i][listVar] == listId){
-                        regList.push(registrations()[i]);
+                for(var i = 0; i < registrations.length; i++){
+                    if(registrations[i][listVar] == listId){
+                        regList.push(registrations[i]);
                     }
                 }
                 // there should be one more registration than sibling discount
@@ -346,8 +370,8 @@
                 var removeCnt = 1 - (regList.length - sibDisc[id].length);
                 // if removeCnt is larger, remove some
                 while(removeCnt > 0){
-                    for(var i = 0; i < surcharges().length; i++){
-                        if(surcharges()[i].context && surcharges()[i].context.id() && surcharges()[i].context.id() == id){
+                    for(var i = 0; i < surcharges.length; i++){
+                        if(surcharges[i].context && surcharges[i].context.id && surcharges[i].context.id == id){
                             surcharges.splice(i, 1);
                             removeCnt--;
                             break;
@@ -356,15 +380,15 @@
                 }
             }
 
-            if (registrations().length == 0)
+            if (registrations.length == 0)
                 cartIsVisible(false);
         };
 
         var emptyCart = function () {
-            var length = this.registrations().length;
+            var length = this.registrations.length;
             registrations.splice(0, length);
 
-            var chargeLength = this.surcharges().length;
+            var chargeLength = this.surcharges.length;
             surcharges.splice(0, chargeLength);
 
             cartIsVisible(false);
@@ -373,11 +397,11 @@
         var getSubTotal = function () {
             var me = this;
             var price = 0,
-                length = this.registrations().length,
+                length = this.registrations.length,
                 i = 0;
 
             for (; i < length; i++) {
-                price += Math.round((me.registrations()[i].fee) * parseFloat(me.registrations()[i].quantity) * 100) / 100;
+                price += Math.round((me.registrations[i].fee) * parseFloat(me.registrations[i].quantity) * 100) / 100;
             }
             return price;
         };
@@ -385,17 +409,17 @@
         var getTotalPrice = function () {
             var me = this;
             var price = 0,
-                chargelength = me.surcharges().length,
+                chargelength = me.surcharges.length,
                 i = 0;
 
             for (; i < chargelength; i++) {
-                price += parseFloat(me.surcharges()[i].amount);
+                price += parseFloat(me.surcharges[i].amount);
             }
 
-            var reglength = me.registrations().length;
+            var reglength = me.registrations.length;
             i = 0;
             for (; i < reglength; i++) {
-                price += parseFloat(me.registrations()[i].fee) * parseFloat(me.registrations()[i].quantity);
+                price += parseFloat(me.registrations[i].fee) * parseFloat(me.registrations[i].quantity);
             }
 
             return price;
@@ -403,8 +427,8 @@
 
         var setGiftCardSurcharge = function(value){
             var index = null;
-            for(var i = 0; i < surcharges().length; i++){
-                if(surcharges()[i].chargeType == "giftcard"){
+            for(var i = 0; i < surcharges.length; i++){
+                if(surcharges[i].chargeType == "giftcard"){
                     index = i;
                     break;
                 }
@@ -412,14 +436,14 @@
 
             if(index == null){
                 // chargeDesc, amount, chargeType, listId, partId, couponId, context
-                surcharges.push(new surcharge("Gift card surcharge", -1*value, "giftcard", 0, currentPartId(), 0, null));
-                index = surcharges().length - 1;
+                surcharges.push(new surcharge("Gift card surcharge", -1*value, "giftcard", 0, currentPartId, 0, null));
+                index = surcharges.length - 1;
             }
         };
 
         var removeGiftCardSurcharge = function(){
-            for(var i = 0; i < surcharges().length; i++){
-                if(surcharges()[i].chargeType == "giftcard"){
+            for(var i = 0; i < surcharges.length; i++){
+                if(surcharges[i].chargeType == "giftcard"){
                     surcharges.splice(i, 1);
                     break;
                 }
@@ -428,8 +452,8 @@
 
         var setPriceAdjustSurcharge = function(value){
             var index = null;
-            for(var i = 0; i < surcharges().length; i++){
-                if(surcharges()[i].chargeType == "priceadjustment"){
+            for(var i = 0; i < surcharges.length; i++){
+                if(surcharges[i].chargeType == "priceadjustment"){
                     index = i;
                     break;
                 }
@@ -437,14 +461,14 @@
 
             if(index == null){
                 // chargeDesc, amount, chargeType, listId, partId, couponId, context
-                surcharges.push(new surcharge("Price adjustment surchage", value, "priceadjustment", 0, currentPartId(), 0, null));
-                index = surcharges().length - 1;
+                surcharges.push(new surcharge("Price adjustment surchage", value, "priceadjustment", 0, currentPartId, 0, null));
+                index = surcharges.length - 1;
             }
         };
 
         var removePriceAdjustSurcharge = function(){
-            for(var i = 0; i < surcharges().length; i++){
-                if(surcharges()[i].chargeType == "priceadjustment"){
+            for(var i = 0; i < surcharges.length; i++){
+                if(surcharges[i].chargeType == "priceadjustment"){
                     surcharges.splice(i, 1);
                     break;
                 }
@@ -454,7 +478,7 @@
         var serializeSurcharges = function(orig){
             var send = [];
             if(!orig)
-                orig = surcharges()
+                orig = surcharges
             for(var i = 0; i < orig.length; i++){
                 send.push(orig[i].forXhr());
             }
@@ -495,11 +519,20 @@
             currentGroup2Id: currentGroup2Id,
             currentStockAnswerSet: currentStockAnswerSet,
             currentQuantity: currentQuantity,
-            serializeSurcharges : serializeSurcharges
+            serializeSurcharges : serializeSurcharges,
+			
+			// setters
+			setCurrentParticipant : setCurrentParticipant,
+			setCurrentEventure : setCurrentEventure,
+			setCurrentEventureList : setCurrentEventureList,
+			
+			currentParticipant : currentParticipant,
+			currentEventure : currentEventure,
+			currentEventureList : currentEventureList,
         };
         return vm;
 	}
 
-	angular.module("evReg").service("cart", ["$http", "$routeParams", "datacontext", "logger", "config", Cart]);
+	angular.module("evReg").service("CartModel", ["$http", "$routeParams", "datacontext", "logger", "config", Cart]);
 
 })();

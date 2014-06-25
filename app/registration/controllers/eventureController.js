@@ -1,7 +1,9 @@
 (function(){
 
-    function controller($scope, $location, $anchorScroll, config, datacontext){
+    function controller($scope, $location, $anchorScroll, config, datacontext, cartModel){
 
+		$scope.cart = cartModel;
+		
         var all = [];
         var viewLength = 10;
         var currentPage = 0;
@@ -32,6 +34,6 @@
         }
     }
 
-    angular.module("evReg").controller("EventureController", ["$scope", "$location", "$anchorScroll", "config", "datacontext", controller]);
+    angular.module("evReg").controller("EventureController", ["$scope", "$location", "$anchorScroll", "config", "datacontext", "CartModel", controller]);
 
 })();
