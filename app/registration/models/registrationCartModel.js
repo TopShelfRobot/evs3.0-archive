@@ -14,6 +14,29 @@
         model.currentlyPaid = 0;
         model.allowZeroPayment = false;
 
+        model.order = function (value) {
+            var order = {
+                orderAmount: Number(value),
+                //orderToken: token,
+                orderHouseId: model.participantId,
+                ownerId: 1,
+                orderType: "teamreg",
+                teamName: model.teamName,
+                teamMembers: model.teamMembers,
+                regs: [
+                    {
+                        eventureListId: model.eventureListId,
+                        partId: model.participantId,
+                        fee: Number(value),
+                        quantity: 1
+                    }
+                ]
+            };
+            return order;
+        };
+        
+       
+
         // Submits orders to be processed by the backend.
         model.submitOrder = function(token, value) {
             // var order = {
@@ -25,25 +48,27 @@
             //     teamMembers : model.teamMembers,
             //     payment : value
             // };
-
-            var order = {
+            
+           var order = {
                 orderAmount: Number(value),
                 orderToken: token,
                 orderHouseId: model.participantId,
                 ownerId: 1,
+                orderType: "teamreg",
+                teamName: model.teamName,
+                teamMembers: model.teamMembers,
                 regs: [
                     {
                         eventureListId: model.eventureListId,
                         partId: model.participantId,
                         fee: Number(value),
-                        quantitiy: 1,
-                        orderType: "teamreg"
+                        quantity: 1
                     }
                 ]
             };
             alert('sending order');
             console.log(order);
-            return $http.post("http://evs30api.eventuresports.info/api/Payment/PostTest", order);
+            return $http.post("http://evs30api.eventuresports.info/api/Payment/PostTeam", order);
             // expected response:
             // var response = {
             //     teamId : "1233534656"

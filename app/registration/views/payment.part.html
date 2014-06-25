@@ -5,7 +5,7 @@
             <label for="Amount">What would you like to pay?</label>
             <p class="input-group">
               <span class="input-group-addon">$</span>
-              <input ng-model="$parent.userPaying" type="text" class="form-control" name="Amount" id="Amount" placeholder="0.00" />
+              <input ng-model="$parent.userPaying" type="text" class="form-control" value="33" name="Amount" id="Amount" placeholder="0.00" />
             </p>
             <p class="help-block">We suggest you pay $40.00.</p>
           </div>
@@ -57,7 +57,7 @@
         <div class="col-lg-3">
           <div class="form-group">
             <label for="CardCvc">CVC</label>
-            <input type="text" size="3" autocomplete="off" class="form-control" name="CardCvc" ng-model="$parent.cvc" />
+            <input type="text" size="3" autocomplete="off" class="form-control" name="CardCvc" value="424" ng-model="$parent.cvc" />
             <p class="help-block"><small>3 digit number on the back of your card.</small></p>
           </div>
         </div>
@@ -113,6 +113,6 @@
     </form>
     <div class="row">
       <div class="col-lg-2 col-lg-offset-10 clearfix">
-        <button type="button" class="btn btn-success btn-block pull-right" ng-disabled="(!$parent.waiverSigned) || ($parent.userPaying == 0 && !$parent.fullPaymentRequired)" ng-click="$parent.completeRegistration()">Complete Registration</button>
+        <button type="submit" class="btn btn-success btn-block pull-right" ng-disabled="(!$parent.waiverSigned) || ($parent.userPaying == 0 && !$parent.fullPaymentRequired)" ng-click="$parent.completeRegistration()">Complete Registration</button>
       </div>
     </div>

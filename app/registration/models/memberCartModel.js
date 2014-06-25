@@ -12,7 +12,10 @@
         model.allowZeroPayment = true;
 
         // Submits orders to be processed by the backend.
-        model.submitOrder = function(token, value) {
+        model.submitOrder = function (token, value) {
+
+            alert('submitting');
+            
             console.log("token value:", token, value);
             var order = {
                 token: token,
