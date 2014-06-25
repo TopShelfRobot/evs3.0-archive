@@ -104,9 +104,9 @@
                     // otherwise it's a eventreu rule any you should look for matching
                     // eventureIds
                     if (isListRule) {
-                        process = registrations[i].eventureListId == registrations[regIndex].eventureListId;
+                        process = vm.registrations[i].eventureListId == vm.registrations[regIndex].eventureListId;
                     } else {
-                        process = registrations[i].eventureId == registrations[regIndex].eventureId;
+                        process = vm.registrations[i].eventureId == vm.registrations[regIndex].eventureId;
                     }
                     // if you havae found one, then you are done (because extras don't make sense)
                     // but if you haven't found one, one might still be lurking in the list.
@@ -120,9 +120,9 @@
 
             var isRegDupe = false;
             if (!config.isDuplicateOrderAllowed) {
-                for (var i = 0; i < registrations.length; i++) {
-                    var currentReg = registrations[i];
-                    if (currentEventureListId == currentReg.eventureListId && currentPartId == currentReg.partId) {
+                for (var i = 0; i < vm.registrations.length; i++) {
+                    var currentReg = vm.registrations[i];
+                    if (vm.currentEventureListId == currentReg.eventureListId && vm.currentPartId == currentReg.partId) {
                         alert('Duplicate Registration.  Removed from cart.');
                         isRegDupe = true;
                     }
@@ -131,8 +131,8 @@
 
             if (!isRegDupe) {
 				
-                registrations.push(new registration(currentDisplayEvent, currentDisplayList, currentImage, currentEmail, currentFee, currentEventureId, currentEventureListId, currentPartId, currentName, currentStockAnswerSet, currentGroupId, currentGroup2Id, currentQuantity));
-                cartIsVisible = true;
+                vm.registrations.push(new registration(vm.currentDisplayEvent, vm.currentDisplayList, vm.currentImage, vm.currentEmail, vm.currentFee, vm.currentEventureId, vm.currentEventureListId, vm.currentPartId, vm.currentName, vm.currentStockAnswerSet, vm.currentGroupId, vm.currentGroup2Id, vm.currentQuantity));
+                vm.cartIsVisible = true;
 
                 //mjb these two need to be one function with addon passed in
 				var afterGetListAddons = function() {
@@ -142,14 +142,14 @@
                         var processAddon = true;
                         if (current.isUsat)  // = true then{
                         {
-                            if (currentStockAnswerSet.usat.length > 1)
+                            if (vm.currentStockAnswerSet.usat.length > 1)
                                 processAddon = true;
                             else
                                 processAddon = false;
                         }
                         if (current.isShirtUpgrade)  // = true then{
                         {
-                            if (currentStockAnswerSet.shirtUpgrade == "Yes")
+                            if (vm.currentStockAnswerSet.shirtUpgrade == "Yes")
                                 processAddon = true;
                             else
                                 processAddon = false;
@@ -157,16 +157,16 @@
 
                         // process the sibling discount only if it is set.
                         if(current.isSiblingDiscount && current.isSiblingDiscount){
-                            processAddon = shouldProcessSiblingDiscount(registrations.length - 1, current, true);
+                            processAddon = shouldProcessSiblingDiscount(vm.registrations.length - 1, current, true);
                         }
 
                         if (processAddon) {
                             if (current.amountTypeId == 1) { //%
-                                amount = Math.round(current.amount * currentFee * currentQuantity) / 100;
+                                amount = Math.round(current.amount * vm.currentFee * vm.currentQuantity) / 100;
                             } else { //currently only % and $
                                 amount = current.amount;
                             }
-                            surcharges.push(new surcharge(current.addonDesc, amount, current.addonType, current.addonTypeLinkId, currentPartId, 0, current));
+                            surcharges.push(new surcharge(current.addonDesc, amount, current.addonType, current.addonTypeLinkId, vm.currentPartId, 0, current));
                         }
                     }
                 };
@@ -178,14 +178,14 @@
                         var processAddon = true;
                         if (current.isUsat)
                         {
-                            if (currentStockAnswerSet.usat.length > 1)
+                            if (vm.currentStockAnswerSet.usat.length > 1)
                                 processAddon = true;
                             else
                                 processAddon = false;
                         }
                         if (current.isShirtUpgrade)  
                         {
-                            if (currentStockAnswerSet.shirtUpgrade == "Yes")
+                            if (vm.currentStockAnswerSet.shirtUpgrade == "Yes")
                                 processAddon = true;
                             else
                                 processAddon = false;
@@ -193,26 +193,26 @@
 
                         // process the sibling discount only if set
                         if(current.isSiblingDiscount && current.isSiblingDiscount){
-                            processAddon = shouldProcessSiblingDiscount(registrations.length - 1, current, false);
+                            processAddon = shouldProcessSiblingDiscount(vm.registrations.length - 1, current, false);
                         }
 
                         if (processAddon) {
                             if (current.amountTypeId == 1) { //%
-                                amount = Math.round(current.amount * currentFee * currentQuantity) / 100;
+                                amount = Math.round(current.amount * vm.currentFee * vm.currentQuantity) / 100;
                             } else { //currently only % and $
                                 amount = current.amount;
                             }
-                            surcharges.push(new surcharge(current.addonDesc, amount, current.addonType, current.addonTypeLinkId, currentPartId, 0, current));
+                            surcharges.push(new surcharge(current.addonDesc, amount, current.addonType, current.addonTypeLinkId, vm.currentPartId, 0, current));
                         }
                     }
                 }
 				
                 var listAddons = [];
-                datacontext.getAddonsByEventureListId(config.regEventureListId, listAddons)
+                datacontext.getAddonsByEventureListId(vm.currentEventureListId, listAddons)
                     .then(afterGetListAddons);
 
                 var eventAddons = [];
-                datacontext.getAddonsByEventureId(config.regEventureId, eventAddons)
+                datacontext.getAddonsByEventureId(vm.currentEventureId, eventAddons)
                     .then(afterGetEventAddons);  
             }
         };
@@ -235,8 +235,8 @@
             var regTotalAmount = 0;
             var multiEvents = {};
 
-            for (var i = 0; i < registrations.length; i++) {
-                var currentReg = registrations[i];
+            for (var i = 0; i < vm.registrations.length; i++) {
+                var currentReg = vm.registrations[i];
 
 
                 if (config.fourDeLisDiscount) {
@@ -308,10 +308,10 @@
         };
 
         var removeRegistration = function (selectedItem) {
-            for (var i = 0; i < registrations.length; i++) {
-                var current = registrations[i];
+            for (var i = 0; i < vm.registrations.length; i++) {
+                var current = vm.registrations[i];
                 if (current === selectedItem) {
-                    registrations.splice(i, 1);
+                    vm.registrations.splice(i, 1);
                     break;
                 }
             }
@@ -360,9 +360,9 @@
                 }
                 // make a list of the registrations that match the sibling discount addon
                 var regList = [];
-                for(var i = 0; i < registrations.length; i++){
-                    if(registrations[i][listVar] == listId){
-                        regList.push(registrations[i]);
+                for(var i = 0; i < vm.registrations.length; i++){
+                    if(vm.registrations[i][listVar] == listId){
+                        regList.push(vm.registrations[i]);
                     }
                 }
                 // there should be one more registration than sibling discount
@@ -380,18 +380,18 @@
                 }
             }
 
-            if (registrations.length == 0)
-                cartIsVisible(false);
+            if (vm.registrations.length == 0)
+                vm.cartIsVisible = false;
         };
 
         var emptyCart = function () {
-            var length = this.registrations.length;
-            registrations.splice(0, length);
+            var length = this.vm.registrations.length;
+            vm.registrations.splice(0, length);
 
             var chargeLength = this.surcharges.length;
             surcharges.splice(0, chargeLength);
 
-            cartIsVisible(false);
+            vm.cartIsVisible = false;
         };
 
         var getSubTotal = function () {
@@ -436,7 +436,7 @@
 
             if(index == null){
                 // chargeDesc, amount, chargeType, listId, partId, couponId, context
-                surcharges.push(new surcharge("Gift card surcharge", -1*value, "giftcard", 0, currentPartId, 0, null));
+                surcharges.push(new surcharge("Gift card surcharge", -1*value, "giftcard", 0, vm.currentPartId, 0, null));
                 index = surcharges.length - 1;
             }
         };
@@ -461,7 +461,7 @@
 
             if(index == null){
                 // chargeDesc, amount, chargeType, listId, partId, couponId, context
-                surcharges.push(new surcharge("Price adjustment surchage", value, "priceadjustment", 0, currentPartId, 0, null));
+                surcharges.push(new surcharge("Price adjustment surchage", value, "priceadjustment", 0, vm.currentPartId, 0, null));
                 index = surcharges.length - 1;
             }
         };

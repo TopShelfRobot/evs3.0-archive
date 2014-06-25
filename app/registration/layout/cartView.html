@@ -9,16 +9,16 @@
         </tr>
       </thead>
       <tbody data-role="listview" data-template="large-cart-item">
+		  
         <tr ng-repeat='reg in cart.registrations'>
-          <td><span class="product-name">Bluegrass Festival</span></td>
-          <td><span class="product-name">10k</span></td>
-          <td>$<span class="product-name">140.00</span></td>
-          <td><button type="button" class="close remove-item">&times;</button></td>
+          <td><span class="product-name">{{reg.displayEvent}}</span></td>
+		  <!-- <td><span>{{$parent.cart.butts}}</span></td> -->
+          <td><span class="product-name">{{reg.displayList}}</span></td>
+          <td><span class="product-name">{{reg.fee | currency}}</span></td>
+          <td><button type="button" class="close remove-item" ng-click="$parent.$parent.removeItem(reg)">&times;</button></td>
         </tr>
       </tbody>
     </table>
     <hr>
-    <a class="btn btn-warning btn-block" href="carttable.html">Checkout</a>
-	
-	
+    <a class="btn btn-warning btn-block" ng-click="checkout()">Checkout</a>
 </div>

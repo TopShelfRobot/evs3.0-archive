@@ -1,133 +1,83 @@
 
 ;(function(){
 	
-	function Controller($scope, config, cartModel, datacontext, logger){
+	function Controller($scope, $location, config, cartModel, datacontext, logger){
 		
 		$scope.cart = cartModel;
 		
-        var stockQuestionSet = ko.observable();
-        var customQuestionSet = ko.observable();
-        var stockAnswerSet = ko.observable();
-        var groups = ko.observableArray();
-        var isWaiverChecked = false;
-        var groupId = ko.observable(0);
-        var group2Id = ko.observable(0);
+		var questions = {
+				stockQuestionSet : [],
+		        customQuestionSet : [],
+		        stockAnswerSet : [],
+			};
+			
+		$scope.questions = questions;
+		
+        $scope.groups = [];
+        $scope.isWaiverChecked = false;
+        $scope.groupId = 0;
+        $scope.group2Id = 0;
 
-        var activate = function () {
-            datacontext.getCustomQuestionSetByEventureListId(config.regEventureListId, customQuestionSet)
-                .then(function(obs){
+				//         datacontext.getCustomQuestionSetByEventureListId(cartModel.currentEventureListId)
+				//             .then(function(obs){
+				//
+				//                 for(var i = 0; i < obs().length; i++){
+				//                     obs()[i].answerValue = ko.observable();
+				//
+				//                     if(obs()[i].options()){
+				//                         var opts = obs()[i].options().split(",");
+				//                         if(obs()[i].type() == "combo"){
+				//                             opts.unshift(null);
+				//                         }
+				//                         obs()[i].options(opts);
+				//                     }
+				//                 }
+				//                 questions.customQuestionSet = obs();
+				// return questions.customQuestionSet;
+				//             });
 
-                    for(var i = 0; i < obs().length; i++){
-                        obs()[i].answerValue = ko.observable();
-
-                        if(obs()[i].options()){
-                            var opts = obs()[i].options().split(",");
-                            if(obs()[i].type() == "combo"){
-                                opts.unshift(null);
-                            }
-                            obs()[i].options(opts);
-                        }
-                    }
-                    customQuestionSet(obs());
-                    console.log(obs());
-                });
-
-            datacontext.getGroupsActiveByEventureListId(config.regEventureListId, groups)
-                .then(function () {
-
-                    if (config.isGroupRequired && groups().length < 1) {
-                        alert('There are currently no spaces available');
-                        //router.navigateBack();
-                        router.navigateTo("#eventurelist/" + config.regEventureId);
-                    }
-                });
-
-            datacontext.getStockQuestionSetByEventureListId(config.regEventureListId, stockQuestionSet);
-
-            stockAnswerSet({       //mjb question issue
-                shirtSize: "",
-                finishTime: "",
-                bibName: "",
-                howHear: "",
-                usat: "",
-                //ownRv: "",
-                //nextRv: "",
-                //howHearRv: "",
-                school: "",
-                howHearDropDown: "",
-                estimatedSwimTime400: "",
-                estimatedSwimTime: "",
-                notes: "",
-                relayTeamQuestion: "",
-                annualIncome: "",
-                stockQuestionSetId: "",
-                shirtUpgrade: "",
-                Wheelchair: "",
-                PuretapUnisex: "",
-                NortonUnisex: "",
-                BourbonGenderSpecific: "",
-                HearRunathon: "",
-                HearPure: "",
-                HearNorton: "",
-                HearBourbon: "",
-                ParticipatePure: "",
-                ParticipateNorton: "",
-                ParticipateBourbon: "",
-                Mile15: "",
-                SportsEmails: "",
-                BourbonWaiver: "",
-                Overnight: "",
-                OvernightWhere: "",
-                OvernightDays: ""
-            });
-            return datacontext.getEventureListById(config.regEventureListId, eventureList);
-        };
-
-        var viewAttached = function () {
-            $('.form-horizontal').validate({
-                highlight: function (element) {
-                    $(element).closest('.form-group').addClass('has-error');
-                },
-                unhighlight: function (element) {
-                    $(element).closest('.form-group').removeClass('has-error');
-                },
-                errorElement: 'span',
-                errorClass: 'help-block',
-                errorPlacement: function (error, element) {
-                    if (element.parent('.input-group').length) {
-                        error.insertAfter(element.parent());
-                    } else {
-                        error.insertAfter(element);
-                    }
+        datacontext.getGroupsActiveByEventureListId(cartModel.currentEventureListId)
+            .then(function (data) {
+				$scope.groups = data;
+                if (config.isGroupRequired && groups().length < 1) {
+                    alert('There are currently no spaces available');
+                    router.navigateTo("#eventurelist/" + cartModel.currentEventureListId);
                 }
             });
 
-        };
+        datacontext.getStockQuestionSetByEventureListId(cartModel.currentEventureListId)
+			.then(function(data){
+				return questions.stockQuestionSet = data;
+			});
+
+        questions.stockAnswerSet = {
+	            shirtSize: "",
+	            howHear: "",
+	        };
 
         var getCustomAnswers = function(){
             var answers = [];
-            for(var i = 0; i < customQuestionSet().length; i++){
+            for(var i = 0; i < questions.customQuestionSet.length; i++){
                 answers.push({
-                	id : customQuestionSet()[i].id(),
-					answerValue : customQuestionSet()[i].answerValue()
+                	id : questions.customQuestionSet[i].id,
+					answerValue : questions.customQuestionSet[i].answerValue
                 });
             }
             return answers;
         }
 
-        var clickAddToCart = function () {
+        $scope.next = function (isValid) {
 
             var form = $(".form-horizontal");
             form.validate();
 
             if (form.valid()) {
-                cartModel.currentGroupId(groupId());
-                stockAnswerSet().stockQuestionSetId = stockQuestionSet().id();
-                cartModel.currentStockAnswerSet(stockAnswerSet());
-                cartModel.currentCustomAnswerSet(getCustomAnswers());
+                cartModel.currentGroupId = $scope.groupId;
+                questions.stockAnswerSet.stockQuestionSetId = questions.stockQuestionSet && questions.stockQuestionSet.id ? questions.stockQuestionSet.id : null;
+                cartModel.currentStockAnswerSet = questions.stockAnswerSet;
+                cartModel.currentCustomAnswerSet = getCustomAnswers();
                 cartModel.addRegistration();
-                var url = '#eventure'; //+ selectedEvent.id();
-                router.navigateTo(url);
+	            $location.path("/eventure/");
             }
         };
 
@@ -150,5 +100,5 @@
       //   return vm;
 	}
 	
-	angular.module("evReg").controller("QuestionsController", ["$scope", "config", "CartModel", "datacontext", Controller]);
+	angular.module("evReg").controller("QuestionsController", ["$scope", "$location", "config", "CartModel", "datacontext", Controller]);
 })();
