@@ -54,8 +54,6 @@
                 //form.submit();
             };
 
-           
-
             StripeCheckout.open({
                 key: 'pk_test_bJMgdPZt8B8hINCMgG2vUDy4',
                 address: false,

@@ -64,11 +64,6 @@
     <Content Include="app\dashboard\setup\setlist.js" />
     <Content Include="app\dashboard\setup\setresourceitem.js" />
     <Content Include="app\dashboard\setup\setresourceitemcategory.js" />
-    <Content Include="app\layout\cartView.html" />
-    <Content Include="app\layout\reg-footer.html" />
-    <Content Include="app\layout\reg-header.html" />
-    <Content Include="app\layout\reg-shell.html" />
-    <Content Include="app\layout\registrationHeaderController.js" />
     <Content Include="app\registration\app.js" />
     <Content Include="app\registration\config.js" />
     <Content Include="app\registration\config.route.js" />
@@ -102,12 +97,6 @@
     <Content Include="app\registration\views\questions.part.html" />
     <Content Include="app\registration\views\setparticipant.part.html" />
     <Content Include="app\registration\views\teamPayment.part.html" />
-    <Content Include="app\services\eventureModel.js" />
-    <Content Include="app\services\memberCartModel.js" />
-    <Content Include="app\services\participantModel.js" />
-    <Content Include="app\services\registrationCartModel.js" />
-    <Content Include="app\services\StripeService.js" />
-    <Content Include="app\services\teamModel.js" />
     <Content Include="back-favicon.png" />
     <Content Include="app\common\bootstrap\bootstrap.dialog.js" />
     <Content Include="app\common\common.js" />
