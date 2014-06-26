@@ -2,9 +2,9 @@
 	'use strict';
 
 	var controllerId = 'seteventure';
-	angular.module('app').controller(controllerId, ['$routeParams', '$upload', '$http', '$timeout', 'common', 'datacontext', 'config', seteventure]);
+	angular.module('app').controller(controllerId, ['$q', '$routeParams', '$upload', '$http', '$timeout', 'common', 'datacontext', 'config', seteventure]);
 
-	function seteventure($routeParams, $upload, $http, $timeout, common, datacontext, config) {
+	function seteventure($q, $routeParams, $upload, $http, $timeout, common, datacontext, config) {
 
 		var getLogFn = common.logger.getLogFn;
 		var log = getLogFn(controllerId);
@@ -34,11 +34,7 @@
 						return vm.eventure = data;
 					});
 			} else {
-				return datacontext.createEventure()
-					.then(function(data) {
-						//applyFilter();
-						return vm.eventure = data;
-					});
+				return vm.eventure = datacontext.createEventure();
 			}
 		}
 
