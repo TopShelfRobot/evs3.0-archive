@@ -13,6 +13,15 @@
 			
 		$scope.questions = questions;
 		
+		$scope.notAllowedToContinue = function(){
+			return !$scope.isWaiverChecked;
+		};
+		
+		$scope.setWaiverChecked = function(val){
+			console.log("setWaiverChecked:", val);
+			$scope.isWaiverChecked = val;
+		};
+		
         $scope.groups = [];
         $scope.isWaiverChecked = false;
         $scope.groupId = 0;

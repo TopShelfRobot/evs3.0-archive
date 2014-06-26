@@ -135,7 +135,7 @@
                 vm.cartIsVisible = true;
 
                 //mjb these two need to be one function with addon passed in
-				var afterGetListAddons = function() {
+				var afterGetListAddons = function(listAddons) {
                     for (var i = 0; i < listAddons.length; i++) {
                         var current = listAddons[i];
                         var amount = 0;
@@ -171,7 +171,7 @@
                     }
                 };
 
-                var afterGetEventAddons = function() {
+                var afterGetEventAddons = function(eventAddons) {
                     for (var i = 0; i < eventAddons.length; i++) {
                         var current = eventAddons[i];
                         var amount = 0;
@@ -207,12 +207,10 @@
                     }
                 }
 				
-                var listAddons = [];
-                datacontext.getAddonsByEventureListId(vm.currentEventureListId, listAddons)
+                datacontext.getAddonsByEventureListId(vm.currentEventureListId)
                     .then(afterGetListAddons);
 
-                var eventAddons = [];
-                datacontext.getAddonsByEventureId(vm.currentEventureId, eventAddons)
+                datacontext.getAddonsByEventureId(vm.currentEventureId)
                     .then(afterGetEventAddons);  
             }
         };

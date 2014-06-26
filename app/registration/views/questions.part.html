@@ -16,6 +16,7 @@
                   <label for="T-Shirt" class="col-lg-6 control-label">T-Shirt Size:</label>
                   <div class="col-lg-6">
                     <select class="form-control" ng-model="questions.stockAnswerSet.shirtSize" required>
+						<option value=""></option>
                         <option>Small</option>
                         <option>Medium</option>
                         <option>Large</option>
@@ -40,8 +41,8 @@
                   <label for="WaiverAgree" class="col-xs-6 control-label">I Agree To The Waiver:</label>
                   <div class="col-xs-6">
                     <div class="btn-group">
-                      <button type="button" class="btn btn-default" value="true" ng-click="isWaiverChecked = true">Agree</button>
-                      <button type="button" class="btn btn-default" value="false" ng-click="isWaiverChecked = false">Disagree</button>
+                      <button type="button" class="btn btn-default" ng-model="isWaiverChecked" btn-radio="true">Agree</button>
+                      <button type="button" class="btn btn-default" ng-model="isWaiverChecked" btn-radio="false">Disagree</button>
                     </div>
                   </div>
                 </div>
@@ -49,7 +50,7 @@
         </div>
         <div class="row">
             <div class="col-lg-12">
-                <button class="btn btn-success pull-right" ng-click="next()">Next</button>
+                <button class="btn btn-success pull-right" ng-disabled="notAllowedToContinue()" ng-click="next()">Next</button>
             </div>
         </div>
     </form>
