@@ -9,6 +9,7 @@
         var predicate = breeze.Predicate;
         var entityQuery = breeze.EntityQuery;
         var manager = emFactory.newManager();
+        manager.fetchMetadata();
         var getLogFn = common.logger.getLogFn;
         var log = getLogFn(serviceId);
         var logError = getLogFn(serviceId, 'error');
@@ -82,10 +83,6 @@
                 .using(manager).execute()
                 .then(querySucceeded, _queryFailed);
 
-            //return manager.executeQuery(query)
-            //   .then(querySucceeded, _queryFailed);
-            //
-
             function querySucceeded(data) {
                 return data.results;
             }
@@ -110,8 +107,7 @@
         };
 
         var createEventure = function () {
-
-            return manager.createEntity('Eventure', { imageFileName: "", ownerId: config.ownerId, dateTransferCutoff: moment().format("MM/DD/YYYY"), dateDeferralCutoff: moment().format("MM/DD/YYYY"), dateEventure: moment().format("MM/DD/YYYY") });
+            return manager.createEntity('Eventure', { name: 'Our Event'});
         };
 
         var getEventureListById = function (id) {
