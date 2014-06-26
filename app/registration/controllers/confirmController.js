@@ -1,97 +1,65 @@
 
 ;(function(){
 	
-    function Controller(datacontext, logger, cart, router, config) {
+    function Controller($scope, $http, $location, Stripe, datacontext, logger, cart, config) {
 
-        var isTerms = ko.observable(false);
-        var isRefund = ko.observable(false);
-        var owner = ko.observable();
-        var termsText = '';
-        var refundsText = '';
-
-        var activate = function () {
-            //logger.log('did we activate' + cart.cartItems().length, null, 'quest', true);
-            cart.cartIsVisible(false);
-            //logger.log('processiong cart rules', null, 'quest', true);
-            cart.processCartRules();
-            return datacontext.getOwnerById(config.ownerId, owner)
-                .then(function () {
-                    termsText = owner().termsText();
-                    refundsText = owner().refundsText();
-                    });
-        };
-
-        var viewAttached = function () {
-            $('#terms').popover({ title: "Terms and Conditions", html: true, content: function () { msg = '<div id="popover_content_wrapper"><p>' + termsText + '</p></div>'; return $(msg).html(); }, placement: 'auto', container: 'body', trigger: 'click' });
-            $('#refund').popover({ title: "Refund Policy", html: true, content: function () { msg = '<div id="popover_content_wrapper"><p>' + refundsText + '</p></div>'; return $(msg).html(); }, placement: 'auto', container: 'body', trigger: 'click' });
-
-            //logger.log('did we activate' + owner().stripePublishableKey(), null, 'confirm', true);
-            var customerPublishableCode = owner().stripePublishableKey();
-
-            //This identifies your website in the createToken call below
-            //Stripe.setPublishableKey('pk_test_bJMgdPZt8B8hINCMgG2vUDy4');
-            Stripe.setPublishableKey(customerPublishableCode);
-
-            $('#payment-form').submit(function (e) {
-                var $form = $(this);
-
-                // Disable the submit button to prevent repeated clicks
-                $form.find('button').prop('disabled', true);
-
-                Stripe.createToken($form, stripeResponseHandler);
-
-                // Prevent the form from submitting with the default action
-                return false;
+        $scope.isTerms = false;
+        $scope.isRefund = false;
+        $scope.owner = null;
+		
+		$scope.couponErrors = "";
+		$scope.cart = cart;
+		$scope.allowPartialPayment = false;
+		$scope.allowZeroPayment = false;
+        // cart.cartIsVisible = false;
+		
+		// initialize it
+        datacontext.getOwnerById(config.owner.ownerId)
+            .then(function (owner) {
+				$scope.owner = owner;
+	            $('#terms').popover({ title: "Terms and Conditions", html: true, content: function () { msg = '<div id="popover_content_wrapper"><p>' + owner.termsText + '</p></div>'; return $(msg).html(); }, placement: 'auto', container: 'body', trigger: 'click' });
+	            $('#refund').popover({ title: "Refund Policy", html: true, content: function () { msg = '<div id="popover_content_wrapper"><p>' + owner.refundsText + '</p></div>'; return $(msg).html(); }, placement: 'auto', container: 'body', trigger: 'click' });
+				
+				// Stripe.setPublishableKey(owner.stripePublishableKey);
+				
+				cart.processCartRules();
             });
-        };
 
-        var removeCoupons = function () {
-            cart.removeCoupons();
-        };
+		
+        $scope.submit = function(){
+            var $form = $('#payment-form');
+
+            // Disable the submit button to prevent repeated clicks
+            $form.find('button').prop('disabled', true);
+
+            Stripe.createToken($form)
+				.then(stripeResponseHandler);
+        }
 
         var applyCoupon = function () {
             //logger.log('validating', null, 'confirm', true);
 
-            var couponCode = $("#CouponCode").val();
             var apiUrl = config.apiPath + "/api/Coupon/Post";    //mjb
             var source = {
-                'couponCode': couponCode,
-                'regs': cart.registrations(),
+                'couponCode': $scope.couponCode,
+                'regs': cart.registrations,
             };
 
-            $.ajax({
-                type: "POST",
-                dataType: "json",
-                url: apiUrl,
-                data: source,
-                beforeSend: function (xhr) {
-                    xhr.setRequestHeader("Accept", "application/json");
-                },
-                success: function (result) {
-
-                    //alert('post returns success_amount:' + result.Amount);
-                    //alert('post returns success_couponid:' + result.CouponId);
-                    //alert('post returns success_amount:' + result.Message);
-
+            $http({type: "POST", url: apiUrl, data: source})
+				.then(function (result) {
                     if (result.Amount != 0) {
                         cart.removeCoupons();
                         cart.addSurcharge('Coupon: ' + couponCode, result.Amount, 'coupon', cart.currentEventureListId(), cart.currentPartId, result.CouponId);
-                        $("#coupon-errors").text("");
+                        $scope.couponErrors = "";
                     } else {
                         {
-                            $("#coupon-errors").text(result.Message);
+                            $scope.couponErrors = result.Message;
                         }
                     }
-                },
-                error: function (xhr, textStatus, errorThrown) {
-                    //if (typeof console === 'object' && typeof console.log === 'function') {
-                    //    alert(xhr);
-                    //    alert(textStatus);
-                    //    alert(errorThrown);
-                    //}
-                    $("#coupon-errors").text("Coupon Not Found(E1)");
-                }
-            });
+                })
+				.error(function (xhr, textStatus, errorThrown) {
+                    $scope.couponErrors = "Coupon Not Found(E1)";
+                });
         };
 
         var stripeResponseHandler = function (status, response) {
@@ -148,7 +116,8 @@
                     success: function (result) {
                         //alert('post returns success' + result);
                         var receiptUrl = '#receipt';
-                        router.navigateTo(receiptUrl);
+                        // router.navigateTo(receiptUrl);
+						
                     },
                     error: function (xhr, textStatus, errorThrown) {
                         //alert('fail' + errorThrown.responseText);
@@ -164,27 +133,12 @@
             }
         };
 
-        var isConfirm = ko.computed(function () {
-            return isTerms() && isRefund();
-        });
-
-        var vm = {
-            activate: activate,
-            cart: cart,
-            isConfirm: isConfirm,
-            isTerms: isTerms,
-            isRefund: isRefund,
-            stripeResponseHandler: stripeResponseHandler,
-            applyCoupon: applyCoupon,
-            removeCoupons: removeCoupons,
-            //deactivate: deactivate,
-            //refresh: refresh,
-            viewAttached: viewAttached,
-            title: 'Event'
+        $scope.isConfirm = function () {
+            return $scope.isTerms && $scope.isRefund;
         };
-        return vm;
 
-    });
+        $scope.title = 'Event';
+    }
 	
-	angular.module("evReg").controller("ConfirmController", [Controller]);
+	angular.module("evReg").controller("ConfirmController", ["$scope", "$http", "$location", "StripeService", "datacontext", "logger", "CartModel", "config", Controller]);
 })();

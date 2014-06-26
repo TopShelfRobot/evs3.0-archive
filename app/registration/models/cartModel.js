@@ -228,7 +228,7 @@
                     temp.push(currCharge);
                 }
             }
-            surcharges(temp);
+            surcharges = temp;
 
             var regCount = 0;
             var lowestFee = 0;

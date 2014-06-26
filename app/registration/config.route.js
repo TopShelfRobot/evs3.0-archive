@@ -77,7 +77,7 @@
                     templateUrl: 'app/registration/views/questions.part.html'
                 }
             },{
-                url: '/eventure/:eventureId/list/:listId/confirm',
+                url: '/confirm',
                 config: {
                     title: 'Confirm',
                     templateUrl: 'app/registration/views/confirm.part.html'
