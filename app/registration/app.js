@@ -14,7 +14,7 @@
         'breeze.directives', // contains the breeze validation directive (zValidate)
         'ui.bootstrap',      // ui-bootstrap (ex: carousel, pagination, dialog)
 		'common.bootstrap', // bootstrap dialog wrapper functions
-
+		'nsPopover',
 		'app'
     ]);
 
