@@ -6,6 +6,7 @@
 		
 		$scope.checkout = function(){
 			$location.path("/confirm");
+			$scope.hidePopover();
 		}
 				
 		$scope.removeItem = function(item){
