@@ -484,7 +484,7 @@
             }
             return send;
         };
-
+		
         var vm = {
             setGiftCardSurcharge : setGiftCardSurcharge,
             removeGiftCardSurcharge: removeGiftCardSurcharge,
