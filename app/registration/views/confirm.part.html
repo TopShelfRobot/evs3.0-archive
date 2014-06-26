@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" ng-controller="ConfirmController">
     <div class="row">
         <div class="col-lg-12 text-center">
             <img class="logo" src="/Content/images/logo.png">
@@ -19,14 +19,14 @@
                             <th class="col-lg-1">Subtotal</th>
                         </tr>
                     </thead>
-                    <tbody data-role="listview" data-bind="foreach: cart.registrations">
+                    <tbody data-role="listview" ng-repeat="reg in cart.registrations">
                         <tr>
-                            <td>{{ vm.displayEvent }}</td>
-                            <td>{{ vm.displayList }}</td>
-                            <td>{{ vm.name }}</td>
-                            <td>{{ fee | currency }}</td>
-                            <td>{{ quantity }}</td>
-                            <td>{{ lineTotal | currency }}</td>
+                            <td>{{ reg.displayEvent }}</td>
+                            <td>{{ reg.displayList }}</td>
+                            <td>{{ reg.name }}</td>
+                            <td>{{ reg.fee | currency }}</td>
+                            <td>{{ reg.quantity }}</td>
+                            <td>{{ reg.lineTotal | currency }}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -36,17 +36,17 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="table-responsive">
-                <table class="table table-striped" data-bind="visible: cart.surcharges().length > 0">
+                <table class="table table-striped" ng-show="cart.surcharges">
                     <thead>
                         <tr>
                             <th class="col-lg-11">Description</th>
                             <th class="col-lg-1">Price</th>
                         </tr>
                     </thead>
-                    <tbody data-role="listview" data-bind="foreach: cart.surcharges">
-                        <tr>
-                            <td>{{ vm.desc }}</td>
-                            <td>{{ vm.amount | currency }}</td>
+                    <tbody data-role="listview">
+                        <tr ng-repate="charge in cart.surcharges">
+                            <td>{{ charge.desc }}</td>
+                            <td>{{ charge.amount | currency }}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -59,18 +59,22 @@
             <form class="form-horizontal">
                 <input id="CouponCode" class="form-control" type="text" placeholder="Coupon Code" />
                 <br>
-                <button class="btn btn-default btn-xs" ng-click="vm.applyCoupon"><i class="glyphicon glyphicon-plus-sign"></i>&nbsp;Apply Coupon</button>
-                <button class="btn btn-danger btn-xs" ng-click="vm.removeCoupons"><i class="glyphicon glyphicon-minus-sign"></i>&nbsp;Remove Coupon</button>
+                <button class="btn btn-default btn-xs" ng-click="vm.applyCoupon">
+					<i class="glyphicon glyphicon-plus-sign"></i>&nbsp;Apply Coupon
+				</button>
+                <button class="btn btn-danger btn-xs" ng-click="vm.removeCoupons">
+					<i class="glyphicon glyphicon-minus-sign"></i>&nbsp;Remove Coupon
+				</button>
             </form>
         </div>
         <div class="col-sm-7 text-right">
-            <p><em>Total:</em>&nbsp;{{ cart.getTotalPrice() | currency }}$34.00</p>
+            <p><em>Total:</em>&nbsp;{{ cart.getTotalPrice() | currency }}</p>
         </div>
     </div>
     <br>
     <div class="row">
         <div class="col-sm-12">
-            <div ng-include="'/app/registration/payment.part.html'"></div>
+            <div ng-include="'/app/registration/views/payment.part.html'"></div>
         </div>
     </div>
 </div>

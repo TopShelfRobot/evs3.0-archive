@@ -13,6 +13,8 @@
         model.teamId = "tbd";
         model.currentlyPaid = 0;
         model.allowZeroPayment = false;
+		
+		
 
         model.order = function (value) {
             var order = {

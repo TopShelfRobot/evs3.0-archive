@@ -1,0 +1,24 @@
+<div class="triangle"></div>
+<div class="ns-popover-tooltip" ng-controller="Header">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th class="col-lg-5">Event</th>
+          <th class="col-lg-5">Listing</th>
+          <th class="col-lg-1">Price</th>
+          <th class="col-lg-1" />
+        </tr>
+      </thead>
+      <tbody data-role="listview" data-template="large-cart-item">
+		  
+        <tr ng-repeat='reg in cart.registrations'>
+          <td><span class="product-name">{{reg.displayEvent}}</span></td>
+          <td><span class="product-name">{{reg.displayList}}</span></td>
+          <td><span class="product-name">{{reg.fee | currency}}</span></td>
+          <td><button type="button" class="close remove-item" ng-click="$parent.$parent.removeItem(reg)">&times;</button></td>
+        </tr>
+      </tbody>
+    </table>
+    <hr>
+    <a class="btn btn-warning btn-block" data-ng-click="checkout()">Checkout</a>
+</div>

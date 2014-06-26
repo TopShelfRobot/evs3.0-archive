@@ -1,63 +1,65 @@
-    <div class="container" id="content" ng-controller="EventureListController">
-      <div class="row">
-        <div class="col-lg-12 text-center">
-          <img class="logo" ng-src="{{eventure.imageFileName}}">
-          <h3>Which list would you like to participate in?</h3>
-          <hr>
+<div class="container" id="content" ng-controller="EventureListController">
+  <div class="row">
+    <div class="col-lg-12 text-center">
+      <img class="logo" ng-src="{{eventure.imageFileName}}">
+      <h3>Which list would you like to participate in?</h3>
+      <hr>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-8 col-lg-8 clearfix">
+      <ul class="list-image grid">
+        <li>
+			<figure>
+				<img ng-src="{{selection.imageFileName}}" alt="" />
+				<figcaption>
+					<h4>{{selection.displayName}}</h4>
+					<br>
+					<span class="list-description">{{selection.desc}}<span>
+					<br>
+					<a ng-click="register(eventure, selection, selectedParticipant)" class="btn btn-default hidden-xs">Register</a>
+	            </figcaption>
+			</figure>
+        </li>
+      </ul>
+    </div>
+
+    <div class="col-md-4 col-lg-4">
+      <h1 class="text-center">{{selection.currentFee | currency}}</h1>
+      <a href="regcreateteam.html" class="btn btn-success visible-xs">Register</a>
+      <br>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Listings</h3>
+        </div>
+        <div class="panel-body">
+          <p class="text-muted">Choose a listing.</p>
+          <select class="form-control" ng-model="selection" ng-options="selection.name for selection in list"></select>
         </div>
       </div>
-      <div class="row">
-        <div class="col-md-8 col-lg-8 clearfix">
-          <ul class="list-image grid">
-            <li>
-    			<figure>
-    				<img ng-src="{{selection.imageFileName}}" alt="" />
-    				<figcaption>
-                  <h4>{{selection.displayName}}</h4>
-                  <br>
-                  <span class="list-description">{{selection.desc}}<span>
-                  <br>
-                  <a ng-click="register(eventure.id, selection.id)" class="btn btn-default hidden-xs">Register</a>
-                </figcaption>
-    					</figure>
+      <hr>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Participants</h3>
+        </div>
+        <div class="panel-body">
+          <p class="text-muted">Choose or add a new participant to your account.</p>
+          <ul class="participant-list">
+            <li class="participant">
+              <div class="radio">
+                <label>
+                  <div ng-repeat="part in participants">
+					  <input type="radio" name="participant" ng-value="part" ng-model="$parent.selectedParticipant">
+						{{part.firstName}} {{part.lastName}}
+					</div>
+                </label>
+              </div>
             </li>
           </ul>
-        </div>
-
-        <div class="col-md-4 col-lg-4">
-          <h1 class="text-center">{{selection.currentFee}}</h1>
-          <a href="regcreateteam.html" class="btn btn-success visible-xs">Register</a>
-          <br>
-          <div class="panel panel-default">
-            <div class="panel-heading">
-              <h3 class="panel-title">Listings</h3>
-            </div>
-            <div class="panel-body">
-              <p class="text-muted">Choose a listing.</p>
-              <select class="form-control" ng-model="selection" ng-options="selection.name for selection in list"></select>
-            </div>
-          </div>
           <hr>
-          <div class="panel panel-default">
-            <div class="panel-heading">
-              <h3 class="panel-title">Participants</h3>
-            </div>
-            <div class="panel-body">
-              <p class="text-muted">Choose or add a new participant to your account.</p>
-              <ul class="participant-list">
-                <li class="participant">
-                  <div class="radio">
-                    <label>
-                      <div ng-repeat="part in participants"><input type="radio" name="participant" value="{{part.id}}" ng-model="$parent.participantId">
-                      {{part.firstName}} {{part.lastName}}</div>
-                    </label>
-                  </div>
-                </li>
-              </ul>
-              <hr>
-              <button class="btn btn-primary btn-block">Add New Participant</button>
-            </div>
-          </div>
+          <button class="btn btn-primary btn-block">Add New Participant</button>
         </div>
       </div>
     </div>
+  </div>
+</div>

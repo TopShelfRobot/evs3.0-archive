@@ -21,11 +21,13 @@
     <link href="Content/app.css" rel="stylesheet" />
     <link href="Content/toastr.css" rel="stylesheet" />
     <link href="Content/registration.css" rel="stylesheet" />
+	<link href="/Content/nsPopover.custom.css" rel="stylesheet" />
     <link href="//cdn.kendostatic.com/2014.1.318/styles/kendo.common.min.css" rel="stylesheet" type="text/css" />
     <link href="//cdn.kendostatic.com/2014.1.318/styles/kendo.bootstrap.min.css" rel="stylesheet" type="text/css" />
     <link href="//cdn.kendostatic.com/2014.1.318/styles/kendo.bootstrap.mobile.min.css" rel="stylesheet" type="text/css" />
     <link href="//cdn.kendostatic.com/2014.1.318/styles/kendo.dataviz.min.css" rel="stylesheet" type="text/css" />
     <link href="//cdn.kendostatic.com/2014.1.318/styles/kendo.dataviz.default.min.css" rel="stylesheet" type="text/css" />
+	
 </head>
 
 <body>
@@ -51,6 +53,7 @@
 
     <!-- Vendor Scripts -->
     <script src="scripts/jquery-2.0.3.js"></script>
+    <script src="/scripts/jquery.validate.min.js"></script>
     <script src="scripts/angular.js"></script>
     <script src="scripts/angular-animate.js"></script>
     <script src="scripts/angular-route.js"></script>
@@ -68,10 +71,10 @@
     <script src="//cdn.kendostatic.com/2014.1.318/js/kendo.all.min.js"></script>
     <script src="scripts/angular-kendo.js"></script>
     <script src="scripts/angular-file-upload.min.js"></script>
-
+	<script src="scripts/nsPopover.js"></script>
     <!--<script src="Scripts/stripe.js"></script>-->
     
-        <!-- Stripe -->
+    <!-- Stripe -->
     <script src="https://checkout.stripe.com/v2/checkout.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/3.32/jquery.form.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.blockUI/2.61.0-2013.06.06/jquery.blockUI.min.js"></script>
@@ -116,12 +119,13 @@
     <script src="app/registration/controllers/eventureListController.js"></script>
     <script src="app/registration/controllers/memberPaymentController.js"></script>
     <script src="app/registration/controllers/setParticipantController.js"></script>
+	<script src="app/registration/controllers/questionsController.js"></script>
+	<script src="app/registration/controllers/confirmController.js"></script>
 	<script src="app/registration/services/StripeService.js"></script>
     <script src="app/registration/models/teamModel.js"></script>
-    <script src="app/registration/models/eventureModel.js"></script>
-    <script src="app/registration/models/participantModel.js"></script>
     <script src="app/registration/models/registrationCartModel.js"></script>
     <script src="app/registration/models/memberCartModel.js"></script>
+	<script src="app/registration/models/cartModel.js"></script>
 	<script src="app/registration/directives/cart-view.js"></script>
 
 </body>

@@ -1,38 +1,43 @@
 (function(){
 
-    function controller(scope, $location, $routeParams, eModel,  cartModel, partModel){
+    function controller($scope, $location, $routeParams, config, cartModel, datacontext){
+		
+		$scope.cart = cartModel;
+		
+		datacontext.getEventureById($routeParams.eventureId)
+	        .then(function(item){
+	            $scope.eventure = item;
+	        });
+		
+		datacontext.getEventureListsByEventureId($routeParams.eventureId)
+	        .then(function(list){
+	            $scope.list = list;
+	            $scope.selection = $scope.list[0];
+	        });
 
-        console.log("cartModel:", cartModel);
+		datacontext.getParticipantsByHouseId(config.owner.houseId)
+	        .then(function(list){
+				
+				$scope.selectedParticipant = list[0]
+	            $scope.participants = list;
+	        });
 
-        eModel.getEventure($routeParams.eventureId)
-            .then(function(eventure){
-                scope.eventure = eventure;
-            });
-
-        eModel.getEventureListAll($routeParams.eventureId)
-            .then(function(list){
-                scope.list = list;
-                scope.selection = scope.list[0];
-            });
-
-        partModel.getAll()
-            .then(function(list){
-                scope.participantId = list[0].houseId;
-                scope.participants = list;
-            });
-
-        scope.register = function(eventureId, listId){
-            cartModel.participantId = scope.participantId;
-            cartModel.eventureId = eventureId;
-            cartModel.eventureListId = listId;
-            $location.path("/eventure/" + eventureId + "/list/" + listId + "/team")
-                .search("uid", scope.participantId);
+        $scope.register = function(eventure, eventureList, participant){
+            cartModel.setCurrentParticipant(participant);
+            cartModel.setCurrentEventure(eventure);
+            cartModel.setCurrentEventureList(eventureList);
+			
+			if(eventure.IsTeam){
+	            $location.path("/eventure/" + eventure.id + "/list/" + eventureList.id + "/team")
+	                .search("uid", participant.id);
+			}else{
+	            $location.path("/eventure/" + eventure.id + "/list/" + eventureList.id + "/questions")
+	                .search("uid", participant.id);
+			}
         }
     }
 
     angular.module("evReg").controller("EventureListController",
-        ["$scope", "$location", "$routeParams",
-            "EventureModel", "RegistrationCartModel", "ParticipantModel",
-            controller]);
+        ["$scope", "$location", "$routeParams", "config", "CartModel", "datacontext", controller]);
 
 })();
