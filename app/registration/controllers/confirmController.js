@@ -65,8 +65,8 @@
                 'orderAmount': cart.getTotalPrice(),
                 'orderHouseId': config.houseId,
                 'ownerId': config.ownerId,
-                'regs': cart.registrations(),
-                'charges': cart.surcharges()
+                'regs': cart.registrations,
+                'charges': cart.surcharges
             };
 			$scope.submitDisabled = true;
             $http({type: "POST", url: apiUrl, data: source})
@@ -105,13 +105,14 @@
 			$scope.errorMessage = "";  //clears any previous errors
 			$scope.submitDisabled = true; // Disable the submit button to prevent repeated clicks
 
-            Stripe.createToken($form)
-				.then(stripeSuccessHandler)
-				.catch(stripeErrorHandler)
-				.finally(function(){
-					// $("#overlay").removeClass("hidden");
-					$scope.submitDisabled = false;
-				});
+			stripeSuccessHandler('asdfasdfasdfasf');
+				//             Stripe.createToken($form)
+				// .then(stripeSuccessHandler)
+				// .catch(stripeErrorHandler)
+				// .finally(function(){
+				// 	// $("#overlay").removeClass("hidden");
+				// 	$scope.submitDisabled = false;
+				// });
         };
 
         $scope.isConfirm = function () {
