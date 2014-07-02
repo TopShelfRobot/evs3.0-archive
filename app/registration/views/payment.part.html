@@ -113,6 +113,6 @@
 </form>
 <div class="row">
   <div class="col-lg-2 col-lg-offset-10 clearfix">
-    <button type="button" class="btn btn-success btn-block pull-right" ng-disabled="(!$parent.waiverSigned) || ($parent.userPaying == 0 && !$parent.fullPaymentRequired)" ng-click="$parent.completeRegistration()">Complete Registration</button>
+    <button type="button" class="btn btn-success btn-block pull-right" ng-disabled="(!$parent.waiverSigned) || ($parent.userPaying == 0 && !$parent.fullPaymentRequired) || ($parent.submitDisabled)" ng-click="$parent.completeRegistration()">Complete Registration</button>
   </div>
 </div>
