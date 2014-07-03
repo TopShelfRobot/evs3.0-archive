@@ -57,12 +57,12 @@
     <div class="row">
         <div class="col-sm-5">
             <form class="form-horizontal">
-                <input id="CouponCode" class="form-control" type="text" placeholder="Coupon Code" />
+                <input id="CouponCode" class="form-control" type="text" placeholder="Coupon Code" ng-model="couponCode"/>
                 <br>
-                <button class="btn btn-default btn-xs" ng-click="vm.applyCoupon">
+                <button class="btn btn-default btn-xs" ng-click="applyCoupon()">
 					<i class="glyphicon glyphicon-plus-sign"></i>&nbsp;Apply Coupon
 				</button>
-                <button class="btn btn-danger btn-xs" ng-click="vm.removeCoupons">
+                <button class="btn btn-danger btn-xs" ng-click="removeCoupons()">
 					<i class="glyphicon glyphicon-minus-sign"></i>&nbsp;Remove Coupon
 				</button>
             </form>

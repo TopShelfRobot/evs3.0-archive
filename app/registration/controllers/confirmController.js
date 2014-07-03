@@ -36,8 +36,9 @@
 				$scope.submitDisabled = false;
 			});
         
-        var applyCoupon = function () {
-
+        $scope.applyCoupon = function () {
+			
+			$scope.submitDisabled = true;
             var apiUrl = config.apiPath + "/api/Coupon/Post";    //mjb
             var source = {
                 'couponCode': $scope.couponCode,
@@ -51,15 +52,21 @@
                         cart.addSurcharge('Coupon: ' + couponCode, result.Amount, 'coupon', cart.currentEventureListId(), cart.currentPartId, result.CouponId);
                         $scope.couponErrors = "";
                     } else {
-                        {
-                            $scope.couponErrors = result.Message;
-                        }
+                        $scope.couponErrors = result.Message;
                     }
                 })
 				.error(function (data, status, headers, config) {
                     $scope.couponErrors = "Coupon Not Found(E1)";
-                });
+                })
+				.finally(function(){
+					$scope.submitDisabled = false;
+				});
         };
+		
+		$scope.removeCoupons = function(){
+			cart.removeCoupons();
+			$scope.couponCode = "";
+		}
 
         var stripeSuccessHandler = function (data) {
 
