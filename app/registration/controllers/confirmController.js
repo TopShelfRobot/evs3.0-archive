@@ -1,7 +1,7 @@
 
 ;(function(){
 	
-    function Controller($scope, $http, $location, Stripe, datacontext, logger, cart, config) {
+    function Controller($scope, $http, $location, $q, Stripe, datacontext, logger, cart, config) {
 
         $scope.isTerms = false;
         $scope.isRefund = false;
@@ -11,22 +11,31 @@
 		$scope.cart = cart;
 		$scope.allowPartialPayment = false;
 		$scope.allowZeroPayment = false;
-		$scope.submitDisabled = false;
+		
         // cart.cartIsVisible = false;
 		
 		// initialize it
-        datacontext.getOwnerById(config.owner.ownerId)
-            .then(function (owner) {
+		$scope.submitDisabled = true;
+		$q.all([
+			datacontext.getOwnerById(config.owner.ownerId),
+			datacontext.getParticipantById(config.owner.houseId),
+			])
+			.then(function(output){
+				var owner = output[0];
+				var house = output[1];
 				$scope.owner = owner;
 				Stripe.setPublishableKey(owner.stripePublishableKey);
 	            $('#terms').popover({ title: "Terms and Conditions", html: true, content: function () { msg = '<div id="popover_content_wrapper"><p>' + owner.termsText + '</p></div>'; return $(msg).html(); }, placement: 'auto', container: 'body', trigger: 'click' });
 	            $('#refund').popover({ title: "Refund Policy", html: true, content: function () { msg = '<div id="popover_content_wrapper"><p>' + owner.refundsText + '</p></div>'; return $(msg).html(); }, placement: 'auto', container: 'body', trigger: 'click' });
 				
-				// Stripe.setPublishableKey(owner.stripePublishableKey);
+				$scope.house = house;
 				
+			})
+			.finally(function(){
 				cart.processCartRules();
-            });
-
+				$scope.submitDisabled = false;
+			});
+        
         var applyCoupon = function () {
 
             var apiUrl = config.apiPath + "/api/Coupon/Post";    //mjb
@@ -60,11 +69,11 @@
             var apiUrl = config.apiPath + "/api/Payment/Post";    //mjb
             var source = {
                 'orderToken': token,
-                'orderName': config.regLoginName,
-                'orderEmail': config.houseName,
+                'orderName': $scope.house.firstName + " " + $scope.house.lastName,
+                'orderEmail': $scope.house.email,
                 'orderAmount': cart.getTotalPrice(),
-                'orderHouseId': config.houseId,
-                'ownerId': config.ownerId,
+                'orderHouseId': $scope.house.id,
+                'ownerId': $scope.owner.id,
                 'regs': cart.registrations,
                 'charges': cart.surcharges
             };
@@ -72,17 +81,17 @@
             $http({type: "POST", url: apiUrl, data: source})
 				.success(function (data, status, headers, config) {
                     var receiptUrl = '#receipt';
-					$scope.submitDisabled = false;
                     // router.navigateTo(receiptUrl);
-					
                 })
-				.error(function (data, status, headers, config) {
+				.error(function (response, status, headers, config) {
                     // var respText = JSON.parse(xhr.responseText);
-                    $scope.errorMessage = respText.Message;
-					$scope.submitDisabled = false;
+                    $scope.errorMessage = response.Message;
                     // $("#overlay").addClass("hidden");
                     // $form.find('button').prop('disabled', false);
-                });
+                })
+				.finally(function(){
+					$scope.submitDisabled = false;
+				});
         };
 		
         var stripeErrorHandler = function (data, status) {
@@ -122,5 +131,5 @@
         $scope.title = 'Event';
     }
 	
-	angular.module("evReg").controller("ConfirmController", ["$scope", "$http", "$location", "StripeService", "datacontext", "logger", "CartModel", "config", Controller]);
+	angular.module("evReg").controller("ConfirmController", ["$scope", "$http", "$location", "$q", "StripeService", "datacontext", "logger", "CartModel", "config", Controller]);
 })();
