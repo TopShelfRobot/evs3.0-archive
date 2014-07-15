@@ -4,23 +4,64 @@
 
 		var service = {};
 
-		service.setPublishableKey = function(key) {
-			Stripe.setPublishableKey(key)
-		};
+        service.checkout = function (userPaying, cartModel) {
+            // build form
+            var form = $('.form-stripe');
+            form.empty();
+            form.attr("action", 'http://evs30api.eventuresports.info/api/Payment/PostTeam');
+            form.attr("method", "POST");
+            form.attr("style", "display:none;");
+            console.log(userPaying);
+            var order = cartModel.order(userPaying);
+            console.log(order);
+            this.addFormFields(form, order);
+            $("body").append(form);
 
-		service.createToken = function(form) {
-			console.log("stripe create token form:", form);
-			var deferred = $q.defer();
+            //// ajaxify form
+            form.ajaxForm({
+                success: function (result) {
+                    $.unblockUI();
+                    alert('Order was good nav to receipt number: ' + result);
+                },
+                error: function (result) {
+                    $.unblockUI();
+                    alert('Error submitting order: ' + result.statusText);
+                }
+            });
 
-			Stripe.createToken(form, function(status, response) {
-				if (response.error) {
-					deferred.reject(response.error.message, response);
-				} else {
-					deferred.resolve(response.id, response)
-				}
-			});
-			return deferred;
-		};
+            var token = function (res) {
+                var $input = $('<input type=hidden name=stripeToken />').val(res.id);
+                // show processing message and block UI until form is submitted and returns
+                $.blockUI({ message: 'Processing order...' });
+                // submit form
+                form.append($input).submit();
+                //this.clearCart = clearCart == null || clearCart;
+                //form.submit();
+            };
+
+            StripeCheckout.open({
+                key: 'pk_test_bJMgdPZt8B8hINCMgG2vUDy4',
+                address: false,
+                amount: order.orderAmount * 100,  //this.getTotalPrice() * 100, /** expects an integer **/
+                currency: 'usd',
+                name: 'Eventure Sports',
+                description: 'Description',
+                panelLabel: 'Checkout',
+                token: token
+            });
+        };
+
+        // utility methods
+        service.addFormFields = function (form, data) {
+            if (data != null) {
+                $.each(data, function (name, value) {
+                    if (value != null) {
+                        var input = $("<input></input>").attr("type", "hidden").attr("name", name).val(value);
+                        form.append(input);
+                    }
+                });
+            }
+        };
 
 		return service;
 	}

@@ -759,6 +759,17 @@
                 return data.results[0];
             }
         };
+		
+        var getTeamById = function(id) {
+            var query = breeze.EntityQuery
+                .from("Teams")
+                .where("id", "==", id);
+
+            return manager.executeQuery(query)
+                .then(function(response) {
+                    return response.results[0];
+                });
+        };
 
         //generic
         function saveEntity(masterEntity) {
@@ -932,6 +943,7 @@
             getCapacityByEventureListId: getCapacityByEventureListId,
             getCapacityByOwnerId: getCapacityByOwnerId,
             getTrendsByEventId: getTrendsByEventId,
+			getTeamById : getTeamById,
 
             //reports
             getReportsByOwnerId: getReportsByOwnerId,

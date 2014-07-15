@@ -10,6 +10,25 @@
         model.memberId = $routeParams.memberId || null;
         model.waiverSigned = false;
         model.allowZeroPayment = true;
+		
+        model.order = function (value) {
+            var order = {
+                orderAmount: Number(value),
+                orderHouseId: model.memberId,
+                ownerId: 1,
+                orderType: "playerreg",
+                regs: [
+                    {
+                        eventureListId: model.eventureListId,
+                        partId: model.memberId,
+                        fee: Number(value),
+                        quantity: 1
+                    }
+                ]
+            };
+            return order;
+        };
+        
 
         // Submits orders to be processed by the backend.
         model.submitOrder = function (token, value) {
