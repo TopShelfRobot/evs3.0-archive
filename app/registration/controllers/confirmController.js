@@ -1,7 +1,7 @@
 
 ;(function(){
 	
-    function Controller($scope, $http, $location, $q, Stripe, datacontext, logger, cart, config) {
+    function Controller($scope, $http, $location, $q, stripe, datacontext, logger, cart, config) {
 
         $scope.isTerms = false;
         $scope.isRefund = false;
@@ -130,6 +130,19 @@
 				// 	$scope.submitDisabled = false;
 				// });
         };
+		
+		$scope.checkout = function(){
+            var order = {
+                'orderName': $scope.house.firstName + " " + $scope.house.lastName,
+                'orderEmail': $scope.house.email,
+                'orderAmount': cart.getTotalPrice(),
+                'orderHouseId': $scope.house.id,
+                'ownerId': $scope.owner.id,
+                'regs': cart.registrations,
+                'charges': cart.surcharges
+            };
+			stripe.checkout(cart.getTotalPrice(), order);
+		}
 
         $scope.isConfirm = function () {
             return $scope.isTerms && $scope.isRefund;

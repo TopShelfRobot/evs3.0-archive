@@ -4,7 +4,7 @@
 
 		var service = {};
 
-        service.checkout = function (userPaying, cartModel) {
+        service.checkout = function (userPaying, order) {
             // build form
             var form = $('.form-stripe');
             form.empty();
@@ -12,7 +12,6 @@
             form.attr("method", "POST");
             form.attr("style", "display:none;");
             console.log(userPaying);
-            var order = cartModel.order(userPaying);
             console.log(order);
             this.addFormFields(form, order);
             $("body").append(form);

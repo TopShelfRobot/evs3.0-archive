@@ -10,7 +10,9 @@
         $scope.userPaying = 30;
 
         $scope.checkout = function(){
-        	stripe.checkout($scope.userPaying, cartModel);
+			var payment = $scope.userPaying;
+			var order = cartModel.order(payment);
+        	stripe.checkout(payment, order);
         }
 
         datacontext.getTeamById(2)
