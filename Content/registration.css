@@ -94,7 +94,8 @@
 	-webkit-transition: -webkit-transform 0.4s;
 	-moz-transition: -moz-transform 0.4s;
 	transition: transform 0.4s;
-  min-height:300px;
+    height:300px;
+    width:300px;
 }
 
 .no-touch .event-tiles figure:hover img,
