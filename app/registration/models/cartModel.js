@@ -68,9 +68,10 @@
         var currentQuantity = null;
 		
 		var setCurrentParticipant = function(part){
-			vm.currentName = config.regName; // TODO: check on this
+			vm.currentName = part.firstName + " " + part.lastName; // TODO: check on this
 			vm.currentPartId = part.id;
 			vm.currentParticipant = part;
+			vm.currentEmail = part.email;
 		};
 		
 		var setCurrentEventure = function(eventure){

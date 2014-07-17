@@ -4,10 +4,7 @@
 	function Controller($scope, config, datacontext){
 		
 		// console.log("config:", config);
-		datacontext.getParticipantById(config.owner.houseId)
-			.then(function(part){
-				$scope.participant = part;
-			});
+		$scope.participant = config.participant;
 		
 		$scope.submit = function(){
 			datacontext.saveChanges()
