@@ -1,47 +1,70 @@
-(function(){
+(function() {
 
-    function Service($q){
-        //var customerPublishableCode = owner().stripePublishableKey();
+	function Service($q) {
 
-        //This identifies your website in the createToken call below
-        //Stripe.setPublishableKey(customerPublishableCode);
+		var service = {};
 
+        service.checkout = function (userPaying, order) {
+            // build form
+            var form = $('.form-stripe');
+            form.empty();
+            form.attr("action", 'http://evs30api.eventuresports.info/api/Payment/PostTeam');
+            form.attr("method", "POST");
+            form.attr("style", "display:none;");
+            console.log(userPaying);
+            console.log(order);
+            this.addFormFields(form, order);
+            $("body").append(form);
 
+            //// ajaxify form
+            form.ajaxForm({
+                success: function (result) {
+                    $.unblockUI();
+                    alert('Order was good nav to receipt number: ' + result);
+                },
+                error: function (result) {
+                    $.unblockUI();
+                    alert('Error submitting order: ' + result.statusText);
+                }
+            });
 
-        //alert('submitting');
-        //var customerPublishableCode = owner().stripePublishableKey();
-        //alert('cpc' + customerPublishableCode);
-        ////This identifies your website in the createToken call below
-        ////Stripe.setPublishableKey('pk_test_bJMgdPZt8B8hINCMgG2vUDy4');
-        //Stripe.setPublishableKey(customerPublishableCode);
-        ////alert('rellay');
-        //$('#payment-form').submit(function (e) {
-        //    var $form = $(this);
-
-        //    // Disable the submit button to prevent repeated clicks
-        //    $form.find('button').prop('disabled', true);
-
-        //    Stripe.createToken($form, stripeResponseHandler);
-
-        //    // Prevent the form from submitting with the default action
-        //    return false;
-        //});
-
-        var service = {};
-
-        service.createToken = function(form) {
-            console.log("form:", form);
-            var response = {
-                error: null,
-                //error.message = "Don't be a dummy!",
-                id: "aweoijh2345oiert5jkadgf"
+            var token = function (res) {
+                var $input = $('<input type=hidden name=stripeToken />').val(res.id);
+                // show processing message and block UI until form is submitted and returns
+                $.blockUI({ message: 'Processing order...' });
+                // submit form
+                form.append($input).submit();
+                //this.clearCart = clearCart == null || clearCart;
+                //form.submit();
             };
-            return $q.when(response.id);
+
+            StripeCheckout.open({
+                key: 'pk_test_bJMgdPZt8B8hINCMgG2vUDy4',
+                address: false,
+                amount: order.orderAmount * 100,  //this.getTotalPrice() * 100, /** expects an integer **/
+                currency: 'usd',
+                name: 'Eventure Sports',
+                description: 'Description',
+                panelLabel: 'Checkout',
+                token: token
+            });
         };
 
-        return service;
-    }
+        // utility methods
+        service.addFormFields = function (form, data) {
+            if (data != null) {
+                $.each(data, function (name, value) {
+                    if (value != null) {
+                        var input = $("<input></input>").attr("type", "hidden").attr("name", name).val(value);
+                        form.append(input);
+                    }
+                });
+            }
+        };
 
-    angular.module("app").service("StripeService", ["$q", Service]);
+		return service;
+	}
+
+	angular.module("app").service("StripeService", ["$q", Service]);
 
 })();

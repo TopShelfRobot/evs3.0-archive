@@ -1,6 +1,6 @@
 (function () {
 
-    function controller($scope, $location, stripe, eventureModel, cartModel) {
+    function controller($scope, $location, stripe, datacontext, cartModel) {
 
         //console.log("cartModel:", cartModel);
 
@@ -8,7 +8,7 @@
 
         //$scope.remaining;
         console.log(cartModel.eventureId, cartModel.eventureListId);
-        eventureModel.getEventureListItem(cartModel.eventureId, cartModel.eventureListId)
+        datacontext.getEventureListById(cartModel.eventureListId)
             .then(function (item) {
                 if (item)
                     $scope.remaining = item.currentFee - cartModel.currentlyPaid;
@@ -80,7 +80,5 @@
     }
 
     angular.module("evReg").controller("TeamPaymentController",
-        ["$scope", "$location",
-            "StripeService", "EventureModel", "RegistrationCartModel",
-            controller]);
+		["$scope", "$location", "StripeService", "datacontext", "RegistrationCartModel", controller]);
 })();
