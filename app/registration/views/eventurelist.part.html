@@ -7,7 +7,7 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-md-8 col-lg-8 clearfix">
+    <div class="col-md-8 col-lg-8 col-md-push-4 clearfix">
       <ul class="list-image grid">
         <li>
 			<figure>
@@ -24,9 +24,9 @@
       </ul>
     </div>
 
-    <div class="col-md-4 col-lg-4">
+    <div class="col-md-4 col-lg-4 col-md-pull-8 clearfix">
       <h1 class="text-center">{{selection.currentFee | currency}}</h1>
-      <a href="regcreateteam.html" class="btn btn-success visible-xs">Register</a>
+      <button ng-click="register(eventure, selection, selectedParticipant)" class="btn btn-success btn-block visible-xs">Register</button>
       <br>
       <div class="panel panel-default">
         <div class="panel-heading">
