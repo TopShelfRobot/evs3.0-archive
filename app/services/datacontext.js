@@ -856,6 +856,66 @@
         var primeData = function () {
             return Q.all([getEventures()]);   //Q wraps data call in promise  //, getCartItems()
         };
+		
+		var getCustomQuestionSetByEventureListId = function(id){
+		    var json = [
+		        {
+		            id:124,
+		            questionText: "What is your name?",
+		            type: "text",
+		            options: null,
+		            active: true,
+					eventureListId : id,
+		            required: true},
+		        {
+		            id:8976,
+		            questionText: "Are you tall?",
+		            type: "combo",
+		            options: "Yes,No",
+		            active: true,
+					eventureListId : id,
+		            required: true},
+		        {
+		            id:567,
+		            questionText: "Gender",
+		            type: "radio",
+		            options: "Male, Female, Transgender",
+		            active: true,
+					eventureListId : id,
+		            required: true},
+		        {
+		            id:22345,
+		            questionText: "Are you an asshole?",
+		            type: "radio",
+		            options: "Yes,No,Sometimes",
+		            active: true,
+					eventureListId : id,
+		            required: true},
+		        {
+		            id:986778,
+		            questionText: "How did you hear about us?",
+		            type: "combo",
+		            options: "Facebook, Twitter, From A Friend",
+		            active: true,
+					eventureListId : id,
+		            required: true},
+
+		        {
+		            id:34678,
+		            questionText: "I am a human",
+		            type: "checkbox",
+		            options: null,
+		            active: true,
+					eventureListId : id,
+		            required: false}
+		        ];
+		    var p = Q.when({results : json});
+
+		    return p
+		        .then(function(data){
+		        	return data.results;
+		        });
+		};
 
         var service = {
             //Eventure
