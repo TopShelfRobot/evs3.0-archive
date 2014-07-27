@@ -3,9 +3,9 @@
 
     var serviceId = 'datacontext';
     angular.module('app').factory(serviceId,
-        ['common', 'entityManagerFactory', 'model', 'breeze', 'config', datacontext]);
+        ['$q', 'common', 'entityManagerFactory', 'model', 'breeze', 'config', datacontext]);
 
-    function datacontext(common, emFactory, model, breeze, config) {
+    function datacontext($q, common, emFactory, model, breeze, config) {
         var predicate = breeze.Predicate;
         var entityQuery = breeze.EntityQuery;
         var manager = emFactory.newManager();
@@ -909,7 +909,7 @@
 					eventureListId : id,
 		            required: false}
 		        ];
-		    var p = Q.when({results : json});
+		    var p = $q.when({results : json});
 
 		    return p
 		        .then(function(data){
@@ -957,6 +957,7 @@
             getStockAnswerSetByEventureListId: getStockAnswerSetByEventureListId,
             getStockQuestionSetByRegistrationId: getStockQuestionSetByRegistrationId,
             getStockAnswerSetByRegistrationId: getStockAnswerSetByRegistrationId,
+			getCustomQuestionSetByEventureListId: getCustomQuestionSetByEventureListId,
 
             //resources
             getResourceById: getResourceById,

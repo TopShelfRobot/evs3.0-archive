@@ -27,23 +27,14 @@
         $scope.groupId = 0;
         $scope.group2Id = 0;
 
-				//         datacontext.getCustomQuestionSetByEventureListId(cartModel.currentEventureListId)
-				//             .then(function(obs){
-				//
-				//                 for(var i = 0; i < obs().length; i++){
-				//                     obs()[i].answerValue = ko.observable();
-				//
-				//                     if(obs()[i].options()){
-				//                         var opts = obs()[i].options().split(",");
-				//                         if(obs()[i].type() == "combo"){
-				//                             opts.unshift(null);
-				//                         }
-				//                         obs()[i].options(opts);
-				//                     }
-				//                 }
-				//                 questions.customQuestionSet = obs();
-				// return questions.customQuestionSet;
-				//             });
+        datacontext.getCustomQuestionSetByEventureListId(cartModel.currentEventureListId)
+            .then(function(results){
+				// for(var i = 0; i < results.length; i++){
+				// 	if(results[i].options)
+				// 		results[i].options = results[i].options.split(",");
+				// }
+				$scope.customQuestions = results;
+            });
 
         datacontext.getGroupsActiveByEventureListId(cartModel.currentEventureListId)
             .then(function (data) {
