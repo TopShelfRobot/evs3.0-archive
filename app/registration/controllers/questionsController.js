@@ -5,14 +5,6 @@
 		
 		$scope.cart = cartModel;
 		
-		var questions = {
-				stockQuestionSet : [],
-		        customQuestionSet : [],
-		        stockAnswerSet : [],
-			};
-			
-		$scope.questions = questions;
-		
 		$scope.notAllowedToContinue = function(){
 			return !$scope.isWaiverChecked;
 		};
@@ -49,65 +41,38 @@
                 }
             });
 
-        datacontext.getStockQuestionSetByEventureListId(cartModel.currentEventureListId)
-			.then(function(data){
-				return questions.stockQuestionSet = data;
-			});
+			//         datacontext.getStockQuestionSetByEventureListId(cartModel.currentEventureListId)
+			// .then(function(data){
+			// 	return questions.stockQuestionSet = data;
+			// });
 
-        questions.stockAnswerSet = {
+        $scope.stockAnswerSet = {
 	            shirtSize: "",
 	            howHear: "",
 	        };
 
         var getCustomAnswers = function(){
             var answers = [];
-            for(var i = 0; i < questions.customQuestionSet.length; i++){
-                answers.push({
-                	id : questions.customQuestionSet[i].id,
-					answerValue : questions.customQuestionSet[i].answerValue
-                });
-            }
+			var ans;
+			for(var i = 0; i < $scope.customQuestions.length; i++){
+				ans = {
+					id : $scope.customQuestions[i].id,
+					answer : $scope.customQuestions[i].answer,
+				}
+				answers.push(ans);
+			}
             return answers;
         }
 
         $scope.next = function () {
-
-			var customAnswers = [];
-			for(var i = 0; i < $scope.customQuestions.length; i++){
-				var ans = {
-					id : $scope.customQuestions[i].id,
-					answer : $scope.customQuestions[i].answer,
-				}
-				customAnswers.push(ans);
-			}
-			console.log(customAnswers);
-            // if (form.valid()) {
-            //     cartModel.currentGroupId = $scope.groupId;
-            //     questions.stockAnswerSet.stockQuestionSetId = questions.stockQuestionSet && questions.stockQuestionSet.id ? questions.stockQuestionSet.id : null;
-            //     cartModel.currentStockAnswerSet = questions.stockAnswerSet;
-            //     cartModel.currentCustomAnswerSet = getCustomAnswers();
-            //     cartModel.addRegistration();
-            // 	            $location.path("/eventure/");
-            // }
+			
+            cartModel.currentGroupId = $scope.groupId;
+            cartModel.currentStockAnswerSet = $scope.stockAnswerSet;
+            cartModel.currentCustomAnswerSet = getCustomAnswers();
+            cartModel.addRegistration();
+			$location.$$search = {};
+            $location.path("/eventure/");
         };
-
-      // var vm = {
-      //       activate: activate,
-      //       viewAttached: viewAttached,
-      //       clickAddToCart: clickAddToCart,
-      //       cart: cart,
-      //       eventureList: eventureList,
-      //       stockQuestionSet: stockQuestionSet,
-      //       stockAnswerSet: stockAnswerSet,
-      //       groups: groups,
-      //       groupId: groupId,
-      //       //group2Id: group2Id,
-      //       isWaiverChecked: isWaiverChecked,
-      //       customQuestionSet : customQuestionSet,
-      //       //isAddCartApproved: isAddCartApproved,
-      //       title: 'question'
-      //   };
-      //   return vm;
 	}
 	
 	angular.module("evReg").controller("QuestionsController", ["$scope", "$location", "config", "CartModel", "datacontext", Controller]);
