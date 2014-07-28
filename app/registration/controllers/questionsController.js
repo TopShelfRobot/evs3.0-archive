@@ -26,13 +26,14 @@
         $scope.isWaiverChecked = false;
         $scope.groupId = 0;
         $scope.group2Id = 0;
-
+		
         datacontext.getCustomQuestionSetByEventureListId(cartModel.currentEventureListId)
             .then(function(results){
-				// for(var i = 0; i < results.length; i++){
-				// 	if(results[i].options)
-				// 		results[i].options = results[i].options.split(",");
-				// }
+				for(var i = 0; i < results.length; i++){
+					results[i].answer = null;
+					if(results[i].options)
+						results[i].options = results[i].options.split(",");
+				}
 				$scope.customQuestions = results;
             });
 
