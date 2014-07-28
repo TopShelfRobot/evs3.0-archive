@@ -31,8 +31,11 @@
             .then(function(results){
 				for(var i = 0; i < results.length; i++){
 					results[i].answer = null;
-					if(results[i].options)
+					if(results[i].options && results[i].options.length && results[i].options.length > 0)
 						results[i].options = results[i].options.split(",");
+					if(results[i].required && results[i].type !== "combo" && results[i].type !== "text"){
+						results[i].answer = results[i].options ? results[i].options[0] : true;
+					}
 				}
 				$scope.customQuestions = results;
             });
@@ -67,19 +70,25 @@
             return answers;
         }
 
-        $scope.next = function (isValid) {
+        $scope.next = function () {
 
-            var form = $(".form-horizontal");
-            form.validate();
-
-            if (form.valid()) {
-                cartModel.currentGroupId = $scope.groupId;
-                questions.stockAnswerSet.stockQuestionSetId = questions.stockQuestionSet && questions.stockQuestionSet.id ? questions.stockQuestionSet.id : null;
-                cartModel.currentStockAnswerSet = questions.stockAnswerSet;
-                cartModel.currentCustomAnswerSet = getCustomAnswers();
-                cartModel.addRegistration();
-	            $location.path("/eventure/");
-            }
+			var customAnswers = [];
+			for(var i = 0; i < $scope.customQuestions.length; i++){
+				var ans = {
+					id : $scope.customQuestions[i].id,
+					answer : $scope.customQuestions[i].answer,
+				}
+				customAnswers.push(ans);
+			}
+			console.log(customAnswers);
+            // if (form.valid()) {
+            //     cartModel.currentGroupId = $scope.groupId;
+            //     questions.stockAnswerSet.stockQuestionSetId = questions.stockQuestionSet && questions.stockQuestionSet.id ? questions.stockQuestionSet.id : null;
+            //     cartModel.currentStockAnswerSet = questions.stockAnswerSet;
+            //     cartModel.currentCustomAnswerSet = getCustomAnswers();
+            //     cartModel.addRegistration();
+            // 	            $location.path("/eventure/");
+            // }
         };
 
       // var vm = {
