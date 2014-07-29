@@ -92,7 +92,7 @@
                 url: '/user-profile',
                 config: {
                     title: 'User Profile',
-                    templateUrl: 'app/registration/profile.part.html'
+                    templateUrl: 'app/registration/views/profile.part.html'
                 }
             },{
                 url: '/kitchensink',
