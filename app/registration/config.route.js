@@ -70,11 +70,17 @@
                     title: 'Participant',
                     templateUrl: 'app/registration/views/setparticipant.part.html'
                 }
-            },,{
+            },{
                 url: '/participant/add',
                 config: {
                     title: 'Add Participant',
                     templateUrl: 'app/registration/views/addparticipant.part.html'
+                }
+            },{
+                url: '/participant/:partId',
+                config: {
+                    title: 'Edit Participant',
+                    templateUrl: 'app/registration/views/setparticipant.part.html'
                 }
             },{
                 url: '/eventure/:eventureId/list/:listId/questions',

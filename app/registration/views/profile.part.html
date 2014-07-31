@@ -205,7 +205,7 @@
                 <br>
                     <div class="row">
                         <div class="col-lg-12">
-                            <div id="partgrid"></div>
+                            <div id="partgrid" kendo-grid k-options="participantGridOptions"></div>
                         </div>
                     </div>
                 </tab>
@@ -216,3 +216,7 @@
         </div>
     </div>
 </div>
+
+<script type="text/x-kendo-template" id="template">
+  <div kendo-grid k-options="detailGridOptions(dataItem)"></div>
+</script>
