@@ -25,6 +25,19 @@
 			zip: null,
 		};
 		
+		$scope.datePicker = {
+			opened : false
+		};
+		
+		var formats = ['MM-dd-yyyy', 'yyyy/MM/dd', 'shortDate'];
+		$scope.format = formats[0];
+		$scope.open = function($event) {
+			$event.preventDefault();
+			$event.stopPropagation();
+			
+			$scope.datePicker.opened = true;
+		};
+		
 		datacontext.getParticipantById(config.owner.houseId)
 			.then(function(owner){
 				for(key in owner){
