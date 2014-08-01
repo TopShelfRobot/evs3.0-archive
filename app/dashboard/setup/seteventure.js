@@ -21,7 +21,7 @@
 		function activate() {
 			common.activateController(getEventure(), controllerId)
 				.then(function() {
-					log('Activated set resource');
+					log('Activated set eventure');
 				});
 		}
 
@@ -40,13 +40,13 @@
 
 
 
-		//vm.today = function () {
-		//    //vm.dateEventure = new Date();
-		//    //vm.dateTransfer = new Date();
-		//    //vm.dateDeferral = new Date();
-		//};
+		vm.today = function () {
+		   vm.eventure.dateEventure = new Date();
+		   vm.eventure.dateTransfer = new Date();
+		   vm.eventure.dateDeferral = new Date();
+		};
 
-		//vm.today();
+		vm.today();
 
 
 		//vm.clear = function () {
@@ -54,6 +54,10 @@
 		//    vm.dateTransfer = null;
 		//    vm.dateDeferral = null;
 		//};
+
+        vm.saveChanges = function(){
+            return datacontext.saveChanges(vm.eventure);
+        }
 
 		vm.open = function($event, open) {
 			$event.preventDefault();
@@ -191,7 +195,7 @@
 
 		vm.submit = function(){
 			console.log("butts");
-			
+
 			vm.saveAndNav()
 			.then(function(data){
 				console.log("next");
