@@ -55,9 +55,9 @@
 		//    vm.dateDeferral = null;
 		//};
 
-        vm.saveChanges = function(){
+        vm.saveChanges = function() {
             return datacontext.saveChanges(vm.eventure);
-        }
+        };
 
 		vm.open = function($event, open) {
 			$event.preventDefault();
@@ -75,14 +75,14 @@
 		vm.format = vm.formats[0];
 
 		//File Upload
-		vm.fileReaderSupported = window.FileReader != null;
+		vm.fileReaderSupported = window.FileReader !== null;
 		vm.uploadRightAway = true;
 		vm.changeAngularVersion = function() {
 			window.location.hash = vm.angularVersion;
 			window.location.reload(true);
 		};
 		vm.hasUploader = function(index) {
-			return vm.upload[index] != null;
+			return vm.upload[index] !== null;
 		};
 		vm.abort = function(index) {
 			vm.upload[index].abort();
@@ -94,7 +94,7 @@
 			vm.progress = [];
 			if (vm.upload && vm.upload.length > 0) {
 				for (var i = 0; i < vm.upload.length; i++) {
-					if (vm.upload[i] != null) {
+					if (vm.upload[i] !== null) {
 						vm.upload[i].abort();
 					}
 				}
@@ -113,7 +113,7 @@
 							$timeout(function() {
 								vm.dataUrls[index] = e.target.result;
 							});
-						}
+						};
 					}(fileReader, i);
 				}
 				vm.progress[i] = -1;
@@ -179,7 +179,7 @@
 						// Math.min is to fix IE which reports 200% sometimes
 						vm.progress[index] = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
 					});
-				}
+				};
 				fileReader.readAsArrayBuffer(vm.selectedFiles[index]);
 			}
 		};
@@ -200,7 +200,7 @@
 			.then(function(data){
 				console.log("next");
 			});
-		}
+		};
 
 		vm.saveAndNav = function() {
 			return datacontext.saveChanges(vm.eventure)

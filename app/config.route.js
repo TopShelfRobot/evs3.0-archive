@@ -127,6 +127,12 @@
                     templateUrl: 'app/dashboard/setup/setaddon.html'
                 }
             }, {
+                url: '/setaddon/:addonId',
+                config: {
+                    title: 'Create An Addon',
+                    templateUrl: 'app/dashboard/setup/setaddon.html'
+                }
+            }, {
                 url: '/setclient',
                 config: {
                     title: 'Create A Client',
@@ -134,6 +140,12 @@
                 }
             }, {
                 url: '/setcoupon',
+                config: {
+                    title: 'Create A Coupon',
+                    templateUrl: 'app/dashboard/setup/setcoupon.html'
+                }
+            }, {
+                url: '/setcoupon/:couponId',
                 config: {
                     title: 'Create A Coupon',
                     templateUrl: 'app/dashboard/setup/setcoupon.html'
