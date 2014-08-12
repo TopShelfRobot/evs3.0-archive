@@ -85,7 +85,6 @@
     <Content Include="app\registration\layout\shell.html" />
     <Content Include="app\registration\models\memberCartModel.js" />
     <Content Include="app\registration\models\registrationCartModel.js" />
-    <Content Include="app\registration\models\teamModel.js" />
     <Content Include="app\registration\views\profile.part.html" />
     <Content Include="app\registration\views\receipt.part.html" />
     <Content Include="app\registration\services\StripeService.js" />

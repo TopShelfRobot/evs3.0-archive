@@ -1,5 +1,5 @@
 (function() {
-
+    angular.module("app").service("StripeService", ["$q", Service]);
 	function Service($q) {
 
 		var service = {};
@@ -8,7 +8,7 @@
             // build form
             var form = $('.form-stripe');
             form.empty();
-            form.attr("action", 'http://evs30api.eventuresports.info/api/Payment/PostTeam');
+            form.attr("action", 'http://evs30api.eventuresports.info/api/Payment/Post');
             form.attr("method", "POST");
             form.attr("style", "display:none;");
             console.log(userPaying);
@@ -39,7 +39,7 @@
             };
 
             StripeCheckout.open({
-                key: 'pk_test_bJMgdPZt8B8hINCMgG2vUDy4',
+                key: 'pk_test_pGFaKfcKFrOuiR3PNDFsrhey',
                 address: false,
                 amount: order.orderAmount * 100,  //this.getTotalPrice() * 100, /** expects an integer **/
                 currency: 'usd',
@@ -64,7 +64,4 @@
 
 		return service;
 	}
-
-	angular.module("app").service("StripeService", ["$q", Service]);
-
 })();

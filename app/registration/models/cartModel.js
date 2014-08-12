@@ -1,5 +1,5 @@
 
-; (function() {
+(function() {
 	
     //mjb see if you can get this to work with registration().name() see notes
     function registration(displayEvent, displayList, image, email, fee, eventureId, eventureListId, partId, name, stockAnswerSet, groupId, group2Id, quantity) {
@@ -177,15 +177,13 @@
                         var current = eventAddons[i];
                         var amount = 0;
                         var processAddon = true;
-                        if (current.isUsat)
-                        {
+                        if (current.isUsat) {
                             if (vm.currentStockAnswerSet.usat.length > 1)
                                 processAddon = true;
                             else
                                 processAddon = false;
                         }
-                        if (current.isShirtUpgrade)  
-                        {
+                        if (current.isShirtUpgrade) {
                             if (vm.currentStockAnswerSet.shirtUpgrade == "Yes")
                                 processAddon = true;
                             else
@@ -193,7 +191,7 @@
                         }
 
                         // process the sibling discount only if set
-                        if(current.isSiblingDiscount && current.isSiblingDiscount){
+                        if (current.isSiblingDiscount && current.isSiblingDiscount) {
                             processAddon = shouldProcessSiblingDiscount(vm.registrations.length - 1, current, false);
                         }
 
@@ -206,7 +204,7 @@
                             surcharges.push(new surcharge(current.addonDesc, amount, current.addonType, current.addonTypeLinkId, vm.currentPartId, 0, current));
                         }
                     }
-                }
+                };
 				
                 datacontext.getAddonsByEventureListId(vm.currentEventureListId)
                     .then(afterGetListAddons);
