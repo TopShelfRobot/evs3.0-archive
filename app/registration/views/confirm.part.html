@@ -68,47 +68,39 @@
             </form>
         </div>
         <div class="col-sm-7 text-right">
-            <p><em>Total:</em>&nbsp;{{ cart.getTotalPrice() | currency }}</p>
+            <p class="total-amount"><em>Total:</em>&nbsp;{{ cart.getTotalPrice() | currency }}</p>
         </div>
     </div>
     <br>
     <div class="row">
-        <div class="col-sm-12">
-            <!-- <div ng-include="'/app/registration/views/payment.part.html'"></div> -->
-			
-			<div class="row">
-				<div class="col-sm-5">
-					<h3>Payment Information</h3>
-					<p class="text-muted">We accept all major credit and debit cards</p>
-					<img src="/Content/images/creditcards.png" /><br>
-				</div>
-				<div class="col-sm-7">
-					<br><br>
-					<label class="checkbox" ng-show="$parent.allowZeroPayment">
-						<input type="checkbox" data-bind="checked: isTerms" ng-model="$parent.fullPaymentRequired">
-						I am paying an amount of $0.00 and understand my team is still responsible for the full amount.
-					</label>
-					<label class="checkbox">
-						<input type="checkbox" data-bind="checked: isTerms" ng-model="$parent.waiverSigned">
-						I have read and agree to the
-						<a id="terms" data-contents="{{show.msg}}" rel="popover">Terms and Conditions</a>,
-						<a id="refund">Refund Policy</a>,
-						and
-						<a id="waiver">Waiver</a>.
-					</label>
-				</div>
-			</div>
-	
-			<div class="row">
-				<div class="col-lg-2 col-lg-offset-10 clearfix">
-					<button type="button" 
-						class="btn btn-success btn-block pull-right" 
-						ng-disabled="(!$parent.waiverSigned) || ($parent.userPaying == 0 && !$parent.fullPaymentRequired) || ($parent.submitDisabled)" 
-						ng-click="checkout()">Complete Registration
-					</button>
-				</div>
-			</div>
-			
+        <div class="col-sm-12 text-center">
+            <h3>Payment Information</h3>
+            <p class="text-muted">We accept all major credit and debit cards</p>
+            <img src="/Content/images/creditcards.png" />
+            <hr>
+            <p class="text-muted">Your card will be charged for the amount of <strong>{{ cart.getTotalPrice() | currency }}</strong>.</p>
+	<label class="checkbox" ng-show="$parent.allowZeroPayment">
+                <input type="checkbox" data-bind="checked: isTerms" ng-model="$parent.fullPaymentRequired">
+                I am paying an amount of $0.00 and understand my team is still responsible for the full amount.
+            </label>	
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6 col-sm-offset-3">
+            <br>
+            <label class="checkbox agreement">
+                <input type="checkbox" data-bind="checked: isTerms" ng-model="$parent.waiverSigned">
+                I have read and agree to the
+                <a id="terms" data-contents="{{show.msg}}" rel="popover">Terms and Conditions</a>,
+                <a id="refund">Refund Policy</a>,
+                and
+                <a id="waiver">Waiver</a>.
+            </label>
+            <button type="button" 
+                        class="btn btn-success btn-block pull-right" 
+                        ng-disabled="(!$parent.waiverSigned) || ($parent.userPaying == 0 && !$parent.fullPaymentRequired) || ($parent.submitDisabled)" 
+                        ng-click="checkout()">Complete Your Registration
+            </button>
         </div>
     </div>
 </div>

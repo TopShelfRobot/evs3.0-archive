@@ -1,3 +1,12 @@
+.wrap {
+  height: 100%;
+  min-height: 100%;
+  margin-bottom: -400px;
+}
+
+#push, #footer {
+  height: 200px;
+}
 .nav.navbar-nav.navbar-right {
   padding-right:100px;
 }
@@ -13,12 +22,19 @@
 .badge {
   background-color:#5cb85c;
 }
-
+.total-amount {
+  font-size:28px;
+  font-weight:bold;
+}
 .credit-card-header::before {
   content: url('../../Content/images/creditcards.png');
   padding:5px;
   height:19px;
   width:126px;
+}
+
+.agreement {
+  font-size:12px;
 }
 
 /* Tile Layout */
@@ -86,6 +102,14 @@
 	display: inline-block;
 	background: #ffffff;
 	color: #333333;
+}
+
+.pager .previous > a, .pager .previous > span {
+  cursor: pointer;
+}
+
+.pager .next > a, .pager .next > span {
+  cursor: pointer;
 }
 
 /* Hover Animation */

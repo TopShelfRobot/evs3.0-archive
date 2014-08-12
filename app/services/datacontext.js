@@ -107,7 +107,7 @@
         };
 
         var createEventure = function () {
-            return manager.createEntity('Eventure', { name: 'Our Event'});
+            return manager.createEntity('Eventure');
         };
 
         var getEventureListById = function (id) {
@@ -759,7 +759,7 @@
                 return data.results[0];
             }
         };
-		
+
         var getTeamById = function(id) {
             var query = breeze.EntityQuery
                 .from("Teams")
@@ -847,7 +847,7 @@
                 error.message = msg;
                 throw error;
             }
-			
+
             return manager.saveChanges()
                 .then(saveSucceeded)
                 .catch(saveFailed);
@@ -857,7 +857,7 @@
             return Q.all([getEventures()]);   //Q wraps data call in promise  //, getCartItems()
         };
 
-        var service = {
+        var datacontext = {
             //Eventure
             createEventure: createEventure,
             getEventureById: getEventureById,
@@ -950,10 +950,10 @@
 
             //generic
             primeData: primeData,
-            saveChanges: saveChanges,
+            saveChanges: saveChanges
         };
 
-        return service;
+        return datacontext;
 
         //#region Internal methods
 
