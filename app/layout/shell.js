@@ -11,6 +11,7 @@
         var events = config.events;
         vm.busyMessage = 'Please wait ...';
         vm.isBusy = true;
+        vm.showSplash = true;
         vm.spinnerOptions = {
             radius: 40,
             lines: 7,
@@ -25,8 +26,11 @@
         activate();
 
         function activate() {
-            logSuccess('Eventure Sports Angular loaded@#@$!', null, true);
+            logSuccess('Eventure SPorts ANgular loaded!', null, true);
             common.activateController([], controllerId);
+                //.then(function () {
+                //    vm.showSplash = false;
+                //});
         }
 
         function toggleSpinner(on) { vm.isBusy = on; }
@@ -42,5 +46,6 @@
         $rootScope.$on(events.spinnerToggle,
             function (data) { toggleSpinner(data.show); }
         );
+
     };
 })();

@@ -28,6 +28,7 @@
                 regs: [
                     {
                         eventureListId: model.eventureListId,
+                        houseId: config.houseId,
                         partId: model.participantId,
                         fee: Number(value),
                         quantity: 1
@@ -54,9 +55,9 @@
            var order = {
                 orderAmount: Number(value),
                 orderToken: token,
-                orderHouseId: model.participantId,
+                orderHouseId: 15,       //config.owner.houseId,            //model.participantId,
                 ownerId: 1,
-                orderType: "teamreg",
+                orderType: "teamregggggggg",
                 teamName: model.teamName,
                 teamMembers: model.teamMembers,
                 regs: [

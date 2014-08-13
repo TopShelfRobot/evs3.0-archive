@@ -23,7 +23,7 @@
             // build form
             var form = $('.form-stripe');
             form.empty();
-            form.attr("action", 'http://evs30api.eventuresports.info/api/Payment/PostTeam');
+            form.attr("action", '/api/Payment/PostTeam');
             form.attr("method", "POST");
             form.attr("style", "display:none;");
             console.log($scope.userPaying);

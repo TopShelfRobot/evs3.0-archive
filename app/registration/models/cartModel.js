@@ -235,7 +235,6 @@
             for (var i = 0; i < vm.registrations.length; i++) {
                 var currentReg = vm.registrations[i];
 
-
                 if (config.fourDeLisDiscount) {
                     var allFour1 = false;
                     var allFour2 = false;
