@@ -101,6 +101,7 @@
     <Content Include="app\services\repositories.js" />
     <Content Include="app\services\repository.abstract.js" />
     <Content Include="app\services\repository.eventure.js" />
+    <Content Include="app\services\repository.resource.js" />
     <Content Include="app\services\repository.session.js" />
     <Content Include="back-favicon.png" />
     <Content Include="app\common\bootstrap\bootstrap.dialog.js" />
@@ -186,7 +187,6 @@
     <Content Include="Content\bootstrap\glyphicons-halflings-regular.eot" />
     <Content Include="Content\bootstrap\glyphicons-halflings-regular.ttf" />
     <Content Include="Content\bootstrap\glyphicons-halflings-regular.woff" />
-    <Content Include="app\services\repository.resource.js" />
     <None Include="Scripts\jquery-2.0.3.intellisense.js" />
     <Content Include="Scripts\angular-mocks.js" />
     <Content Include="Scripts\bootstrap.js" />
