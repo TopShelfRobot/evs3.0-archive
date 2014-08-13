@@ -1,14 +1,19 @@
 
 ;(function(){
 	
-	function Controller($scope, config, datacontext){
+	function Controller($scope, $routeParams, $window, config, datacontext){
 		
 		// console.log("config:", config);
-		$scope.participant = config.participant;
+		// $scope.participant = config.participant;
+		datacontext.getParticipantById($routeParams.partId)
+			.then(function(part){
+				$scope.participant = part;
+			});
 		
 		$scope.submit = function(){
 			datacontext.saveChanges()
 			.then(function(){
+				$window.history.back();
 				console.log("saved");
 			});
 		};
@@ -16,5 +21,5 @@
 		
 	}
 	
-	angular.module("evReg").controller("setParticipant", ["$scope", "config", "datacontext", Controller]);
+	angular.module("evReg").controller("setParticipant", ["$scope", "$routeParams", "$window", "config", "datacontext", Controller]);
 })();
