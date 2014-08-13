@@ -205,6 +205,12 @@
                     templateUrl: 'app/dashboard/setup/setresource.html'
                 }
             }, {
+                url: '/setresource/:resourceId',
+                config: {
+                    title: 'Create A Resource',
+                    templateUrl: 'app/dashboard/setup/setresource.html'
+                }
+            }, {
                 url: '/setresourceitem',
                 config: {
                     title: 'Create A Resource Item',

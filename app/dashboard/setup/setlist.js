@@ -38,8 +38,6 @@
 			}
 		}
 
-
-
 		vm.today = function () {
 		   vm.list.dateEventureList = new Date();
            vm.list.dateBeginReg = new Date();
@@ -47,10 +45,6 @@
 		};
 
 		vm.today();
-
-        vm.saveChanges = function(){
-            return datacontext.saveChanges(vm.eventure);
-        }
 
 		vm.open = function($event, open) {
 			$event.preventDefault();
@@ -186,27 +180,12 @@
 			}
 		};
 
-		vm.submit = function(){
-			console.log("butts");
-
-			vm.saveAndNav()
-			.then(function(data){
-				console.log("next");
-			});
-		}
-
 		vm.saveAndNav = function() {
 			return datacontext.saveChanges(vm.list)
-				.fin(complete);
+				.then(complete);
 
 			function complete() {
-
-				//if (eventure().managed()) {
-				//    url = '#setclient';
-				//    router.navigateTo(url);
-				//}
-				//else
-				//    parent.$.fancybox.close(true);
+				$location.path("/setfee/");
 			}
 		};
 
