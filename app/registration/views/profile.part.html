@@ -1,8 +1,8 @@
-﻿<div class="container" data-bind="with: participant">
+﻿<div class="container" ng-controller="UserProfile">
     <div class="row">
         <div class="col-lg-12">
             <div class="jumbotron">
-                <h1 class="highlight">Hello, {{ vm.firstName }}&nbsp;{{ vm.lastName }}</h1>
+                <h1 class="highlight">Hello, {{ participant.firstName }}&nbsp;{{ participant.lastName }}</h1>
                 <p class="lead text-muted">
                     Manage your Information, Registrations, and Associated Participants.
                 </p>
@@ -17,28 +17,28 @@
                                 <div class="form-group">
                                     <label for="FirstName" class="col-lg-5 control-label">First Name</label>
                                     <div class="col-lg-7">
-                                        <input type="text" name="FirstName" class="form-control" data-bind="value: firstName" placeholder="First Name" id="FirstName" required />
+                                        <input type="text" name="FirstName" class="form-control" ng-model="participant.firstName" placeholder="First Name" id="FirstName" required />
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="LastName" class="col-lg-5 control-label">Last Name</label>
                                     <div class="col-lg-7">
-                                        <input type="text" class="form-control" name="LastName" id="LastName" data-bind="value: lastName" placeholder="Last Name" required>
+                                        <input type="text" class="form-control" name="LastName" id="LastName" ng-model="participant.lastName" placeholder="Last Name" required>
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="Birthdate" class="col-lg-5 control-label">Date Of Birth</label>
                                     <div class="col-lg-7">
-                                        <input id="dateBirth" class="form-control" name="Birthdate" data-bind="datepicker: dateBirth, datepickerOptions: { changeMonth: true, changeYear: true, yearRange: '-100:+0' }" placeholder="MM/DD/YYYY" required />
+                                        <input id="dateBirth" class="form-control" name="Birthdate" ng-model="participant.dateBirth" placeholder="MM/DD/YYYY" required />
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="Gender" class="col-lg-5 control-label">Gender</label>
                                     <div class="col-lg-7">
-                                        <select class="form-control" name="Gender" data-bind="value: gender" required>
+                                        <select class="form-control" name="Gender" ng-model="participant.gender" required>
                                             <option value="0" disabled style="display: none;">Select</option>
                                             <option value="F">Female</option>
                                             <option value="M">Male</option>
@@ -49,21 +49,21 @@
                                 <div class="form-group">
                                     <label for="EmailAddress" class="col-lg-5 control-label">Email Address</label>
                                     <div class="col-lg-7">
-                                        <input type="email" class="form-control" id="EmailAddress" name="EmailAddress" data-bind="value: email" placeholder="Email Address" disabled>
+                                        <input type="email" class="form-control" id="EmailAddress" name="EmailAddress" ng-model="participant.email" placeholder="Email Address" disabled>
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="EmergencyContact" class="col-lg-5 control-label">Emergency Contact</label>
                                     <div class="col-lg-7">
-                                        <input type="text" class="form-control" id="EmergencyContact" name="EmergencyContact" data-bind="value: emergencyContact" placeholder="Emergency Contact" required>
+                                        <input type="text" class="form-control" id="EmergencyContact" name="EmergencyContact" ng-model="participant.emergencyContact" placeholder="Emergency Contact" required>
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="EmergencyPhone" class="col-lg-5 control-label">Emergency Phone</label>
                                     <div class="col-lg-7">
-                                        <input type="tel" class="form-control" id="EmergencyPhone" name="EmergencyPhone" data-bind="value: emergencyPhone" placeholder="Emergency Phone" required>
+                                        <input type="tel" class="form-control" id="EmergencyPhone" name="EmergencyPhone" ng-model="participant.emergencyPhone" placeholder="Emergency Phone" required>
                                     </div>
                                 </div>
                             </div>
@@ -71,21 +71,21 @@
                                 <div class="form-group">
                                     <label for="StreetAddress" class="col-lg-5 control-label">Street Address</label>
                                     <div class="col-lg-7">
-                                        <input type="text" class="form-control" id="StreetAddress" name="StreetAddress" data-bind="value: street1" placeholder="Street Address" required>
+                                        <input type="text" class="form-control" id="StreetAddress" name="StreetAddress" ng-model="participant.street1" placeholder="Street Address" required>
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="City" class="col-lg-5 control-label">City</label>
                                     <div class="col-lg-7">
-                                        <input type="text" class="form-control" id="City" name="City" data-bind="value: city" placeholder="City" required>
+                                        <input type="text" class="form-control" id="City" name="City" ng-model="participant.city" placeholder="City" required>
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="State" class="col-lg-5 control-label">State</label>
                                     <div class="col-lg-7">
-                                        <select class="form-control" name="State" data-bind="value: state" required>
+                                        <select class="form-control" name="State" ng-model="participant.state" required>
                                             <option value="0" disabled style="display: none;">Select </option>
                                             <option value="AK">AK</option>
                                             <option value="AL">AL</option>
@@ -151,28 +151,28 @@
                                 <div class="form-group">
                                     <label for="ZipCode" class="col-lg-5 control-label">Zip Code</label>
                                     <div class="col-lg-7">
-                                        <input type="text" class="form-control" id="ZipCode" name="ZipCode" minlength="5" data-bind="value: zip" placeholder="Zipcode" required>
+                                        <input type="text" class="form-control" id="ZipCode" name="ZipCode" minlength="5" ng-model="participant.zip" placeholder="Zipcode" required>
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="Country" class="col-lg-5 control-label">Country</label>
                                     <div class="col-lg-7">
-                                        <input type="text" class="form-control" id="Country" data-bind="value: country" placeholder="Country">
+                                        <input type="text" class="form-control" id="Country"ng-model="participant.country" placeholder="Country">
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="HomePhone" class="col-lg-5 control-label">Home Phone</label>
                                     <div class="col-lg-7">
-                                        <input type="tel" class="form-control" id="HomePhone" data-bind="value: phone" placeholder="Home Phone">
+                                        <input type="tel" class="form-control" id="HomePhone" ng-model="participant.phone" placeholder="Home Phone">
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="CellPhone" class="col-lg-5 control-label">Cell Phone</label>
                                     <div class="col-lg-7">
-                                        <input type="tel" class="form-control" id="CellPhone" name="CellPhone" data-bind="value: phoneMobile" placeholder="Mobile Phone" required>
+                                        <input type="tel" class="form-control" id="CellPhone" name="CellPhone" ng-model="participant.phoneMobile" placeholder="Mobile Phone" required>
                                     </div>
                                 </div>
                                 <br />
@@ -182,7 +182,7 @@
                     <div class="row">
                         <div class="col-lg-3 col-lg-offset-9">
                             <div class="pull-right">
-                                <button class="btn btn-success" ng-click="$parent.clickSave" type="submit">Save Changes</button>
+                                <button class="btn btn-success" ng-click="save()" type="submit">Save Changes</button>
                                 <br class="clearfix">
                             </div>
                         </div>
@@ -205,7 +205,7 @@
                 <br>
                     <div class="row">
                         <div class="col-lg-12">
-                            <div id="partgrid"></div>
+                            <div id="partgrid" kendo-grid k-options="participantGridOptions"></div>
                         </div>
                     </div>
                 </tab>
@@ -216,3 +216,7 @@
         </div>
     </div>
 </div>
+
+<script type="text/x-kendo-template" id="template">
+  <div kendo-grid k-options="detailGridOptions(dataItem)"></div>
+</script>
