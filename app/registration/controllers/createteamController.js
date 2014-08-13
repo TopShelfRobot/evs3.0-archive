@@ -3,9 +3,13 @@
     var minNameLength = 0;
     var minTeamSize = 0;
 
-    function controller($scope, $location, cartModel){
+    function controller($scope, $location, $routeParams, cartModel){
 
         console.log("cartModel:", cartModel);
+		
+		cartModel.eventureId = $routeParams.eventureId;
+		cartModel.eventureListId = $routeParams.listId;
+		cartModel.participantId = $location.search()["uid"];
 
         $scope.teamName = "";
         $scope.players = [{name : "", email : ""}];
@@ -26,7 +30,7 @@
             for (var i = 0; i < $scope.players.length; i++) {
                 var name, email;
                 if ($scope.players[i].name.length > minNameLength && $scope.players[i].email) {
-                    cartModel.teamMembers.push({ name: name, email: email });
+                    cartModel.teamMembers.push({ name: $scope.players[i].name, email: $scope.players[i].email });
                 } else if ($scope.players[i].name.length == 0 && $scope.players[i].email.length == 0) {
                     // ignore this entry
                     // it's still valid
@@ -42,11 +46,12 @@
             }
 
             if (valid) {
+				$location.search("uid", null);
                 $location.path("/eventure/1/list/1/team/" + cartModel.teamId + "/payment");
             }
         };
     }
 
     angular.module("evReg").controller("CreateTeamController",
-        ["$scope", "$location", "RegistrationCartModel", controller]);
+        ["$scope", "$location", "$routeParams", "RegistrationCartModel", controller]);
 })();

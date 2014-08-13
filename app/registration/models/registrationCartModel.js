@@ -1,85 +1,51 @@
 (function(){
 
-    function Model($http, $routeParams, config){
+    function Model($http, $routeParams, $location, config){
 
         var model = {};
 
-        model.eventureId = $routeParams.eventureId || null;
-        model.eventureListId = $routeParams.listId || null;
-        model.participantId = $routeParams.uid || null;
+        model.eventureId = null;
+        model.eventureListId = null;
+		model.participantId = null;
         model.waiverSigned = false;
         model.teamName;
         model.teamMembers = [];
         model.teamId = "tbd";
         model.currentlyPaid = 0;
         model.allowZeroPayment = false;
-		
-		
 
         model.order = function (value) {
             var order = {
                 orderAmount: Number(value),
-                //orderToken: token,
                 orderHouseId: model.participantId,
                 ownerId: 1,
-                orderType: "teamreg",
-                teamName: model.teamName,
-                teamMembers: model.teamMembers,
                 regs: [
                     {
+						regType: "teamreg",
                         eventureListId: model.eventureListId,
-                        houseId: config.houseId,
+                        houseId: config.owner.houseId,
                         partId: model.participantId,
                         fee: Number(value),
-                        quantity: 1
+                        quantity: 1,
+						teamMembers : model.teamMembers,
+						teamName : model.teamName,
                     }
                 ]
             };
             return order;
         };
-        
-       
 
         // Submits orders to be processed by the backend.
         model.submitOrder = function(token, value) {
-            // var order = {
-            //     token : token,
-            //     eventureId : model.eventureId,
-            //     eventureListId : model.eventureListId,
-            //     participantId : model.participantId,
-            //     teamName : model.teamName,
-            //     teamMembers : model.teamMembers,
-            //     payment : value
-            // };
-            
-           var order = {
-                orderAmount: Number(value),
-                orderToken: token,
-                orderHouseId: 15,       //config.owner.houseId,            //model.participantId,
-                ownerId: 1,
-                orderType: "teamregggggggg",
-                teamName: model.teamName,
-                teamMembers: model.teamMembers,
-                regs: [
-                    {
-                        eventureListId: model.eventureListId,
-                        partId: model.participantId,
-                        fee: Number(value),
-                        quantity: 1
-                    }
-                ]
-            };
+			
+			var order = model.order(value);
             alert('sending order');
             console.log(order);
-            return $http.post("http://evs30api.eventuresports.info/api/Payment/PostTeam", order);
-            // expected response:
-            // var response = {
-            //     teamId : "1233534656"
-            // }
+            return $http.post(config.apiPath + "api/Payment/PostTeam", order);
         };
 
         return model;
     }
 
-    angular.module("evReg").service("RegistrationCartModel", ["$http", "$routeParams", "config", Model]);
+    angular.module("evReg").service("RegistrationCartModel", ["$http", "$routeParams", "$location", "config", Model]);
 })()

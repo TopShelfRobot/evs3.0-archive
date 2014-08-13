@@ -23,11 +23,12 @@
 	        });
 
         $scope.register = function(eventure, eventureList, participant) {
-            cartModel.setCurrentParticipant(participant);
-            cartModel.setCurrentEventure(eventure);
-            cartModel.setCurrentEventureList(eventureList);
+            // cartModel.setCurrentParticipant(participant);
+            // cartModel.setCurrentEventure(eventure);
+            // cartModel.setCurrentEventureList(eventureList);
 
-            $location.path("/eventure/" + eventure.id + "/list/" + eventureList.id + "/team");
+            $location.path("/eventure/" + eventure.id + "/list/" + eventureList.id + "/team")
+				.search("uid", participant.id);
 
             //if (eventure.IsTeam) {
             //    $location.path("/eventure/" + eventure.id + "/list/" + eventureList.id + "/team")
