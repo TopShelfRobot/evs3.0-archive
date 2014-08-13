@@ -53,12 +53,22 @@
                     }
                 }
             }, {
+                url: '/teamcenter',
+                config: {
+                    title: 'Team Workcenter',
+                    templateUrl: 'app/dashboard/teamcenter.html',
+                    settings: {
+                        nav: 4,
+                        content: 'Teams'
+                    }
+                }
+            }, {
                 url: '/couponaddon',
                 config: {
                     title: 'Coupons & Addons',
                     templateUrl: 'app/dashboard/couponaddon.html',
                     settings: {
-                        nav: 4,
+                        nav: 5,
                         content: 'Coupons & Addons'
                     }
                 }
@@ -68,7 +78,7 @@
                     title: 'Resources',
                     templateUrl: 'app/dashboard/resourcecenter.html',
                     settings: {
-                        nav: 5,
+                        nav: 6,
                         content: 'Resources'
                     }
                 }
@@ -79,7 +89,7 @@
                     title: 'Reporting',
                     templateUrl: 'app/dashboard/reporting.html',
                     settings: {
-                        nav: 6,
+                        nav: 7,
                         content: 'Reporting'
                     }
                 }
