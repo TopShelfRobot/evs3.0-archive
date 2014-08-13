@@ -97,7 +97,7 @@
     <Content Include="app\registration\views\questions.part.html" />
     <Content Include="app\registration\views\setparticipant.part.html" />
     <Content Include="app\registration\views\teamPayment.part.html" />
-    <Content Include="app\services\datacontext_new.js" />
+    <Content Include="app\services\datacontext.js" />
     <Content Include="app\services\repositories.js" />
     <Content Include="app\services\repository.abstract.js" />
     <Content Include="app\services\repository.eventure.js" />
@@ -145,7 +145,7 @@
     <Content Include="app\layout\widgetheader.html" />
     <Content Include="app\app.js" />
     <Content Include="app\config.route.js" />
-    <Content Include="app\services\datacontext.js" />
+    <Content Include="app\services\datacontext_old.js" />
     <Content Include="app\services\directives.js" />
     <Content Include="app\services\entityManagerFactory.js" />
     <Content Include="app\services\model.js" />

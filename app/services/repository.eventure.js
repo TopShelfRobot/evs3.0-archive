@@ -4,12 +4,13 @@
     var serviceId = 'repository.eventure';
 
     angular.module('app').factory(serviceId,
-        ['model', 'repository.abstract', RepositoryEventure]);
+        ['model', 'breeze', 'repository.abstract', repositoryEventure]);
 
-    function RepositoryEventure(model, AbstractRepository) {
+    function repositoryEventure(model, breeze, abstractRepository) {
         var entityName = 'Eventure';
-        var entityNames = model.entityNames;
-        var EntityQuery = breeze.EntityQuery;
+        //var entityNames = model.entityNames;
+        var entityQuery = breeze.EntityQuery;
+        var predicate = breeze.Predicate;
 
         //only creating on demand - using ctor
         function Ctor(mgr) {
@@ -19,14 +20,14 @@
             // Exposed data access functions
             this.getAll = getAll;
             this.getEventuresByOwnerId = getEventuresByOwnerId;
-            this.setLookups = setLookups;
+            //this.setLookups = setLookups;
         }
         
         // Allow this repo to have access to the Abstract Repo's functions,
         // then put its own Ctor back on itself.
         //Ctor.prototype = new AbstractRepository(Ctor);
         //Ctor.prototype.constructor = Ctor;
-        AbstractRepository.extend(Ctor);
+        abstractRepository.extend(Ctor);
 
         return Ctor;
 
@@ -34,27 +35,25 @@
         function getAll() {
             
             var self = this;
-            alert('really11');
-            return EntityQuery.from('Eventure')
+            //alert('really11');
+            return entityQuery.from('Eventures')
                 .using(self.manager).execute()
                 .then(querySucceeded, self._queryFailed);
 
             function querySucceeded(data) {
-                alert('really12121212121212');
+                //alert('really12121212121212');
                 self.log('Retrieved [Eventure]', data, true);
-                return true;
+                return data.results;
             }
         }
         
-        var getEventuresByOwnerId = function (ownerId) {
+       function getEventuresByOwnerId(ownerId) {
 
             var self = this;
             var pred = predicate.create("active", "==", true)
               .and("ownerId", "==", ownerId);
 
-            
-
-            return EntityQuery.from('Eventures')
+            return entityQuery.from('Eventures')
                 .where(pred)
                 .orderBy('sortOrder')
                 .using(self.manager).execute()
@@ -65,15 +64,13 @@
             }
 
         };
-// ReSharper restore JsUnreachableCode
 
-        // Formerly known as datacontext.setLookups()
-        function setLookups() {
-            this.lookupCachedData = {
-                //rooms: this._getAllLocal(entityNames.room, 'name'),
-                //tracks: this._getAllLocal(entityNames.track, 'name'),
-                //timeslots: this._getAllLocal(entityNames.timeslot, 'start'),
-            };
-        }
+        //function setLookups() {
+        //    this.lookupCachedData = {
+        //        //rooms: this._getAllLocal(entityNames.room, 'name'),
+        //        //tracks: this._getAllLocal(entityNames.track, 'name'),
+        //        //timeslots: this._getAllLocal(entityNames.timeslot, 'start'),
+        //    };
+        //}
     }
 })();

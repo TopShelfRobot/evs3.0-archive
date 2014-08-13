@@ -8,8 +8,8 @@
         var viewLength = 10;
         var currentPage = 0;
         //alert('heryhr');
-        datacontext.getEventuresByOwnerId(config.owner.ownerId)
-        //datacontext.eventure.getAll()
+        //datacontext.getEventuresByOwnerId(config.owner.ownerId)
+        datacontext.eventure.getEventuresByOwnerId(config.owner.ownerId)
 	        .then(function(list){
 	            all = list;
 	            $scope.eventures = all.slice(0, viewLength);
