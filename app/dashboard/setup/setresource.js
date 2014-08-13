@@ -24,18 +24,18 @@
         function getResource() {
 
             if (vm.resourceId > 0) {
-                return datacontext.getResourceById(vm.resourceId)
+                return datacontext.resource.getResourceById(vm.resourceId)
                     .then(function(data) {
                         //applyFilter();
                         return vm.resource = data;
                     });
             } else {
-                return vm.resource = datacontext.createResource();
+                return vm.resource = datacontext.resource.createResource();
             }
         }
 
         vm.saveAndNav = function() {
-            return datacontext.saveChanges(vm.resource)
+            return datacontext.save(vm.resource)
                 .then(complete);
 
             function complete() {

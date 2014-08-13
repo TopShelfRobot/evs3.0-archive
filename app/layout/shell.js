@@ -7,7 +7,7 @@
 
     function shell($rootScope, common, config) {
         var vm = this;
-        var logSuccess = common.logger.getLogFn(controllerId, 'success');
+        var logSuccess = common.logger.getLogFn(controllerId, 'success!!!');
         var events = config.events;
         vm.busyMessage = 'Please wait ...';
         vm.isBusy = true;
@@ -26,7 +26,7 @@
         activate();
 
         function activate() {
-            logSuccess('Eventure SPorts ANgular loaded!', null, true);
+            logSuccess('Eventure SPorts Angular loaded!!!!!', null, true);
             common.activateController([], controllerId);
                 //.then(function () {
                 //    vm.showSplash = false;

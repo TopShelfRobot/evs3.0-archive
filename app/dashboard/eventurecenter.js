@@ -4,6 +4,7 @@
     angular.module('app').controller(controllerId, ['common', 'datacontext', 'config', eventurecenter]);
 
     function eventurecenter(common, datacontext, config) {
+        alert('is this thinkg on?');
         var getLogFn = common.logger.getLogFn;
         var log = getLogFn(controllerId);
 

@@ -13,11 +13,12 @@
         var logSuccess = getLogFn(serviceId, 'success');
         var manager = emFactory.newManager();
         var primePromise;
-        var repoNames = ['eventure'];
-        //var $q = common.$q;
+        var repoNames = ['eventure', 'resource'];
+        var $q = common.$q;
 
         var service = {
-            prime: prime
+            prime: prime,
+            save: save
             // Repositories to be added on demand:
             //      attendees
             //      lookups
@@ -58,16 +59,14 @@
         }
 
         function prime() {
-            alert('am i priming');
-            extendMetadata();
+
             if (primePromise) return primePromise;
 
-            //primePromise = $q.all([service.lookup.getAll(),
-            //    service.speaker.getPartials(true)])
-            //    .then(extendMetadata)
-            //    .then(success);
-            //return primePromise;
-            return true;
+            primePromise = $q.all([service.eventure.getAll()])
+                .then(extendMetadata)
+                .then(success);
+            return primePromise;
+            //return true;
 
             function success() {
                 //service.lookup.setLookups();
@@ -91,6 +90,23 @@
                 function set(resourceName, entityName) {
                     metadataStore.setEntityTypeForResourceName(resourceName, entityName);
                 }
+            }
+        }
+        
+        function save() {
+            return manager.saveChanges()
+               .then(saveSucceeded, saveFailed);
+
+            function saveSucceeded(result) {
+                logSuccess('Saved data11', result, true);
+            }
+
+            function saveFailed(error) {
+                var msg = config.appErrorPrefix + 'Save failed: ' +
+                    breeze.saveErrorMessageService.getErrorMessage(error);
+                error.message = msg;
+                logError(msg, error);
+                throw error;
             }
         }
     }

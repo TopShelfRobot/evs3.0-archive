@@ -89,89 +89,89 @@
 
         };
 
-        var getFirstEventureByOwnerId = function () {
+        //var getFirstEventureByOwnerId = function () {
 
-            var pred = predicate.create("ownerId", "==", config.ownerId)
-              .and("active", "==", true);
+        //    var pred = predicate.create("ownerId", "==", config.ownerId)
+        //      .and("active", "==", true);
 
-            return entityQuery.from('Eventures')
-                 .where(pred)
-                 .orderBy("active desc", "id")
-                 .take(1)
-                 .using(manager).execute()
-                 .then(querySucceeded, _queryFailed);
+        //    return entityQuery.from('Eventures')
+        //         .where(pred)
+        //         .orderBy("active desc", "id")
+        //         .take(1)
+        //         .using(manager).execute()
+        //         .then(querySucceeded, _queryFailed);
 
-            function querySucceeded(data) {
-                return data.results[0];
-            }
-        };
+        //    function querySucceeded(data) {
+        //        return data.results[0];
+        //    }
+        //};
 
-        var createEventure = function () {
-            return manager.createEntity('Eventure');
-        };
+        //var createEventure = function () {
+        //    return manager.createEntity('Eventure');
+        //};
 
-        var getEventureListById = function (id) {
+        //var getEventureListById = function (id) {
 
-            var query = entityQuery.from('EventureLists')
-                .where('id', '==', id)
-                .orderBy('sortOrder');
+        //    var query = entityQuery.from('EventureLists')
+        //        .where('id', '==', id)
+        //        .orderBy('sortOrder');
 
-            return manager.executeQuery(query)
-               .then(querySucceeded, _queryFailed);
+        //    return manager.executeQuery(query)
+        //       .then(querySucceeded, _queryFailed);
 
-            function querySucceeded(data) {
-                return data.results[0];
-            }
+        //    function querySucceeded(data) {
+        //        return data.results[0];
+        //    }
 
-        };
+        //};
 
-        var getEventureListsByEventureId = function (eventureId) {
+        //var getEventureListsByEventureId = function (eventureId) {
 
-            var query = entityQuery.from('EventureListsByEventureId')
-                .withParameters({ eventureId: eventureId })
-                .orderBy('sortOrder');
+        //    var query = entityQuery.from('EventureListsByEventureId')
+        //        .withParameters({ eventureId: eventureId })
+        //        .orderBy('sortOrder');
 
-            return manager.executeQuery(query)
-                .then(querySucceeded, _queryFailed);
+        //    return manager.executeQuery(query)
+        //        .then(querySucceeded, _queryFailed);
 
-            function querySucceeded(data) {
-                return data.results;
-            }
-        };
+        //    function querySucceeded(data) {
+        //        return data.results;
+        //    }
+        //};
 
-        var getEventureListsByOwnerId = function (ownerId) {
+        //var getEventureListsByOwnerId = function (ownerId) {
 
-            var query = entityQuery.from('EventureListsByOwnerId')
-                .withParameters({ ownerId: ownerId })
-                .orderBy('sortOrder');
+        //    var query = entityQuery.from('EventureListsByOwnerId')
+        //        .withParameters({ ownerId: ownerId })
+        //        .orderBy('sortOrder');
 
-            return manager.executeQuery(query)
-                .then(querySucceeded, _queryFailed);
+        //    return manager.executeQuery(query)
+        //        .then(querySucceeded, _queryFailed);
 
-            function querySucceeded(data) {
-                return data.results;
-            }
-        };
+        //    function querySucceeded(data) {
+        //        return data.results;
+        //    }
+        //};
 
-        var createEventureList = function (eventureId) {
+        //var createEventureList = function (eventureId) {
 
-            return manager.createEntity('EventureList',
-                { eventureId: eventureId, dateEventureList: moment().format("MM/DD/YYYY"), dateBeginReg: moment().format("MM/DD/YYYY"), dateEndReg: moment().format("MM/DD/YYYY"), imageFileName: "" });
-        };
+        //    return manager.createEntity('EventureList',
+        //        { eventureId: eventureId, dateEventureList: moment().format("MM/DD/YYYY"), dateBeginReg: moment().format("MM/DD/YYYY"), dateEndReg: moment().format("MM/DD/YYYY"), imageFileName: "" });
+        //};
 
-        var getGroupsByEventureListId = function (eventureListId) {
+        //var getGroupsByEventureListId = function (eventureListId) {
 
-            var query = entityQuery.from('EventureGroups')
-                .where('eventureListId', '==', eventureListId)
-                .orderBy('sortOrder');
+        //    var query = entityQuery.from('EventureGroups')
+        //        .where('eventureListId', '==', eventureListId)
+        //        .orderBy('sortOrder');
 
-            return manager.executeQuery(query)
-                .then(querySucceeded, _queryFailed);
+        //    return manager.executeQuery(query)
+        //        .then(querySucceeded, _queryFailed);
 
-            function querySucceeded(data) {
-                return data.results;
-            }
-        };
+        //    function querySucceeded(data) {
+        //        return data.results;
+        //    }
+        //};
 
         var getGroupsActiveByEventureListId = function (eventureListId) {
 
@@ -476,171 +476,194 @@
             return manager.createEntity('StockQuestionSet', { eventureListId: eventureListId });
         };
 
-        var getExpensesByEventureId = function (eventureId) {
+        //var getExpensesByEventureId = function (eventureId) {
 
-            var query = entityQuery.from('Expense')
-                .where('eventureId', '==', eventureId);
+        //    var query = entityQuery.from('Expense')
+        //        .where('eventureId', '==', eventureId);
 
-            return manager.executeQuery(query)
-                .then(querySucceeded, _queryFailed);
+        //    return manager.executeQuery(query)
+        //        .then(querySucceeded, _queryFailed);
 
-            function querySucceeded(data) {
-                return data.results;
-            }
-        };
+        //    function querySucceeded(data) {
+        //        return data.results;
+        //    }
+        //};
 
-        var createExpense = function (eventureId) {
-            return manager.createEntity('EventureExpense', { eventureId: eventureId });
-        };
+        //var createExpense = function (eventureId) {
+        //    return manager.createEntity('EventureExpense'; { eventureId: eventureId });
+        //};
 
-        var createResourceItem = function (resourceId) {
-            return manager.createEntity('ResourceItem', { resourceId: resourceId, ownerId: config.ownerId, active: true });
-        };
+        //var createResourceItem = function (resourceId) {
+        //    return manager.createEntity('ResourceItem', { resourceId: resourceId, ownerId: config.ownerId, active: true });
+        //};
 
-        var getResourceItemById = function (resourceItemId) {
+        //var getResourceItemById = function (resourceItemId) {
 
-            var query = entityQuery.from('ResourceItems')
-            .where('id', '==', resourceItemId);
+        //    var query = entityQuery.from('ResourceItems')
+        //    .where('id', '==', resourceItemId);
 
-            return manager.executeQuery(query)
-                .then(querySucceeded, _queryFailed);
+        //    return manager.executeQuery(query)
+        //        .then(querySucceeded, _queryFailed);
 
-            function querySucceeded(data) {
-                return data.results[0];
-            }
-        };
+        //    function querySucceeded(data) {
+        //        return data.results[0];
+        //    }
+        //};
 
-        var getResourceServicesByOwnerId = function (ownerId) {
+        //var getResourceServicesByOwnerId = function (ownerId) {
 
-            var query = entityQuery.from('GetResourceServicesByOwnerId')
-                .withParameters({ id: ownerId });
+        //    var query = entityQuery.from('GetResourceServicesByOwnerId')
+        //        .withParameters({ id: ownerId });
 
-            return manager.executeQuery(query)
-                .then(querySucceeded, _queryFailed);
+        //    return manager.executeQuery(query)
+        //        .then(querySucceeded, _queryFailed);
 
-            function querySucceeded(data) {
-                return data.results;
-            }
-        };
+        //    function querySucceeded(data) {
+        //        return data.results;
+        //    }
+        //};
 
-        var getResourceById = function (resourceId) {
-            var query = entityQuery.from('resources')
-                .where('id', '==', resourceId);
+        //var getResourceById = function (resourceId) {
+        //    var query = entityQuery.from('resources')
+        //        .where('id', '==', resourceId);
 
-            return manager.executeQuery(query)
-               .then(querySucceeded, _queryFailed);
+        //    return manager.executeQuery(query)
+        //       .then(querySucceeded, _queryFailed);
 
-            function querySucceeded(data) {
-                return data.results[0];
-            }
-        };
+        //    function querySucceeded(data) {
+        //        return data.results[0];
+        //    }
+        //};
 
-        var getResourcesByOwnerId = function (ownerId) {
-            var query = entityQuery.from('resources')
-                .where('ownerId', '==', ownerId);
+        //var getResourcesByOwnerId = function (ownerId) {
+        //    var query = entityQuery.from('resources')
+        //        .where('ownerId', '==', ownerId);
 
-            return manager.executeQuery(query)
-                .then(querySucceeded, _queryFailed);
+        //    return manager.executeQuery(query)
+        //        .then(querySucceeded, _queryFailed);
 
-            function querySucceeded(data) {
-                return data.results;
-            }
-        };
+        //    function querySucceeded(data) {
+        //        return data.results;
+        //    }
+        //};
 
-        var createResourceItemCategory = function () {
-            return manager.createEntity('ResourceItemCategory', { ownerId: config.ownerId });
-        };
+        //var createResourceItemCategory = function () {
+        //    return manager.createEntity('ResourceItemCategory', { ownerId: config.ownerId });
+        //};
 
-        var createResource = function () {
-            return manager.createEntity('Resource', { ownerId: config.ownerId });
-        };
+        //var createResource = function () {
+        //    return manager.createEntity('Resource', { ownerId: config.ownerId });
+        //};
 
-        var getResourceItemCategoriesByOwnerId = function (ownerId, isOnlyActive) {
-            var pred; // = predicate.create("ownerId", "==", ownerId);
+        //var getResourceItemCategoriesByOwnerId = function (ownerId, isOnlyActive) {
+        //    var pred; // = predicate.create("ownerId", "==", ownerId);
 
-            if (isOnlyActive) {
-                pred = predicate.create("ownerId", "==", ownerId)
-                  .and("active", "==", true);
+        //    if (isOnlyActive) {
+        //        pred = predicate.create("ownerId", "==", ownerId)
+        //          .and("active", "==", true);
 
-            } else {
-                {
-                  pred = predicate.create("ownerId", "==", ownerId);
-                }
-            }
-            return entityQuery.from('ResourceItemCategories')
-            .where(pred)
-            .using(manager).execute()
-            .then(querySucceeded, _queryFailed);
-
-
-            function querySucceeded(data) {
-                return data.results;
-            }
-        };
-
-        var getResourceItemsByOwnerId = function (ownerId) {
-
-            var pred = predicate.create("active", "==", true)
-              .and("ownerId", "==", ownerId);
-
-            return entityQuery.from('ResourceItems')
-              .where(pred)
-              .using(manager).execute()
-              .then(querySucceeded, _queryFailed);
+        //    } else {
+        //        {
+        //          pred = predicate.create("ownerId", "==", ownerId);
+        //        }
+        //    }
+        //    return entityQuery.from('ResourceItemCategories')
+        //    .where(pred)
+        //    .using(manager).execute()
+        //    .then(querySucceeded, _queryFailed);
 
 
-            function querySucceeded(data) {
-                return data.results;
-            }
-        };
+        //    function querySucceeded(data) {
+        //        return data.results;
+        //    }
+        //};
 
-        var getClientResourcesByOwnerId = function (ownerId, resouceType) {
+        //var getResourceItemsByOwnerId = function (ownerId) {
 
-            var pred = predicate.create("resourceType", "==", resouceType)
-              .and("ownerId", "==", ownerId);
+        //    var pred = predicate.create("active", "==", true)
+        //      .and("ownerId", "==", ownerId);
 
-            return entityQuery.from('Resources')
-                .where(pred)
-                .using(manager).execute()
-                .then(querySucceeded, _queryFailed);
-
-            function querySucceeded(data) {
-                return data.results;
-            }
-        };
-
-        var getEventureServicesByEventureId = function (eventureId) {
-
-            var query = entityQuery.from('EventureServices')
-                .where('eventureId', '==', eventureId);
-
-            return manager.executeQuery(query)
-               .then(querySucceeded, _queryFailed);
+        //    return entityQuery.from('ResourceItems')
+        //      .where(pred)
+        //      .using(manager).execute()
+        //      .then(querySucceeded, _queryFailed);
 
 
-            function querySucceeded(data) {
-                return data.results;
-            }
-        };
+        //    function querySucceeded(data) {
+        //        return data.results;
+        //    }
+        //};
 
-        var createEventureService = function (eventureId) {
-            return manager.createEntity('EventureService',
-                { eventureId: eventureId, active: true });
-        };
+        //var getClientResourcesByOwnerId = function (ownerId, resouceType) {
 
-        var getClientById = function (id) {
-            var query = entityQuery.from('Clients')
-                .where('id', '==', id);
+        //    var pred = predicate.create("resourceType", "==", resouceType)
+        //      .and("ownerId", "==", ownerId);
 
-            return manager.executeQuery(query)
-                .then(querySucceeded, _queryFailed);
+        //    return entityQuery.from('Resources')
+        //        .where(pred)
+        //        .using(manager).execute()
+        //        .then(querySucceeded, _queryFailed);
 
-            function querySucceeded(data) {
-                return data.results[0];
-            }
-        };
+        //    function querySucceeded(data) {
+        //        return data.results;
+        //    }
+        //};
 
-        var getOrderById = function (Id) {
+        //var getEventureServicesByEventureId = function (eventureId) {
+
+        //    var query = entityQuery.from('EventureServices')
+        //        .where('eventureId', '==', eventureId);
+
+        //    return manager.executeQuery(query)
+        //       .then(querySucceeded, _queryFailed);
+
+
+        //    function querySucceeded(data) {
+        //        return data.results;
+        //    }
+        //};
+
+        //var createEventureService = function (eventureId) {
+        //    return manager.createEntity('EventureService',
+        //        { eventureId: eventureId, active: true });
+        //};
+
+        //var getClientById = function (id) {
+        //    var query = entityQuery.from('Clients')
+        //        .where('id', '==', id);
+
+        //    return manager.executeQuery(query)
+        //        .then(querySucceeded, _queryFailed);
+
+        //    function querySucceeded(data) {
+        //        return data.results[0];
+        //    }
+        //};
+
+       
+        
+
+        //var createPlanItem = function (eventureId) {
+        //    return manager.createEntity('EventurePlanItem',
+        //        { eventureId: eventureId, dateDue: moment().format("MM/DD/YYYY") });
+        //};
+
+        //var getPlanItemById = function (planItemId) {
+
+        //    var query = entityQuery.from('EventurePlanItems')
+        //        .where('id', '==', planItemId);
+
+        //    return manager.executeQuery(query)
+        //        .then(querySucceeded, _queryFailed);
+
+
+        //    function querySucceeded(data) {
+        //        return data.results[0];
+        //    }
+        //};
+
+
+        function getOrderById(Id) {
             var query = entityQuery.from('OrderById')
                 .withParameters({ id: Id });
 
@@ -651,8 +674,8 @@
                 return data.results[0];
             }
         };
-
-        var getOrderByRegistrationId = function (regId) {
+        
+        function getOrderByRegistrationId(regId) {
 
             var query = entityQuery.from('OrderByRegistrationId')
                 .withParameters({ id: regId });
@@ -665,24 +688,6 @@
             }
         };
 
-        var createPlanItem = function (eventureId) {
-            return manager.createEntity('EventurePlanItem',
-                { eventureId: eventureId, dateDue: moment().format("MM/DD/YYYY") });
-        };
-
-        var getPlanItemById = function (planItemId) {
-
-            var query = entityQuery.from('EventurePlanItems')
-                .where('id', '==', planItemId);
-
-            return manager.executeQuery(query)
-                .then(querySucceeded, _queryFailed);
-
-
-            function querySucceeded(data) {
-                return data.results[0];
-            }
-        };
 
         var getRegDataByOwnerId = function (ownerId) {
 
