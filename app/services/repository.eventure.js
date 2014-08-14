@@ -19,15 +19,20 @@
             this.manager = mgr;
             // Exposed data access functions
             this.getAll = getAll;
+            
             this.createEventure = createEventure;
             this.getEventureById = getEventureById;
             this.getEventuresByOwnerId = getEventuresByOwnerId;
             this.getFirstEventureByOwnerId = getFirstEventureByOwnerId;
+            
             this.getEventureListById = getEventureListById;
             this.getEventureListsByEventureId = getEventureListsByEventureId;
             this.getEventureListsByOwnerId = getEventureListsByOwnerId;
             this.createEventureList = createEventureList;
+
             this.getGroupsByEventureListId = getGroupsByEventureListId;
+            this.getGroupsActiveByEventureListId = getGroupsActiveByEventureListId;
+            this.createGroup = createGroup;
         }
 
         // Allow this repo to have access to the Abstract Repo's functions,
@@ -157,5 +162,24 @@
                 return data.results;
             }
         }
+
+        function getGroupsActiveByEventureListId(eventureListId) {
+
+            var query = entityQuery.from('GroupsBelowCapacity')
+                 .withParameters({ listId: eventureListId });
+
+            return manager.executeQuery(query)
+                .then(querySucceeded, _queryFailed);
+
+            function querySucceeded(data) {
+                return data.results;
+            }
+        };
+
+            function createGroup(eventureListId) {
+
+            return manager.createEntity('EventureGroup',
+                { eventureListId: eventureListId, active: true });
+        };
     }
 })();

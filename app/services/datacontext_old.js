@@ -173,255 +173,255 @@
         //    }
         //};
 
-        var getGroupsActiveByEventureListId = function (eventureListId) {
+        //var getGroupsActiveByEventureListId = function (eventureListId) {
 
-            var query = entityQuery.from('GroupsBelowCapacity')
-                 .withParameters({ listId: eventureListId });
+        //    var query = entityQuery.from('GroupsBelowCapacity')
+        //         .withParameters({ listId: eventureListId });
 
-            return manager.executeQuery(query)
-                .then(querySucceeded, _queryFailed);
+        //    return manager.executeQuery(query)
+        //        .then(querySucceeded, _queryFailed);
 
-            function querySucceeded(data) {
-                return data.results;
-            }
-        };
+        //    function querySucceeded(data) {
+        //        return data.results;
+        //    }
+        //};
 
-        var createGroup = function (eventureListId) {
+        //var createGroup = function (eventureListId) {
 
-            return manager.createEntity('EventureGroup',
-                { eventureListId: eventureListId, active: true });
-        };
+        //    return manager.createEntity('EventureGroup',
+        //        { eventureListId: eventureListId, active: true });
+        //};
 
-        var createTransfer = function (regId, oldListId, newListId, answerId, partId) {
+        //var createTransfer = function (regId, oldListId, newListId, answerId, partId) {
 
-            //log('regId: ' + regId, null, 'dc', true);
-            //log('oldListId: ' + oldListId, null, 'dc', true);
-            //log('newListId: ' + newListId, null, 'dc', true);
-            //log('answerId: ' + answerId, null, 'dc', true);
-            //log('partId: ' + partId, null, 'dc', true);
-            return manager.createEntity('EventureTransfer',
-                { registrationId: regId, eventureListIdFrom: oldListId, eventureListIdTo: newListId, stockAnswerSetId: answerId, isComplete: false, participantId: partId, dateCreated: moment().format("MM/DD/YYYY") });
-        };
+        //    //log('regId: ' + regId, null, 'dc', true);
+        //    //log('oldListId: ' + oldListId, null, 'dc', true);
+        //    //log('newListId: ' + newListId, null, 'dc', true);
+        //    //log('answerId: ' + answerId, null, 'dc', true);
+        //    //log('partId: ' + partId, null, 'dc', true);
+        //    return manager.createEntity('EventureTransfer',
+        //        { registrationId: regId, eventureListIdFrom: oldListId, eventureListIdTo: newListId, stockAnswerSetId: answerId, isComplete: false, participantId: partId, dateCreated: moment().format("MM/DD/YYYY") });
+        //};
 
-        var getTransferInfoById = function (transferId) {
+        //var getTransferInfoById = function (transferId) {
 
-            var query = entityQuery.from('GetTransferInfo')
-                .withParameters({
-                    id: transferId
-                });
+        //    var query = entityQuery.from('GetTransferInfo')
+        //        .withParameters({
+        //            id: transferId
+        //        });
 
-            return manager.executeQuery(query)
-                .then(querySucceeded, _queryFailed);
+        //    return manager.executeQuery(query)
+        //        .then(querySucceeded, _queryFailed);
 
-            function querySucceeded(data) {
-                return data.results[0];
-            }
-        };
+        //    function querySucceeded(data) {
+        //        return data.results[0];
+        //    }
+        //};
 
-        var getTransferById = function (id) {
+        //var getTransferById = function (id) {
 
-            var query = entityQuery.from('EventureTransfers')
-                .where('id', '==', id);
+        //    var query = entityQuery.from('EventureTransfers')
+        //        .where('id', '==', id);
 
-            return manager.executeQuery(query)
-               .then(querySucceeded, _queryFailed);
+        //    return manager.executeQuery(query)
+        //       .then(querySucceeded, _queryFailed);
 
-            function querySucceeded(data) {
-                return data.results[0];
-            }
-        };
+        //    function querySucceeded(data) {
+        //        return data.results[0];
+        //    }
+        //};
 
-        var getParticipantById = function (partId) {
+        //var getParticipantById = function (partId) {
 
-            var query = entityQuery.from('Participants')
-                .where('id', '==', partId);
+        //    var query = entityQuery.from('Participants')
+        //        .where('id', '==', partId);
 
-            return manager.executeQuery(query)
-               .then(querySucceeded, _queryFailed);
+        //    return manager.executeQuery(query)
+        //       .then(querySucceeded, _queryFailed);
 
-            function querySucceeded(data) {
-                return data.results[0];
-            }
-        };
+        //    function querySucceeded(data) {
+        //        return data.results[0];
+        //    }
+        //};
 
-        var getParticipantByEmailAddress = function (partEmail, ownerId) {
+        //var getParticipantByEmailAddress = function (partEmail, ownerId) {
 
-            var pred = predicate.create("email", "==", partEmail)
-              .and("ownerId", "==", ownerId);
+        //    var pred = predicate.create("email", "==", partEmail)
+        //      .and("ownerId", "==", ownerId);
 
-            return entityQuery.from('Participants')
-              .where(pred)
-              .using(manager).execute()
-              .then(querySucceeded, _queryFailed);
+        //    return entityQuery.from('Participants')
+        //      .where(pred)
+        //      .using(manager).execute()
+        //      .then(querySucceeded, _queryFailed);
 
-            function querySucceeded(data) {
-                return data.results[0];
-            }
-        };
+        //    function querySucceeded(data) {
+        //        return data.results[0];
+        //    }
+        //};
 
-        var getParticipantsByHouseId = function (houseId) {
+        //var getParticipantsByHouseId = function (houseId) {
 
-            var query = entityQuery.from('ParticipantsByHouseId')
-                .withParameters({
-                    houseId: houseId
-                });
+        //    var query = entityQuery.from('ParticipantsByHouseId')
+        //        .withParameters({
+        //            houseId: houseId
+        //        });
 
-            return manager.executeQuery(query)
-               .then(querySucceeded, _queryFailed);
+        //    return manager.executeQuery(query)
+        //       .then(querySucceeded, _queryFailed);
 
-            function querySucceeded(data) {
-                return data.results;
-            }
-        };
+        //    function querySucceeded(data) {
+        //        return data.results;
+        //    }
+        //};
 
-        var createParticipant = function (ownerId, email, houseId) {
+        //var createParticipant = function (ownerId, email, houseId) {
 
-            return manager.createEntity('Participant',
-                { dateBirth: moment().format("MM/DD/YYYY"), ownerId: ownerId, email: email, houseId: houseId, country: "US" });
-        };
+        //    return manager.createEntity('Participant',
+        //        { dateBirth: moment().format("MM/DD/YYYY"), ownerId: ownerId, email: email, houseId: houseId, country: "US" });
+        //};
 
-        var getRegistrationById = function (registrationId, registrationObservable) {
+        //var getRegistrationById = function (registrationId, registrationObservable) {
 
-            var query = entityQuery.from('Registrations')
-                .where('id', '==', registrationId);
+        //    var query = entityQuery.from('Registrations')
+        //        .where('id', '==', registrationId);
 
-            return manager.executeQuery(query)
-                .then(querySucceeded, _queryFailed);
+        //    return manager.executeQuery(query)
+        //        .then(querySucceeded, _queryFailed);
 
-            function querySucceeded(data) {
-                return data.results[0];
-            }
-        };
+        //    function querySucceeded(data) {
+        //        return data.results[0];
+        //    }
+        //};
 
-        var getRegEditDisplayInfoById = function (registrationId) {
+        //var getRegEditDisplayInfoById = function (registrationId) {
 
-            var query = entityQuery.from('GetRegEditDisplayInfo')
-                .withParameters({
-                    id: registrationId
-                });
+        //    var query = entityQuery.from('GetRegEditDisplayInfo')
+        //        .withParameters({
+        //            id: registrationId
+        //        });
 
-            return manager.executeQuery(query)
-                .then(querySucceeded, _queryFailed);
+        //    return manager.executeQuery(query)
+        //        .then(querySucceeded, _queryFailed);
 
-            function querySucceeded(data) {
-                return data.results[0];
-            }
-        };
+        //    function querySucceeded(data) {
+        //        return data.results[0];
+        //    }
+        //};
 
-        var getAddonsByEventureId = function (eventureId) {
+        //var getAddonsByEventureId = function (eventureId) {
 
-            var pred = predicate.create("addonTypeLinkId", "==", eventureId)
-              .and("addonType", "==", 'eventfee')
-              .and("active", "==", true);
+        //    var pred = predicate.create("addonTypeLinkId", "==", eventureId)
+        //      .and("addonType", "==", 'eventfee')
+        //      .and("active", "==", true);
 
-            return entityQuery.from('Addons')
-              .where(pred)
-              .using(manager).execute()
-              .then(querySucceeded, _queryFailed);
+        //    return entityQuery.from('Addons')
+        //      .where(pred)
+        //      .using(manager).execute()
+        //      .then(querySucceeded, _queryFailed);
 
-            function querySucceeded(data) {
-                return data.results;
-            }
-        };
+        //    function querySucceeded(data) {
+        //        return data.results;
+        //    }
+        //};
 
-        var getAddonsByEventureListId = function (eventureListId) {
+        //var getAddonsByEventureListId = function (eventureListId) {
 
-            var pred = predicate.create("addonTypeLinkId", "==", eventureListId)
-              .and("addonType", "==", 'listfee')
-              .and("active", "==", true);
+        //    var pred = predicate.create("addonTypeLinkId", "==", eventureListId)
+        //      .and("addonType", "==", 'listfee')
+        //      .and("active", "==", true);
 
-            return entityQuery.from('Addons')
-              .where(pred)
-              .using(manager).execute()
-              .then(querySucceeded, _queryFailed);
+        //    return entityQuery.from('Addons')
+        //      .where(pred)
+        //      .using(manager).execute()
+        //      .then(querySucceeded, _queryFailed);
 
-            function querySucceeded(data) {
-                return data.results;
-            }
-        };
+        //    function querySucceeded(data) {
+        //        return data.results;
+        //    }
+        //};
 
-        var getAddonById = function (addonId) {
+        //var getAddonById = function (addonId) {
 
-            var query = entityQuery.from('Addons')
-                .where('id', '==', addonId);
+        //    var query = entityQuery.from('Addons')
+        //        .where('id', '==', addonId);
 
-            return manager.executeQuery(query)
-                .then(querySucceeded, _queryFailed);
+        //    return manager.executeQuery(query)
+        //        .then(querySucceeded, _queryFailed);
 
-            function querySucceeded(data) {
-                return data.results[0];
-            }
-        };
+        //    function querySucceeded(data) {
+        //        return data.results[0];
+        //    }
+        //};
 
-        var createAddon = function (ownerId) {
-            return manager.createEntity('Addon', { addonType: 'eventfee', ownerId: ownerId });
-        };
+        //var createAddon = function (ownerId) {
+        //    return manager.createEntity('Addon', { addonType: 'eventfee', ownerId: ownerId });
+        //};
 
-        var getCouponById = function (couponId) {
+        //var getCouponById = function (couponId) {
 
-            var query = entityQuery.from('Coupons')
-                .where('id', '==', couponId);
+        //    var query = entityQuery.from('Coupons')
+        //        .where('id', '==', couponId);
 
-            return manager.executeQuery(query)
-                .then(querySucceeded, _queryFailed);
+        //    return manager.executeQuery(query)
+        //        .then(querySucceeded, _queryFailed);
 
-            function querySucceeded(data) {
-                return data.results[0];
-            }
-        };
+        //    function querySucceeded(data) {
+        //        return data.results[0];
+        //    }
+        //};
 
-        var createCoupon = function (ownerId) {
-            return manager.createEntity('Coupon', { dateStart: moment().format("MM/DD/YYYY"), dateEnd: moment().format("MM/DD/YYYY"), couponType: 'owner', ownerId: ownerId });
-        };
+        //var createCoupon = function (ownerId) {
+        //    return manager.createEntity('Coupon', { dateStart: moment().format("MM/DD/YYYY"), dateEnd: moment().format("MM/DD/YYYY"), couponType: 'owner', ownerId: ownerId });
+        //};
 
-        var validateCoupon = function (couponCode, participantId, eventureListId) {
+        //var validateCoupon = function (couponCode, participantId, eventureListId) {
 
-            var query = entityQuery.from('ValidateCoupon')
-                .withParameters({
-                    couponCode: couponCode,
-                    participantId: participantId,
-                    eventureListId: eventureListId
-                });
+        //    var query = entityQuery.from('ValidateCoupon')
+        //        .withParameters({
+        //            couponCode: couponCode,
+        //            participantId: participantId,
+        //            eventureListId: eventureListId
+        //        });
 
-            return manager.executeQuery(query)
-                .then(querySucceeded, _queryFailed);
+        //    return manager.executeQuery(query)
+        //        .then(querySucceeded, _queryFailed);
 
-            function querySucceeded(data) {
-                return data.results[0];
-            }
-        };
+        //    function querySucceeded(data) {
+        //        return data.results[0];
+        //    }
+        //};
 
-        var getFeeSchedulesByEventureListId = function (eventureListId) {
+        //var getFeeSchedulesByEventureListId = function (eventureListId) {
 
-            var query = entityQuery.from('FeeSchedules')//;
-                .where('eventureListId', '==', eventureListId);
+        //    var query = entityQuery.from('FeeSchedules')//;
+        //        .where('eventureListId', '==', eventureListId);
 
-            return manager.executeQuery(query)
-                .then(querySucceeded, _queryFailed);
+        //    return manager.executeQuery(query)
+        //        .then(querySucceeded, _queryFailed);
 
-            function querySucceeded(data) {
-                return data.results;
-            }
-        };
+        //    function querySucceeded(data) {
+        //        return data.results;
+        //    }
+        //};
 
-        var createFeeSchedule = function () {
-            return manager.createEntity('FeeSchedule', { dateBegin: moment().format("MM/DD/YYYY") });
-        };
+        //var createFeeSchedule = function () {
+        //    return manager.createEntity('FeeSchedule', { dateBegin: moment().format("MM/DD/YYYY") });
+        //};
 
-        var getReportsByOwnerId = function (ownerId) {
+        //var getReportsByOwnerId = function (ownerId) {
 
-            var pred = predicate.create("active", "==", true)
-                                    .and("ownerId", "==", ownerId);
-            return entityQuery.from('Reports')
-                .where(pred)
-                .using(manager).execute()
-                .then(querySucceeded, _queryFailed);
+        //    var pred = predicate.create("active", "==", true)
+        //                            .and("ownerId", "==", ownerId);
+        //    return entityQuery.from('Reports')
+        //        .where(pred)
+        //        .using(manager).execute()
+        //        .then(querySucceeded, _queryFailed);
 
-            function querySucceeded(data) {
-                return data.results;
-            }
+        //    function querySucceeded(data) {
+        //        return data.results;
+        //    }
 
-        };
+        //};
 
         var getStockAnswerSetByEventureListId = function (eventureListId) {
 
@@ -689,81 +689,81 @@
         };
 
 
-        var getRegDataByOwnerId = function (ownerId) {
+        //var getRegDataByOwnerId = function (ownerId) {
 
-            var query = entityQuery.from('GetRegsRevByOwner')
-                .withParameters({
-                    id: ownerId
-                });
+        //    var query = entityQuery.from('GetRegsRevByOwner')
+        //        .withParameters({
+        //            id: ownerId
+        //        });
 
-            return manager.executeQuery(query)
-                .then(querySucceeded, _queryFailed);
+        //    return manager.executeQuery(query)
+        //        .then(querySucceeded, _queryFailed);
 
-            function querySucceeded(data) {
-                return data.results[0];
-            }
-        };
+        //    function querySucceeded(data) {
+        //        return data.results[0];
+        //    }
+        //};
 
-        var getCapacityByOwnerId = function (ownerId) {
+        //var getCapacityByOwnerId = function (ownerId) {
 
-            var query = entityQuery.from('GetCapacityByOwnerId')
-                .withParameters({
-                    id: ownerId
-                });
+        //    var query = entityQuery.from('GetCapacityByOwnerId')
+        //        .withParameters({
+        //            id: ownerId
+        //        });
 
-            return manager.executeQuery(query)
-                .then(querySucceeded, _queryFailed);
+        //    return manager.executeQuery(query)
+        //        .then(querySucceeded, _queryFailed);
 
-            function querySucceeded(data) {
-                return data.results[0];
-            }
-        };
+        //    function querySucceeded(data) {
+        //        return data.results[0];
+        //    }
+        //};
 
-        var getCapacityByEventureListId = function (eventureListId) {
+        //var getCapacityByEventureListId = function (eventureListId) {
 
-            var query = entityQuery.from('GetCapacityByEventureListId')
-                .withParameters({
-                    id: eventureListId
-                });
+        //    var query = entityQuery.from('GetCapacityByEventureListId')
+        //        .withParameters({
+        //            id: eventureListId
+        //        });
 
-            return manager.executeQuery(query)
-                .then(querySucceeded, _queryFailed);
+        //    return manager.executeQuery(query)
+        //        .then(querySucceeded, _queryFailed);
 
-            function querySucceeded(data) {
-                return data.results[0];
-            }
-        };
+        //    function querySucceeded(data) {
+        //        return data.results[0];
+        //    }
+        //};
 
-        var getCapacityByEventureId = function (eventureId) {
+        //var getCapacityByEventureId = function (eventureId) {
 
-            var query = entityQuery.from('GetCapacityByEventureId')
-                .withParameters({
-                    id: eventureId
-                });
+        //    var query = entityQuery.from('GetCapacityByEventureId')
+        //        .withParameters({
+        //            id: eventureId
+        //        });
 
-            return manager.executeQuery(query)
-                .then(querySucceeded, _queryFailed);
+        //    return manager.executeQuery(query)
+        //        .then(querySucceeded, _queryFailed);
 
-            function querySucceeded(data) {
-                return data.results[0];
-            }
-        };
+        //    function querySucceeded(data) {
+        //        return data.results[0];
+        //    }
+        //};
 
-        var getTrendsByEventId = function (id) {
+        //var getTrendsByEventId = function (id) {
 
-            var query = entityQuery.from('GetTrendsByEventId')
-                .withParameters({
-                    id: id
-                });
+        //    var query = entityQuery.from('GetTrendsByEventId')
+        //        .withParameters({
+        //            id: id
+        //        });
 
-            return manager.executeQuery(query)
-                .then(querySucceeded, _queryFailed);
+        //    return manager.executeQuery(query)
+        //        .then(querySucceeded, _queryFailed);
 
 
-            function querySucceeded(data) {
-                return data.results[0];
-            }
-        };
+        //    function querySucceeded(data) {
+        //        return data.results[0];
+        //    }
+        //};
 
         var getTeamById = function(id) {
             var query = breeze.EntityQuery
@@ -864,35 +864,35 @@
 
         var datacontext = {
             //Eventure
-            createEventure: createEventure,
-            getEventureById: getEventureById,
-            getFirstEventureByOwnerId: getFirstEventureByOwnerId,
-            getEventuresByOwnerId: getEventuresByOwnerId,
+            //createEventure: createEventure,
+            //getEventureById: getEventureById,
+            //getFirstEventureByOwnerId: getFirstEventureByOwnerId,
+            //getEventuresByOwnerId: getEventuresByOwnerId,
 
-            //EventureList
-            createEventureList: createEventureList,
-            createGroup: createGroup,
-            getEventureListsByEventureId: getEventureListsByEventureId,
-            getEventureListsByOwnerId: getEventureListsByOwnerId,
-            getEventureListById: getEventureListById,
-            getGroupsByEventureListId: getGroupsByEventureListId,
-            getGroupsActiveByEventureListId: getGroupsActiveByEventureListId,
+            ////EventureList
+            //createEventureList: createEventureList,
+            //createGroup: createGroup,
+            //getEventureListsByEventureId: getEventureListsByEventureId,
+            //getEventureListsByOwnerId: getEventureListsByOwnerId,
+            //getEventureListById: getEventureListById,
+            //getGroupsByEventureListId: getGroupsByEventureListId,
+            //getGroupsActiveByEventureListId: getGroupsActiveByEventureListId,
 
             //Transfer
-            createTransfer: createTransfer,
-            getTransferById: getTransferById,
-            getTransferInfoById: getTransferInfoById,
+            //createTransfer: createTransfer,
+            //getTransferById: getTransferById,
+            //getTransferInfoById: getTransferInfoById,
 
             //participant
-            createParticipant: createParticipant,
-            getParticipantById: getParticipantById,
-            getParticipantsByHouseId: getParticipantsByHouseId,
-            getParticipantByEmailAddress: getParticipantByEmailAddress,
+            //createParticipant: createParticipant,
+            //getParticipantById: getParticipantById,
+            //getParticipantsByHouseId: getParticipantsByHouseId,
+            //getParticipantByEmailAddress: getParticipantByEmailAddress,
             //saveParticipant: saveParticipant,
 
             //registration
-            getRegistrationById: getRegistrationById,
-            getRegEditDisplayInfoById: getRegEditDisplayInfoById,
+            //getRegistrationById: getRegistrationById,
+            //getRegEditDisplayInfoById: getRegEditDisplayInfoById,
             //createRegistration: createRegistration,
             //saveRegistration: saveRegistration,
 
@@ -904,19 +904,19 @@
             getStockAnswerSetByRegistrationId: getStockAnswerSetByRegistrationId,
 
             //resources
-            getResourceById: getResourceById,
-            getResourcesByOwnerId: getResourcesByOwnerId,
-            getResourceItemCategoriesByOwnerId: getResourceItemCategoriesByOwnerId,
-            getClientResourcesByOwnerId: getClientResourcesByOwnerId,
-            getClientById: getClientById,
-            getResourceServicesByOwnerId: getResourceServicesByOwnerId,
-            getEventureServicesByEventureId: getEventureServicesByEventureId,
-            createEventureService: createEventureService,
-            createResource: createResource,
-            createResourceItem: createResourceItem,
-            getResourceItemById: getResourceItemById,
-            getResourceItemsByOwnerId: getResourceItemsByOwnerId,
-            createResourceItemCategory: createResourceItemCategory,
+            //getResourceById: getResourceById,
+            //getResourcesByOwnerId: getResourcesByOwnerId,
+            //getResourceItemCategoriesByOwnerId: getResourceItemCategoriesByOwnerId,
+            //getClientResourcesByOwnerId: getClientResourcesByOwnerId,
+            //getClientById: getClientById,
+            //getResourceServicesByOwnerId: getResourceServicesByOwnerId,
+            //getEventureServicesByEventureId: getEventureServicesByEventureId,
+            //createEventureService: createEventureService,
+            //createResource: createResource,
+            //createResourceItem: createResourceItem,
+            //getResourceItemById: getResourceItemById,
+            //getResourceItemsByOwnerId: getResourceItemsByOwnerId,
+            //createResourceItemCategory: createResourceItemCategory,
 
             createPlanItem: createPlanItem,
             getPlanItemById: getPlanItemById,
@@ -932,22 +932,22 @@
             getOrderByRegistrationId: getOrderByRegistrationId,
 
             //charges
-            createFeeSchedule: createFeeSchedule,
-            createCoupon: createCoupon,
-            createAddon: createAddon,
-            getAddonById: getAddonById,
-            getCouponById: getCouponById,
-            getFeeSchedulesByEventureListId: getFeeSchedulesByEventureListId,
-            getAddonsByEventureListId: getAddonsByEventureListId,
-            getAddonsByEventureId: getAddonsByEventureId,
-            validateCoupon: validateCoupon,
+            //createFeeSchedule: createFeeSchedule,
+            //createCoupon: createCoupon,
+            //createAddon: createAddon,
+            //getAddonById: getAddonById,
+            //getCouponById: getCouponById,
+            //getFeeSchedulesByEventureListId: getFeeSchedulesByEventureListId,
+            //getAddonsByEventureListId: getAddonsByEventureListId,
+            //getAddonsByEventureId: getAddonsByEventureId,
+            //validateCoupon: validateCoupon,
 
             //stats
-            getRegDataByOwnerId: getRegDataByOwnerId,
-            getCapacityByEventureId: getCapacityByEventureId,
-            getCapacityByEventureListId: getCapacityByEventureListId,
-            getCapacityByOwnerId: getCapacityByOwnerId,
-            getTrendsByEventId: getTrendsByEventId,
+            //getRegDataByOwnerId: getRegDataByOwnerId,
+            //getCapacityByEventureId: getCapacityByEventureId,
+            //getCapacityByEventureListId: getCapacityByEventureListId,
+            //getCapacityByOwnerId: getCapacityByOwnerId,
+            //getTrendsByEventId: getTrendsByEventId,
 			getTeamById : getTeamById,
 
             //reports

@@ -13,9 +13,7 @@
         model.teamId = "tbd";
         model.currentlyPaid = 0;
         model.allowZeroPayment = false;
-		
-		
-
+	
         model.order = function (value) {
             var order = {
                 orderAmount: Number(value),
@@ -37,10 +35,7 @@
             };
             return order;
         };
-        
-       
-
-        // Submits orders to be processed by the backend.
+         // Submits orders to be processed by the backend.
         model.submitOrder = function(token, value) {
             // var order = {
             //     token : token,
