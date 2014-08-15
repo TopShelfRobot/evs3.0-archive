@@ -3,6 +3,8 @@
     var minNameLength = 0;
     var minTeamSize = 0;
 
+    angular.module("evReg").controller("CreateTeamController",
+                        ["$scope", "$location", "$routeParams", "RegistrationCartModel", controller]);
     function controller($scope, $location, $routeParams, cartModel){
 
         console.log("cartModel:", cartModel);
@@ -52,6 +54,5 @@
         };
     }
 
-    angular.module("evReg").controller("CreateTeamController",
-        ["$scope", "$location", "$routeParams", "RegistrationCartModel", controller]);
+   
 })();

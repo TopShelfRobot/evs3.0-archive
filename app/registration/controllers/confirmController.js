@@ -16,8 +16,8 @@
         // initialize it
         $scope.submitDisabled = true;
         $q.all([
-            datacontext.getOwnerById(config.owner.ownerId),
-            datacontext.getParticipantById(config.owner.houseId),
+            datacontext.participant.getOwnerById(config.owner.ownerId),
+            datacontext.participant.getParticipantById(config.owner.houseId),
         ])
             .then(function(output){
                 var owner = output[0];

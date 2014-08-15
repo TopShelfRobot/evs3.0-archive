@@ -1,6 +1,6 @@
 (function() {
-    angular.module("app").service("StripeService", ["$q", Service]);
-	function Service($q) {
+    angular.module("app").service("StripeService", ["$q","config", Service]);
+	function Service($q, config) {
 
 		var service = {};
 
@@ -8,12 +8,12 @@
             // build form
             var form = $('.form-stripe');
             form.empty();
-            form.attr("action", 'http://evs30api.eventuresports.info/api/Payment/Post');
+            form.attr("action", config.apiPath + '/api/Payment/PostTeam');
             form.attr("method", "POST");
             form.attr("style", "display:none;");
             console.log(userPaying);
-            console.log(order);
-            this.addFormFields(form, order);
+            console.log('from stripe service' + order);
+            //this.addFormFields(form, order);
             $("body").append(form);
 
             //// ajaxify form
@@ -51,16 +51,16 @@
         };
 
         // utility methods
-        service.addFormFields = function (form, data) {
-            if (data != null) {
-                $.each(data, function (name, value) {
-                    if (value != null) {
-                        var input = $("<input></input>").attr("type", "hidden").attr("name", name).val(value);
-                        form.append(input);
-                    }
-                });
-            }
-        };
+        //service.addFormFields = function (form, data) {
+        //    if (data != null) {
+        //        $.each(data, function (name, value) {
+        //            if (value != null) {
+        //                var input = $("<input></input>").attr("type", "hidden").attr("name", name).val(value);
+        //                form.append(input);
+        //            }
+        //        });
+        //    }
+        //};
 
 		return service;
 	}

@@ -99,7 +99,7 @@
     <Content Include="app\registration\views\questions.part.html" />
     <Content Include="app\registration\views\setparticipant.part.html" />
     <Content Include="app\registration\views\teamPayment.part.html" />
-    <Content Include="app\services\Copy of repository.ZZZ.js" />
+    <Content Include="app\services\repository.question.js" />
     <Content Include="app\services\repository.volunteer.js" />
     <Content Include="app\services\repository.analytic.js" />
     <Content Include="app\services\repository.surcharge.js" />

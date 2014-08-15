@@ -9,13 +9,13 @@
         $scope.waiverSigned = false;
         $scope.userPaying = 30;
 
-        $scope.checkout = function(){
-			var payment = $scope.userPaying;
-			var order = cartModel.order(payment);
-        	stripe.checkout(payment, order);
-        }
+        $scope.checkout = function() {
+            var payment = $scope.userPaying;
+            var order = cartModel.order(payment);
+            stripe.checkout(payment, order);
+        };
 
-        datacontext.getTeamById(2)
+        datacontext.team.getTeamById(2)
             .then(function(team){
                 console.log("team:", team);
 				if(team)

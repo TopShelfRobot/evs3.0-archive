@@ -13,7 +13,7 @@
         var logSuccess = getLogFn(serviceId, 'success');
         var manager = emFactory.newManager();
         var primePromise;
-        var repoNames = ['eventure', 'resource'];
+        var repoNames = ['eventure', 'resource', 'participant', 'registration', 'analytic', 'surcharge', 'volunteer', 'team', 'question'];
         var $q = common.$q;
 
         var service = {

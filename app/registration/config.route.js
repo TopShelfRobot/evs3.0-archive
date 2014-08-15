@@ -29,7 +29,7 @@
                     }
                 }
             }, {
-                url: '/eventure/:eventureId/list',
+                url: '/eventure/:eventureId/list/',
                 config: {
                     title: 'Eventure List',
                     templateUrl: 'app/registration/views/eventurelist.part.html',

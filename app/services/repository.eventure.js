@@ -19,12 +19,12 @@
             this.manager = mgr;
             // Exposed data access functions
             this.getAll = getAll;
-            
+
             this.createEventure = createEventure;
             this.getEventureById = getEventureById;
             this.getEventuresByOwnerId = getEventuresByOwnerId;
             this.getFirstEventureByOwnerId = getFirstEventureByOwnerId;
-            
+
             this.getEventureListById = getEventureListById;
             this.getEventureListsByEventureId = getEventureListsByEventureId;
             this.getEventureListsByOwnerId = getEventureListsByOwnerId;
@@ -59,11 +59,12 @@
         }
 
         function getEventureById(id) {
+            var self = this;
             var query = entityQuery.from('Eventures')
                 .where("id", "==", id);
 
             return self.manager.executeQuery(query)
-               .then(querySucceeded, _queryFailed);
+               .then(querySucceeded, self._queryFailed);
 
             function querySucceeded(data) {
                 return data.results[0];
@@ -87,6 +88,7 @@
         }
 
         function getFirstEventureByOwnerId() {
+            var self = this;
             var pred = predicate.create("ownerId", "==", config.ownerId)
               .and("active", "==", true);
 
@@ -95,7 +97,7 @@
                  .orderBy("active desc", "id")
                  .take(1)
                  .using(self.manager).execute()
-                 .then(querySucceeded, _queryFailed);
+                 .then(querySucceeded, self._queryFailed);
 
             function querySucceeded(data) {
                 return data.results[0];
@@ -103,29 +105,42 @@
         }
 
         function createEventure() {
-            return manager.createEntity('Eventure');
+            var self = this;
+            return self.manager.createEntity('Eventure');
         }
 
         function getEventureListById(id) {
+            var self = this;
             var query = entityQuery.from('EventureLists')
                 .where('id', '==', id)
                 .orderBy('sortOrder');
 
             return self.manager.executeQuery(query)
-               .then(querySucceeded, _queryFailed);
+               .then(querySucceeded, self._queryFailed);
 
             function querySucceeded(data) {
                 return data.results[0];
             }
         }
 
+        //var self = this;
+        //var pred = predicate.create("active", "==", true)
+        //  .and("ownerId", "==", ownerId);
+
+        //return entityQuery.from('Eventures')
+        //    .where(pred)
+        //    .orderBy('sortOrder')
+        //    .using(self.manager).execute()
+        //    .then(querySucceeded, self._queryFailed);
+
         function getEventureListsByEventureId(eventureId) {
+            var self = this;
             var query = entityQuery.from('EventureListsByEventureId')
                 .withParameters({ eventureId: eventureId })
                 .orderBy('sortOrder');
 
             return self.manager.executeQuery(query)
-                .then(querySucceeded, _queryFailed);
+                .then(querySucceeded, self._queryFailed);
 
             function querySucceeded(data) {
                 return data.results;
@@ -133,12 +148,13 @@
         }
 
         function getEventureListsByOwnerId(ownerId) {
+            var self = this;
             var query = entityQuery.from('EventureListsByOwnerId')
                 .withParameters({ ownerId: ownerId })
                 .orderBy('sortOrder');
 
             return self.manager.executeQuery(query)
-                .then(querySucceeded, _queryFailed);
+                .then(querySucceeded, self._queryFailed);
 
             function querySucceeded(data) {
                 return data.results;
@@ -146,17 +162,19 @@
         }
 
         function createEventureList(eventureId) {
+            var self = this;
             return self.manager.createEntity('EventureList',
                 { eventureId: eventureId, dateEventureList: moment().format("MM/DD/YYYY"), dateBeginReg: moment().format("MM/DD/YYYY"), dateEndReg: moment().format("MM/DD/YYYY"), imageFileName: "" });
         }
 
         function getGroupsByEventureListId(eventureListId) {
+            var self = this;
             var query = entityQuery.from('EventureGroups')
                 .where('eventureListId', '==', eventureListId)
                 .orderBy('sortOrder');
 
             return self.manager.executeQuery(query)
-                .then(querySucceeded, _queryFailed);
+                .then(querySucceeded, self._queryFailed);
 
             function querySucceeded(data) {
                 return data.results;
@@ -164,21 +182,21 @@
         }
 
         function getGroupsActiveByEventureListId(eventureListId) {
-
+            var self = this;
             var query = entityQuery.from('GroupsBelowCapacity')
                  .withParameters({ listId: eventureListId });
 
-            return manager.executeQuery(query)
-                .then(querySucceeded, _queryFailed);
+            return self.manager.executeQuery(query)
+                .then(querySucceeded, self._queryFailed);
 
             function querySucceeded(data) {
                 return data.results;
             }
         };
 
-            function createGroup(eventureListId) {
-
-            return manager.createEntity('EventureGroup',
+        function createGroup(eventureListId) {
+            var self = this;
+            return self.manager.createEntity('EventureGroup',
                 { eventureListId: eventureListId, active: true });
         };
     }

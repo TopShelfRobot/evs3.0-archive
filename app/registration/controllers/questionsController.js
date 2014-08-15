@@ -1,7 +1,7 @@
 
 ;(function(){
-	
-	function Controller($scope, $location, config, cartModel, datacontext, logger){
+    angular.module("evReg").controller("QuestionsController", ["$scope", "$location", "config", "CartModel", "datacontext", "$routeParams", Controller]);
+    function Controller($scope, $location, config, cartModel, datacontext, $routeParams) {
 		
 		$scope.cart = cartModel;
 		
@@ -45,7 +45,8 @@
 				// return questions.customQuestionSet;
 				//             });
 
-        datacontext.getGroupsActiveByEventureListId(cartModel.currentEventureListId)
+        //datacontext.eventure.getGroupsActiveByEventureListId(cartModel.currentEventureListId)
+        datacontext.eventure.getGroupsActiveByEventureListId(6)   //$routeParams.ListId
             .then(function (data) {
 				$scope.groups = data;
                 if (config.isGroupRequired && groups().length < 1) {
@@ -54,7 +55,7 @@
                 }
             });
 
-        datacontext.getStockQuestionSetByEventureListId(cartModel.currentEventureListId)
+        datacontext.question.getStockQuestionSetByEventureListId(cartModel.currentEventureListId)
 			.then(function(data){
 				return questions.stockQuestionSet = data;
 			});
@@ -108,6 +109,4 @@
       //   };
       //   return vm;
 	}
-	
-	angular.module("evReg").controller("QuestionsController", ["$scope", "$location", "config", "CartModel", "datacontext", Controller]);
 })();

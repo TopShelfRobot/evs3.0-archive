@@ -64,7 +64,7 @@
                 .where('id', '==', resourceId);
 
             return self.manager.executeQuery(query)
-               .then(querySucceeded, _queryFailed);
+               .then(querySucceeded, self._queryFailed);
 
             function querySucceeded(data) {
                 return data.results[0];
@@ -76,7 +76,7 @@
                 .where('ownerId', '==', ownerId);
 
             return self.manager.executeQuery(query)
-                .then(querySucceeded, _queryFailed);
+                .then(querySucceeded, self._queryFailed);
 
             function querySucceeded(data) {
                 return data.results;
@@ -107,7 +107,7 @@
             return entityQuery.from('ResourceItemCategories')
             .where(pred)
             .using(manager).execute()
-            .then(querySucceeded, _queryFailed);
+            .then(querySucceeded, self._queryFailed);
 
             function querySucceeded(data) {
                 return data.results;
@@ -121,7 +121,7 @@
             return entityQuery.from('ResourceItems')
               .where(pred)
               .using(manager).execute()
-              .then(querySucceeded, _queryFailed);
+              .then(querySucceeded, self._queryFailed);
 
             function querySucceeded(data) {
                 return data.results;
@@ -135,7 +135,7 @@
             return entityQuery.from('Resources')
                 .where(pred)
                 .using(manager).execute()
-                .then(querySucceeded, _queryFailed);
+                .then(querySucceeded, self._queryFailed);
 
             function querySucceeded(data) {
                 return data.results;
@@ -147,7 +147,7 @@
                 .where('eventureId', '==', eventureId);
 
             return self.manager.executeQuery(query)
-               .then(querySucceeded, _queryFailed);
+               .then(querySucceeded, self._queryFailed);
 
             function querySucceeded(data) {
                 return data.results;
@@ -164,7 +164,7 @@
                 .where('id', '==', id);
 
             return self.manager.executeQuery(query)
-                .then(querySucceeded, _queryFailed);
+                .then(querySucceeded, self._queryFailed);
 
             function querySucceeded(data) {
                 return data.results[0];
@@ -181,7 +181,7 @@
                 .where('id', '==', planItemId);
 
             return self.manager.executeQuery(query)
-                .then(querySucceeded, _queryFailed);
+                .then(querySucceeded, self._queryFailed);
 
             function querySucceeded(data) {
                 return data.results[0];
@@ -193,7 +193,7 @@
                 .withParameters({ id: ownerId });
 
             return self.manager.executeQuery(query)
-                .then(querySucceeded, _queryFailed);
+                .then(querySucceeded, self._queryFailed);
 
             function querySucceeded(data) {
                 return data.results;
@@ -209,7 +209,7 @@
             .where('id', '==', resourceItemId);
 
             return self.manager.executeQuery(query)
-                .then(querySucceeded, _queryFailed);
+                .then(querySucceeded, self._queryFailed);
 
             function querySucceeded(data) {
                 return data.results[0];
@@ -221,7 +221,7 @@
                 .where('eventureId', '==', eventureId);
 
             return self.manager.executeQuery(query)
-                .then(querySucceeded, _queryFailed);
+                .then(querySucceeded, self._queryFailed);
 
              function querySucceeded(data) {
                 return data.results;

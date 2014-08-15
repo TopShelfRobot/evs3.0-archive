@@ -206,10 +206,10 @@
                     }
                 };
 				
-                datacontext.getAddonsByEventureListId(vm.currentEventureListId)
+                datacontext.surcharge.getAddonsByEventureListId(vm.currentEventureListId)
                     .then(afterGetListAddons);
 
-                datacontext.getAddonsByEventureId(vm.currentEventureId)
+                datacontext.surcharge.getAddonsByEventureId(vm.currentEventureId)
                     .then(afterGetEventAddons);  
             }
         };
