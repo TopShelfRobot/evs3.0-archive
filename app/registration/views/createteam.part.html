@@ -11,7 +11,7 @@
       <div class="col-lg-6 col-lg-offset-3">
         <h4>Team Name</h4>
        <!-- do we need to check for duplicate names?-->
-        <input type="text" class="form-control" name="TeamName" id="TeamName" placeholder="Choose a name for your team."
+        <input type="text" class="form-control" name="TeamName" value="blue gogs"  id="TeamName" placeholder="Choose a name for your team."
             ng-model="teamName">
       </div>
     </div>
@@ -31,10 +31,10 @@
             <tbody>
               <tr ng-repeat="player in players">
                 <td>
-                  <input ng-model="player.name" type="text" class="form-control" placeholder="Enter the full name of the person you would like to invite." />
+                  <input ng-model="player.name" type="text" class="form-control" value="tom jones" placeholder="Enter the full name of the person you would like to invite." />
                 </td>
                 <td>
-                  <input ng-model="player.email" type="email" class="form-control" placeholder="Enter a valid email address for the person you would like to invite." />
+                  <input ng-model="player.email" type="email" class="form-control" value="tom@jones.com" placeholder="Enter a valid email address for the person you would like to invite." />
                 </td>
                 <td>
                   <input type="hidden" class="form-control" />

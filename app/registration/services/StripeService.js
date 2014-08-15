@@ -33,7 +33,7 @@
                 // show processing message and block UI until form is submitted and returns
                 $.blockUI({ message: 'Processing order...' });
                 // submit form
-                form.append($input).submit();
+                //form.append($input).submit();
                 //this.clearCart = clearCart == null || clearCart;
                 //form.submit();
             };
@@ -45,7 +45,7 @@
                 currency: 'usd',
                 name: 'Eventure Sports',
                 description: 'Description',
-                panelLabel: 'Checkout',
+                panelLabel: 'Checkoutqwq1',
                 token: token
             });
         };
