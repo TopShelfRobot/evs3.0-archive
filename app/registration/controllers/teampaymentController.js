@@ -1,8 +1,8 @@
 (function () {
     angular.module("evReg").controller("TeamPaymentController",
-       ["$scope", "$location", "datacontext", "RegistrationCartModel", "config","StripeService", controller]);
-})();
-function controller($scope, $location, datacontext, cartModel, config, stripe) {
+       ["$scope", "$location", "$http", "datacontext", "RegistrationCartModel", "config","StripeService", controller]);
+	   
+	function controller($scope, $location, $http, datacontext, cartModel, config, stripe) {
 
         //console.log("cartModel:", cartModel);
 
@@ -20,12 +20,12 @@ function controller($scope, $location, datacontext, cartModel, config, stripe) {
         // $scope.waiverSigned = cartModel.waiverSigned;
 
         $scope.errorMessage = "";
-    
+
         $scope.checkout = function () {
 
             var cartOrder = cartModel.order($scope.userPaying);
             console.log('order man!!!!!!!!!:' + cartOrder);
-            
+        
             var order = {
                 //'orderName': $scope.house.firstName + " " + $scope.house.lastName,
                 'orderEmail': 'boone.mike@bitem.com',
@@ -35,10 +35,26 @@ function controller($scope, $location, datacontext, cartModel, config, stripe) {
                 'regs': cartOrder.regs   //,
                 //'charges': cart.surcharges
             };
-            
+        
             //var order = cartModel.order($scope.userPaying);
             console.log('order man:' + order);
-            stripe.checkout(order.orderAmount, order);
+			$.blockUI({ message: 'Processing order...' });
+            stripe.checkout(order.orderAmount)
+				.then(function(res){
+					console.log(res);
+					order.token = res.id;
+					$http.post("/api/Payment/PostTeam", order)
+						.success(function(data){
+							console.log("success");
+						})
+						.error(function(err){
+							console.error("ERROR:", err.toString());
+						})
+						.finally(function(){
+							$.unblockUI();
+						});
+						
+				});
         };
 
 
@@ -53,7 +69,7 @@ function controller($scope, $location, datacontext, cartModel, config, stripe) {
         //    //console.log('order man:' + cartModel.order);
         //    var order = cartModel.order($scope.userPaying);
         //    console.log('order man:' + order);
-            
+        
         //    this.addFormFields(form, order);
         //    $("body").append(form);
 
@@ -103,5 +119,5 @@ function controller($scope, $location, datacontext, cartModel, config, stripe) {
         //    }
         //};
     }
-
+})();
    
