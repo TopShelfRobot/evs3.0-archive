@@ -51,7 +51,7 @@
                 width: "200px"
             },{
                 field: "Email",
-                title: "List",
+                title: "Listing",
                 width: "220px"
             },{
                 field: "Email",

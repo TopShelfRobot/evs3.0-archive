@@ -8,7 +8,7 @@
                 </p>
                 <hr>
             </div>
-            <tabset justified="true"> 
+            <tabset justified="true">
                 <tab heading="Personal Information">
                     <br>
                     <form class="form-horizontal">
@@ -201,11 +201,29 @@
                     <br>
                 </tab>
                 <!-- Tab -->
+                <tab heading="Team Registrations">
+                <br>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div id="teamgrid" kendo-grid k-options="teamGridOptions"></div>
+                        </div>
+                    </div>
+                </tab>
+                <!-- Tab -->
                 <tab heading="Associated Participants">
                 <br>
                     <div class="row">
                         <div class="col-lg-12">
                             <div id="partgrid" kendo-grid k-options="participantGridOptions"></div>
+                        </div>
+                    </div>
+                </tab>
+                <!-- Tab -->
+                <tab heading="Captain View">
+                <br>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div id="captaingrid" kendo-grid k-options="captainGridOptions"></div>
                         </div>
                     </div>
                 </tab>
@@ -217,6 +235,14 @@
     </div>
 </div>
 
-<script type="text/x-kendo-template" id="template">
-  <div kendo-grid k-options="detailGridOptions(dataItem)"></div>
+<script type="text/x-kendo-template" id="parttemplate">
+  <div kendo-grid k-options="partDetailGridOptions(dataItem)"></div>
+</script>
+
+<script type="text/x-kendo-template" id="teamtemplate">
+  <div kendo-grid k-options="teamDetailGridOptions(dataItem)"></div>
+</script>
+
+<script type="text/x-kendo-template" id="captaintemplate">
+  <div kendo-grid k-options="captainDetailGridOptions(dataItem)"></div>
 </script>
