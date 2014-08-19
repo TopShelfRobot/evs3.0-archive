@@ -31,13 +31,13 @@
 		function getCoupon() {
 
 			if (vm.couponId > 0) {
-				return datacontext.surchage.getCouponById(vm.couponId)
+				return datacontext.surcharge.getCouponById(vm.couponId)
 					.then(function(data) {
 						//applyFilter();
 						return vm.coupon = data;
 					});
 			} else {
-				return vm.coupon = datacontext.surchage.createCoupon();
+				return vm.coupon = datacontext.surcharge.createCoupon();
 			}
 		}
 
