@@ -74,7 +74,7 @@
         }
 
         function Capacity() {
-          return datacontext.getCapacityByEventureId(vm.eventureId)
+          return datacontext.analytic.getCapacityByEventureId(vm.eventureId)
             .then(function (data) {
               return vm.capacity = data;
             });
