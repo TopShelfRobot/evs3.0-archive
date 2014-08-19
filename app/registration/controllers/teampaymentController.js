@@ -29,10 +29,10 @@
             //};
 
 			//$.blockUI({ message: 'Processing order...' });
-            stripe.checkout(order.orderAmount)
+            stripe.checkout(cartOrder.orderAmount)
 				.then(function(res){
 					console.log(res);
-					order.token = res.id;
+					cartOrder.stripeToken = res.id;
 				    $http.post(config.apiPath + "/api/Payment/PostTeam", cartOrder)
 						.success(function(data){
 							console.log("success");
