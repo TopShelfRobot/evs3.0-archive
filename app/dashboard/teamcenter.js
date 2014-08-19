@@ -25,7 +25,7 @@
 
         function teamGrid() {
 
-          var teamapi = config.remoteApiName + 'Participants/GetParticipantsByOwnerId/' + vm.ownerId;
+          var teamapi = config.remoteApiName + 'Teams/GetTeamRegistrationsByOwnerId/' + vm.ownerId;
 
           vm.teamGridOptions = {
             dataSource: {
@@ -42,20 +42,20 @@
             filterable: true,
             detailTemplate: kendo.template($("#template").html()),
             columns: [{
-                field: "FirstName",
+                field: "Name",
                 title: "Team Name",
                 width: "200px"
             },{
-                field: "LastName",
+                field: "EventName",
                 title: "Eventure",
                 width: "200px"
             },{
-                field: "Email",
+                field: "ListingName",
                 title: "Listing",
                 width: "220px"
             },{
-                field: "Email",
-                title: "Captain Name",
+                field: "CoachName",
+                title: "Coach Name",
                 width: "220px"
             },{
                 title: "",
@@ -66,13 +66,13 @@
 
           vm.detailGridOptions = function(e) {
 
-            var regapi = config.remoteApiName + 'Registrations/GetRegistrationsByPartId/' + e.Id;
+            var teamapi = config.remoteApiName + 'Teams/GetTeamMembersByTeamId/' + e.Id;
 
             return {
                 dataSource: {
                     type: "json",
                     transport: {
-                        read: regapi
+                        read: teamapi
                     },
                     serverPaging: false,
                     serverSorting: false,
@@ -83,19 +83,14 @@
                 pageable: true,
                 columns: [{
                     field: "Name",
-                    title: "First Name",
+                    title: "Name",
                     width: 200
                 }, {
-                    field: "TotalAmount",
-                    title: "Last Name",
-                    format: "{0:c}",
-                    width: 200
-                }, {
-                    field: "Quantity",
+                    field: "Email",
                     title: "Email",
                     width: 250
                 }, {
-                    field: "Quantity",
+                    field: "",
                     title: "Paid",
                     width: 75
                 },{

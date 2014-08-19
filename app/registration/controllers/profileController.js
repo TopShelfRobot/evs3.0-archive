@@ -38,6 +38,51 @@
 
 		$scope.format = $scope.formats[0];
 
+		var regapi = config.remoteApiName + 'Registrations/GetRegistrationsByPartId/' + $scope.participant.id;
+
+		$scope.registrationGridOptions = {
+			dataSource: {
+				type: "json",
+				transport: {
+					read: regapi
+				},
+				pageSize: 10,
+				serverPaging: false,
+				serverSorting: false
+			},
+			sortable: true,
+			pageable: true,
+			filterable: true,
+			columns: [{
+					field: "Name",
+					title: "Listing",
+					width: 300
+				}, {
+					field: "TotalAmount",
+					title: "Amount",
+					format: "{0:c}",
+					width: 150
+				}, {
+					field: "Quantity",
+					title: "Quantity",
+					width: 125
+				}, {
+					field: "DateCreated",
+					title: "Registration Date",
+					type: "date",
+					format: "{0:MM/dd/yyyy}",
+					width: 200
+				},{
+					field: '',
+					title: '',
+					template: '<a href="\\\#viewreceipt/#=EventureOrderId#" class="btn btn-success btn-block">View Receipt</a>'
+				}, {
+					field: '',
+					title: '',
+					template: '<a href="\\\#registrationedit/#=Id#/#=StockAnswerSetId#" class="btn btn-default btn-block">Edit</a>'
+				}]
+		};
+
 		var partapi = config.remoteApiName + 'Participants/GetParticipantsByHouseId/' + config.owner.houseId;
 
 		$scope.participantGridOptions = {
@@ -122,7 +167,7 @@
 			};
 		}
 
-		var teamapi = config.remoteApiName + 'Participants/GetParticipantsByHouseId/' + config.owner.houseId;
+		var teamapi = config.remoteApiName + 'Teams/GetTeamRegistrationsByHouseId/' + config.owner.houseId;
 
 		$scope.teamGridOptions = {
 			dataSource: {
@@ -139,27 +184,27 @@
 			filterable: true,
 			detailTemplate: kendo.template($("#teamtemplate").html()),
 			columns: [{
-					field: "FirstName",
+					field: "Name",
 					title: "Team Name",
 					width: "200px"
 				},{
-					field: "LastName",
+					field: "EventName",
 					title: "Eventure",
 					width: "200px"
 				},{
-					field: "Email",
+					field: "ListName",
 					title: "Listing",
 					width: "220px"
 				},{
-					field: "Email",
-					title: "Captain Name",
+					field: "CoachName",
+					title: "Coach Name",
 					width: "120px"
 			}]
 		};
 
 		$scope.teamDetailGridOptions = function(e) {
 
-			var teamdetailapi = config.remoteApiName + 'Registrations/GetRegistrationsByPartId/' + e.Id;
+			var teamdetailapi = config.remoteApiName + 'Teams/GetTeamMembersByTeamId/' + e.Id;
 
 			return {
 				dataSource: {
@@ -175,23 +220,23 @@
 				sortable: true,
 				pageable: true,
 				columns: [{
-						field: "FirstName",
-						title: "First Name"
-					}, {
-						field: "LastName",
-						title: "Last Name"
+						field: "Name",
+						title: "Name"
+					},{
+						field: "Email",
+						title: "Email"
 					}
 				]
 			};
 		}
 
-		var captainapi = config.remoteApiName + 'Participants/GetParticipantsByHouseId/' + config.owner.houseId;
+		var coachapi = config.remoteApiName + 'Teams/GetTeamRegistrationsByCoachId/' + config.owner.houseId;
 
-		$scope.captainGridOptions = {
+		$scope.coachGridOptions = {
 			dataSource: {
 				type: "json",
 				transport: {
-					read: captainapi
+					read: coachapi
 				},
 				pageSize: 10,
 				serverPaging: false,
@@ -200,22 +245,22 @@
 			sortable: true,
 			pageable: true,
 			filterable: true,
-			detailTemplate: kendo.template($("#captaintemplate").html()),
+			detailTemplate: kendo.template($("#coachtemplate").html()),
 			columns: [{
-					field: "FirstName",
+					field: "Name",
 					title: "Team Name",
 					width: "200px"
 				},{
-					field: "LastName",
+					field: "EventName",
 					title: "Eventure",
 					width: "200px"
 				},{
-					field: "Email",
+					field: "ListName",
 					title: "Listing",
 					width: "220px"
 				},{
-					field: "Email",
-					title: "Captain Name",
+					field: "CoachName",
+					title: "Coach Name",
 					width: "220px"
 				},{
 					title: "",
@@ -224,15 +269,15 @@
 				}]
 		};
 
-		$scope.captainDetailGridOptions = function(e) {
+		$scope.coachDetailGridOptions = function(e) {
 
-			var captaindetailapi = config.remoteApiName + 'Registrations/GetRegistrationsByPartId/' + e.Id;
+			var coachdetailapi = config.remoteApiName + 'Teams/GetTeamMembersByTeamId/' + e.Id;
 
 			return {
 				dataSource: {
 					type: "json",
 					transport: {
-						read: captaindetailapi
+						read: coachdetailapi
 					},
 					serverPaging: false,
 					serverSorting: false,
@@ -243,19 +288,14 @@
 				pageable: true,
 				columns: [{
 						field: "Name",
-						title: "First Name",
+						title: "Name",
 						width: 200
 					}, {
-						field: "TotalAmount",
-						title: "Last Name",
-						format: "{0:c}",
-						width: 200
-					}, {
-						field: "Quantity",
+						field: "Email",
 						title: "Email",
 						width: 250
 					}, {
-						field: "Quantity",
+						field: "",
 						title: "Paid",
 						width: 75
 					},{

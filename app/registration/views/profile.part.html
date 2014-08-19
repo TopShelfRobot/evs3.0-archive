@@ -198,9 +198,7 @@
                 <br>
                     <div class="row">
                         <div class="col-lg-12">
-                            <h4 class="highlight">Open Registrations</h4>
-                            <p class="text-muted">A list of open events you have registered for.</p>
-                            <div id="openregistrationgrid"></div>
+                            <div id="openregistrationgrid" kendo-grid k-options="registrationGridOptions"></div>
                         </div>
                     </div>
                     <br>
@@ -224,11 +222,11 @@
                     </div>
                 </tab>
                 <!-- Tab -->
-                <tab heading="Captain View">
+                <tab heading="Coach View">
                 <br>
                     <div class="row">
                         <div class="col-lg-12">
-                            <div id="captaingrid" kendo-grid k-options="captainGridOptions"></div>
+                            <div id="captaingrid" kendo-grid k-options="coachGridOptions"></div>
                         </div>
                     </div>
                 </tab>
@@ -248,6 +246,6 @@
   <div kendo-grid k-options="teamDetailGridOptions(dataItem)"></div>
 </script>
 
-<script type="text/x-kendo-template" id="captaintemplate">
-  <div kendo-grid k-options="captainDetailGridOptions(dataItem)"></div>
+<script type="text/x-kendo-template" id="coachtemplate">
+  <div kendo-grid k-options="coachDetailGridOptions(dataItem)"></div>
 </script>
