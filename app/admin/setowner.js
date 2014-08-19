@@ -24,7 +24,7 @@
         }
 
         function getOwnerById() {
-            return datacontext.getOwnerById(vm.ownerId)
+            return datacontext.particpant.getOwnerById(vm.ownerId)
                     .then(function(data) {
                         //applyFilter();
                         return vm.owner = data;
@@ -165,7 +165,7 @@
 //             //logger.log('test activating.', null, 'test', true);
 //             return datacontext.getOwnerById(config.ownerId, owner);
 //         };
-        
+
 //         var clickSave = function () {
 //             //logger.log('next', null, 'test', true);
 //             save();
@@ -187,9 +187,9 @@
 //         var clickRandomFunction = function () {
 
 //             var apiUrl = "/api/Mail/SendMockingbirdWelcomeEmail/";    //mjb
-            
+
 //             logger.log('api: ' + apiUrl, null, 'confirm jonsify', true);
-            
+
 
 //             //var source = {
 //             //    'token': token,
@@ -224,7 +224,7 @@
 
 //                 },
 //                 error: function (xhr, textStatus, errorThrown) {
-                    
+
 //                     alert('fail');
 //                     //alert('fail' + errorThrown.responseText);
 //                     //alert('error4' + textStatus);  //value is error
@@ -238,12 +238,12 @@
 //             });
 
 //         };
-        
+
 //         var viewAttached = function () {
 //             //logger.log('view attached', null, 'test', true);
 //            // bindEventToList(view, '.events', gotoDetails);
 //         };
-        
+
 //       var vm = {
 //             activate: activate,
 //             clickSave: clickSave,
@@ -253,4 +253,3 @@
 //         };
 //         return vm;
 //    });
-

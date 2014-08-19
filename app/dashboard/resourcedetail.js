@@ -25,7 +25,7 @@
 
         function getResource () {
         //    resourceId = parseInt(routeData.id);
-            return datacontext.getResourceById(vm.resourceId)
+            return datacontext.resource.getResourceById(vm.resourceId)
                 .then(function(data) {
                     return vm.resource = data;
                 });

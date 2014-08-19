@@ -28,13 +28,13 @@
 		function getEventure() {
 
 			if (vm.eventureId > 0) {
-				return datacontext.getEventureById(vm.eventureId)
+				return datacontext.eventure.getEventureById(vm.eventureId)
 					.then(function(data) {
 						//applyFilter();
 						return vm.eventure = data;
 					});
 			} else {
-				return vm.eventure = datacontext.createEventure();
+				return vm.eventure = datacontext.eventure.createEventure();
 			}
 		}
 
