@@ -44,14 +44,14 @@
                 return data.results;
             }
         }
-        
+
 
        function getRegistrationById(registrationId, registrationObservable) {
-
+            var self = this;
             var query = entityQuery.from('Registrations')
                 .where('id', '==', registrationId);
 
-            return manager.executeQuery(query)
+            return self.manager.executeQuery(query)
                 .then(querySucceeded, self._queryFailed);
 
             function querySucceeded(data) {
@@ -60,13 +60,13 @@
         }
 
         function getRegEditDisplayInfoById(registrationId) {
-
+            var self = this;
             var query = entityQuery.from('GetRegEditDisplayInfo')
                 .withParameters({
                     id: registrationId
                 });
 
-            return manager.executeQuery(query)
+            return self.manager.executeQuery(query)
                 .then(querySucceeded, self._queryFailed);
 
             function querySucceeded(data) {
@@ -75,17 +75,18 @@
         }
 
         function createTransfer(regId, oldListId, newListId, answerId, partId) {
-            return manager.createEntity('EventureTransfer',
+            return self.manager.createEntity('EventureTransfer',
                 { registrationId: regId, eventureListIdFrom: oldListId, eventureListIdTo: newListId, stockAnswerSetId: answerId, isComplete: false, participantId: partId, dateCreated: moment().format("MM/DD/YYYY") });
         }
 
         function getTransferInfoById(transferId) {
+            var self = this;
             var query = entityQuery.from('GetTransferInfo')
                 .withParameters({
                     id: transferId
                 });
 
-            return manager.executeQuery(query)
+            return self.manager.executeQuery(query)
                 .then(querySucceeded, self._queryFailed);
 
             function querySucceeded(data) {
@@ -94,10 +95,11 @@
         }
 
         function getTransferById(id) {
+            var self = this;
             var query = entityQuery.from('EventureTransfers')
                 .where('id', '==', id);
 
-            return manager.executeQuery(query)
+            return self.manager.executeQuery(query)
                .then(querySucceeded, self._queryFailed);
 
             function querySucceeded(data) {
