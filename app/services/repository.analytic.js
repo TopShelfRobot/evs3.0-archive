@@ -49,14 +49,14 @@
 
 
         function getRegDataByOwnerId(ownerId) {
-
+            var self = this;
             var query = entityQuery.from('GetRegsRevByOwner')
                 .withParameters({
                     id: ownerId
                 });
 
-            return manager.executeQuery(query)
-                .then(querySucceeded, _queryFailed);
+            return self.manager.executeQuery(query)
+                .then(querySucceeded, self._queryFailed);
 
             function querySucceeded(data) {
                 return data.results[0];
@@ -64,14 +64,14 @@
         }
 
         function getCapacityByOwnerId(ownerId) {
-
+            var self = this;
             var query = entityQuery.from('GetCapacityByOwnerId')
                 .withParameters({
                     id: ownerId
                 });
 
-            return manager.executeQuery(query)
-                .then(querySucceeded, _queryFailed);
+            return self.manager.executeQuery(query)
+                .then(querySucceeded, self._queryFailed);
 
             function querySucceeded(data) {
                 return data.results[0];
@@ -79,14 +79,14 @@
         }
 
         function getCapacityByEventureListId(eventureListId) {
-
+            var self = this;
             var query = entityQuery.from('GetCapacityByEventureListId')
                 .withParameters({
                     id: eventureListId
                 });
 
-            return manager.executeQuery(query)
-                .then(querySucceeded, _queryFailed);
+            return self.manager.executeQuery(query)
+                .then(querySucceeded, self._queryFailed);
 
             function querySucceeded(data) {
                 return data.results[0];
@@ -94,14 +94,14 @@
         }
 
         function getCapacityByEventureId(eventureId) {
-
+            var self = this;
             var query = entityQuery.from('GetCapacityByEventureId')
                 .withParameters({
                     id: eventureId
                 });
 
-            return manager.executeQuery(query)
-                .then(querySucceeded, _queryFailed);
+            return self.manager.executeQuery(query)
+                .then(querySucceeded, self._queryFailed);
 
             function querySucceeded(data) {
                 return data.results[0];
@@ -109,29 +109,29 @@
         }
 
         function getTrendsByEventId(id) {
-
+            var self = this;
             var query = entityQuery.from('GetTrendsByEventId')
                 .withParameters({
                     id: id
                 });
 
-            return manager.executeQuery(query)
-                .then(querySucceeded, _queryFailed);
+            return self.manager.executeQuery(query)
+                .then(querySucceeded, self._queryFailed);
 
 
             function querySucceeded(data) {
                 return data.results[0];
             }
         }
-        
-       function getReportsByOwnerId(ownerId) {
 
+       function getReportsByOwnerId(ownerId) {
+            var self = this;
             var pred = predicate.create("active", "==", true)
                                     .and("ownerId", "==", ownerId);
             return entityQuery.from('Reports')
                 .where(pred)
-                .using(manager).execute()
-                .then(querySucceeded, _queryFailed);
+                .using(self.manager).execute()
+                .then(querySucceeded, self._queryFailed);
 
             function querySucceeded(data) {
                 return data.results;

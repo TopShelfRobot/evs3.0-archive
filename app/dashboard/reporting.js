@@ -12,7 +12,7 @@
         vm.title = 'app';
 
         vm.reports = [];
-        
+
 
         activate();
 
@@ -23,7 +23,7 @@
         }
 
       function getReports() {
-          return datacontext.getReportsByOwnerId(1)
+          return datacontext.analytic.getReportsByOwnerId(1)
           //return datacontext.getPeople()
               .then(function (data) {
                   //alert(data)

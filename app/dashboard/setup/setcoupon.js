@@ -31,18 +31,18 @@
 		function getCoupon() {
 
 			if (vm.couponId > 0) {
-				return datacontext.getCouponById(vm.couponId)
+				return datacontext.surcharge.getCouponById(vm.couponId)
 					.then(function(data) {
 						//applyFilter();
 						return vm.coupon = data;
 					});
 			} else {
-				return vm.coupon = datacontext.createCoupon();
+				return vm.coupon = datacontext.surcharge.createCoupon();
 			}
 		}
 
         function getEventures() {
-            return datacontext.getEventuresByOwnerId(vm.ownerId)
+            return datacontext.eventure.getEventuresByOwnerId(vm.ownerId)
                 .then(function(data) {
                     //applyFilter();
                     return vm.eventures = data;
@@ -50,7 +50,7 @@
         }
 
         function getEventureLists() {
-            return datacontext.getEventureListsByOwnerId(vm.ownerId)
+            return datacontext.eventure.getEventureListsByOwnerId(vm.ownerId)
                 .then(function(data) {
                     //applyFilter();
                     return vm.listings = data;

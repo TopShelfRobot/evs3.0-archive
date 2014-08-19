@@ -25,7 +25,7 @@
               .then(function() { log('Activated Eventure Detail View'); }); }
 
         function getEventure() {
-          return datacontext.getEventureById(vm.eventureId)
+          return datacontext.eventure.getEventureById(vm.eventureId)
             .then(function (data) {
                 return vm.eventure = data;
             });
@@ -74,7 +74,7 @@
         }
 
         function Capacity() {
-          return datacontext.getCapacityByEventureId(vm.eventureId)
+          return datacontext.analytic.getCapacityByEventureId(vm.eventureId)
             .then(function (data) {
               return vm.capacity = data;
             });

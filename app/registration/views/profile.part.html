@@ -31,7 +31,12 @@
                                 <div class="form-group">
                                     <label for="Birthdate" class="col-lg-5 control-label">Date Of Birth</label>
                                     <div class="col-lg-7">
-                                        <input id="dateBirth" class="form-control" name="Birthdate" ng-model="participant.dateBirth" placeholder="MM/DD/YYYY" required />
+                                        <p class="input-group">
+                                            <input type="text" name="DateBirth"  class="form-control" datepicker-popup="{{format}}" ng-model="participant.dateBirth" is-open="dateOpen" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" close-text="Close" />
+                                            <span class="input-group-btn">
+                                            <button class="btn btn-default" ng-click="open($event, 'dateOpen')"><i class="glyphicon glyphicon-calendar"></i></button>
+                                            </span>
+                                        </p>
                                     </div>
                                 </div>
 

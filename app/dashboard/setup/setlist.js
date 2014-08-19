@@ -28,13 +28,13 @@
 		function getEventureList() {
 
 			if (vm.listId > 0) {
-				return datacontext.getEventureListById(vm.listId)
+				return datacontext.eventure.getEventureListById(vm.listId)
 					.then(function(data) {
 						//applyFilter();
 						return vm.list = data;
 					});
 			} else {
-				return vm.list = datacontext.createEventureList();
+				return vm.list = datacontext.eventure.createEventureList();
 			}
 		}
 

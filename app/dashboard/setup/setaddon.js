@@ -31,18 +31,18 @@
         function getAddon() {
 
             if (vm.addonId > 0) {
-                return datacontext.getAddonById(vm.addonId)
+                return datacontext.surchage.getAddonById(vm.addonId)
                     .then(function(data) {
                         //applyFilter();
                         return vm.addon = data;
                     });
             } else {
-                return vm.addon = datacontext.createAddon();
+                return vm.addon = datacontext.surcharge.createAddon();
             }
         }
 
         function getEventures() {
-            return datacontext.getEventuresByOwnerId(vm.ownerId)
+            return datacontext.eventure.getEventuresByOwnerId(vm.ownerId)
                 .then(function(data) {
                     //applyFilter();
                     return vm.eventures = data;
@@ -50,7 +50,7 @@
         }
 
         function getEventureLists() {
-            return datacontext.getEventureListsByOwnerId(vm.ownerId)
+            return datacontext.eventure.getEventureListsByOwnerId(vm.ownerId)
                 .then(function(data) {
                     //applyFilter();
                     return vm.listings = data;

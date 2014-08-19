@@ -33,20 +33,20 @@
       //  }
 
         function getListing() {
-          return datacontext.getEventureListById(vm.listingId)
+          return datacontext.eventure.getEventureListById(vm.listingId)
             .then(function (data) {
                 return vm.listing = data;
             });
         }
 
         function Capacity() {
-          return datacontext.getCapacityByEventureListId(vm.listingId)
+          return datacontext.analytic.getCapacityByEventureListId(vm.listingId)
             .then(function (data) {
               return vm.capacity = data;
             });
         }
         function FeeSchedule() {
-          return datacontext.getFeeSchedulesByEventureListId(vm.listingId)
+          return datacontext.surcharge.getFeeSchedulesByEventureListId(vm.listingId)
             .then(function (data) {
               return vm.fees = data;
             });
