@@ -3,6 +3,8 @@
 
 	function Controller($scope, config, datacontext){
 
+	$scope.participant = {};
+
 		datacontext.participant.getParticipantById(config.owner.houseId)
 			.then(function(participant){
 				$scope.participant = participant;
@@ -15,6 +17,26 @@
 				});
 		};
 
+		$scope.today = function () {
+			$scope.participant.dateBirth = new Date();
+		};
+
+		$scope.today();
+
+		$scope.open = function($event, open) {
+			$event.preventDefault();
+			$event.stopPropagation();
+			$scope[open] = true;
+		};
+
+		$scope.dateOptions = {
+			'year-format': "'yy'",
+			'starting-day': 1
+		};
+
+		$scope.formats = ['MM-dd-yyyy', 'yyyy/MM/dd', 'shortDate'];
+
+		$scope.format = $scope.formats[0];
 
 		var partapi = config.remoteApiName + 'Participants/GetParticipantsByHouseId/' + config.owner.houseId;
 
