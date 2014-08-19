@@ -99,7 +99,7 @@
                 .where('id', '==', couponId);
 
             return self.manager.executeQuery(query)
-                .then(querySucceeded, _queryFailed);
+                .then(querySucceeded, self._queryFailed);
 
             function querySucceeded(data) {
                 return data.results[0];
@@ -121,7 +121,7 @@
                 });
 
             return self.manager.executeQuery(query)
-                .then(querySucceeded, _queryFailed);
+                .then(querySucceeded, self._queryFailed);
 
             function querySucceeded(data) {
                 return data.results[0];
@@ -134,7 +134,7 @@
                 .where('eventureListId', '==', eventureListId);
 
             return self.manager.executeQuery(query)
-                .then(querySucceeded, _queryFailed);
+                .then(querySucceeded, self._queryFailed);
 
             function querySucceeded(data) {
                 return data.results;

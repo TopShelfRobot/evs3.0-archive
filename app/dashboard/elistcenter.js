@@ -46,7 +46,7 @@
             });
         }
         function FeeSchedule() {
-          return datacontext.eventure.getFeeSchedulesByEventureListId(vm.listingId)
+          return datacontext.surcharge.getFeeSchedulesByEventureListId(vm.listingId)
             .then(function (data) {
               return vm.fees = data;
             });
