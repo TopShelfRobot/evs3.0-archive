@@ -4,9 +4,9 @@
     var serviceId = 'repository.eventure';
 
     angular.module('app').factory(serviceId,
-        ['model', 'breeze', 'repository.abstract', repositoryEventure]);
+        ['model', 'breeze', 'repository.abstract', 'config', repositoryEventure]);
 
-    function repositoryEventure(model, breeze, abstractRepository) {
+    function repositoryEventure(model, breeze, abstractRepository, config) {
         var entityName = 'Eventure';
         //var entityNames = model.entityNames;
         var entityQuery = breeze.EntityQuery;
@@ -106,7 +106,7 @@
 
         function createEventure() {
             var self = this;
-            return self.manager.createEntity('Eventure');
+            return self.manager.createEntity('Eventure', { imageFileName: "", ownerId: config.owner.ownerId });
         }
 
         function getEventureListById(id) {
