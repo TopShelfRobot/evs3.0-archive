@@ -423,58 +423,58 @@
 
         //};
 
-        var getStockAnswerSetByEventureListId = function (eventureListId) {
+        //var getStockAnswerSetByEventureListId = function (eventureListId) {
 
-            var query = entityQuery.from('StockAnswerSets')
-                .where('registrationId', '==', eventureListId);
+        //    var query = entityQuery.from('StockAnswerSets')
+        //        .where('registrationId', '==', eventureListId);
 
-            return manager.executeQuery(query)
-                .then(querySucceeded, queryFailed);
+        //    return manager.executeQuery(query)
+        //        .then(querySucceeded, queryFailed);
 
-            function querySucceeded(data) {
-                return data.results[0];
-            }
-        };
+        //    function querySucceeded(data) {
+        //        return data.results[0];
+        //    }
+        //};
 
-        var getStockAnswerSetByRegistrationId = function (stockAnswerSetId) {
-            var query = entityQuery.from('StockAnswerSets')
-                .where('id', '==', stockAnswerSetId);
+        //var getStockAnswerSetByRegistrationId = function (stockAnswerSetId) {
+        //    var query = entityQuery.from('StockAnswerSets')
+        //        .where('id', '==', stockAnswerSetId);
 
-            return manager.executeQuery(query)
-                .then(querySucceeded, _queryFailed);
+        //    return manager.executeQuery(query)
+        //        .then(querySucceeded, _queryFailed);
 
-            function querySucceeded(data) {
-                return data.results[0];
-            }
-        };
+        //    function querySucceeded(data) {
+        //        return data.results[0];
+        //    }
+        //};
 
-        var getStockQuestionSetByEventureListId = function (eventureListId) {
-            var query = entityQuery.from('StockQuestionSets')
-                .where('eventureListId', '==', eventureListId);
+        //var getStockQuestionSetByEventureListId = function (eventureListId) {
+        //    var query = entityQuery.from('StockQuestionSets')
+        //        .where('eventureListId', '==', eventureListId);
 
-            return manager.executeQuery(query)
-                .then(querySucceeded, _queryFailed);
+        //    return manager.executeQuery(query)
+        //        .then(querySucceeded, _queryFailed);
 
-            function querySucceeded(data) {
-                return data.results[0];
-            }
-        };
+        //    function querySucceeded(data) {
+        //        return data.results[0];
+        //    }
+        //};
 
-        var getStockQuestionSetByRegistrationId = function (registrationId) {
-            var query = entityQuery.from('StockQuestionSets')
-                .where('registrationId', '==', registrationId);
+        //var getStockQuestionSetByRegistrationId = function (registrationId) {
+        //    var query = entityQuery.from('StockQuestionSets')
+        //        .where('registrationId', '==', registrationId);
 
-            return manager.executeQuery(query)
-                .then(querySucceeded, _queryFailed);
+        //    return manager.executeQuery(query)
+        //        .then(querySucceeded, _queryFailed);
 
-            function querySucceeded(data) {
-                return data.results[0];
-            }
-        };
+        //    function querySucceeded(data) {
+        //        return data.results[0];
+        //    }
+        //};
 
-        var createStockQuestionSet = function (eventureListId) {
-            return manager.createEntity('StockQuestionSet', { eventureListId: eventureListId });
-        };
+        //var createStockQuestionSet = function (eventureListId) {
+        //    return manager.createEntity('StockQuestionSet', { eventureListId: eventureListId });
+        //};
 
         //var getExpensesByEventureId = function (eventureId) {
 
@@ -663,30 +663,30 @@
         //};
 
 
-        function getOrderById(Id) {
-            var query = entityQuery.from('OrderById')
-                .withParameters({ id: Id });
+        //function getOrderById(Id) {
+        //    var query = entityQuery.from('OrderById')
+        //        .withParameters({ id: Id });
 
-            return manager.executeQuery(query)
-                .then(querySucceeded, _queryFailed);
+        //    return manager.executeQuery(query)
+        //        .then(querySucceeded, _queryFailed);
 
-            function querySucceeded(data) {
-                return data.results[0];
-            }
-        };
+        //    function querySucceeded(data) {
+        //        return data.results[0];
+        //    }
+        //};
         
-        function getOrderByRegistrationId(regId) {
+        //function getOrderByRegistrationId(regId) {
 
-            var query = entityQuery.from('OrderByRegistrationId')
-                .withParameters({ id: regId });
+        //    var query = entityQuery.from('OrderByRegistrationId')
+        //        .withParameters({ id: regId });
 
-            return manager.executeQuery(query)
-                .then(querySucceeded, _queryFailed);
+        //    return manager.executeQuery(query)
+        //        .then(querySucceeded, _queryFailed);
 
-            function querySucceeded(data) {
-                return data.results[0];
-            }
-        };
+        //    function querySucceeded(data) {
+        //        return data.results[0];
+        //    }
+        //};
 
 
         //var getRegDataByOwnerId = function (ownerId) {

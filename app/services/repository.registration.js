@@ -19,6 +19,10 @@
             this.manager = mgr;
             // Exposed data access functions
             this.getAll = getAll;
+
+            this.getOrderById = getOrderById;
+            this.getOrderByRegistrationId = getOrderByRegistrationId;
+
             this.createTransfer = createTransfer;
             this.getTransferById = getTransferById;
             this.getTransferInfoById = getTransferInfoById;
@@ -44,6 +48,33 @@
                 return data.results;
             }
         }
+
+        function getOrderById(Id) {
+            var self = this;
+            var query = entityQuery.from('OrderById')
+                .withParameters({ id: Id });
+
+            return self.AcceptChangesmanager.executeQuery(query)
+                .then(querySucceeded, self._queryFailed);
+
+            function querySucceeded(data) {
+                return data.results[0];
+            }
+        };
+
+        function getOrderByRegistrationId(regId) {
+            var self = this;
+            var query = entityQuery.from('OrderByRegistrationId')
+                .withParameters({ id: regId });
+
+            return self.manager.executeQuery(query)
+                .then(querySucceeded, self._queryFailed);
+
+            function querySucceeded(data) {
+                return data.results[0];
+            }
+        };
+
 
 
        function getRegistrationById(registrationId, registrationObservable) {
