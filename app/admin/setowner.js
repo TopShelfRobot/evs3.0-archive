@@ -24,7 +24,7 @@
         }
 
         function getOwnerById() {
-            return datacontext.particpant.getOwnerById(vm.ownerId)
+            return datacontext.participant.getOwnerById(vm.ownerId)
                     .then(function(data) {
                         //applyFilter();
                         return vm.owner = data;
