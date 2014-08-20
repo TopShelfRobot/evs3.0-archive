@@ -3,11 +3,12 @@
 
 	function Controller($scope, config, datacontext){
 
-	$scope.participant = {};
+		$scope.participant = {};
 
 		datacontext.participant.getParticipantById(config.owner.houseId)
 			.then(function(participant){
 				$scope.participant = participant;
+
 			});
 
 		$scope.save = function(){
@@ -19,6 +20,7 @@
 
 		$scope.today = function () {
 			$scope.participant.dateBirth = new Date();
+			console.log('participant: ' + $scope.participant.id);
 		};
 
 		$scope.today();
@@ -265,13 +267,22 @@
 				},{
 					title: "",
 					width: "120px",
-					template:'<a class="btn btn-default btn-block" href="\\\#profile/#=Id#">Edit</a>'
+					template:'<a class="btn btn-default btn-block" href="\\\#editteam/#=Id#">Edit</a>'
 				}]
 		};
 
 		$scope.coachDetailGridOptions = function(e) {
 
 			var coachdetailapi = config.remoteApiName + 'Teams/GetTeamMembersByTeamId/' + e.Id;
+
+			$scope.remove = function() {
+				alert('Removing: ' + e.Id );
+				$scope.vm.coachgrid.refresh();
+			};
+
+			$scope.resend = function() {
+				alert('Resending: ' + e.Id);
+			};
 
 			return {
 				dataSource: {
@@ -288,31 +299,29 @@
 				pageable: true,
 				columns: [{
 						field: "Name",
-						title: "Name",
-						width: 200
+						title: "Name"
 					}, {
 						field: "Email",
-						title: "Email",
-						width: 250
+						title: "Email"
 					}, {
-						field: "",
+						field: "Amount",
 						title: "Paid",
-						width: 75
+						width: 100
 					},{
 						field: '',
 						title: '',
-						template: '<a href="\\\#viewreceipt/#=EventureOrderId#" class="btn btn-success btn-block">Resend Invitation</a>',
+						template: '<button ng-click="resend()" class="btn btn-success btn-block">Resend Invitation</button>',
+						width: 170
 					},{
 						field: '',
 						title: '',
-						template: '<a href="\\\#viewreceipt/#=EventureOrderId#" class="btn btn-success btn-block">Remove</a>'
-					}, {
-						field: '',
-						title: '',
-						template: '<a href="\\\#registrationedit/#=Id#/#=StockAnswerSetId#" class="btn btn-default btn-block">Edit</a>'
+						template: '<button ng-click="remove()" class="btn btn-danger btn-block">Remove</button>',
+						width: 100
 					}]
 			};
-		}
+		};
+
+
 	}
 
 	angular.module("evReg").controller("UserProfile", ["$scope", "config", "datacontext", Controller]);

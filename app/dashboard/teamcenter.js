@@ -50,7 +50,7 @@
                 title: "Eventure",
                 width: "200px"
             },{
-                field: "ListingName",
+                field: "ListName",
                 title: "Listing",
                 width: "220px"
             },{
@@ -68,6 +68,17 @@
 
             var teamapi = config.remoteApiName + 'Teams/GetTeamMembersByTeamId/' + e.Id;
 
+            vm.remove = function() {
+                alert('Removing: ' + e.Id );
+                //datacontext.team.removeTeamMemberById(e.Id);
+                vm.teamgrid.refresh();
+
+            };
+
+            vm.resend = function() {
+                alert('Resending: ' + e.Id);
+            };
+
             return {
                 dataSource: {
                     type: "json",
@@ -82,30 +93,26 @@
                 sortable: true,
                 pageable: true,
                 columns: [{
-                    field: "Name",
-                    title: "Name",
-                    width: 200
-                }, {
-                    field: "Email",
-                    title: "Email",
-                    width: 250
-                }, {
-                    field: "",
-                    title: "Paid",
-                    width: 75
-                },{
-                    field: '',
-                    title: '',
-                    template: '<a href="\\\#viewreceipt/#=EventureOrderId#" class="btn btn-success btn-block">Resend Invitation</a>',
-                },{
-                    field: '',
-                    title: '',
-                    template: '<a href="\\\#viewreceipt/#=EventureOrderId#" class="btn btn-success btn-block">Remove</a>'
-                }, {
-                    field: '',
-                    title: '',
-                    template: '<a href="\\\#registrationedit/#=Id#/#=StockAnswerSetId#" class="btn btn-default btn-block">Edit</a>'
-                }]
+                        field: "Name",
+                        title: "Name"
+                    }, {
+                        field: "Email",
+                        title: "Email"
+                    }, {
+                        field: "Amount",
+                        title: "Paid",
+                        width: 100
+                    },{
+                        field: '',
+                        title: '',
+                        template: '<button ng-click="vm.resend()" class="btn btn-success btn-block">Resend Invitation</button>',
+                        width: 170
+                    },{
+                        field: '',
+                        title: '',
+                        template: '<button ng-click="vm.remove()" class="btn btn-danger btn-block">Remove</button>',
+                        width: 100
+                    }]
             };
           };
 
