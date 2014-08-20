@@ -3,11 +3,12 @@
 
 	function Controller($scope, config, datacontext){
 
-	$scope.participant = {};
+		$scope.participant = {};
 
 		datacontext.participant.getParticipantById(config.owner.houseId)
 			.then(function(participant){
 				$scope.participant = participant;
+
 			});
 
 		$scope.save = function(){
@@ -19,6 +20,7 @@
 
 		$scope.today = function () {
 			$scope.participant.dateBirth = new Date();
+			console.log('participant: ' + $scope.participant.id);
 		};
 
 		$scope.today();
@@ -37,6 +39,51 @@
 		$scope.formats = ['MM-dd-yyyy', 'yyyy/MM/dd', 'shortDate'];
 
 		$scope.format = $scope.formats[0];
+
+		var regapi = config.remoteApiName + 'Registrations/GetRegistrationsByPartId/' + $scope.participant.id;
+
+		$scope.registrationGridOptions = {
+			dataSource: {
+				type: "json",
+				transport: {
+					read: regapi
+				},
+				pageSize: 10,
+				serverPaging: false,
+				serverSorting: false
+			},
+			sortable: true,
+			pageable: true,
+			filterable: true,
+			columns: [{
+					field: "Name",
+					title: "Listing",
+					width: 300
+				}, {
+					field: "TotalAmount",
+					title: "Amount",
+					format: "{0:c}",
+					width: 150
+				}, {
+					field: "Quantity",
+					title: "Quantity",
+					width: 125
+				}, {
+					field: "DateCreated",
+					title: "Registration Date",
+					type: "date",
+					format: "{0:MM/dd/yyyy}",
+					width: 200
+				},{
+					field: '',
+					title: '',
+					template: '<a href="\\\#viewreceipt/#=EventureOrderId#" class="btn btn-success btn-block">View Receipt</a>'
+				}, {
+					field: '',
+					title: '',
+					template: '<a href="\\\#registrationedit/#=Id#/#=StockAnswerSetId#" class="btn btn-default btn-block">Edit</a>'
+				}]
+		};
 
 		var partapi = config.remoteApiName + 'Participants/GetParticipantsByHouseId/' + config.owner.houseId;
 
@@ -122,7 +169,7 @@
 			};
 		}
 
-		var teamapi = config.remoteApiName + 'Participants/GetParticipantsByHouseId/' + config.owner.houseId;
+		var teamapi = config.remoteApiName + 'Teams/GetTeamRegistrationsByHouseId/' + config.owner.houseId;
 
 		$scope.teamGridOptions = {
 			dataSource: {
@@ -139,27 +186,27 @@
 			filterable: true,
 			detailTemplate: kendo.template($("#teamtemplate").html()),
 			columns: [{
-					field: "FirstName",
+					field: "Name",
 					title: "Team Name",
 					width: "200px"
 				},{
-					field: "LastName",
+					field: "EventName",
 					title: "Eventure",
 					width: "200px"
 				},{
-					field: "Email",
+					field: "ListName",
 					title: "Listing",
 					width: "220px"
 				},{
-					field: "Email",
-					title: "Captain Name",
+					field: "CoachName",
+					title: "Coach Name",
 					width: "120px"
 			}]
 		};
 
 		$scope.teamDetailGridOptions = function(e) {
 
-			var teamdetailapi = config.remoteApiName + 'Registrations/GetRegistrationsByPartId/' + e.Id;
+			var teamdetailapi = config.remoteApiName + 'Teams/GetTeamMembersByTeamId/' + e.Id;
 
 			return {
 				dataSource: {
@@ -175,23 +222,23 @@
 				sortable: true,
 				pageable: true,
 				columns: [{
-						field: "FirstName",
-						title: "First Name"
-					}, {
-						field: "LastName",
-						title: "Last Name"
+						field: "Name",
+						title: "Name"
+					},{
+						field: "Email",
+						title: "Email"
 					}
 				]
 			};
 		}
 
-		var captainapi = config.remoteApiName + 'Participants/GetParticipantsByHouseId/' + config.owner.houseId;
+		var coachapi = config.remoteApiName + 'Teams/GetTeamRegistrationsByCoachId/' + config.owner.houseId;
 
-		$scope.captainGridOptions = {
+		$scope.coachGridOptions = {
 			dataSource: {
 				type: "json",
 				transport: {
-					read: captainapi
+					read: coachapi
 				},
 				pageSize: 10,
 				serverPaging: false,
@@ -200,39 +247,48 @@
 			sortable: true,
 			pageable: true,
 			filterable: true,
-			detailTemplate: kendo.template($("#captaintemplate").html()),
+			detailTemplate: kendo.template($("#coachtemplate").html()),
 			columns: [{
-					field: "FirstName",
+					field: "Name",
 					title: "Team Name",
 					width: "200px"
 				},{
-					field: "LastName",
+					field: "EventName",
 					title: "Eventure",
 					width: "200px"
 				},{
-					field: "Email",
+					field: "ListName",
 					title: "Listing",
 					width: "220px"
 				},{
-					field: "Email",
-					title: "Captain Name",
+					field: "CoachName",
+					title: "Coach Name",
 					width: "220px"
 				},{
 					title: "",
 					width: "120px",
-					template:'<a class="btn btn-default btn-block" href="\\\#profile/#=Id#">Edit</a>'
+					template:'<a class="btn btn-default btn-block" href="\\\#editteam/#=Id#">Edit</a>'
 				}]
 		};
 
-		$scope.captainDetailGridOptions = function(e) {
+		$scope.coachDetailGridOptions = function(e) {
 
-			var captaindetailapi = config.remoteApiName + 'Registrations/GetRegistrationsByPartId/' + e.Id;
+			var coachdetailapi = config.remoteApiName + 'Teams/GetTeamMembersByTeamId/' + e.Id;
+
+			$scope.remove = function() {
+				alert('Removing: ' + e.Id );
+				$scope.vm.coachgrid.refresh();
+			};
+
+			$scope.resend = function() {
+				alert('Resending: ' + e.Id);
+			};
 
 			return {
 				dataSource: {
 					type: "json",
 					transport: {
-						read: captaindetailapi
+						read: coachdetailapi
 					},
 					serverPaging: false,
 					serverSorting: false,
@@ -243,36 +299,29 @@
 				pageable: true,
 				columns: [{
 						field: "Name",
-						title: "First Name",
-						width: 200
+						title: "Name"
 					}, {
-						field: "TotalAmount",
-						title: "Last Name",
-						format: "{0:c}",
-						width: 200
+						field: "Email",
+						title: "Email"
 					}, {
-						field: "Quantity",
-						title: "Email",
-						width: 250
-					}, {
-						field: "Quantity",
+						field: "Amount",
 						title: "Paid",
-						width: 75
+						width: 100
 					},{
 						field: '',
 						title: '',
-						template: '<a href="\\\#viewreceipt/#=EventureOrderId#" class="btn btn-success btn-block">Resend Invitation</a>',
+						template: '<button ng-click="resend()" class="btn btn-success btn-block">Resend Invitation</button>',
+						width: 170
 					},{
 						field: '',
 						title: '',
-						template: '<a href="\\\#viewreceipt/#=EventureOrderId#" class="btn btn-success btn-block">Remove</a>'
-					}, {
-						field: '',
-						title: '',
-						template: '<a href="\\\#registrationedit/#=Id#/#=StockAnswerSetId#" class="btn btn-default btn-block">Edit</a>'
+						template: '<button ng-click="remove()" class="btn btn-danger btn-block">Remove</button>',
+						width: 100
 					}]
 			};
-		}
+		};
+
+
 	}
 
 	angular.module("evReg").controller("UserProfile", ["$scope", "config", "datacontext", Controller]);

@@ -2,9 +2,9 @@
 	'use strict';
 
 	var controllerId = 'seteventure';
-	angular.module('app').controller(controllerId, ['$q', '$routeParams', '$upload', '$http', '$timeout', 'common', 'datacontext', 'config', seteventure]);
+	angular.module('app').controller(controllerId, ['$q', '$routeParams', '$upload', '$http', '$timeout', '$location', 'common', 'datacontext', 'config', seteventure]);
 
-	function seteventure($q, $routeParams, $upload, $http, $timeout, common, datacontext, config) {
+	function seteventure($q, $routeParams, $upload, $http, $timeout, $location, common, datacontext, config) {
 
 		var getLogFn = common.logger.getLogFn;
 		var log = getLogFn(controllerId);
@@ -56,7 +56,12 @@
 		//};
 
         vm.saveChanges = function() {
-            return datacontext.saveChanges(vm.eventure);
+            return datacontext.save(vm.eventure)
+            .then(complete);
+
+                function complete() {
+                    $location.path("/eventurecenter/");
+                }
         };
 
 		vm.open = function($event, open) {

@@ -25,7 +25,7 @@
 
         function teamGrid() {
 
-          var teamapi = config.remoteApiName + 'Participants/GetParticipantsByOwnerId/' + vm.ownerId;
+          var teamapi = config.remoteApiName + 'Teams/GetTeamRegistrationsByOwnerId/' + vm.ownerId;
 
           vm.teamGridOptions = {
             dataSource: {
@@ -42,20 +42,20 @@
             filterable: true,
             detailTemplate: kendo.template($("#template").html()),
             columns: [{
-                field: "FirstName",
+                field: "Name",
                 title: "Team Name",
                 width: "200px"
             },{
-                field: "LastName",
+                field: "EventName",
                 title: "Eventure",
                 width: "200px"
             },{
-                field: "Email",
+                field: "ListName",
                 title: "Listing",
                 width: "220px"
             },{
-                field: "Email",
-                title: "Captain Name",
+                field: "CoachName",
+                title: "Coach Name",
                 width: "220px"
             },{
                 title: "",
@@ -66,13 +66,24 @@
 
           vm.detailGridOptions = function(e) {
 
-            var regapi = config.remoteApiName + 'Registrations/GetRegistrationsByPartId/' + e.Id;
+            var teamapi = config.remoteApiName + 'Teams/GetTeamMembersByTeamId/' + e.Id;
+
+            vm.remove = function() {
+                alert('Removing: ' + e.Id );
+                //datacontext.team.removeTeamMemberById(e.Id);
+                vm.teamgrid.refresh();
+
+            };
+
+            vm.resend = function() {
+                alert('Resending: ' + e.Id);
+            };
 
             return {
                 dataSource: {
                     type: "json",
                     transport: {
-                        read: regapi
+                        read: teamapi
                     },
                     serverPaging: false,
                     serverSorting: false,
@@ -82,35 +93,26 @@
                 sortable: true,
                 pageable: true,
                 columns: [{
-                    field: "Name",
-                    title: "First Name",
-                    width: 200
-                }, {
-                    field: "TotalAmount",
-                    title: "Last Name",
-                    format: "{0:c}",
-                    width: 200
-                }, {
-                    field: "Quantity",
-                    title: "Email",
-                    width: 250
-                }, {
-                    field: "Quantity",
-                    title: "Paid",
-                    width: 75
-                },{
-                    field: '',
-                    title: '',
-                    template: '<a href="\\\#viewreceipt/#=EventureOrderId#" class="btn btn-success btn-block">Resend Invitation</a>',
-                },{
-                    field: '',
-                    title: '',
-                    template: '<a href="\\\#viewreceipt/#=EventureOrderId#" class="btn btn-success btn-block">Remove</a>'
-                }, {
-                    field: '',
-                    title: '',
-                    template: '<a href="\\\#registrationedit/#=Id#/#=StockAnswerSetId#" class="btn btn-default btn-block">Edit</a>'
-                }]
+                        field: "Name",
+                        title: "Name"
+                    }, {
+                        field: "Email",
+                        title: "Email"
+                    }, {
+                        field: "Amount",
+                        title: "Paid",
+                        width: 100
+                    },{
+                        field: '',
+                        title: '',
+                        template: '<button ng-click="vm.resend()" class="btn btn-success btn-block">Resend Invitation</button>',
+                        width: 170
+                    },{
+                        field: '',
+                        title: '',
+                        template: '<button ng-click="vm.remove()" class="btn btn-danger btn-block">Remove</button>',
+                        width: 100
+                    }]
             };
           };
 

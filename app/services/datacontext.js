@@ -42,7 +42,7 @@
                 Object.defineProperty(service, name, {
                     configurable: true, // will redefine this property once
                     get: function () {
-                        // The 1st time the repo is request via this property, 
+                        // The 1st time the repo is request via this property,
                         // we ask the repositories for it (which will inject it).
                         var repo = repositories.getRepo(name);
                         // Rewrite this property to always return this repo;
@@ -92,13 +92,13 @@
                 }
             }
         }
-        
+
         function save() {
             return manager.saveChanges()
                .then(saveSucceeded, saveFailed);
 
             function saveSucceeded(result) {
-                logSuccess('Saved data11', result, true);
+                logSuccess('Saved data', result, true);
             }
 
             function saveFailed(error) {
