@@ -13,7 +13,7 @@
                     cartModel.teamMemberId = data.teamMemberId;
                     $scope.teamName = data.teamName;
                     $scope.listName = data.listName;
-                    $scope.remaining = data.PaymentSum - data.regAmount;
+                    $scope.remaining = data.regAmount - data.PaymentSum;
                     $scope.suggested = $scope.remaining / data.memberCount;
                 }
                 else {
