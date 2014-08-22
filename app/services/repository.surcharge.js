@@ -90,7 +90,7 @@
 
         function createAddon(ownerId) {
             var self = this;
-            return self.manager.createEntity('Addon', { addonType: 'eventfee', ownerId: ownerId });
+            return self.manager.createEntity('Addon', { addonType: 'eventfee', ownerId: config.owner.ownerId, addonTypeLinkId: config.owner.ownerId });
         }
 
         function getCouponById(couponId) {
@@ -108,7 +108,7 @@
 
         function createCoupon(ownerId) {
             var self = this;
-            return self.manager.createEntity('Coupon', { dateStart: moment().format("MM/DD/YYYY"), dateEnd: moment().format("MM/DD/YYYY"), couponType: 'owner', ownerId: ownerId });
+            return self.manager.createEntity('Coupon', { couponType: 'owner', ownerId: config.owner.ownerId, couponTypeLinkId: config.owner.ownerId });
         }
 
         function validateCoupon(couponCode, participantId, eventureListId) {

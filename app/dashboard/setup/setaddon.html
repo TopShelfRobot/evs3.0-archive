@@ -22,7 +22,7 @@
           <div class="form-group" ng-show="vm.addon.addonType === 'event'">
             <label for="addoncode" class="col-lg-6 control-label">Event:</label>
             <div class="col-lg-6">
-              <select class="form-control" id="eventuredropdown" ng-model="vm.coupon.eventure" ng-options="e.id as e.name for e in vm.eventures">
+              <select class="form-control" id="eventuredropdown" ng-model="vm.addon.addonTypeLinkId" ng-options="e.id as e.name for e in vm.eventures">
                   <option value="">-- Please Select --</option>
               </select>
             </div>
@@ -32,7 +32,7 @@
           <div class="form-group" ng-show="vm.addon.addonType === 'listing'">
             <label for="addoncode" class="col-lg-6 control-label">Event List:</label>
             <div class="col-lg-6">
-              <select class="form-control" id="listdropdown" ng-model="vm.coupon.listing" ng-options="l.id as l.name for l in vm.listings">
+              <select class="form-control" id="listdropdown" ng-model="vm.addon.addonTypeLinkId" ng-options="l.id as l.name for l in vm.listings">
                   <option value="">-- Please Select --</option>
               </select>
             </div>

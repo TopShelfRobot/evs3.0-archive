@@ -17,7 +17,6 @@
 
         vm.ownerId = 1;
 
-
         activate();
 
         function activate() {
@@ -51,7 +50,7 @@
             pageable: true,
             filterable: true,
             columns: [{
-                field: "Name",
+                field: "Code",
                 title: "Coupon",
                 width: "400px"
             },{

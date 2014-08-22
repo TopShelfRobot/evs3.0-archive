@@ -8,12 +8,13 @@
     function controller($scope, $location, $routeParams, cartModel){
 
         console.log("cartModel:", cartModel);
-		
+
 		cartModel.eventureId = $routeParams.eventureId;
 		cartModel.eventureListId = $routeParams.listId;
 		cartModel.participantId = $location.search()["uid"];
 
-        $scope.teamName = "";
+        $scope.team = {};
+        $scope.team.teamName = "";
         $scope.players = [{name : "", email : ""}];
 
         $scope.addPlayer = function() {
@@ -22,12 +23,12 @@
 
         $scope.makeTeam = function() {
             var valid = true;
-            cartModel.teamName = $scope.teamName || "";
+            cartModel.teamName = $scope.team.teamName || "";
             if (cartModel.teamName.length < minNameLength) {
                 // make name red
                 valid = false;
             }
-            
+
             cartModel.teamMembers = [];
             for (var i = 0; i < $scope.players.length; i++) {
                 var name, email;
@@ -41,7 +42,7 @@
                     valid = false;
                 }
             }
-            
+
             if (cartModel.teamMembers.length < minTeamSize) {
                 // do something
                 valid = false;
@@ -54,5 +55,5 @@
         };
     }
 
-   
+
 })();

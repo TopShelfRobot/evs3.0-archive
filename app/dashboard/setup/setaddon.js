@@ -11,11 +11,11 @@
 
         var vm = this;
         vm.title = 'Eventure';
-        vm.addonId = $routeParams.couponId || 0;
+        vm.addonId = $routeParams.addonId || 0;
 
         vm.ownerId = 1;
 
-        vm.adon = {};
+        vm.addon = {};
         vm.eventures = [];
         vm.listings = [];
 
@@ -31,7 +31,7 @@
         function getAddon() {
 
             if (vm.addonId > 0) {
-                return datacontext.surchage.getAddonById(vm.addonId)
+                return datacontext.surcharge.getAddonById(vm.addonId)
                     .then(function(data) {
                         //applyFilter();
                         return vm.addon = data;
@@ -58,7 +58,7 @@
         }
 
         vm.saveAndNav = function() {
-            return datacontext.saveChanges(vm.addon)
+            return datacontext.save(vm.addon)
                 .then(complete);
 
             function complete() {

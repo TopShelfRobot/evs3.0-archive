@@ -80,7 +80,7 @@
 		vm.format = vm.formats[0];
 
 		vm.saveAndNav = function() {
-			return datacontext.saveChanges(vm.coupon)
+			return datacontext.save(vm.coupon)
 				.then(complete);
 
 			function complete() {
