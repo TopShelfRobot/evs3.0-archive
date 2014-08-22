@@ -48,7 +48,7 @@
         //     // }
         // };
         //
-        // return model;
+        return model;
     }
 
     angular.module("evReg").service("MemberCartModel", ["$http", "$routeParams", Model]);

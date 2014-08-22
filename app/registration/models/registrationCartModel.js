@@ -35,7 +35,7 @@
             return order;
         };
 
-        // // Submits orders to be processed by the backend.
+        // Submits orders to be processed by the backend.
         // model.submitOrder = function (token, value) {
         //
         //     var order = model.order(value);
@@ -43,8 +43,8 @@
         //     console.log(order);
         //     return $http.post(config.apiPath + "api/Payment/PostTeam", order);
         // };
-        //
-        // return model;
+
+        return model;
     }
 
 
