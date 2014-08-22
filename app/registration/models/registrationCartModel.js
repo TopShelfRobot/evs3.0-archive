@@ -26,7 +26,7 @@
                     eventureListId: model.eventureListId,
                     houseId: config.owner.houseId,
                     partId: model.participantId,
-                    fee: Number(value),
+                    fee: Number(model.fee), //total cost of registration
                     quantity: 1,
                     teamName: model.teamName,
                     teamMembers : model.teamMembers
@@ -35,16 +35,16 @@
             return order;
         };
 
-        // Submits orders to be processed by the backend.
-        model.submitOrder = function (token, value) {
-
-            var order = model.order(value);
-            alert('sending order');
-            console.log(order);
-            return $http.post(config.apiPath + "api/Payment/PostTeam", order);
-        };
-
-        return model;
+        // // Submits orders to be processed by the backend.
+        // model.submitOrder = function (token, value) {
+        //
+        //     var order = model.order(value);
+        //     alert('sending order');
+        //     console.log(order);
+        //     return $http.post(config.apiPath + "api/Payment/PostTeam", order);
+        // };
+        //
+        // return model;
     }
 
 

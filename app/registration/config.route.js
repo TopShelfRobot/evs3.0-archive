@@ -59,7 +59,7 @@
                     }
                 }
             },{
-                url: '/eventure/:eventureId/list/:listId/team/:teamId/member/:memberId/payment',
+                url: '/member/:teamMemberGuid/payment',
                 config: {
                     title: 'Member Payment',
                     templateUrl: 'app/registration/views/memberPayment.part.html'

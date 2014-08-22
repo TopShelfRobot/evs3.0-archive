@@ -1,7 +1,7 @@
 (function () {
     angular.module("evReg").controller("TeamPaymentController",
        ["$scope", "$location", "$http", "datacontext", "RegistrationCartModel", "config","StripeService", controller]);
-	   
+
 	function controller($scope, $location, $http, datacontext, cartModel, config, stripe) {
         $scope.teamName = cartModel.teamName;
 
@@ -9,7 +9,8 @@
         datacontext.eventure.getEventureListById(cartModel.eventureListId)
             .then(function (item) {
                 if (item)
-                    $scope.remaining = item.currentFee - cartModel.currentlyPaid;
+                    $scope.fee = item.currentFee;
+                    cartModel.fee = item.currentFee;
             });
 
         $scope.allowZeroPayment = cartModel.allowZeroPayment;
@@ -19,7 +20,7 @@
 
         $scope.checkout = function () {
             var cartOrder = cartModel.order($scope.userPaying);
-       
+
             //var order = {
             //    'orderAmount': $scope.userPaying,     //cart.getTotalPrice(),
             //    'orderHouseId': config.owner.houseId,
@@ -47,4 +48,3 @@
         };
     }
 })();
-   
