@@ -20,6 +20,7 @@
             // Exposed data access functions
             this.getAll = getAll;
             this.getTeamMemberPaymentInfoByTeamMemberGuid = getTeamMemberPaymentInfoByTeamMemberGuid;
+			this.getTeamById  = getTeamById;
         }
 
         // Allow this repo to have access to the Abstract Repo's functions,
@@ -53,6 +54,21 @@
                 return data.results[0];
             }
         };
+		
+		function getTeamById(id){
+			
+			var self = this;
+			
+			var query = entityQuery.from("Teams")
+				.where('id', '==', id);
+         
+		    return self.manager.executeQuery(query)
+                .then(querySucceeded, self.queryFailed);
+
+            function querySucceeded(data) {
+                return data.results[0];
+            }
+		}
 
     }
 })();

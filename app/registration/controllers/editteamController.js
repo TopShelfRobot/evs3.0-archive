@@ -1,20 +1,29 @@
 ;(function(){
 	
-	var controllerId = "EditTeam";
+	var controllerId = "EditTeamController";
 	function Controller($scope, $location, $routeParams, common, datacontext){
+		
+		function getTeam(){
+			return datacontext.team.getTeamById($routeParams.teamId)
+				.then(function(team){
+					$scope.team = team;
+				});
+		}
 		
         function activate() {
             var promises = [
-				function(){
-					
-				}
+				getTeam()
 			];
             common.activateController(promises, controllerId)
-                .then(function () { log('Activated Dashboard View'); });
+                .then(function () { 
+					console.log('Activated Dashboard View'); 
+				})
+				.finally(function(){
+					console.log("done");
+				});
         }
-		
 		activate();
 	}
 	
-	angular.module("evReg").controller(controllerId, ["$scope", "$location", "$routeParams", "common", "datacontext", Controller]));
+	angular.module("evReg").controller(controllerId, ["$scope", "$location", "$routeParams", "common", "datacontext", Controller]);
 })();
