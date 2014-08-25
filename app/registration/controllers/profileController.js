@@ -267,7 +267,7 @@
 				},{
 					title: "",
 					width: "120px",
-					template:'<a class="btn btn-default btn-block" href="\\\#editteam/#=Id#">Edit</a>'
+					template:'<a class="btn btn-default btn-block" href="\\\editteam/#=Id#">Edit</a>'
 				}]
 		};
 

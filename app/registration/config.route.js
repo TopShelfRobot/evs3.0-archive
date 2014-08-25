@@ -107,6 +107,12 @@
                     templateUrl: 'app/registration/views/profile.part.html'
                 }
             },{
+                url: '/editteam/:teamId',
+                config: {
+                    title: 'Edit Team',
+                    templateUrl: 'app/registration/views/editteam.part.html'
+                }
+            },{
                 url: '/kitchensink',
                 config: {
                     title: 'Kitchen Sink',
