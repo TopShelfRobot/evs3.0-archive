@@ -54,7 +54,7 @@
             var query = entityQuery.from('OrderById')
                 .withParameters({ id: Id });
 
-            return self.AcceptChangesmanager.executeQuery(query)
+            return self.manager.executeQuery(query)
                 .then(querySucceeded, self._queryFailed);
 
             function querySucceeded(data) {

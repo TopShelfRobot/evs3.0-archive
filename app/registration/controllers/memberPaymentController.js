@@ -5,16 +5,20 @@
 
     function Controller($scope, $routeParams, datacontext, stripe, cartModel){
         var controller = {};
+        $scope.allowZeroPayment = cartModel.allowZeroPayment;
+        $scope.waiverSigned = false;
+        $scope.userPaying = $scope.suggested;
+        $scope.teamMemberGuid = $routeParams.teamMemberGuid;
 
-        datacontext.team.getTeamMemberPaymentInfoByTeamMemberGuid($scope.teamMemberGuid)
+        datacontext.team.getTeamMemberPaymentInfoByTeamMemberGuid($scope.teamMemberGuid)   //$scope.teamMemberGuid
             .then(function(data){
                 // console.log("team:", team);
                 if(data) {
                     cartModel.teamMemberId = data.teamMemberId;
-                    $scope.teamName = data.teamName;
+                    $scope.teamName = data.name;
                     $scope.listName = data.listName;
-                    $scope.remaining = data.regAmount - data.PaymentSum;
-                    $scope.suggested = $scope.remaining / data.memberCount;
+                    $scope.remaining = data.regAmount;  // - data.PaymentSum;
+                    $scope.suggested = $scope.remaining; // / data.memberCount;
                 }
                 else {
                     alert("Invalid Team Id! Please contact your team's coach.");
@@ -23,10 +27,7 @@
 
         console.log("MemberPaymentController:", $scope);
 
-        $scope.allowZeroPayment = cartModel.allowZeroPayment;
-        $scope.waiverSigned = false;
-        $scope.userPaying = $scope.suggested;
-        $scope.teamMemberGuid = $routeParams.teamMemberGuid;
+       
 
         // $scope.checkout = function() {
         //     var payment = $scope.userPaying;
@@ -53,8 +54,6 @@
                         });
                 });
         };
-
         return controller;
     }
-
 })();
