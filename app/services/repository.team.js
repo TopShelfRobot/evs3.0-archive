@@ -1,13 +1,13 @@
 ﻿(function () {
     'use strict';
 
-    var serviceId = 'repository.ZZZ';
+    var serviceId = 'repository.team';
 
     angular.module('app').factory(serviceId,
-        ['breeze', 'config', 'repository.abstract', repositoryZZZ]);
+        ['breeze', 'config', 'repository.abstract', repositoryTeam]);
 
-    function repositoryZZZ(breeze, config, abstractRepository) {
-        var entityName = 'ZZZ';
+    function repositoryTeam(breeze, config, abstractRepository) {
+        var entityName = 'team';
         //var entityNames = model.entityNames;
         var entityQuery = breeze.EntityQuery;
         var predicate = breeze.Predicate;
@@ -19,6 +19,7 @@
             this.manager = mgr;
             // Exposed data access functions
             this.getAll = getAll;
+            this.getTeamMemberPaymentInfoByTeamMemberGuid = getTeamMemberPaymentInfoByTeamMemberGuid;
         }
 
         // Allow this repo to have access to the Abstract Repo's functions,
@@ -39,5 +40,19 @@
                 return data.results;
             }
         }
+        
+        function getTeamMemberPaymentInfoByTeamMemberGuid(guid) {
+            var self = this;
+            var query = entityQuery.from('getTeamMemberPaymentInfoByTeamMemberGuid')
+                .withParameters({ id: guid });
+
+            return self.manager.executeQuery(query)
+                .then(querySucceeded, self._queryFailed);
+
+            function querySucceeded(data) {
+                return data.results[0];
+            }
+        };
+
     }
 })();
