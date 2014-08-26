@@ -6,8 +6,9 @@
 		var team = null;
 		function getTeam(){
 			return datacontext.team.getTeamById($routeParams.teamId)
-				.then(function(team){
+				.then(function(result){
 					console.log("Team:", team);
+					team = result;
 					$scope.team = {};
 					$scope.team.teamName = team.name;
 					
@@ -18,12 +19,20 @@
 			return datacontext.team.getTeamMembersByTeamId($routeParams.teamId)
 				.then(function(members){
 					console.log("members:", members);
+					// $scope.players = members;
 					$scope.players = [];
 					var player;
 					for(var i = 0; i < members.length; i++){
-						player = {name: members[i].name, email: members[i].email};
+						player = members[i];
 						$scope.players.push(player);
 					}
+				});
+		}
+		
+		function getPayments(){
+			return datacontext.team.getTeamPaymentsByTeamId($routeParams.teamId)
+				.then(function(payments){
+					console.log("Payments:", payments);
 				});
 		}
 		
@@ -31,6 +40,7 @@
             var promises = [
 				getTeam(),
 				getPlayers(),
+				getPayments(),
 			];
             common.activateController(promises, controllerId)
                 .then(function () { 
@@ -41,6 +51,22 @@
 				});
         }
 		activate();
+		
+		$scope.addPlayer = function(name, email){
+			$scope.players.push({name : null, email: null});
+		}
+		
+		$scope.editTeam = function(){
+			team.name = $scope.team.teamName;
+			for(var i = 0; i < $scope.players.length; i++){
+				if(typeof $scope.players[i].id == "undefined"){
+					if($scope.players[i].name && $scope.players[i].email){
+						datacontext.team.addTeamMember({teamId: $routeParams.teamId, name: $scope.players[i].name, email: $scope.players[i].email});
+					}
+				}
+			}
+			datacontext.save();
+		}
 	}
 	
 	angular.module("evReg").controller(controllerId, ["$scope", "$location", "$routeParams", "common", "datacontext", Controller]);

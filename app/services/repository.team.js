@@ -22,6 +22,8 @@
             this.getTeamMemberPaymentInfoByTeamMemberGuid = getTeamMemberPaymentInfoByTeamMemberGuid;
 			this.getTeamById  = getTeamById;
 			this.getTeamMembersByTeamId = getTeamMembersByTeamId;
+			this.addTeamMember = addTeamMember;
+			this.getTeamPaymentsByTeamId = getTeamPaymentsByTeamId;
         }
 
         // Allow this repo to have access to the Abstract Repo's functions,
@@ -76,6 +78,25 @@
 			
 			var query = entityQuery.from("Teammembers")
 				.where("teamId", "==", Number(id));
+				
+			return self.manager.executeQuery(query)
+				.then(querySucceeded, self.queryFailed);
+			
+            function querySucceeded(data) {
+                return data.results;
+            }	
+		}
+		
+		function addTeamMember(obj){
+            var self = this;
+            return self.manager.createEntity('Teammembers', obj);
+		}
+		
+		function getTeamPaymentsByTeamId(id){
+			var self = this;
+			
+			var query = entityQuery.from("TeamMemberPayments")
+				// .where("teamId", "==", Number(id));
 				
 			return self.manager.executeQuery(query)
 				.then(querySucceeded, self.queryFailed);
