@@ -5,7 +5,7 @@
 
     // Collect the routes
     app.constant('routes', getRoutes());
-    
+
     // Configure the routes and route resolvers
     app.config(['$routeProvider', 'routes', routeConfigurator]);
     function routeConfigurator($routeProvider, routes) {
@@ -213,6 +213,12 @@
                 config: {
                     title: 'Create Fees & Groups',
                     templateUrl: 'app/dashboard/setup/setfee.html'
+                }
+            }, {
+                url: '/setquestion',
+                config: {
+                    title: 'Create Questions',
+                    templateUrl: 'app/dashboard/setup/setquestion.html'
                 }
             }, {
                 url: '/setlist',
