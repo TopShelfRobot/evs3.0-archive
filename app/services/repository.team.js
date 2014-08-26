@@ -24,6 +24,8 @@
 			this.getTeamMembersByTeamId = getTeamMembersByTeamId;
 			this.addTeamMember = addTeamMember;
 			this.getTeamPaymentsByTeamId = getTeamPaymentsByTeamId;
+            this.getNotPaidTeamMemberCountByTeamGuid = getNotPaidTeamMemberCountByTeamGuid;
+            this.getTeamMemberPaymentSumByTeamGuid = getTeamMemberPaymentSumByTeamGuid;
         }
 
         // Allow this repo to have access to the Abstract Repo's functions,
@@ -67,6 +69,19 @@
          
 		    return self.manager.executeQuery(query)
                 .then(querySucceeded, self.queryFailed);
+				
+            function querySucceeded(data) {
+                return data.results[0];
+            }
+        }
+
+        function getNotPaidTeamMemberCountByTeamGuid(teamGuid) {
+            var self = this;
+            var query = entityQuery.from('GetNotPaidTeamMemberCountByTeamGuid')
+                .withParameters({ id: teamGuid });
+
+            return self.manager.executeQuery(query)
+                .then(querySucceeded, self._queryFailed);
 
             function querySucceeded(data) {
                 return data.results[0];
@@ -105,6 +120,18 @@
                 return data.results;
             }	
 		}
+        
+        function getTeamMemberPaymentSumByTeamGuid(teamGuid) {
+            var self = this;
+            var query = entityQuery.from('GetTeamMemberPaymentSumByTeamGuid')
+                .withParameters({ id: teamGuid });
 
+            return self.manager.executeQuery(query)
+                .then(querySucceeded, self._queryFailed);
+
+            function querySucceeded(data) {
+                return data.results[0];
+            }
+        }
     }
 })();

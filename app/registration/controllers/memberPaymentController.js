@@ -1,29 +1,60 @@
 (function(){
 
-    angular.module("evReg").controller("MemberPaymentController",
-        ["$scope", "$routeParams", "datacontext", "StripeService", "MemberCartModel", Controller]);
+    var controllerId = 'MemberPaymentController';
 
-    function Controller($scope, $routeParams, datacontext, stripe, cartModel){
+    function Controller($scope, $routeParams, $q, datacontext, stripe, cartModel, common){
         var controller = {};
         $scope.allowZeroPayment = cartModel.allowZeroPayment;
         $scope.waiverSigned = false;
         $scope.userPaying = $scope.suggested;
         $scope.teamMemberGuid = $routeParams.teamMemberGuid;
+        $scope.teamGuid = $routeParams.teamGuid;
+    
+        //$q.all([datacontext.team.getTeamMemberPaymentInfoByTeamMemberGuid($scope.teamMemberGuid),
+        //            datacontext.team.getNotPaidTeamMemberCountByTeamGuid($scope.teamGuid),
+        //            datacontext.team.getTeamMemberPaymentSumByTeamGuid($scope.teamGuid)])  //$scope.teamMemberGuid
+        //    .then(function(data){
+        //        // console.log("team:", team);
+        //        if(data) {
+        //            cartModel.teamMemberId = data.teamMemberId;
+        //            $scope.teamName = data.name;
+        //            $scope.listName = data.listName;
+        //            $scope.remaining = data.regAmount;  // - data.PaymentSum;
+        //            $scope.suggested = $scope.remaining; // / data.memberCount;
+        //        }
+        //        else {
+        //            alert("Invalid Team Id! Please contact your team's coach.");
+        //        }
+        //    });
+       
+        activate();
 
-        datacontext.team.getTeamMemberPaymentInfoByTeamMemberGuid($scope.teamMemberGuid)   //$scope.teamMemberGuid
-            .then(function(data){
-                // console.log("team:", team);
-                if(data) {
-                    cartModel.teamMemberId = data.teamMemberId;
-                    $scope.teamName = data.name;
-                    $scope.listName = data.listName;
-                    $scope.remaining = data.regAmount;  // - data.PaymentSum;
-                    $scope.suggested = $scope.remaining; // / data.memberCount;
-                }
-                else {
-                    alert("Invalid Team Id! Please contact your team's coach.");
-                }
-            });
+        function activate() {
+            var promises = [datacontext.team.getTeamMemberPaymentInfoByTeamMemberGuid($scope.teamMemberGuid),
+                   datacontext.team.getNotPaidTeamMemberCountByTeamGuid($scope.teamGuid),
+                   datacontext.team.getTeamMemberPaymentSumByTeamGuid($scope.teamGuid)];
+
+            common.activateController(promises, controllerId)
+                .then(function () { log('Activated Listing Detail View'); });
+        }
+        
+
+        $q.all([datacontext.team.getTeamMemberPaymentInfoByTeamMemberGuid($scope.teamMemberGuid),
+                   datacontext.team.getNotPaidTeamMemberCountByTeamGuid($scope.teamGuid),
+                   datacontext.team.getTeamMemberPaymentSumByTeamGuid($scope.teamGuid)])  //$scope.teamMemberGuid
+           .then(function (data) {
+               // console.log("team:", team);
+               if (data) {
+                   cartModel.teamMemberId = data.teamMemberId;
+                   $scope.teamName = data.name;
+                   $scope.listName = data.listName;
+                   $scope.remaining = data.regAmount;  // - data.PaymentSum;
+                   $scope.suggested = $scope.remaining; // / data.memberCount;
+               }
+               else {
+                   alert("Invalid Team Id! Please contact your team's coach.");
+               }
+           });
 
         console.log("MemberPaymentController:", $scope);
 
@@ -56,4 +87,6 @@
         };
         return controller;
     }
+    angular.module("evReg").controller(controllerId,
+        ["$scope", "$routeParams", "$q", "datacontext", "StripeService", "MemberCartModel", "common", Controller]);
 })();
