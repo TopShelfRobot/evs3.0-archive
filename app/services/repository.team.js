@@ -76,7 +76,7 @@
 		function getTeamMembersByTeamId(id){
 			var self = this;
 			
-			var query = entityQuery.from("Teammembers")
+			var query = entityQuery.from("Teammember")
 				.where("teamId", "==", Number(id));
 				
 			return self.manager.executeQuery(query)
