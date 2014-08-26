@@ -91,7 +91,7 @@
 		function getTeamMembersByTeamId(id){
 			var self = this;
 			
-			var query = entityQuery.from("Teammember")
+			var query = entityQuery.from("Teammembers")
 				.where("teamId", "==", Number(id));
 				
 			return self.manager.executeQuery(query)
@@ -104,7 +104,7 @@
 		
 		function addTeamMember(obj){
             var self = this;
-            return self.manager.createEntity('Teammembers', obj);
+            return self.manager.createEntity('Teammember', obj);
 		}
 		
 		function getTeamPaymentsByTeamId(id){
