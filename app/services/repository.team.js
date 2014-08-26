@@ -104,7 +104,7 @@
 		
 		function addTeamMember(obj){
             var self = this;
-            return self.manager.createEntity('Teammember', obj);
+            return self.manager.createEntity('TeamMember', obj);
 		}
 		
 		function getTeamPaymentsByTeamId(id){

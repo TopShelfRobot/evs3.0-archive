@@ -61,7 +61,7 @@
 			for(var i = 0; i < $scope.players.length; i++){
 				if(typeof $scope.players[i].id == "undefined"){
 					if($scope.players[i].name && $scope.players[i].email){
-						datacontext.team.addTeamMember({teamId: $routeParams.teamId, name: $scope.players[i].name, email: $scope.players[i].email});
+						datacontext.team.addTeamMember({teamId: $routeParams.teamId, name: $scope.players[i].name, email: $scope.players[i].email, active: true});
 					}
 				}
 			}
