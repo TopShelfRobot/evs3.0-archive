@@ -20,6 +20,8 @@
             // Exposed data access functions
             this.getAll = getAll;
             this.getTeamMemberPaymentInfoByTeamMemberGuid = getTeamMemberPaymentInfoByTeamMemberGuid;
+            this.getNotPaidTeamMemberCountByTeamGuid = getNotPaidTeamMemberCountByTeamGuid;
+            this.getTeamMemberPaymentSumByTeamGuid = getTeamMemberPaymentSumByTeamGuid;
         }
 
         // Allow this repo to have access to the Abstract Repo's functions,
@@ -52,7 +54,32 @@
             function querySucceeded(data) {
                 return data.results[0];
             }
-        };
+        }
 
+        function getNotPaidTeamMemberCountByTeamGuid(teamGuid) {
+            var self = this;
+            var query = entityQuery.from('GetNotPaidTeamMemberCountByTeamGuid')
+                .withParameters({ id: teamGuid });
+
+            return self.manager.executeQuery(query)
+                .then(querySucceeded, self._queryFailed);
+
+            function querySucceeded(data) {
+                return data.results[0];
+            }
+        }
+        
+        function getTeamMemberPaymentSumByTeamGuid(teamGuid) {
+            var self = this;
+            var query = entityQuery.from('GetTeamMemberPaymentSumByTeamGuid')
+                .withParameters({ id: teamGuid });
+
+            return self.manager.executeQuery(query)
+                .then(querySucceeded, self._queryFailed);
+
+            function querySucceeded(data) {
+                return data.results[0];
+            }
+        }
     }
 })();

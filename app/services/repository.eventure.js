@@ -37,8 +37,8 @@
 
         // Allow this repo to have access to the Abstract Repo's functions,
         // then put its own Ctor back on itself.
-        //Ctor.prototype = new AbstractRepository(Ctor);
-        //Ctor.prototype.constructor = Ctor;
+        Ctor.prototype = new AbstractRepository(Ctor);
+        Ctor.prototype.constructor = Ctor;
         abstractRepository.extend(Ctor);
 
         return Ctor;
