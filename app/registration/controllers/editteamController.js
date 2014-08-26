@@ -1,7 +1,7 @@
 ;(function(){
 	
 	var controllerId = "EditTeamController";
-	function Controller($scope, $location, $routeParams, common, datacontext){
+	function Controller($scope, $location, $routeParams, $window, common, datacontext){
 		
 		var team = null;
 		function getTeam(){
@@ -65,9 +65,12 @@
 					}
 				}
 			}
-			datacontext.save();
+			datacontext.save()
+				.then(function(){
+					$window.history.back();
+				});
 		}
 	}
 	
-	angular.module("evReg").controller(controllerId, ["$scope", "$location", "$routeParams", "common", "datacontext", Controller]);
+	angular.module("evReg").controller(controllerId, ["$scope", "$location", "$routeParams", "$window", "common", "datacontext", Controller]);
 })();
