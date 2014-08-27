@@ -7,7 +7,7 @@
     // Define the factory on the module.
     // Inject the dependencies. 
     // Point to the factory definition function.
-    angular.module('app').factory(serviceId, model);
+    angular.module('common').factory(serviceId, model);
 
     function model() {
         // Define the functions and properties to reveal.

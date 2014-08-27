@@ -3,10 +3,10 @@
 
     var serviceId = 'repository.ZZZ';
 
-    angular.module('app').factory(serviceId,
-        ['breeze', 'config', 'repository.abstract', repositoryZZZ]);
+    angular.module('common').factory(serviceId,
+        ['breeze', 'repository.abstract', repositoryZZZ]);
 
-    function repositoryZZZ(breeze, config, abstractRepository) {
+    function repositoryZZZ(breeze, abstractRepository) {
         var entityName = 'ZZZ';
         //var entityNames = model.entityNames;
         var entityQuery = breeze.EntityQuery;

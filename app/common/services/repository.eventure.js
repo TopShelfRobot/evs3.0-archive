@@ -3,7 +3,7 @@
 
     var serviceId = 'repository.eventure';
 
-    angular.module('app').factory(serviceId,
+    angular.module('common').factory(serviceId,
         ['model', 'breeze', 'repository.abstract', 'config', repositoryEventure]);
 
     function repositoryEventure(model, breeze, abstractRepository, config) {

@@ -7,7 +7,7 @@
     // Define the factory on the module.
     // Inject the dependencies. 
     // Point to the factory definition function.
-    angular.module('app')
+    angular.module('common')
         .factory(serviceId,
             ['$location', '$rootScope', 'config', 'logger', routemediator]);
 
