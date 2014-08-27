@@ -20,7 +20,7 @@
             var order = {
                 orderAmount: Number(value),
                 orderHouseId: model.participantId,
-                ownerId: 1,
+                ownerId: config.owner.ownerId,
                 regs: [{
                     regType: "teamreg",
                     eventureListId: model.eventureListId,
