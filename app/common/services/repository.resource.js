@@ -3,7 +3,7 @@
 
     var serviceId = 'repository.resource';
 
-    angular.module('app').factory(serviceId,
+    angular.module('common').factory(serviceId,
         ['model', 'breeze', 'config', 'repository.abstract', repositoryResource]);
 
     function repositoryResource(model, breeze, config, abstractRepository) {

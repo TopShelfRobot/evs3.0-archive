@@ -19,7 +19,8 @@
         'ui.bootstrap', // ui-bootstrap (ex: carousel, pagination, dialog)
         'kendo.directives', // kendo-angular (grid, dataviz)
         'angularMoment', // Date and Time Format
-        'angularFileUpload'  // file upload functions
+        'angularFileUpload',  // file upload functions
+		'evReg',
     ]);
 
     app.config(['$httpProvider', function ($httpProvider) {

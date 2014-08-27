@@ -1,7 +1,7 @@
 ﻿(function() {
     'use strict';
 
-    var app = angular.module('app');
+    var app = angular.module('common');
 
     app.directive('json', function () {
         return {

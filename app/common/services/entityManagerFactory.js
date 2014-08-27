@@ -2,7 +2,7 @@
     'use strict';
 
     var serviceId = 'entityManagerFactory';
-    angular.module('app').factory(serviceId, ['config', 'model', emFactory]);
+    angular.module('common').factory(serviceId, ['config', 'model', emFactory]);
 
     function emFactory(config, model) {
         breeze.config.initializeAdapterInstance('modelLibrary', 'backingStore', true);

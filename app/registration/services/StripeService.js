@@ -1,5 +1,5 @@
 (function () {
-    angular.module("app").service("StripeService", ["$q", "config", Service]);
+    angular.module("evReg").service("StripeService", ["$q", "config", Service]);
     function Service($q, config) {
 
         var service = {};

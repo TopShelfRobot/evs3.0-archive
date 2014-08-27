@@ -3,7 +3,7 @@
 
     var serviceId = 'repository.abstract';
 
-    angular.module('app').factory(serviceId, ['common', abstractRepository]);
+    angular.module('common').factory(serviceId, ['common', abstractRepository]);
 
     function abstractRepository(common) {
         var EntityQuery = breeze.EntityQuery;

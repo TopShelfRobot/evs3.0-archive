@@ -3,7 +3,7 @@
 
     var serviceId = 'repository.surcharge';
 
-    angular.module('app').factory(serviceId,
+    angular.module('common').factory(serviceId,
         ['breeze', 'config', 'repository.abstract', repositorySurcharge]);
 
     function repositorySurcharge(breeze, config, abstractRepository) {

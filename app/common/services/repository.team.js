@@ -3,10 +3,10 @@
 
     var serviceId = 'repository.team';
 
-    angular.module('app').factory(serviceId,
-        ['breeze', 'config', 'repository.abstract', repositoryTeam]);
+    angular.module('common').factory(serviceId,
+        ['breeze', 'repository.abstract', repositoryTeam]);
 
-    function repositoryTeam(breeze, config, abstractRepository) {
+    function repositoryTeam(breeze, abstractRepository) {
         var entityName = 'team';
         //var entityNames = model.entityNames;
         var entityQuery = breeze.EntityQuery;
@@ -20,6 +20,10 @@
             // Exposed data access functions
             this.getAll = getAll;
             this.getTeamMemberPaymentInfoByTeamMemberGuid = getTeamMemberPaymentInfoByTeamMemberGuid;
+			this.getTeamById  = getTeamById;
+			this.getTeamMembersByTeamId = getTeamMembersByTeamId;
+			this.addTeamMember = addTeamMember;
+			this.getTeamPaymentsByTeamId = getTeamPaymentsByTeamId;
             this.getNotPaidTeamMemberCountByTeamGuid = getNotPaidTeamMemberCountByTeamGuid;
             this.getTeamMemberPaymentSumByTeamGuid = getTeamMemberPaymentSumByTeamGuid;
         }
@@ -54,6 +58,21 @@
             function querySucceeded(data) {
                 return data.results[0];
             }
+        };
+		
+		function getTeamById(id){
+			
+			var self = this;
+			
+			var query = entityQuery.from("Teams")
+				.where('id', '==', id);
+         
+		    return self.manager.executeQuery(query)
+                .then(querySucceeded, self.queryFailed);
+				
+            function querySucceeded(data) {
+                return data.results[0];
+            }
         }
 
         function getNotPaidTeamMemberCountByTeamGuid(teamGuid) {
@@ -67,7 +86,40 @@
             function querySucceeded(data) {
                 return data.results[0];
             }
-        }
+		}
+		
+		function getTeamMembersByTeamId(id){
+			var self = this;
+			
+			var query = entityQuery.from("Teammembers")
+				.where("teamId", "==", Number(id));
+				
+			return self.manager.executeQuery(query)
+				.then(querySucceeded, self.queryFailed);
+			
+            function querySucceeded(data) {
+                return data.results;
+            }	
+		}
+		
+		function addTeamMember(obj){
+            var self = this;
+            return self.manager.createEntity('TeamMember', obj);
+		}
+		
+		function getTeamPaymentsByTeamId(id){
+			var self = this;
+			
+			var query = entityQuery.from("TeamMemberPayments")
+				// .where("teamId", "==", Number(id));
+				
+			return self.manager.executeQuery(query)
+				.then(querySucceeded, self.queryFailed);
+			
+            function querySucceeded(data) {
+                return data.results;
+            }	
+		}
         
         function getTeamMemberPaymentSumByTeamGuid(teamGuid) {
             var self = this;

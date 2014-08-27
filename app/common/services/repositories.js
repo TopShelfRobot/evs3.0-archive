@@ -2,7 +2,7 @@
     'use strict';
 
     var serviceId = 'repositories';
-    angular.module('app').factory(serviceId, ['$injector', repositories]);
+    angular.module('common').factory(serviceId, ['$injector', repositories]);
 
     function repositories($injector) {
         var manager;
