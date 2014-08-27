@@ -262,7 +262,13 @@
                     title: 'Create A Resource Item Category',
                     templateUrl: 'app/dashboard/setup/setresourceitemcategory.html'
                 }
-            },{
+            }, {
+                url: '/editteam/:teamId',
+                config: {
+                    title: 'Edit Team',
+                    templateUrl: 'app/registration/views/editteam.part.html'
+                }
+            }, {
                 url: '/kitchensink',
                 config: {
                     title: 'Kitchen Sink',
