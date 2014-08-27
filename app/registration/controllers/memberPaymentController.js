@@ -2,14 +2,14 @@
 
     var controllerId = 'MemberPaymentController';
 
-    function Controller($scope, $routeParams, $q, datacontext, stripe, cartModel, common){
+    function Controller($scope, $routeParams, $q, $http, datacontext, stripe, cartModel, common){
         var controller = {};
         $scope.allowZeroPayment = cartModel.allowZeroPayment;
         $scope.waiverSigned = false;
         $scope.userPaying = $scope.suggested;
         $scope.teamMemberGuid = $routeParams.teamMemberGuid;
         $scope.teamGuid = $routeParams.teamGuid;
-    
+
         //$q.all([datacontext.team.getTeamMemberPaymentInfoByTeamMemberGuid($scope.teamMemberGuid),
         //            datacontext.team.getNotPaidTeamMemberCountByTeamGuid($scope.teamGuid),
         //            datacontext.team.getTeamMemberPaymentSumByTeamGuid($scope.teamGuid)])  //$scope.teamMemberGuid
@@ -26,7 +26,7 @@
         //            alert("Invalid Team Id! Please contact your team's coach.");
         //        }
         //    });
-       
+
         activate();
 
         function activate() {
@@ -35,10 +35,10 @@
             common.activateController(promises, controllerId)
                 .then(function () {
                     //log('Activated Listing Detail View');
-                    
+
                 });
         }
-        
+
         function getTeamInfo() {
             $q.all([datacontext.team.getTeamMemberPaymentInfoByTeamMemberGuid($scope.teamMemberGuid),
                        datacontext.team.getNotPaidTeamMemberCountByTeamGuid($scope.teamGuid),
@@ -52,7 +52,7 @@
                         cartModel.teamMemberId = payment.teamMemberId;
                         $scope.teamName = payment.name;
                         $scope.listName = payment.listName;
-                        
+
                         console.log("regAmount:", payment.regAmount);
                         //console.log("count:", count);
                         console.log("team:", sum);
@@ -61,7 +61,7 @@
                         console.log("remain11:", payment.regAmount - sum);
                         console.log("remain:", $scope.remaining);
                         console.log("suggest:", $scope.suggested);
-                        
+
                        //cartModel.teamMemberId = data.teamMemberId;
                        //$scope.teamName = data.name;
                        //$scope.listName = data.listName;
@@ -74,11 +74,11 @@
                });
         }
 
-        
+
 
         console.log("MemberPaymentController:", $scope);
 
-       
+
 
         // $scope.checkout = function() {
         //     var payment = $scope.userPaying;
@@ -108,5 +108,5 @@
         return controller;
     }
     angular.module("evReg").controller(controllerId,
-        ["$scope", "$routeParams", "$q", "datacontext", "StripeService", "MemberCartModel", "common", Controller]);
+        ["$scope", "$routeParams", "$q", "$http", "datacontext", "StripeService", "MemberCartModel", "common", Controller]);
 })();
