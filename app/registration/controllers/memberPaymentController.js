@@ -30,31 +30,51 @@
         activate();
 
         function activate() {
-            var promises = [datacontext.team.getTeamMemberPaymentInfoByTeamMemberGuid($scope.teamMemberGuid),
-                   datacontext.team.getNotPaidTeamMemberCountByTeamGuid($scope.teamGuid),
-                   datacontext.team.getTeamMemberPaymentSumByTeamGuid($scope.teamGuid)];
+            var promises = [getTeamInfo()];
 
             common.activateController(promises, controllerId)
-                .then(function () { log('Activated Listing Detail View'); });
+                .then(function () {
+                    //log('Activated Listing Detail View');
+                    
+                });
         }
         
+        function getTeamInfo() {
+            $q.all([datacontext.team.getTeamMemberPaymentInfoByTeamMemberGuid($scope.teamMemberGuid),
+                       datacontext.team.getNotPaidTeamMemberCountByTeamGuid($scope.teamGuid),
+                       datacontext.team.getTeamMemberPaymentSumByTeamGuid($scope.teamGuid)])  //$scope.teamMemberGuid
+               .then(function (data) {
+                    //console.log("team:", team);
+                    if (data) {
+                        var payment = data[0];
+                        var count = data[1];
+                        var sum = data[2];
+                        cartModel.teamMemberId = payment.teamMemberId;
+                        $scope.teamName = payment.name;
+                        $scope.listName = payment.listName;
+                        
+                        console.log("regAmount:", payment.regAmount);
+                        //console.log("count:", count);
+                        console.log("team:", sum);
+                        $scope.remaining = payment.regAmount - sum;
+                        $scope.suggested = $scope.remaining / count;
+                        console.log("remain11:", payment.regAmount - sum);
+                        console.log("remain:", $scope.remaining);
+                        console.log("suggest:", $scope.suggested);
+                        
+                       //cartModel.teamMemberId = data.teamMemberId;
+                       //$scope.teamName = data.name;
+                       //$scope.listName = data.listName;
+                       //$scope.remaining = data.regAmount;  // - data.PaymentSum;
+                       //$scope.suggested = $scope.remaining; // / data.memberCount;
+                   }
+                   else {
+                       alert("Invalid Team Id! Please contact your team's coach.");
+                   }
+               });
+        }
 
-        $q.all([datacontext.team.getTeamMemberPaymentInfoByTeamMemberGuid($scope.teamMemberGuid),
-                   datacontext.team.getNotPaidTeamMemberCountByTeamGuid($scope.teamGuid),
-                   datacontext.team.getTeamMemberPaymentSumByTeamGuid($scope.teamGuid)])  //$scope.teamMemberGuid
-           .then(function (data) {
-               // console.log("team:", team);
-               if (data) {
-                   cartModel.teamMemberId = data.teamMemberId;
-                   $scope.teamName = data.name;
-                   $scope.listName = data.listName;
-                   $scope.remaining = data.regAmount;  // - data.PaymentSum;
-                   $scope.suggested = $scope.remaining; // / data.memberCount;
-               }
-               else {
-                   alert("Invalid Team Id! Please contact your team's coach.");
-               }
-           });
+        
 
         console.log("MemberPaymentController:", $scope);
 

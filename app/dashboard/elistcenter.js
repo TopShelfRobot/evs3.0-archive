@@ -15,7 +15,7 @@
         vm.capacity = {};
         vm.fees = {};
 
-        vm.listingId = $routeParams.listingId || 0;;
+        vm.listingId = $routeParams.listingId || 0;
 
         activate();
 
