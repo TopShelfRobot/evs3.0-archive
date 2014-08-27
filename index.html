@@ -27,6 +27,7 @@
     <link href="content/breeze.directives.css" rel="stylesheet" />
     <link href="content/app.css" rel="stylesheet" />
     <link href="content/toastr.css" rel="stylesheet" />
+	<link href="/Content/nsPopover.custom.css" rel="stylesheet" />
 </head>
 
 <body>
@@ -69,7 +70,8 @@
     <script src="scripts/breeze.saveErrorExtensions.js"></script>
     <script src="scripts/angular-kendo.js"></script>
     <script src="scripts/angular-file-upload.min.js"></script>
-
+	<script src="scripts/nsPopover.js"></script>
+	
     <!-- Bootstrapping -->
     <script src="app/app.js"></script>
     <script src="app/config.js"></script>
@@ -77,6 +79,7 @@
     <script src="app/config.route.js"></script>
 
     <!-- common Modules -->
+	<script src="app/registration/app.js"></script>
     <script src="app/common/common.js"></script>
     <script src="app/common/logger.js"></script>
     <script src="app/common/spinner.js"></script>
@@ -103,6 +106,25 @@
     <script src="app/dashboard/setup/setcoupon.js"></script>
     <script src="app/dashboard/setup/seteventure.js"></script>
     <script src="app/dashboard/setup/setlist.js"></script>
+	
+	<!-- registration -->
+	<script src="app/registration/controllers/registrationHeaderController.js"></script>
+    <script src="app/registration/controllers/createteamController.js"></script>
+    <script src="app/registration/controllers/teampaymentController.js"></script>
+    <script src="app/registration/controllers/eventureController.js"></script>
+    <script src="app/registration/controllers/eventureListController.js"></script>
+    <script src="app/registration/controllers/memberPaymentController.js"></script>
+    <script src="app/registration/controllers/setParticipantController.js"></script>
+	<script src="app/registration/controllers/addParticipantController.js"></script>
+	<script src="app/registration/controllers/questionsController.js"></script>
+	<script src="app/registration/controllers/confirmController.js"></script>
+	<script src="app/registration/controllers/profileController.js"></script>
+	<script src="app/registration/controllers/editteamController.js"></script>
+	<script src="app/registration/services/StripeService.js"></script>
+    <script src="app/registration/models/registrationCartModel.js"></script>
+    <script src="app/registration/models/memberCartModel.js"></script>
+	<script src="app/registration/models/cartModel.js"></script>
+	<script src="app/registration/directives/cart-view.js"></script>
 
     <!-- common Services -->
 	<script src="app/common/layout/shell.js"></script>
@@ -122,7 +144,6 @@
     <script src="app/common/services/repository.surcharge.js"></script>
     <script src="app/common/services/repository.team.js"></script>
     <script src="app/common/services/repository.volunteer.js"></script>
-
 
 </body>
 
