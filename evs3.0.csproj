@@ -71,8 +71,10 @@
     <Content Include="app\registration\config.route.js" />
     <Content Include="app\registration\controllers\addParticipantController.js" />
     <Content Include="app\registration\controllers\confirmController.js" />
+    <Content Include="app\registration\controllers\editteamController.js" />
     <Content Include="app\registration\controllers\profileController.js" />
     <Content Include="app\registration\controllers\questionsController.js" />
+    <Content Include="app\registration\controllers\viewReceiptController.js" />
     <Content Include="app\registration\models\cartModel.js" />
     <Content Include="app\registration\views\addparticipant.part.html" />
     <Content Include="app\registration\views\cart.part.html" />
@@ -90,6 +92,7 @@
     <Content Include="app\registration\layout\shell.html" />
     <Content Include="app\registration\models\memberCartModel.js" />
     <Content Include="app\registration\models\registrationCartModel.js" />
+    <Content Include="app\registration\views\editteam.part.html" />
     <Content Include="app\registration\views\participantForm.part.html" />
     <Content Include="app\registration\views\profile.part.html" />
     <Content Include="app\registration\views\receipt.part.html" />
@@ -102,6 +105,7 @@
     <Content Include="app\registration\views\payment.part.html" />
     <Content Include="app\registration\views\questions.part.html" />
     <Content Include="app\registration\views\setparticipant.part.html" />
+    <Content Include="app\registration\views\teamForm.part.html" />
     <Content Include="app\registration\views\teamPayment.part.html" />
     <Content Include="app\services\repository.analytic.js" />
     <Content Include="app\services\repository.participant.js" />

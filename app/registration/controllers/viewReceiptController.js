@@ -1,7 +1,9 @@
 
 ;(function(){
 
-    function Controller($scope, $window, $routeParams, config, datacontext){
+    function Controller($scope, $window, $routeParams, config, datacontext) {
+
+        $scope.receipt = {};
 
         $scope.title = "Registration Complete";
         $scope.teamMemberGuid = $routeParams.teamMemberGuid;
