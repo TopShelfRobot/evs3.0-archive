@@ -4,7 +4,8 @@
 
 	function controller($scope, $location, $http, datacontext, cartModel, config, stripe) {
         $scope.teamName = cartModel.teamName;
-
+        $scope.waiverSigned = false;
+        
         console.log(cartModel.eventureId, cartModel.eventureListId);
         datacontext.eventure.getEventureListById(cartModel.eventureListId)
             .then(function (item) {

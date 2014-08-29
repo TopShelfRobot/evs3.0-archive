@@ -1,7 +1,7 @@
 <div class="container" ng-controller="ConfirmController">
     <div class="row">
         <div class="col-lg-12 text-center">
-            <img class="logo" src="/Content/images/logo.png">
+            <img class="logo" src="Content/images/logo.png">
             <h1>Order Summary</h1>
         </div>
     </div>
@@ -82,7 +82,7 @@
 	<label class="checkbox" ng-show="$parent.allowZeroPayment">
                 <input type="checkbox" data-bind="checked: isTerms" ng-model="$parent.fullPaymentRequired">
                 I am paying an amount of $0.00 and understand my team is still responsible for the full amount.
-            </label>	
+            </label>
         </div>
     </div>
     <div class="row">
@@ -96,9 +96,9 @@
                 and
                 <a id="waiver">Waiver</a>.
             </label>
-            <button type="button" 
-                        class="btn btn-success btn-block pull-right" 
-                        ng-disabled="(!$parent.waiverSigned) || ($parent.userPaying == 0 && !$parent.fullPaymentRequired) || ($parent.submitDisabled)" 
+            <button type="button"
+                        class="btn btn-success btn-block pull-right"
+                        ng-disabled="(!$parent.waiverSigned) || ($parent.userPaying == 0 && !$parent.fullPaymentRequired) || ($parent.submitDisabled)"
                         ng-click="checkout()">Complete Your Registration
             </button>
         </div>
