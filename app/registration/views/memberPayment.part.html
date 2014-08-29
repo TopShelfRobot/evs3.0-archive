@@ -4,25 +4,38 @@
 			<img class="logo" src="content/images/logo.png">
 			<h3>{{ listName }}.</h3>
 			<hr>
-			<h3>Team {{teamName}} <br> has a remaining balance of {{remaining || 1000 | currency}}.</h3>
-			<p class="text-muted">You can pay whatever you desire, but your team must have the balanced paid in full in order to participate.</p>
+		</div>
+	</div>
+	<!-- Suggested Pay Form -->
+	<div ng-show="isSuggestPayVisible">
+		<div class="row">
+			<div class="col-lg-12 text-center">
+				<h3>Team {{teamName}} <br> has a remaining balance of {{remaining || 1000 | currency}}.</h3>
+				<p class="text-muted">You can pay whatever you desire, but your team must have the balanced paid in full in order to participate.</p>
+			</div>
+		</div>
+	    <div class="row">
+	        <div class="col-xs-8 col-md-4 col-xs-offset-2 col-md-offset-4">
+	          <div class="form-group">
+	            <label for="Amount">What would you like to pay?</label>
+	            <p class="input-group">
+	              <span class="input-group-addon">$</span>
+	              <input ng-model="userPaying" type="text" class="form-control" name="Amount" id="Amount" placeholder="0.00" />
+	            </p>
+	            <p class="help-block">We suggest you pay {{ suggested | currency }}.</p>
+	          </div>
+	        </div>
+	    </div>
+	</div>
+    <hr>
+	<!-- Individual Fixed Pay -->
+	<div class="row" ng-show="isIndividualVisible">
+		<div class="col-xs-8 col-md-4 col-xs-offset-2 col-md-offset-4">
+			<h3>Team {{ teamName }}</h3>
+			<p>Your card will be charged {{ fee | currency }}.</p>
 		</div>
 	</div>
 
-    <div class="row">
-        <div class="col-xs-8 col-md-4 col-xs-offset-2 col-md-offset-4">
-          <div class="form-group">
-            <label for="Amount">What would you like to pay?</label>
-            <p class="input-group">
-              <span class="input-group-addon">$</span>
-              <input ng-model="userPaying" type="text" class="form-control" name="Amount" id="Amount" placeholder="0.00" />
-            </p>
-            <p class="help-block">We suggest you pay {{ suggested | currency }}.</p>
-          </div>
-        </div>
-      </div>
-    <hr>
-	
 	<div class="row">
 		<div class="col-sm-12">
 			<h3>Participant Information</h3>
