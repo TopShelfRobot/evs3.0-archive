@@ -1,8 +1,8 @@
-(function(){
+(function () {
 
     var controllerId = 'MemberPaymentController';
 
-    function Controller($scope, $routeParams, $q, $http, datacontext, stripe, cartModel, common, config){
+    function Controller($scope, $routeParams, $q, $http, $location, datacontext, stripe, cartModel, common, config) {
         var controller = {};
         $scope.allowZeroPayment = cartModel.allowZeroPayment;
         $scope.waiverSigned = false;
@@ -45,25 +45,25 @@
                        datacontext.team.getNotPaidTeamMemberCountByTeamGuid($scope.teamGuid),
                        datacontext.team.getTeamMemberPaymentSumByTeamGuid($scope.teamGuid)])  //$scope.teamMemberGuid
                .then(function (data) {
-                    //console.log("team:", team);
-                    if (data) {
-                        var payment = data[0];
-                        var count = data[1];
-                        var sum = data[2];
-                        //alert('is this null: ' + payment.teamMemberId);
-                        cartModel.teamMemberId = payment.teamMemberId;
-                        cartModel.teamId = payment.teamId;
-                        $scope.teamName = payment.name;
-                        $scope.listName = payment.listName;
+                   //console.log("team:", team);
+                   if (data) {
+                       var payment = data[0];
+                       var count = data[1];
+                       var sum = data[2];
+                       //alert('is this null: ' + payment.teamMemberId);
+                       cartModel.teamMemberId = payment.teamMemberId;
+                       cartModel.teamId = payment.teamId;
+                       $scope.teamName = payment.name;
+                       $scope.listName = payment.listName;
 
-                        //console.log("regAmount:", payment.regAmount);
-                        //console.log("count:", count);
-                        //console.log("team:", sum);
-                        $scope.remaining = payment.regAmount - sum;
-                        $scope.suggested = $scope.remaining / count;
-                        //console.log("remain11:", payment.regAmount - sum);
-                        //console.log("remain:", $scope.remaining);
-                        //console.log("suggest:", $scope.suggested);
+                       //console.log("regAmount:", payment.regAmount);
+                       //console.log("count:", count);
+                       //console.log("team:", sum);
+                       $scope.remaining = payment.regAmount - sum;
+                       $scope.suggested = $scope.remaining / count;
+                       //console.log("remain11:", payment.regAmount - sum);
+                       //console.log("remain:", $scope.remaining);
+                       //console.log("suggest:", $scope.suggested);
 
                        //cartModel.teamMemberId = data.teamMemberId;
                        //$scope.teamName = data.name;
@@ -93,17 +93,19 @@
             var cartOrder = cartModel.order($scope.userPaying, $scope.participant);
 
             stripe.checkout(cartOrder.orderAmount)
-                .then(function(res){
+                .then(function (res) {
                     console.log(res);
                     cartOrder.orderToken = res.id;
                     $http.post(config.apiPath + "/api/Payment/PostTeamPayment", cartOrder)
-                        .success(function(data){
-                            console.log("success");
-                        })
-                        .error(function(err){
+                       .success(function (result) {
+                           console.log("result: " + result);
+                           //$location.path("/receipt/" + result);
+                           $location.path("/receipt/" + $scope.teamMemberGuid);  
+                       })
+                        .error(function (err) {
                             console.error("ERROR:", err.toString());
                         })
-                        .finally(function(){
+                        .finally(function () {
                             $.unblockUI();
                         });
                 });
@@ -111,5 +113,5 @@
         return controller;
     }
     angular.module("evReg").controller(controllerId,
-        ["$scope", "$routeParams", "$q", "$http", "datacontext", "StripeService", "MemberCartModel", "common","config", Controller]);
+        ["$scope", "$routeParams", "$q", "$http","$location", "datacontext", "StripeService", "MemberCartModel", "common", "config", Controller]);
 })();

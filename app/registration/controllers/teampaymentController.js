@@ -5,13 +5,22 @@
 	function controller($scope, $location, $http, datacontext, cartModel, config, stripe) {
         $scope.teamName = cartModel.teamName;
         $scope.waiverSigned = false;
+        $scope.isSuggestPayVisible = false;
+        $scope.isIndividualVisible = false;
         
         console.log(cartModel.eventureId, cartModel.eventureListId);
         datacontext.eventure.getEventureListById(cartModel.eventureListId)
             .then(function (item) {
-                if (item)
+                if (item) {
                     $scope.fee = item.currentFee;
                     cartModel.fee = item.currentFee;
+                    if (item.listType == 2) {
+                        $scope.isIndividualVisible = false;
+                    }
+                    if (item.listType == 3) {
+                        $scope.isSuggestPayVisible = true;
+                    }
+                }
             });
 
         $scope.allowZeroPayment = cartModel.allowZeroPayment;
