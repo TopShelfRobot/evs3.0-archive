@@ -9,6 +9,7 @@
         $scope.userPaying = $scope.suggested;
         $scope.teamMemberGuid = $routeParams.teamMemberGuid;
         $scope.teamGuid = $routeParams.teamGuid;
+        $scope.participant = {};
 
         //$q.all([datacontext.team.getTeamMemberPaymentInfoByTeamMemberGuid($scope.teamMemberGuid),
         //            datacontext.team.getNotPaidTeamMemberCountByTeamGuid($scope.teamGuid),
@@ -89,7 +90,7 @@
         // };
 
         $scope.checkout = function () {
-            var cartOrder = cartModel.order($scope.userPaying);
+            var cartOrder = cartModel.order($scope.userPaying, $scope.participant);
 
             stripe.checkout(cartOrder.orderAmount)
                 .then(function(res){

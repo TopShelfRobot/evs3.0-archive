@@ -57,7 +57,7 @@
                     }
                 }
             }, {
-                url: '/eventure',
+                url: '/eventurecenter',
                 config: {
                     title: 'Eventure Workcenter',
                     templateUrl: 'app/dashboard/eventurecenter.html',

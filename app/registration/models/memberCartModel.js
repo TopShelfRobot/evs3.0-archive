@@ -11,12 +11,13 @@
         model.waiverSigned = false;
         model.allowZeroPayment = true;
 
-        model.order = function (value) {
+        model.order = function (userPaying,part) {
             var order = {
-                orderAmount: Number(value),
+                orderAmount: Number(userPaying),
                 teamId: model.teamId,
                 teamMemberId: model.teamMemberId,
                 ownerId: config.owner.ownerId,
+                participant: part    
             };
             return order;
         };

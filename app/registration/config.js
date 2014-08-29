@@ -26,7 +26,7 @@
         guid: 0,
         logoImageName: '/Content/images/logo.png',
 
-        houseId: 1,    //this will be set by shell
+        houseId: 11,    //this will be set by shell
         mr_houseId: 0,
         houseName: "",
         accessType: "none",
@@ -52,7 +52,7 @@
         eventureName: 'Event',
         listName: 'List',
         groupName: 'Group',
-        partButtonText: 'Select PArty!',
+        partButtonText: 'Select Party!',
 
         listStatement: 'Select a desired start time',
 

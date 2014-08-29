@@ -34,7 +34,7 @@
         guid: 0,
         logoImageName: '/Content/images/logo.png',
 
-        houseId: 0,    //this will be set by shell
+        houseId: 11,    //this will be set by shell
         mr_houseId: 0,
         houseName: "",
         accessType: "none",
