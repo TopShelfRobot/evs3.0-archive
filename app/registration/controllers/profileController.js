@@ -249,26 +249,32 @@
 			filterable: true,
 			detailTemplate: kendo.template($("#coachtemplate").html()),
 			columns: [{
-					field: "Name",
-					title: "Team Name",
-					width: "200px"
-				},{
-					field: "EventName",
-					title: "Eventure",
-					width: "200px"
-				},{
-					field: "ListName",
-					title: "Listing",
-					width: "220px"
-				},{
-					field: "CoachName",
-					title: "Coach Name",
-					width: "220px"
-				},{
-					title: "",
-					width: "120px",
-					template:'<a class="btn btn-default btn-block" href="\\\#/editteam/#=Id#">Edit</a>'
-				}]
+			    field: "Name",
+			    title: "Team Name",
+			    width: "200px"
+			}, {
+			    field: "EventName",
+			    title: "Eventure",
+			    width: "200px"
+			}, {
+			    field: "ListName",
+			    title: "Listing",
+			    width: "220px"
+			}, {
+			    field: "Amount",
+			    title: "Total Paid",
+			    //width: "120px",
+			    format: "{0:c}"
+			}, {
+			    field: "Balance",
+			    title: "Balance",
+			    //width: "120px",
+			    format: "{0:c}"
+			}, {
+			    title: "",
+			    width: "120px",
+			    template: '<a class="btn btn-default btn-block" href="\\\#/editteam/#=Id#">Edit</a>'
+			}]
 		};
 
 		$scope.coachDetailGridOptions = function(e) {
@@ -298,26 +304,27 @@
 				sortable: true,
 				pageable: true,
 				columns: [{
-						field: "Name",
-						title: "Name"
-					}, {
-						field: "Email",
-						title: "Email"
-					}, {
-						field: "Amount",
-						title: "Paid",
-						width: 100
-					},{
-						field: '',
-						title: '',
-						template: '<button ng-click="resend()" class="btn btn-success btn-block">Resend Invitation</button>',
-						width: 170
-					},{
-						field: '',
-						title: '',
-						template: '<button ng-click="remove()" class="btn btn-danger btn-block">Remove</button>',
-						width: 100
-					}]
+				    field: "Name",
+				    title: "Name"
+				}, {
+				    field: "Email",
+				    title: "Email"
+				}, {
+				    field: "Amount",
+				    title: "Paid",
+				    width: 100,
+				    format: "{0:c}"
+				}, {
+				    field: '',
+				    title: '',
+				    template: '<button ng-click="resend()" class="btn btn-success btn-block">Resend Invitation</button>',
+				    width: 170
+				}, {
+				    field: '',
+				    title: '',
+				    template: '<button ng-click="remove()" class="btn btn-danger btn-block">Remove</button>',
+				    width: 100
+				}]
 			};
 		};
 

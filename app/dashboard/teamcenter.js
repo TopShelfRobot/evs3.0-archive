@@ -57,7 +57,17 @@
                 field: "CoachName",
                 title: "Coach Name",
                 width: "220px"
-            },{
+            }, {
+                field: "Amount",
+                title: "Total Paid",
+                width: "120px",
+                format: "{0:c}"
+            }, {
+                field: "Balance",
+                title: "Balance",
+                width: "120px",
+                format: "{0:c}"
+            }, {
                 title: "",
                 width: "120px",
                 template:'<a class="btn btn-default btn-block" href="\\\#/editteam/#=Id#">Edit</a>'
@@ -101,7 +111,8 @@
                     }, {
                         field: "Amount",
                         title: "Paid",
-                        width: 100
+                        width: 100,
+                        format: "{0:c}"
                     },{
                         field: '',
                         title: '',

@@ -12,8 +12,8 @@
     var remoteServiceName = 'http://evs30api.eventuresports.info/breeze/breeze/';
     var remoteApiName = 'http://evs30api.eventuresports.info/kendo/';
 
-     // var remoteServiceName = 'http://localhost:55972/breeze/breeze/';
-     // var remoteApiName = 'http://localhost:55972/kendo/';
+      //var remoteServiceName = 'http://localhost:55972/breeze/breeze/';
+      //var remoteApiName = 'http://localhost:55972/kendo/';
 
     //var remoteServiceName = '/breeze/breeze/';
     //var remoteApiName = '/kendo/';
@@ -29,7 +29,7 @@
     };
 
     var owner = {
-        ownerId: 1,
+        ownerId: 11,
         houseEmail: 0,
         guid: 0,
         logoImageName: '/Content/images/logo.png',
