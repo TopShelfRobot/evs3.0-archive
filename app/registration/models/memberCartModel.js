@@ -1,23 +1,22 @@
 (function(){
 
-    function Model($http, $routeParams){
+    function Model($http, $routeParams, config){
 
         var model = {};
 
         model.eventureId = $routeParams.eventureId || null;
         model.eventureListId = $routeParams.listId || null;
         model.teamId = null;                                  // $routeParams.teamId || null;
-        model.memberId = null;                                // $routeParams.memberId || null;
+        model.teamMemberId = null;                                // $routeParams.memberId || null;
         model.waiverSigned = false;
         model.allowZeroPayment = true;
 
         model.order = function (value) {
             var order = {
                 orderAmount: Number(value),
-                //teamId: model.teamId,
-                teamMemberId: model.teammemberId
-                //ownerId: 1,
-                //orderType: "playerreg",
+                teamId: model.teamId,
+                teamMemberId: model.teamMemberId,
+                ownerId: config.owner.ownerId,
             };
             return order;
         };
@@ -51,5 +50,5 @@
         return model;
     }
 
-    angular.module("evReg").service("MemberCartModel", ["$http", "$routeParams", Model]);
+    angular.module("evReg").service("MemberCartModel", ["$http", "$routeParams", "config", Model]);
 })()

@@ -36,12 +36,15 @@
 					cartOrder.stripeToken = res.id;
 				    $http.post(config.apiPath + "/api/Payment/PostTeam", cartOrder)
 						.success(function(result){
-                            console.log("result: " + result);
+						    console.log("result: " + result);
                             $location.path("/receipt/" + result);
 						})
 						.error(function(err){
 							console.error("ERROR:", err.toString());
-						});
+						})
+				        .finally(function () {
+				         $.unblockUI();
+				     });
 				});
         };
     }
