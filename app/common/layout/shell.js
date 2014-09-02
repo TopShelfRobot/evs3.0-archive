@@ -26,7 +26,7 @@
         activate();
 
         function activate() {
-            logSuccess('Eventure SPorts Angular loaded!!!!!', null, true);
+            //logSuccess('Eventure SPorts Angular loaded!!!!!', null, true);
             common.activateController([], controllerId);
                 //.then(function () {
                 //    vm.showSplash = false;

@@ -14,12 +14,27 @@
                 if (item) {
                     $scope.fee = item.currentFee;
                     cartModel.fee = item.currentFee;
-                    if (item.listType == 2) {
-                        $scope.isIndividualVisible = false;
+                    switch (item.listingType) {
+                        case 2:    //team sponsor
+                            $scope.isIndividualVisible = true;
+                            $scope.userPaying = item.currentFee;
+                            break;
+                        case 3:   //team suggest
+                            $scope.isSuggestPayVisible = true;
+                            
+                            break;
+                        case 4:    //team all pays the same
+                            $scope.isIndividualVisible = true;
+                            $scope.userPaying = item.currentFee;
+                            break;
+                        default:
                     }
-                    if (item.listType == 3) {
-                        $scope.isSuggestPayVisible = true;
-                    }
+                    //if (item.listingType == 2) {
+                    //    $scope.isIndividualVisible = false;
+                    //}
+                    //if (item.listingType == 3) {
+                    //    $scope.isSuggestPayVisible = true;
+                    //}
                 }
             });
 

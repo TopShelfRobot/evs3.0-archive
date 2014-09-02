@@ -53,7 +53,7 @@
 
             function querySucceeded(data) {
                 //alert('really12121212121212');
-                self.log('Retrieved [Eventure]', data, true);
+                //self.log('Retrieved [Eventure]', data, true);
                 return data.results;
             }
         }

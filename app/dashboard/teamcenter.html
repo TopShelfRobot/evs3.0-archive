@@ -14,3 +14,11 @@
 <script type="text/x-kendo-template" id="template">
   <div kendo-grid k-options="vm.detailGridOptions(dataItem)"></div>
 </script>
+
+<script type="text/x-kendo-template" id="balanceTemplate">
+    #if(ListingType === 4){#
+        N/A
+    #}else{#
+        #: '$' + Balance.toFixed(2) #
+    #}#
+</script>

@@ -35,7 +35,7 @@
         activate();
 
         function activate() {
-            logger.log('Activated Dashboard View!!!!!!!!!!!!!!!!');
+            //logger.log('Activated Dashboard View!!!!!!!!!!!!!!!!');
             getTopSpeakers();
             var promises = [getAttendeeCount(), getSessionCount(), getSpeakerCount(), getTrackCounts()];
             common.activateController(promises, controllerId)

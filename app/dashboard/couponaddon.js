@@ -22,7 +22,9 @@
         function activate() {
             var promises = [CouponGrid(), AddonGrid()];
             common.activateController(promises, controllerId)
-                .then(function () { log('Activated Coupon Addon Center View'); });
+                .then(function () {
+                    //log('Activated Coupon Addon Center View');
+                });
         }
 
         function CouponGrid() {

@@ -20,7 +20,9 @@
 
         function activate() {
             common.activateController(teamGrid(), controllerId)
-                .then(function () { log('Activated Team Center View'); });
+                .then(function () {
+                    //log('Activated Team Center View');
+                });
         }
 
         function teamGrid() {
@@ -33,6 +35,18 @@
                 transport: {
                     read: teamapi
                 },
+                //schema: {
+                //    model: {
+                //        fields: {
+                //            Balance: { type: "boolean" },
+                //            DateEventureList: { type: "date" },
+                //            DateBeginReg: { type: "date" },
+                //            DateEndReg: { type: "date" },
+                //            Id: { type: "number" },
+                //            Name: { type: "string" }
+                //        }
+                //    }
+                //},
                 pageSize: 10,
                 serverPaging: false,
                 serverSorting: false
@@ -66,7 +80,8 @@
                 field: "Balance",
                 title: "Balance",
                 width: "120px",
-                format: "{0:c}"
+                format: "{0:c}",
+                template: kendo.template($("#balanceTemplate").html())
             }, {
                 title: "",
                 width: "120px",

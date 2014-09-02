@@ -24,7 +24,7 @@
         function activate() {
             common.activateController(getAddon(), getEventures(), getEventureLists(), controllerId)
                 .then(function() {
-                    log('Activated set addon');
+                    //log('Activated set addon');
                 });
         }
 

@@ -70,7 +70,7 @@
 
             function success() {
                 //service.lookup.setLookups();
-                log('Primed the data');
+                //log('Primed the data');
             }
 
             function extendMetadata() {

@@ -21,7 +21,7 @@
 		function activate() {
 			common.activateController(getEventure(), controllerId)
 				.then(function() {
-					log('Activated set eventure');
+					//log('Activated set eventure');
 				});
 		}
 

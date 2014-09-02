@@ -50,7 +50,7 @@
             return $q.all(promises).then(function (eventArgs) {
                 var data = { controllerId: controllerId };
                 $broadcast(commonConfig.config.controllerActivateSuccessEvent, data);
-                logger.log('contl activated success: ' + controllerId);
+                //logger.log('contl activated success: ' + controllerId);
             });
         }
 

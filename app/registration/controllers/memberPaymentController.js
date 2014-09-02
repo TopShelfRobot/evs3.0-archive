@@ -10,86 +10,67 @@
         $scope.teamMemberGuid = $routeParams.teamMemberGuid;
         $scope.teamGuid = $routeParams.teamGuid;
         $scope.participant = {};
-
-        //$q.all([datacontext.team.getTeamMemberPaymentInfoByTeamMemberGuid($scope.teamMemberGuid),
-        //            datacontext.team.getNotPaidTeamMemberCountByTeamGuid($scope.teamGuid),
-        //            datacontext.team.getTeamMemberPaymentSumByTeamGuid($scope.teamGuid)])  //$scope.teamMemberGuid
-        //    .then(function(data){
-        //        // console.log("team:", team);
-        //        if(data) {
-        //            cartModel.teamMemberId = data.teamMemberId;
-        //            $scope.teamName = data.name;
-        //            $scope.listName = data.listName;
-        //            $scope.remaining = data.regAmount;  // - data.PaymentSum;
-        //            $scope.suggested = $scope.remaining; // / data.memberCount;
-        //        }
-        //        else {
-        //            alert("Invalid Team Id! Please contact your team's coach.");
-        //        }
-        //    });
+        $scope.isSuggestPayVisible = false;
+        $scope.isIndividualVisible = false;
+        $scope.isSponsorPayVisible = false;
 
         activate();
 
         function activate() {
             var promises = [getTeamInfo()];
-
-            common.activateController(promises, controllerId)
-                .then(function () {
-                    //log('Activated Listing Detail View');
-
-                });
+            common.activateController(promises, controllerId);
         }
 
         function getTeamInfo() {
             $q.all([datacontext.team.getTeamMemberPaymentInfoByTeamMemberGuid($scope.teamMemberGuid),
-                       datacontext.team.getNotPaidTeamMemberCountByTeamGuid($scope.teamGuid),
-                       datacontext.team.getTeamMemberPaymentSumByTeamGuid($scope.teamGuid)])  //$scope.teamMemberGuid
-               .then(function (data) {
-                   //console.log("team:", team);
-                   if (data) {
-                       var payment = data[0];
-                       var count = data[1];
-                       var sum = data[2];
-                       //alert('is this null: ' + payment.teamMemberId);
-                       cartModel.teamMemberId = payment.teamMemberId;
-                       cartModel.teamId = payment.teamId;
-                       $scope.teamName = payment.name;
-                       $scope.listName = payment.listName;
+                datacontext.team.getNotPaidTeamMemberCountByTeamGuid($scope.teamGuid),
+                datacontext.team.getTeamMemberPaymentSumByTeamGuid($scope.teamGuid)])
+                .then(function (data) {
+                    if (data) {
+                        var payment = data[0];
+                        var count = data[1];
+                        var sum = data[2];
 
-                       //console.log("regAmount:", payment.regAmount);
-                       //console.log("count:", count);
-                       //console.log("team:", sum);
-                       $scope.remaining = payment.regAmount - sum;
-                       $scope.suggested = $scope.remaining / count;
-                       //console.log("remain11:", payment.regAmount - sum);
-                       //console.log("remain:", $scope.remaining);
-                       //console.log("suggest:", $scope.suggested);
-
-                       //cartModel.teamMemberId = data.teamMemberId;
-                       //$scope.teamName = data.name;
-                       //$scope.listName = data.listName;
-                       //$scope.remaining = data.regAmount;  // - data.PaymentSum;
-                       //$scope.suggested = $scope.remaining; // / data.memberCount;
-                   }
-                   else {
-                       alert("Invalid Team Id! Please contact your team's coach.");
-                   }
-               });
+                        cartModel.teamMemberId = payment.teamMemberId;
+                        cartModel.teamId = payment.teamId;
+                        $scope.teamName = payment.name;
+                        $scope.listName = payment.listName;
+                        console.log("listingType: ", payment.listingType);
+                        switch (payment.listingType) {
+                            case 2:
+                                //team sponsor
+                                $scope.isSponsorPayVisible = true;
+                                //$scope.userPaying = payment.currentFee;
+                                break;
+                            case 3:
+                                //team suggest
+                                $scope.isSuggestPayVisible = true;
+                                $scope.remaining = payment.regAmount - sum;
+                                $scope.suggested = $scope.remaining / count;
+                                break;
+                            case 4:
+                                //team all pays the same
+                                $scope.isIndividualVisible = true;
+                                console.log("here: ", payment.listingType);
+                                //$scope.suggested = payment.CurrentFee;
+                                $scope.userPaying = payment.currentFee;
+                                break;
+                            default:
+                        }
+                    } else {
+                        alert("Invalid Team Id! Please contact your team's coach.");
+                    }
+                });
         }
 
 
-
-        console.log("MemberPaymentController:", $scope);
-
-
-
-        // $scope.checkout = function() {
-        //     var payment = $scope.userPaying;
-        //     var order = cartModel.order(payment);
-        //     stripe.checkout(payment, order);
-        // };
-
         $scope.checkout = function () {
+
+            if ($scope.isSponsorPayVisible == true) {
+                alert('Thanks for joining');
+                $location.path("/eventure/");
+                return;
+            }
             var cartOrder = cartModel.order($scope.userPaying, $scope.participant);
 
             stripe.checkout(cartOrder.orderAmount)
@@ -98,9 +79,7 @@
                     cartOrder.orderToken = res.id;
                     $http.post(config.apiPath + "/api/Payment/PostTeamPayment", cartOrder)
                        .success(function (result) {
-                           console.log("result: " + result);
-                           //$location.path("/receipt/" + result);
-                           $location.path("/receipt/" + $scope.teamMemberGuid);  
+                           $location.path("/receipt/" + $scope.teamMemberGuid);
                        })
                         .error(function (err) {
                             console.error("ERROR:", err.toString());
@@ -113,5 +92,5 @@
         return controller;
     }
     angular.module("evReg").controller(controllerId,
-        ["$scope", "$routeParams", "$q", "$http","$location", "datacontext", "StripeService", "MemberCartModel", "common", "config", Controller]);
+        ["$scope", "$routeParams", "$q", "$http", "$location", "datacontext", "StripeService", "MemberCartModel", "common", "config", Controller]);
 })();

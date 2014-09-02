@@ -24,7 +24,7 @@
 		function activate() {
 			common.activateController(getCoupon(), getEventures(), getEventureLists(), controllerId)
 				.then(function() {
-					log('Activated set coupon');
+					//log('Activated set coupon');
 				});
 		}
 

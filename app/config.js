@@ -9,11 +9,11 @@
 
     // For use with the HotTowel-Angular-Breeze add-on that uses Breeze
     //var remoteServiceName = 'breeze/Breeze';
-    var remoteServiceName = 'http://evs30api.eventuresports.info/breeze/breeze/';
-    var remoteApiName = 'http://evs30api.eventuresports.info/kendo/';
+    //var remoteServiceName = 'http://evs30api.eventuresports.info/breeze/breeze/';
+    //var remoteApiName = 'http://evs30api.eventuresports.info/kendo/';
 
-      //var remoteServiceName = 'http://localhost:55972/breeze/breeze/';
-      //var remoteApiName = 'http://localhost:55972/kendo/';
+      var remoteServiceName = 'http://localhost:55972/breeze/breeze/';
+      var remoteApiName = 'http://localhost:55972/kendo/';
 
     //var remoteServiceName = '/breeze/breeze/';
     //var remoteApiName = '/kendo/';
@@ -29,12 +29,12 @@
     };
 
     var owner = {
-        ownerId: 11,
+        ownerId: 1,
         houseEmail: 0,
         guid: 0,
         logoImageName: '/Content/images/logo.png',
 
-        houseId: 11,    //this will be set by shell
+        houseId: 1,    //this will be set by shell
         mr_houseId: 0,
         houseName: "",
         accessType: "none",

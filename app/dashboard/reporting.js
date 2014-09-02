@@ -19,7 +19,9 @@
         function activate() {
             //var promises = [getMessageCount(), getPeople()];
             common.activateController(getReports(), controllerId)
-                .then(function () { log('Activated reporting View'); });
+                .then(function () {
+                    //log('Activated reporting View');
+                });
         }
 
       function getReports() {

@@ -22,7 +22,10 @@
           var promises = [getEventure(), Registrations(), Capacity(), ListingsGrid(), ExpenseGrid(), EventPlanGrid(), ParticipantGrid()];
 
           common.activateController(promises, controllerId)
-              .then(function() { log('Activated Eventure Detail View'); }); }
+              .then(function () {
+                  //log('Activated Eventure Detail View');
+              });
+      }
 
         function getEventure() {
           return datacontext.eventure.getEventureById(vm.eventureId)

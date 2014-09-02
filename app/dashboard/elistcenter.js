@@ -23,7 +23,9 @@
           var promises = [getListing(), Registrations(), Capacity(), FeeSchedule(), ParticipantGrid()];
 
           common.activateController(promises, controllerId)
-              .then(function() { log('Activated Listing Detail View'); });
+              .then(function () {
+                  //log('Activated Listing Detail View');
+              });
           }
 
       //  vm.resize = function setChartSize() {
