@@ -90,7 +90,6 @@
 }
 
 .grid figcaption h4 {
-	margin: 0;
 	padding: 0;
 	color: #ecf0f1;
 }
@@ -122,12 +121,12 @@
     width:300px;
 }
 
-.no-touch .event-tiles figure:hover img,
-.event-tiles figure.cs-hover img {
-	-webkit-transform: translateY(-50px) scale(0.5);
-	-moz-transform: translateY(-50px) scale(0.5);
-	-ms-transform: translateY(-50px) scale(0.5);
-	transform: translateY(-50px) scale(0.5);
+.no-touch .event-tiles figure img,
+.event-tiles figure img {
+	-webkit-transform: translateY(-60px) scale(0.5);
+	-moz-transform: translateY(-60px) scale(0.5);
+	-ms-transform: translateY(-60px) scale(0.5);
+	transform: translateY(-60px) scale(0.5);
 }
 
 .event-tiles figcaption {
