@@ -70,8 +70,8 @@
                 field: "Balance",
                 title: "Balance",
                 width: "120px",
-                format: "{0:c}",
-                template: kendo.template($("#balanceTemplate").html())
+                format: "{0:c}"
+                //template: kendo.template($("#balanceTemplate").html())
             }, {
                 title: "",
                 width: "120px",
@@ -95,6 +95,7 @@
             };
 
             return {
+                toolbar: '<a download="detailexport.xlsx" class="k-button" ng-click="vm.detailexcel()">Export</a>',
                 dataSource: {
                     type: "json",
                     transport: {
@@ -223,9 +224,67 @@
 
              navigator.msSaveBlob(blob, this.getAttribute("download"));
           } else {
-            this.href = result.href();
+            window.location.href = result.href();
           }
 
-    }
+        };
+
+        vm.detailexcel = function() {
+          var grid = vm.detailgrid;
+          // use grid.dataSource.data() to export all data and not just the current page
+          var data = vm.detailgrid.dataSource.data();
+
+          var file = {
+            worksheets: [{
+              data: []
+            }],
+            creator: 'John Smith',
+            created: new Date('8/16/2012'),
+            lastModifiedBy: 'Larry Jones',
+            modified: new Date(),
+            activeWorksheet: 0
+          };
+
+          var worksheetData = file.worksheets[0].data;
+          var worksheetDataHeader = [];
+
+          worksheetData.push(worksheetDataHeader);
+
+          for (var ci = 0; ci < grid.columns.length; ci++) {
+            var title = grid.columns[ci].title;
+            worksheetDataHeader.push({
+              value: title,
+              autoWidth: true
+            });
+          }
+
+          for (var di = 0; di < data.length; di++) {
+
+            var dataItem = data[di];
+            var worksheetDataItem = [];
+
+            for (ci = 0; ci < grid.columns.length; ci++) {
+
+              var column = grid.columns[ci];
+              worksheetDataItem.push({
+
+                value: dataItem.get(column.field)
+              });
+            }
+
+            worksheetData.push(worksheetDataItem);
+          }
+
+          var result = xlsx(file);
+
+          if (navigator.msSaveBlob) {
+             var blob = new Blob([base64DecToArr(result.base64)]);
+
+             navigator.msSaveBlob(blob, this.getAttribute("download"));
+          } else {
+            window.location.href = result.href();
+          }
+
+        };
     }
 })();
