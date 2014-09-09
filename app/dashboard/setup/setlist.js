@@ -12,8 +12,7 @@
 		var vm = this;
 		vm.title = 'Eventure Listing';
 		vm.listId = $routeParams.listId || 0;
-
-		//log('val is: ' + vm.eventureId);
+		vm.eventureId = $routeParams.eventureId || 0;
 
 		vm.list = {};
 		activate();
@@ -21,7 +20,8 @@
 		function activate() {
 			common.activateController(getEventureList(), controllerId)
 				.then(function() {
-					log('Activated set list');
+					vm.list.eventureId = vm.eventureId;
+					//log('Activated set list');
 				});
 		}
 
@@ -181,11 +181,12 @@
 		};
 
 		vm.saveAndNav = function() {
+
 			return datacontext.saveChanges(vm.list)
 				.then(complete);
 
 			function complete() {
-				$location.path("/setfee/");
+				$location.path("/vm.list.eventureId/vm.list.id/setfee/");
 			}
 		};
 

@@ -198,14 +198,14 @@
 			}
 		};
 
-		vm.submit = function(){
-			console.log("butts");
+        vm.saveAndNav = function() {
+            return datacontext.save(vm.eventure)
+                .then(complete);
 
-			vm.saveAndNav()
-			.then(function(data){
-				console.log("next");
-			});
-		};
+            function complete() {
+                $location.path("/eventuredetail/" + vm.eventureId);
+            }
+        };
 
 		vm.saveAndNav = function() {
 			return datacontext.saveChanges(vm.eventure)

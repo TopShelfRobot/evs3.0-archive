@@ -7,7 +7,7 @@
       <tabset justified="true"> <tab heading="Coupons">
       <br><br>
         <div class="col-lg-12 columns">
-          <div id="coupongrid" kendo-grid k-options="vm.couponGridOptions"></div>
+          <div id="coupongrid" kendo-grid="vm.coupongrid" k-options="vm.couponGridOptions"></div>
         </div>
         </tab>
         <!-- end Coupons -->
@@ -24,3 +24,7 @@
     </div>
   </div>
 </section>
+
+<script type="text/x-kendo-template" id="template">
+  <div kendo-grid="vm.detailgrid" k-options="vm.detailGridOptions(dataItem)"></div>
+</script>
