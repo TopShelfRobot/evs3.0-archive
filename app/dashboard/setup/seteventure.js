@@ -38,23 +38,6 @@
 			}
 		}
 
-
-
-		vm.today = function () {
-		   vm.eventure.dateEventure = new Date();
-		   vm.eventure.dateTransfer = new Date();
-		   vm.eventure.dateDeferral = new Date();
-		};
-
-		vm.today();
-
-
-		//vm.clear = function () {
-		//    vm.dateEventure = null;
-		//    vm.dateTransfer = null;
-		//    vm.dateDeferral = null;
-		//};
-
         vm.saveChanges = function() {
             return datacontext.save(vm.eventure)
             .then(complete);
@@ -63,6 +46,14 @@
                     $location.path("/eventurecenter/");
                 }
         };
+
+		vm.today = function () {
+			vm.eventure.dateEventure = new Date();
+			vm.eventure.dateTransfer = new Date();
+			vm.eventure.dateDeferral = new Date();
+		};
+
+		vm.today();
 
 		vm.open = function($event, open) {
 			$event.preventDefault();

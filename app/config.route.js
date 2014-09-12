@@ -269,6 +269,12 @@
                     templateUrl: 'app/dashboard/setup/setresourceitemcategory.html'
                 }
             }, {
+                url: '/setvolunteerjob',
+                config: {
+                    title: 'Create A Volunteer Job',
+                    templateUrl: 'app/dashboard/setup/setvolunteerjob.html'
+                }
+            }, {
                 url: '/editteam/:teamId',
                 config: {
                     title: 'Edit Team',

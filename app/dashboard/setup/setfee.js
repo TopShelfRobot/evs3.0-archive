@@ -1,84 +1,178 @@
-﻿define(['services/logger', 'services/datacontext', 'durandal/plugins/router', 'config'],
+(function() {
+    'use strict';
 
-    function (logger, datacontext, router, config) {
+    var controllerId = 'setfee';
+    angular.module('app').controller(controllerId, ['$q', '$routeParams', '$upload', '$http', '$timeout', '$location', 'common', 'datacontext', 'config', setfee]);
 
-        var fees = ko.observableArray();
-        var groups = ko.observableArray();
-        var sortOrder = 0;
+    function setfee($q, $routeParams, $upload, $http, $timeout, $location, common, datacontext, config) {
 
-        var activate = function () {
-            //logger.log('test activating.' + config.wizEventureListId, null, 'sfee', true);
-            datacontext.getGroupsByEventureListId(config.wizEventureListId, groups)
-                .then(function () {
-                    //logger.log('groups: ' + groups().length(), null, 'sfee', true);
+        var getLogFn = common.logger.getLogFn;
+        var log = getLogFn(controllerId);
+
+        var vm = this;
+        vm.title = 'Fee Setup';
+        vm.listId = $routeParams.listId || 0;
+        vm.eventureId = $routeParams.eventureId || 0;
+
+        vm.ownerId = config.owner.ownerId;
+
+        vm.fees = [];
+        vm.groups = [];
+        vm.listing = {};
+
+        activate();
+
+        function activate() {
+            common.activateController(getFees(), getGroups(), getEventureList(), controllerId)
+                .then(function() {
+                    //log('Activated set addon');
                 });
-            return datacontext.getFeeSchedulesByEventureListId(config.wizEventureListId, fees);
+        }
+
+        function getFees() {
+            return datacontext.surcharge.getFeeSchedulesByEventureListId(vm.listId)
+                .then(function(data) {
+                    //applyFilter();
+                    return vm.fees = data;
+                });
+        }
+
+        function getGroups() {
+            return datacontext.eventure.getGroupsByEventureListId(vm.listId)
+                .then(function(data) {
+                    //applyFilter();
+                    return vm.groups = data;
+                });
+        }
+
+        function getEventureList() {
+            return datacontext.eventure.getEventureListById(vm.listId)
+                .then(function(data) {
+                    //applyFilter();
+                    return vm.listing = data;
+                });
+        }
+
+        vm.addFee = function() {
+            vm.newFee = datacontext.surcharge.createFeeSchedule(vm.listId);
+            vm.fees.push(vm.newFee);
         };
 
-        var viewAttached = function () {
-            //logger.log('view attached', null, 'setfee', true);
-            $(".feedate").datepicker();
-            //$("#feedate").datepicker();
-            //$(".feeamount").maskMoney({ symbol: '$ ', thousands: ',', decimal: '.', symbolStay: true });
+        vm.addGroup = function() {
+            vm.newGroup = datacontext.eventure.createGroup(vm.listId);
+            vm.groups.push(vm.newGroup);
         };
 
-        var clickAddGroup = function () {
-            //logger.log('trying to add group ', null, 'sf', true);
-            //logger.log('groups: ' + groups().length, null, 'sfee', true);
-            var newGroup = ko.observable(datacontext.createGroup());
-            //logger.log('still good ', null, 'sf', true);
-            newGroup().eventureListId(config.wizEventureListId);
-            newGroup().capacity(0);
-            newGroup().active(true);
-            newGroup().name("");
-            newGroup().sortOrder(groups().length + 1);
-            groups.push(newGroup);
+        vm.open = function($event, open) {
+            $event.preventDefault();
+            $event.stopPropagation();
+            vm[open] = true;
         };
 
-        var clickAddFee = function () {
-            //logger.log('', null, 'sf', true);
-            var newFee = ko.observable(datacontext.createFeeSchedule());
-
-            newFee().eventureListId(config.wizEventureListId);
-            newFee().amount(0);
-            newFee().dateBegin("");
-            fees.push(newFee);
-            //fees.push({ amount: 0, dateBegin: "", active: true, eventureListId: config.wizEventureListId });
-
-            $(".feedate").datepicker();
-            //$(".feeamount").maskMoney({ symbol: '$ ', thousands: ',', decimal: '.', symbolStay: true });
-
+        vm.dateOptions = {
+            'year-format': "'yy'",
+            'starting-day': 1
         };
 
-        var clickNext = function () {
-            //logger.log('next to quest', null, 'sf', true);
-            saveAndNav();
-        };
+        vm.formats = ['MM-dd-yyyy', 'yyyy/MM/dd', 'shortDate'];
 
-        var saveAndNav = function () {
-            //isSaving(true);
-            //logger.log('called saveeeee', null, 'sf', true);
-            return datacontext.saveChanges(fees)
-                .fin(complete);
+        vm.format = vm.formats[0];
+
+        vm.saveAndNav = function() {
+            return datacontext.save()
+                .then(complete);
 
             function complete() {
-                //isSaving(false);
-                //logger.log('save complete', null, 'sl', true);
-                var url = '#setquestion'; //+ eventureList().id();
-                router.navigateTo(url);
+                $location.path("/" + vm.eventureId + "/" + vm.listId + "/setquestion");
             }
         };
 
+    }
+})();
 
-        var vm = {
-            activate: activate,
-            fees: fees,
-            groups: groups,
-            clickNext: clickNext,
-            clickAddGroup: clickAddGroup,
-            clickAddFee: clickAddFee,
-            viewAttached: viewAttached
-        };
-        return vm;
-    });
 
+
+// ﻿define(['services/logger', 'services/datacontext', 'durandal/plugins/router', 'config'],
+//
+//     function (logger, datacontext, router, config) {
+//
+//         var fees = ko.observableArray();
+//         var groups = ko.observableArray();
+//         var sortOrder = 0;
+//
+//         var activate = function () {
+//             //logger.log('test activating.' + config.wizEventureListId, null, 'sfee', true);
+//             datacontext.getGroupsByEventureListId(config.wizEventureListId, groups)
+//                 .then(function () {
+//                     //logger.log('groups: ' + groups().length(), null, 'sfee', true);
+//                 });
+//             return datacontext.getFeeSchedulesByEventureListId(config.wizEventureListId, fees);
+//         };
+//
+//         var viewAttached = function () {
+//             //logger.log('view attached', null, 'setfee', true);
+//             $(".feedate").datepicker();
+//             //$("#feedate").datepicker();
+//             //$(".feeamount").maskMoney({ symbol: '$ ', thousands: ',', decimal: '.', symbolStay: true });
+//         };
+//
+//         var clickAddGroup = function () {
+//             //logger.log('trying to add group ', null, 'sf', true);
+//             //logger.log('groups: ' + groups().length, null, 'sfee', true);
+//             var newGroup = ko.observable(datacontext.createGroup());
+//             //logger.log('still good ', null, 'sf', true);
+//             newGroup().eventureListId(config.wizEventureListId);
+//             newGroup().capacity(0);
+//             newGroup().active(true);
+//             newGroup().name("");
+//             newGroup().sortOrder(groups().length + 1);
+//             groups.push(newGroup);
+//         };
+//
+//         var clickAddFee = function () {
+//             //logger.log('', null, 'sf', true);
+//             var newFee = ko.observable(datacontext.createFeeSchedule());
+//
+//             newFee().eventureListId(config.wizEventureListId);
+//             newFee().amount(0);
+//             newFee().dateBegin("");
+//             fees.push(newFee);
+//             //fees.push({ amount: 0, dateBegin: "", active: true, eventureListId: config.wizEventureListId });
+//
+//             $(".feedate").datepicker();
+//             //$(".feeamount").maskMoney({ symbol: '$ ', thousands: ',', decimal: '.', symbolStay: true });
+//
+//         };
+//
+//         var clickNext = function () {
+//             //logger.log('next to quest', null, 'sf', true);
+//             saveAndNav();
+//         };
+//
+//         var saveAndNav = function () {
+//             //isSaving(true);
+//             //logger.log('called saveeeee', null, 'sf', true);
+//             return datacontext.saveChanges(fees)
+//                 .fin(complete);
+//
+//             function complete() {
+//                 //isSaving(false);
+//                 //logger.log('save complete', null, 'sl', true);
+//                 var url = '#setquestion'; //+ eventureList().id();
+//                 router.navigateTo(url);
+//             }
+//         };
+//
+//
+//         var vm = {
+//             activate: activate,
+//             fees: fees,
+//             groups: groups,
+//             clickNext: clickNext,
+//             clickAddGroup: clickAddGroup,
+//             clickAddFee: clickAddFee,
+//             viewAttached: viewAttached
+//         };
+//         return vm;
+//     });
+//
