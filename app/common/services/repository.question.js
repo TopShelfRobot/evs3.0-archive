@@ -50,10 +50,11 @@
 
         function getCustomQuestionSetByEventureListId(eventureListId) {
             var self = this;
+			eventureListId = Number(eventureListId);
             var query = entityQuery.from('Questions')
                 .where('eventureListId', '==', eventureListId);
 
-            return manager.executeQuery(query)
+            return self.manager.executeQuery(query)
                 .then(querySucceeded, self.queryFailed);
 
             function querySucceeded(data) {
@@ -66,7 +67,7 @@
             var query = entityQuery.from('Answers')
                 .where('eventureListId', '==', eventureListId);
 
-            return manager.executeQuery(query)
+            return self.manager.executeQuery(query)
                 .then(querySucceeded, self.queryFailed);
 
             function querySucceeded(data) {
@@ -81,7 +82,7 @@
             var query = entityQuery.from('StockAnswerSets')
                 .where('registrationId', '==', eventureListId);
 
-            return manager.executeQuery(query)
+            return self.manager.executeQuery(query)
                 .then(querySucceeded, self.queryFailed);
 
             function querySucceeded(data) {
