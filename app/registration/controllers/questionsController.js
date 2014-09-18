@@ -19,7 +19,7 @@
         $scope.groupId = 0;
         $scope.group2Id = 0;
 		
-        datacontext.getCustomQuestionSetByEventureListId(cartModel.currentEventureListId)
+        datacontext.question.getCustomQuestionSetByEventureListId($routeParams.listId)
             .then(function(results){
 				for(var i = 0; i < results.length; i++){
 					results[i].answer = null;
@@ -42,9 +42,9 @@
                 }
             });
 
-        datacontext.question.getStockQuestionSetByEventureListId(cartModel.currentEventureListId)
+        datacontext.question.getStockQuestionSetByEventureListId($routeParams.listId)
 			.then(function(data){
-				return questions.stockQuestionSet = data;
+				// return questions.stockQuestionSet = data;
 			});
 
         $scope.stockAnswerSet = {

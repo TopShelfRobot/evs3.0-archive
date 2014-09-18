@@ -40,7 +40,8 @@
 				
                 <!-- Custom Questions -->
 				<div ng-repeat="question in customQuestions">
-					<div class="row" ng-switch on="question.type">
+					<!-- <span>{{question.questionText}}, {{question.questionType}}</span> -->
+					<div class="row" ng-switch on="question.questionType">
 	                    <div class="form-group" 
 								ng-switch-when="combo" 
 								ng-show="question.active">
