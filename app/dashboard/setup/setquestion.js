@@ -22,7 +22,16 @@
 			console.log("New working item is:", self.workingQuestion);
 		};
 		
-		var loadQuestions = function(){
+		var loadStockQuestions = function(){
+			// return datacontext.question.getStockQuestionSetByEventureListId(listId)
+			// 	.then(function(data){
+			// 		console.log("stock answers:", data);
+			//
+			// 		self.stockAnswers = data;
+			// 	});
+		}
+		
+		var loadCustomQuestions = function(){
 			return datacontext.question.getCustomQuestionSetByEventureListId(listId)
 				.then(function(data){
 					console.log("custom questions:", data);
@@ -38,10 +47,12 @@
 							data[i].active = false;
 					}
 					self.customQuestions = data;
+					return self.customQuestions;
 				});
 		};
 		
-		loadQuestions();
+		loadCustomQuestions();
+		loadStockQuestions();
 			
 		this.saveQuestion = function(){
 			var question;
@@ -61,11 +72,20 @@
 			datacontext.save()
 				.then(function(data){
 					console.log("save successful:", data);
-					return loadQuestions();
+					return loadCustomQuestions();
 				}).catch(function(err){
 					console.error("save unsuccessful:", err);
-					return loadQuestions();
+					return loadCustomQuestions();
 				});
+		}
+		
+		this.saveAndNav = function(){
+			datacontext.save()
+			.then(function(){
+				console.log("ready to nav");
+			}).catch(function(){
+				console.log("save failed");
+			});
 		}
 	}
 	

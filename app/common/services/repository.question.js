@@ -84,7 +84,7 @@
         function getStockAnswerSetByEventureListId(eventureListId) {
             var self = this;
             var query = entityQuery.from('StockAnswerSets')
-                .where('registrationId', '==', eventureListId);
+                .where('eventureListId', '==', eventureListId);
 
             return self.manager.executeQuery(query)
                 .then(querySucceeded, self.queryFailed);
