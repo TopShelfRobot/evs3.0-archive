@@ -25,7 +25,7 @@
 					  	ng-model="setq.activeQuestion" 
 						name="QuestionText" 
 						ng-change="setq.questionChanged()"
-						ng-options="q.questionText for q in setq.customQuestions">
+						ng-options="q.questionText for (key, q) in setq.customQuestions">
                       </select>
                   </div>
               </div>
@@ -42,10 +42,10 @@
                     <tbody>
                         <tr>
                             <td>
-                                <input type="text" class="form-control" ng-model="setq.activeQuestion.questionText" />
+                                <input type="text" class="form-control" ng-model="setq.workingQuestion.questionText" />
                             </td>
                             <td>
-                                <select class="form-control" ng-model="setq.activeQuestion.questionType">
+                                <select class="form-control" ng-model="setq.workingQuestion.questionType">
                                   <option value="text">Text Box</option>
                                   <option value="dropdown">Dropdown</option>
                                   <option value="radio">Radio</option>
@@ -55,23 +55,23 @@
                           <td>
                               <div class="col-lg-6">
                                   <div class="btn-group">
-                                      <button type="button" class="btn btn-default" ng-model="setq.activeQuestion.active" btn-radio="true">Yes</button>
-                                      <button type="button" class="btn btn-default" ng-model="setq.activeQuestion.active" btn-radio="false">No</button>
+                                      <button type="button" class="btn btn-default" ng-model="setq.workingQuestion.active" btn-radio="true">Yes</button>
+                                      <button type="button" class="btn btn-default" ng-model="setq.workingQuestion.active" btn-radio="false">No</button>
                                   </div>
                               </div>
                           </td>
                           <td>
                               <div class="col-lg-6">
                                   <div class="btn-group">
-                                      <button type="button" class="btn btn-default" ng-model="setq.activeQuestion.required" btn-radio="true">Yes</button>
-                                      <button type="button" class="btn btn-default" ng-model="setq.activeQuestion.required" btn-radio="false">No</button>
+                                      <button type="button" class="btn btn-default" ng-model="setq.workingQuestion.isRequired" btn-radio="true">Yes</button>
+                                      <button type="button" class="btn btn-default" ng-model="setq.workingQuestion.isRequired" btn-radio="false">No</button>
                                   </div>
                               </div>
                           </td>
                       </tr>
                   </tbody>
                 </table>
-                <div class="well" id="options" ng-if="setq.activeQuestion.questionType == 'radio' || setq.activeQuestion.questionType == 'dropdown'"> <!-- Will begin hidden and show when needed -->
+                <div class="well" id="options" ng-if="setq.workingQuestion.questionType == 'radio' || setq.workingQuestion.questionType == 'dropdown'"> <!-- Will begin hidden and show when needed -->
                     <table class="table">
                       <thead>
                           <tr>
@@ -82,7 +82,7 @@
                       <tbody>
                           <tr>
                               <td>
-                                  <input class="form-control" ng-model="setq.activeQuestion.options"/>
+                                  <input class="form-control" ng-model="setq.workingQuestion.options"/>
                                   <p class="help-block">Enter your options as a comma separated list.</p>
                               </td>
                           </tr>

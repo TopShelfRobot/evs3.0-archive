@@ -10,29 +10,62 @@
 		this.stockAnswers = [false, false, false, false, false, false];
 		
 		this.activeQuestion;
-		
+		this.workingQuestion = {};
 		this.questionChanged = function(){
-			console.log($scope.regions);
+			self.workingQuestion = {};
+			var keys = ["questionText", "questionType", "active", "isRequired", "id", "options"];
+			for(var i in keys){
+				if(typeof self.activeQuestion[keys[i]] !== "undefined"){
+					self.workingQuestion[keys[i]] = self.activeQuestion[keys[i]];
+				}
+			}
+			console.log("New working item is:", self.workingQuestion);
 		};
 		
-		datacontext.question.getCustomQuestionSetByEventureListId(listId)
-			.then(function(data){
-				console.log("custom questions:", data);
+		var loadQuestions = function(){
+			return datacontext.question.getCustomQuestionSetByEventureListId(listId)
+				.then(function(data){
+					console.log("custom questions:", data);
 				
-				data.unshift({required: false, active: false, questionText: "", questionType: "text"});
-				self.activeQuestion = data[0];
+					data.unshift({isRequired: false, active: false, questionText: "", questionType: "text"});
+					self.activeQuestion = data[0];
+					self.questionChanged();
 				
-				for(var i = 0; i < data.length; i++){
-					if(data[i].required == null)
-					 	data[i].required = false;
-					if(data[i].active == null)
-						data[i].active = false;
-				}
-				self.customQuestions = data;
-			});
+					for(var i = 0; i < data.length; i++){
+						if(data[i].isRequired == null)
+						 	data[i].isRequired = false;
+						if(data[i].active == null)
+							data[i].active = false;
+					}
+					self.customQuestions = data;
+				});
+		};
+		
+		loadQuestions();
 			
 		this.saveQuestion = function(){
-			console.log("custom questions:", self.activeQuestion);
+			var question;
+			if(typeof self.workingQuestion.id == "undefined"){
+				question = datacontext.question.createCustomQuestion(listId);
+			}else{
+				for(var i = 0; i < self.customQuestions.length; i++){
+					if(self.workingQuestion.id == self.customQuestions[i].id){
+						question = self.customQuestions[i];
+						break;
+					}
+				}
+			}
+			for(var key in self.workingQuestion){
+				question[key] = self.workingQuestion[key];
+			}
+			datacontext.save()
+				.then(function(data){
+					console.log("save successful:", data);
+					return loadQuestions();
+				}).catch(function(err){
+					console.error("save unsuccessful:", err);
+					return loadQuestions();
+				});
 		}
 	}
 	

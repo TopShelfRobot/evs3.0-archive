@@ -21,6 +21,7 @@
             this.getAll = getAll;
 
             this.createStockQuestionSet = createStockQuestionSet;
+			this.createCustomQuestion = createCustomQuestion;
             this.getStockAnswerSetByEventureListId = getStockAnswerSetByEventureListId;
             this.getStockAnswerSetByRegistrationId = getStockAnswerSetByRegistrationId;
             this.getStockQuestionSetByEventureListId = getStockQuestionSetByEventureListId;
@@ -75,7 +76,10 @@
             }
         }
 
-
+        function createCustomQuestion(eventureListId) {
+            var self = this;
+            return self.manager.createEntity('Question', {'eventureListId': eventureListId});
+        }
 
         function getStockAnswerSetByEventureListId(eventureListId) {
             var self = this;
