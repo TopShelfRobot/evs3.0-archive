@@ -5,14 +5,6 @@
 		
 		$scope.cart = cartModel;
 		
-		var questions = {
-				stockQuestionSet : [],
-		        customQuestionSet : [],
-		        stockAnswerSet : [],
-			};
-			
-		$scope.questions = questions;
-		
 		$scope.notAllowedToContinue = function(){
 			return !$scope.isWaiverChecked;
 		};
@@ -26,24 +18,19 @@
         $scope.isWaiverChecked = false;
         $scope.groupId = 0;
         $scope.group2Id = 0;
-
-				//         datacontext.getCustomQuestionSetByEventureListId(cartModel.currentEventureListId)
-				//             .then(function(obs){
-				//
-				//                 for(var i = 0; i < obs().length; i++){
-				//                     obs()[i].answerValue = ko.observable();
-				//
-				//                     if(obs()[i].options()){
-				//                         var opts = obs()[i].options().split(",");
-				//                         if(obs()[i].type() == "combo"){
-				//                             opts.unshift(null);
-				//                         }
-				//                         obs()[i].options(opts);
-				//                     }
-				//                 }
-				//                 questions.customQuestionSet = obs();
-				// return questions.customQuestionSet;
-				//             });
+		
+        datacontext.getCustomQuestionSetByEventureListId(cartModel.currentEventureListId)
+            .then(function(results){
+				for(var i = 0; i < results.length; i++){
+					results[i].answer = null;
+					if(results[i].options && results[i].options.length && results[i].options.length > 0)
+						results[i].options = results[i].options.split(",");
+					if(results[i].required && results[i].type !== "combo" && results[i].type !== "text"){
+						results[i].answer = results[i].options ? results[i].options[0] : true;
+					}
+				}
+				$scope.customQuestions = results;
+            });
 
         //datacontext.eventure.getGroupsActiveByEventureListId(cartModel.currentEventureListId)
         datacontext.eventure.getGroupsActiveByEventureListId(6)   //$routeParams.ListId
@@ -60,53 +47,32 @@
 				return questions.stockQuestionSet = data;
 			});
 
-        questions.stockAnswerSet = {
+        $scope.stockAnswerSet = {
 	            shirtSize: "",
 	            howHear: "",
 	        };
 
         var getCustomAnswers = function(){
             var answers = [];
-            for(var i = 0; i < questions.customQuestionSet.length; i++){
-                answers.push({
-                	id : questions.customQuestionSet[i].id,
-					answerValue : questions.customQuestionSet[i].answerValue
-                });
-            }
+			var ans;
+			for(var i = 0; i < $scope.customQuestions.length; i++){
+				ans = {
+					id : $scope.customQuestions[i].id,
+					answer : $scope.customQuestions[i].answer,
+				}
+				answers.push(ans);
+			}
             return answers;
         }
 
-        $scope.next = function (isValid) {
-
-            var form = $(".form-horizontal");
-            form.validate();
-
-            if (form.valid()) {
-                cartModel.currentGroupId = $scope.groupId;
-                questions.stockAnswerSet.stockQuestionSetId = questions.stockQuestionSet && questions.stockQuestionSet.id ? questions.stockQuestionSet.id : null;
-                cartModel.currentStockAnswerSet = questions.stockAnswerSet;
-                cartModel.currentCustomAnswerSet = getCustomAnswers();
-                cartModel.addRegistration();
-	            $location.path("/eventure/");
-            }
+        $scope.next = function () {
+			
+            cartModel.currentGroupId = $scope.groupId;
+            cartModel.currentStockAnswerSet = $scope.stockAnswerSet;
+            cartModel.currentCustomAnswerSet = getCustomAnswers();
+            cartModel.addRegistration();
+			$location.$$search = {};
+            $location.path("/eventure/");
         };
-
-      // var vm = {
-      //       activate: activate,
-      //       viewAttached: viewAttached,
-      //       clickAddToCart: clickAddToCart,
-      //       cart: cart,
-      //       eventureList: eventureList,
-      //       stockQuestionSet: stockQuestionSet,
-      //       stockAnswerSet: stockAnswerSet,
-      //       groups: groups,
-      //       groupId: groupId,
-      //       //group2Id: group2Id,
-      //       isWaiverChecked: isWaiverChecked,
-      //       customQuestionSet : customQuestionSet,
-      //       //isAddCartApproved: isAddCartApproved,
-      //       title: 'question'
-      //   };
-      //   return vm;
 	}
 })();
