@@ -39,35 +39,35 @@
             <div class="col-sm-6">
 				
                 <!-- Custom Questions -->
-				<div ng-repeat="question in customQuestions">
+				<div ng-repeat="(key, question) in customQuestions">
 					<!-- <span>{{question.questionText}}, {{question.questionType}}</span> -->
-					<div class="row" ng-switch on="question.questionType">
+					<div class="row" ng-switch on="question.questionType" ng-if="question.active">
 	                    <div class="form-group" 
-								ng-switch-when="combo" 
-								ng-show="question.active">
+								ng-switch-when="dropdown"
+								ng-if"question.active">
 	                        <label class="col-6 col-sm-6 col-lg-6 control-label" >{{question.questionText}}</label>
 	                        <div class="col-6 col-sm-6 col-lg-6">
 	                            <select class="form-control" 
-										ng-model="question.answer" 
-										ng-options="o for o in question.options" 
-										ng-required="question.required">
+										ng-model="customAnswers[key]" 
+										ng-options="o for o in question.qOptions" 
+										ng-required="question.isRequired">
 	                            	<option value="">-- choose --</option>
 	                            </select>
 	                        </div>
 	                    </div>
                     
 	                    <div class="form-group" 
-								ng-switch-when="radio" 
-								ng-show="question.active">
+								ng-switch-when="radio"
+								ng-if"question.active">
 	                        <label class="col-6 col-sm-6 col-lg-6 control-label" >{{question.questionText}}</label>
 	                        <div class="col-6 col-sm-6 col-lg-6">
-	                            <div ng-repeat="o in question.options">
+	                            <div ng-repeat="o in question.qOptions">
 	                                <label class="radio-inline">
 										<input type="radio" 
 											name="raiod-{{question.id}}"
-											ng-model="question.answer"
+											ng-model="customAnswers[key]"
 											ng-value="o"
-											ng-required="$parent.required"/>
+											ng-required="$parent.isRequired"/>
 										<span>{{o}}</span>
 	                                </label>
 	                            </div>
@@ -75,29 +75,27 @@
 	                    </div>
 
 	                    <div class="form-group" 
-								ng-switch-when="text" 
-								ng-show="question.active">
+								ng-switch-when="text"
+								ng-if"question.active">
 	                        <label class="col-6 col-sm-6 col-lg-6 control-label" >{{question.questionText}}</label>
 	                        <div class="col-6 col-sm-6 col-lg-6">
 	                            <input type="text" class="form-control" 
-									ng-model="question.answer"
-									ng-required="question.required">
+									ng-model="customAnswers[key]"
+									ng-required="question.isRequired">
 								</input>
 	                         </div>
 	                    </div>
 
 	                    <div class="form-group" 
-								ng-switch-when="checkbox"
-								ng-show="question.active">
+								ng-switch-when="checkbox">
 	                        <label class="col-6 col-sm-6 col-lg-6 control-label">{{question.questionText}}</label>
 							<div class="col-6 col-sm-6 col-lg-6">
 	                            <input type="checkbox" 
-									ng-model="question.answer" 
-									ng-required="question.required">
+									ng-model="customAnswers[key]" 
+									ng-required="question.isRequired">
 								</input>
 	                        </div>
 						</div>
-						
 					</div>
                 </div>
 				

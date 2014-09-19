@@ -19,21 +19,30 @@
         $scope.groupId = 0;
         $scope.group2Id = 0;
 		
-        datacontext.question.getCustomQuestionSetByEventureListId($routeParams.listId)
-            .then(function(results){
-				for(var i = 0; i < results.length; i++){
-					results[i].answer = null;
-					if(results[i].options && results[i].options.length && results[i].options.length > 0)
-						results[i].options = results[i].options.split(",");
-					if(results[i].required && results[i].type !== "combo" && results[i].type !== "text"){
-						results[i].answer = results[i].options ? results[i].options[0] : true;
+		var loadCustomQuestions = function(){
+			return datacontext.question.getCustomQuestionSetByEventureListId($routeParams.listId)
+	            .then(function(results){
+					for(var i = 0; i < results.length; i++){
+						results[i].answer = null;
+						if(results[i].options && results[i].options.length){
+							results[i].qOptions = results[i].options.split(",");
+						}
+						if(results[i].questionOptions && results[i].questionOptions.length){
+							results[i].qOptions = results[i].questionOptions;
+						}
 					}
-				}
-				$scope.customQuestions = results;
-            });
+					$scope.customQuestions = results;
+					console.log("Custom Questions:", $scope.customQuestions);
+					return results;
+	            });
+		};
+		
+		loadCustomQuestions()
+			.then(function(results){
+				$scope.customAnswers = new Array(results.length);
+			});
 
-        //datacontext.eventure.getGroupsActiveByEventureListId(cartModel.currentEventureListId)
-        datacontext.eventure.getGroupsActiveByEventureListId(6)   //$routeParams.ListId
+        datacontext.eventure.getGroupsActiveByEventureListId($routeParams.listId)
             .then(function (data) {
 				$scope.groups = data;
                 if (config.isGroupRequired && groups().length < 1) {
@@ -55,18 +64,19 @@
         var getCustomAnswers = function(){
             var answers = [];
 			var ans;
-			for(var i = 0; i < $scope.customQuestions.length; i++){
+			for(var i = 0; i < $scope.customAnswers.length; i++){
 				ans = {
 					id : $scope.customQuestions[i].id,
-					answer : $scope.customQuestions[i].answer,
+					answer : $scope.customAnswers[i],
 				}
-				answers.push(ans);
+				if($scope.customQuestions[i].active){
+					answers.push(ans);
+				}
 			}
             return answers;
-        }
+        };
 
         $scope.next = function () {
-			
             cartModel.currentGroupId = $scope.groupId;
             cartModel.currentStockAnswerSet = $scope.stockAnswerSet;
             cartModel.currentCustomAnswerSet = getCustomAnswers();
