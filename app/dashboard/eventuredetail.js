@@ -2,9 +2,9 @@
     'use strict';
 
     var controllerId = 'eventuredetail';
-    angular.module('app').controller(controllerId, ['$routeParams', 'common', 'datacontext', 'config', eventuredetail]);
+    angular.module('app').controller(controllerId, ['$routeParams', 'common', 'datacontext', 'config', "$q", "$timeout", eventuredetail]);
 
-    function eventuredetail($routeParams, common, datacontext, config) {
+    function eventuredetail($routeParams, common, datacontext, config, $q, $timeout) {
         var getLogFn = common.logger.getLogFn;
         var log = getLogFn(controllerId);
 
@@ -23,6 +23,7 @@
 
           common.activateController(promises, controllerId)
               .then(function () {
+				  console.log("Activated");
                   //log('Activated Eventure Detail View');
               });
       }
