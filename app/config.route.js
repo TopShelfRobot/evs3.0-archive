@@ -87,12 +87,22 @@
                     }
                 }
             }, {
+                url: '/volunteercenter',
+                config: {
+                    title: 'Volunteers',
+                    templateUrl: 'app/dashboard/volunteercenter.html',
+                    settings: {
+                        nav: 5,
+                        content: 'Volunteers'
+                    }
+                }
+            }, {
                 url: '/couponaddon',
                 config: {
                     title: 'Coupons & Addons',
                     templateUrl: 'app/dashboard/couponaddon.html',
                     settings: {
-                        nav: 5,
+                        nav: 6,
                         content: 'Coupons & Addons'
                     }
                 }
@@ -102,7 +112,7 @@
                     title: 'Resources',
                     templateUrl: 'app/dashboard/resourcecenter.html',
                     settings: {
-                        nav: 6,
+                        nav: 7,
                         content: 'Resources'
                     }
                 }
@@ -113,7 +123,7 @@
                     title: 'Reporting',
                     templateUrl: 'app/dashboard/reporting.html',
                     settings: {
-                        nav: 7,
+                        nav: 8,
                         content: 'Reporting'
                     }
                 }
