@@ -27,7 +27,7 @@
 
         function activate() {
             //logSuccess('Eventure SPorts Angular loaded!!!!!', null, true);
-            // common.activateController([], controllerId);
+            common.activateController([], controllerId);
                 //.then(function () {
                 //    vm.showSplash = false;
                 //});
@@ -40,7 +40,7 @@
 		toggleSpinner(true);
 
         $rootScope.$on('$routeChangeStart', function (event, next, last) { 
-				toggleSpinner(true); 
+				// toggleSpinner(true); 
 			}
         );
 
@@ -49,8 +49,8 @@
 			}
         );
 
-        $rootScope.$on(events.spinnerToggle, function (data) { 
-				toggleSpinner(data.show); 
+        $rootScope.$on(events.spinnerToggle, function (scope, on) { 
+				toggleSpinner(on); 
 			}
         );
 

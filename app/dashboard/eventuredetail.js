@@ -23,7 +23,6 @@
 
           common.activateController(promises, controllerId)
               .then(function () {
-				  console.log("Activated");
                   //log('Activated Eventure Detail View');
               });
       }
