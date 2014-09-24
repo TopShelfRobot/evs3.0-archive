@@ -199,7 +199,7 @@
         };
 
 		vm.saveAndNav = function() {
-			return datacontext.saveChanges(vm.eventure)
+			return datacontext.save(vm.eventure)
 				.fin(complete);
 
 			function complete() {
