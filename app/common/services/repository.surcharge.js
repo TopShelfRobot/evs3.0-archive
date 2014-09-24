@@ -7,7 +7,7 @@
         ['breeze', 'config', 'repository.abstract', repositorySurcharge]);
 
     function repositorySurcharge(breeze, config, abstractRepository) {
-        var entityName = 'ZZZ';
+        var entityName = 'surcharge';
         //var entityNames = model.entityNames;
         var entityQuery = breeze.EntityQuery;
         var predicate = breeze.Predicate;
