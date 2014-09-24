@@ -297,7 +297,7 @@
         }
 
         function VolunteerGrid() {
-            var volJobApi = config.remoteApiName + 'kendo/Participants/GetVolunteerDataByEventure/' + vm.eventureId;
+            var volJobApi = config.remoteApiName + 'Participants/GetVolunteerDataByEventureId/' + vm.eventureId;
 
             vm.volunteerGridOptions = {
                 dataSource: {
@@ -350,7 +350,7 @@
             vm.volunteerDetailGridOptions = function(e) {
 
 
-                var volunteerApi = config.remoteApiName + 'kendo/Participants/GetVolunteersByVolunteerJobId/' + e.Id;
+                var volunteerApi = config.remoteApiName + 'Participants/GetVolunteersByVolunteerJobId/' + e.Id;
 
                 return {
                     dataSource: {
