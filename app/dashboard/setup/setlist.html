@@ -131,17 +131,18 @@
         <!-- /field -->
 
         <div class="form-group">
-          <label for="MaxRunTime" class="col-lg-6 control-label" style="padding-top:40px;">Max Run Time:</label>
+          <label for="MaxRunTime" class="col-lg-6 control-label">Max Run Time:</label>
           <div class="col-lg-6">
-            <div ng-model="mytime" ng-change="changed()" style="display:inline-block;">
+              <input type="text" class="form-control" name="MaxRunTime" ng-model="vm.list.maxRunTime" />
+            <!-- <div ng-model="mytime" ng-change="changed()" style="display:inline-block;">
               <timepicker hour-step="hstep" minute-step="mstep" show-meridian="false" ng-model="vm.list.maxRunTime"></timepicker>
-            </div>
+            </div> -->
           </div>
         </div>
         <!-- /field -->
 
         <div class="form-group">
-          <label for="" class="col-lg-6 control-label">Active Event:</label>
+          <label for="" class="col-lg-6 control-label">Active Listing:</label>
           <div class="col-lg-6">
             <div class="btn-group">
               <button type="button" class="btn btn-default" ng-model="vm.list.active" btn-radio="true">Yes</button>

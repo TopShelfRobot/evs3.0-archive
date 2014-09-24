@@ -3,9 +3,9 @@
 
     var serviceId = 'datacontext';
     angular.module('common').factory(serviceId,
-        ['common', 'entityManagerFactory', 'model', 'repositories', datacontext]);
+        ['common', 'entityManagerFactory', 'model', 'config', 'repositories', datacontext]);
 
-    function datacontext(common, emFactory, model, repositories) {
+    function datacontext(common, emFactory, model, config, repositories) {
         var entityNames = model.entityNames;
         var getLogFn = common.logger.getLogFn;
         var log = getLogFn(serviceId);
