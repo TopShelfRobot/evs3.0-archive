@@ -34,7 +34,7 @@
               <br>
               <div class="row">
                 <div class="col-xs-6">
-                  <a class="btn btn-info btn-block" ng-href="#/setlist">Add a Listing</a>
+                  <a class="btn btn-info btn-block" ng-href="#/{{vm.eventureId}}/setlist">Add a Listing</a>
                 </div>
                 <div class="col-xs-6">
                   <a class="btn btn-primary btn-block" ng-href="#/seteventure/{{vm.eventureId}}">Edit Event</a>
@@ -62,7 +62,7 @@
               <p class="text-muted">Get an overview of your expenses for this event.</p>
               <div id="expensesgrid" kendo-grid k-options="vm.expenseGridOptions"></div>
               <br>
-              <button class="btn btn-info">Add Event Expense</button>
+              <a class="btn btn-info" ng-href="#/{{vm.eventureId}}/setexpense">Add Event Expense</a>
             </section>
           </div>
         </div>
@@ -102,89 +102,10 @@
             <section id="volunteercontent">
               <br>
               <p class="text-muted">Manage each volunteer job and your volunteers for this event.</p>
-              <!--<p>2 level grid
-              <br>First level edit takes you to setvolunteerjob
-              <br>Second level edit takes you to setvolunteershift</p>-->
-              <h3>Volunteer Jobs</h3>
-              <div id="jobgrid" class="">
-                <table class="table table-striped">
-                  <thead>
-                  <th class="col-sm-3">Job Name</th>
-                    <th class="col-sm-2">Date</th>
-                    <th class="col-sm-2">Shifts</th>
-                    <th class="col-sm-2">Capacity</th>
-                    <th class="col-sm-2">Max Capacity</th>
-                    <th />
-                  <tbody>
-                    <tr>
-                      <td>Packet Pickup</td>
-                      <td>6/1/14</td>
-                      <td>5</td>
-                      <td>6</td>
-                      <td>10</td>
-                      <td><button class="btn btn-default" type="button">Edit</button></td>
-                    </tr>
-                    <tr>
-                      <td>Water Station</td>
-                      <td>6/1/14</td>
-                      <td>20</td>
-                      <td>11</td>
-                      <td>40</td>
-                      <td><button class="btn btn-default" type="button">Edit</button></td>
-                    </tr>
-                    <tr>
-                      <td>Post Race Cleanup</td>
-                      <td>6/1/14</td>
-                      <td>1</td>
-                      <td>8</td>
-                      <td>10</td>
-                      <td><button class="btn btn-default" type="button">Edit</button></td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-              <hr>
-              <h3>Volunteers</h3>
-              <!--<p>1 level grid
-              <br>Edit takes you to regedit</p> -->
-              <div id="volunteergrid" class="">
-                <table class="table table-striped">
-                  <thead>
-                  <th class="col-sm-1">First Name</th>
-                    <th class="col-sm-2">Last Name</th>
-                    <th class="col-sm-3">Email</th>
-                    <th class="col-sm-3">Job</th>
-                    <th class="col-sm-3">Shift</th>
-                  <tbody>
-                    <tr>
-                      <td>Bob</td>
-                      <td>Johnson</td>
-                      <td>bjohnson@gmail.com</td>
-                      <td>Packet Pickup</td>
-                      <td>5:00pm - 6:00pm</td>
-                      <td><button class="btn btn-default" type="button">Edit</button></td>
-                    </tr>
-                    <tr>
-                      <td>Stanley</td>
-                      <td>Steamer</td>
-                      <td>ssteamer@yahoo.com</td>
-                      <td>Water Station</td>
-                      <td>8:00am - 9:00am</td>
-                      <td><button class="btn btn-default" type="button">Edit</button></td>
-                    </tr>
-                    <tr>
-                      <td>Carl</td>
-                      <td>Spangler</td>
-                      <td>cspangler@gmail.com</td>
-                      <td>Post Race Cleanup</td>
-                      <td>2:00pm - 3:00pm</td>
-                      <td><button class="btn btn-default" type="button">Edit</button></td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
+              <div id="volunteergrid" kendo-grid="vm.volunteergrid" k-options="vm.volunteerGridOptions"></div>
               <br>
               <button class="btn btn-primary">Add Volunteer Job</button>
+              </div>
             </section>
           </div>
         </div>
@@ -194,3 +115,8 @@
     </div>
   </div>
 </section>
+
+
+<script type="text/x-kendo-template" id="template">
+    <div kendo-grid k-options="vm.volunteerDetailGridOptions(dataItem)"></div>
+</script>

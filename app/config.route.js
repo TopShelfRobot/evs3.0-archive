@@ -87,12 +87,22 @@
                     }
                 }
             }, {
+                url: '/volunteercenter',
+                config: {
+                    title: 'Volunteers',
+                    templateUrl: 'app/dashboard/volunteercenter.html',
+                    settings: {
+                        nav: 5,
+                        content: 'Volunteers'
+                    }
+                }
+            }, {
                 url: '/couponaddon',
                 config: {
                     title: 'Coupons & Addons',
                     templateUrl: 'app/dashboard/couponaddon.html',
                     settings: {
-                        nav: 5,
+                        nav: 6,
                         content: 'Coupons & Addons'
                     }
                 }
@@ -102,7 +112,7 @@
                     title: 'Resources',
                     templateUrl: 'app/dashboard/resourcecenter.html',
                     settings: {
-                        nav: 6,
+                        nav: 7,
                         content: 'Resources'
                     }
                 }
@@ -113,7 +123,7 @@
                     title: 'Reporting',
                     templateUrl: 'app/dashboard/reporting.html',
                     settings: {
-                        nav: 7,
+                        nav: 8,
                         content: 'Reporting'
                     }
                 }
@@ -203,25 +213,31 @@
                     templateUrl: 'app/dashboard/setup/seteventure.html'
                 }
             }, {
-                url: '/setexpense',
+                url: '/:eventureId/setexpense',
                 config: {
                     title: 'Create An Expense',
                     templateUrl: 'app/dashboard/setup/setexpense.html'
                 }
             }, {
-                url: '/setfee',
+                url: '/:eventureId/setexpense/:expenseId',
+                config: {
+                    title: 'Edit An Expense',
+                    templateUrl: 'app/dashboard/setup/setexpense.html'
+                }
+            }, {
+                url: '/:eventureId/:listId/setfee',
                 config: {
                     title: 'Create Fees & Groups',
                     templateUrl: 'app/dashboard/setup/setfee.html'
                 }
             }, {
-                url: '/setquestion',
+                url: '/:eventureId/:listId/setquestion',
                 config: {
                     title: 'Create Questions',
                     templateUrl: 'app/dashboard/setup/setquestion.html'
                 }
             }, {
-                url: '/setlist',
+                url: '/:eventureId/setlist/',
                 config: {
                     title: 'Create A Listing',
                     templateUrl: 'app/dashboard/setup/setlist.html'
@@ -261,6 +277,12 @@
                 config: {
                     title: 'Create A Resource Item Category',
                     templateUrl: 'app/dashboard/setup/setresourceitemcategory.html'
+                }
+            }, {
+                url: '/setvolunteerjob',
+                config: {
+                    title: 'Create A Volunteer Job',
+                    templateUrl: 'app/dashboard/setup/setvolunteerjob.html'
                 }
             }, {
                 url: '/editteam/:teamId',

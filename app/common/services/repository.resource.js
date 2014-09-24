@@ -19,7 +19,7 @@
             this.manager = mgr;
             // Exposed data access functions
             this.getAll = getAll;
-            
+
             this.getResourceById = getResourceById;
             this.getResourcesByOwnerId = getResourcesByOwnerId;
             this.createResourceItemCategory = createResourceItemCategory;
@@ -58,8 +58,9 @@
                 return data.results;
             }
         }
-        
+
         function getResourceById(resourceId) {
+            var self = this;
             var query = entityQuery.from('resources')
                 .where('id', '==', resourceId);
 
@@ -72,6 +73,7 @@
         }
 
         function getResourcesByOwnerId(ownerId) {
+            var self = this;
             var query = entityQuery.from('resources')
                 .where('ownerId', '==', ownerId);
 
@@ -84,6 +86,7 @@
         }
 
         function createResourceItemCategory() {
+            var self = this;
             return self.manager.createEntity('ResourceItemCategory', { ownerId: config.ownerId });
         }
 
@@ -93,6 +96,7 @@
         }
 
         function getResourceItemCategoriesByOwnerId(ownerId, isOnlyActive) {
+            var self = this;
             var pred; // = predicate.create("ownerId", "==", ownerId);
 
             if (isOnlyActive) {
@@ -106,7 +110,7 @@
             }
             return entityQuery.from('ResourceItemCategories')
             .where(pred)
-            .using(manager).execute()
+            .using(self.manager).execute()
             .then(querySucceeded, self._queryFailed);
 
             function querySucceeded(data) {
@@ -115,12 +119,13 @@
         }
 
         function getResourceItemsByOwnerId(ownerId) {
+            var self = this;
             var pred = predicate.create("active", "==", true)
               .and("ownerId", "==", ownerId);
 
             return entityQuery.from('ResourceItems')
               .where(pred)
-              .using(manager).execute()
+              .using(self.manager).execute()
               .then(querySucceeded, self._queryFailed);
 
             function querySucceeded(data) {
@@ -129,12 +134,13 @@
         }
 
         function getClientResourcesByOwnerId(ownerId, resouceType) {
+            var self = this;
             var pred = predicate.create("resourceType", "==", resouceType)
               .and("ownerId", "==", ownerId);
 
             return entityQuery.from('Resources')
                 .where(pred)
-                .using(manager).execute()
+                .using(self.manager).execute()
                 .then(querySucceeded, self._queryFailed);
 
             function querySucceeded(data) {
@@ -143,6 +149,7 @@
         }
 
         function getEventureServicesByEventureId(eventureId) {
+            var self = this;
             var query = entityQuery.from('EventureServices')
                 .where('eventureId', '==', eventureId);
 
@@ -155,11 +162,13 @@
         }
 
         function createEventureService(eventureId) {
+            var self = this;
             return self.manager.createEntity('EventureService',
                 { eventureId: eventureId, active: true });
         }
 
         function getClientById(id) {
+            var self = this;
             var query = entityQuery.from('Clients')
                 .where('id', '==', id);
 
@@ -172,11 +181,13 @@
         }
 
     function createPlanItem(eventureId) {
+            var self = this;
             return self.manager.createEntity('EventurePlanItem',
                 { eventureId: eventureId, dateDue: moment().format("MM/DD/YYYY") });
         }
 
-        function getPlanItemById(planItemId) {  
+        function getPlanItemById(planItemId) {
+            var self = this;
             var query = entityQuery.from('EventurePlanItems')
                 .where('id', '==', planItemId);
 
@@ -189,6 +200,7 @@
         }
 
         function getResourceServicesByOwnerId(ownerId) {
+            var self = this;
             var query = entityQuery.from('GetResourceServicesByOwnerId')
                 .withParameters({ id: ownerId });
 
@@ -199,12 +211,14 @@
                 return data.results;
             }
         }
-        
+
         function createResourceItem(resourceId) {
+            var self = this;
             return self.manager.createEntity('ResourceItem', { resourceId: resourceId, ownerId: config.ownerId, active: true });
         }
 
         function getResourceItemById(resourceItemId) {
+            var self = this;
             var query = entityQuery.from('ResourceItems')
             .where('id', '==', resourceItemId);
 
@@ -215,8 +229,9 @@
                 return data.results[0];
             }
         }
-    
+
         function getExpensesByEventureId(eventureId) {
+            var self = this;
             var query = entityQuery.from('Expense')
                 .where('eventureId', '==', eventureId);
 
@@ -228,9 +243,10 @@
             }
         }
 
-        function createExpense(eventureId) {
-            return self.manager.createEntity('EventureExpense', { eventureId: eventureId });
+        function createExpense() {
+            var self = this;
+            return self.manager.createEntity('EventureExpense');
         }
-       
+
     }
 })();

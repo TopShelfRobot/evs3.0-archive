@@ -30,7 +30,7 @@
           var teamapi = config.remoteApiName + 'Teams/GetTeamRegistrationsByOwnerId/' + vm.ownerId;
 
           vm.teamGridOptions = {
-            toolbar: '<a download="Contacts.xlsx" class="k-button" ng-click="vm.excel()">Export</a>',
+            toolbar: '<a download="Teams.xlsx" class="k-button" ng-click="vm.excel()">Export</a>',
             dataSource: {
                 type: "json",
                 transport: {
@@ -134,6 +134,7 @@
           };
 
         }
+
         function b64ToUint6 (nChr) {
           return nChr > 64 && nChr < 91 ?
               nChr - 65
@@ -180,9 +181,9 @@
             worksheets: [{
               data: []
             }],
-            creator: 'John Smith',
-            created: new Date('8/16/2012'),
-            lastModifiedBy: 'Larry Jones',
+            creator: 'System',
+            created: new Date(),
+            lastModifiedBy: 'System',
             modified: new Date(),
             activeWorksheet: 0
           };
@@ -238,9 +239,9 @@
             worksheets: [{
               data: []
             }],
-            creator: 'John Smith',
-            created: new Date('8/16/2012'),
-            lastModifiedBy: 'Larry Jones',
+            creator: 'System',
+            created: new Date(),
+            lastModifiedBy: 'System',
             modified: new Date(),
             activeWorksheet: 0
           };

@@ -39,7 +39,7 @@
                 .then(complete);
 
             function complete() {
-                $location.path("/resourcecenter/");
+                $location.path("/resourcecenter");
             }
         };
 

@@ -25,6 +25,8 @@
             this.getStockAnswerSetByRegistrationId = getStockAnswerSetByRegistrationId;
             this.getStockQuestionSetByEventureListId = getStockQuestionSetByEventureListId;
             this.getStockQuestionSetByRegistrationId = getStockQuestionSetByRegistrationId;
+            this.getCustomQuestionSetByEventureListId = getCustomQuestionSetByEventureListId;
+            this.getCustomAnswersSetByEventureListId = getCustomAnswersSetByEventureListId;
         }
 
         // Allow this repo to have access to the Abstract Repo's functions,
@@ -45,6 +47,34 @@
                 return data.results;
             }
         }
+
+        function getCustomQuestionSetByEventureListId(eventureListId) {
+            var self = this;
+            var query = entityQuery.from('Questions')
+                .where('eventureListId', '==', eventureListId);
+
+            return manager.executeQuery(query)
+                .then(querySucceeded, self.queryFailed);
+
+            function querySucceeded(data) {
+                return data.results;
+            }
+        }
+
+        function getCustomAnswersSetByEventureListId(eventureListId) {
+            var self = this;
+            var query = entityQuery.from('Answers')
+                .where('eventureListId', '==', eventureListId);
+
+            return manager.executeQuery(query)
+                .then(querySucceeded, self.queryFailed);
+
+            function querySucceeded(data) {
+                return data.results;
+            }
+        }
+
+
 
         function getStockAnswerSetByEventureListId(eventureListId) {
             var self = this;

@@ -9,11 +9,11 @@
 
     // For use with the HotTowel-Angular-Breeze add-on that uses Breeze
     //var remoteServiceName = 'breeze/Breeze';
-    //var remoteServiceName = 'http://evs30api.eventuresports.info/breeze/breeze/';
-    //var remoteApiName = 'http://evs30api.eventuresports.info/kendo/';
+    var remoteServiceName = 'http://evs30api.eventuresports.info/breeze/breeze/';
+    var remoteApiName = 'http://evs30api.eventuresports.info/kendo/';
 
-      var remoteServiceName = 'http://localhost:55972/breeze/breeze/';
-      var remoteApiName = 'http://localhost:55972/kendo/';
+    //   var remoteServiceName = 'http://localhost:55972/breeze/breeze/';
+    //   var remoteApiName = 'http://localhost:55972/kendo/';
 
     //var remoteServiceName = '/breeze/breeze/';
     //var remoteApiName = '/kendo/';

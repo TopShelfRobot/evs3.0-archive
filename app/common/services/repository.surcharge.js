@@ -38,9 +38,10 @@
 
         return Ctor;
 
-        function createFeeSchedule() {
+        function createFeeSchedule(eventureListId) {
             var self = this;
-            return self.manager.createEntity('FeeSchedule', { dateBegin: moment().format("MM/DD/YYYY") });
+            return self.manager.createEntity('FeeSchedule',
+                { eventureListId: eventureListId, dateBegin: new Date() });
         }
 
         function getAddonsByEventureId(eventureId) {
@@ -131,7 +132,8 @@
         function getFeeSchedulesByEventureListId(eventureListId) {
             var self = this;
             var query = entityQuery.from('FeeSchedules')//;
-                .where('eventureListId', '==', eventureListId);
+                .where('eventureListId', '==', eventureListId)
+                .orderBy('dateBegin');
 
             return self.manager.executeQuery(query)
                 .then(querySucceeded, self._queryFailed);

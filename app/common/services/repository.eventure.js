@@ -197,7 +197,7 @@
         function createGroup(eventureListId) {
             var self = this;
             return self.manager.createEntity('EventureGroup',
-                { eventureListId: eventureListId, active: true });
+                { eventureListId: eventureListId, capacity: 0, active: true });
         };
     }
 })();
