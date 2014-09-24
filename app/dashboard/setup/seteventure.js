@@ -189,30 +189,6 @@
 			}
 		};
 
-        vm.saveAndNav = function() {
-            return datacontext.save(vm.eventure)
-                .then(complete);
-
-            function complete() {
-                $location.path("/eventuredetail/" + vm.eventureId);
-            }
-        };
-
-		vm.saveAndNav = function() {
-			return datacontext.save(vm.eventure)
-				.fin(complete);
-
-			function complete() {
-
-				//if (eventure().managed()) {
-				//    url = '#setclient';
-				//    router.navigateTo(url);
-				//}
-				//else
-				//    parent.$.fancybox.close(true);
-			}
-		};
-
 	}
 })();
 
