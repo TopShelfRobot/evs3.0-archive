@@ -11,7 +11,7 @@
 			});
 		
 		$scope.submit = function(){
-			datacontext.saveChanges()
+			datacontext.save()
 			.then(function(){
 				$window.history.back();
 				console.log("saved");

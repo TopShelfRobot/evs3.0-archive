@@ -20,7 +20,7 @@
         
         var clickSave = function () {
             //isSaving(true);
-            return datacontext.saveChanges()
+            return datacontext.save()
                 .fin(complete);
 
             function complete() {

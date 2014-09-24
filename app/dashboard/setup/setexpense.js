@@ -113,7 +113,7 @@
 //         var save = function () {
 //             //isSaving(true);
 //             //logger.log('called save', null, 'test', true);
-//             return datacontext.saveChanges(expense)
+//             return datacontext.save(expense)
 //                 .then(complete);
 //
 //             function complete() {

@@ -303,7 +303,7 @@
 //             //    $("#validation-errors").text(firstErr);
 //             //} else {
 //             //    //logger.log('called save', null, 'sl', true);
-//              return datacontext.saveChanges()
+//              return datacontext.save()
 //                     .then(success);
 //
 //                 function success() {

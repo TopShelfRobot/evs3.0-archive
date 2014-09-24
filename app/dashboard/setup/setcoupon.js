@@ -195,7 +195,7 @@
 //                     coupon().couponTypeLinkId($("#listdropdown").val());
 //                     break;
 //             }
-//             datacontext.saveChanges(coupon);
+//             datacontext.save(coupon);
 //
 //             parent.$.fancybox.close(true);
 //

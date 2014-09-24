@@ -152,7 +152,7 @@
 //         var saveAndNav = function () {
 //             //isSaving(true);
 //             //logger.log('called saveeeee', null, 'sf', true);
-//             return datacontext.saveChanges(fees)
+//             return datacontext.save(fees)
 //                 .fin(complete);
 //
 //             function complete() {

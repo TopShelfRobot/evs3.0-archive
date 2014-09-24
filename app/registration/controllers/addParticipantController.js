@@ -56,7 +56,7 @@
 			for(key in $scope.participant){
 				newPart[key] = $scope.participant[key];
 			}
-			datacontext.saveChanges()
+			datacontext.save()
 				.then(function(){
 					console.log("saved");
 					$window.history.back();

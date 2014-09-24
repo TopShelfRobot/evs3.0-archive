@@ -75,7 +75,7 @@
 
 
 		$scope.save = function(){
-			datacontext.saveChanges()
+			datacontext.save()
 				.then(function(){
 					console.log("saved");
 				});

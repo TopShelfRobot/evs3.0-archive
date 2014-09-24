@@ -34,7 +34,7 @@
         var save = function () {
             //isSaving(true);
             //logger.log('called save', null, 'test', true);
-            return datacontext.saveChanges(planItem)
+            return datacontext.save(planItem)
                 .then(complete);
             //.fin(fin1);
 

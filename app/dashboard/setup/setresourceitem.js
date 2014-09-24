@@ -28,7 +28,7 @@
         var saveResourceItem = function () {
             //logger.log('called save', null, 'test', true);
 
-            return datacontext.saveChanges()
+            return datacontext.save()
                 .fin(complete);
 
             function complete() {

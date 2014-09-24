@@ -179,7 +179,7 @@
 //                     addon().addonTypeLinkId($("#listdropdown").val());
 //                     break;
 //             }
-//             datacontext.saveChanges(addon);
+//             datacontext.save(addon);
 //
 //             parent.$.fancybox.close(true);
 //
