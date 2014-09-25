@@ -1,7 +1,9 @@
 
 ;(function(){
-    angular.module("evReg").controller("QuestionsController", ["$scope", "$location", "config", "CartModel", "datacontext", "$routeParams", Controller]);
-    function Controller($scope, $location, config, cartModel, datacontext, $routeParams) {
+	
+	var controllerId = "QuestionsController";
+    
+    function Controller($scope, $location, config, cartModel, datacontext, $routeParams, common) {
 		
 		$scope.cart = cartModel;
 		
@@ -27,39 +29,45 @@
         $scope.groupId = 0;
         $scope.group2Id = 0;
 
-				//         datacontext.getCustomQuestionSetByEventureListId(cartModel.currentEventureListId)
-				//             .then(function(obs){
-				//
-				//                 for(var i = 0; i < obs().length; i++){
-				//                     obs()[i].answerValue = ko.observable();
-				//
-				//                     if(obs()[i].options()){
-				//                         var opts = obs()[i].options().split(",");
-				//                         if(obs()[i].type() == "combo"){
-				//                             opts.unshift(null);
-				//                         }
-				//                         obs()[i].options(opts);
-				//                     }
-				//                 }
-				//                 questions.customQuestionSet = obs();
-				// return questions.customQuestionSet;
-				//             });
+//         datacontext.getCustomQuestionSetByEventureListId(cartModel.currentEventureListId)
+//             .then(function(obs){
+//
+//                 for(var i = 0; i < obs().length; i++){
+//                     obs()[i].answerValue = ko.observable();
+//
+//                     if(obs()[i].options()){
+//                         var opts = obs()[i].options().split(",");
+//                         if(obs()[i].type() == "combo"){
+//                             opts.unshift(null);
+//                         }
+//                         obs()[i].options(opts);
+//                     }
+//                 }
+//                 questions.customQuestionSet = obs();
+// return questions.customQuestionSet;
+//             });
 
-        //datacontext.eventure.getGroupsActiveByEventureListId(cartModel.currentEventureListId)
-        datacontext.eventure.getGroupsActiveByEventureListId(6)   //$routeParams.ListId
-            .then(function (data) {
-				$scope.groups = data;
-                if (config.isGroupRequired && groups().length < 1) {
-                    alert('There are currently no spaces available');
-                    router.navigateTo("#eventurelist/" + cartModel.currentEventureListId);
-                }
-            });
+		var promises = [];
+        promises.push(
+			datacontext.eventure.getGroupsActiveByEventureListId(6)   //$routeParams.ListId
+	            .then(function (data) {
+					$scope.groups = data;
+	                if (config.isGroupRequired && groups().length < 1) {
+	                    alert('There are currently no spaces available');
+	                    router.navigateTo("#eventurelist/" + cartModel.currentEventureListId);
+	                }
+	            })
+		);
 
-        datacontext.question.getStockQuestionSetByEventureListId(cartModel.currentEventureListId)
-			.then(function(data){
-				return questions.stockQuestionSet = data;
-			});
-
+		promises.push(
+	        datacontext.question.getStockQuestionSetByEventureListId(cartModel.currentEventureListId)
+				.then(function(data){
+					return questions.stockQuestionSet = data;
+				})
+		);
+		
+		common.activateController(promises, controllerId);
+		
         questions.stockAnswerSet = {
 	            shirtSize: "",
 	            howHear: "",
@@ -90,23 +98,7 @@
 	            $location.path("/eventure/");
             }
         };
-
-      // var vm = {
-      //       activate: activate,
-      //       viewAttached: viewAttached,
-      //       clickAddToCart: clickAddToCart,
-      //       cart: cart,
-      //       eventureList: eventureList,
-      //       stockQuestionSet: stockQuestionSet,
-      //       stockAnswerSet: stockAnswerSet,
-      //       groups: groups,
-      //       groupId: groupId,
-      //       //group2Id: group2Id,
-      //       isWaiverChecked: isWaiverChecked,
-      //       customQuestionSet : customQuestionSet,
-      //       //isAddCartApproved: isAddCartApproved,
-      //       title: 'question'
-      //   };
-      //   return vm;
 	}
+	
+	angular.module("evReg").controller(controllerId, ["$scope", "$location", "config", "CartModel", "datacontext", "$routeParams", "common", Controller]);
 })();

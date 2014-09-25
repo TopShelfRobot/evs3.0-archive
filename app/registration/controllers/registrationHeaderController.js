@@ -1,6 +1,8 @@
 (function(){
+	
+	var controllerId = "Header";
 
-    function controller($scope, $location, cartModel){
+    function controller($scope, $location, cartModel, common){
 
         $scope.cart = cartModel;
 		
@@ -14,6 +16,6 @@
 		};
     }
 
-    angular.module("evReg").controller("Header", ["$scope", "$location", "CartModel", controller]);
+    angular.module("evReg").controller(controllerId, ["$scope", "$location", "CartModel", "common", controller]);
 
 })();

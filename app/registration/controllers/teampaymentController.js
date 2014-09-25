@@ -1,43 +1,46 @@
 (function () {
-    angular.module("evReg").controller("TeamPaymentController",
-       ["$scope", "$location", "$http", "datacontext", "RegistrationCartModel", "config","StripeService", controller]);
+	
+	var controllerId = "TeamPaymentController";
 
-	function controller($scope, $location, $http, datacontext, cartModel, config, stripe) {
+	function controller($scope, $location, $http, datacontext, cartModel, config, stripe, common) {
         $scope.teamName = cartModel.teamName;
         $scope.waiverSigned = false;
         $scope.isSuggestPayVisible = false;
         $scope.isIndividualVisible = false;
         
-        console.log(cartModel.eventureId, cartModel.eventureListId);
-        datacontext.eventure.getEventureListById(cartModel.eventureListId)
-            .then(function (item) {
-                if (item) {
-                    $scope.fee = item.currentFee;
-                    cartModel.fee = item.currentFee;
-                    switch (item.listingType) {
-                        case 2:    //team sponsor
-                            $scope.isIndividualVisible = true;
-                            $scope.userPaying = item.currentFee;
-                            break;
-                        case 3:   //team suggest
-                            $scope.isSuggestPayVisible = true;
+		var promises = [
+	        datacontext.eventure.getEventureListById(cartModel.eventureListId)
+	            .then(function (item) {
+	                if (item) {
+	                    $scope.fee = item.currentFee;
+	                    cartModel.fee = item.currentFee;
+	                    switch (item.listingType) {
+	                        case 2:    //team sponsor
+	                            $scope.isIndividualVisible = true;
+	                            $scope.userPaying = item.currentFee;
+	                            break;
+	                        case 3:   //team suggest
+	                            $scope.isSuggestPayVisible = true;
                             
-                            break;
-                        case 4:    //team all pays the same
-                            $scope.isIndividualVisible = true;
-                            $scope.userPaying = item.currentFee;
-                            break;
-                        default:
-                    }
-                    //if (item.listingType == 2) {
-                    //    $scope.isIndividualVisible = false;
-                    //}
-                    //if (item.listingType == 3) {
-                    //    $scope.isSuggestPayVisible = true;
-                    //}
-                }
-            });
-
+	                            break;
+	                        case 4:    //team all pays the same
+	                            $scope.isIndividualVisible = true;
+	                            $scope.userPaying = item.currentFee;
+	                            break;
+	                        default:
+	                    }
+	                    //if (item.listingType == 2) {
+	                    //    $scope.isIndividualVisible = false;
+	                    //}
+	                    //if (item.listingType == 3) {
+	                    //    $scope.isSuggestPayVisible = true;
+	                    //}
+	                }
+	            })
+		];
+		
+		common.activateController(promises, controllerId);
+		
         $scope.allowZeroPayment = cartModel.allowZeroPayment;
         // $scope.waiverSigned = cartModel.waiverSigned;
 
@@ -73,4 +76,8 @@
 				});
         };
     }
+	
+    angular.module("evReg").controller(controllerId,
+		["$scope", "$location", "$http", "datacontext", "RegistrationCartModel", "config","StripeService", "common", controller]);
+	
 })();
