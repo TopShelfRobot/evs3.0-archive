@@ -15,8 +15,8 @@
         vm.spinnerOptions = {
             radius: 40,
             lines: 7,
-            length: 0,
-            width: 30,
+            length: 20,
+            width: 15,
             speed: 1.7,
             corners: 1.0,
             trail: 100,
@@ -33,24 +33,24 @@
                 //});
         }
 
-        function toggleSpinner(on) { 
-			vm.isBusy = on; 
+        function toggleSpinner(on) {
+			vm.isBusy = on;
 		}
-		
+
 		toggleSpinner(true);
 
-        $rootScope.$on('$routeChangeStart', function (event, next, last) { 
-				// toggleSpinner(true); 
+        $rootScope.$on('$routeChangeStart', function (event, next, last) {
+				// toggleSpinner(true);
 			}
         );
 
-        $rootScope.$on(events.controllerActivateSuccess, function (data) { 
-				toggleSpinner(false); 
+        $rootScope.$on(events.controllerActivateSuccess, function (data) {
+				toggleSpinner(false);
 			}
         );
 
-        $rootScope.$on(events.spinnerToggle, function (scope, on) { 
-				toggleSpinner(on); 
+        $rootScope.$on(events.spinnerToggle, function (scope, on) {
+				toggleSpinner(on);
 			}
         );
 
