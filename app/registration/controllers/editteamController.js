@@ -36,21 +36,18 @@
 				});
 		}
 		
-        function activate() {
-            var promises = [
-				getTeam(),
-				getPlayers(),
-				getPayments(),
-			];
-            common.activateController(promises, controllerId)
-                .then(function () { 
-					console.log('Activated Dashboard View'); 
-				})
-				.finally(function(){
-					console.log("done");
-				});
-        }
-		activate();
+		var promises = [
+			getTeam(),
+			getPlayers(),
+			getPayments(),
+		];
+		common.activateController(promises, controllerId)
+	        .then(function () { 
+				console.log('Activated Dashboard View'); 
+			})
+			.finally(function(){
+				console.log("done");
+			});
 		
 		$scope.addPlayer = function(name, email){
 			$scope.players.push({name : null, email: null});

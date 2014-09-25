@@ -1,8 +1,10 @@
 
 (function() {
     'use strict';
-    angular.module("evReg").controller("ConfirmController", ["$scope", "$http", "$location", "$q", "StripeService", "datacontext", "logger", "CartModel", "config", Controller]);
-    function Controller($scope, $http, $location, $q, stripe, datacontext, logger, cart, config) {
+	
+	var controllerId = "ConfirmController";
+	
+    function Controller($scope, $http, $location, $q, stripe, datacontext, logger, cart, config, common) {
 
         $scope.isTerms = false;
         $scope.isRefund = false;
@@ -15,24 +17,29 @@
 	
         // initialize it
         $scope.submitDisabled = true;
-        $q.all([
-            datacontext.participant.getOwnerById(config.owner.ownerId),
-            datacontext.participant.getParticipantById(config.owner.houseId),
-        ])
-            .then(function(output){
-                var owner = output[0];
-                var house = output[1];
-                $scope.owner = owner;
-                Stripe.setPublishableKey(owner.stripePublishableKey);
-                $('#terms').popover({ title: "Terms and Conditions", html: true, content: function () { msg = '<div id="popover_content_wrapper"><p>' + owner.termsText + '</p></div>'; return $(msg).html(); }, placement: 'auto', container: 'body', trigger: 'click' });
-                $('#refund').popover({ title: "Refund Policy", html: true, content: function () { msg = '<div id="popover_content_wrapper"><p>' + owner.refundsText + '</p></div>'; return $(msg).html(); }, placement: 'auto', container: 'body', trigger: 'click' });
+		
+		var promises = [
+	        $q.all([
+	            datacontext.participant.getOwnerById(config.owner.ownerId),
+	            datacontext.participant.getParticipantById(config.owner.houseId),
+	        ])
+	            .then(function(output){
+	                var owner = output[0];
+	                var house = output[1];
+	                $scope.owner = owner;
+	                Stripe.setPublishableKey(owner.stripePublishableKey);
+	                $('#terms').popover({ title: "Terms and Conditions", html: true, content: function () { msg = '<div id="popover_content_wrapper"><p>' + owner.termsText + '</p></div>'; return $(msg).html(); }, placement: 'auto', container: 'body', trigger: 'click' });
+	                $('#refund').popover({ title: "Refund Policy", html: true, content: function () { msg = '<div id="popover_content_wrapper"><p>' + owner.refundsText + '</p></div>'; return $(msg).html(); }, placement: 'auto', container: 'body', trigger: 'click' });
 				
-                $scope.house = house;	
-            })
-            .finally(function(){
-                cart.processCartRules();
-                $scope.submitDisabled = false;
-            });
+	                $scope.house = house;	
+	            })
+	            .finally(function(){
+	                cart.processCartRules();
+	                $scope.submitDisabled = false;
+	            })
+		];
+			
+		common.activateController(promises, controllerId);
         
         $scope.applyCoupon = function () {
 			
@@ -101,6 +108,9 @@
 
         $scope.title = 'Event';
     }
+	
+	angular.module("evReg").controller(controllerId, ["$scope", "$http", "$location", "$q", "StripeService", "datacontext", "logger", "CartModel", "config", "common", Controller]);
+	
 })();
 
 

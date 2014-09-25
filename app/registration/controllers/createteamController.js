@@ -2,10 +2,10 @@
 
     var minNameLength = 0;
     var minTeamSize = 0;
+	
+	var controllerId = "CreateTeamController";
 
-    angular.module("evReg").controller("CreateTeamController",
-                        ["$scope", "$location", "$routeParams", "RegistrationCartModel", controller]);
-    function controller($scope, $location, $routeParams, cartModel){
+    function controller($scope, $location, $routeParams, cartModel, common){
 
         console.log("cartModel:", cartModel);
 
@@ -20,6 +20,9 @@
         $scope.addPlayer = function() {
             $scope.players.push({ name: "", email: "" });
         };
+		
+		var promises = [];
+		common.activateController(promises, controllerId);
 
         $scope.makeTeam = function() {
             var valid = true;
@@ -55,5 +58,7 @@
         };
     }
 
-
+    angular.module("evReg").controller(controllerId,
+        ["$scope", "$location", "$routeParams", "RegistrationCartModel", "common", controller]);
+	
 })();

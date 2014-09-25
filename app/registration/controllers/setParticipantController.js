@@ -1,14 +1,18 @@
 
 ;(function(){
 	
-	function Controller($scope, $routeParams, $window, config, datacontext){
+	var controllerId = "setParticipant";
+	
+	function Controller($scope, $routeParams, $window, config, datacontext, common){
 		
-		// console.log("config:", config);
-		// $scope.participant = config.participant;
-		datacontext.getParticipantById($routeParams.partId)
-			.then(function(part){
-				$scope.participant = part;
-			});
+		var promises = [
+			datacontext.getParticipantById($routeParams.partId)
+				.then(function(part){
+					$scope.participant = part;
+				})
+		];
+		
+		common.activateController(promises, controllerId);
 		
 		$scope.submit = function(){
 			datacontext.saveChanges()
@@ -17,9 +21,7 @@
 				console.log("saved");
 			});
 		};
-		
-		
 	}
 	
-	angular.module("evReg").controller("setParticipant", ["$scope", "$routeParams", "$window", "config", "datacontext", Controller]);
+	angular.module("evReg").controller(controllerId, ["$scope", "$routeParams", "$window", "config", "datacontext", "common", Controller]);
 })();

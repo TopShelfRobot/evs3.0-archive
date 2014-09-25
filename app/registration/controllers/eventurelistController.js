@@ -1,28 +1,41 @@
 (function(){
-    angular.module("evReg").controller("EventureListController",
-                    ["$scope", "$location", "$routeParams", "config", "CartModel", "datacontext", controller]);
+	
+	var controllerId = "EventureListController";
+    angular.module("evReg").controller(controllerId,
+                    ["$scope", "$location", "$routeParams", "config", "CartModel", "datacontext", "common", controller]);
     
-    function controller($scope, $location, $routeParams, config, cartModel, datacontext){
+    function controller($scope, $location, $routeParams, config, cartModel, datacontext, common){
 		
 		$scope.cart = cartModel;
 		
-		datacontext.eventure.getEventureById($routeParams.eventureId)
-	        .then(function(item){
-	            $scope.eventure = item;
-	        });
+		var promises = [];
 		
-        datacontext.eventure.getEventureListsByEventureId($routeParams.eventureId)
-	        .then(function(list){
-	            $scope.list = list;
-	            $scope.selection = $scope.list[0];
-	        });
+		promises.push(
+			datacontext.eventure.getEventureById($routeParams.eventureId)
+		        .then(function(item){
+		            $scope.eventure = item;
+		        })
+		);
+	
+		promises.push(
+	        datacontext.eventure.getEventureListsByEventureId($routeParams.eventureId)
+		        .then(function(list){
+		            $scope.list = list;
+		            $scope.selection = $scope.list[0];
+		        })
+		);
+		
+		promises.push(
+			datacontext.participant.getParticipantsByHouseId(config.owner.houseId)
+		        .then(function(list) {
+		            $scope.selectedParticipant = list[0];
+		            $scope.participants = list;
+		        })
+		);
+			
+		common.activateController(promises, controllerId);
 
-		datacontext.participant.getParticipantsByHouseId(config.owner.houseId)
-	        .then(function(list) {
-	            $scope.selectedParticipant = list[0];
-	            $scope.participants = list;
-	        });
-
+		
         $scope.register = function(eventure, eventureList, participant) {
              //cartModel.setCurrentParticipant(participant);
              //cartModel.setCurrentEventure(eventure);

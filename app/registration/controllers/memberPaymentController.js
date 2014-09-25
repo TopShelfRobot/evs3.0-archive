@@ -2,7 +2,7 @@
 
     var controllerId = 'MemberPaymentController';
 
-    function Controller($scope, $routeParams, $q, $http, $location, datacontext, stripe, cartModel, common, config) {
+    function Controller($scope, $routeParams, $q, $http, $location, datacontext, stripe, cartModel, common, config, common) {
         var controller = {};
         $scope.allowZeroPayment = cartModel.allowZeroPayment;
         $scope.waiverSigned = false;
@@ -14,15 +14,8 @@
         $scope.isIndividualVisible = false;
         $scope.isSponsorPayVisible = false;
 
-        activate();
-
-        function activate() {
-            var promises = [getTeamInfo()];
-            common.activateController(promises, controllerId);
-        }
-
         function getTeamInfo() {
-            $q.all([datacontext.team.getTeamMemberPaymentInfoByTeamMemberGuid($scope.teamMemberGuid),
+            return $q.all([datacontext.team.getTeamMemberPaymentInfoByTeamMemberGuid($scope.teamMemberGuid),
                 datacontext.team.getNotPaidTeamMemberCountByTeamGuid($scope.teamGuid),
                 datacontext.team.getTeamMemberPaymentSumByTeamGuid($scope.teamGuid)])
                 .then(function (data) {
@@ -62,6 +55,11 @@
                     }
                 });
         }
+		
+        var promises = [
+			getTeamInfo()
+		];
+        common.activateController(promises, controllerId);
 
 
         $scope.checkout = function () {
@@ -91,6 +89,7 @@
         };
         return controller;
     }
+	
     angular.module("evReg").controller(controllerId,
-        ["$scope", "$routeParams", "$q", "$http", "$location", "datacontext", "StripeService", "MemberCartModel", "common", "config", Controller]);
+        ["$scope", "$routeParams", "$q", "$http", "$location", "datacontext", "StripeService", "MemberCartModel", "common", "config", "common", Controller]);
 })();
