@@ -1,13 +1,13 @@
 ﻿(function () {
     'use strict';
 
-    var serviceId = 'repository.ZZZ';
+    var serviceId = 'repository.volunteer';
 
     angular.module('common').factory(serviceId,
-        ['breeze', 'repository.abstract', repositoryZZZ]);
+        ['breeze', 'repository.abstract', repositoryVolunteer]);
 
-    function repositoryZZZ(breeze, abstractRepository) {
-        var entityName = 'ZZZ';
+    function repositoryVolunteer(breeze, abstractRepository) {
+        var entityName = 'volunteer';
         //var entityNames = model.entityNames;
         var entityQuery = breeze.EntityQuery;
         var predicate = breeze.Predicate;
@@ -19,6 +19,16 @@
             this.manager = mgr;
             // Exposed data access functions
             this.getAll = getAll;
+            this.getVolunteerEventuresByOwnerId = getVolunteerEventuresByOwnerId;
+            this.createVolunteerJob = createVolunteerJob;
+            this.createVolunteerShift = createVolunteerShift;
+            this.getVolunteerJobById = getVolunteerJobById;
+            this.getVolunteerById = getVolunteerById;
+            this.getVolunteerShiftsByVolunteerJobId = getVolunteerShiftsByVolunteerJobId;
+            this.getVolunteerJobsByEventureId = getVolunteerJobsByEventureId;
+            this.getVolunteerShiftsByEventureId = getVolunteerShiftsByEventureId;
+            this.getVolunteerScheduleById = getVolunteerScheduleById;
+
         }
 
         // Allow this repo to have access to the Abstract Repo's functions,
@@ -31,12 +41,119 @@
 
         function getAll() {
             var self = this;
-            return entityQuery.from('ZZZ')
+            return entityQuery.from('volunteer')
                 .using(self.manager).execute()
                 .then(querySucceeded, self._queryFailed);
 
             function querySucceeded(data) {
                 return data.results;
+            }
+        }
+
+        function getVolunteerEventuresByOwnerId(ownerId) {
+            var self = this;
+            var predicate = breeze.Predicate;
+            var p1 = new predicate("active", "==", true);
+            var p2 = new predicate("ownerId", "==", ownerId);
+            var p3 = new predicate("isUsingVolunteers", "==", true);
+            var newPred = predicate.and(p1, p2, p3);
+
+            var query = EntityQuery.from('Eventures')
+            .where(newPred)
+            .orderBy('sortOrder');
+
+            return self.manager.executeQuery(query)
+               .then(querySucceeded, self._queryFailed);
+
+            function querySucceeded(data) {
+                return data.results;
+            }
+        }
+
+        function createVolunteerJob(eventureId) {
+            var self = this;
+            return self.manager.createEntity('VolunteerJob', { eventureId: eventureId, dateCreated: moment().format("MM/DD/YYYY"), ageRestriction: 'None' });
+        }
+        
+        function createVolunteerShift(eventureId) {
+            var self = this;
+            return self.manager.createEntity('VolunteerShift', { dateShift: moment().format("MM/DD/YYYY"), dateCreated: moment().format("MM/DD/YYYY") });
+        }
+        
+        function getVolunteerJobById(id) {
+            var self = this;
+            var query = EntityQuery.from('VolunteerJobs')
+                .where('id', '==', id);
+
+            return self.manager.executeQuery(query)
+                .then(querySucceeded, self._queryFailed);
+
+            function querySucceeded(data) {
+                return data.results[0];
+            }
+        }
+        function getVolunteerById(id) {
+            var self = this;
+            var query = EntityQuery.from('Volunteer')
+                .where('id', '==', id)
+                .expand('Participants');
+
+            return self.manager.executeQuery(query)
+                .then(querySucceeded, self._queryFailed);
+
+            function querySucceeded(data) {
+                return data.results[0];
+            }
+        }
+        function getVolunteerShiftsByVolunteerJobId(id) {
+            var self = this;
+            var query = EntityQuery.from('VolunteerShifts')
+                .where('volunteerJobId', '==', id);
+
+            return self.manager.executeQuery(query)
+               .then(querySucceeded, self._queryFailed);
+
+            function querySucceeded(data) {
+                return data.results;
+            }
+        }
+
+        function getVolunteerJobsByEventureId(eventureId) {
+            var self = this;
+            var query = EntityQuery.from('VolunteerJobs')
+                .where('eventureId', '==', eventureId);
+
+            return self.manager.executeQuery(query)
+                 .then(querySucceeded, self._queryFailed);
+
+            function querySucceeded(data) {
+                return data.results;
+            }
+        }
+
+        function getVolunteerShiftsByEventureId(eventureId) {
+            var self = this;
+            var query = EntityQuery.from('VolunteerShifts')
+                .where('VolunteerJob.eventureId', '==', eventureId);
+
+            return self.manager.executeQuery(query)
+                .then(querySucceeded, self._queryFailed);
+
+            function querySucceeded(data) {
+                return data.results;
+            }
+        }
+
+        function getVolunteerScheduleById(id) {
+            var self = this;
+            var query = EntityQuery.from('VolunteerSchedules')
+                .where('id', '==', id);
+
+            return self.manager.executeQuery(query)
+                .then(querySucceeded, self._queryFailed);
+
+            function querySucceeded(data) {
+                return data.results[0];
             }
         }
     }

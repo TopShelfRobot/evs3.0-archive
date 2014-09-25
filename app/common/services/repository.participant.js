@@ -7,7 +7,7 @@
         ['breeze', 'repository.abstract', repositoryParticipant]);
 
     function repositoryParticipant(breeze, abstractRepository) {
-        var entityName = 'particiapant';
+        var entityName = 'participant';
         //var entityNames = model.entityNames;
         var entityQuery = breeze.EntityQuery;
         var predicate = breeze.Predicate;
@@ -38,7 +38,7 @@
 
         function getAll() {
             var self = this;
-            return self.entityQuery.from('Particiapants')
+            return self.entityQuery.from('Participants')
                 .using(self.manager).execute()
                 .then(querySucceeded, self._queryFailed);
 

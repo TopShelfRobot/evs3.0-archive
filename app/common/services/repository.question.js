@@ -21,6 +21,7 @@
             this.getAll = getAll;
 
             this.createStockQuestionSet = createStockQuestionSet;
+			this.createCustomQuestion = createCustomQuestion;
             this.getStockAnswerSetByEventureListId = getStockAnswerSetByEventureListId;
             this.getStockAnswerSetByRegistrationId = getStockAnswerSetByRegistrationId;
             this.getStockQuestionSetByEventureListId = getStockQuestionSetByEventureListId;
@@ -50,10 +51,11 @@
 
         function getCustomQuestionSetByEventureListId(eventureListId) {
             var self = this;
+			eventureListId = Number(eventureListId);
             var query = entityQuery.from('Questions')
                 .where('eventureListId', '==', eventureListId);
 
-            return manager.executeQuery(query)
+            return self.manager.executeQuery(query)
                 .then(querySucceeded, self.queryFailed);
 
             function querySucceeded(data) {
@@ -66,7 +68,7 @@
             var query = entityQuery.from('Answers')
                 .where('eventureListId', '==', eventureListId);
 
-            return manager.executeQuery(query)
+            return self.manager.executeQuery(query)
                 .then(querySucceeded, self.queryFailed);
 
             function querySucceeded(data) {
@@ -74,14 +76,17 @@
             }
         }
 
-
+        function createCustomQuestion(eventureListId) {
+            var self = this;
+            return self.manager.createEntity('Question', {'eventureListId': eventureListId});
+        }
 
         function getStockAnswerSetByEventureListId(eventureListId) {
             var self = this;
             var query = entityQuery.from('StockAnswerSets')
-                .where('registrationId', '==', eventureListId);
+                .where('eventureListId', '==', eventureListId);
 
-            return manager.executeQuery(query)
+            return self.manager.executeQuery(query)
                 .then(querySucceeded, self.queryFailed);
 
             function querySucceeded(data) {

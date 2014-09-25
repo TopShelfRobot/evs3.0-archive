@@ -2,9 +2,9 @@
 	'use strict';
 
 	var controllerId = 'setlist';
-	angular.module('app').controller(controllerId, ['$q', '$routeParams', '$upload', '$http', '$timeout', 'common', 'datacontext', 'config', setlist]);
+	angular.module('app').controller(controllerId, ['$q', '$routeParams', '$upload', '$http', '$timeout', '$location', 'common', 'datacontext', 'config', setlist]);
 
-	function setlist($q, $routeParams, $upload, $http, $timeout, common, datacontext, config) {
+	function setlist($q, $routeParams, $upload, $http, $timeout, $location, common, datacontext, config) {
 
 		var getLogFn = common.logger.getLogFn;
 		var log = getLogFn(controllerId);
@@ -182,11 +182,11 @@
 
 		vm.saveAndNav = function() {
 
-			return datacontext.saveChanges(vm.list)
+			return datacontext.save(vm.list)
 				.then(complete);
 
 			function complete() {
-				$location.path("/vm.list.eventureId/vm.list.id/setfee/");
+				$location.path("/" + vm.list.eventureId + "/" + vm.list.id + "/setfee/");
 			}
 		};
 

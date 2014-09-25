@@ -19,7 +19,7 @@
         activate();
 
         function activate() {
-          var promises = [getEventure(), Registrations(), Capacity(), ListingsGrid(), ExpenseGrid(), EventPlanGrid(), ParticipantGrid()];
+          var promises = [getEventure(), Registrations(), Capacity(), ListingsGrid(), ExpenseGrid(), EventPlanGrid(), ParticipantGrid(), VolunteerGrid()];
 
           common.activateController(promises, controllerId)
               .then(function () {
@@ -294,6 +294,115 @@
                         template: '<a href="\\\#partedit/#=Id#" class="btn btn-default btn-block ">Edit</a>'
             }]
           };
+        }
+
+        function VolunteerGrid() {
+            var volJobApi = config.remoteApiName + 'Participants/GetVolunteerDataByEventureId/' + vm.eventureId;
+
+            vm.volunteerGridOptions = {
+                dataSource: {
+                    type: "json",
+                    transport: {
+                        read: volJobApi
+                    },
+                    pageSize: 10,
+                    serverPaging: true,
+                    serverSorting: true
+                },
+                selectable: "single cell",
+                sortable: true,
+                pageable: true,
+                serverFiltering: true,
+                detailTemplate: kendo.template($("#template").html()),
+                filterable: {
+                    extra: false,
+                    operators: {
+                        string: {
+                            startswith: "Starts with",
+                            eq: "Is equal to",
+                            neq: "Is not equal to"
+                        }
+                    }
+                },
+                dataBound: function() {
+                },
+                columns:[{
+                    field: "Name",
+                    title: "Job Name",
+                    width: 350
+                }, {
+                    field: "Shifts",
+                    title: "Shifts",
+                    width: 200
+                }, {
+                    field: "Capacity",
+                    title: "Capacity",
+                    width: 200
+                }, {
+                    field: "MaxCapacity",
+                    title: "MaxCapacity",
+                    width: 200
+                }, {
+                    field: '', title: '',
+                    template: '<a href="\\\#setvolunteerjob/#=Id#" class="btn btn-primary btn-small btn-block">Edit</a>'
+                }]
+            };
+            vm.volunteerDetailGridOptions = function(e) {
+
+
+                var volunteerApi = config.remoteApiName + 'Participants/GetVolunteersByVolunteerJobId/' + e.Id;
+
+                return {
+                    dataSource: {
+                        type: "json",
+                        transport: {
+                            read: volunteerApi
+                        },
+                        pageSize: 10,
+                        serverPaging: false,
+                        serverFiltering: false,
+                        serverSorting: true
+                    },
+                    filterable: {
+                        extra: false,
+                        operators: {
+                            string: {
+                                contains: "Contains",
+                                startswith: "Starts with",
+                                eq: "Equal to"
+                            }
+                        }
+                    },
+                    sortable: true,
+                    pageable: true,
+                    dataBound: function() {
+                    },
+                    columns: [{
+                    field: "FirstName",
+                    title: "First Name",
+                    width: 150
+                }, {
+                    field: "LastName",
+                    title: "Last Name",
+                    width: 150
+                }, {
+                    field: "Email",
+                    title: "Email Address",
+                    width: 275
+                }, {
+                    field: "TimeBegin",
+                    title: "Start Time",
+                    format: "{0:h:mm tt}"
+                }, {
+                    field: "TimeEnd",
+                    title: "End Time",
+                    format: "{0:h:mm tt}"
+                }, { title: "",
+                     width: 100,
+                     template: '<a class="btn btn-primary btn-small btn-block" href="\\\#setvolunteerscheduleedit/#=ScheduleId#">Edit</a>' }
+                    ]
+                };
+            };
         }
 
 
