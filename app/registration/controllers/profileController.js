@@ -73,7 +73,7 @@
 
 
 		$scope.save = function(){
-			datacontext.saveChanges()
+			datacontext.save()
 				.then(function(){
 					console.log("saved");
 				});
@@ -93,7 +93,8 @@
 
 		$scope.dateOptions = {
 			'year-format': "'yy'",
-			'starting-day': 1
+			'starting-day': 1,
+			showWeeks: 'false'
 		};
 
 		$scope.formats = ['MM-dd-yyyy', 'yyyy/MM/dd', 'shortDate'];
