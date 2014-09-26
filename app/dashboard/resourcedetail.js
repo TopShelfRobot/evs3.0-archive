@@ -1,9 +1,9 @@
-﻿(function () {
+(function () {
     'use strict';
     var controllerId = 'resourcedetail';
-    angular.module('app').controller(controllerId, ['$routeParams','common', 'datacontext','config', resourcedetail]);
+    angular.module('app').controller(controllerId, ['$routeParams','common', 'datacontext','config', 'ExcelService', resourcedetail]);
 
-    function resourcedetail($routeParams, common, datacontext, config) {
+    function resourcedetail($routeParams, common, datacontext, config, excel) {
         var getLogFn = common.logger.getLogFn;
         var log = getLogFn(controllerId);
 
@@ -20,7 +20,7 @@
         function activate() {
             var promises = [createresourceDetailGrid(), getResource()];
             common.activateController(promises, controllerId)
-                .then(function() { log('Activated reporting View'); });
+                .then(function() { log('Activated Resource Detail View'); });
         }
 
         function getResource () {
@@ -46,6 +46,7 @@
             //alert(ResourceApi);
 
             vm.resourceDetailGridOptions = {
+                toolbar: '<a download="detail.xlsx" class="k-button" ng-click="vm.excel(vm.resourcegrid)">Export</a>',
                 dataSource: {
                     type: "",
                     transport: {
@@ -65,5 +66,10 @@
                 ]
             };
         }
+      
+        vm.excel = function(data) {
+          var gridname = data;
+          excel.export(gridname);
+        };
     }
 })();

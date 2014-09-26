@@ -1,9 +1,9 @@
 (function () {
     'use strict';
     var controllerId = 'resourcecenter';
-    angular.module('app').controller(controllerId, ['common', 'config', resourcecenter]);
+    angular.module('app').controller(controllerId, ['common', 'config', 'ExcelService', resourcecenter]);
 
-    function resourcecenter(common, config) {
+    function resourcecenter(common, config, excel) {
         var getLogFn = common.logger.getLogFn;
         var log = getLogFn(controllerId);
 
@@ -25,6 +25,7 @@
             var resourceApi = config.remoteApiName + 'Resources/GetResourcesByOwnerId/' + vm.ownerId;
 
             vm.resourceGridOptions = {
+              toolbar: '<a download="download.xlsx" class="k-button" ng-click="vm.excel(vm.resourcegrid)">Export</a>',
                 dataSource: {
                     type: "json",
                     transport: {
@@ -58,10 +59,12 @@
                     { field: "ResourceType", title: "Type", width: "175px" }
                 ]
             };
+          
             vm.detailGridOptions = function(e) {
                 var resourceApi = config.remoteApiName + 'Resources/GetResourceItemsByResourceId/' + e.Id;
 
                 return {
+                  toolbar: '<a download="download.xlsx" class="k-button" ng-click="vm.excel(vm.detailgrid)">Export</a>',
                     dataSource: {
                         type: "json",
                         transport: {
@@ -95,5 +98,10 @@
                 };
             };
         }
+      
+        vm.excel = function(data) {
+          var gridname = data;
+          excel.export(gridname);
+        };
     }
 })();

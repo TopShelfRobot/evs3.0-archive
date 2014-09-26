@@ -2,9 +2,9 @@
     'use strict';
 
     var controllerId = 'listingdetail';
-    angular.module('app').controller(controllerId, ['$routeParams', 'config', 'common', 'datacontext', listingdetail]);
+    angular.module('app').controller(controllerId, ['$routeParams', 'config', 'common', 'datacontext', 'ExcelService', listingdetail]);
 
-    function listingdetail($routeParams, config, common, datacontext) {
+    function listingdetail($routeParams, config, common, datacontext, excel) {
         var getLogFn = common.logger.getLogFn;
         var log = getLogFn(controllerId);
 
@@ -150,62 +150,11 @@
           };
         }
 
-        function ListingsGrid() {
-
-          var status = [{
-            "value": true,
-            "text": "Active",
-          },{
-            "value": false,
-            "text": "Inactive"
-          }];
-
-          var eventurelistapi = config.remoteApiName + 'EventureLists/getEventureListsByEventureId/' + vm.listingId;
-          vm.eventureListGridOptions = {
-            dataSource: {
-                type: "json",
-                transport: {
-                    read: eventurelistapi
-                },
-                schema: {
-                    model: {
-                        fields: {
-                            Active: { type: "boolean" },
-                            DisplayDate: { type: "text" },
-                            Id: { type: "number" },
-                            Name: { type: "string" }
-                        }
-                    }
-                },
-                pageSize: 10,
-                serverPaging: false,
-                serverSorting: false
-            },
-            sortable: true,
-            pageable: true,
-            columns: [{
-                title: "Listing",
-                template: '<a href="\\\#elistcenter/#=Id#">#=Name#</a>'
-            },{
-                field: "DisplayDate",
-                title: "Date",
-                width: "220px"
-            },{
-                field: "Active",
-                width: "100px",
-                values: status
-            },{
-                title: "",
-                width: "120px",
-                template:'<a class="btn btn-default btn-block" href="\\\#setlist/#=Id#">Edit</a>'
-            }]
-          };
-        }
-
         function ParticipantGrid() {
 
           var participantapi = config.remoteApiName +  'Participants/GetRegisteredParticipantsByEventureListId/' + vm.listingId;
           vm.participantGridOptions = {
+            toolbar: '<a download="download.xlsx" class="k-button" ng-click="vm.excel(vm.partgrid)">Export</a>',
             dataSource: {
                 type: "json",
                 transport: {
@@ -248,7 +197,10 @@
           };
         }
 
-
+        vm.excel = function(data) {
+          var gridname = data;
+          excel.export(gridname);
+        };
 
 
 
