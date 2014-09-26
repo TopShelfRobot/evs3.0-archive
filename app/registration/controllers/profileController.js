@@ -20,9 +20,9 @@
 		];
 		
 		common.activateController(promises, controllerId)
-		.then(function(){
-			console.log("really done");
-		})
+			.then(function(){
+				console.log("really done");
+			});
 
 		function Registrations() {
 			var regapi = config.remoteApiName + 'Registrations/GetRegistrationsByPartId/' + $scope.participant.id;
@@ -70,7 +70,6 @@
 					}]
 			};
 		}
-
 
 		$scope.save = function(){
 			datacontext.save()
