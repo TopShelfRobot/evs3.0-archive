@@ -1,4 +1,4 @@
-﻿(function () {
+(function () {
     'use strict';
 
     var serviceId = 'repository.eventure';
@@ -164,7 +164,7 @@
         function createEventureList(eventureId) {
             var self = this;
             return self.manager.createEntity('EventureList',
-                { eventureId: eventureId, dateEventureList: moment().format("MM/DD/YYYY"), dateBeginReg: moment().format("MM/DD/YYYY"), dateEndReg: moment().format("MM/DD/YYYY"), imageFileName: "" });
+                { eventureId: eventureId});
         }
 
         function getGroupsByEventureListId(eventureListId) {

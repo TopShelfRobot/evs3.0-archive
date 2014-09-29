@@ -49,7 +49,7 @@
         <div class="row">
           <div class="col-lg-12">
             <h3>Listings</h3>
-            <div id="eventurelistgrid" kendo-grid k-options="vm.eventureListGridOptions"></div>
+            <div id="eventurelistgrid" kendo-grid="vm.listinggrid" k-options="vm.eventureListGridOptions"></div>
           </div>
         </div>
         </tab>
@@ -60,7 +60,7 @@
             <section id="expensescontent">
               <br>
               <p class="text-muted">Get an overview of your expenses for this event.</p>
-              <div id="expensesgrid" kendo-grid k-options="vm.expenseGridOptions"></div>
+              <div id="expensesgrid" kendo-grid="vm.expensegrid" k-options="vm.expenseGridOptions"></div>
               <br>
               <a class="btn btn-info" ng-href="#/{{vm.eventureId}}/setexpense">Add Event Expense</a>
             </section>
@@ -74,11 +74,9 @@
             <section id="plancontent">
               <br>
               <p class="text-muted">Construct a bird's eye view of everything that needs to be done.</p>
-              <div id="eventplangrid" kendo-grid k-options="vm.eventPlanGridOptions"></div>
+              <div id="eventplangrid" kendo-grid="vm.plangrid" k-options="vm.eventPlanGridOptions"></div>
               <br>
-              <button class="btn btn-info">Add Event Plan Item</button>
-              <button class="btn btn-success">Save As Template</button>
-              <button class="btn btn-default">Import Template</button>
+              <a ng-href="#/{{vm.eventureId}}/seteventplan" class="btn btn-info">Add Event Plan Item</a>
             </section>
           </div>
         </div>
@@ -90,7 +88,7 @@
             <section id="participantscontent">
               <br>
               <p class="text-muted">Here's everyone that has registered for this event.</p>
-              <div id="partgrid" kendo-grid k-options="vm.participantGridOptions"></div>
+              <div id="partgrid" kendo-grid="vm.partgrid" k-options="vm.participantGridOptions"></div>
             </section>
           </div>
         </div>
@@ -118,5 +116,5 @@
 
 
 <script type="text/x-kendo-template" id="template">
-    <div kendo-grid k-options="vm.volunteerDetailGridOptions(dataItem)"></div>
+    <div kendo-grid="vm.detailgrid" k-options="vm.volunteerDetailGridOptions(dataItem)"></div>
 </script>

@@ -47,6 +47,8 @@
         return service;
 
         function activateController(promises, controllerId) {
+			$broadcast(commonConfig.config.spinnerToggleEvent, true);
+			
             return $q.all(promises).then(function (eventArgs) {
                 var data = { controllerId: controllerId };
                 $broadcast(commonConfig.config.controllerActivateSuccessEvent, data);

@@ -1,9 +1,9 @@
 (function () {
     'use strict';
     var controllerId = 'eventurecenter';
-    angular.module('app').controller(controllerId, ['common', 'datacontext', 'config', eventurecenter]);
+    angular.module('app').controller(controllerId, ['common', 'datacontext', 'config', 'ExcelService', eventurecenter]);
 
-    function eventurecenter(common, datacontext, config) {
+    function eventurecenter(common, datacontext, config, excel) {
         var getLogFn = common.logger.getLogFn;
         var log = getLogFn(controllerId);
 
@@ -35,6 +35,7 @@
 
           var eventureapi = config.remoteApiName + 'eventures/GetAllEventuresByOwnerId/' + vm.ownerId;
           vm.eventureGridOptions = {
+            toolbar: '<a download="download.xlsx" class="k-button" ng-click="vm.excel(vm.eventuregrid)">Export</a>',
             dataSource: {
                 type: "json",
                 transport: {
@@ -78,6 +79,11 @@
           };
 
         }
+      
+        vm.excel = function(data) {
+          var gridname = data;
+          excel.export(gridname);
+        };
 
     }
 })();

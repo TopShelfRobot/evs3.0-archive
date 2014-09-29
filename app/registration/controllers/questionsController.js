@@ -1,7 +1,9 @@
 
 ;(function(){
-    angular.module("evReg").controller("QuestionsController", ["$scope", "$location", "config", "CartModel", "datacontext", "$routeParams", Controller]);
-    function Controller($scope, $location, config, cartModel, datacontext, $routeParams) {
+	
+	var controllerId = "QuestionsController";
+    
+    function Controller($scope, $location, config, cartModel, datacontext, $routeParams, common) {
 		
 		$scope.cart = cartModel;
 		
@@ -42,19 +44,24 @@
 				$scope.customAnswers = new Array(results.length);
 			});
 
-        datacontext.eventure.getGroupsActiveByEventureListId($routeParams.listId)
-            .then(function (data) {
-				$scope.groups = data;
-                if (config.isGroupRequired && groups().length < 1) {
-                    alert('There are currently no spaces available');
-                    router.navigateTo("#eventurelist/" + cartModel.currentEventureListId);
-                }
-            });
+		var promises = [];
+		promises.push(
+	        datacontext.eventure.getGroupsActiveByEventureListId($routeParams.listId)
+	            .then(function (data) {
+					$scope.groups = data;
+	                if (config.isGroupRequired && groups().length < 1) {
+	                    alert('There are currently no spaces available');
+	                    router.navigateTo("#eventurelist/" + cartModel.currentEventureListId);
+	                }
+	            })
+		);
 
-        datacontext.question.getStockQuestionSetByEventureListId($routeParams.listId)
-			.then(function(data){
-				// return questions.stockQuestionSet = data;
-			});
+		promises.push(
+	        datacontext.question.getStockQuestionSetByEventureListId($routeParams.listId)
+				.then(function(data){
+					return data;
+				})
+		);
 
         $scope.stockAnswerSet = {
 	            shirtSize: "",
@@ -85,4 +92,6 @@
             $location.path("/eventure/");
         };
 	}
+	
+	angular.module("evReg").controller(controllerId, ["$scope", "$location", "config", "CartModel", "datacontext", "$routeParams", "common", Controller]);
 })();

@@ -1,7 +1,9 @@
 
 ;(function(){
+	
+	var controllerId = "addParticipant";
 
-	function Controller($scope, $window, config, datacontext){
+	function Controller($scope, $window, config, datacontext, common){
 
 		// console.log("config:", config);
 		$scope.participant = config.participant;
@@ -28,6 +30,12 @@
 		$scope.datePicker = {
 			opened : false
 		};
+		
+		$scope.dateOptions = {
+			'year-format': "'yy'",
+			'starting-day': 1,
+			showWeeks: 'false'
+		};
 
 		var formats = ['MM-dd-yyyy', 'yyyy/MM/dd', 'shortDate'];
 		$scope.format = formats[0];
@@ -38,16 +46,21 @@
 			$scope.datePicker.opened = true;
 		};
 
-		datacontext.getParticipantById(config.owner.houseId)
-			.then(function(owner){
-				for(key in owner){
-					if(key == "city"
-						|| key == "phoneMobile" || key == "state" || key == "street1"
-						|| key == "zip" || key == "email"){
-						$scope.participant[key] = owner[key];
+			
+		var promises = [];
+		promises.push(
+			datacontext.participant.getParticipantById(config.owner.houseId)
+				.then(function(owner){
+					for(key in owner){
+						if(key == "city"
+							|| key == "phoneMobile" || key == "state" || key == "street1"
+							|| key == "zip" || key == "email"){
+							$scope.participant[key] = owner[key];
+						}
 					}
-				}
-			});
+				})
+		);
+		common.activateController(promises, controllerId);
 
 		$scope.submit = function(){
 
@@ -66,5 +79,5 @@
 
 	}
 
-	angular.module("evReg").controller("addParticipant", ["$scope", "$window", "config", "datacontext", Controller]);
+	angular.module("evReg").controller(controllerId, ["$scope", "$window", "config", "datacontext", "common", Controller]);
 })();

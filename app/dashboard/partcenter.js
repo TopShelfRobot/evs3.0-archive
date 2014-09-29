@@ -1,9 +1,9 @@
 (function () {
     'use strict';
     var controllerId = 'partcenter';
-    angular.module('app').controller(controllerId, ['common', 'datacontext', 'config', partcenter]);
+    angular.module('app').controller(controllerId, ['common', 'datacontext', 'config', 'ExcelService', partcenter]);
 
-    function partcenter(common, datacontext, config) {
+    function partcenter(common, datacontext, config, excel) {
         var getLogFn = common.logger.getLogFn;
         var log = getLogFn(controllerId);
 
@@ -28,6 +28,7 @@
           var partapi = config.remoteApiName + 'Participants/GetParticipantsByOwnerId/' + vm.ownerId;
 
           vm.participantGridOptions = {
+            toolbar: '<a download="detail.xlsx" class="k-button" ng-click="vm.excel(vm.partgrid)">Export</a>',
             dataSource: {
                 type: "json",
                 transport: {
@@ -65,6 +66,7 @@
             var regapi = config.remoteApiName + 'Registrations/GetRegistrationsByPartId/' + e.Id;
 
             return {
+                toolbar: '<a download="detail.xlsx" class="k-button" ng-click="vm.excel(vm.detailgrid)">Export</a>',
                 dataSource: {
                     type: "json",
                     transport: {
@@ -78,7 +80,7 @@
                 sortable: true,
                 pageable: true,
                 columns: [{
-                    field: "Name",
+                    field: "DisplayName",
                     title: "Listing",
                     width: 300
                 }, {
@@ -108,5 +110,11 @@
             };
           };
         }
+
+        vm.excel = function(data) {
+          var gridname = data;
+          excel.export(gridname);
+        };
+
     }
 })();

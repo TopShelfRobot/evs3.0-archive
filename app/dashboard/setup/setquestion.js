@@ -1,7 +1,7 @@
 ;(function(){
 	
 	
-	function Controller($scope, $routeParams, datacontext, config){
+	function Controller($scope, $routeParams, $location, datacontext, config){
 		var self = this;
 		
 		var listId = $routeParams.listId;
@@ -82,12 +82,12 @@
 		this.saveAndNav = function(){
 			datacontext.save()
 			.then(function(){
-				console.log("ready to nav");
+				$location.path("/elistcenter/" + listId);
 			}).catch(function(){
 				console.log("save failed");
 			});
 		}
 	}
 	
-	angular.module("app").controller("SetQuestion", ['$scope', '$routeParams', 'datacontext', 'config', Controller]);
+	angular.module("app").controller("SetQuestion", ['$scope', '$routeParams', '$location', 'datacontext', 'config', Controller]);
 })();

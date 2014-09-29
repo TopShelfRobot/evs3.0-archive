@@ -1,21 +1,13 @@
 
 ;(function(){
+	
+	var controllerId = "UserProfile";
 
 	function Controller($scope, config, datacontext, common){
 
-		activate();
-
-		function activate() {
-			common.activateController(getParticipant(), Controller)
-				.then(function() {
-					//log('Activated set coupon');
-				});
-		}
-
 		$scope.participant = {};
-
-
-		function getParticipant() {
+		
+		var promises = [
 			datacontext.participant.getParticipantById(config.owner.houseId)
 				.then(function(participant){
 					$scope.participant = participant;
@@ -23,15 +15,21 @@
 					Participants();
 					Team();
 					Coach();
-				});
-		}
+					console.log("done");
+				})
+		];
+		
+		common.activateController(promises, controllerId)
+			.then(function(){
+				console.log("really done");
+			});
 
 		function Registrations() {
 			var regapi = config.remoteApiName + 'Registrations/GetRegistrationsByPartId/' + $scope.participant.id;
 
 			$scope.registrationGridOptions = {
 				dataSource: {
-					type: "json",
+					type: "`json`",
 					transport: {
 						read: regapi
 					},
@@ -73,7 +71,6 @@
 			};
 		}
 
-
 		$scope.save = function(){
 			datacontext.save()
 				.then(function(){
@@ -95,7 +92,8 @@
 
 		$scope.dateOptions = {
 			'year-format': "'yy'",
-			'starting-day': 1
+			'starting-day': 1,
+			showWeeks: 'false'
 		};
 
 		$scope.formats = ['MM-dd-yyyy', 'yyyy/MM/dd', 'shortDate'];
@@ -351,11 +349,7 @@
 				};
 			};
 		}
-
-
-
-
 	}
 
-	angular.module("evReg").controller("UserProfile", ["$scope", "config", "datacontext", "common", Controller]);
+	angular.module("evReg").controller(controllerId, ["$scope", "config", "datacontext", "common", Controller]);
 })();

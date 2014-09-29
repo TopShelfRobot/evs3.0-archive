@@ -1,4 +1,4 @@
-﻿(function () {
+(function () {
     'use strict';
 
     var app = angular.module('app');
@@ -195,9 +195,15 @@
                     templateUrl: 'app/dashboard/setup/setcoupon.html'
                 }
             }, {
-                url: '/seteventplan',
+                url: '/:eventureId/seteventplan',
                 config: {
                     title: 'Create An Event Plan',
+                    templateUrl: 'app/dashboard/setup/seteventplan.html'
+                }
+            }, {
+                url: '/:eventureId/seteventplan/:planItemId',
+                config: {
+                    title: 'Edit An Event Plan',
                     templateUrl: 'app/dashboard/setup/seteventplan.html'
                 }
             }, {
