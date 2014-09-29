@@ -61,11 +61,11 @@
 
 
         vm.saveAndNav = function() {
-            return datacontext.save(vm.addon)
+            return datacontext.save()
                 .then(complete);
 
             function complete() {
-                $location.path("/couponaddon/");
+                $location.path("/eventuredetail/" + vm.eventureId);
             }
         };
 

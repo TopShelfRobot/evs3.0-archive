@@ -217,6 +217,13 @@
                 transport: {
                     read: eventplanapi
                 },
+              schema: {
+                    model: {
+                        fields: {
+                            DateDue: { type: "date" }
+                        }
+                    }
+                },
                 pageSize: 10,
                 serverPaging: false,
                 serverSorting: false
@@ -234,21 +241,22 @@
                     {
                         field: "DateDue",
                         title: "Due Date",
-                        format: "{0:MM/dd/yyyy}",
-                        width: 140
+                        width: "140px",
+                        format: "{0:MM/dd/yyyy}"
+                      
                     },
                     {
                         field: "IsCompleted",
                         title: "Completed",
-                        width: 140,
+                        width: "140px",
                         values: status,
                         filterable: false
                     },
                     {
                         title: "",
-                        width: 100,
+                        width: "100px",
                         filterable: false,
-                        template: '<a class="btn btn-default btn-block" href="\\\#seteventplan/id/#=Id#">Edit</a>'
+                        template: '<a class="btn btn-default btn-block" ng-href="\\#/{{vm.eventureId}}/seteventplan/#=Id#">Edit</a>'    //\\\#seteventplan//#=Id#
             }]
           };
         }

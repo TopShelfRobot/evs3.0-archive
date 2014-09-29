@@ -1,61 +1,145 @@
-﻿define(['services/logger', 'services/datacontext', 'config'],
+(function() {
+    'use strict';
 
-    function (logger, datacontext, config) {
+    var controllerId = 'seteventplanitem';
+    angular.module('app').controller(controllerId, ['$q', '$routeParams', '$upload', '$http', '$timeout', '$location', 'common', 'datacontext', 'config', seteventplanitem]);
 
-        var planItem = ko.observable();
-        var resources = ko.observableArray();
-        var eventureId = 0;
-        var planItemId;
+    function seteventplanitem($q, $routeParams, $upload, $http, $timeout, $location, common, datacontext, config) {
 
-        var activate = function (routeData) {
-            planItemId = parseInt(routeData.id);
-            eventureId = parseInt(routeData.eid);
-            logger.log('create plan planItemId: ' + planItemId, null, 'plan', true);
-            logger.log('create plan eventureId: ' + eventureId, null, 'plan', true);
+        var getLogFn = common.logger.getLogFn;
+        var log = getLogFn(controllerId);
 
+        var vm = this;
+        vm.title = 'Event Plan Item';
+      
+        vm.planItemId = $routeParams.planItemId || 0;
+        vm.eventureId = $routeParams.eventureId || 0;
+        vm.ownerId = config.owner.ownerId;
 
-           
-            datacontext.getResourcesByOwnerId(config.ownerId, resources);
-            
-            if (isNaN(planItemId)) {
-                logger.log('should nto go here', null, 'plan', true);
-                return planItem(datacontext.createPlanItem(eventureId));
+        vm.planItem = {};
+        vm.resources = [];
+
+        activate();
+
+        function activate() {
+            common.activateController(getPlanItem(), getResources(), controllerId)
+                .then(function() {
+                    //log('Activated set addon');
+                });
+        }
+
+        function getPlanItem() {
+
+            if (vm.planItemId > 0) {
+                return datacontext.resource.getPlanItemById(vm.planItemId)
+                    .then(function(data) {
+                        //applyFilter();
+                        return vm.planItem = data;
+                    });
+            } else {
+                return vm.planItem = datacontext.resource.createPlanItem(vm.eventureId);
             }
-            else {
-                logger.log('int here', null, 'plan', true);
-                return datacontext.getPlanItemById(planItemId, planItem);
-            }
-        };
+        }
 
-        var clickSave = function () {
-            save();
-        };
+        function getResources() {
+            return datacontext.resource.getResourcesByOwnerId(vm.ownerId)
+                .then(function(data) {
+                    //applyFilter();
+                    return vm.resources = data;
+                });
+        }
+      
+        vm.today = function () {
+		   vm.planItem.dateDue = new Date();
+		};
 
-        var save = function () {
-            //isSaving(true);
-            //logger.log('called save', null, 'test', true);
-            return datacontext.saveChanges(planItem)
+		vm.today();
+
+		vm.open = function($event, open) {
+			$event.preventDefault();
+			$event.stopPropagation();
+			vm[open] = true;
+		};
+
+		vm.dateOptions = {
+			'year-format': "'yy'",
+			'starting-day': 1
+		};
+
+		vm.formats = ['MM-dd-yyyy', 'yyyy/MM/dd', 'shortDate'];
+
+		vm.format = vm.formats[0];
+
+        vm.saveAndNav = function() {
+            return datacontext.save(vm.planItem)
                 .then(complete);
-            //.fin(fin1);
 
             function complete() {
-                //isSaving(false);
-                parent.$.fancybox.close(true);
+                $location.path("/eventuredetail/" + vm.eventureId);
             }
         };
 
-        var viewAttached = function (view) {
-            //logger.log('view attached', null, 'test', true);
-            // bindEventToList(view, '.events', gotoDetails);
-        };
+    }
+})();
 
-        var vm = {
-            activate: activate,
-            clickSave: clickSave,
-            planItem: planItem,
-            resources: resources,
-            viewAttached: viewAttached
-        };
-        return vm;
-    });
-
+//define(['services/logger', 'services/datacontext', 'config'],
+//
+//    function (logger, datacontext, config) {
+//
+//        var planItem = ko.observable();
+//        var resources = ko.observableArray();
+//        var eventureId = 0;
+//        var planItemId;
+//
+//        var activate = function (routeData) {
+//            planItemId = parseInt(routeData.id);
+//            eventureId = parseInt(routeData.eid);
+//            logger.log('create plan planItemId: ' + planItemId, null, 'plan', true);
+//            logger.log('create plan eventureId: ' + eventureId, null, 'plan', true);
+//
+//
+//           
+//            datacontext.getResourcesByOwnerId(config.ownerId, resources);
+//            
+//            if (isNaN(planItemId)) {
+//                logger.log('should nto go here', null, 'plan', true);
+//                return planItem(datacontext.createPlanItem(eventureId));
+//            }
+//            else {
+//                logger.log('int here', null, 'plan', true);
+//                return datacontext.getPlanItemById(planItemId, planItem);
+//            }
+//        };
+//
+//        var clickSave = function () {
+//            save();
+//        };
+//
+//        var save = function () {
+//            //isSaving(true);
+//            //logger.log('called save', null, 'test', true);
+//            return datacontext.saveChanges(planItem)
+//                .then(complete);
+//            //.fin(fin1);
+//
+//            function complete() {
+//                //isSaving(false);
+//                parent.$.fancybox.close(true);
+//            }
+//        };
+//
+//        var viewAttached = function (view) {
+//            //logger.log('view attached', null, 'test', true);
+//            // bindEventToList(view, '.events', gotoDetails);
+//        };
+//
+//        var vm = {
+//            activate: activate,
+//            clickSave: clickSave,
+//            planItem: planItem,
+//            resources: resources,
+//            viewAttached: viewAttached
+//        };
+//        return vm;
+//    });
+//

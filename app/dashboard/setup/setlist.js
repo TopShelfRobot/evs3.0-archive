@@ -12,7 +12,6 @@
 		var vm = this;
 		vm.title = 'Eventure Listing';
 		vm.listId = $routeParams.listId || 0;
-		vm.eventureId = $routeParams.eventureId || 0;
 
 		vm.list = {};
 		activate();
@@ -20,7 +19,6 @@
 		function activate() {
 			common.activateController(getEventureList(), controllerId)
 				.then(function() {
-					vm.list.eventureId = vm.eventureId;
 					//log('Activated set list');
 				});
 		}

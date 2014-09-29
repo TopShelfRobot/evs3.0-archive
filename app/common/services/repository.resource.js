@@ -1,4 +1,4 @@
-﻿(function () {
+(function () {
     'use strict';
 
     var serviceId = 'repository.resource';
@@ -87,12 +87,12 @@
 
         function createResourceItemCategory() {
             var self = this;
-            return self.manager.createEntity('ResourceItemCategory', { ownerId: config.ownerId });
+            return self.manager.createEntity('ResourceItemCategory', { ownerId: config.owner.ownerId });
         }
 
         function createResource() {
             var self = this;
-            return self.manager.createEntity('Resource', { ownerId: config.ownerId });
+            return self.manager.createEntity('Resource', { ownerId: config.owner.ownerId });
         }
 
         function getResourceItemCategoriesByOwnerId(ownerId, isOnlyActive) {
@@ -183,13 +183,13 @@
     function createPlanItem(eventureId) {
             var self = this;
             return self.manager.createEntity('EventurePlanItem',
-                { eventureId: eventureId, dateDue: moment().format("MM/DD/YYYY") });
+                { eventureId: eventureId });
         }
 
-        function getPlanItemById(planItemId) {
+        function getPlanItemById(id) {
             var self = this;
             var query = entityQuery.from('EventurePlanItems')
-                .where('id', '==', planItemId);
+                .where('id', '==', id);
 
             return self.manager.executeQuery(query)
                 .then(querySucceeded, self._queryFailed);
