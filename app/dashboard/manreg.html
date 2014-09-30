@@ -1,1 +1,76 @@
-<div data-ng-include="'/app/registration/eventure.part.html'"></div>
+<!-- <div data-ng-include="'/app/registration/eventure.part.html'"></div> -->
+<form class="form-horizontal" ng-controller="ManReg as manReg">
+	<div class="form-group">
+	    <div class="row">
+	        <label class="control-label col-2  col-sm-2 col-md-2 col-lg-2">Email</label>
+	        <div class="col-8 col-sm-8 col-md-8 col-lg-8">
+	            <input class="form-control" ng-model="manReg.partEmail" ng-disabled="manReg.partName.length > 0"/>
+	        </div>
+	    </div>
+	    <hr>
+	    <div class="row">
+	        <label class="control-label col-2  col-sm-2 col-md-2 col-lg-2">Name</label>
+	        <div class="col-8 col-sm-8 col-md-8 col-lg-8">
+	            <input class="form-control" ng-model="manReg.partName" ng-disabled="manReg.partEmail.length > 0"/>
+	        </div>
+	        <div class="col-2 col-sm-2 col-md-2 col-lg-2">
+	            <input type="button" class="btn btn-default btn-block" ng-click="manReg.search()" value="Search"/>
+	        </div>
+	    </div>
+	</div>
+	<hr>
+	<div class="form-group">
+	    <div class="row" ng-hide="manReg.searchResults.length == 0">
+	        <div class="col-2"></div>
+	        <div class="col-6">
+				<select  class="form-control" ng-model="manReg.selectedUser" ng-options="(result.firstName + ' ' + result.lastName) for result in manReg.searchResults">
+				      <option value="">-- choose participant --</option>
+			    </select>
+	            <!-- <select class="form-control" data-bind="options: searchResults, optionsText: 'fullName', value: selectedUser, enable: searchResults() && searchResults().length > 0"></select> -->
+	        </div>
+			<hr>
+	    </div>
+	    
+		<div class="form-group" ng-show="manReg.selectedUser">
+		    <div class="row">
+		        <label class="control-label col-2  col-sm-2 col-md-2 col-lg-2">Full Name</label>
+		        <div class="col-8 col-sm-8 col-md-8 col-lg-8">
+		            <div class="form-control" disabled>{{manReg.selectedUser.firstName + ' ' + manReg.selectedUser.lastName}}</div>
+		        </div>
+		    </div>
+		    <hr>
+		    <div class="row">
+		        <label class="control-label col-2  col-sm-2 col-md-2 col-lg-2">Email</label>
+		        <div class="col-8 col-sm-8 col-md-8 col-lg-8">
+					<div class="form-control" disabled>{{manReg.selectedUser.email}}</div>
+		        </div>
+		    </div>
+		    <hr>
+		    <div class="row">
+		        <label class="control-label col-2  col-sm-2 col-md-2 col-lg-2">City</label>
+		        <div class="col-8 col-sm-8 col-md-8 col-lg-8">
+					<div class="form-control" disabled>{{ manReg.selectedUser.city }}</div>
+		        </div>
+		    </div>
+		    <hr>
+		    <div class="row">
+		        <label class="control-label col-2  col-sm-2 col-md-2 col-lg-2">Age (yrs)</label>
+		        <div class="col-8 col-sm-8 col-md-8 col-lg-8">
+					<div class="form-control" disabled>{{ manReg.ageFromBirthday(manReg.selectedUser.birthday) }}</div>
+		        </div>
+		    </div>
+		    <hr>
+		</div>
+		<div>
+		    <div class="row">
+		        <div class="col-8"></div>
+		        <div class="col-2 col-sm-2 col-lg-2">
+		            <button class="btn btn-default btn-block" ng-click="createNewUser()" disabled>New User</button>
+		        </div>
+		        <div class="col-2 col-sm-2 col-lg-2" ng-show="manReg.selectedUser">
+		            <button class="btn btn-default btn-block" ng-click="manReg.selectUser">Select User</button>
+		        </div>
+		    </div>
+		</div>
+	</div>
+</form>
