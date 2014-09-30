@@ -3,15 +3,16 @@
 
     var controllerId = 'shell';
     angular.module('common').controller(controllerId,
-        ['$rootScope', 'common', 'config', shell]);
+        ['$rootScope', 'common', 'config', "$timeout", shell]);
 
-    function shell($rootScope, common, config) {
+    function shell($rootScope, common, config, $timeout) {
         var vm = this;
         var logSuccess = common.logger.getLogFn(controllerId, 'success!!!');
         var events = config.events;
         vm.busyMessage = 'Please wait ...';
         vm.isBusy = true;
         vm.showSplash = true;
+		vm.progBar = 22;
         vm.spinnerOptions = {
             radius: 40,
             lines: 7,
@@ -26,11 +27,16 @@
         activate();
 
         function activate() {
-            //logSuccess('Eventure SPorts Angular loaded!!!!!', null, true);
-            common.activateController([], controllerId);
-                //.then(function () {
-                //    vm.showSplash = false;
-                //});
+            vm.showSplash = true;
+			vm.progBar = 55;
+            common.activateController([], controllerId)
+                .then(function () {
+					vm.progBar = 89;
+					$timeout(function(){
+						vm.showSplash = false;
+					}, 500);
+					
+                });
         }
 
         function toggleSpinner(on) {

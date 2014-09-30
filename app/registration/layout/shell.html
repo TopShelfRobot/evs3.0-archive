@@ -1,13 +1,29 @@
-<div class="wrap" data-ng-controller="shell as vm">
+<div class="wrap" ng-controller="shell as vm">
 	
-	<div ng-show="vm.isBusy" style="position: absolute; top: 50%; left: 50%; right: 50%; z-index: 1000000">
-		<div data-cc-spinner="vm.spinnerOptions" style="z-index: 1001"></div>
-		<div style="background-color: #aaa; opacity: 0.6; position: fixed; top: 0; bottom: 0; left: 0; right: 0; z-index: 1000"></div>
+    <div id="splash-page" ng-show="vm.showSplash">
+        <div class="row">
+            <div class="page-splash col-lg-12">
+                <div class="page-splash-message text-center">
+                    <img class="img-responsive" src="/Content/images/logo.png">
+                    <br>
+                    <h1>Loading...</h1>
+                </div>
+				<progressbar class="progress-striped" value="vm.progBar"></progressbar>
+            </div>
+        </div>
+    </div>
+	
+	<div ng-hide="vm.showSplash">
+		
+		<div ng-show="vm.isBusy" style="position: absolute; top: 50%; left: 50%; right: 50%; z-index: 1000000">
+			<div data-cc-spinner="vm.spinnerOptions" style="z-index: 1001"></div>
+			<div style="background-color: #aaa; opacity: 0.6; position: fixed; top: 0; bottom: 0; left: 0; right: 0; z-index: 1000"></div>
+		</div>
+	
+	    <div data-ng-include="'/app/registration/layout/header.html'"></div>
+
+	    <div ng-view></div>
+
+	    <div data-ng-include="'/app/registration/layout/footer.html'"></div>
 	</div>
-	
-    <div data-ng-include="'/app/registration/layout/header.html'"></div>
-
-    <div ng-view></div>
-
-    <div data-ng-include="'/app/registration/layout/footer.html'"></div>
 </div>
