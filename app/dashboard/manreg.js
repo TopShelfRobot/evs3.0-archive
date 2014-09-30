@@ -1,6 +1,6 @@
 ;(function(){
 	
-	function Controller(datacontext){
+	function Controller($location, datacontext, helpers, config){
 		var self = this;
 		
 		this.partEmail = "";
@@ -26,14 +26,23 @@
             }
 		};
 		
-		this.ageFromBirthday = function(birthday){
-			return 10;
-		};
+		this.ageFromBirthday = helpers.ageFromBirthday;
 		
 		this.searchResults = [];
 		
 		this.selectedUser = null;
+		
+		this.selectUser = function(){
+			config.owner.houseId = self.selectedUser.houseId;
+			console.log(config);
+			
+            $location.path("/eventure/");
+		};
+		
+		this.createUser = function(){
+			
+		};
 	}
 	
-	angular.module("app").controller("ManReg", ["datacontext", Controller]);
+	angular.module("app").controller("ManReg", ["$location", "datacontext", "Helpers", "config", Controller]);
 })();

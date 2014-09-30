@@ -4,10 +4,11 @@
     var app = angular.module('evReg');
 
     // Collect the routes
-    app.constant('routes', getRoutes());
+    app.constant('reg.routes', getRoutes());
 
     // Configure the routes and route resolvers
-    app.config(['$routeProvider', 'routes', routeConfigurator]);
+    app.config(['$routeProvider', 'reg.routes', routeConfigurator]);
+	
     function routeConfigurator($routeProvider, routes) {
         routes.forEach(function (r) {
             // $routeProvider.when(r.url, r.config);
@@ -28,8 +29,10 @@
     }
 
     prime.$inject = ['datacontext'];
-    function prime(dc) { return dc.prime(); }
-
+	
+    function prime(dc) { 
+		return dc.prime(); 
+	}
 
     // Define the routes
     function getRoutes() {

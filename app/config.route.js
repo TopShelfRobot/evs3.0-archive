@@ -7,13 +7,19 @@
     app.constant('routes', getRoutes());
 
     // Configure the routes and route resolvers
-    app.config(['$routeProvider', 'routes', routeConfigurator]);
-    function routeConfigurator($routeProvider, routes) {
+    app.config(['$routeProvider', 'routes', "reg.routes", routeConfigurator]);
+    function routeConfigurator($routeProvider, routes, regRoutes) {
 
         routes.forEach(function (r) {
             //$routeProvider.when(r.url, r.config);
             setRoute(r.url, r.config);
         });
+		
+		regRoutes.forEach(function(r){
+			// console.log("route:", r);
+			setRoute(r.url, r.config);
+		});
+		
         $routeProvider.otherwise({ redirectTo: '/' });
 
         function setRoute(url, definition) {
