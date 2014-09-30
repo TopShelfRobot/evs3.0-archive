@@ -1,61 +1,50 @@
 (function() {
 	'use strict';
 
-	var controllerId = 'setresourceitem';
-	angular.module('app').controller(controllerId, ['$q', '$routeParams', '$upload', '$http', '$timeout', '$location', 'common', 'datacontext', 'config', setresourceitem]);
+	var controllerId = 'setresourceitemcategory';
+	angular.module('app').controller(controllerId, ['$q', '$routeParams', '$upload', '$http', '$timeout', '$location', 'common', 'datacontext', 'config', setresourceitemcategory]);
 
-	function setresourceitem($q, $routeParams, $upload, $http, $timeout, $location, common, datacontext, config) {
+	function setresourceitemcategory($q, $routeParams, $upload, $http, $timeout, $location, common, datacontext, config) {
 
 		var getLogFn = common.logger.getLogFn;
 		var log = getLogFn(controllerId);
 
 		var vm = this;
-		vm.title = 'Resource Item';
-		vm.itemId = $routeParams.itemId || 0;
+		vm.title = 'Resource Item Category';
         vm.resourceId = $routeParams.resourceId;
       
         vm.ownerId = config.owner.ownerId;
-
-        vm.item = {};
-        vm.categories = [];
+        vm.category= {};
+        //vm.categories = [];
 
 		activate();
 
 		function activate() {
-			common.activateController(getResourceItem(), getResourceCategories(), controllerId)
+			common.activateController(getResourceItemCategories(), controllerId)
 				.then(function() {
 					//log('Activated set coupon');
 				});
 		}
 
-		function getResourceItem() {
-
-			if (vm.itemId > 0) {
-				return datacontext.resource.getResourceItemById(vm.itemId)
-					.then(function(data) {
-						//applyFilter();
-						return vm.item = data;
-					});
-			} else {
-				return vm.coupon = datacontext.resource.createResourceItem(vm.resourceId);
-			}
+		function getResourceItemCategories() {
+				return vm.category = datacontext.resource.createResourceItemCategory();
 		}
 
-        function getResourceCategories() {
-            return datacontext.resources.getResourceItemCategoriesByOwnerId(vm.ownerId)
-                .then(function(data) {
-                    //applyFilter();
-                    return vm.categories = data;
-                });
-        }
+//        vm.addResourceItemCategory = function() {
+//            return datacontext.resource.createResourceItemCategory()
+//                .then(function(data) {
+//                   vm.categories.push(data);
+//                });
+//        };
+      
+        vm.saveAndNav = function() {
+            return datacontext.save()
+                .then(complete);
 
-        function getEventureLists() {
-            return datacontext.eventure.getEventureListsByOwnerId(vm.ownerId)
-                .then(function(data) {
-                    //applyFilter();
-                    return vm.listings = data;
-                });
-        }
+            function complete() {
+                $location.path("/resourcedetail/" + vm.resourceId);
+            }
+        };
 
 	}
 })();

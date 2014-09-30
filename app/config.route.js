@@ -285,7 +285,7 @@
                     templateUrl: 'app/dashboard/setup/setresourceitem.html'
                 }
             }, {
-                url: '/setresourceitemcategory',
+                url: '/:resourceId/setresourceitemcategory',
                 config: {
                     title: 'Create A Resource Item Category',
                     templateUrl: 'app/dashboard/setup/setresourceitemcategory.html'

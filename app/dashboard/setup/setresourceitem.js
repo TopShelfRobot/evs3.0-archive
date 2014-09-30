@@ -56,6 +56,15 @@
                     return vm.resources = data;
                 });
         }
+      
+        vm.saveAndNav = function() {
+            return datacontext.save()
+                .then(complete);
+
+            function complete() {
+                $location.path("/resourcedetail/" + vm.resourceId);
+            }
+        };
 
 	}
 })();

@@ -12,7 +12,7 @@
         var vm = this;
         vm.title = 'Eventure';
         vm.expenseId = $routeParams.expenseId || 0;
-        vm.eventureId = $routeParams.eventureId || 0;
+        vm.eventureId = $routeParams.eventureId;
 
         vm.ownerId = config.owner.ownerId;
 

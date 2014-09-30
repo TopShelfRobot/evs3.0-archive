@@ -214,7 +214,7 @@
 
         function createResourceItem(resourceId) {
             var self = this;
-            return self.manager.createEntity('ResourceItem', { resourceId: resourceId, ownerId: config.ownerId, active: true });
+            return self.manager.createEntity('ResourceItem', { resourceId: resourceId, ownerId: config.owner.ownerId, active: true });
         }
 
         function getResourceItemById(resourceItemId) {
