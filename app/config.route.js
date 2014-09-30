@@ -14,7 +14,7 @@
             //$routeProvider.when(r.url, r.config);
             setRoute(r.url, r.config);
         });
-        $routeProvider.otherwise({ redirectTo: '/' });
+        $routeProvider.otherwise({ redirectTo: '/eventurecenter' });
 
         function setRoute(url, definition) {
             // Sets resolvers for all of the routes
@@ -201,7 +201,7 @@
                     templateUrl: 'app/dashboard/setup/seteventplan.html'
                 }
             }, {
-                url: '/:eventureId/seteventplan/:planItemId',
+                url: '/seteventplan/:itemId',
                 config: {
                     title: 'Edit An Event Plan',
                     templateUrl: 'app/dashboard/setup/seteventplan.html'
@@ -273,9 +273,15 @@
                     templateUrl: 'app/dashboard/setup/setresource.html'
                 }
             }, {
-                url: '/setresourceitem',
+                url: '/:resourceId/setresourceitem',
                 config: {
                     title: 'Create A Resource Item',
+                    templateUrl: 'app/dashboard/setup/setresourceitem.html'
+                }
+            }, {
+                url: 'setresourceitem/:itemId',
+                config: {
+                    title: 'Edit A Resource Item',
                     templateUrl: 'app/dashboard/setup/setresourceitem.html'
                 }
             }, {
@@ -295,12 +301,6 @@
                 config: {
                     title: 'Edit Team',
                     templateUrl: 'app/registration/views/editteam.part.html'
-                }
-            }, {
-                url: '/kitchensink',
-                config: {
-                    title: 'Kitchen Sink',
-                    templateUrl: 'app/dashboard/kitchensink.html'
                 }
             }
         ];

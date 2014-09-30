@@ -256,7 +256,7 @@
                         title: "",
                         width: "100px",
                         filterable: false,
-                        template: '<a class="btn btn-default btn-block" ng-href="\\#/{{vm.eventureId}}/seteventplan/#=Id#">Edit</a>'    //\\\#seteventplan//#=Id#
+                        template: '<a class="btn btn-default btn-block" ng-href="\\#/seteventplan/#=Id#">Edit</a>'    //\\\#seteventplan//#=Id#
             }]
           };
         }

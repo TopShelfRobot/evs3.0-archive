@@ -1,19 +1,17 @@
 (function () {
     'use strict';
     var controllerId = 'resourcedetail';
-    angular.module('app').controller(controllerId, ['$routeParams','common', 'datacontext','config', 'ExcelService', resourcedetail]);
+    angular.module('app').controller(controllerId, ['$routeParams', '$location', 'common', 'datacontext','config', 'ExcelService', resourcedetail]);
 
-    function resourcedetail($routeParams, common, datacontext, config, excel) {
+    function resourcedetail($routeParams, $location, common, datacontext, config, excel) {
         var getLogFn = common.logger.getLogFn;
         var log = getLogFn(controllerId);
 
         var vm = this;
-        vm.title = 'app';
+        vm.title = 'Resource Detail';
         vm.ownerId = config.owner.ownerId;
-        vm.resourceId = 0;
-        vm.resource = {};
         vm.resourceId = $routeParams.resourceId;
-        log(vm.resourceId);
+        vm.resource = {};
 
         activate();
 
@@ -32,13 +30,14 @@
         };
 
 
-        vm.clickSave = function () {
-            //logger.log('next', null, 'test', true);
-            alert('called save');
-            //save();
-            //var url = '#test';
-            //router.navigateTo(url);
-        };
+        vm.saveAndNav = function() {
+			return datacontext.save()
+				.then(complete);
+
+			function complete() {
+                $location.path("/resourcecenter/");
+			}
+		};
 
         function createresourceDetailGrid() {
 

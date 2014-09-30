@@ -12,8 +12,8 @@
         var vm = this;
         vm.title = 'Event Plan Item';
       
-        vm.planItemId = $routeParams.planItemId || 0;
-        vm.eventureId = $routeParams.eventureId || 0;
+        vm.planItemId = $routeParams.itemId || 0;
+        vm.eventureId = $routeParams.eventureId;
         vm.ownerId = config.owner.ownerId;
 
         vm.planItem = {};
