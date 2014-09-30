@@ -14,8 +14,7 @@
         vm.resourceId = $routeParams.resourceId;
       
         vm.ownerId = config.owner.ownerId;
-        vm.category= {};
-        //vm.categories = [];
+        vm.categories= [];
 
 		activate();
 
@@ -27,15 +26,18 @@
 		}
 
 		function getResourceItemCategories() {
-				return vm.category = datacontext.resource.createResourceItemCategory();
+				return datacontext.resource.getResourceItemCategoriesByOwnerId(vm.ownerId)
+                  .then(function(data) {
+                      return vm.categories = data;
+                  });
 		}
-
-//        vm.addResourceItemCategory = function() {
-//            return datacontext.resource.createResourceItemCategory()
-//                .then(function(data) {
-//                   vm.categories.push(data);
-//                });
-//        };
+      
+        vm.addNewCategory = function() {
+          return datacontext.resource.createResourceItemCategory()
+                .then(function(data) {
+                   vm.categories.push(data);
+                });
+        };
       
         vm.saveAndNav = function() {
             return datacontext.save()

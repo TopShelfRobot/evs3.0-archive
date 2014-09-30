@@ -4,7 +4,6 @@
       <div class="text-right"> <a href="#/resource" class="danger"><i class="glyphicon glyphicon-ban-circle"></i></a> </div>
     </div>
   </div>
-  
 <!--   ng-repeat="category in vm.categories"-->
   <div class="row">
     <form class="form-horizontal">
@@ -20,20 +19,20 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
+              <tr ng-repeat="category in vm.categories">
                 <td>
-                  <input class="form-control" ng-model="vm.category.name" />
+                  <input class="form-control" ng-model="category.name" />
                 </td>
                 <td class="text-center">
                   <div class="btn-group">
-                    <button type="button" class="btn btn-default" ng-model="vm.category.active" btn-radio="true">Yes</button>
-                    <button type="button" class="btn btn-default" ng-model="vm.category.active" btn-radio="false">No</button>
+                    <button type="button" class="btn btn-default" ng-model="category.active" btn-radio="true">Yes</button>
+                    <button type="button" class="btn btn-default" ng-model="category.active" btn-radio="false">No</button>
                   </div>
                 </td>
               </tr>
             </tbody>
           </table>
-          <button class="btn btn-primary">Add New Item Category</button>
+          <button class="btn btn-primary" ng-click="vm.categories.push({})">Add New Item Category</button>
         </div>
       </div>
     </form>
