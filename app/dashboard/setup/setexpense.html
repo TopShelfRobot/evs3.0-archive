@@ -18,7 +18,7 @@
         <div class="form-group">
           <label for="CostingItem" class="col-lg-6 control-label">Item:</label>
           <div class="col-lg-6">
-            <select name="CostingItem" class="form-control" ng-model="vm.expense.itemId" ng-options="i.id as i.name for i in vm.items | filter:vm.expense.categoryId ">
+            <select name="CostingItem" class="form-control" ng-model="vm.expense.itemId" ng-options="i.id as i.name for i in vm.items | filter:{ resourceItemCategoryId: vm.expense.categoryId} ">
             </select>
           </div>
         </div>
