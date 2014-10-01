@@ -1,4 +1,4 @@
-﻿(function() {
+(function() {
 	'use strict';
 
 	var controllerId = 'setresourceitemcategory';
@@ -34,6 +34,15 @@
       
 		vm.addNewCategory = function () {
 		   vm.categories.push(datacontext.resource.createResourceItemCategory());
+        };
+      
+        vm.cancel = function() {
+          return datacontext.cancel()
+            .then(complete);
+          
+            function complete() {
+              $location.path("/resourcedetail/" + vm.resourceId);
+            }
         };
       
         vm.saveAndNav = function () {

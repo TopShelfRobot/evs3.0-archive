@@ -26,6 +26,15 @@
                         return vm.volunteerschedule = data;
                     });
         }
+      
+        vm.cancel = function() {
+          return datacontext.cancel()
+            .then(complete);
+          
+            function complete() {
+              $location.path("/volunteercenter");
+            }
+        };
 
         vm.saveAndNav = function() {
             return datacontext.save(vm.volunteerschedule)

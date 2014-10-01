@@ -1,4 +1,4 @@
-﻿(function () {
+(function () {
     'use strict';
 
     var controllerId = 'setresource';
@@ -33,6 +33,15 @@
                 return vm.resource = datacontext.resource.createResource();
             }
         }
+      
+        vm.cancel = function() {
+          return datacontext.cancel()
+            .then(complete);
+          
+            function complete() {
+              $location.path("/resourcecenter");
+            }
+        };
 
         vm.saveAndNav = function() {
             return datacontext.save(vm.resource)

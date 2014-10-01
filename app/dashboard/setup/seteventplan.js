@@ -69,7 +69,16 @@
 		vm.formats = ['MM-dd-yyyy', 'yyyy/MM/dd', 'shortDate'];
 
 		vm.format = vm.formats[0];
-
+        
+        vm.cancel = function() {
+          return datacontext.cancel()
+            .then(complete);
+          
+            function complete() {
+              $location.path("/eventuredetail/" + vm.eventureId);
+            }
+        };
+      
         vm.saveAndNav = function() {
             return datacontext.save(vm.planItem)
                 .then(complete);
