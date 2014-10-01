@@ -1,4 +1,4 @@
-(function() {
+﻿(function() {
 	'use strict';
 
 	var controllerId = 'setresourceitemcategory';
@@ -32,14 +32,12 @@
                   });
 		}
       
-        vm.addNewCategory = function() {
-          return datacontext.resource.createResourceItemCategory()
-                .then(function(data) {
-                   vm.categories.push(data);
-                });
+		vm.addNewCategory = function () {
+		   vm.categories.push(datacontext.resource.createResourceItemCategory());
         };
       
-        vm.saveAndNav = function() {
+        vm.saveAndNav = function () {
+            alert('trying to save');
             return datacontext.save()
                 .then(complete);
 
