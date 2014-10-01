@@ -37,7 +37,6 @@
         };
       
         vm.saveAndNav = function () {
-            alert('trying to save');
             return datacontext.save()
                 .then(complete);
 

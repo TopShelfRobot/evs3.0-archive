@@ -1,4 +1,4 @@
-(function() {
+﻿(function() {
     'use strict';
 
     var controllerId = 'seteventplanitem';
@@ -13,6 +13,13 @@
         vm.title = 'Event Plan Item';
       
         vm.planItemId = $routeParams.itemId || 0;
+
+        //alert('planItemId: ' + vm.planItemId);
+        //if (vm.planItemId === parseInt(vm.planItemId))
+        //    alert("11111111111data is integer");
+        //else
+        //    alert("11111111data is not an integer");
+
         vm.eventureId = $routeParams.eventureId;
         vm.ownerId = config.owner.ownerId;
 
@@ -31,7 +38,7 @@
         function getPlanItem() {
 
             if (vm.planItemId > 0) {
-                return datacontext.resource.getPlanItemById(vm.planItemId)
+                return datacontext.resource.getPlanItemById(parseInt(vm.planItemId))
                     .then(function(data) {
                         //applyFilter();
                         return vm.planItem = data;
@@ -39,6 +46,7 @@
             } else {
                 return vm.planItem = datacontext.resource.createPlanItem(vm.eventureId);
             }
+
         }
 
         function getResources() {
