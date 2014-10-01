@@ -18,7 +18,9 @@
         function activate() {
             var promises = [createresourceDetailGrid(), getResource()];
             common.activateController(promises, controllerId)
-                .then(function() { log('Activated Resource Detail View'); });
+                .then(function() { 
+                  //log('Activated Resource Detail View'); 
+                });
         }
 
         function getResource () {

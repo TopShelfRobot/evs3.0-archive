@@ -16,7 +16,9 @@
         function activate() {
             //var promises = [getMessageCount(), getPeople()];
             common.activateController(createResourceGrid(), controllerId)
-                .then(function() { log('Activated reporting View'); });
+                .then(function() { 
+                  //log('Activated reporting View'); 
+                });
         }
 
         function createResourceGrid() {

@@ -20,7 +20,9 @@
 
         function activate() {
             common.activateController(EventureGrid(), controllerId)
-                .then(function () { log('Activated Eventure Center View'); });
+                .then(function () { 
+                  //log('Activated Eventure Center View'); 
+                });
         }
 
         function EventureGrid() {

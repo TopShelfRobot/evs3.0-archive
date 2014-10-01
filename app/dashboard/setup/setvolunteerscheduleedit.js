@@ -16,7 +16,9 @@
 
         function activate() {
             common.activateController(getVolunteerSchedule(), controllerId)
-                .then(function () { log('Activated Volunteer Schedule Edit'); });
+                .then(function () { 
+                  //log('Activated Volunteer Schedule Edit'); 
+                });
         }
 
         function getVolunteerSchedule() {

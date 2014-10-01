@@ -20,7 +20,9 @@
 
         function activate() {
             common.activateController(ParticipantGrid(), controllerId)
-                .then(function () { log('Activated Participant Center View'); });
+                .then(function () { 
+                  //log('Activated Participant Center View'); 
+                });
         }
 
         function ParticipantGrid() {

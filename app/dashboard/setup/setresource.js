@@ -18,7 +18,9 @@
 
         function activate() {
             common.activateController(getResource(), controllerId)
-                .then(function () { log('Activated set resource'); });
+                .then(function () { 
+                  //log('Activated set resource'); 
+                });
         }
 
         function getResource() {
