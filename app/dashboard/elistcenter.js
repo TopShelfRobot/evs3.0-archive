@@ -154,7 +154,7 @@
 
           var participantapi = config.remoteApiName +  'Participants/GetRegisteredParticipantsByEventureListId/' + vm.listingId;
           vm.participantGridOptions = {
-            toolbar: '<a download="download.xlsx" class="k-button" ng-click="vm.excel(vm.partgrid)">Export</a>',
+            toolbar: '<a download="download.xlsx" class="k-button" ng-click="vm.excel(vm.partgrid)"><em class="glyphicon glyphicon-save"></em>&nbsp;Export</a>',
             dataSource: {
                 type: "json",
                 transport: {
@@ -192,7 +192,7 @@
                         title: "",
                         width: 100,
                         filterable: false,
-                        template: '<a href="\\\#partedit/#=Id#" class="btn btn-default btn-block ">Edit</a>'
+                        template: '<a href="\\\#partedit/#=Id#" class="btn btn-default btn-block "><em class="glyphicon glyphicon-edit"></em>&nbsp;Edit</a>'
             }]
           };
         }

@@ -58,7 +58,16 @@
                     return vm.items = data;
                 });
         }
-
+      
+        vm.cancel = function() {
+          return datacontext.cancel()
+            .then(complete);
+          
+            function complete() {
+              $location.path("/eventuredetail/" + vm.eventureId);
+            }
+        };
+      
 
         vm.saveAndNav = function() {
             return datacontext.save()

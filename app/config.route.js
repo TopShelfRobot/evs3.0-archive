@@ -291,10 +291,22 @@
                     templateUrl: 'app/dashboard/setup/setresourceitemcategory.html'
                 }
             }, {
-                url: '/setvolunteerjob',
+                url: '/:eventureId/setvolunteerjob',
                 config: {
                     title: 'Create A Volunteer Job',
                     templateUrl: 'app/dashboard/setup/setvolunteerjob.html'
+                }
+            }, {
+                url: '/setvolunteerjob/:jobId',
+                config: {
+                    title: 'Edit A Volunteer Job',
+                    templateUrl: 'app/dashboard/setup/setvolunteerjob.html'
+                }
+            }, {
+                url: '/setvolunteerscheduleedit/:volunteerId',
+                config: {
+                    title: 'Edit A Volunteer Schedule',
+                    templateUrl: 'app/dashboard/setup/setvolunteerscheduleedit.html'
                 }
             }, {
                 url: '/editteam/:teamId',

@@ -1,4 +1,4 @@
-﻿(function () {
+(function () {
     'use strict';
 
     var serviceId = 'repository.volunteer';
@@ -72,12 +72,12 @@
 
         function createVolunteerJob(eventureId) {
             var self = this;
-            return self.manager.createEntity('VolunteerJob', { eventureId: eventureId, dateCreated: moment().format("MM/DD/YYYY"), ageRestriction: 'None' });
+            return self.manager.createEntity('VolunteerJob', { eventureId: eventureId, ageRestriction: 'None' });
         }
         
-        function createVolunteerShift(eventureId) {
+        function createVolunteerShift(jobId) {
             var self = this;
-            return self.manager.createEntity('VolunteerShift', { dateShift: moment().format("MM/DD/YYYY"), dateCreated: moment().format("MM/DD/YYYY") });
+            return self.manager.createEntity('VolunteerShift', { volunteerJobId: jobId });
         }
         
         function getVolunteerJobById(id) {

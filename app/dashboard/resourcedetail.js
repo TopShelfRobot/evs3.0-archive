@@ -18,7 +18,9 @@
         function activate() {
             var promises = [createresourceDetailGrid(), getResource()];
             common.activateController(promises, controllerId)
-                .then(function() { log('Activated Resource Detail View'); });
+                .then(function() { 
+                  //log('Activated Resource Detail View'); 
+                });
         }
 
         function getResource () {
@@ -45,7 +47,7 @@
             //alert(ResourceApi);
 
             vm.resourceDetailGridOptions = {
-                toolbar: '<a download="detail.xlsx" class="k-button" ng-click="vm.excel(vm.resourcegrid)">Export</a>',
+                toolbar: '<a download="detail.xlsx" class="k-button" ng-click="vm.excel(vm.resourcegrid)"><em class="glyphicon glyphicon-save"></em>&nbsp;Export</a>',
                 dataSource: {
                     type: "",
                     transport: {

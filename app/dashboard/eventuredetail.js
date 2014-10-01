@@ -95,7 +95,7 @@
 
           var eventurelistapi = config.remoteApiName + 'EventureLists/getEventureListsByEventureId/' + vm.eventureId;
           vm.eventureListGridOptions = {
-            toolbar: '<a download="download.xlsx" class="k-button" ng-click="vm.excel(vm.listinggrid)">Export</a>',
+            toolbar: '<a download="download.xlsx" class="k-button" ng-click="vm.excel(vm.listinggrid)"><em class="glyphicon glyphicon-save"></em>&nbsp;Export</a>',
             dataSource: {
                 type: "json",
                 transport: {
@@ -144,7 +144,7 @@
             },{
                 title: "",
                 width: "120px",
-                template:'<a class="btn btn-default btn-block" href="\\\#setlist/#=Id#">Edit</a>'
+                template:'<a class="btn btn-default btn-block" href="\\\#setlist/#=Id#"><em class="glyphicon glyphicon-edit"></em>&nbsp;Edit</a>'
             }]
           };
         }
@@ -153,7 +153,7 @@
 
           var expenseapi = config.remoteApiName + 'Resources/GetExpensesByEventureId/' + vm.eventureId;
           vm.expenseGridOptions = {
-            toolbar: '<a download="download.xlsx" class="k-button" ng-click="vm.excel(vm.expensegrid)">Export</a>',
+            toolbar: '<a download="download.xlsx" class="k-button" ng-click="vm.excel(vm.expensegrid)"><em class="glyphicon glyphicon-save"></em>&nbsp;Export</a>',
             dataSource: {
                 type: "json",
                 transport: {
@@ -211,7 +211,7 @@
 
           var eventplanapi = config.remoteApiName + 'Resources/GetNotificationsByEventureId/' + vm.eventureId;
           vm.eventPlanGridOptions = {
-            toolbar: '<a download="download.xlsx" class="k-button" ng-click="vm.excel(vm.plangrid)">Export</a>',
+            toolbar: '<a download="download.xlsx" class="k-button" ng-click="vm.excel(vm.plangrid)"><em class="glyphicon glyphicon-save"></em>&nbsp;Export</a>',
             dataSource: {
                 type: "json",
                 transport: {
@@ -256,7 +256,7 @@
                         title: "",
                         width: "100px",
                         filterable: false,
-                        template: '<a class="btn btn-default btn-block" ng-href="\\#/seteventplan/#=Id#">Edit</a>'    //\\\#seteventplan//#=Id#
+                        template: '<a class="btn btn-default btn-block" ng-href="\\#/seteventplan/#=Id#"><em class="glyphicon glyphicon-edit"></em>&nbsp;Edit</a>'    //\\\#seteventplan//#=Id#
             }]
           };
         }
@@ -265,7 +265,7 @@
 
           var participantapi = config.remoteApiName + 'Participants/GetRegisteredParticipantsByEventureId/' + vm.eventureId;
           vm.participantGridOptions = {
-            toolbar: '<a download="download.xlsx" class="k-button" ng-click="vm.excel(vm.partgrid)">Export</a>',
+            toolbar: '<a download="download.xlsx" class="k-button" ng-click="vm.excel(vm.partgrid)"><em class="glyphicon glyphicon-save"></em>&nbsp;Export</a>',
             dataSource: {
                 type: "json",
                 transport: {
@@ -303,7 +303,7 @@
                         title: "",
                         width: 100,
                         filterable: false,
-                        template: '<a href="\\\#partedit/#=Id#" class="btn btn-default btn-block ">Edit</a>'
+                        template: '<a href="\\\#partedit/#=Id#" class="btn btn-default btn-block "><em class="glyphicon glyphicon-edit"></em>&nbsp;Edit</a>'
             }]
           };
         }
@@ -312,7 +312,7 @@
             var volJobApi = config.remoteApiName + 'Participants/GetVolunteerDataByEventureId/' + vm.eventureId;
 
             vm.volunteerGridOptions = {
-                toolbar: '<a download="download.xlsx" class="k-button" ng-click="vm.excel(vm.volunteergrid)">Export</a>',
+                toolbar: '<a download="download.xlsx" class="k-button" ng-click="vm.excel(vm.volunteergrid)"><em class="glyphicon glyphicon-save"></em>&nbsp;Export</a>',
                 dataSource: {
                     type: "json",
                     transport: {
@@ -357,7 +357,7 @@
                     width: 200
                 }, {
                     field: '', title: '',
-                    template: '<a href="\\\#setvolunteerjob/#=Id#" class="btn btn-primary btn-small btn-block">Edit</a>'
+                    template: '<a href="\\\#setvolunteerjob/#=Id#" class="btn btn-primary btn-small btn-block"><em class="glyphicon glyphicon-edit"></em>&nbsp;Edit</a>'
                 }]
             };
           
@@ -366,7 +366,7 @@
                 var volunteerApi = config.remoteApiName + 'Participants/GetVolunteersByVolunteerJobId/' + e.Id;
 
                 return {
-                  toolbar: '<a download="download.xlsx" class="k-button" ng-click="vm.excel(vm.detailgrid)">Export</a>',
+                  toolbar: '<a download="download.xlsx" class="k-button" ng-click="vm.excel(vm.detailgrid)"><em class="glyphicon glyphicon-save"></em>&nbsp;Export</a>',
                     dataSource: {
                         type: "json",
                         transport: {
@@ -413,7 +413,7 @@
                     format: "{0:h:mm tt}"
                 }, { title: "",
                      width: 100,
-                     template: '<a class="btn btn-primary btn-small btn-block" href="\\\#setvolunteerscheduleedit/#=ScheduleId#">Edit</a>' }
+                     template: '<a class="btn btn-primary btn-small btn-block" href="\\\#setvolunteerscheduleedit/#=ScheduleId#"><em class="glyphicon glyphicon-edit"></em>&nbsp;Edit</a>' }
                     ]
                 };
             };
