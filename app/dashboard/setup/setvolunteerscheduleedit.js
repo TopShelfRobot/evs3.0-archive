@@ -10,7 +10,7 @@
 
         var vm = this;
         vm.volunteerschedule = {};
-        vm.volunteerId = $routeParams.volunteerId || 0;
+        vm.volunteerId = $routeParams.volunteerId;
 
         activate();
 
@@ -39,7 +39,7 @@
         };
 
         vm.saveAndNav = function() {
-            return datacontext.save(vm.volunteerschedule)
+            return datacontext.save()
                 .then(complete);
 
             function complete() {
