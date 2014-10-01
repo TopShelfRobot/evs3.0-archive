@@ -1,6 +1,12 @@
 <section data-ng-controller="eventuredetail as vm">
   <div class="row">
     <div class="col-lg-12">
+      <a ng-href="#/eventurecenter" class="btn btn-info btn-sm"><em class="glyphicon glyphicon-circle-arrow-left"></em>&nbsp;Back</a>
+      <a class="btn btn-primary btn-sm" ng-href="#/seteventure/{{vm.eventureId}}"><em class="glyphicon glyphicon-edit"></em>&nbsp;Edit Event</a>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12">
       <h1>{{ vm.eventure.name }}&nbsp;<small>{{ vm.eventure.displayDate }}</small></h1>
       <br>
     </div>
@@ -32,14 +38,6 @@
               </ul>
               <h3 class="text-center">Capacity: <small>{{ vm.capacity.regs }}&nbsp;/&nbsp;{{ vm.capacity.capacity }}</small></h3>
               <br>
-              <div class="row">
-                <div class="col-xs-6">
-                  <a class="btn btn-info btn-block" ng-href="#/{{vm.eventureId}}/setlist">Add a Listing</a>
-                </div>
-                <div class="col-xs-6">
-                  <a class="btn btn-primary btn-block" ng-href="#/seteventure/{{vm.eventureId}}">Edit Event</a>
-                </div>
-              </div>
             </div>
           </div>
           <div class="col-md-8">
@@ -50,6 +48,8 @@
           <div class="col-lg-12">
             <h3>Listings</h3>
             <div id="eventurelistgrid" kendo-grid="vm.listinggrid" k-options="vm.eventureListGridOptions"></div>
+            <br>
+            <a class="btn btn-info" ng-href="#/{{vm.eventureId}}/setlist"><em class="glyphicon glyphicon-plus-sign"></em>&nbsp;Add a Listing</a>
           </div>
         </div>
         </tab>
@@ -62,7 +62,7 @@
               <p class="text-muted">Get an overview of your expenses for this event.</p>
               <div id="expensesgrid" kendo-grid="vm.expensegrid" k-options="vm.expenseGridOptions"></div>
               <br>
-              <a class="btn btn-info" ng-href="#/{{vm.eventureId}}/setexpense">Add Event Expense</a>
+              <a class="btn btn-info" ng-href="#/{{vm.eventureId}}/setexpense"><em class="glyphicon glyphicon-plus-sign"></em>&nbsp;Add Event Expense</a>
             </section>
           </div>
         </div>
@@ -76,7 +76,7 @@
               <p class="text-muted">Construct a bird's eye view of everything that needs to be done.</p>
               <div id="eventplangrid" kendo-grid="vm.plangrid" k-options="vm.eventPlanGridOptions"></div>
               <br>
-              <a ng-href="#/{{vm.eventureId}}/seteventplan" class="btn btn-info">Add Event Plan Item</a>
+              <a ng-href="#/{{vm.eventureId}}/seteventplan" class="btn btn-info"><em class="glyphicon glyphicon-plus-sign"></em>&nbsp;Add Event Plan Item</a>
             </section>
           </div>
         </div>
@@ -102,7 +102,7 @@
               <p class="text-muted">Manage each volunteer job and your volunteers for this event.</p>
               <div id="volunteergrid" kendo-grid="vm.volunteergrid" k-options="vm.volunteerGridOptions"></div>
               <br>
-              <button class="btn btn-primary">Add Volunteer Job</button>
+              <button class="btn btn-primary"><em class="glyphicon glyphicon-plus-sign"></em>&nbsp;Add Volunteer Job</button>
               </div>
             </section>
           </div>

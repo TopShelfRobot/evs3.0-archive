@@ -39,7 +39,7 @@
 
           var couponapi = config.remoteApiName + 'Coupon/GetCouponsByOwnerId/' + vm.ownerId;
           vm.couponGridOptions = {
-            toolbar: '<a download="Coupons.xlsx" class="k-button" ng-click="vm.excel(vm.coupongrid)">Export</a>',
+            toolbar: '<a download="Coupons.xlsx" class="k-button" ng-click="vm.excel(vm.coupongrid)"><em class="glyphicon glyphicon-save"></em>&nbsp;Export</a>',
             dataSource: {
                 type: "json",
                 transport: {
@@ -68,7 +68,7 @@
             },{
                 title: "",
                 width: "120px",
-                template:'<a class="btn btn-default btn-block" href="\\\#setcoupon/#=Id#">Edit</a>'
+                template:'<a class="btn btn-default btn-block" href="\\\#setcoupon/#=Id#"><em class="glyphicon glyphicon-edit"></em>&nbsp;Edit</a>'
             }]
           };
 
@@ -76,7 +76,7 @@
             var couponuseapi = config.remoteApiName + 'GetCouponUseByCouponId/' + e.Id;
 
             return {
-                toolbar: '<a download="detailexport.xlsx" class="k-button" ng-click="vm.detailexcel(vm.detailgrid)">Export</a>',
+                toolbar: '<a download="detailexport.xlsx" class="k-button" ng-click="vm.detailexcel(vm.detailgrid)"><em class="glyphicon glyphicon-save"></em>&nbsp;Export</a>',
                 dataSource: {
                     type: "json",
                     transport: {
@@ -128,7 +128,7 @@
           var addonapi = config.remoteApiName + 'Addon/GetAddonsByOwnerId/' + vm.ownerId;
 
           vm.addonGridOptions = {
-            toolbar: '<a download="Coupons.xlsx" class="k-button" ng-click="vm.excel(vm.addongrid)">Export</a>',
+            toolbar: '<a download="Coupons.xlsx" class="k-button" ng-click="vm.excel(vm.addongrid)"><em class="glyphicon glyphicon-save"></em>&nbsp;Export</a>',
             dataSource: {
                 type: "json",
                 transport: {
@@ -156,7 +156,7 @@
             },{
                 title: "",
                 width: "120px",
-                template:'<a class="btn btn-default btn-block" href="\\\#setaddon/#=Id#">Edit</a>'
+                template:'<a class="btn btn-default btn-block" href="\\\#setaddon/#=Id#"><em class="glyphicon glyphicon-edit"></em>&nbsp;Edit</a>'
             }]
           };
 

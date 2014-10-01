@@ -30,7 +30,7 @@
           var teamapi = config.remoteApiName + 'Teams/GetTeamRegistrationsByOwnerId/' + vm.ownerId;
 
           vm.teamGridOptions = {
-            toolbar: '<a download="Teams.xlsx" class="k-button" ng-click="vm.excel(vm.teamgrid)">Export</a>',
+            toolbar: '<a download="Teams.xlsx" class="k-button" ng-click="vm.excel(vm.teamgrid)"><em class="glyphicon glyphicon-save"></em>&nbsp;Export</a>',
             dataSource: {
                 type: "json",
                 transport: {
@@ -75,7 +75,7 @@
             }, {
                 title: "",
                 width: "120px",
-                template:'<a class="btn btn-default btn-block" href="\\\#/editteam/#=Id#">Edit</a>'
+                template:'<a class="btn btn-default btn-block" href="\\\#/editteam/#=Id#"><em class="glyphicon glyphicon-edit"></em>&nbsp;Edit</a>'
             }]
           };
 
@@ -95,7 +95,7 @@
             };
 
             return {
-                toolbar: '<a download="detailexport.xlsx" class="k-button" ng-click="vm.excel(vm.detailgrid)">Export</a>',
+                toolbar: '<a download="detailexport.xlsx" class="k-button" ng-click="vm.excel(vm.detailgrid)"><em class="glyphicon glyphicon-save"></em>&nbsp;Export</a>',
                 dataSource: {
                     type: "json",
                     transport: {
@@ -122,12 +122,12 @@
                     },{
                         field: '',
                         title: '',
-                        template: '<button ng-click="vm.resend()" class="btn btn-success btn-block">Resend Invitation</button>',
+                        template: '<button ng-click="vm.resend()" class="btn btn-success btn-block"><em class="glyphicon glyphicon-send"></em>&nbsp;Resend Invitation</button>',
                         width: 170
                     },{
                         field: '',
                         title: '',
-                        template: '<button ng-click="vm.remove()" class="btn btn-danger btn-block">Remove</button>',
+                        template: '<button ng-click="vm.remove()" class="btn btn-danger btn-block"><em class="glyphicon glyphicon-remove"></em>&nbsp;Remove</button>',
                         width: 100
                     }]
             };

@@ -28,7 +28,7 @@
           var partapi = config.remoteApiName + 'Participants/GetParticipantsByOwnerId/' + vm.ownerId;
 
           vm.participantGridOptions = {
-            toolbar: '<a download="detail.xlsx" class="k-button" ng-click="vm.excel(vm.partgrid)">Export</a>',
+            toolbar: '<a download="detail.xlsx" class="k-button" ng-click="vm.excel(vm.partgrid)"><em class="glyphicon glyphicon-save"></em>&nbsp;Export</a>',
             dataSource: {
                 type: "json",
                 transport: {
@@ -57,7 +57,7 @@
             },{
                 title: "",
                 width: "120px",
-                template:'<a class="btn btn-default btn-block" href="\\\#profile/#=Id#">Edit</a>'
+                template:'<a class="btn btn-default btn-block" href="\\\#profile/#=Id#"><em class="glyphicon glyphicon-edit"></em>&nbsp;Edit</a>'
             }]
           };
 
@@ -66,7 +66,7 @@
             var regapi = config.remoteApiName + 'Registrations/GetRegistrationsByPartId/' + e.Id;
 
             return {
-                toolbar: '<a download="detail.xlsx" class="k-button" ng-click="vm.excel(vm.detailgrid)">Export</a>',
+                toolbar: '<a download="detail.xlsx" class="k-button" ng-click="vm.excel(vm.detailgrid)"><em class="glyphicon glyphicon-save"></em>&nbsp;Export</a>',
                 dataSource: {
                     type: "json",
                     transport: {
@@ -101,11 +101,11 @@
                 },{
                     field: '',
                     title: '',
-                    template: '<a href="\\\#viewreceipt/#=EventureOrderId#" class="btn btn-success btn-block">View Receipt</a>'
+                    template: '<a href="\\\#viewreceipt/#=EventureOrderId#" class="btn btn-success btn-block"><em class="glyphicon glyphicon-tags"></em>&nbsp;&nbsp;View Receipt</a>'
                 }, {
                     field: '',
                     title: '',
-                    template: '<a href="\\\#registrationedit/#=Id#/#=StockAnswerSetId#" class="btn btn-default btn-block">Edit</a>'
+                    template: '<a href="\\\#registrationedit/#=Id#/#=StockAnswerSetId#" class="btn btn-default btn-block"><em class="glyphicon glyphicon-edit"></em>&nbsp;Edit</a>'
                 }]
             };
           };

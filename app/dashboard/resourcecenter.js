@@ -25,7 +25,7 @@
             var resourceApi = config.remoteApiName + 'Resources/GetResourcesByOwnerId/' + vm.ownerId;
 
             vm.resourceGridOptions = {
-              toolbar: '<a download="download.xlsx" class="k-button" ng-click="vm.excel(vm.resourcegrid)">Export</a>',
+              toolbar: '<a download="download.xlsx" class="k-button" ng-click="vm.excel(vm.resourcegrid)"><em class="glyphicon glyphicon-save"></em>&nbsp;Export</a>',
                 dataSource: {
                     type: "json",
                     transport: {
@@ -53,10 +53,12 @@
                 dataBound: function() {
                 },
                 columns: [//{ field: "Name", title: "Resource", width: "325px" },
-                    { field: "Name", title: "Resource", width: "325px", template: '<a href="\\\#resourcedetail/#=Id#">#=Name#</a>' },
+                    { field: "Name", title: "Resource", width: "325px" },
                     { field: "Email", title: "Email", width: "225px" },
                     { field: "Phone", title: "Phone", width: "175px" },
-                    { field: "ResourceType", title: "Type", width: "175px" }
+                    { field: "ResourceType", title: "Type", width: "175px" },
+                    { title: "", width: "120px", template: '<a class="btn btn-default btn-block" href="\\\#resourcedetail/#=Id#"><em class="glyphicon glyphicon-edit"></em>&nbsp;Edit</a>'
+            }
                 ]
             };
           
@@ -64,7 +66,7 @@
                 var resourceApi = config.remoteApiName + 'Resources/GetResourceItemsByResourceId/' + e.Id;
 
                 return {
-                  toolbar: '<a download="download.xlsx" class="k-button" ng-click="vm.excel(vm.detailgrid)">Export</a>',
+                  toolbar: '<a download="download.xlsx" class="k-button" ng-click="vm.excel(vm.detailgrid)"><em class="glyphicon glyphicon-save"></em>&nbsp;Export</a>',
                     dataSource: {
                         type: "json",
                         transport: {
@@ -91,9 +93,9 @@
                     },
                     columns: [
                         { field: "Name", title: "Item Name", width: "150px" },
-                        { field: "Cost", title: "Cost", width: "70px" },
+                        { field: "Cost", title: "Cost", width: "70px", format: "{0:c}" },
                         { field: "Category", title: "Category", width: "100px" },
-                        { title: "", width: 100, template: '<button class="btn btn-primary btn-small btn-block" href="\\\#setresourceitem/#=Id#">Edit</button>' }
+                        { title: "", width: 100, template: '<a class="btn btn-default btn-block" href="\\\#setresourceitem/#=Id#"><em class="glyphicon glyphicon-edit"></em>&nbsp;Edit</a>' }
                     ]
                 };
             };
