@@ -1,0 +1,52 @@
+<section ng-controller="yearsummary as vm">
+  <div class="row">
+    <div class="col-lg-12">
+      <h1>Here's a sweet chart!</h1>
+      <div kendo-chart="vm.summaryChart" k-options="vm.yearOverYear"></div>
+    </div>
+  </div>
+  <br>
+  <form class="form-horizontal">
+    <div class="row">
+      <div class="col-sm-4">
+        <div class="form-group">
+            <label for="addoncode" class="col-lg-6 control-label">Start Year:</label>
+            <div class="col-lg-6">
+              <select class="form-control" id="eventuredropdown">
+                  <option value="">-- Please Select --</option>
+              </select>
+            </div>
+          </div>
+          <!-- /field -->
+      </div>
+      <div class="col-sm-4">
+        <div class="form-group">
+            <label for="addoncode" class="col-lg-6 control-label">Event:</label>
+            <div class="col-lg-6">
+              <select class="form-control" id="eventuredropdown">
+                  <option value="">-- Please Select --</option>
+              </select>
+            </div>
+          </div>
+          <!-- /field -->
+      </div>
+      <div class="col-sm-4">
+        <div class="form-group">
+            <label for="addoncode" class="col-lg-6 control-label">Field:</label>
+            <div class="col-lg-6">
+              <select class="form-control" id="eventuredropdown">
+                  <option value="">-- Please Select --</option>
+              </select>
+            </div>
+          </div>
+          <!-- /field -->
+      </div>
+    </div>
+    <br>
+    <div class="row">
+      <div class="col-lg-12">
+        <button class="btn btn-success pull-right" ng-click="vm.generateChart()">Generate Summary Chart</button><button class="btn btn-success pull-right" ng-click="vm.redrawChart()">redraw</button>
+      </div>
+    </div>
+  </form>
+</section>

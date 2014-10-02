@@ -309,6 +309,12 @@
                     templateUrl: 'app/dashboard/setup/setvolunteerscheduleedit.html'
                 }
             }, {
+                url: '/yearsummary/',  //Move this
+                config: {
+                    title: 'Year Summary',
+                    templateUrl: 'app/admin/yearsummary.html'
+                }
+            }, {
                 url: '/editteam/:teamId',
                 config: {
                     title: 'Edit Team',
