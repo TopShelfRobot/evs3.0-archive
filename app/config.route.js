@@ -303,7 +303,13 @@
                     templateUrl: 'app/dashboard/setup/setvolunteerjob.html'
                 }
             }, {
-                url: '/setvolunteerscheduleedit/:volunteerId',
+                url: '/setvolunteerscheduleedit/:volunteerId',      
+                config: {
+                    title: 'Edit A Volunteer Schedule',
+                    templateUrl: 'app/dashboard/setup/setvolunteerscheduleedit.html'
+                }
+            }, {
+                url: '/setvolunteerscheduleedit',       //mjb delete this
                 config: {
                     title: 'Edit A Volunteer Schedule',
                     templateUrl: 'app/dashboard/setup/setvolunteerscheduleedit.html'

@@ -32,7 +32,7 @@
                     });
           }
           else {
-              return datacontext.volunteer.createVolunteerJob(vm.eventureId);
+              return vm.job = datacontext.volunteer.createVolunteerJob(vm.eventureId);
           }
                     
         }
@@ -77,7 +77,7 @@
             .then(complete);
           
             function complete() {
-              $location.path("/volunteercenter");
+                $location.path("/eventuredetail/" + vm.eventureId);
             }
         };
 
@@ -86,7 +86,7 @@
                 .then(complete);
 
             function complete() {
-                $location.path("/volunteercenter");
+                $location.path("/eventuredetail/" + vm.eventureId);
             }
         };
 

@@ -25,6 +25,8 @@
                 return datacontext.volunteer.getVolunteerScheduleById(vm.volunteerId)
                     .then(function(data) {
                         //applyFilter();
+                        alert('success');
+                        console.log(data);
                         return vm.volunteerschedule = data;
                     });
         }

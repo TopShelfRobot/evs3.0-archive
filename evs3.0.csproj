@@ -72,6 +72,7 @@
     <Content Include="app\dashboard\partcenter.js" />
     <Content Include="app\dashboard\resourcecenter.js" />
     <Content Include="app\dashboard\resourcedetail.js" />
+    <Content Include="app\dashboard\services\excelservice.js" />
     <Content Include="app\dashboard\setup\setaddon.js" />
     <Content Include="app\dashboard\setup\setclient.js" />
     <Content Include="app\dashboard\setup\setcoupon.js" />
@@ -80,10 +81,18 @@
     <Content Include="app\dashboard\setup\setexpense.js" />
     <Content Include="app\dashboard\setup\setfee.js" />
     <Content Include="app\dashboard\setup\setlist.js" />
+    <Content Include="app\dashboard\setup\setquestion.html" />
+    <Content Include="app\dashboard\setup\setquestion.js" />
     <Content Include="app\dashboard\setup\setresourceitem.js" />
     <Content Include="app\dashboard\setup\setresourceitemcategory.js" />
+    <Content Include="app\dashboard\setup\setvolunteerjob.html" />
+    <Content Include="app\dashboard\setup\setvolunteerjob.js" />
+    <Content Include="app\dashboard\setup\setvolunteerscheduleedit.html" />
+    <Content Include="app\dashboard\setup\setvolunteerscheduleedit.js" />
     <Content Include="app\dashboard\teamcenter.html" />
     <Content Include="app\dashboard\teamcenter.js" />
+    <Content Include="app\dashboard\volunteercenter.html" />
+    <Content Include="app\dashboard\volunteercenter.js" />
     <Content Include="app\registration\app.js" />
     <Content Include="app\registration\config.exceptionHandler.js" />
     <Content Include="app\registration\config.js" />
@@ -135,8 +144,6 @@
     <Content Include="app\config.exceptionHandler.js" />
     <Content Include="app\config.js" />
     <Content Include="app\dashboard\couponaddon.html" />
-    <Content Include="app\dashboard\dashboard.html" />
-    <Content Include="app\dashboard\dashboard.js" />
     <Content Include="app\dashboard\elistcenter.html" />
     <Content Include="app\dashboard\enterpriseeventure.html" />
     <Content Include="app\dashboard\enterpriselaunchpad.html" />

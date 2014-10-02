@@ -14,7 +14,7 @@
         };
         vm.messageCount = 0;
         vm.people = [];
-        vm.title = 'app';
+        vm.title = 'Dashboard';
 
         activate();
 
