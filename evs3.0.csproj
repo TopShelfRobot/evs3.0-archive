@@ -46,6 +46,8 @@
     <Content Include="app\admin\dashboard.js" />
     <Content Include="app\admin\setowner.html" />
     <Content Include="app\admin\setowner.js" />
+    <Content Include="app\admin\yearsummary.html" />
+    <Content Include="app\admin\yearsummary.js" />
     <Content Include="app\common\directives\date-input.js" />
     <Content Include="app\common\directives\directives.js" />
     <Content Include="app\common\layout\shell.js" />

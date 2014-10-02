@@ -11,7 +11,7 @@
 
         vm.title = 'app';
 
-        
+
 
         vm.ownerId = 1;
 
@@ -19,116 +19,82 @@
 
         function activate() {
             var promises = [Chart()];
+            //var promises = [];
             common.activateController(promises, controllerId)
                 .then(function () {
                     //log('Activated Coupon Addon Center View');
                 });
         }
-      
-        vm.generateChart = function() {
-          alert('hi');
-          var yearOverYearData = [
-            {
-                "event": "Urban Bourbon",
-                "month": "November",
-                "year": 10,
-                "yeartwo": 20,
-                "yearthree": 30
-            },
-            {
-                "event": "Urban Bourbon",
-                "month": "December",
-                "year": 10,
-                "yeartwo": 20,
-                "yearthree": 30
-            },
-            {
-                "event": "Urban Bourbon",
-                "month": "January",
-                "year": 10,
-                "yeartwo": 20,
-                "yearthree": 30
-            }
-          ];
-           
-        };
-        
-        vm.redrawChart = function() {
-          alert('refreshing');
-          vm.summaryChart.refresh();
+
+        vm.generateChart = function () {
+            var dataSource = new kendo.data.DataSource({
+                transport: {
+                    read: {
+                        url: function () {
+                            return config.remoteApiName + 'Registrations/GetYearOverYearData/2';
+                        },
+                        dataType: "json"
+                    }
+                }
+            });
+            vm.summaryChart.setDataSource(dataSource);
         };
 
-        function Chart() {
-          var title = "Number of Registrations";
-          
-          var yearOverYearData = [
-            {
-                "event": "Urban Bourbon",
-                "month": "November",
-                "year": 20,
-                "yeartwo": 10,
-                "yearthree": 17
-            },
-            {
-                "event": "Urban Bourbon",
-                "month": "December",
-                "year": 15,
-                "yeartwo": 20,
-                "yearthree": 37
-            },
-            {
-                "event": "Urban Bourbon",
-                "month": "January",
-                "year": 10,
-                "yeartwo": 50,
-                "yearthree": 37
-            }
-          ];
-          
-          var yearOverYearSeries = [{
-              field: "year",
-              name: "2014"
-          }, {
-              field: "yeartwo",
-              name: "2013"
-          }, {
-              field: "yearthree",
-              name: "2012"
-          }];
-          
-        vm.yearOverYear = {
-            theme: "bootstrap",
-            dataSource: {
-                    data: yearOverYearData
-            },
-            title: {
-              text: title
-            },
-            legend: {
-              position: "bottom"
-            },
-            seriesDefaults: {
-              type: "line",
-              style: "smooth",
-              labels: {
-                  visible: true,
-                  background: "transparent"
-              }
-            },
-            series: yearOverYearSeries,
-            valueAxis: {
+         function Chart() {
+            alert('called drawChart');
+            var title = "Number of Registrations";
+            var yearapi = config.remoteApiName + 'Registrations/GetYearOverYearData/1'; //+ vm.ownerId;
+
+            var yearOverYearSeries = [{
+                    field: "Year",
+                    name: "2014"
+                }, {
+                    field: "Yeartwo",
+                    name: "2013"
+                }, {
+                    field: "Yearthree",
+                    name: "2012"
+                }];
+
+            vm.yearOverYear = {
+                theme: "bootstrap",
+                dataSource: {
+                    transport: {
+                        read: yearapi,
+                        dataType: "json"
+                    }
+                },
+                //dataSource: {
+                //        data: yearOverYearData
+                //},
+                title: {
+                    text: title
+                },
+                legend: {
+                    position: "bottom"
+                },
+                seriesDefaults: {
+                    type: "line",
+                    style: "smooth",
+                    labels: {
+                        visible: true,
+                        background: "transparent"
+                    }
+                },
+                series: yearOverYearSeries,
+                valueAxis: {
                     line: {
                         visible: false
                     }
-            },
-            categoryAxis: {
-                    field: "month",
+                },
+                categoryAxis: {
+                    field: "Month",
                     majorGridLines: {
                         visible: false
                     }
                 }
-          };
-          
-        }
+            };
+            alert('drawChart is done');
+        };
     }
 })();
