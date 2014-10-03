@@ -10,7 +10,7 @@
 
         var vm = this;
         vm.volunteerschedule = {};
-        vm.volunteerId = $routeParams.volunteerId;
+        vm.scheduleId = $routeParams.scheduleId || 0;
 
         activate();
 
@@ -22,7 +22,7 @@
         }
 
         function getVolunteerSchedule() {
-                return datacontext.volunteer.getVolunteerScheduleById(vm.volunteerId)
+            return datacontext.volunteer.getVolunteerScheduleById(vm.scheduleId)
                     .then(function(data) {
                         //applyFilter();
                         alert('success');

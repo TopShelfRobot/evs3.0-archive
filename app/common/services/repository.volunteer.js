@@ -145,10 +145,9 @@
         }
 
         function getVolunteerScheduleById(id) {
-            alert('in the dc' + id);
             var self = this;
             var query = entityQuery.from('VolunteerSchedules')
-                .where('id', '==', id);
+                .where("id", "==", parseInt(id));
 
             return self.manager.executeQuery(query)
                 .then(querySucceeded, self._queryFailed);

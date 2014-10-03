@@ -303,7 +303,7 @@
                     templateUrl: 'app/dashboard/setup/setvolunteerjob.html'
                 }
             }, {
-                url: '/setvolunteerscheduleedit/:volunteerId',      
+                url: '/setvolunteerscheduleedit/:scheduleId',      
                 config: {
                     title: 'Edit A Volunteer Schedule',
                     templateUrl: 'app/dashboard/setup/setvolunteerscheduleedit.html'
