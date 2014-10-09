@@ -1,51 +1,74 @@
 <section ng-controller="yearsummary as vm">
   <div class="row">
     <div class="col-lg-12">
-      <h1>Here's a sweet chart!</h1>
+      <a ng-href="#/enterprise" class="btn btn-info btn-sm"><em class="glyphicon glyphicon-circle-arrow-left"></em>&nbsp;Back</a>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12">
+      <h1>Summary Data</h1>
+      <p class="text-muted">Choose your parameters below and click "Generate Summary Chart".</p>
       <div kendo-chart="vm.summaryChart" k-options="vm.yearOverYear"></div>
     </div>
   </div>
   <br>
   <form class="form-horizontal">
     <div class="row">
-      <div class="col-sm-4">
+      <div class="col-sm-3">
+        <ul class="list-group">
+            <li class="list-group-item">
+                <input id="baseUnitYears" name="baseUnit"
+                        type="radio" value="years" autocomplete="off" />
+                <label for="baseUnitYears">Years</label>
+            </li class="list-group-item">
+            <li class="list-group-item">
+                <input id="baseUnitMonths" name="baseUnit"
+                        type="radio" value="months" checked="checked" autocomplete="off" />
+                <label for="baseUnitMonths">Months</label>
+            </li>
+            <li class="list-group-item">
+                <input id="baseUnitWeeks" name="baseUnit"
+                        type="radio" value="weeks" autocomplete="off" />
+                <label for="baseUnitWeeks">Weeks</label>
+            </li>
+        </ul>
+      </div>
+      <div class="col-sm-3">
         <div class="form-group">
-            <label for="addoncode" class="col-lg-6 control-label">Start Year:</label>
-            <div class="col-lg-6">
+            <label for="addoncode" class="col-lg-4 control-label">Start Year:</label>
+            <div class="col-lg-8">
               <select class="form-control" id="eventuredropdown">
-                  <option value="">-- Please Select --</option>
               </select>
             </div>
           </div>
           <!-- /field -->
       </div>
-      <div class="col-sm-4">
+      <div class="col-sm-3">
         <div class="form-group">
-            <label for="addoncode" class="col-lg-6 control-label">Event:</label>
-            <div class="col-lg-6">
+            <label for="addoncode" class="col-lg-4 control-label">Event:</label>
+            <div class="col-lg-8">
               <select class="form-control" id="eventuredropdown">
-                  <option value="">-- Please Select --</option>
               </select>
             </div>
           </div>
           <!-- /field -->
       </div>
-      <div class="col-sm-4">
+      <div class="col-sm-3">
         <div class="form-group">
-            <label for="addoncode" class="col-lg-6 control-label">Field:</label>
-            <div class="col-lg-6">
+            <label for="addoncode" class="col-lg-4 control-label">Field:</label>
+            <div class="col-lg-8">
               <select class="form-control" id="eventuredropdown">
-                  <option value="">-- Please Select --</option>
               </select>
             </div>
+            <div class="row">
+              <div class="col-lg-8 col-lg-offset-4">
+                <hr>
+                <button class="btn btn-success btn-block" ng-click="vm.generateChart()">Generate Summary Chart</button>
+              </div>
+            </div>
+
           </div>
           <!-- /field -->
-      </div>
-    </div>
-    <br>
-    <div class="row">
-      <div class="col-lg-12">
-        <button class="btn btn-success pull-right" ng-click="vm.generateChart()">Generate Summary Chart</button>
       </div>
     </div>
   </form>

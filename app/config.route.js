@@ -135,7 +135,7 @@
                     templateUrl: 'app/dashboard/elistcenter.html'
                 }
             }, {
-                url: '/enterpriseeventure',
+                url: '/enterpriseeventure/:eventureId',
                 config: {
                     title: 'Enterprise Eventure',
                     templateUrl: 'app/dashboard/enterpriseeventure.html'
