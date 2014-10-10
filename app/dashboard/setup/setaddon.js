@@ -62,7 +62,7 @@
             .then(complete);
           
             function complete() {
-              $location.path("/couponaddon");
+              $location.path("/#");
             }
         };
 
@@ -71,7 +71,7 @@
                 .then(complete);
 
             function complete() {
-                $location.path("/couponaddon/");
+                $location.path("/#");
             }
         };
 

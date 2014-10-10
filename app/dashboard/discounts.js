@@ -1,9 +1,9 @@
 (function () {
     'use strict';
-    var controllerId = 'couponaddon';
-    angular.module('app').controller(controllerId, ['config', 'common', 'datacontext', 'ExcelService', couponaddon]);
+    var controllerId = 'discounts';
+    angular.module('app').controller(controllerId, ['config', 'common', 'datacontext', 'ExcelService', discounts]);
 
-    function couponaddon(config, common, datacontext, excel) {
+    function discounts(config, common, datacontext, excel) {
         var getLogFn = common.logger.getLogFn;
         var log = getLogFn(controllerId);
 
@@ -13,21 +13,19 @@
 
         vm.couponGridOptions = {};
 
-        vm.addonGridOptions = {};
-
         vm.ownerId = 1;
 
         activate();
 
         function activate() {
-            var promises = [CouponGrid(), AddonGrid()];
+            var promises = [couponGrid()];
             common.activateController(promises, controllerId)
                 .then(function () {
                     //log('Activated Coupon Addon Center View');
                 });
         }
 
-        function CouponGrid() {
+        function couponGrid() {
 
           var status = [{
             "value": true,
@@ -111,55 +109,7 @@
                        title: "Last Name"
                    }]
             };
-        };
-
-        }
-
-        function AddonGrid() {
-
-          var status = [{
-            "value": true,
-            "text": "Active",
-          },{
-            "value": false,
-            "text": "Inactive"
-          }];
-
-          var addonapi = config.remoteApiName + 'Addon/GetAddonsByOwnerId/' + vm.ownerId;
-
-          vm.addonGridOptions = {
-            toolbar: '<a download="Coupons.xlsx" class="k-button" ng-click="vm.excel(vm.addongrid)"><em class="glyphicon glyphicon-save"></em>&nbsp;Export</a>',
-            dataSource: {
-                type: "json",
-                transport: {
-                    read: addonapi
-                },
-                pageSize: 10,
-                serverPaging: false,
-                serverSorting: false
-            },
-            sortable: true,
-            pageable: true,
-            filterable: true,
-            columns: [{
-                field: "AddonDesc",
-                title: "Addon",
-                width: "400px"
-            },{
-                field: "Amount",
-                title: "Amount",
-                width: "220px"
-            },{
-                field: "Active",
-                width: "100px",
-                values: status
-            },{
-                title: "",
-                width: "120px",
-                template:'<a class="btn btn-default btn-block" href="\\\#setaddon/#=Id#"><em class="glyphicon glyphicon-edit"></em>&nbsp;Edit</a>'
-            }]
           };
-
         }
         
         vm.excel = function(data) {

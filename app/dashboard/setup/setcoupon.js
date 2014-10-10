@@ -84,7 +84,7 @@
             .then(complete);
           
             function complete() {
-              $location.path("/couponaddon");
+              $location.path("/discounts");
             }
         };
       
@@ -93,7 +93,7 @@
 				.then(complete);
 
 			function complete() {
-                $location.path("/couponaddon/");
+                $location.path("/discounts");
 			}
 		};
 

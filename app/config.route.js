@@ -97,13 +97,13 @@
                     }
                 }
             }, {
-                url: '/couponaddon',
+                url: '/discounts',
                 config: {
-                    title: 'Coupons & Addons',
-                    templateUrl: 'app/dashboard/couponaddon.html',
+                    title: 'Discounts',
+                    templateUrl: 'app/dashboard/discounts.html',
                     settings: {
                         nav: 6,
-                        content: 'Coupons & Addons'
+                        content: 'Discounts'
                     }
                 }
             }, {
