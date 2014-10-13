@@ -315,6 +315,18 @@
                     templateUrl: 'app/dashboard/setup/setvolunteerscheduleedit.html'
                 }
             }, {
+                url: '/setbundle',
+                config: {
+                    title: 'Create A Bundle',
+                    templateUrl: 'app/dashboard/setup/setbundle.html'
+                }
+            }, {
+                url: '/setbundle/:bundleId',
+                config: {
+                    title: 'Edit A Bundle',
+                    templateUrl: 'app/dashboard/setup/setbundle.html'
+                }
+            }, {
                 url: '/yearsummary/',  //Move this
                 config: {
                     title: 'Year Summary',
