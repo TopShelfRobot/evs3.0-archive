@@ -88,10 +88,34 @@
                           </tr>
                       </tbody>
                     </table>
-            </div>
-            <button class="btn btn-primary" ng-click="setq.saveQuestion()"><em class="glyphicon glyphicon-save"></em>&nbsp;Save Question</button>
+                </div>
+                <button class="btn btn-primary" ng-click="setq.saveQuestion()"><em class="glyphicon glyphicon-save"></em>&nbsp;Save Question</button>
+          </div>
       </div>
     </form>
+  </div>
+    <hr>
+  <div class="row">
+      <div class="col-lg-12">
+          <table class="table table-responsive">
+              <thead>
+                  <tr>
+                      <th class="col-xs-5">Question</th>
+                      <th class="col-xs-3">Type</th>
+                      <th class="col-xs-3">Answers</th>
+                      <th class="col-xs-1"/>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr>
+                      <td><!--{{Question}}--></td>
+                      <td><!--{{Type}}--></td>
+                      <td><!--<select></select>--></td>
+                      <td><button class="btn btn-default btn-block" ng-click=""><em class="glyphicon glyphicon-edit"></em>&nbsp;Edit</button></td> <!-- Will Load question back into form -->
+                  </tr>
+              </tbody>
+          </table>
+      </div>
   </div>
   <div class="row">
     <div class="col-lg-12">

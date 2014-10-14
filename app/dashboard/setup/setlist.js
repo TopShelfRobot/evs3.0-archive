@@ -12,6 +12,7 @@
 		var vm = this;
 		vm.title = 'Eventure Listing';
 		vm.listId = $routeParams.listId || 0;
+		vm.eventureId = $routeParams.eventureId;
 
 		vm.list = {};
 		activate();
@@ -20,6 +21,7 @@
 			common.activateController(getEventureList(), controllerId)
 				.then(function() {
 					//log('Activated set list');
+
 				});
 		}
 
@@ -32,7 +34,9 @@
 						return vm.list = data;
 					});
 			} else {
-				return vm.list = datacontext.eventure.createEventureList();
+				vm.list = datacontext.eventure.createEventureList();
+				vm.list.eventureId = vm.eventureId;
+				return vm.list;
 			}
 		}
 
