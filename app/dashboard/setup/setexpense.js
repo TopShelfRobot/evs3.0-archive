@@ -12,7 +12,7 @@
         var vm = this;
         vm.title = 'Eventure';
         vm.expenseId = $routeParams.expenseId || 0;
-        vm.eventureId = $routeParams.eventureId || 0;
+        vm.eventureId = $routeParams.eventureId;
 
         vm.ownerId = config.owner.ownerId;
 
@@ -58,7 +58,16 @@
                     return vm.items = data;
                 });
         }
-
+      
+        vm.cancel = function() {
+          return datacontext.cancel()
+            .then(complete);
+          
+            function complete() {
+              $location.path("/eventuredetail/" + vm.eventureId);
+            }
+        };
+      
 
         vm.saveAndNav = function() {
             return datacontext.save()

@@ -10,25 +10,38 @@
 
         var vm = this;
         vm.volunteerschedule = {};
-        vm.volunteerId = $routeParams.volunteerId || 0;
+        vm.scheduleId = $routeParams.scheduleId || 0;
 
         activate();
 
         function activate() {
             common.activateController(getVolunteerSchedule(), controllerId)
-                .then(function () { log('Activated Volunteer Schedule Edit'); });
+                .then(function () { 
+                  //log('Activated Volunteer Schedule Edit'); 
+                });
         }
 
         function getVolunteerSchedule() {
-                return datacontext.volunteer.getVolunteerScheduleById(vm.volunteerId)
+            return datacontext.volunteer.getVolunteerScheduleById(vm.scheduleId)
                     .then(function(data) {
                         //applyFilter();
+                        alert('success');
+                        console.log(data);
                         return vm.volunteerschedule = data;
                     });
         }
+      
+        vm.cancel = function() {
+          return datacontext.cancel()
+            .then(complete);
+          
+            function complete() {
+              $location.path("/volunteercenter");
+            }
+        };
 
         vm.saveAndNav = function() {
-            return datacontext.save(vm.volunteerschedule)
+            return datacontext.save()
                 .then(complete);
 
             function complete() {

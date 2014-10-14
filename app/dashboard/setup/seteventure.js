@@ -1,4 +1,4 @@
-﻿(function() {
+(function() {
 	'use strict';
 
 	var controllerId = 'seteventure';
@@ -37,13 +37,22 @@
 				return vm.eventure = datacontext.eventure.createEventure();
 			}
 		}
+      
+        vm.cancel = function() {
+          return datacontext.cancel()
+            .then(complete);
+          
+            function complete() {
+              $location.path("/eventurecenter");
+            }
+        };
 
-        vm.saveChanges = function() {
+        vm.saveAndNav = function() {
             return datacontext.save(vm.eventure)
             .then(complete);
 
                 function complete() {
-                    $location.path("/eventurecenter/");
+                    $location.path("/eventurecenter");
                 }
         };
 

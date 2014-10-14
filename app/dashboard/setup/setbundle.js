@@ -1,36 +1,35 @@
 (function() {
     'use strict';
 
-    var controllerId = 'setaddon';
-    angular.module('app').controller(controllerId, ['$q', '$routeParams', '$upload', '$http', '$timeout', '$location', 'common', 'datacontext', 'config', setaddon]);
+    var controllerId = 'setbundle';
+    angular.module('app').controller(controllerId, ['$q', '$routeParams', '$upload', '$http', '$timeout', '$location', 'common', 'datacontext', 'config', setbundle]);
 
-    function setaddon($q, $routeParams, $upload, $http, $timeout, $location, common, datacontext, config) {
+    function setbundle($q, $routeParams, $upload, $http, $timeout, $location, common, datacontext, config) {
 
         var getLogFn = common.logger.getLogFn;
         var log = getLogFn(controllerId);
 
         var vm = this;
         vm.title = 'Eventure';
-        vm.addonId = $routeParams.addonId || 0;
+        vm.bundleId = $routeParams.bundleId || 0;
 
-        vm.ownerId = 1;
+        vm.ownerId = config.owner.ownerId;
 
-        vm.addon = {};
-        vm.eventures = [];
-        vm.listings = [];
+        vm.bundle = {};
+        var listings = [];
 
         activate();
 
         function activate() {
-            common.activateController(getAddon(), getEventures(), getEventureLists(), controllerId)
+            common.activateController(getEventureLists(),  controllerId)
                 .then(function() {
-                    //log('Activated set addon');
+
                 });
         }
 
-        function getAddon() {
+        function getBundle() {
 
-            if (vm.addonId > 0) {
+            if (vm.bundleId > 0) {
                 return datacontext.surcharge.getAddonById(vm.addonId)
                     .then(function(data) {
                         //applyFilter();
@@ -41,28 +40,32 @@
             }
         }
 
-        function getEventures() {
-            return datacontext.eventure.getEventuresByOwnerId(vm.ownerId)
+        function getEventureLists() {
+
+            return datacontext.eventure.getEventureListsByOwnerId(vm.ownerId)
                 .then(function(data) {
-                    //applyFilter();
-                    return vm.eventures = data;
+                    multiSelect(data);
                 });
         }
 
-        function getEventureLists() {
-            return datacontext.eventure.getEventureListsByOwnerId(vm.ownerId)
-                .then(function(data) {
-                    //applyFilter();
-                    return vm.listings = data;
-                });
+        function multiSelect(listings) {
+            vm.bundledListOptions = {
+                placeholder: "Select listing...",
+                dataTextField: "name",
+                dataValueField: "id",
+                dataSource: {
+                    data: listings
+                }
+            };
+            console.log(vm.bundledListOptions);
         }
-      
+
         vm.cancel = function() {
-          return datacontext.cancel()
-            .then(complete);
-          
+            return datacontext.cancel()
+                .then(complete);
+
             function complete() {
-              $location.path("/#");
+                $location.path("/#");
             }
         };
 

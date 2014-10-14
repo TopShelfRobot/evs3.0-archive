@@ -14,13 +14,7 @@
             //$routeProvider.when(r.url, r.config);
             setRoute(r.url, r.config);
         });
-		
-		regRoutes.forEach(function(r){
-			// console.log("route:", r);
-			setRoute(r.url, r.config);
-		});
-		
-        $routeProvider.otherwise({ redirectTo: '/' });
+        $routeProvider.otherwise({ redirectTo: '/eventurecenter' });
 
         function setRoute(url, definition) {
             // Sets resolvers for all of the routes
@@ -103,13 +97,13 @@
                     }
                 }
             }, {
-                url: '/couponaddon',
+                url: '/discounts',
                 config: {
-                    title: 'Coupons & Addons',
-                    templateUrl: 'app/dashboard/couponaddon.html',
+                    title: 'Discounts',
+                    templateUrl: 'app/dashboard/discounts.html',
                     settings: {
                         nav: 6,
-                        content: 'Coupons & Addons'
+                        content: 'Discounts'
                     }
                 }
             }, {
@@ -141,7 +135,7 @@
                     templateUrl: 'app/dashboard/elistcenter.html'
                 }
             }, {
-                url: '/enterpriseeventure',
+                url: '/enterpriseeventure/:eventureId',
                 config: {
                     title: 'Enterprise Eventure',
                     templateUrl: 'app/dashboard/enterpriseeventure.html'
@@ -207,7 +201,7 @@
                     templateUrl: 'app/dashboard/setup/seteventplan.html'
                 }
             }, {
-                url: '/:eventureId/seteventplan/:planItemId',
+                url: '/seteventplan/:itemId',
                 config: {
                     title: 'Edit An Event Plan',
                     templateUrl: 'app/dashboard/setup/seteventplan.html'
@@ -279,22 +273,64 @@
                     templateUrl: 'app/dashboard/setup/setresource.html'
                 }
             }, {
-                url: '/setresourceitem',
+                url: '/:resourceId/setresourceitem',
                 config: {
                     title: 'Create A Resource Item',
                     templateUrl: 'app/dashboard/setup/setresourceitem.html'
                 }
             }, {
-                url: '/setresourceitemcategory',
+                url: 'setresourceitem/:itemId',
+                config: {
+                    title: 'Edit A Resource Item',
+                    templateUrl: 'app/dashboard/setup/setresourceitem.html'
+                }
+            }, {
+                url: '/:resourceId/setresourceitemcategory',
                 config: {
                     title: 'Create A Resource Item Category',
                     templateUrl: 'app/dashboard/setup/setresourceitemcategory.html'
                 }
             }, {
-                url: '/setvolunteerjob',
+                url: '/:eventureId/setvolunteerjob',
                 config: {
                     title: 'Create A Volunteer Job',
                     templateUrl: 'app/dashboard/setup/setvolunteerjob.html'
+                }
+            }, {
+                url: '/setvolunteerjob/:jobId',
+                config: {
+                    title: 'Edit A Volunteer Job',
+                    templateUrl: 'app/dashboard/setup/setvolunteerjob.html'
+                }
+            }, {
+                url: '/setvolunteerscheduleedit/:scheduleId',
+                config: {
+                    title: 'Edit A Volunteer Schedule',
+                    templateUrl: 'app/dashboard/setup/setvolunteerscheduleedit.html'
+                }
+            }, {
+                url: '/setvolunteerscheduleedit',       //mjb delete this
+                config: {
+                    title: 'Edit A Volunteer Schedule',
+                    templateUrl: 'app/dashboard/setup/setvolunteerscheduleedit.html'
+                }
+            }, {
+                url: '/setbundle',
+                config: {
+                    title: 'Create A Bundle',
+                    templateUrl: 'app/dashboard/setup/setbundle.html'
+                }
+            }, {
+                url: '/setbundle/:bundleId',
+                config: {
+                    title: 'Edit A Bundle',
+                    templateUrl: 'app/dashboard/setup/setbundle.html'
+                }
+            }, {
+                url: '/yearsummary/',  //Move this
+                config: {
+                    title: 'Year Summary',
+                    templateUrl: 'app/admin/yearsummary.html'
                 }
             }, {
                 url: '/editteam/:teamId',
@@ -303,10 +339,10 @@
                     templateUrl: 'app/registration/views/editteam.part.html'
                 }
             }, {
-                url: '/kitchensink',
+                url: '/registrationedit',
                 config: {
-                    title: 'Kitchen Sink',
-                    templateUrl: 'app/dashboard/kitchensink.html'
+                    title: 'Edit a Registration',
+                    templateUrl: 'app/common/registrationedit.html'
                 }
             }
         ];

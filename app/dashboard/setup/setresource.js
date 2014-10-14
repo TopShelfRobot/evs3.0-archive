@@ -1,4 +1,4 @@
-﻿(function () {
+(function () {
     'use strict';
 
     var controllerId = 'setresource';
@@ -18,7 +18,9 @@
 
         function activate() {
             common.activateController(getResource(), controllerId)
-                .then(function () { log('Activated set resource'); });
+                .then(function () { 
+                  //log('Activated set resource'); 
+                });
         }
 
         function getResource() {
@@ -33,6 +35,15 @@
                 return vm.resource = datacontext.resource.createResource();
             }
         }
+      
+        vm.cancel = function() {
+          return datacontext.cancel()
+            .then(complete);
+          
+            function complete() {
+              $location.path("/resourcecenter");
+            }
+        };
 
         vm.saveAndNav = function() {
             return datacontext.save(vm.resource)

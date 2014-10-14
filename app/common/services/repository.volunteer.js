@@ -1,4 +1,4 @@
-﻿(function () {
+(function () {
     'use strict';
 
     var serviceId = 'repository.volunteer';
@@ -58,7 +58,7 @@
             var p3 = new predicate("isUsingVolunteers", "==", true);
             var newPred = predicate.and(p1, p2, p3);
 
-            var query = EntityQuery.from('Eventures')
+            var query = entityQuery.from('Eventures')
             .where(newPred)
             .orderBy('sortOrder');
 
@@ -72,17 +72,17 @@
 
         function createVolunteerJob(eventureId) {
             var self = this;
-            return self.manager.createEntity('VolunteerJob', { eventureId: eventureId, dateCreated: moment().format("MM/DD/YYYY"), ageRestriction: 'None' });
+            return self.manager.createEntity('VolunteerJob', { eventureId: eventureId, ageRestriction: 'None' });
         }
         
-        function createVolunteerShift(eventureId) {
+        function createVolunteerShift(jobId) {
             var self = this;
-            return self.manager.createEntity('VolunteerShift', { dateShift: moment().format("MM/DD/YYYY"), dateCreated: moment().format("MM/DD/YYYY") });
+            return self.manager.createEntity('VolunteerShift', { volunteerJobId: jobId });
         }
         
         function getVolunteerJobById(id) {
             var self = this;
-            var query = EntityQuery.from('VolunteerJobs')
+            var query = entityQuery.from('VolunteerJobs')
                 .where('id', '==', id);
 
             return self.manager.executeQuery(query)
@@ -94,7 +94,7 @@
         }
         function getVolunteerById(id) {
             var self = this;
-            var query = EntityQuery.from('Volunteer')
+            var query = entityQuery.from('Volunteer')
                 .where('id', '==', id)
                 .expand('Participants');
 
@@ -107,7 +107,7 @@
         }
         function getVolunteerShiftsByVolunteerJobId(id) {
             var self = this;
-            var query = EntityQuery.from('VolunteerShifts')
+            var query = entityQuery.from('VolunteerShifts')
                 .where('volunteerJobId', '==', id);
 
             return self.manager.executeQuery(query)
@@ -120,7 +120,7 @@
 
         function getVolunteerJobsByEventureId(eventureId) {
             var self = this;
-            var query = EntityQuery.from('VolunteerJobs')
+            var query = entityQuery.from('VolunteerJobs')
                 .where('eventureId', '==', eventureId);
 
             return self.manager.executeQuery(query)
@@ -133,7 +133,7 @@
 
         function getVolunteerShiftsByEventureId(eventureId) {
             var self = this;
-            var query = EntityQuery.from('VolunteerShifts')
+            var query = entityQuery.from('VolunteerShifts')
                 .where('VolunteerJob.eventureId', '==', eventureId);
 
             return self.manager.executeQuery(query)
@@ -146,8 +146,8 @@
 
         function getVolunteerScheduleById(id) {
             var self = this;
-            var query = EntityQuery.from('VolunteerSchedules')
-                .where('id', '==', id);
+            var query = entityQuery.from('VolunteerSchedules')
+                .where("id", "==", parseInt(id));
 
             return self.manager.executeQuery(query)
                 .then(querySucceeded, self._queryFailed);

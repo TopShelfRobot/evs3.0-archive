@@ -1,4 +1,4 @@
-(function() {
+﻿(function() {
     'use strict';
 
     var controllerId = 'seteventplanitem';
@@ -12,8 +12,15 @@
         var vm = this;
         vm.title = 'Event Plan Item';
       
-        vm.planItemId = $routeParams.planItemId || 0;
-        vm.eventureId = $routeParams.eventureId || 0;
+        vm.planItemId = $routeParams.itemId || 0;
+
+        //alert('planItemId: ' + vm.planItemId);
+        //if (vm.planItemId === parseInt(vm.planItemId))
+        //    alert("11111111111data is integer");
+        //else
+        //    alert("11111111data is not an integer");
+
+        vm.eventureId = $routeParams.eventureId;
         vm.ownerId = config.owner.ownerId;
 
         vm.planItem = {};
@@ -31,7 +38,7 @@
         function getPlanItem() {
 
             if (vm.planItemId > 0) {
-                return datacontext.resource.getPlanItemById(vm.planItemId)
+                return datacontext.resource.getPlanItemById(parseInt(vm.planItemId))
                     .then(function(data) {
                         //applyFilter();
                         return vm.planItem = data;
@@ -39,6 +46,7 @@
             } else {
                 return vm.planItem = datacontext.resource.createPlanItem(vm.eventureId);
             }
+
         }
 
         function getResources() {
@@ -69,7 +77,16 @@
 		vm.formats = ['MM-dd-yyyy', 'yyyy/MM/dd', 'shortDate'];
 
 		vm.format = vm.formats[0];
-
+        
+        vm.cancel = function() {
+          return datacontext.cancel()
+            .then(complete);
+          
+            function complete() {
+              $location.path("/eventuredetail/" + vm.eventureId);
+            }
+        };
+      
         vm.saveAndNav = function() {
             return datacontext.save(vm.planItem)
                 .then(complete);

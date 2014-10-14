@@ -61,7 +61,7 @@
 
         function getResourceById(resourceId) {
             var self = this;
-            var query = entityQuery.from('resources')
+            var query = entityQuery.from('Resources')
                 .where('id', '==', resourceId);
 
             return self.manager.executeQuery(query)
@@ -74,7 +74,7 @@
 
         function getResourcesByOwnerId(ownerId) {
             var self = this;
-            var query = entityQuery.from('resources')
+            var query = entityQuery.from('Resources')
                 .where('ownerId', '==', ownerId);
 
             return self.manager.executeQuery(query)
@@ -180,16 +180,16 @@
             }
         }
 
-    function createPlanItem(eventureId) {
+        function createPlanItem(eventureId) {
             var self = this;
             return self.manager.createEntity('EventurePlanItem',
                 { eventureId: eventureId });
         }
 
-        function getPlanItemById(id) {
+        function getPlanItemById(planItemId) {
             var self = this;
             var query = entityQuery.from('EventurePlanItems')
-                .where('id', '==', id);
+                .where('id', '==', planItemId);
 
             return self.manager.executeQuery(query)
                 .then(querySucceeded, self._queryFailed);
@@ -214,7 +214,7 @@
 
         function createResourceItem(resourceId) {
             var self = this;
-            return self.manager.createEntity('ResourceItem', { resourceId: resourceId, ownerId: config.ownerId, active: true });
+            return self.manager.createEntity('ResourceItem', { resourceId: resourceId, ownerId: config.owner.ownerId, active: true });
         }
 
         function getResourceItemById(resourceItemId) {

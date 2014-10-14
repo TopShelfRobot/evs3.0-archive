@@ -1,26 +1,26 @@
 (function () {
     'use strict';
     var controllerId = 'resourcedetail';
-    angular.module('app').controller(controllerId, ['$routeParams','common', 'datacontext','config', 'ExcelService', resourcedetail]);
+    angular.module('app').controller(controllerId, ['$routeParams', '$location', 'common', 'datacontext','config', 'ExcelService', resourcedetail]);
 
-    function resourcedetail($routeParams, common, datacontext, config, excel) {
+    function resourcedetail($routeParams, $location, common, datacontext, config, excel) {
         var getLogFn = common.logger.getLogFn;
         var log = getLogFn(controllerId);
 
         var vm = this;
-        vm.title = 'app';
+        vm.title = 'Resource Detail';
         vm.ownerId = config.owner.ownerId;
-        vm.resourceId = 0;
-        vm.resource = {};
         vm.resourceId = $routeParams.resourceId;
-        log(vm.resourceId);
+        vm.resource = {};
 
         activate();
 
         function activate() {
             var promises = [createresourceDetailGrid(), getResource()];
             common.activateController(promises, controllerId)
-                .then(function() { log('Activated Resource Detail View'); });
+                .then(function() { 
+                  //log('Activated Resource Detail View'); 
+                });
         }
 
         function getResource () {
@@ -32,13 +32,14 @@
         };
 
 
-        vm.clickSave = function () {
-            //logger.log('next', null, 'test', true);
-            alert('called save');
-            //save();
-            //var url = '#test';
-            //router.navigateTo(url);
-        };
+        vm.saveAndNav = function() {
+			return datacontext.save()
+				.then(complete);
+
+			function complete() {
+                $location.path("/resourcecenter/");
+			}
+		};
 
         function createresourceDetailGrid() {
 
@@ -46,7 +47,7 @@
             //alert(ResourceApi);
 
             vm.resourceDetailGridOptions = {
-                toolbar: '<a download="detail.xlsx" class="k-button" ng-click="vm.excel(vm.resourcegrid)">Export</a>',
+                toolbar: '<a download="detail.xlsx" class="k-button" ng-click="vm.excel(vm.resourcegrid)"><em class="glyphicon glyphicon-save"></em>&nbsp;Export</a>',
                 dataSource: {
                     type: "",
                     transport: {
