@@ -126,6 +126,12 @@
                     templateUrl: 'app/registration/views/profile.part.html'
                 }
             }, {
+                url: '/user-profile/add',
+                config: {
+                    title: 'Add User Profile',
+                    templateUrl: 'app/registration/views/addProfile.part.html'
+                }
+            },{
                 url: '/editteam/:teamId',
                 config: {
                     title: 'Edit Team',

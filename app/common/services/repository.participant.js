@@ -19,6 +19,7 @@
             this.manager = mgr;
             // Exposed data access functions
             this.getAll = getAll;
+			this.createProfile = createProfile;
             this.createParticipant = createParticipant;
             this.getParticipantById = getParticipantById;
             this.getParticipantsByHouseId = getParticipantsByHouseId;
@@ -171,6 +172,12 @@
             function querySucceeded(data) {
                 return data.results;
             }
+        }
+		
+        function createProfile(email) {
+            var self = this;
+            return self.manager.createEntity('Participant',
+                { ownerId: config.owner.ownerId, country: "US", email: email, });
         }
 
         function createParticipant(ownerId, email, houseId) {

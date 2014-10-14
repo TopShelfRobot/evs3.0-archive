@@ -4,7 +4,6 @@
 		var self = this;
 		
 		this.partEmail = "";
-		
 		this.partName = "";
 		
 		this.search = function(){
@@ -35,13 +34,18 @@
 		this.selectUser = function(){
 			config.owner.houseId = self.selectedUser.houseId;
 			console.log(config);
-			
             $location.path("/eventure/");
 		};
 		
-		this.createUser = function(){
-			
+		this.createNewUser = function(){
+			$location.path("/user-profile/add");
 		};
+		
+		if(config.owner.newId && config.owner.houseId){
+			console.log(config);
+			config.owner.newId = false;
+            $location.path("/eventure/");
+		}
 	}
 	
 	angular.module("app").controller("ManReg", ["$location", "datacontext", "Helpers", "config", Controller]);
