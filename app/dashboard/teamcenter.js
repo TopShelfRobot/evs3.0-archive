@@ -70,8 +70,8 @@
                 field: "Balance",
                 title: "Balance",
                 width: "120px",
-                format: "{0:c}"
-                //template: kendo.template($("#balanceTemplate").html())
+                format: "{0:c}",
+                template: kendo.template($("#balanceTemplate").html())
             }, {
                 title: "",
                 width: "120px",
