@@ -11,7 +11,6 @@
             var token = function (res) {
                 var $input = $('<input type=hidden name=stripeToken />').val(res.id);
                 // show processing message and block UI until form is submitted and returns
-                $.blockUI({ message: 'Processing order...' });
 
                 deferred.resolve(res);
             };

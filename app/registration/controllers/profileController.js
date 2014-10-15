@@ -7,6 +7,8 @@
 
 		$scope.participant = {};
 		
+		$scope.disableEmail = true;
+		
 		var promises = [
 			datacontext.participant.getParticipantById(config.owner.houseId)
 				.then(function(participant){

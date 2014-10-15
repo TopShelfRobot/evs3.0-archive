@@ -26,6 +26,7 @@
     <link href="content/bootstrapoverrides.css" rel="stylesheet" />
     <link href="content/breeze.directives.css" rel="stylesheet" />
     <link href="content/app.css" rel="stylesheet" />
+    <link href="Content/registration.css" rel="stylesheet" />
     <link href="content/toastr.css" rel="stylesheet" />
 	<link href="/Content/nsPopover.custom.css" rel="stylesheet" />
 </head>
@@ -48,6 +49,9 @@
     </div>
 
     <span data-cc-scroll-to-top></span>
+	
+    <script src="/Scripts/modernizr.custom.js"></script>
+    <script src="/Scripts/toucheffects.js"></script>
 
     <script src="scripts/angular-file-upload-shim.min.js"></script>
 
@@ -70,6 +74,13 @@
     <script src="scripts/breeze.saveErrorExtensions.js"></script>
     <script src="scripts/angular-file-upload.min.js"></script>
 	<script src="scripts/nsPopover.js"></script>
+
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jszip/2.2.1/jszip.min.js"></script>
+    <script src="http://rawgit.com/stephen-hardy/xlsx.js/master/xlsx.js"></script>
+    <script src="Scripts/stripe.js"></script>
+    <script src="https://checkout.stripe.com/v2/checkout.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/3.32/jquery.form.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.blockUI/2.61.0-2013.06.06/jquery.blockUI.min.js"></script>
     <script src="scripts/jszip.min.js"></script>
     <script src="scripts/xlsx.js"></script>
 
@@ -84,6 +95,7 @@
     <script src="app/common/common.js"></script>
     <script src="app/common/logger.js"></script>
     <script src="app/common/spinner.js"></script>
+	<script src="app/common/services/helpers.js"></script>
 
     <!-- common.bootstrap Modules -->
     <script src="app/common/bootstrap/bootstrap.dialog.js"></script>
@@ -103,6 +115,7 @@
     <script src="app/dashboard/resourcedetail.js"></script>
     <script src="app/dashboard/discounts.js"></script>
     <script src="app/dashboard/elistcenter.js"></script>
+	<script src="app/dashboard/manreg.js"></script>
     <script src="app/dashboard/volunteercenter.js"></script>
     <script src="app/admin/setowner.js"></script>
     <script src="app/dashboard/resourcedetail.js"></script>
@@ -127,7 +140,8 @@
     <script src="app/dashboard/services/excelservice.js"></script>
 
 	<!-- registration -->
-	  <script src="app/registration/controllers/registrationHeaderController.js"></script>
+	<script src="app/registration/config.route.js"></script>
+	<script src="app/registration/controllers/registrationHeaderController.js"></script>
     <script src="app/registration/controllers/createteamController.js"></script>
     <script src="app/registration/controllers/teampaymentController.js"></script>
     <script src="app/registration/controllers/eventureController.js"></script>
@@ -138,6 +152,7 @@
 	<script src="app/registration/controllers/questionsController.js"></script>
 	<script src="app/registration/controllers/confirmController.js"></script>
 	<script src="app/registration/controllers/profileController.js"></script>
+	<script src="app/registration/controllers/addProfileController.js"></script>
 	<script src="app/registration/controllers/editteamController.js"></script>
     <script src="app/registration/controllers/viewReceiptController.js"></script>
 	<script src="app/registration/services/StripeService.js"></script>
