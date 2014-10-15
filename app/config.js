@@ -11,6 +11,10 @@
     //var remoteServiceName = 'breeze/Breeze';
     var remoteServiceName = 'http://evs30api.eventuresports.info/breeze/breeze/';
     var remoteApiName = 'http://evs30api.eventuresports.info/kendo/';
+	
+	var apiPath = "";
+	// apiPath = "http://localhost:55972";
+	apiPath = "http://evs30api.eventuresports.info";
 
        // var remoteServiceName = 'http://localhost:55972/breeze/breeze/';
        // var remoteApiName = 'http://localhost:55972/kendo/';
@@ -76,6 +80,7 @@
         appErrorPrefix: '[evs Error] ', //Configure the exceptionHandler decorator
         docTitle: 'eventure sports: ',
         events: events,
+		apiPath : apiPath,
         remoteServiceName: remoteServiceName,
         imageSettings: imageSettings,
         version: '3.0.0',
