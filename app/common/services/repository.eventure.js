@@ -28,6 +28,7 @@
             this.getEventureListById = getEventureListById;
             this.getEventureListsByEventureId = getEventureListsByEventureId;
             this.getEventureListsByOwnerId = getEventureListsByOwnerId;
+            this.getEventureListTypesByOwnerId = getEventureListTypesByOwnerId;
             this.createEventureList = createEventureList;
 
             this.getGroupsByEventureListId = getGroupsByEventureListId;
@@ -161,10 +162,24 @@
             }
         }
 
+        function getEventureListTypesByOwnerId(ownerId) {
+            var self = this;
+            var query = entityQuery.from('EventureListTypes')
+                 .where("ownerId", "==", ownerId);
+
+            return self.manager.executeQuery(query)
+               .then(querySucceeded, self._queryFailed);
+
+            function querySucceeded(data) {
+                return data.results;
+            }
+        }
+
+
         function createEventureList(eventureId) {
             var self = this;
             return self.manager.createEntity('EventureList',
-                { eventureId: eventureId});
+                { eventureId: eventureId });
         }
 
         function getGroupsByEventureListId(eventureListId) {
