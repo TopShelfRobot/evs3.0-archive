@@ -1,34 +1,9 @@
 <section ng-controller="SetQuestion as setq">
   <div class="row">
     <form class="form-horizontal">
-      <legend >Questions Setup</legend>
       <div class="row">
           <div class="col-sm-12">
-            <div class="form-group col-sm-6" ng-repeat="(key, question) in setq.stockQuestions">
-              <label for="" class="col-lg-6 control-label">{{question}}</label>
-              <div class="col-lg-6">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-default" ng-model="setq.stockAnswers[key]" btn-radio="true">Yes</button>
-                  <button type="button" class="btn btn-default" ng-model="setq.stockAnswers[key]" btn-radio="false">No</button>
-                </div>
-              </div>
-            </div>
-		  </div>
-      </div>
-      <hr>
-      <div class="row">
-          <div class="col-sm-12">
-              <legend>Custom Questions</legend>
-              <div class="row">
-                  <div class="col-sm-6 col-sm-offset-3">
-                      <select class="form-control" 
-					  	ng-model="setq.activeQuestion" 
-						name="QuestionText" 
-						ng-change="setq.questionChanged()"
-						ng-options="q.questionText for (key, q) in setq.customQuestions">
-                      </select>
-                  </div>
-              </div>
+              <legend>Question Setup</legend>
               <table class="table">
                   <thead>
                     <tr>
@@ -90,6 +65,7 @@
                     </table>
                 </div>
                 <button class="btn btn-primary" ng-click="setq.saveQuestion()"><em class="glyphicon glyphicon-save"></em>&nbsp;Save Question</button>
+				<button class="btn btn-primary" ng-click="setq.clearEdits()"><em class="glyphicon glyphicon-save"></em>&nbsp;Clear Edits</button>
           </div>
       </div>
     </form>
@@ -107,11 +83,11 @@
                   </tr>
               </thead>
               <tbody>
-                  <tr>
-                      <td><!--{{Question}}--></td>
-                      <td><!--{{Type}}--></td>
-                      <td><!--<select></select>--></td>
-                      <td><button class="btn btn-default btn-block" ng-click=""><em class="glyphicon glyphicon-edit"></em>&nbsp;Edit</button></td> <!-- Will Load question back into form -->
+                  <tr ng-repeat="(key, q) in setq.customQuestions">
+                      <td>{{q.questionText}}</td>
+                      <td>{{q.questionType}}</td>
+                      <td>{{q.options}}</td>
+                      <td><button class="btn btn-default btn-block" ng-click="setq.editQuestion(key)"><em class="glyphicon glyphicon-edit"></em>&nbsp;Edit</button></td>
                   </tr>
               </tbody>
           </table>
