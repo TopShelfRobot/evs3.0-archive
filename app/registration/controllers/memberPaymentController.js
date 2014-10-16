@@ -55,11 +55,26 @@
                     }
                 });
         }
-		
+
         var promises = [
 			getTeamInfo()
 		];
         common.activateController(promises, controllerId);
+
+        $scope.open = function($event, open) {
+            $event.preventDefault();
+            $event.stopPropagation();
+            $scope[open] = true;
+        };
+
+        $scope.dateOptions = {
+            'year-format': "'yy'",
+            'starting-day': 1
+        };
+
+        $scope.formats = ['MM-dd-yyyy', 'yyyy/MM/dd', 'shortDate'];
+
+        $scope.format = $scope.formats[0];
 
 
         $scope.checkout = function () {
