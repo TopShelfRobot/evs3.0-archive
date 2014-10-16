@@ -19,6 +19,7 @@
             this.manager = mgr;
             // Exposed data access functions
             this.getAll = getAll;
+			this.getAllRegistrations = getAllRegistrations;
 
             this.getOrderById = getOrderById;
             this.getOrderByRegistrationId = getOrderByRegistrationId;
@@ -75,7 +76,17 @@
             }
         };
 
+		function getAllRegistrations() {
+		     var self = this;
+		     var query = entityQuery.from('Registrations')
 
+		     return self.manager.executeQuery(query)
+		         .then(querySucceeded, self._queryFailed);
+
+		     function querySucceeded(data) {
+		         return data.results;
+		     }
+		 }
 
        function getRegistrationById(registrationId, registrationObservable) {
             var self = this;
