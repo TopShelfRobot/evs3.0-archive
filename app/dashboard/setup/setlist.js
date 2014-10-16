@@ -13,17 +13,26 @@
 		vm.title = 'Eventure Listing';
 		vm.listId = $routeParams.listId || 0;
 		vm.eventureId = $routeParams.eventureId;
+	    vm.ownerId = config.owner.ownerId;
 
-		vm.list = {};
-		activate();
+	    vm.list = {};
+	    vm.listTypes = {};
+	    activate();
 
 		function activate() {
-			common.activateController(getEventureList(), controllerId)
+		    common.activateController(getEventureList(), getListTypes(), controllerId)
 				.then(function() {
-					//log('Activated set list');
-
+					//log('Activated list typessssss');
 				});
 		}
+
+		function getListTypes() {
+		    return datacontext.eventure.getEventureListTypesByOwnerId(vm.ownerId)
+					.then(function (data) {
+					    //applyFilter();
+					    return vm.listTypes = data;
+					});
+	    }
 
 		function getEventureList() {
 

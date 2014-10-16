@@ -1,76 +1,63 @@
 ;(function(){
 	
+	var questionKeys = [
+		"questionText",
+		"questionType",
+		"active",
+		"isRequired",
+		"options"
+	];
+	
 	
 	function Controller($scope, $routeParams, $location, datacontext, config){
 		var self = this;
 		
 		var listId = $routeParams.listId;
 		
-		this.stockQuestions = ["Question 1", "Question 2", "Question 3", "Question 4", "Question 5", "Question 6"];
-		this.stockAnswers = [false, false, false, false, false, false];
-		
-		this.activeQuestion;
+		this.activeQuestion = null;
 		this.workingQuestion = {};
-		this.questionChanged = function(){
-			self.workingQuestion = {};
-			var keys = ["questionText", "questionType", "active", "isRequired", "id", "options"];
-			for(var i in keys){
-				if(typeof self.activeQuestion[keys[i]] !== "undefined"){
-					self.workingQuestion[keys[i]] = self.activeQuestion[keys[i]];
-				}
-			}
-			console.log("New working item is:", self.workingQuestion);
-		};
-		
-		var loadStockQuestions = function(){
-			// return datacontext.question.getStockQuestionSetByEventureListId(listId)
-			// 	.then(function(data){
-			// 		console.log("stock answers:", data);
-			//
-			// 		self.stockAnswers = data;
-			// 	});
-		}
+		this.isEdit = false;
 		
 		var loadCustomQuestions = function(){
 			return datacontext.question.getCustomQuestionSetByEventureListId(listId)
 				.then(function(data){
 					console.log("custom questions:", data);
 				
-					data.unshift({isRequired: false, active: false, questionText: "", questionType: "text"});
-					self.activeQuestion = data[0];
-					self.questionChanged();
-				
-					for(var i = 0; i < data.length; i++){
-						if(data[i].isRequired == null)
-						 	data[i].isRequired = false;
-						if(data[i].active == null)
-							data[i].active = false;
-					}
 					self.customQuestions = data;
 					return self.customQuestions;
 				});
 		};
 		
 		loadCustomQuestions();
-		loadStockQuestions();
+		
+		this.editQuestion = function(key){
+			self.isEdit = true;
+			self.activeQuestion = key;
+			for(var i = 0; i < questionKeys.length; i++){
+				self.workingQuestion[questionKeys[i]] = self.customQuestions[key][questionKeys[i]];
+			}
+		};
+		
+		this.clearEdits = function(){
+			self.isEdit = false;
+			self.activeQuestion = null;
+			self.workingQuestion = {};
+		};
 			
 		this.saveQuestion = function(){
+			self.isEdit = false;
 			var question;
-			if(typeof self.workingQuestion.id == "undefined"){
+			if(self.activeQuestion == null){
 				question = datacontext.question.createCustomQuestion(listId);
 			}else{
-				for(var i = 0; i < self.customQuestions.length; i++){
-					if(self.workingQuestion.id == self.customQuestions[i].id){
-						question = self.customQuestions[i];
-						break;
-					}
-				}
+				question = self.customQuestions[self.activeQuestion];
 			}
 			for(var key in self.workingQuestion){
 				question[key] = self.workingQuestion[key];
 			}
 			datacontext.save()
 				.then(function(data){
+					self.clearEdits();
 					console.log("save successful:", data);
 					return loadCustomQuestions();
 				}).catch(function(err){
