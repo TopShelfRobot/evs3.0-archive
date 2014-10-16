@@ -16,6 +16,7 @@
 		
 		this.activeQuestion = null;
 		this.workingQuestion = {};
+		this.isEdit = false;
 		
 		var loadCustomQuestions = function(){
 			return datacontext.question.getCustomQuestionSetByEventureListId(listId)
@@ -30,6 +31,7 @@
 		loadCustomQuestions();
 		
 		this.editQuestion = function(key){
+			self.isEdit = true;
 			self.activeQuestion = key;
 			for(var i = 0; i < questionKeys.length; i++){
 				self.workingQuestion[questionKeys[i]] = self.customQuestions[key][questionKeys[i]];
@@ -37,11 +39,13 @@
 		};
 		
 		this.clearEdits = function(){
+			self.isEdit = false;
 			self.activeQuestion = null;
 			self.workingQuestion = {};
 		};
 			
 		this.saveQuestion = function(){
+			self.isEdit = false;
 			var question;
 			if(self.activeQuestion == null){
 				question = datacontext.question.createCustomQuestion(listId);

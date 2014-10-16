@@ -65,7 +65,7 @@
                     </table>
                 </div>
                 <button class="btn btn-primary" ng-click="setq.saveQuestion()"><em class="glyphicon glyphicon-save"></em>&nbsp;Save Question</button>
-				<button class="btn btn-primary" ng-click="setq.clearEdits()"><em class="glyphicon glyphicon-save"></em>&nbsp;Clear Edits</button>
+				<button class="btn btn-danger" ng-show="setq.isEdit" ng-click="setq.clearEdits()"><em class="glyphicon glyphicon-ban-circle"></em>&nbsp;Cancel Edits</button>
           </div>
       </div>
     </form>
