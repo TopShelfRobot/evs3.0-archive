@@ -68,7 +68,7 @@
 					}, {
 						field: '',
 						title: '',
-						template: '<a href="\\\#registrationedit/#=Id#/#=StockAnswerSetId#" class="btn btn-default btn-block">Edit</a>'
+						template: '<a href="\\\#registration/#=Id#" class="btn btn-default btn-block">Edit</a>'
 					}]
 			};
 		}
@@ -182,7 +182,7 @@
 						}, {
 							field: '',
 							title: '',
-							template: '<a href="\\\#registrationedit/#=Id#/#=StockAnswerSetId#" class="btn btn-default btn-block">Edit</a>'
+							template: '<a href="\\\#registration/#=Id#" class="btn btn-default btn-block">Edit</a>'
 						}
 					]
 				};

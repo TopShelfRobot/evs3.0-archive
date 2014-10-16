@@ -138,6 +138,12 @@
                     templateUrl: 'app/registration/views/editteam.part.html'
                 }
             }, {
+                url: '/registration/:regId',
+                config: {
+                    title: 'Edit Registration',
+                    templateUrl: 'app/registration/views/registrationedit.part.html'
+                }
+            }, {
                 url: '/kitchensink',
                 config: {
                     title: 'Kitchen Sink',

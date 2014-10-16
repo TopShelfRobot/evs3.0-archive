@@ -141,7 +141,8 @@
 		
         function getCustomAnswerSetByRegistrationId(regId) {
             var self = this;
-            var query = entityQuery.from('CustomAnswerSets')
+			regId = Number(regId);
+            var query = entityQuery.from('Answers')
                 .where('id', '==', regId);
 
             return self.manager.executeQuery(query)

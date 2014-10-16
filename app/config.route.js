@@ -338,13 +338,7 @@
                     title: 'Edit Team',
                     templateUrl: 'app/registration/views/editteam.part.html'
                 }
-            }, {
-                url: '/registration/:regId',
-                config: {
-                    title: 'Edit a Registration',
-                    templateUrl: 'app/registration/views/registrationedit.part.html'
-                }
-            }
+            },
         ];
     }
 })();

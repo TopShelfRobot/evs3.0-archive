@@ -107,7 +107,7 @@
                 }, {
                     field: '',
                     title: '',
-                    template: '<a href="\\\#registrationedit/#=Id#/#=StockAnswerSetId#" class="btn btn-default btn-block"><em class="glyphicon glyphicon-edit"></em>&nbsp;Edit</a>'
+                    template: '<a href="\\\#registration/#=Id#" class="btn btn-default btn-block"><em class="glyphicon glyphicon-edit"></em>&nbsp;Edit</a>'
                 }]
             };
           };
