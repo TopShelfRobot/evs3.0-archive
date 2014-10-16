@@ -17,6 +17,7 @@
         var $q = common.$q;
 
         var service = {
+            cancel: cancel,
             prime: prime,
             save: save
             // Repositories to be added on demand:
@@ -34,6 +35,13 @@
             //alert('am i inintiing');
             repositories.init(manager);
             defineLazyLoadedRepos();
+        }
+        
+        function cancel() {
+            if (manager.hasChanges()) {
+                manager.rejectChanges();
+                logSuccess('Canceled changes', null, true);
+            }
         }
 
         // Add ES5 property to datacontext for each named repo
