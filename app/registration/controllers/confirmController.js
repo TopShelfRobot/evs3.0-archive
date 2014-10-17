@@ -74,19 +74,10 @@
         };
 
         $scope.completeRegistration = function(){
-            //var $form = $('#payment-form');
 
             $scope.errorMessage = "";  //clears any previous errors
             $scope.submitDisabled = true; // Disable the submit button to prevent repeated clicks
 
-            //stripeSuccessHandler('asdfasdfasdfasf');
-            //             Stripe.createToken($form)
-            // .then(stripeSuccessHandler)
-            // .catch(stripeErrorHandler)
-            // .finally(function(){
-            // 	// $("#overlay").removeClass("hidden");
-            // 	$scope.submitDisabled = false;
-            // });
         };
 
         $scope.checkout = function() {
@@ -99,7 +90,24 @@
                 'regs': cart.registrations,
                 'charges': cart.surcharges
             };
-            stripe.checkout(cart.getTotalPrice(), order);
+			
+            stripe.checkout(cart.getTotalPrice())
+				.then(function(res){
+					console.log(res);
+					$.blockUI({ message: 'Processing order...' });
+					order.stripeToken = res.id;
+				    $http.post(config.apiPath + "/api/Payment/PostRegular", order)
+						.success(function(result){
+						    console.log("result: " + result);
+	                        $location.path("/receipt/" + result);
+						})
+						.error(function(err){
+							console.log("ERROR:", err.toString());
+						})
+				        .finally(function () {
+				         $.unblockUI();
+				     });
+				});
         };
 
         $scope.isConfirm = function () {
