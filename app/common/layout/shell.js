@@ -34,8 +34,7 @@
 					vm.progBar = 89;
 					$timeout(function(){
 						vm.showSplash = false;
-					}, 500);
-					
+					}, 500);			
                 });
         }
 

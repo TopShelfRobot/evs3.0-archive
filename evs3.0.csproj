@@ -193,6 +193,11 @@
     <Content Include="Content\images\participants.jpg" />
     <Content Include="Content\images\registrations.jpg" />
     <Content Include="Content\images\white-logo.png" />
+    <Content Include="Content\kendo.bootstrap.min.css" />
+    <Content Include="Content\kendo.bootstrap.mobile.min.css" />
+    <Content Include="Content\kendo.common.min.css" />
+    <Content Include="Content\kendo.dataviz.default.min.css" />
+    <Content Include="Content\kendo.dataviz.min.css" />
     <Content Include="Content\nsPopover.custom.css" />
     <Content Include="Content\registration.css" />
     <Content Include="Content\toastr.css" />
@@ -203,6 +208,7 @@
     <Content Include="Scripts\angular-animate.min.js" />
     <Content Include="Scripts\angular-kendo.js" />
     <Content Include="Scripts\angular-moment-input.js" />
+    <Content Include="Scripts\angular-moment.min.js" />
     <Content Include="Scripts\angular-route.js" />
     <Content Include="Scripts\angular-route.min.js" />
     <Content Include="Scripts\angular-sanitize.js" />
@@ -228,6 +234,8 @@
     <Content Include="Scripts\breeze.saveErrorExtensions.js" />
     <Content Include="Scripts\jquery-2.0.3.js" />
     <Content Include="Scripts\jquery-2.0.3.min.js" />
+    <Content Include="Scripts\jszip.min.js" />
+    <Content Include="Scripts\kendo.all.min.js" />
     <Content Include="Scripts\modernizr.custom.js" />
     <Content Include="Scripts\moment-with-langs.js" />
     <Content Include="Scripts\moment-with-langs.min.js" />
@@ -240,6 +248,8 @@
     <Content Include="Scripts\toucheffects.js" />
     <Content Include="Scripts\ui-bootstrap-tpls-0.10.0.js" />
     <Content Include="Scripts\ui-bootstrap-tpls-0.10.0.min.js" />
+    <Content Include="Scripts\ui-bootstrap-tpls-0.11.0.js" />
+    <Content Include="Scripts\xlsx.js" />
     <Content Include="Web.config" />
     <Content Include="Scripts\jquery-2.0.3.min.map" />
     <Content Include="Scripts\toastr.min.js.map" />
