@@ -14,7 +14,7 @@
             // $routeProvider.when(r.url, r.config);
             setRoute(r.url, r.config);
         });
-        $routeProvider.otherwise({ redirectTo: '/kitchensink' });
+        $routeProvider.otherwise({ redirectTo: '/eventure' });
 
 
         function setRoute(url, definition) {
