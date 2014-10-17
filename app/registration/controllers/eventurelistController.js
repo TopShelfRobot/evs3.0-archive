@@ -37,25 +37,15 @@
 
 		
         $scope.register = function(eventure, eventureList, participant) {
-             //cartModel.setCurrentParticipant(participant);
-             //cartModel.setCurrentEventure(eventure);
-            //cartModel.setCurrentEventureList(eventureList);
             cartModel.fee = $scope.selection.currentFee;
-            //console.log("fee:", cartModel.fee);
-
-            //$location.path("/eventure/" + eventure.id + "/list/" + eventureList.id + "/questions")
-			//	.search("uid", participant.id);
-
-            $location.path("/eventure/" + eventure.id + "/list/" + eventureList.id + "/team")
-                    .search("uid", participant.id);
-
-            //if (eventure.IsTeam) {
-            //    $location.path("/eventure/" + eventure.id + "/list/" + eventureList.id + "/team")
-            //        .search("uid", participant.id);
-            //} else {
-            //    $location.path("/eventure/" + eventure.id + "/list/" + eventureList.id + "/questions")
-            //        .search("uid", participant.id);
-            //}
+			
+			if(eventureList.eventureListTypeId == 1){
+	            $location.path("/eventure/" + eventure.id + "/list/" + eventureList.id + "/questions")
+	                    .search("uid", participant.id);
+			}else{
+	            $location.path("/eventure/" + eventure.id + "/list/" + eventureList.id + "/team")
+	                    .search("uid", participant.id);
+			}
         };
     }
 })();
