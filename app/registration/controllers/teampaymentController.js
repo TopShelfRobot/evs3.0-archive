@@ -21,7 +21,6 @@
 	                            break;
 	                        case 3:   //team suggest
 	                            $scope.isSuggestPayVisible = true;
-								$scope.userPaying = item.currentFee;
                             
 	                            break;
 	                        case 4:    //team all pays the same
