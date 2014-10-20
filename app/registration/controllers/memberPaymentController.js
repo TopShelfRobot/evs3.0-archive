@@ -13,6 +13,7 @@
         $scope.isSuggestPayVisible = false;
         $scope.isIndividualVisible = false;
         $scope.isSponsorPayVisible = false;
+        $scope.tryoutFee=150;
 
         function getTeamInfo() {
             return $q.all([datacontext.team.getTeamMemberPaymentInfoByTeamMemberGuid($scope.teamMemberGuid),
@@ -28,8 +29,8 @@
                         cartModel.teamId = payment.teamId;
                         $scope.teamName = payment.name;
                         $scope.listName = payment.listName;
-                        console.log("listingType: ", payment.listingType);
-                        switch (payment.listingType) {
+                        console.log("listingType: ", payment.eventureListTypeId);
+                        switch (payment.eventureListTypeId) {
                             case 2:
                                 //team sponsor
                                 $scope.isSponsorPayVisible = true;
@@ -44,7 +45,7 @@
                             case 4:
                                 //team all pays the same
                                 $scope.isIndividualVisible = true;
-                                console.log("here: ", payment.listingType);
+                                console.log("here: ", payment.eventureListTypeId);
                                 //$scope.suggested = payment.CurrentFee;
                                 $scope.userPaying = payment.currentFee;
                                 break;
@@ -84,12 +85,13 @@
                 $location.path("/eventure/");
                 return;
             }
-            var cartOrder = cartModel.order($scope.userPaying, $scope.participant);
+            var cartOrder = cartModel.order($scope.tryoutFee, $scope.participant);   //mjb fix this hard coded
 
             stripe.checkout(cartOrder.orderAmount)
                 .then(function (res) {
                     console.log(res);
                     cartOrder.orderToken = res.id;
+                    console.log(cartOrder);
                     $http.post(config.apiPath + "/api/Payment/PostTeamPayment", cartOrder)
                        .success(function (result) {
                            $location.path("/receipt/" + $scope.teamMemberGuid);

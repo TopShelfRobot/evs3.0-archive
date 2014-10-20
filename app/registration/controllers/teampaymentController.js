@@ -14,7 +14,8 @@
 	                if (item) {
 	                    $scope.fee = item.currentFee;
 	                    cartModel.fee = item.currentFee;
-	                    switch (item.listingType) {
+	                    //alert('itemlistingtype: ' + item.eventureListTypeId + 'fee: ' + item.currentFee)
+	                    switch (item.eventureListTypeId) {
 	                        case 2:    //team sponsor
 	                            $scope.isIndividualVisible = true;
 	                            $scope.userPaying = item.currentFee;

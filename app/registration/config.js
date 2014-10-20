@@ -8,7 +8,7 @@
 	var apiPath = "";
 	 //apiPath = "http://localhost:55972";
     //apiPath = "http://evs30api.eventuresports.info";
-	apiPath = " https://lcfctryouts30Api.eventuresports.com";
+    apiPath = " https://lcfctryouts30Api.eventuresports.com";
 
    
     var remoteServiceName = apiPath + '/breeze/breeze/';
@@ -29,7 +29,7 @@
         guid: 0,
         logoImageName: '/Content/images/logo.png',
 
-        houseId: 11,    //this will be set by shell
+        houseId: 2,    //this will be set by shell
         mr_houseId: 0,
         houseName: "",
         accessType: "none",

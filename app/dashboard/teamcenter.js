@@ -123,7 +123,7 @@
                         field: '',
                         title: '',
                         template: '<button ng-click="vm.resend()" class="btn btn-success btn-block"><em class="glyphicon glyphicon-send"></em>&nbsp;Resend Invitation</button>',
-                        width: 170
+                        width: 180
                     },{
                         field: '',
                         title: '',
