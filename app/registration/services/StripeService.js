@@ -16,7 +16,8 @@
             };
 
             StripeCheckout.open({
-                key: 'pk_live_kX0HvkyB96C1aqldjSpsufu0',
+                //key: 'pk_live_kX0HvkyB96C1aqldjSpsufu0',    //this is hardcoded //mjb
+                key: 'pk_test_pGFaKfcKFrOuiR3PNDFsrhey',
                 address: false,
                 amount: userPaying * 100,  //this.getTotalPrice() * 100, /** expects an integer **/
                 currency: 'usd',

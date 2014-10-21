@@ -94,7 +94,7 @@
                     console.log(cartOrder);
                     $http.post(config.apiPath + "/api/Payment/PostTeamPayment", cartOrder)
                        .success(function (result) {
-                           $location.path("/receipt/" + $scope.teamMemberGuid);
+                           $location.path("/receipt/" + result);
                        })
                         .error(function (err) {
                             console.error("ERROR:", err.toString());

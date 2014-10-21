@@ -114,7 +114,7 @@
                     templateUrl: 'app/registration/views/confirm.part.html'
                 }
             }, {
-                url: '/receipt/:teamMemberGuid',
+                url: '/receipt/:paymentId',
                 config: {
                     title: 'Receipt',
                     templateUrl: 'app/registration/views/receipt.part.html'

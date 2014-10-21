@@ -8,10 +8,10 @@
         $scope.receipt = {};
 
         $scope.title = "Registration Complete";
-        $scope.teamMemberGuid = $routeParams.teamMemberGuid;
+        $scope.paymentId = $routeParams.paymentId;
 		
 		var promises = [
-	        datacontext.team.getTeamMemberPaymentInfoByTeamMemberGuid($scope.teamMemberGuid)
+	        datacontext.team.getTeamMemberPaymentInfoByPaymentId($scope.paymentId)
 	            .then( function(data) {
 	                return $scope.receipt = data;
 	            })
