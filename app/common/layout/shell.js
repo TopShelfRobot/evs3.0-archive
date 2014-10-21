@@ -1,7 +1,7 @@
 ﻿(function () {
     'use strict';
 
-    var controllerId = 'shell';
+    var controllerId = 'shell';   //mjb test push
     angular.module('common').controller(controllerId,
         ['$rootScope', 'common', 'config', "$timeout", shell]);
 
@@ -24,7 +24,7 @@
             color: '#F58A00'
         };
 
-        activate();
+        activate();  
 
         function activate() {
             vm.showSplash = true;

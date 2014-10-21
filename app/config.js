@@ -14,8 +14,8 @@
 	
 	var apiPath = "";
     //apiPath = "http://localhost:55972";
-    apiPath = "http://evs30api.eventuresports.info";
-	//apiPath = "https://lcfctryouts30Api.eventuresports.com";
+    //apiPath = "http://evs30api.eventuresports.info";
+	apiPath = "https://lcfctryouts30Api.eventuresports.com";
 
 	 var remoteServiceName = apiPath + '/breeze/breeze/';
 	 var remoteApiName = apiPath + '/kendo/';

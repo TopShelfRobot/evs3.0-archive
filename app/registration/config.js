@@ -10,7 +10,6 @@
     apiPath = "http://evs30api.eventuresports.info";
     //apiPath = " https://lcfctryouts30Api.eventuresports.com";
 
-   
     var remoteServiceName = apiPath + '/breeze/breeze/';
     var remoteApiName = apiPath + '/kendo/';
     var events = {

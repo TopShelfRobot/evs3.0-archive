@@ -1,9 +1,9 @@
 (function () {
     'use strict';
     var controllerId = 'teamcenter';
-    angular.module('app').controller(controllerId, ['common', 'datacontext', 'config', 'ExcelService', teamcenter]);
+    angular.module('app').controller(controllerId, ['$http', 'common', 'datacontext', 'config', 'ExcelService', teamcenter]);
 
-    function teamcenter(common, datacontext, config, excel) {
+    function teamcenter($http, common, datacontext, config, excel) {
         var getLogFn = common.logger.getLogFn;
         var log = getLogFn(controllerId);
 
@@ -89,8 +89,14 @@
 
             };
 
-            vm.resend = function() {
-                alert('Resending: ' + e.Id);
+            vm.resend = function (memberId) {
+                $http.post(config.apiPath + "/breeze/breeze/SendSoccerTryoutInviteMail/" + memberId)
+                    .success(function(result) {
+                        alert('Invitation has been sent');
+                    })
+                    .error(function(err) {
+                        console.error("ERROR:", err.toString());
+                    });
             };
 
             return {
@@ -100,10 +106,17 @@
                     transport: {
                         read: teamapi
                     },
+                    schema: {
+                        model: {
+                            fields: {
+                                Id: { type: "number" }
+                            }
+                        }
+                    },
                     serverPaging: false,
                     serverSorting: false,
                     serverFiltering: false,
-                    pageSize: 5
+                    pageSize: 15    //mjb fix this just for lcfc??
                 },
                 sortable: true,
                 pageable: true,
@@ -122,7 +135,7 @@
                     },{
                         field: '',
                         title: '',
-                        template: '<button ng-click="vm.resend()" class="btn btn-success btn-block"><em class="glyphicon glyphicon-send"></em>&nbsp;Resend Invitation</button>',
+                        template: '<button ng-click="vm.resend(#=Id#)" class="btn btn-success btn-block"><em class="glyphicon glyphicon-send"></em>&nbsp;Resend Invitation</button>',
                         width: 180
                     },{
                         field: '',
