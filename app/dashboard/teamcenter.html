@@ -15,6 +15,10 @@
   <div kendo-grid="vm.detailgrid" k-options="vm.detailGridOptions(dataItem)"></div>
 </script>
 
+<script type="text/x-kendo-template" id="paymenttemplate">
+    <div kendo-grid="vm.paymentgrid" k-options="vm.paymentDetailGridOptions(dataItem)"></div>
+</script>
+
 <script type="text/x-kendo-template" id="balanceTemplate">
     #if(EventureListTypeId === 4){#
         N/A

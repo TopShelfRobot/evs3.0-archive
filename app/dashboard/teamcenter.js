@@ -82,7 +82,6 @@
           vm.detailGridOptions = function(e) {
 
             var teamapi = config.remoteApiName + 'Teams/GetTeamMembersByTeamId/' + e.Id;
-
             vm.remove = function() {
                 alert('Removing: ' + e.Id );
                 //datacontext.team.removeTeamMemberById(e.Id);
@@ -108,6 +107,7 @@
                 },
                 sortable: true,
                 pageable: true,
+                detailTemplate: kendo.template($("#paymenttemplate").html()),
                 columns: [{
                         field: "Name",
                         title: "Name"
@@ -132,6 +132,55 @@
                     }]
             };
           };
+
+            vm.paymentDetailGridOptions = function(e) {
+
+                var paymentapi = config.remoteApiName + 'Teams/GetPaymentsByTeamMemberId/' + e.Id;
+
+                vm.refund = function() {
+                    alert('Refunding: ' + e.Id );
+                    //datacontext.team.removeTeamMemberById(e.Id);
+                    vm.teamgrid.refresh();
+
+                };
+
+                vm.resendReceipt = function() {
+                    alert('Resending: ' + e.Id);
+                };
+
+                return {
+                    dataSource: {
+                        type: "json",
+                        transport: {
+                            read: paymentapi
+                        },
+                        serverPaging: false,
+                        serverSorting: false,
+                        serverFiltering: false,
+                        pageSize: 5
+                    },
+                    sortable: true,
+                    pageable: true,
+                    columns: [{
+                        field: "Id",
+                        title: "Confirmation Number"
+                    }, {
+                        field: "Amount",
+                        title: "Amount",
+                        format: "{0:c}"
+                    },{
+                        field: '',
+                        title: '',
+                        template: '<button ng-click="vm.resendReceipt()" class="btn btn-success btn-block"><em class="glyphicon glyphicon-send"></em>&nbsp;Resend Receipt</button>',
+                        width: 180
+                    },{
+                        field: '',
+                        title: '',
+                        template: '<button ng-click="vm.remove()" class="btn btn-danger btn-block"><em class="glyphicon glyphicon-usd"></em>&nbsp;Refund</button>',
+                        width: 100
+                    }]
+                };
+            };
 
         }
       
