@@ -96,10 +96,10 @@
 					console.log(res);
 					$.blockUI({ message: 'Processing order...' });
 					order.stripeToken = res.id;
-				    $http.post(config.apiPath + "/api/Payment/PostRegular", order)
+				    $http.post(config.apiPath + "/api/Payment/Post", order)
 						.success(function(result){
 						    console.log("result: " + result);
-	                        $location.path("/receipt/" + result);
+	                        $location.path("/orderreceipt/" + result);
 						})
 						.error(function(err){
 							console.log("ERROR:", err.toString());

@@ -120,6 +120,12 @@
                     templateUrl: 'app/registration/views/receipt.part.html'
                 }
             }, {
+                url: '/orderreceipt/:orderId',
+                config: {
+                    title: 'Receipt Cart',
+                    templateUrl: 'app/registration/views/orderreceipt.part.html'
+                }
+            }, {
                 url: '/user-profile',
                 config: {
                     title: 'User Profile',
