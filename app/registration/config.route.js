@@ -138,6 +138,12 @@
                     templateUrl: 'app/registration/views/editteam.part.html'
                 }
             }, {
+                url: '/shoppingcart',
+                config: {
+                    title: 'Shopping Cart',
+                    templateUrl: 'app/registration/views/shoppingcart.part.html'
+                }
+            }, {
                 url: '/kitchensink',
                 config: {
                     title: 'Kitchen Sink',
