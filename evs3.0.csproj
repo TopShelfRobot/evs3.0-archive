@@ -102,10 +102,12 @@
     <Content Include="app\registration\controllers\addParticipantController.js" />
     <Content Include="app\registration\controllers\confirmController.js" />
     <Content Include="app\registration\controllers\editteamController.js" />
+    <Content Include="app\registration\controllers\orderReceiptController.js" />
     <Content Include="app\registration\controllers\profileController.js" />
     <Content Include="app\registration\controllers\questionsController.js" />
     <Content Include="app\registration\controllers\viewReceiptController.js" />
     <Content Include="app\registration\models\cartModel.js" />
+    <Content Include="app\registration\models\cartModel_old.js" />
     <Content Include="app\registration\views\addparticipant.part.html" />
     <Content Include="app\registration\views\cart.part.html" />
     <Content Include="app\registration\views\confirm.part.html" />
@@ -123,6 +125,7 @@
     <Content Include="app\registration\models\memberCartModel.js" />
     <Content Include="app\registration\models\registrationCartModel.js" />
     <Content Include="app\registration\views\editteam.part.html" />
+    <Content Include="app\registration\views\orderreceipt.part.html" />
     <Content Include="app\registration\views\participantForm.part.html" />
     <Content Include="app\registration\views\profile.part.html" />
     <Content Include="app\registration\views\receipt.part.html" />
@@ -135,6 +138,7 @@
     <Content Include="app\registration\views\payment.part.html" />
     <Content Include="app\registration\views\questions.part.html" />
     <Content Include="app\registration\views\setparticipant.part.html" />
+    <Content Include="app\registration\views\shoppingcart.part.html" />
     <Content Include="app\registration\views\teamForm.part.html" />
     <Content Include="app\registration\views\teamPayment.part.html" />
     <Content Include="app\common\services\repository.ZZZ.js" />
@@ -229,7 +233,9 @@
     <Content Include="Scripts\angular-sanitize.min.js" />
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js" />
-    <Content Include="Scripts\angular.min.js.map" />
+    <Content Include="Scripts\angular.min.js.map">
+      <DependentUpon>angular.js</DependentUpon>
+    </Content>
     <Content Include="Scripts\angular-route.min.js.map" />
     <Content Include="Scripts\angular-animate.min.js.map" />
     <Content Include="Scripts\angular-sanitize.min.js.map" />

@@ -37,7 +37,7 @@
 
 		
         $scope.register = function(eventure, eventureList, participant) {
-            cartModel.fee = $scope.selection.currentFee;
+            //mjb cartModel.fee = $scope.selection.currentFee;
 			
 			if(eventureList.eventureListTypeId == 1){
 	            $location.path("/eventure/" + eventure.id + "/list/" + eventureList.id + "/questions")

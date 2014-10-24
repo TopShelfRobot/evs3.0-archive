@@ -50,6 +50,7 @@
         }
 
         function getOrderById(Id) {
+            alert('in the dc');
             var self = this;
             var query = entityQuery.from('OrderById')
                 .withParameters({ id: Id });
@@ -74,8 +75,6 @@
                 return data.results[0];
             }
         };
-
-
 
        function getRegistrationById(registrationId, registrationObservable) {
             var self = this;

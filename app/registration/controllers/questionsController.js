@@ -20,6 +20,7 @@
         $scope.isWaiverChecked = false;
         $scope.groupId = 0;
         $scope.group2Id = 0;
+        $scope.quantity = 1;
 				
 		var promises = [];
 		
@@ -70,14 +71,14 @@
 					return data;
 				})
 		);
-		
-		promises.push(
-			datacontext.eventure.getEventureById($routeParams.eventureId)
-				.then(function(data){
-					$scope.eventure = data;
-					return data;
-				})
-		)
+
+        promises.push(
+            datacontext.eventure.getEventureById($routeParams.eventureId)
+                .then(function(data) {
+                    $scope.eventure = data;
+                    return data;
+                })
+        );
 		
 		promises.push(
 			(function(){
@@ -103,10 +104,10 @@
             var answers = [];
 			var ans;
 			for(var i = 0; i < $scope.customAnswers.length; i++){
-				ans = {
-					id : $scope.customQuestions[i].id,
-					answer : $scope.customAnswers[i],
-				}
+			    ans = {
+			        id: $scope.customQuestions[i].id,
+			        answer: $scope.customAnswers[i],
+			    };
 				if($scope.customQuestions[i].active){
 					answers.push(ans);
 				}
@@ -115,13 +116,13 @@
         };
 
         $scope.next = function () {
-            cartModel.currentGroupId = $scope.groupId;
-            cartModel.currentStockAnswerSet = $scope.stockAnswerSet;
-            cartModel.currentCustomAnswerSet = getCustomAnswers();
-			cartModel.setCurrentParticipant($scope.participant);
-			cartModel.setCurrentEventure($scope.eventure);
-			cartModel.setCurrentEventureList($scope.eventureList);
-            cartModel.addRegistration();
+            //cartModel.currentGroupId = $scope.groupId;
+            //cartModel.currentStockAnswerSet = $scope.stockAnswerSet;
+            //cartModel.currentCustomAnswerSet = getCustomAnswers();
+			//cartModel.setCurrentParticipant($scope.participant);
+			//cartModel.setCurrentEventure($scope.eventure);
+			//cartModel.setCurrentEventureList($scope.eventureList);
+            cartModel.addRegistration($scope.eventure, $scope.eventureList, $scope.participant, getCustomAnswers(), $scope.groupId, $scope.group2Id, $scope.quantity);
 			$location.$$search = {};
             $location.path("/eventure/");
         };

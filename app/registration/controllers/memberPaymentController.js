@@ -90,7 +90,7 @@
             stripe.checkout(cartOrder.orderAmount)
                 .then(function (res) {
                     console.log(res);
-                    cartOrder.orderToken = res.id;
+                    cartOrder.stripeToken = res.id;
                     console.log(cartOrder);
                     $http.post(config.apiPath + "/api/Payment/PostTeamPayment", cartOrder)
                        .success(function (result) {

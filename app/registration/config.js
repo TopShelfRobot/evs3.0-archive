@@ -6,8 +6,8 @@
     // For use with the HotTowel-Angular-Breeze add-on that uses Breeze
     //var remoteServiceName = 'breeze/Breeze';
 	var apiPath = "";
-	 //apiPath = "http://localhost:55972";
-    apiPath = "http://evs30api.eventuresports.info";
+	apiPath = "http://localhost:55972";
+   // apiPath = "http://evs30api.eventuresports.info";
     
 
     var remoteServiceName = apiPath + '/breeze/breeze/';
@@ -23,12 +23,12 @@
     };
 
     var owner = {
-        ownerId: 1,
-        houseEmail: 0,
+        ownerId: 1,   //this is temp needs to be removed //mjb
+        houseEmail: 18,   //this is temp needs to be removed //mjb
         guid: 0,
         logoImageName: '/Content/images/logo.png',
 
-        houseId: 2,    //this will be set by shell
+        houseId: 18,    //this is temp needs to be removed //mjb
         mr_houseId: 0,
         houseName: "",
         accessType: "none",
@@ -46,9 +46,10 @@
         multItemDiscount: false,
         fourDeLisDiscount: false,
 
-        isAddSingleFeeForAllRegs: false,
-        addSingleFeeForAllRegsPercent: 0,
-        addSingleFeeType: '',
+        isDuplicateOrderAllowed: false,
+        isAddSingleFeeForAllRegs: true,
+        addSingleFeeForAllRegsPercent: 6,   //this is temp needs to be removed //mjb
+        addSingleFeeType: 'percent',
         addSingleFeeForAllRegsFlat: 0,
 
         eventureName: 'Event',
