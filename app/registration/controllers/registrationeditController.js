@@ -2,11 +2,12 @@
 	
 	var controllerId = "EditRegistration";
 	
-	function Controller($routeParams, datacontext, common, config){
+	function Controller($routeParams, $q, model, datacontext, common, config){
 		var self = this;
 		this.showDefer = false;
 		this.showTransfer = false;
 		this.newListing = null;
+		this.model = model;
 		
 		this.loadTransfer = function(){
 			self.showDefer = false;
@@ -23,71 +24,26 @@
 		};
 		
 		this.cancelTransfer = function(){
+			self.newListing = null;
 			self.showTransfer = false;
-		};
-		
-		this.submitTransfer = function(){
-			
 		};
 		
 		this.cancelDefer = function(){
 			self.showDefer = false;
 		};
 		
-		this.submitDefer = function(){
+		this.submitTransfer = function(){
+			self.model.setTransfer(self.newListing);
 			
 		};
-				
-		var promises = [];
 		
-		promises.push(
-			datacontext.registration.getRegistrationById($routeParams.regId)
-			.then(function(data){
-				console.log(data);
-				datacontext.eventure.getEventureListById(data.eventureListId)
-				.then(function(list){
-					console.log("list:", list);
-					self.list = list;
-					return datacontext.eventure.getEventureListsByOwnerId(config.owner.ownerId)
-				})
-				.then(function(listings){
-					console.log("listings:", listings);
-					self.listings = [];
-					for(var k in listings){
-						if(listings[k].active && listings[k].id !== self.list.id){
-							self.listings.push(listings[k]);
-						}
-					}
-					if(self.listings.length > 0){
-						self.newListing = self.listings[0];
-					}
-				});
-				
-				return datacontext.question.getCustomQuestionSetByEventureListId(data.eventureListId)
-			})
-			.then(function(qs){
-				console.log("qs:", qs);
-				self.customQuestions = qs;
-				return datacontext.question.getCustomAnswerSetByRegistrationId($routeParams.regId);
-			})
-			.then(function(ans){
-				console.log("ans:", ans);
-				self.customAnswers = ans;
-			})
-			.catch(function(err){
-			
-			})
-		);
+		this.submitDefer = function(){
+			self.model.setDefer();
+		};
 		
-		common.activateController(promises, controllerId)
-	        .then(function () { 
-				console.log('Activated Registration Edit View'); 
-			})
-			.finally(function(){
-				console.log("done");
-			});
+		common.activateController(model.load($routeParams.regId), controllerId);
 	}
 	
-	angular.module("evReg").controller(controllerId, ["$routeParams", "datacontext", "common", "config", Controller]);
+	angular.module("evReg").controller(controllerId, ["$routeParams", "$q", "RegistrationEditModel", "datacontext", "common", "config", Controller]);
 	
 })();

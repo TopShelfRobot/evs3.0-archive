@@ -11,7 +11,7 @@
 	    <div class="col-sm-6">
 	      <h3>Questions</h3>
 		  
-		  <custom-questions questions="editReg.customQuestions" answers="editReg.customAnswers"></custom-questions>
+		  <custom-questions questions="editReg.model.customQuestions" answers="editReg.model.customAnswers"></custom-questions>
 		  <button class="btn btn-success pull-right"><i class="glyphicon glyphicon-save"></i>&nbsp;Save Changes</button>
 
 	    </div>
@@ -21,12 +21,12 @@
 	      <h3>Transfers and Deferrals</h3>
 	      <div class="row">
 	        <div class="col-xs-6">
-	          <button class="btn btn-warning btn-sm" ng-click="editReg.loadTransfer()" ng-disabled="editReg.list.eventure.transfersAllowed" ng-cloak>
+	          <button class="btn btn-warning btn-sm" ng-click="editReg.loadTransfer()" ng-disabled="editReg.model.current.eventure.transfersAllowed" ng-cloak>
 				  <i class="glyphicon glyphicon-refresh"></i>&nbsp;Transfer Registration
 			  </button>
 	        </div>
 	        <div class="col-xs-6">
-	          <button class="btn btn-danger btn-sm" ng-click="editReg.loadDefer()" ng-disabled="editReg.list.eventure.deferralsAllowed" ng-cloak>
+	          <button class="btn btn-danger btn-sm" ng-click="editReg.loadDefer()" ng-disabled="editReg.model.current.eventure.deferralsAllowed" ng-cloak>
 				  <i class="glyphicon glyphicon-time"></i>&nbsp;Defer Registration
 			  </button>
 	        </div>
@@ -36,18 +36,18 @@
 		      <form id="transferform" class="form-inline">
 		        <div class="form-group">
 		          <label for="StartListing">Current Listing</label>
-		          <input type="text" disabled class="form-control" ng-model="editReg.list.displayName">
+		          <input type="text" disabled class="form-control" ng-model="editReg.model.current.displayName">
 		        </div>
 		        <div class="form-group">
 		          <label for="defer">New Listing</label>
-		          <select class="form-control" id="listdropdown" ng-model="editReg.newListing" ng-options="li.displayName for li in editReg.listings"></select>
+		          <select class="form-control" id="listdropdown" ng-model="editReg.newListing" ng-options="li.displayName for li in editReg.model.possibles"></select>
 		        </div>
 		        <div class="row">
 		          <div class="col-xs-6">
 		            <button id="canceltransfer" class="btn btn-danger btn-sm"  ng-click="editReg.cancelTransfer()"><i class="glyphicon glyphicon-ban-circle"></i>&nbsp;Cancel</button>
 		          </div>
 		          <div class="col-xs-6">
-		            <button type="button" id="submittransfer" class="btn btn-default" aria-hidden="true" ng-click="editReg.submitTransfer()"><i class="glyphicon glyphicon-ok-circle"></i>&nbsp;Submit Transfer</button>
+		            <button type="button" id="submittransfer" class="btn btn-default" aria-hidden="true" ng-click="editReg.submitTransfer()" ng-disabled="editReg.newListing == null"><i class="glyphicon glyphicon-ok-circle"></i>&nbsp;Submit Transfer</button>
 		          </div>
 		        </div>
 		        <br>
