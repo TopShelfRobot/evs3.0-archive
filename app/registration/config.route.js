@@ -144,6 +144,18 @@
                     templateUrl: 'app/registration/views/registrationedit.part.html'
                 }
             }, {
+                url: '/registration/:regId/transfer',
+                config: {
+                    title: 'Transfer Registration',
+                    templateUrl: 'app/registration/views/registrationEditConfirm.part.html'
+                }
+            }, {
+                url: '/registration/:regId/defer',
+                config: {
+                    title: 'Defer Registration',
+                    templateUrl: 'app/registration/views/registrationEditConfirm.part.html'
+                }
+            }, {
                 url: '/kitchensink',
                 config: {
                     title: 'Kitchen Sink',

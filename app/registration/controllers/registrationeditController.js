@@ -2,12 +2,13 @@
 	
 	var controllerId = "EditRegistration";
 	
-	function Controller($routeParams, $q, model, datacontext, common, config){
+	function Controller($routeParams, $location, $q, model, datacontext, common, config){
 		var self = this;
 		this.showDefer = false;
 		this.showTransfer = false;
 		this.newListing = null;
 		this.model = model;
+		this.regId = $routeParams.regId;
 		
 		this.loadTransfer = function(){
 			self.showDefer = false;
@@ -34,16 +35,17 @@
 		
 		this.submitTransfer = function(){
 			self.model.setTransfer(self.newListing);
-			
+			$location.path("/registration/" + self.regId + "/transfer");
 		};
 		
 		this.submitDefer = function(){
 			self.model.setDefer();
+			$location.path("/registration/" + self.regId + "/defer");
 		};
 		
-		common.activateController(model.load($routeParams.regId), controllerId);
+		common.activateController(model.load(self.regId), controllerId);
 	}
 	
-	angular.module("evReg").controller(controllerId, ["$routeParams", "$q", "RegistrationEditModel", "datacontext", "common", "config", Controller]);
+	angular.module("evReg").controller(controllerId, ["$routeParams", "$location", "$q", "RegistrationEditModel", "datacontext", "common", "config", Controller]);
 	
 })();

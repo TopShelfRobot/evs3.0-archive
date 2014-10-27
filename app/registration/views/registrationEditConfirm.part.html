@@ -1,0 +1,106 @@
+<div class="container" ng-controller="RegistrationEditConfirm as regEditConfirm">
+    <div class="row">
+        <div class="col-lg-12 text-center">
+            <img class="logo" src="Content/images/logo.png">
+            <h1>Order Summary</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th class="col-lg-3">Event</th>
+                            <th class="col-lg-3">Listing</th>
+                            <th class="col-lg-2">Participant</th>
+                            <th class="col-lg-1">Price</th>
+                            <th class="col-lg-2">Quantity</th>
+                            <th class="col-lg-1">Subtotal</th>
+                        </tr>
+                    </thead>
+                    <tbody data-role="listview" ng-repeat="reg in cart.registrations">
+                        <tr>
+                            <td>{{ reg.displayEvent }}</td>
+                            <td>{{ reg.displayList }}</td>
+                            <td>{{ reg.name }}</td>
+                            <td>{{ reg.fee | currency }}</td>
+                            <td>{{ reg.quantity }}</td>
+                            <td>{{ reg.lineTotal | currency }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="table-responsive">
+                <table class="table table-striped" ng-show="cart.surcharges">
+                    <thead>
+                        <tr>
+                            <th class="col-lg-11">Description</th>
+                            <th class="col-lg-1">Price</th>
+                        </tr>
+                    </thead>
+                    <tbody data-role="listview">
+                        <tr ng-repate="charge in cart.surcharges">
+                            <td>{{ charge.desc }}</td>
+                            <td>{{ charge.amount | currency }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-sm-5">
+            <form class="form-horizontal">
+                <input id="CouponCode" class="form-control" type="text" placeholder="Coupon Code" ng-model="couponCode"/>
+                <br>
+                <button class="btn btn-default btn-xs" ng-click="applyCoupon()">
+					<i class="glyphicon glyphicon-plus-sign"></i>&nbsp;Apply Coupon
+				</button>
+                <button class="btn btn-danger btn-xs" ng-click="removeCoupons()">
+					<i class="glyphicon glyphicon-minus-sign"></i>&nbsp;Remove Coupon
+				</button>
+            </form>
+        </div>
+        <div class="col-sm-7 text-right">
+            <p class="total-amount"><em>Total:</em>&nbsp;{{ cart.getTotalPrice() | currency }}</p>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-sm-12 text-center">
+            <h3>Payment Information</h3>
+            <p class="text-muted">We accept all major credit and debit cards</p>
+            <img src="/Content/images/creditcards.png" />
+            <hr>
+            <p class="text-muted">Your card will be charged for the amount of <strong>{{ cart.getTotalPrice() | currency }}</strong>.</p>
+	<label class="checkbox" ng-show="$parent.allowZeroPayment">
+                <input type="checkbox" data-bind="checked: isTerms" ng-model="$parent.fullPaymentRequired">
+                I am paying an amount of $0.00 and understand my team is still responsible for the full amount.
+            </label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6 col-sm-offset-3">
+            <br>
+            <label class="checkbox agreement">
+                <input type="checkbox" data-bind="checked: isTerms" ng-model="$parent.waiverSigned">
+                I have read and agree to the
+                <a id="terms" data-contents="{{show.msg}}" rel="popover">Terms and Conditions</a>,
+                <a id="refund">Refund Policy</a>,
+                and
+                <a id="waiver">Waiver</a>.
+            </label>
+            <button type="button"
+                        class="btn btn-success btn-block pull-right"
+                        ng-disabled="(!$parent.waiverSigned) || ($parent.userPaying == 0 && !$parent.fullPaymentRequired) || ($parent.submitDisabled)"
+                        ng-click="checkout()">Complete Your Registration
+            </button>
+        </div>
+    </div>
+</div>
