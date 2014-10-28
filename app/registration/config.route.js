@@ -144,15 +144,9 @@
                     templateUrl: 'app/registration/views/registrationedit.part.html'
                 }
             }, {
-                url: '/registration/:regId/transfer',
+                url: '/registration/:regId/edit',
                 config: {
-                    title: 'Transfer Registration',
-                    templateUrl: 'app/registration/views/registrationEditConfirm.part.html'
-                }
-            }, {
-                url: '/registration/:regId/defer',
-                config: {
-                    title: 'Defer Registration',
+                    title: 'Edit Registration',
                     templateUrl: 'app/registration/views/registrationEditConfirm.part.html'
                 }
             }, {

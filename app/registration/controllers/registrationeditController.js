@@ -35,12 +35,12 @@
 		
 		this.submitTransfer = function(){
 			self.model.setTransfer(self.newListing);
-			$location.path("/registration/" + self.regId + "/transfer");
+			$location.path("/registration/" + self.regId + "/edit");
 		};
 		
 		this.submitDefer = function(){
 			self.model.setDefer();
-			$location.path("/registration/" + self.regId + "/defer");
+			$location.path("/registration/" + self.regId + "/edit");
 		};
 		
 		common.activateController(model.load(self.regId), controllerId);

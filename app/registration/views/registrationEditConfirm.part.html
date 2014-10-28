@@ -1,4 +1,4 @@
-<div class="container" ng-controller="RegistrationEditConfirm as regEditConfirm">
+<div class="container" ng-controller="RegistrationEditConfirm as confirm">
     <div class="row">
         <div class="col-lg-12 text-center">
             <img class="logo" src="Content/images/logo.png">
@@ -36,7 +36,7 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="table-responsive">
-                <table class="table table-striped" ng-show="cart.surcharges">
+                <table class="table table-striped">
                     <thead>
                         <tr>
                             <th class="col-lg-11">Description</th>
@@ -44,7 +44,7 @@
                         </tr>
                     </thead>
                     <tbody data-role="listview">
-                        <tr ng-repate="charge in cart.surcharges">
+                        <tr ng-repeat="charge in confirm.model.surcharges">
                             <td>{{ charge.desc }}</td>
                             <td>{{ charge.amount | currency }}</td>
                         </tr>
@@ -55,20 +55,8 @@
     </div>
     <hr>
     <div class="row">
-        <div class="col-sm-5">
-            <form class="form-horizontal">
-                <input id="CouponCode" class="form-control" type="text" placeholder="Coupon Code" ng-model="couponCode"/>
-                <br>
-                <button class="btn btn-default btn-xs" ng-click="applyCoupon()">
-					<i class="glyphicon glyphicon-plus-sign"></i>&nbsp;Apply Coupon
-				</button>
-                <button class="btn btn-danger btn-xs" ng-click="removeCoupons()">
-					<i class="glyphicon glyphicon-minus-sign"></i>&nbsp;Remove Coupon
-				</button>
-            </form>
-        </div>
         <div class="col-sm-7 text-right">
-            <p class="total-amount"><em>Total:</em>&nbsp;{{ cart.getTotalPrice() | currency }}</p>
+            <p class="total-amount"><em>Total:</em>&nbsp;{{ confirm.model.totalPrice | currency }}</p>
         </div>
     </div>
     <br>
@@ -78,7 +66,7 @@
             <p class="text-muted">We accept all major credit and debit cards</p>
             <img src="/Content/images/creditcards.png" />
             <hr>
-            <p class="text-muted">Your card will be charged for the amount of <strong>{{ cart.getTotalPrice() | currency }}</strong>.</p>
+            <p class="text-muted">Your card will be charged for the amount of <strong>{{ confirm.model.totalPrice | currency }}</strong>.</p>
 	<label class="checkbox" ng-show="$parent.allowZeroPayment">
                 <input type="checkbox" data-bind="checked: isTerms" ng-model="$parent.fullPaymentRequired">
                 I am paying an amount of $0.00 and understand my team is still responsible for the full amount.
@@ -89,7 +77,7 @@
         <div class="col-sm-6 col-sm-offset-3">
             <br>
             <label class="checkbox agreement">
-                <input type="checkbox" data-bind="checked: isTerms" ng-model="$parent.waiverSigned">
+                <input type="checkbox" data-bind="checked: isTerms" ng-model="confirm.waiverSigned">
                 I have read and agree to the
                 <a id="terms" data-contents="{{show.msg}}" rel="popover">Terms and Conditions</a>,
                 <a id="refund">Refund Policy</a>,
@@ -97,9 +85,10 @@
                 <a id="waiver">Waiver</a>.
             </label>
             <button type="button"
-                        class="btn btn-success btn-block pull-right"
-                        ng-disabled="(!$parent.waiverSigned) || ($parent.userPaying == 0 && !$parent.fullPaymentRequired) || ($parent.submitDisabled)"
-                        ng-click="checkout()">Complete Your Registration
+	                class="btn btn-success btn-block pull-right"
+	                ng-disabled="(!confirm.waiverSigned) || (confirm.userPaying == 0 && !confirm.fullPaymentRequired) || (confirm.submitDisabled)"
+	                ng-click="checkout()">
+				Complete
             </button>
         </div>
     </div>
