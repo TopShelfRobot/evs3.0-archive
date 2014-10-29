@@ -181,7 +181,7 @@
                     position: "bottom"
                 },
                 series: [{
-                    type: "bar",
+                    type: "column",
                     data: [20, 40, 45, 33],
                     stack: true,
                     name: "Profit"
