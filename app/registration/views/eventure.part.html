@@ -54,7 +54,7 @@
         <ul class="grid event-tiles">
 
             <li ng-repeat="eventure in eventures">
-                <figure> <img ng-src="/images/{{eventure.imageFileName || 'eventure-default.jpg'}}" alt="img01">
+                <figure> <img ng-src="content/images/{{eventure.imageFileName || 'eventure-default.jpg'}}" alt="img01">
                   <figcaption>
                     <h4>{{eventure.name}}</h4>
                     <span class="event-info">{{eventure.dateEventure | date}}</span><br>

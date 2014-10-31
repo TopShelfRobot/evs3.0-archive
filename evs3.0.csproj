@@ -306,8 +306,10 @@
     <Content Include="Content\images\AngularJS-small.png" />
     <Content Include="Content\images\back.png" />
     <Content Include="Content\images\breezelogo.png" />
+    <Content Include="Content\images\eventure-default.jpg" />
     <Content Include="Content\images\icon.png" />
     <Content Include="Content\images\kendoui.svg" />
+    <Content Include="Content\images\list-default.jpg" />
     <Content Include="Content\images\logo.png" />
     <Content Include="Content\images\participants.jpg" />
     <Content Include="Content\images\registrations.jpg" />
