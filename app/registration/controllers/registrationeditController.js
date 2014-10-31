@@ -34,6 +34,7 @@
 		};
 		
 		this.submitTransfer = function(){
+			console.log("new lisgint:", self.newListing);
 			self.model.setTransfer(self.newListing);
 			$location.path("/registration/" + self.regId + "/edit");
 		};

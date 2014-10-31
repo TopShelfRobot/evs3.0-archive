@@ -11,22 +11,20 @@
                 <table class="table table-striped">
                     <thead>
                         <tr>
-                            <th class="col-lg-3">Event</th>
-                            <th class="col-lg-3">Listing</th>
-                            <th class="col-lg-2">Participant</th>
-                            <th class="col-lg-1">Price</th>
-                            <th class="col-lg-2">Quantity</th>
-                            <th class="col-lg-1">Subtotal</th>
+                            <th class="col-lg-3">From</th>
+                            <th class="col-lg-2">Edit Type</th>
+							<th class="col-lg-3">To</th>
+                            <th class="col-lg-2">Old Price</th>
+                            <th class="col-lg-2">New Price</th>
                         </tr>
                     </thead>
-                    <tbody data-role="listview" ng-repeat="reg in cart.registrations">
+                    <tbody data-role="listview">
                         <tr>
-                            <td>{{ reg.displayEvent }}</td>
-                            <td>{{ reg.displayList }}</td>
-                            <td>{{ reg.name }}</td>
-                            <td>{{ reg.fee | currency }}</td>
-                            <td>{{ reg.quantity }}</td>
-                            <td>{{ reg.lineTotal | currency }}</td>
+                            <td>{{ confirm.model.current.displayName }}</td>
+                            <td>{{ confirm.model.isDefer ? 'Deferral' : 'Transfer' }}</td>
+                            <td>{{ (confirm.model.transferListing) ? confirm.model.transferListing.displayName : '' }}</td>
+                            <td>{{ confirm.model.current.currentFee | currency }}</td>
+                            <td>{{ ((confirm.model.transferListing) ? confirm.model.transferListing.currentFee : '') | currency }}</td>
                         </tr>
                     </tbody>
                 </table>

@@ -20,7 +20,7 @@
 			var total = self.getTotalPrice();
 			var cartOrder = self.getOrder();
 			
-            stripe.checkout(total)
+				stripe.checkout(total)
                 .then(function (res) {
 					$.blockUI({ message: 'Processing order...' });
                     console.log(res);
