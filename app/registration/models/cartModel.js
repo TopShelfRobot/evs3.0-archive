@@ -41,7 +41,7 @@
                 }
             }
             if (!isRegDupe) {
-                cart.registrations.push(new registration(eventure.displayHeading, eventureList.displayName, participant.email, eventureList.currentFee, eventure.id, eventureList.id, participant.id, participant.firstName + ' ' + participant.lastName, answers, groupId, group2Id, quantity));
+                cart.registrations.push(new registration(eventure.displayHeading, eventureList.displayName, participant.email, eventureList.currentFee, eventure.id, eventureList.id, participant.id, participant.firstName + ' ' + participant.lastName, answers, groupId, group2Id, quantity, eventureList.eventureListTypeId));
             }
         };
 
@@ -134,7 +134,7 @@
         };
 
 
-        function registration(displayEvent, displayList, email, fee, eventureId, eventureListId, partId, name, stockAnswerSet, groupId, group2Id, quantity, regType) {
+        function registration(displayEvent, displayList, email, fee, eventureId, eventureListId, partId, name, stockAnswerSet, groupId, group2Id, quantity, eventureListTypeId) {
             var me = this;
             me.displayEvent = displayEvent;
             me.displayList = displayList;
@@ -150,6 +150,7 @@
             me.stockAnswerSet = stockAnswerSet;
             me.quantity = quantity;
             me.lineTotal = quantity * fee;
+            me.eventureListTypeId = eventureListTypeId;
         };
 
         function surcharge(chargeDesc, amount, chargeType, listId, partId, couponId, context) {
