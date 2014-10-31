@@ -7,7 +7,7 @@
     //var remoteServiceName = 'breeze/Breeze';
 	var apiPath = "";
 	//apiPath = "http://localhost:55972";
-    apiPath = "http://evs30api.eventuresports.info";
+    //apiPath = "http://evs30api.eventuresports.info";
     
 
     var remoteServiceName = apiPath + '/breeze/breeze/';
