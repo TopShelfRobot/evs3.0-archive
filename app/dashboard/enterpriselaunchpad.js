@@ -98,7 +98,7 @@
             title: {
                 position: "top",
                 text: "Revenue By Event",
-                font: 14,
+                font: 14
             },
             legend: {
                 visible: false
@@ -116,7 +116,6 @@
             },
             series: [{
                 field: "RevenuePercent",
-                data: [20, 40, 45, 33],
                 padding: 0,
                 categoryField: "Eventure"
             }],
@@ -129,43 +128,44 @@
           var expapi = config.remoteApiName + 'Registrations/GetExpensePerCategory/' + vm.ownerId;
 
           vm.expenseByCategory = {
-            theme: "flat",
-            dataSource: {
-                transport: {
-                    read: {
-                        url: expapi,
-                        dataType: "json"
-                    }
-                }
-            },
-            legend: {
-                visible: true
-            },
-            seriesDefaults: {
-                type: "pie",
-                labels: {
-                    visible: false,
-                    background: "transparent",
-                    template: "#= category #: $#= value#"
-                }
-            },
-            chartArea: {
-              height: 200
-            },
-            title: {
-              text: "Expense By Category",
-              font: 14
-            },
-            series: [{
-                field: "ExpensePercent",
-                data: [20, 40, 45, 33],
-                padding:0,
-                categoryField: "Category"
-            }],
-            tooltip: {
-                visible: true,
-                template: "#= category #: $#= value#"
-            }
+              theme: "flat",
+              dataSource: {
+                  transport: {
+                      read: {
+                          //url: expapi,
+                          dataType: "json"
+                      }
+                  }
+              },
+              title: {
+                  position: "top",
+                  text: "Expense By Category",
+                  font: 14
+              },
+              legend: {
+                  visible: false
+              },
+              chartArea: {
+                  height: 200
+              },
+              seriesDefaults: {
+                  type: "pie",
+                  labels: {
+                      visible: false,
+                      background: "transparent",
+                      template: "#= category #: $#= value#"
+                  }
+              },
+              series: [{
+                  field: "ExpensePercent",
+                  data: [20, 40, 45, 33],
+                  padding: 0,
+                  categoryField: "Eventure"
+              }],
+              tooltip: {
+                  visible: true,
+                  template: "#= category #: $#= value#"
+              }
           };
         }
 
@@ -181,7 +181,7 @@
                     position: "bottom"
                 },
                 series: [{
-                    type: "bar",
+                    type: "column",
                     data: [20, 40, 45, 33],
                     stack: true,
                     name: "Profit"
