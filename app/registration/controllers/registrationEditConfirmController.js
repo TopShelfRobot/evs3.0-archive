@@ -8,6 +8,8 @@
 		
 		this.regId = $routeParams.regId;
 		model.load(self.regId);
+		this.isAdmin = config.isAdmin;
+		this.paymentEnabled = 'credit';
 		
 		console.log("model:", model);
 		this.model = model;

@@ -31,6 +31,7 @@
 
     var owner = {
         ownerId: 1,
+		isAdmin : true,
         houseEmail: 0,
         guid: 0,
         logoImageName: '/Content/images/logo.png',
