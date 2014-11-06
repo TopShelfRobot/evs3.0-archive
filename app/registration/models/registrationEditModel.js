@@ -22,6 +22,14 @@
 		this.totalPrice = 0;
 		this.surcharges = [];
 		
+		this.getNewQuestions = function(){
+			return datacontext.question.getCustomQuestionSetByEventureListId(self.transferListing.id)
+			.then(function(qs){
+				this.transferQuestions = qs;
+				this.transferAnswers = [];
+			});
+		};
+		
 		this.getSurcharges = function(){
 			var out = [];
 			if(self.current){
@@ -53,6 +61,10 @@
 			self.totalPrice = total;
 			console.log("Total Price:", self.totalPrice);
 			return total;
+		};
+		
+		this.saveAnswers = function(){
+			return datacontext.save();
 		};
 		
 		var loaded = false;
@@ -89,6 +101,10 @@
 							})
 							.then(function(ans){
 								self.customAnswers = ans;
+								// if(!self.customAnswers){
+								// 	self.customAnswers = datacontext.question.createCustomAnswerSet();
+								// 	console.log("custom answers:", self.customAnswers);
+								// }
 								return self.customAnswers;
 							});
 				

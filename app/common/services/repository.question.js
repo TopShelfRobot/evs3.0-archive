@@ -29,6 +29,7 @@
             this.getCustomQuestionSetByEventureListId = getCustomQuestionSetByEventureListId;
             this.getCustomAnswersSetByEventureListId = getCustomAnswersSetByEventureListId;
 			this.getCustomAnswerSetByRegistrationId = getCustomAnswerSetByRegistrationId;
+			this.createCustomAnswerSet = createCustomAnswerSet;
         }
 
         // Allow this repo to have access to the Abstract Repo's functions,
@@ -151,6 +152,11 @@
             function querySucceeded(data) {
                 return data.results[0];
             }
+        }
+		
+        function createCustomAnswerSet(regId) {
+            var self = this;
+            return self.manager.createEntity('Answer');
         }
     }
 })();

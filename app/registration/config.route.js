@@ -150,6 +150,12 @@
                     templateUrl: 'app/registration/views/registrationEditConfirm.part.html'
                 }
             }, {
+                url: '/registration/:regId/transferQuestions',
+                config: {
+                    title: 'Edit Registration',
+                    templateUrl: 'app/registration/views/transferQuestions.part.html'
+                }
+            }, {
                 url: '/kitchensink',
                 config: {
                     title: 'Kitchen Sink',

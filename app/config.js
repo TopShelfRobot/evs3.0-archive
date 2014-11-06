@@ -14,7 +14,7 @@
 	
 	var apiPath = "";
 	 //apiPath = "http://localhost:55972";
-	apiPath = "http://evs30api.eventuresports.info";
+	apiPath = "http://dev30.eventuresports.info";
 
 	 var remoteServiceName = apiPath + '/breeze/breeze/';
 	 var remoteApiName = apiPath + '/kendo/';
