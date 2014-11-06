@@ -1,9 +1,9 @@
 (function () {
     'use strict';
     var controllerId = 'enterpriselaunchpad';
-    angular.module('app').controller(controllerId, ['$http','common', 'datacontext', 'config', 'ExcelService', enterpriselaunchpad]);
+    angular.module('app').controller(controllerId, ['common', 'datacontext', 'config', 'ExcelService', enterpriselaunchpad]);
 
-    function enterpriselaunchpad($http, common, datacontext, config, excel) {
+    function enterpriselaunchpad(common, datacontext, config, excel) {
         var getLogFn = common.logger.getLogFn;
         var log = getLogFn(controllerId);
 
