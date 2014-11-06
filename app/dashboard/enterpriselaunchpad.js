@@ -8,22 +8,28 @@
         var log = getLogFn(controllerId);
 
         var vm = this;
-
         vm.title = 'app';
-
         vm.EventureGridOptions = {};
-
         vm.ownerId = 1;
-
+        vm.eventures = [];
 
         activate();
 
         function activate() {
-            var promises = [NotificationGrid(), TreeView(), Overview()]
+            var promises = [getEvents(), NotificationGrid(),  Overview()];
             common.activateController(promises, controllerId)
                 .then(function () {
-                  //log('Activated Eventure Center View');
+                    //log('Activated Eventure Center View');
+                    alert('gote events');
+                    TreeView();
                 });
+        }
+
+        function getEvents() {
+            return datacontext.eventure.getEventsGroupedByYearByOwnerId(1)
+              .then(function (data) {
+                  return vm.eventures = data;
+              });
         }
 
         function Overview() {
@@ -104,7 +110,7 @@
                 //        }
                 //    ], "text": 2010
                 //}]
-                dataSource: treeviewapi
+                dataSource: vm.events
 
             };
 
