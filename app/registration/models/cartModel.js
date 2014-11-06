@@ -97,10 +97,10 @@
         };
 
         cart.removeRegistration = function (selectedItem) {
-            for (var i = 0; i < vm.registrations.length; i++) {
-                var current = vm.registrations[i];
+            for (var i = 0; i < cart.registrations.length; i++) {
+                var current = cart.registrations[i];
                 if (current === selectedItem) {
-                    vm.registrations.splice(i, 1);
+                    cart.registrations.splice(i, 1);
                     break;
                 }
             }
