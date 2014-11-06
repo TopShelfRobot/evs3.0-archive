@@ -134,7 +134,7 @@
         };
 
 
-        function registration(displayEvent, displayList, email, fee, eventureId, eventureListId, partId, name, stockAnswerSet, groupId, group2Id, quantity, eventureListTypeId) {
+        function registration(displayEvent, displayList, email, fee, eventureId, eventureListId, partId, name, answers, groupId, group2Id, quantity, eventureListTypeId) {
             var me = this;
             me.displayEvent = displayEvent;
             me.displayList = displayList;
@@ -147,7 +147,7 @@
             me.name = name;
             me.groupId = groupId;
             me.group2Id = group2Id;
-            me.stockAnswerSet = stockAnswerSet;
+            me.answers = answers;
             me.quantity = quantity;
             me.lineTotal = quantity * fee;
             me.eventureListTypeId = eventureListTypeId;
