@@ -46,14 +46,15 @@
                     position: "bottom"
                 },
                 series: [{
-
                     type: "column",
                     field: "Rev",
-                    name: "Revenue"
+                    name: "Revenue",
+                    axis: "Revenue"
                 }, {
                     type: "line",
                     field: "Regs",
-                    name: "Registrations"
+                    name: "Registrations",
+                    axis: "Registrations"
                 }],
                 valueAxis: [{
                     name: "Revenue",
@@ -63,10 +64,14 @@
                     title: { text: "Registrations" }
                 }],
                 categoryAxis: {
-                    baseUnit: "months",
+                    field: "Month",
                     majorGridLines: {
                         visible: false
                     }
+                },
+                tooltip: {
+                    visible: true,
+                    template: "#= series.name #: #= value #"
                 }
             };
         }
