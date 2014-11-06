@@ -1,9 +1,9 @@
 (function () {
     'use strict';
     var controllerId = 'enterpriselaunchpad';
-    angular.module('app').controller(controllerId, ['common', 'datacontext', 'config', 'ExcelService', enterpriselaunchpad]);
+    angular.module('app').controller(controllerId, ['$http','common', 'datacontext', 'config', 'ExcelService', enterpriselaunchpad]);
 
-    function enterpriselaunchpad(common, datacontext, config, excel) {
+    function enterpriselaunchpad($http, common, datacontext, config, excel) {
         var getLogFn = common.logger.getLogFn;
         var log = getLogFn(controllerId);
 
@@ -20,15 +20,14 @@
             common.activateController(promises, controllerId)
                 .then(function () {
                     //log('Activated Eventure Center View');
-                    alert('gote events');
-                    TreeView();
                 });
         }
 
         function getEvents() {
             return datacontext.eventure.getEventsGroupedByYearByOwnerId(1)
               .then(function (data) {
-                  return vm.eventures = data;
+                  vm.eventures = data;
+                  return vm.eventures;
               });
         }
 
@@ -86,44 +85,9 @@
             vm.overviewChart.redraw();
         };
 
-
-        function TreeView() {
-            //var treeviewapi = config.remoteApiName +'Eventures/GetEventsGroupedByYearByOwnerId/' + vm.ownerId;
-            var treeviewapi = new kendo.data.HierarchicalDataSource({
-                transport: {
-                    read: {
-                        url: "http://dev30.eventuresports.info/kendo/Eventures/GetEventsGroupedByYearByOwnerId/1",
-                        dataType: "json"
-                    }
-                }
-            });
-
-
-            vm.treeviewOptions = {
-                template: kendo.template($("#treeview-template").html()),
-
-                //dataSource: [{
-                //    "items":[
-                //        {
-                //            "Id": 1, "text": "2010 big event"
-                //        },
-                //        {
-                //            "Id": 2, "text": "2010 bad event"
-                //        },
-                //        {
-                //            "Id":3, "text":"2010 test event"
-                //        }
-                //    ], "text": 2010
-                //}]
-                dataSource: vm.events
-
-            };
-
-
-
-        }
-
-
+        vm.treeviewOptions = {
+            template: kendo.template($("#treeview-template").html())
+        };
 
         function NotificationGrid() {
           var notifApi = config.remoteApiName + 'Resources/GetNotificationsByOwnerId/' + vm.ownerId;
