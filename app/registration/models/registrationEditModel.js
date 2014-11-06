@@ -5,6 +5,8 @@
 		
 		this.isDefer = false;  // by default it is a transfer
 		this.transferListing = null;
+		this.transferQuestions = [];
+		this.transferAnswers = [];
 		this.current = null;
 		
 		this.setTransfer = function(newListing){
@@ -25,8 +27,8 @@
 		this.getNewQuestions = function(){
 			return datacontext.question.getCustomQuestionSetByEventureListId(self.transferListing.id)
 			.then(function(qs){
-				this.transferQuestions = qs;
-				this.transferAnswers = [];
+				self.transferQuestions = qs;
+				self.transferAnswers = [];
 			});
 		};
 		

@@ -4,7 +4,7 @@
 	
 	function Controller($routeParams, $location, $q, model, common, config){
 		var self = this;
-		
+		this.model = model;
 		this.regId = $routeParams.regId;
 		
 		this.submit = function(){
