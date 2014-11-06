@@ -28,7 +28,7 @@
         guid: 0,
         logoImageName: '/Content/images/logo.png',
 
-        houseId: 18,    //this is temp needs to be removed //mjb
+        houseId: 2,    //this is temp needs to be removed //mjb
         mr_houseId: 0,
         houseName: "",
         accessType: "none",

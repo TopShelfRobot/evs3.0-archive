@@ -10,6 +10,7 @@
   <div class="row">
     <div class="col-sm-3">
       <div kendo-tree-view="tree"
+           k-data-source="vm.eventures"
            k-options="vm.treeviewOptions"
            k-on-change="selectedItem = item"></div>
     </div>
@@ -26,12 +27,11 @@
 </section>
 
 <script id="treeview-template" type="text/kendo-ui-template">
-
   # if (item.items) { #
     #: item.text #
   # } #
 
   # if (!item.items) { #
-    <a ng-href='\#/#=item.Id#'>#: item.text #</a>
+    <a ng-href='\#/enterpriseeventure/#=item.id#'>#: item.text #</a>
   # } #
 </script>
