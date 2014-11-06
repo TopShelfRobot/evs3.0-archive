@@ -24,7 +24,7 @@
         }
 
         function getEvents() {
-            return datacontext.eventure.getEventsGroupedByYearByOwnerId(1)
+            return datacontext.eventure.getEventuresGroupedByYearByOwnerId(1)
               .then(function (data) {
                   vm.eventures = data;
                   return vm.eventures;

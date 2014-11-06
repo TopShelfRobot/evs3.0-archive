@@ -31,7 +31,7 @@
             this.getEventureListTypesByOwnerId = getEventureListTypesByOwnerId;
             this.createEventureList = createEventureList;
 
-            this.getEventsGroupedByYearByOwnerId = getEventsGroupedByYearByOwnerId;
+            this.getEventuresGroupedByYearByOwnerId = getEventuresGroupedByYearByOwnerId;
 
             this.getGroupsByEventureListId = getGroupsByEventureListId;
             this.getGroupsActiveByEventureListId = getGroupsActiveByEventureListId;
@@ -61,9 +61,9 @@
             }
         }
 
-        function getEventsGroupedByYearByOwnerId(id) {
+        function getEventuresGroupedByYearByOwnerId(id) {
             var self = this;
-            var query = entityQuery.from('GetEventsGroupedByYearByOwnerId')
+            var query = entityQuery.from('GetEventuresGroupedByYearByOwnerId')
                 //.where ("id" == 1 );
                 .withParameters({ id: id });
                 //.orderBy('sortOrder');

@@ -23,7 +23,7 @@
                                 <select class="form-control" ng-model="setq.workingQuestion.questionType">
                                   <option value="text">Text Box</option>
                                   <option value="dropdown">Dropdown</option>
-                                  <option value="radio">Radio</option>
+                                  <!--<option value="radio">Radio</option>-->
                                   <option value="checkbox">Check Box</option>
                               </select>
                           </td>
@@ -76,9 +76,11 @@
           <table class="table table-responsive">
               <thead>
                   <tr>
-                      <th class="col-xs-5">Question</th>
+                      <th class="col-xs-3">Question</th>
                       <th class="col-xs-3">Type</th>
                       <th class="col-xs-3">Answers</th>
+                      <th class="col-xs-1">Required</th>
+                      <th class="col-xs-1">Active</th>
                       <th class="col-xs-1"/>
                   </tr>
               </thead>
@@ -87,6 +89,8 @@
                       <td>{{q.questionText}}</td>
                       <td>{{q.questionType}}</td>
                       <td>{{q.options}}</td>
+                      <td>{{q.isRequired}}</td>
+                      <td>{{q.active}}</td>
                       <td><button class="btn btn-default btn-block" ng-click="setq.editQuestion(key)"><em class="glyphicon glyphicon-edit"></em>&nbsp;Edit</button></td>
                   </tr>
               </tbody>
