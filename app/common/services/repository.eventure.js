@@ -181,8 +181,8 @@
 
         function getEventureListTypesByOwnerId(ownerId) {
             var self = this;
-            var query = entityQuery.from('EventureListTypes')
-                 .where("ownerId", "==", ownerId);
+            var query = entityQuery.from('EventureListTypeLookups');
+                 //.where("ownerId", "==", ownerId);
 
             return self.manager.executeQuery(query)
                .then(querySucceeded, self._queryFailed);

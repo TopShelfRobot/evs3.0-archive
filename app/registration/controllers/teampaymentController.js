@@ -15,16 +15,16 @@
 	                    $scope.fee = item.currentFee;
 	                    cartModel.fee = item.currentFee;
 	                    //alert('itemlistingtype: ' + item.eventureListTypeId + 'fee: ' + item.currentFee)
-	                    switch (item.eventureListTypeId) {
-	                        case 2:    //team sponsor
+	                    switch (item.eventureListType) {
+	                        case "TeamSponsored":    //team sponsor
 	                            $scope.isIndividualVisible = true;
 	                            $scope.userPaying = item.currentFee;
 	                            break;
-	                        case 3:   //team suggest
+	                        case "TeamSuggest":   //team suggest
 	                            $scope.isSuggestPayVisible = true;
                             
 	                            break;
-	                        case 4:    //team all pays the same
+	                        case "TeamIndividual":    //team all pays the same
 	                            $scope.isIndividualVisible = true;
 	                            $scope.userPaying = item.currentFee;
 	                            break;
@@ -64,7 +64,7 @@
 					console.log(res);
 					$.blockUI({ message: 'Processing order...' });
 					cartOrder.stripeToken = res.id;
-					$http.post(config.apiPath + "/api/Payment/PostTeam", cartOrder)
+					$http.post(config.apiPath + "/api/Payment/Post", cartOrder)
 				        .success(function (result) {
 						    console.log("result: " + result);
                             $location.path("/receipt/" + result);

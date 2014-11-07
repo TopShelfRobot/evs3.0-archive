@@ -16,13 +16,15 @@
 	    vm.ownerId = config.owner.ownerId;
 
 	    vm.list = {};
-	    vm.listTypes = {};
+	    vm.listTypes = [];
 	    activate();
 
 		function activate() {
 		    common.activateController(getEventureList(), getListTypes(), controllerId)
 				.then(function() {
-					//log('Activated list typessssss');
+				    //log('Activated list typessssss');
+				    //console.log(vm.listTypes);
+				    //console.log(vm.list);
 				});
 		}
 
@@ -30,7 +32,10 @@
 		    return datacontext.eventure.getEventureListTypesByOwnerId(vm.ownerId)
 					.then(function (data) {
 					    //applyFilter();
-					    return vm.listTypes = data;
+					    //console.log('testta');
+					    vm.listTypes = data;
+					    console.log(vm.listTypes);
+					    return vm.listTypes;
 					});
 	    }
 

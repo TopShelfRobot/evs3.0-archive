@@ -38,8 +38,8 @@
 		
         $scope.register = function(eventure, eventureList, participant) {
             //mjb cartModel.fee = $scope.selection.currentFee;
-			
-			if(eventureList.eventureListTypeId == 1){
+            //alert(eventureList.eventureListType);
+           if(eventureList.eventureListType == "Standard"){   //enum? mjb
 	            $location.path("/eventure/" + eventure.id + "/list/" + eventureList.id + "/questions")
 	                    .search("uid", participant.id);
 			}else{

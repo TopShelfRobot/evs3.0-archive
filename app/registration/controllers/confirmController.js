@@ -16,9 +16,9 @@
 	
         // initialize it
         $scope.submitDisabled = true;
-		
-		var promises = [
-	        $q.all([datacontext.participant.getOwnerById(config.owner.ownerId),
+
+        var promises = [
+            $q.all([datacontext.participant.getOwnerById(config.owner.ownerId),
 	            datacontext.participant.getParticipantById(config.owner.houseId)
 	        ])
 	            .then(function(output){
