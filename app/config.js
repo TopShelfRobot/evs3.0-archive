@@ -14,7 +14,7 @@
 	
 	var apiPath = "";
     //apiPath = "http://localhost:55972";
-    apiPath = "http://dev30.eventuresports.info";
+    //apiPath = "http://dev30.eventuresports.info";
 	
 
 	 var remoteServiceName = apiPath + '/breeze/breeze/';
@@ -36,7 +36,7 @@
         guid: 0,
         logoImageName: '/Content/images/logo.png',
 
-        houseId: 1,    //this will be set by shell
+        houseId: 2,    //this will be set by shell
         mr_houseId: 0,
         houseName: "",
         accessType: "none",

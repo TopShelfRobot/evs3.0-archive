@@ -6,7 +6,7 @@
     // For use with the HotTowel-Angular-Breeze add-on that uses Breeze
     //var remoteServiceName = 'breeze/Breeze';
 	var apiPath = "";
-	apiPath = "http://localhost:55972";
+	//apiPath = "http://localhost:55972";
     //apiPath = "http://dev30.eventuresports.info";
     
 
