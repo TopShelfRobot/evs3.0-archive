@@ -23,12 +23,23 @@
 		
 		this.totalPrice = 0;
 		this.surcharges = [];
+		this.regId = null;
 		
 		this.getNewQuestions = function(){
 			return datacontext.question.getCustomQuestionSetByEventureListId(self.transferListing.id)
 			.then(function(qs){
+				console.log("qs:", qs);
 				self.transferQuestions = qs;
-				self.transferAnswers = [];
+				self.transferAnswers = {};
+				for(var k = 0; k < self.transferQuestions.length; k++){
+					self.transferAnswers[self.transferQuestions[k].id] = datacontext.question.createCustomAnswer(self.regId, self.transferQuestions[k].id)
+				}
+				
+				// delete the previous answers
+				for(var key in self.customAnswers){
+					self.customAnswers[key].entityAspect.setDeleted();
+				}
+				return self.transferAnswers;
 			});
 		};
 		
@@ -73,6 +84,7 @@
 		this.load = function(regId){
 			
 			if(!loaded){
+				self.regId = regId;
 				return datacontext.registration.getRegistrationById(regId)
 					.then(function(reg){
 					
@@ -131,7 +143,6 @@
 			}else{
 				return;
 			}
-			
 		};
 	}
 	

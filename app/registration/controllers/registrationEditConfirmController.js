@@ -35,6 +35,7 @@
                             console.error("ERROR:", err.toString());
                         })
                         .finally(function () {
+							// model.saveAnswers();
                             $.unblockUI();
                         });
                 });

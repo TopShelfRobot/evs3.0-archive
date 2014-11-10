@@ -20,7 +20,7 @@
 				ng-if"question.active">
             <label class="col-6 col-sm-6 col-lg-6 control-label" >{{question.questionText}}</label>
             <div class="col-6 col-sm-6 col-lg-6">
-                <div ng-repeat="o in question.qOptions">
+                <div ng-repeat="o in question.options.split(',')">
                     <label class="radio-inline">
 						<input type="radio" 
 							name="raiod-{{question.id}}"
