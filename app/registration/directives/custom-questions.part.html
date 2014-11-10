@@ -7,8 +7,8 @@
             <label class="col-6 col-sm-6 col-lg-6 control-label" >{{question.questionText}}</label>
             <div class="col-6 col-sm-6 col-lg-6">
                 <select class="form-control" 
-						ng-model="answers[key]" 
-						ng-options="o for o in question.qOptions" 
+						ng-model="answers[question.id].answerText" 
+						ng-options="o for o in question.options.split(',')" 
 						ng-required="question.isRequired">
                 	<option value="">-- choose --</option>
                 </select>
@@ -24,7 +24,7 @@
                     <label class="radio-inline">
 						<input type="radio" 
 							name="raiod-{{question.id}}"
-							ng-model="answers[key]"
+							ng-model="answers[question.id].answerText"
 							ng-value="o"
 							ng-required="$parent.isRequired"/>
 						<span>{{o}}</span>
@@ -39,7 +39,7 @@
             <label class="col-6 col-sm-6 col-lg-6 control-label" >{{question.questionText}}</label>
             <div class="col-6 col-sm-6 col-lg-6">
                 <input type="text" class="form-control" 
-					ng-model="answers[key]"
+					ng-model="answers[question.id].answerText"
 					ng-required="question.isRequired">
 				</input>
              </div>
@@ -50,7 +50,7 @@
             <label class="col-6 col-sm-6 col-lg-6 control-label">{{question.questionText}}</label>
 			<div class="col-6 col-sm-6 col-lg-6">
                 <input type="checkbox" 
-					ng-model="answers[key]" 
+					ng-model="answers[question.id].answerText" 
 					ng-required="question.isRequired">
 				</input>
             </div>

@@ -29,7 +29,7 @@
             this.getCustomQuestionSetByEventureListId = getCustomQuestionSetByEventureListId;
             this.getCustomAnswersSetByEventureListId = getCustomAnswersSetByEventureListId;
 			this.getCustomAnswerSetByRegistrationId = getCustomAnswerSetByRegistrationId;
-			this.createCustomAnswerSet = createCustomAnswerSet;
+			this.createCustomAnswer = createCustomAnswer;
         }
 
         // Allow this repo to have access to the Abstract Repo's functions,
@@ -144,19 +144,19 @@
             var self = this;
 			regId = Number(regId);
             var query = entityQuery.from('Answers')
-                .where('id', '==', regId);
+                .where('registrationId', '==', regId);
 
             return self.manager.executeQuery(query)
                 .then(querySucceeded, self._queryFailed);
 
             function querySucceeded(data) {
-                return data.results[0];
+                return data.results;
             }
         }
 		
-        function createCustomAnswerSet(regId) {
+        function createCustomAnswer(regId, questId) {
             var self = this;
-            return self.manager.createEntity('Answer');
+            return self.manager.createEntity('Answer', {registrationId: regId, questionId: questId});
         }
     }
 })();

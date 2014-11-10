@@ -98,15 +98,27 @@
 				
 						var defQuestions = datacontext.question.getCustomQuestionSetByEventureListId(reg.eventureListId)
 							.then(function(qs){
+								console.log("qs:", qs);
 								self.customQuestions = qs;
 								return datacontext.question.getCustomAnswerSetByRegistrationId(regId);
 							})
-							.then(function(ans){
-								self.customAnswers = ans;
-								// if(!self.customAnswers){
-								// 	self.customAnswers = datacontext.question.createCustomAnswerSet();
-								// 	console.log("custom answers:", self.customAnswers);
-								// }
+							.then(function(list){
+								console.log("ans:", list);
+								self.customAnswers = {};
+								var ans = null;
+								for(var k = 0; k < self.customQuestions.length; k++){
+									ans = null;
+									for(var j = 0; j < list.length; j++){
+										if(list[j].questionId == self.customQuestions[k].id){
+											ans = list[j];
+											break;
+										}
+									}
+									if(!ans){
+										ans = datacontext.question.createCustomAnswer(regId, self.customQuestions[k].id)
+									}
+									self.customAnswers[self.customQuestions[k].id] = ans;
+								}
 								return self.customAnswers;
 							});
 				
