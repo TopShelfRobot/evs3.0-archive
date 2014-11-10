@@ -344,6 +344,12 @@
                     title: 'Edit a Registration',
                     templateUrl: 'app/common/registrationedit.html'
                 }
+            }, {
+                url: '/email',
+                config: {
+                    title: 'Participant Communication',
+                    templateUrl: 'app/dashboard/email.html'
+                }
             }
         ];
     }
