@@ -144,8 +144,7 @@
         <div class="form-group">
           <label for="ListingType" class="col-lg-6 control-label">Listing Type:</label>
             <div class="col-lg-6">
-                {{vm.list.eventureListType}}
-                <select class="form-control" name="ListingType" ng-model="vm.list.eventureListType" ng-options="t.value as t.text for t in vm.listTypes">
+                <select class="form-control" name="ListingType" ng-model="vm.list.eventureListType" ng-options="t.text as t.text for t in vm.listTypes">
                     <option value="">Please Select</option>
                 </select>
                 <!-- <select class="form-control" name="ListingType" ng-model="vm.list.eventureListType">
