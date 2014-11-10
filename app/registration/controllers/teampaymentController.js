@@ -11,7 +11,6 @@
 		var promises = [
 	        datacontext.eventure.getEventureListById(cartModel.eventureListId)
 	            .then(function (item) {
-					console.log(item.eventureListType);
 	                if (item) {
 	                    $scope.fee = item.currentFee;
 	                    cartModel.fee = item.currentFee;
