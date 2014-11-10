@@ -16,12 +16,13 @@
             };
 
             StripeCheckout.open({
+                //key: 'pk_live_kX0HvkyB96C1aqldjSpsufu0',    //this is hardcoded //mjb
                 key: 'pk_test_pGFaKfcKFrOuiR3PNDFsrhey',
                 address: false,
                 amount: userPaying * 100,  //this.getTotalPrice() * 100, /** expects an integer **/
                 currency: 'usd',
-                name: 'Eventure Sports',
-                description: 'Description',
+                name: 'Louisville City FC',
+                description: 'Player Combine',
                 panelLabel: 'Checkout',
                 token: token
             });

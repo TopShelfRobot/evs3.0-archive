@@ -2,7 +2,7 @@
 
     var app = angular.module('evReg', [
         // Angular modules
-        'ngAnimate',        // animations
+        //'ngAnimate',        // animations
         'ngRoute',          // routing
         'ngSanitize',       // sanitizes html bindings (ex: sidebar.js)
 

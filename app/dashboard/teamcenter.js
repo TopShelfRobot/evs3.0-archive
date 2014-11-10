@@ -1,9 +1,9 @@
 (function () {
     'use strict';
     var controllerId = 'teamcenter';
-    angular.module('app').controller(controllerId, ['common', 'datacontext', 'config', 'ExcelService', teamcenter]);
+    angular.module('app').controller(controllerId, ['$http', 'common', 'datacontext', 'config', 'ExcelService', teamcenter]);
 
-    function teamcenter(common, datacontext, config, excel) {
+    function teamcenter($http, common, datacontext, config, excel) {
         var getLogFn = common.logger.getLogFn;
         var log = getLogFn(controllerId);
 
@@ -82,7 +82,6 @@
           vm.detailGridOptions = function(e) {
 
             var teamapi = config.remoteApiName + 'Teams/GetTeamMembersByTeamId/' + e.Id;
-
             vm.remove = function() {
                 alert('Removing: ' + e.Id );
                 //datacontext.team.removeTeamMemberById(e.Id);
@@ -90,8 +89,14 @@
 
             };
 
-            vm.resend = function() {
-                alert('Resending: ' + e.Id);
+            vm.resend = function (memberId) {
+                $http.post(config.apiPath + "/breeze/breeze/SendSoccerTryoutInviteMail/" + memberId)
+                    .success(function(result) {
+                        alert('Invitation has been sent');
+                    })
+                    .error(function(err) {
+                        console.error("ERROR:", err.toString());
+                    });
             };
 
             return {
@@ -101,13 +106,21 @@
                     transport: {
                         read: teamapi
                     },
+                    schema: {
+                        model: {
+                            fields: {
+                                Id: { type: "number" }
+                            }
+                        }
+                    },
                     serverPaging: false,
                     serverSorting: false,
                     serverFiltering: false,
-                    pageSize: 5
+                    pageSize: 15    //mjb fix this just for lcfc??
                 },
                 sortable: true,
                 pageable: true,
+                detailTemplate: kendo.template($("#paymenttemplate").html()),
                 columns: [{
                         field: "Name",
                         title: "Name"
@@ -122,8 +135,8 @@
                     },{
                         field: '',
                         title: '',
-                        template: '<button ng-click="vm.resend()" class="btn btn-success btn-block"><em class="glyphicon glyphicon-send"></em>&nbsp;Resend Invitation</button>',
-                        width: 170
+                        template: '<button ng-click="vm.resend(#=Id#)" class="btn btn-success btn-block"><em class="glyphicon glyphicon-send"></em>&nbsp;Resend Invitation</button>',
+                        width: 180
                     },{
                         field: '',
                         title: '',
@@ -132,6 +145,55 @@
                     }]
             };
           };
+
+            vm.paymentDetailGridOptions = function(e) {
+
+                var paymentapi = config.remoteApiName + 'Teams/GetPaymentsByTeamMemberId/' + e.Id;
+
+                vm.refund = function() {
+                    alert('Refunding: ' + e.Id );
+                    //datacontext.team.removeTeamMemberById(e.Id);
+                    vm.teamgrid.refresh();
+
+                };
+
+                vm.resendReceipt = function() {
+                    alert('Resending: ' + e.Id);
+                };
+
+                return {
+                    dataSource: {
+                        type: "json",
+                        transport: {
+                            read: paymentapi
+                        },
+                        serverPaging: false,
+                        serverSorting: false,
+                        serverFiltering: false,
+                        pageSize: 5
+                    },
+                    sortable: true,
+                    pageable: true,
+                    columns: [{
+                        field: "Id",
+                        title: "Confirmation Number"
+                    }, {
+                        field: "Amount",
+                        title: "Amount",
+                        format: "{0:c}"
+                    },{
+                        field: '',
+                        title: '',
+                        template: '<button ng-click="vm.resendReceipt()" class="btn btn-success btn-block"><em class="glyphicon glyphicon-send"></em>&nbsp;Resend Receipt</button>',
+                        width: 180
+                    },{
+                        field: '',
+                        title: '',
+                        template: '<button ng-click="vm.remove()" class="btn btn-danger btn-block"><em class="glyphicon glyphicon-usd"></em>&nbsp;Refund</button>',
+                        width: 100
+                    }]
+                };
+            };
 
         }
       

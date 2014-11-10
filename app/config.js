@@ -13,11 +13,12 @@
     //var remoteApiName = 'http://evs30api.eventuresports.info/kendo/';
 	
 	var apiPath = "";
+
 	 //apiPath = "http://localhost:55972";
 	apiPath = "http://dev30.eventuresports.info";
-
-	 var remoteServiceName = apiPath + '/breeze/breeze/';
-	 var remoteApiName = apiPath + '/kendo/';
+	
+	var remoteServiceName = apiPath + '/breeze/breeze/';
+	var remoteApiName = apiPath + '/kendo/';
 
     var events = {
         controllerActivateSuccess: 'controller.activateSuccess',
@@ -31,6 +32,7 @@
 
     var owner = {
         ownerId: 1,
+
 		isAdmin : true,
         houseEmail: 0,
         guid: 0,

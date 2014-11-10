@@ -20,9 +20,12 @@
         $scope.isWaiverChecked = false;
         $scope.groupId = 0;
         $scope.group2Id = 0;
+        $scope.quantity = 1;
+				
+		var promises = [];
 		
-		var loadCustomQuestions = function(){
-			return datacontext.question.getCustomQuestionSetByEventureListId($routeParams.listId)
+		promises.push(
+			datacontext.question.getCustomQuestionSetByEventureListId($routeParams.listId)
 	            .then(function(results){
 					for(var i = 0; i < results.length; i++){
 						results[i].answer = null;
@@ -36,15 +39,13 @@
 					$scope.customQuestions = results;
 					console.log("Custom Questions:", $scope.customQuestions);
 					return results;
-	            });
-		};
+	            })
+				.then(function(results){
+					$scope.customAnswers = new Array(results.length);
+				})
+		);
 		
-		loadCustomQuestions()
-			.then(function(results){
-				$scope.customAnswers = new Array(results.length);
-			});
-
-		var promises = [];
+		
 		promises.push(
 	        datacontext.eventure.getGroupsActiveByEventureListId($routeParams.listId)
 	            .then(function (data) {
@@ -62,6 +63,37 @@
 					return data;
 				})
 		);
+		
+		promises.push(
+	        datacontext.eventure.getEventureListById($routeParams.listId)
+				.then(function(data){
+					$scope.eventureList = data;
+					return data;
+				})
+		);
+
+        promises.push(
+            datacontext.eventure.getEventureById($routeParams.eventureId)
+                .then(function(data) {
+                    $scope.eventure = data;
+                    return data;
+                })
+        );
+		
+		promises.push(
+			(function(){
+				var partId = $location.search()["uid"];
+				if(!partId){
+					partId = config.owner.houseId;
+				}
+				return datacontext.participant.getParticipantById(partId)
+					.then(function(result){
+						$scope.participant = result;
+					});
+			})()
+		);
+		
+		common.activateController(promises, controllerId);
 
         $scope.stockAnswerSet = {
 	            shirtSize: "",
@@ -72,10 +104,10 @@
             var answers = [];
 			var ans;
 			for(var i = 0; i < $scope.customAnswers.length; i++){
-				ans = {
-					id : $scope.customQuestions[i].id,
-					answer : $scope.customAnswers[i],
-				}
+			    ans = {
+			        id: $scope.customQuestions[i].id,
+			        answer: $scope.customAnswers[i],
+			    };
 				if($scope.customQuestions[i].active){
 					answers.push(ans);
 				}
@@ -84,10 +116,13 @@
         };
 
         $scope.next = function () {
-            cartModel.currentGroupId = $scope.groupId;
-            cartModel.currentStockAnswerSet = $scope.stockAnswerSet;
-            cartModel.currentCustomAnswerSet = getCustomAnswers();
-            cartModel.addRegistration();
+            //cartModel.currentGroupId = $scope.groupId;
+            //cartModel.currentStockAnswerSet = $scope.stockAnswerSet;
+            //cartModel.currentCustomAnswerSet = getCustomAnswers();
+			//cartModel.setCurrentParticipant($scope.participant);
+			//cartModel.setCurrentEventure($scope.eventure);
+			//cartModel.setCurrentEventureList($scope.eventureList);
+            cartModel.addRegistration($scope.eventure, $scope.eventureList, $scope.participant, getCustomAnswers(), $scope.groupId, $scope.group2Id, $scope.quantity);
 			$location.$$search = {};
             $location.path("/eventure/");
         };

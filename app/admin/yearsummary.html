@@ -14,62 +14,64 @@
   <br>
   <form class="form-horizontal">
     <div class="row">
-      <div class="col-sm-3">
-        <ul class="list-group">
-            <li class="list-group-item">
-                <input id="baseUnitYears" name="baseUnit"
-                        type="radio" value="years" autocomplete="off" />
-                <label for="baseUnitYears">Years</label>
-            </li class="list-group-item">
-            <li class="list-group-item">
-                <input id="baseUnitMonths" name="baseUnit"
-                        type="radio" value="months" checked="checked" autocomplete="off" />
-                <label for="baseUnitMonths">Months</label>
-            </li>
-            <li class="list-group-item">
-                <input id="baseUnitWeeks" name="baseUnit"
-                        type="radio" value="weeks" autocomplete="off" />
-                <label for="baseUnitWeeks">Weeks</label>
-            </li>
-        </ul>
-      </div>
-      <div class="col-sm-3">
-        <div class="form-group">
-            <label for="addoncode" class="col-lg-4 control-label">Start Year:</label>
-            <div class="col-lg-8">
-              <select class="form-control" id="eventuredropdown">
-              </select>
-            </div>
-          </div>
-          <!-- /field -->
-      </div>
-      <div class="col-sm-3">
-        <div class="form-group">
-            <label for="addoncode" class="col-lg-4 control-label">Event:</label>
-            <div class="col-lg-8">
-              <select class="form-control" id="eventuredropdown">
-              </select>
-            </div>
-          </div>
-          <!-- /field -->
-      </div>
-      <div class="col-sm-3">
-        <div class="form-group">
-            <label for="addoncode" class="col-lg-4 control-label">Field:</label>
-            <div class="col-lg-8">
-              <select class="form-control" id="eventuredropdown">
-              </select>
+        <div class="col-sm-3">
+            <ul class="list-group">
+                <li class="list-group-item">
+                    <input id="baseUnitYears" name="baseUnit"
+                           type="radio" value="years" autocomplete="off" />
+                    <label for="baseUnitYears">Years</label>
+                </li class="list-group-item">
+                <li class="list-group-item">
+                    <input id="baseUnitMonths" name="baseUnit"
+                           type="radio" value="months" checked="checked" autocomplete="off" />
+                    <label for="baseUnitMonths">Months</label>
+                </li>
+                <li class="list-group-item">
+                    <input id="baseUnitWeeks" name="baseUnit"
+                           type="radio" value="weeks" autocomplete="off" />
+                    <label for="baseUnitWeeks">Weeks</label>
+                </li>
+            </ul>
+        </div>
+        <div class="col-sm-9">
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label for="addoncode" class="col-lg-4 control-label">Start Year:</label>
+                        <div class="col-lg-8">
+                            <select class="form-control" id="eventuredropdown">
+                            </select>
+                        </div>
+                    </div>
+                    <!-- /field -->
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label for="addoncode" class="col-lg-4 control-label">Event:</label>
+                        <div class="col-lg-8">
+                            <select class="form-control" id="eventuredropdown">
+                            </select>
+                        </div>
+                    </div>
+                    <!-- /field -->
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label for="addoncode" class="col-lg-4 control-label">Field:</label>
+                        <div class="col-lg-8">
+                            <select class="form-control" id="eventuredropdown">
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <!-- /field -->
             </div>
             <div class="row">
-              <div class="col-lg-8 col-lg-offset-4">
-                <hr>
-                <button class="btn btn-success btn-block" ng-click="vm.generateChart()">Generate Summary Chart</button>
-              </div>
+                <div class="col-sm-6 col-sm-offset-6">
+                    <button class="btn btn-success btn-block" ng-click="vm.generateChart()"><em class="glyphicon glyphicon-refresh"></em>&nbsp;Generate Summary Chart</button>
+                </div>
             </div>
-
-          </div>
-          <!-- /field -->
-      </div>
+        </div>
     </div>
   </form>
 </section>

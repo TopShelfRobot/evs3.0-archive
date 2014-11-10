@@ -44,7 +44,7 @@
                         </tr>
                     </thead>
                     <tbody data-role="listview">
-                        <tr ng-repate="charge in cart.surcharges">
+                        <tr ng-repeat="charge in cart.surcharges">
                             <td>{{ charge.desc }}</td>
                             <td>{{ charge.amount | currency }}</td>
                         </tr>

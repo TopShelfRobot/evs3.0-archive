@@ -141,6 +141,15 @@
             }
         };
 
+        vm.saveAndNav = function() {
+            return datacontext.save()
+                .then(complete);
+
+            function complete() {
+                alert("Changes have been saved.");
+            }
+        };
+
         vm.resetInputFile = function() {
             var elems = document.getElementsByTagName('input');
             for (var i = 0; i < elems.length; i++) {

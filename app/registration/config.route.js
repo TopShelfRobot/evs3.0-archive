@@ -14,7 +14,7 @@
             // $routeProvider.when(r.url, r.config);
             setRoute(r.url, r.config);
         });
-        $routeProvider.otherwise({ redirectTo: '/kitchensink' });
+        $routeProvider.otherwise({ redirectTo: '/eventure' });
 
 
         function setRoute(url, definition) {
@@ -114,10 +114,16 @@
                     templateUrl: 'app/registration/views/confirm.part.html'
                 }
             }, {
-                url: '/receipt/:teamMemberGuid',
+                url: '/receipt/:paymentId',
                 config: {
                     title: 'Receipt',
                     templateUrl: 'app/registration/views/receipt.part.html'
+                }
+            }, {
+                url: '/orderreceipt/:orderId',
+                config: {
+                    title: 'Receipt Cart',
+                    templateUrl: 'app/registration/views/orderreceipt.part.html'
                 }
             }, {
                 url: '/user-profile',
@@ -154,6 +160,12 @@
                 config: {
                     title: 'Edit Registration',
                     templateUrl: 'app/registration/views/transferQuestions.part.html'
+				}
+			}, {
+                url: '/shoppingcart',
+                config: {
+                    title: 'Shopping Cart',
+                    templateUrl: 'app/registration/views/shoppingcart.part.html'
                 }
             }, {
                 url: '/kitchensink',
