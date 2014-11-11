@@ -95,7 +95,7 @@
 						'partId': self.registration.participantId,
 						'amount': total,
 						'transferNewListName': self.transferListing.name,
-						
+						'paymentType': type,
 					};
 					return $http.post(config.apiPath + "/api/Registrations/Transfer", source);
 				});
