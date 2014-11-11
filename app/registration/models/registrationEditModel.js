@@ -1,6 +1,6 @@
 ;(function(){
 	
-	function Service($q, datacontext, config){
+	function Service($q, $http, datacontext, config){
 		var self = this;
 		
 		this.isDefer = false;  // by default it is a transfer
@@ -76,6 +76,31 @@
 			return total;
 		};
 		
+		this.getTransferId = function () {
+            var transfer = datacontext.registration.createTransfer(self.regId, self.current.id, self.transferListing.id, null, self.registration.participantId);
+            return datacontext.save(transfer)
+                .then(function(){
+                	return transfer.id;
+                });
+	    };
+		
+		this.submitTransfer = function(token, total, type){
+			return self.getTransferId()
+				.then(function(id){
+				
+					var source = {
+						'token': token,
+						'ownerId': config.owner.ownerId,
+						'transferId': id,
+						'partId': self.registration.participantId,
+						'amount': total,
+						'transferNewListName': self.transferListing.name,
+						
+					};
+					return $http.post(config.apiPath + "/api/Registrations/Transfer", source);
+				});
+		};
+		
 		this.saveAnswers = function(){
 			return datacontext.save();
 		};
@@ -147,5 +172,5 @@
 	}
 	
 	
-	angular.module("evReg").service("RegistrationEditModel", ["$q", "datacontext", "config", Service]);
+	angular.module("evReg").service("RegistrationEditModel", ["$q", "$http", "datacontext", "config", Service]);
 })();

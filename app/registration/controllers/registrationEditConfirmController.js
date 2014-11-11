@@ -2,7 +2,7 @@
 	
 	var controllerId = "RegistrationEditConfirm";
 	
-	function Controller($http, $routeParams, config, model, stripe){
+	function Controller($http, $routeParams, $q, config, model, stripe){
 		var self = this;
 		var paymentUrl = config.apiPath + "/api/Payment/PostRegistrationEditPayment";
 		
@@ -13,34 +13,51 @@
 		
 		console.log("model:", model);
 		this.model = model;
-				
-		this.getOrder = function(){
-			return {};
+		
+		this.otherPaymentAdjustment = 0;
+		this.otherPaymentAmmount = 0;
+		
+		this.otherPaymentChange = function(){
+			self.otherPaymentAmmount = Number(model.getTotalPrice() + self.otherPaymentAdjustment);
 		};
 		
-		this.submitPayment = function(){
-			var total = self.getTotalPrice();
-			var cartOrder = self.getOrder();
+		var process = function (token, total, type){
+			$.blockUI({ message: 'Processing order...' });
+			var nextUrl;
+			var def =  model.submitTransfer(token, total, type)
+                .then(function (result) {
+					nextUrl = "/receipt/" + result;
+					return model.saveAnswers()
+                })
+				.then(function(){
+					$location.path(nextUrl);
+					return null;
+				})
+				.catch(function (err) {
+					console.error("ERROR:", err.toString());
+				})
+				.finally(function () {
+					$.unblockUI();
+				});
+			return def;
+		};
+				
+		this.submitPayment = function(type){
+			var total = self.otherPaymentAmmount;
 			
+			switch(type){
+			case "credit":
 				stripe.checkout(total)
-                .then(function (res) {
-					$.blockUI({ message: 'Processing order...' });
-                    console.log(res);
-                    cartOrder.orderToken = res.id;
-                    $http.post(paymentUrl, cartOrder)
-                       .success(function (result) {
-                           $location.path("/receipt/" + result);
-                       })
-                        .error(function (err) {
-                            console.error("ERROR:", err.toString());
-                        })
-                        .finally(function () {
-							// model.saveAnswers();
-                            $.unblockUI();
-                        });
-                });
+	                .then(function(res){
+	                	return process(res.id, total, type);
+	                });
+				break;
+			default:
+				process(null, total, type);
+				break;
+			}
 		};
 	}
 	
-	angular.module("evReg").controller(controllerId, ["$http", "$routeParams", "config", "RegistrationEditModel", "StripeService", Controller]);
+	angular.module("evReg").controller(controllerId, ["$http", "$routeParams", "$q", "config", "RegistrationEditModel", "StripeService", Controller]);
 })();

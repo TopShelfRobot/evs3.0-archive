@@ -92,17 +92,17 @@
                      <div class="form-group">
                            <label class="col-lg-3 control-label">Payment Adjustment</label>
                            <div class="col-lg-9">
-                               <input type="text" size="20" autocomplete="off" class="form-control" data-bind="value: otherPaymentAdjustment"><br />
+                               <input type="text" size="20" autocomplete="off" class="form-control" ng-model="confirm.otherPaymentAdjustment" ng-change="confirm.otherPaymentChange()"><br />
                            </div>
                            <hr>
                            <label class="col-lg-3 control-label">Payment Amount</label>
                            <div class="col-lg-9">
-                               <input type="text" size="20" autocomplete="off" class="form-control" data-bind="value: otherPaymentAmount" disabled><br />
+                               <span type="text" size="20" class="form-control" disabled> {{ confirm.otherPaymentAmmount | currency }}</span><br />
                            </div>
                            <hr>
                            <label class="col-lg-3 control-label">Notes</label>
                            <div class="col-lg-9">
-                               <textarea type="text" size="20" rows="3" autocomplete="off" class="form-control" data-bind="value: otherPaymentNotes"></textarea><br />
+                               <textarea type="text" size="20" rows="3" autocomplete="off" class="form-control" ng-model="confirm.otherPaymentNotes"></textarea><br />
                            </div>
                        </div>
 				</form>
@@ -135,7 +135,7 @@
 					        <button type="button"
 					                class="btn btn-success btn-block pull-right"
 					                ng-disabled="(!confirm.waiverSigned) || (confirm.userPaying == 0 && !confirm.fullPaymentRequired) || (confirm.submitDisabled)"
-					                ng-click="checkout()">
+					                ng-click="confirm.submitPayment(confirm.paymentEnabled)">
 								Complete
 					        </button>
 					    </div>

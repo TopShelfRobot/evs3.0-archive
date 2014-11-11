@@ -118,6 +118,7 @@
         }
 
         function createTransfer(regId, oldListId, newListId, answerId, partId) {
+			var self = this;
             return self.manager.createEntity('EventureTransfer',
                 { registrationId: regId, eventureListIdFrom: oldListId, eventureListIdTo: newListId, stockAnswerSetId: answerId, isComplete: false, participantId: partId, dateCreated: moment().format("MM/DD/YYYY") });
         }
