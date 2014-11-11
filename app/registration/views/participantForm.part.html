@@ -18,25 +18,26 @@
                     <div class="form-group">
                         <label for="Birthdate" class="col-lg-5 control-label">Date Of Birth</label>
                         <div class="col-lg-7">
-							<div class="input-group">
-							 <!-- <datepicker ng-model="participant.dateBirth" min-date="minDate" show-weeks="true" class="well well-sm"></datepicker> -->
-                            <!-- <input class="form-control" name="Birthdate" ng-model="participant.dateBirth" date-input required> -->
-								<input type="text" class="form-control"
-									datepicker-popup="{{format}}"
-									ng-model="participant.dateBirth"
-									is-open="datePicker.opened"
-									min-date="minDate"
-									datepicker-options="dateOptions"
-									date-disabled="disabled(date, mode)"
-									ng-required="true"
-									close-text="Close"
-									ng-click="datePicker.opened = true"/>
-								<span class="input-group-btn">
-									<button type="button" class="btn btn-default" ng-click="open($event)">
-										<i class="glyphicon glyphicon-calendar"></i>
-									</button>
-								</span>
-							</div>
+                            <div sb-date-select ng-model="date.dateBirth"></div>
+							<!--<div class="input-group">-->
+							 <!--&lt;!&ndash; <datepicker ng-model="participant.dateBirth" min-date="minDate" show-weeks="true" class="well well-sm"></datepicker> &ndash;&gt;-->
+                            <!--&lt;!&ndash; <input class="form-control" name="Birthdate" ng-model="participant.dateBirth" date-input required> &ndash;&gt;-->
+								<!--<input type="text" class="form-control"-->
+									<!--datepicker-popup="{{format}}"-->
+									<!--ng-model="participant.dateBirth"-->
+									<!--is-open="datePicker.opened"-->
+									<!--min-date="minDate"-->
+									<!--datepicker-options="dateOptions"-->
+									<!--date-disabled="disabled(date, mode)"-->
+									<!--ng-required="true"-->
+									<!--close-text="Close"-->
+									<!--ng-click="datePicker.opened = true"/>-->
+								<!--<span class="input-group-btn">-->
+									<!--<button type="button" class="btn btn-default" ng-click="open($event)">-->
+										<!--<i class="glyphicon glyphicon-calendar"></i>-->
+									<!--</button>-->
+								<!--</span>-->
+							<!--</div>-->
                         </div>
                     </div>
                     <div class="form-group">
