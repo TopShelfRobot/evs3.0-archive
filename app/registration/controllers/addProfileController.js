@@ -9,6 +9,10 @@
 		
 		// $scope.participant = datacontext.participant.createProfile()
 
+		$scope.date = {
+			dateBirth: '1993-07-03'
+		};
+
 		$scope.submit = function(){
 			
 			var newPart = datacontext.participant.createProfile($scope.participant.email)
@@ -16,6 +20,8 @@
 			for(key in $scope.participant){
 				newPart[key] = $scope.participant[key];
 			}
+			$scope.date.dateBirth = moment($scope.date.dateBirth).toISOString();
+			$scope.participant.dateBirth = $scope.date.dateBirth;
 			datacontext.save()
 				.then(function(){
 					console.log("saved:", newPart);
@@ -29,29 +35,29 @@
 				});
 		};
 
-		$scope.today = function () {
-			$scope.participant.dateBirth = new Date();
-		};
-
-		$scope.today();
-
-		$scope.open = function($event, open) {
-			$event.preventDefault();
-			$event.stopPropagation();
-			$scope[open] = true;
-		};
-		
-		$scope.disableEmail = false;
-
-		$scope.dateOptions = {
-			'year-format': "'yy'",
-			'starting-day': 1,
-			showWeeks: 'false'
-		};
-
-		$scope.formats = ['MM-dd-yyyy', 'yyyy/MM/dd', 'shortDate'];
-
-		$scope.format = $scope.formats[0];
+		//$scope.today = function () {
+		//	$scope.participant.dateBirth = new Date();
+		//};
+        //
+		//$scope.today();
+        //
+		//$scope.open = function($event, open) {
+		//	$event.preventDefault();
+		//	$event.stopPropagation();
+		//	$scope[open] = true;
+		//};
+		//
+		//$scope.disableEmail = false;
+        //
+		//$scope.dateOptions = {
+		//	'year-format': "'yy'",
+		//	'starting-day': 1,
+		//	showWeeks: 'false'
+		//};
+        //
+		//$scope.formats = ['MM-dd-yyyy', 'yyyy/MM/dd', 'shortDate'];
+        //
+		//$scope.format = $scope.formats[0];
 
 	}
 

@@ -53,7 +53,7 @@
 
             if (valid) {
 				$location.search("uid", null);
-                $location.path("/eventure/1/list/1/team/" + cartModel.teamId + "/payment");
+                $location.path("/eventure/"+ cartModel.eventureId + "/list/" + cartModel.eventureListId + "/team/" + cartModel.teamId + "/payment");
             }
         };
     }

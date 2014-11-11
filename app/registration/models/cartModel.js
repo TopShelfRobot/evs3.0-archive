@@ -41,7 +41,7 @@
                 }
             }
             if (!isRegDupe) {
-                cart.registrations.push(new registration(eventure.displayHeading, eventureList.displayName, participant.email, eventureList.currentFee, eventure.id, eventureList.id, participant.id, participant.firstName + ' ' + participant.lastName, answers, groupId, group2Id, quantity));
+                cart.registrations.push(new registration(eventure.displayHeading, eventureList.displayName, participant.email, eventureList.currentFee, eventure.id, eventureList.id, participant.id, participant.firstName + ' ' + participant.lastName, answers, groupId, group2Id, quantity, eventureList.eventureListTypeId));
             }
         };
 
@@ -97,10 +97,10 @@
         };
 
         cart.removeRegistration = function (selectedItem) {
-            for (var i = 0; i < vm.registrations.length; i++) {
-                var current = vm.registrations[i];
+            for (var i = 0; i < cart.registrations.length; i++) {
+                var current = cart.registrations[i];
                 if (current === selectedItem) {
-                    vm.registrations.splice(i, 1);
+                    cart.registrations.splice(i, 1);
                     break;
                 }
             }
@@ -134,7 +134,7 @@
         };
 
 
-        function registration(displayEvent, displayList, email, fee, eventureId, eventureListId, partId, name, stockAnswerSet, groupId, group2Id, quantity, regType) {
+        function registration(displayEvent, displayList, email, fee, eventureId, eventureListId, partId, name, answers, groupId, group2Id, quantity, eventureListTypeId) {
             var me = this;
             me.displayEvent = displayEvent;
             me.displayList = displayList;
@@ -147,9 +147,10 @@
             me.name = name;
             me.groupId = groupId;
             me.group2Id = group2Id;
-            me.stockAnswerSet = stockAnswerSet;
+            me.answers = answers;
             me.quantity = quantity;
             me.lineTotal = quantity * fee;
+            me.eventureListTypeId = eventureListTypeId;
         };
 
         function surcharge(chargeDesc, amount, chargeType, listId, partId, couponId, context) {

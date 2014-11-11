@@ -8,199 +8,60 @@
         var log = getLogFn(controllerId);
 
         var vm = this;
-
         vm.title = 'app';
-
         vm.EventureGridOptions = {};
-
         vm.ownerId = 1;
-
+        vm.eventures = [];
 
         activate();
 
         function activate() {
-            common.activateController(EventureGrid(), PieCharts(), Overview(), NotificationGrid(), controllerId)
+            var promises = [getEvents(), NotificationGrid(),  Overview()];
+            common.activateController(promises, controllerId)
                 .then(function () {
-                  //log('Activated Eventure Center View');
+                    //log('Activated Eventure Center View');
                 });
         }
 
-        function EventureGrid() {
-
-          var status = [{
-            "value": true,
-            "text": "Active",
-          },{
-            "value": false,
-            "text": "Inactive"
-          }];
-
-          var eventureapi = config.remoteApiName + 'eventures/GetAllEventuresByOwnerId/' + vm.ownerId;
-          vm.eventureGridOptions = {
-            toolbar: '<a download="download.xlsx" class="k-button" ng-click="vm.excel(vm.eventureGrid)"><em class="glyphicon glyphicon-save"></em>&nbsp;Export</a>',
-            dataSource: {
-                type: "json",
-                transport: {
-                    read: eventureapi
-                },
-                schema: {
-                    model: {
-                        fields: {
-                            Active: { type: "boolean" },
-                            DisplayDate: { type: "text" },
-                            Id: { type: "number" },
-                            Name: { type: "string" }
-                        }
-                    }
-                },
-                pageSize: 10,
-                serverPaging: false,
-                serverSorting: false
-            },
-            sortable: true,
-            pageable: true,
-            filterable: true,
-            columns: [{
-                field: "Name",
-                title: "Event",
-                template: '<a href="\\\#enterpriseeventure/#=Id#">#=Name#</a>',
-                width: "400px"
-            },{
-                field: "DisplayDate",
-                title: "Date",
-                width: "220px"
-            },{
-                field: "Active",
-                width: "100px",
-                values: status
-            },{
-                title: "",
-                width: "120px",
-                template:'<a class="btn btn-default btn-block" href="\\\#seteventure/#=Id#"><em class="glyphicon glyphicon-edit"></em>&nbsp;Edit</a>'
-            }]
-          };
-
-        }
-
-        function PieCharts() {
-
-          var revapi = config.remoteApiName + 'Registrations/GetRevenuePerEvent/' + vm.ownerId;
-          vm.revByEvent = {
-            theme: "flat",
-            dataSource: {
-                transport: {
-                    read: {
-                        url: revapi,
-                        dataType: "json"
-                    }
-                }
-            },
-            title: {
-                position: "top",
-                text: "Revenue By Event",
-                font: 14,
-            },
-            legend: {
-                visible: false
-            },
-            chartArea: {
-                height: 200
-            },
-            seriesDefaults: {
-                type: "pie",
-                labels: {
-                    visible: false,
-                    background: "transparent",
-                    template: "#= category #: $#= value#"
-                }
-            },
-            series: [{
-                field: "RevenuePercent",
-                data: [20, 40, 45, 33],
-                padding: 0,
-                categoryField: "Eventure"
-            }],
-            tooltip: {
-                visible: true,
-                template: "#= category #: $#= value#"
-            }
-          };
-
-          var expapi = config.remoteApiName + 'Registrations/GetExpensePerCategory/' + vm.ownerId;
-
-          vm.expenseByCategory = {
-            theme: "flat",
-            dataSource: {
-                transport: {
-                    read: {
-                        url: expapi,
-                        dataType: "json"
-                    }
-                }
-            },
-            legend: {
-                visible: true
-            },
-            seriesDefaults: {
-                type: "pie",
-                labels: {
-                    visible: false,
-                    background: "transparent",
-                    template: "#= category #: $#= value#"
-                }
-            },
-            chartArea: {
-              height: 200
-            },
-            title: {
-              text: "Expense By Category",
-              font: 14
-            },
-            series: [{
-                field: "ExpensePercent",
-                data: [20, 40, 45, 33],
-                padding:0,
-                categoryField: "Category"
-            }],
-            tooltip: {
-                visible: true,
-                template: "#= category #: $#= value#"
-            }
-          };
+        function getEvents() {
+            return datacontext.eventure.getEventuresGroupedByYearByOwnerId(1)
+              .then(function (data) {
+                  vm.eventures = data;
+                  return vm.eventures;
+              });
         }
 
         function Overview() {
-          var overviewapi = config.remoteApiName +'Registrations/GetEventureGraph/' + vm.ownerId;
+            var overviewapi = config.remoteApiName +'Registrations/GetOwnerGraph/' + vm.ownerId;
 
-          vm.overviewByOwner = {
-            theme: "flat",
+            vm.overviewByOwner = {
+                theme: "flat",
+                dataSource: {
+                    transport: {
+                        read: {
+                            url: overviewapi,
+                            dataType: "json"
+                        }
+                    }
+                },
                 title: {
-                    text: "Eventure Sports Overview"
+                    text: "Eventure Overview"
                 },
                 legend: {
                     position: "bottom"
                 },
                 series: [{
-                    type: "bar",
-                    data: [20, 40, 45, 33],
-                    stack: true,
-                    name: "Profit"
-                }, {
-                    type: "bar",
-                    data: [20, 30, 35, 22],
-                    stack: true,
-                    name: "Expense"
+                    type: "column",
+                    field: "Rev",
+                    name: "Revenue",
+                    axis: "Revenue"
                 }, {
                     type: "line",
-                    data: [30, 38, 40, 33],
-                    name: "Registrations"
+                    field: "Regs",
+                    name: "Registrations",
+                    axis: "Registrations"
                 }],
-                valueAxes: [{
-                    title: { text: "Profit" }
-                }, {
-                    name: "Expense",
-                    title: { text: "Expense" }
-                }, {
+                valueAxis: [{
                     name: "Revenue",
                     title: { text: "Revenue" }
                 }, {
@@ -208,14 +69,24 @@
                     title: { text: "Registrations" }
                 }],
                 categoryAxis: {
-                    categories: ["Glow Go 5k", "Republic Bank Big...", "Run For...", "Buckhead Border..."],
-                    axisCrossingValues: [0, 0, 10, 10]
+                    field: "Month",
+                    majorGridLines: {
+                        visible: false
+                    }
+                },
+                tooltip: {
+                    visible: true,
+                    template: "#= series.name #: #= value #"
                 }
-          };
+            };
         }
 
         vm.overview = function() {
-          vm.overviewChart.redraw();
+            vm.overviewChart.redraw();
+        };
+
+        vm.treeviewOptions = {
+            template: kendo.template($("#treeview-template").html())
         };
 
         function NotificationGrid() {
@@ -254,10 +125,10 @@
                 dataBound: function () {
                 },
                 columns: [
-                    { field: "Task", title: "Task", width: "100px" },    //template is controlling this now //mjb
-                    { field: "Resource", title: "Resource", width: "80px" },
-                    { field: "Eventure", title: "Event", width: "80px" },
-                    { field: "DateDue", title: "Due Date", format: "{0:MM/dd/yyyy}", width: "70px" }
+                    { field: "Task", width: "100px" },    //template is controlling this now //mjb
+                    { field: "Resource", width: "80px" },
+                    { field: "Eventure", width: "80px" },
+                    { field: "DateDue", format: "{0:MM/dd/yyyy}", width: "70px" }
                 ]
           };
         }

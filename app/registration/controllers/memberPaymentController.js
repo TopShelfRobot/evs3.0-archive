@@ -92,7 +92,7 @@
                     console.log(res);
                     cartOrder.stripeToken = res.id;
                     console.log(cartOrder);
-                    $http.post(config.apiPath + "/api/Payment/PostTeamPayment", cartOrder)
+                    $http.post(config.apiPath + "/api/Payment/Post", cartOrder)
                        .success(function (result) {
                            $location.path("/receipt/" + result);
                        })

@@ -8,85 +8,30 @@
   </div>
   <br>
   <div class="row">
-    <div class="col-lg-12">
-      <tabset justified="true">
-        <tab heading="Overview" ng-click="vm.overview()">
-          <br>
-          <div class="row">
-            <div class="col-lg-9">
-              <div kendo-chart="vm.overviewChart" k-options="vm.overviewByOwner"id="overviewchart"></div>
-            </div>
-            <div class="col-lg-3">
-              <h3>Summary Link List</h3>
-              <div class="list-group">
-                <a ng-href="#/yearsummary" class="list-group-item">Year Over Year Summary<span class="badge"><em class="glyphicon glyphicon-circle-arrow-right"></em></span></a>
-                <a ng-href="#/yearsummary" class="list-group-item">Year Over Year Summary<span class="badge"><em class="glyphicon glyphicon-circle-arrow-right"></em></span></a>
-                <a ng-href="#/yearsummary" class="list-group-item">Year Over Year Summary<span class="badge"><em class="glyphicon glyphicon-circle-arrow-right"></em></span></a>
-                <a ng-href="#/yearsummary" class="list-group-item">Year Over Year Summary<span class="badge"><em class="glyphicon glyphicon-circle-arrow-right"></em></span></a>
-                <a ng-href="#/yearsummary" class="list-group-item">Year Over Year Summary<span class="badge"><em class="glyphicon glyphicon-circle-arrow-right"></em></span></a>
-                <a ng-href="#/yearsummary" class="list-group-item">Year Over Year Summary<span class="badge"><em class="glyphicon glyphicon-circle-arrow-right"></em></span></a>
-                <a ng-href="#/yearsummary" class="list-group-item">Year Over Year Summary<span class="badge"><em class="glyphicon glyphicon-circle-arrow-right"></em></span></a>
-              </div>
-            </div>
-          </div>
-        </tab>
-        <tab heading="Events">
-          <br>
-          <div kendo-grid="vm.eventureGrid" k-options="vm.eventureGridOptions" id="eventgrid"></div>
-        </tab>
-        <tab heading="Notifications">
-          <br>
-          <div kendo-grid="vm.notificationGrid" k-options="vm.notificationGridOptions" id="notificationgrid"></div>
-        </tab>
-      </tabset>
-      <hr>
+    <div class="col-sm-3">
+      <div kendo-tree-view="tree"
+           k-data-source="vm.eventures"
+           k-options="vm.treeviewOptions"
+           k-on-change="selectedItem = item"></div>
+    </div>
+    <div class="col-sm-9">
+      <div kendo-chart="vm.overviewChart" k-options="vm.overviewByOwner" id="overviewchart"></div>
     </div>
   </div>
+  <hr>
   <div class="row">
-    <div class="col-xs-6 col-lg-4">
-      <section id="demographics" class="text-center">
-        <h4>Total Number of Participants</h4>
-        <h2>5,000</h2>
-        <div class="row">
-          <div class="col-xs-6">
-            <img src="content/images/Female-Icon.png" width="80" height="80" alt=""/>
-            <h2>2,500</h2>
-          </div>
-          <div class="col-xs-6">
-            <img src="content/images/Male-Icon.png" width="80" height="80" alt=""/>
-            <h2>2,500</h2>
-          </div>
-        </div>
-      </section>
-    </div>
-    <div class="col-xs-6 col-lg-4">
-      <section id="summary">
-        <h4 class="text-center">Financial Summary</h4>
-        <div class="row">
-          <div class="col-lg-6">
-            <h5 class="text-center">Revenue</h5>
-            <h3 class="text-center">$40000</h3>
-          </div>
-          <div class="col-lg-6">
-            <h5 class="danger text-center">Expenses</h5>
-            <h3 class="danger text-center">$10000</h3>
-          </div>
-        </div>
-        <h2 class="text-center">Profit</h2>
-        <h1 class="text-center">$30000</h1>
-      </section>
-    </div>
-    <div class="col-lg-4 hidden-xs">
-      <section id="pies">
-        <div class="row">
-          <div class="col-xs-6">
-            <div kendo-chart="vm.expenseChart" k-options="vm.expenseByCategory"></div>
-          </div>
-          <div class="col-xs-6">
-            <div kendo-chart="vm.revenueChart" k-options="vm.revByEvent"></div>
-          </div>
-        </div>
-      </section>
+    <div class="col-lg-12">
+      <div kendo-grid="vm.notificationGrid" k-options="vm.notificationGridOptions" id="notificationgrid"></div>
     </div>
   </div>
 </section>
+
+<script id="treeview-template" type="text/kendo-ui-template">
+  # if (item.items) { #
+    #: item.text #
+  # } #
+
+  # if (!item.items) { #
+    <a ng-href='\#/enterpriseeventure/#=item.id#'>#: item.text #</a>
+  # } #
+</script>

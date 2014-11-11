@@ -9,29 +9,30 @@
 		
 		$scope.disableEmail = true;
 		
-		var promises = [
-			datacontext.participant.getParticipantById(config.owner.houseId)
-				.then(function(participant){
-					$scope.participant = participant;
-					Registrations();
-					Participants();
-					Team();
-					Coach();
-					console.log("done");
-				})
-		];
+		var promises = [getParticipant()];
 		
 		common.activateController(promises, controllerId)
 			.then(function(){
-				console.log("really done");
+				Registrations();
+				Participants();
+				Team();
+				Coach();
 			});
+
+		function getParticipant() {
+			return datacontext.participant.getParticipantById(config.owner.houseId)
+				.then(function(participant) {
+						$scope.participant = participant;
+						$scope.date.dateBirth = moment($scope.participant.dateBirth).format('YYYY-MM-DD');
+				});
+		}
 
 		function Registrations() {
 			var regapi = config.remoteApiName + 'Registrations/GetRegistrationsByPartId/' + $scope.participant.id;
 
 			$scope.registrationGridOptions = {
 				dataSource: {
-					type: "`json`",
+					type: "json",
 					transport: {
 						read: regapi
 					},
@@ -71,36 +72,43 @@
 						template: '<a href="\\\#registration/#=Id#" class="btn btn-default btn-block">Edit</a>'
 					}]
 			};
+			console.log($scope.registrationGridOptions);
 		}
 
+		$scope.date = {
+			dateBirth: '1993-07-03'
+		};
+
 		$scope.save = function(){
+			$scope.date.dateBirth = moment($scope.date.dateBirth).toISOString();
+			$scope.participant.dateBirth = $scope.date.dateBirth;
 			datacontext.save()
 				.then(function(){
 					console.log("saved");
 				});
 		};
 
-		$scope.today = function () {
-			$scope.participant.dateBirth = new Date();
-		};
-
-		$scope.today();
-
-		$scope.open = function($event, open) {
-			$event.preventDefault();
-			$event.stopPropagation();
-			$scope[open] = true;
-		};
-
-		$scope.dateOptions = {
-			'year-format': "'yy'",
-			'starting-day': 1,
-			showWeeks: 'false'
-		};
-
-		$scope.formats = ['MM-dd-yyyy', 'yyyy/MM/dd', 'shortDate'];
-
-		$scope.format = $scope.formats[0];
+		//$scope.today = function () {
+		//	$scope.participant.dateBirth = new Date();
+		//};
+        //
+		//$scope.today();
+        //
+		//$scope.open = function($event, open) {
+		//	$event.preventDefault();
+		//	$event.stopPropagation();
+		//	$scope[open] = true;
+		//};
+        //
+		//$scope.dateOptions = {
+		//	'year-format': "'yy'",
+		//	'starting-day': 1,
+		//	showWeeks: 'false'
+		//};
+        //
+		//$scope.formats = ['MM-dd-yyyy', 'yyyy/MM/dd', 'shortDate'];
+        //
+		//$scope.format = $scope.formats[0];
 
 
 		function Participants() {

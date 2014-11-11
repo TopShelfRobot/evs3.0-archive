@@ -103,7 +103,7 @@
                 },{
                     field: '',
                     title: '',
-                    template: '<a href="\\\#viewreceipt/#=EventureOrderId#" class="btn btn-success btn-block"><em class="glyphicon glyphicon-tags"></em>&nbsp;&nbsp;View Receipt</a>'
+                    template: '<a href="\\\#receipt/#=EventureOrderId#" class="btn btn-success btn-block"><em class="glyphicon glyphicon-tags"></em>&nbsp;&nbsp;View Receipt</a>'
                 }, {
                     field: '',
                     title: '',

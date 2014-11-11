@@ -16,6 +16,7 @@
 		'kendo.directives', // kendo-angular (grid, dataviz)
 		'common.bootstrap', // bootstrap dialog wrapper functions
 		'nsPopover',
+        'sbDateSelect'
     ]);
 
     // Handle routing errors and success events.

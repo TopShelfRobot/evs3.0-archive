@@ -6,9 +6,9 @@
     // For use with the HotTowel-Angular-Breeze add-on that uses Breeze
     //var remoteServiceName = 'breeze/Breeze';
 	var apiPath = "";
-
-	 //apiPath = "http://localhost:55972";
-	apiPath = "http://dev30.eventuresports.info";
+	//apiPath = "http://localhost:55972";
+    apiPath = "http://dev30.eventuresports.info";
+    
 
     var remoteServiceName = apiPath + '/breeze/breeze/';
     var remoteApiName = apiPath + '/kendo/';
@@ -28,7 +28,7 @@
         guid: 0,
         logoImageName: '/Content/images/logo.png',
 
-        houseId: 18,    //this is temp needs to be removed //mjb
+        houseId: 2,    //this is temp needs to be removed //mjb
         mr_houseId: 0,
         houseName: "",
         accessType: "none",

@@ -13,6 +13,9 @@
     //var remoteApiName = 'http://evs30api.eventuresports.info/kendo/';
 	
 	var apiPath = "";
+    //apiPath = "http://localhost:55972";
+    apiPath = "http://dev30.eventuresports.info";
+	
 
 	 //apiPath = "http://localhost:55972";
 	apiPath = "http://dev30.eventuresports.info";
@@ -38,7 +41,7 @@
         guid: 0,
         logoImageName: '/Content/images/logo.png',
 
-        houseId: 1,    //this will be set by shell
+        houseId: 2,    //this will be set by shell
         mr_houseId: 0,
         houseName: "",
         accessType: "none",

@@ -20,7 +20,7 @@
         'kendo.directives', // kendo-angular (grid, dataviz)
         'angularMoment', // Date and Time Format
         'angularFileUpload',  // file upload functions
-		'evReg',
+		'evReg'
     ]);
 
     app.config(['$httpProvider', function ($httpProvider) {

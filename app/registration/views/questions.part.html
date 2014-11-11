@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-lg-12 text-center">
             <img class="logo" src="content/images/logo.png">
-            <h1>{{ cart.currentDisplayEvent }} &nbsp;<small>{{ cart.currentDisplayList }}</small></h1>
+            <h1>{{ eventureList.displayName }}</h1>
             <p class="text-muted">Please answer the questions below.</p>
             <hr>
         </div>
@@ -11,10 +11,10 @@
     <form class="form-horizontal" name="questionsForm">
 		
 		<!-- This is the original design for questions. -->
-        <div class="row">
-            <div class="col-sm-6">
+       <!-- <div class="row">-->
+           <!-- <div class="col-sm-6">
                 <!-- Stock Questions -->
-                <div class="form-group">
+                <!--<div class="form-group">
                   <label for="T-Shirt" class="col-lg-6 control-label">T-Shirt Size:</label>
                   <div class="col-lg-6">
                     <select class="form-control" ng-model="stockAnswerSet.shirtSize" required>
@@ -25,41 +25,102 @@
                         <option>X-Large</option>
                     </select>
                   </div>
-                </div>
+                </div>-->
 
-                <div class="form-group">
+                <!--<div class="form-group">
                   <label for="HowHear" class="col-lg-6 control-label">How Did You Hear About Us:</label>
                   <div class="col-lg-6">
                     <input type="text" class="form-control" name="HowHear" ng-model="stockAnswerSet.howHear" required>
                   </div>
-                </div>
+                </div>-->
 
-            </div>
+          <!--  </div>-->
 			
             <div class="col-sm-6">
 				
-                <custom-questions questions="customQuestions" answers="customAnswers"></custom-questions>
-				
-				<!-- This is the original waiver stuff. -->
-                <textarea class="form-control" name="Waiver" ng-model="waiver" disabled></textarea>
-                <br>
-                <div class="form-group">
-                  <label for="WaiverAgree" class="col-xs-6 control-label">I Agree To The Waiver:</label>
-                  <div class="col-xs-6">
-                    <div class="btn-group">
-                      <button type="button" class="btn btn-default" ng-model="isWaiverChecked" btn-radio="true">Agree</button>
-                      <button type="button" class="btn btn-default" ng-model="isWaiverChecked" btn-radio="false">Disagree</button>
-                    </div>
-                  </div>
+                <!-- Custom Questions -->
+				<div ng-repeat="(key, question) in customQuestions">
+					<!-- <span>{{question.questionText}}, {{question.questionType}}</span> -->
+					<div class="row" ng-switch on="question.questionType" ng-if="question.active">
+	                    <div class="form-group" 
+								ng-switch-when="dropdown"
+								ng-if"question.active">
+	                        <label class="col-6 col-sm-6 col-lg-6 control-label" >{{question.questionText}}</label>
+	                        <div class="col-6 col-sm-6 col-lg-6">
+	                            <select class="form-control" 
+										ng-model="customAnswers[key]" 
+										ng-options="o for o in question.qOptions" 
+										ng-required="question.isRequired">
+	                            	<option value="">-- choose --</option>
+	                            </select>
+	                        </div>
+	                    </div>
+                    
+	                    <div class="form-group" 
+								ng-switch-when="radio"
+								ng-if"question.active">
+	                        <label class="col-6 col-sm-6 col-lg-6 control-label" >{{question.questionText}}</label>
+	                        <div class="col-6 col-sm-6 col-lg-6">
+	                            <div ng-repeat="o in question.qOptions">
+	                                <label class="radio-inline">
+										<input type="radio" 
+											name="raiod-{{question.id}}"
+											ng-model="customAnswers[key]"
+											ng-value="o"
+											ng-required="$parent.isRequired"/>
+										<span>{{o}}</span>
+	                                </label>
+	                            </div>
+	                         </div>
+	                    </div>
+
+	                    <div class="form-group" 
+								ng-switch-when="text"
+								ng-if"question.active">
+	                        <label class="col-6 col-sm-6 col-lg-6 control-label" >{{question.questionText}}</label>
+	                        <div class="col-6 col-sm-6 col-lg-6">
+	                            <input type="text" class="form-control" 
+									ng-model="customAnswers[key]"
+									ng-required="question.isRequired">
+								</input>
+	                         </div>
+	                    </div>
+
+	                    <div class="form-group" 
+								ng-switch-when="checkbox">
+	                        <label class="col-6 col-sm-6 col-lg-6 control-label">{{question.questionText}}</label>
+							<div class="col-6 col-sm-6 col-lg-6">
+	                            <input type="checkbox" 
+									ng-model="customAnswers[key]" 
+									ng-required="question.isRequired">
+								</input>
+	                        </div>
+						</div>
+					</div>
                 </div>
             </div>
-        </div>
+			<div class="col-sm-6">
+				<!-- This is the original waiver stuff. -->
+				<textarea class="form-control" rows="8" name="Waiver" ng-model="eventureList.waiverText" disabled></textarea>
+				<br>
+				<div class="form-group">
+					<label for="WaiverAgree" class="col-xs-4 control-label">I Agree To The Waiver:</label>
+					<div class="col-xs-8">
+						<div class="btn-group">
+							<button type="button" class="btn btn-default" ng-model="isWaiverChecked" btn-radio="true">Agree</button>
+							<button type="button" class="btn btn-default" ng-model="isWaiverChecked" btn-radio="false">Disagree</button>
+						</div>
+					</div>
+				</div>
+			</div>
+       <!-- </div>-->
 		
         <div class="row">
             <div class="col-lg-12">
+                <!--ng-disabled="!questionsForm.$valid || notAllowedToContinue()"   -->
                 <button class="btn btn-success pull-right" 
-					ng-disabled="!questionsForm.$valid || notAllowedToContinue()" 
-					ng-click="next()">Next</button>
+                        ng-disabled="!questionsForm.$valid || notAllowedToContinue()"
+                        ng-click="next()">Next</button>
             </div>
         </div>
 		

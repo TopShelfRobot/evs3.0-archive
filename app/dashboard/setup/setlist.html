@@ -143,11 +143,18 @@
 
         <div class="form-group">
           <label for="ListingType" class="col-lg-6 control-label">Listing Type:</label>
-          <div class="col-lg-6">
-              <select class="form-control" name="ListingType" ng-model="vm.list.eventureListTypeId" ng-options="t.id as t.name for t in vm.listTypes">
-                  <option value="">Please Select</option>
-              </select>
-          </div>
+            <div class="col-lg-6">
+                <select class="form-control" name="ListingType" ng-model="vm.list.eventureListType" ng-options="t.text as t.text for t in vm.listTypes">
+                    <option value="">Please Select</option>
+                </select>
+                <!-- <select class="form-control" name="ListingType" ng-model="vm.list.eventureListType">
+                         <option value="0">Please Select</option>
+                         <option value="1">Regular Reg</option>
+                         <option value="2">Team Reg - Sponsored</option>
+                         <option value="3">Team Reg - Suggested Pay</option>
+                         <option value="4">Team Reg - Individual Pay</option>
+                     </select>-->
+            </div>
         </div>
         <!-- /field -->
         

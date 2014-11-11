@@ -26,7 +26,8 @@
 		
 		promises.push(
 			datacontext.question.getCustomQuestionSetByEventureListId($routeParams.listId)
-	            .then(function(results){
+	            .then(function (results) {
+	                //alert(results.length);
 					for(var i = 0; i < results.length; i++){
 						results[i].answer = null;
 						if(results[i].options && results[i].options.length){
@@ -95,23 +96,28 @@
 		
 		common.activateController(promises, controllerId);
 
-        $scope.stockAnswerSet = {
-	            shirtSize: "",
-	            howHear: "",
-	        };
+        //$scope.stockAnswerSet = {
+	    //        shirtSize: "",
+	    //        howHear: "",
+	    //    };
 
         var getCustomAnswers = function(){
             var answers = [];
-			var ans;
-			for(var i = 0; i < $scope.customAnswers.length; i++){
+            var ans;
+            //alert($scope.customAnswers.length);
+            //alert($scope.customQuestions.length);
+			for (var i = 0; i < $scope.customAnswers.length; i++) {
+			    //alert('getting in herer');
 			    ans = {
-			        id: $scope.customQuestions[i].id,
+			        questionId: $scope.customQuestions[i].id,
 			        answer: $scope.customAnswers[i],
 			    };
-				if($scope.customQuestions[i].active){
+			    if ($scope.customQuestions[i].active) {
+			        //alert('what about here');
 					answers.push(ans);
 				}
 			}
+            //alert(answers.length);
             return answers;
         };
 

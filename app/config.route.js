@@ -338,7 +338,19 @@
                     title: 'Edit Team',
                     templateUrl: 'app/registration/views/editteam.part.html'
                 }
-            },
+            }, {
+                url: '/registrationedit',
+                config: {
+                    title: 'Edit a Registration',
+                    templateUrl: 'app/common/registrationedit.html'
+                }
+            }, {
+                url: '/email',
+                config: {
+                    title: 'Participant Communication',
+                    templateUrl: 'app/dashboard/email.html'
+                }
+            }
         ];
     }
 })();
