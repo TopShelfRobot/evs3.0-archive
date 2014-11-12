@@ -24,21 +24,31 @@
 		var process = function (token, total, type){
 			$.blockUI({ message: 'Processing order...' });
 			var nextUrl;
-			var def =  model.submitTransfer(token, total, type)
-                .then(function (result) {
-					nextUrl = "/receipt/" + result;
-					return model.saveAnswers()
-                })
-				.then(function(){
-					$location.path(nextUrl);
-					return null;
-				})
-				.catch(function (err) {
-					console.error("ERROR:", err.toString());
-				})
-				.finally(function () {
-					$.unblockUI();
-				});
+			var def; 
+			if(model.isDefer){
+				def =  model.submitDeferral(token, total, type)
+					.then(function (result) {
+						nextUrl = "/receipt/" + result;
+						return null;
+	                });
+			}else{
+				def =  model.submitTransfer(token, total, type)
+					.then(function (result) {
+						nextUrl = "/receipt/" + result;
+						return model.saveAnswers()
+	                });
+			}
+			
+            def.then(function(){
+				$location.path(nextUrl);
+				return null;
+			})
+			.catch(function (err) {
+				console.error("ERROR:", err.toString());
+			})
+			.finally(function () {
+				$.unblockUI();
+			});
 			return def;
 		};
 				

@@ -106,6 +106,35 @@
 				});
 		};
 		
+		this.getDeferralId = function () {
+            var deferral = datacontext.registration.createDeferral(self.regId, self.current.id, self.registration.participantId);
+            return datacontext.saveChanges([deferral])
+                .then(function(){
+                	return deferral.id;
+                });
+	    };
+		
+		this.submitDeferral = function(token, total, paymentType){
+			var type = "online";
+			if(config.owner.isAdmin){
+				type = "manual";
+			}
+			return self.getDeferralId()
+				.then(function(id){
+					
+					var source = {
+						'token': token,
+						'ownerId': config.owner.ownerId,
+						'deferralId': id,
+						'partId': self.registration.participantId,
+						'amount': total,
+						'paymentType': paymentType,
+						'type': type
+					};
+					return $http.post(config.apiPath + "/api/Registrations/Deferral", source);
+				});
+		};
+		
 		this.saveAnswers = function(){
 			return datacontext.save();
 		};
