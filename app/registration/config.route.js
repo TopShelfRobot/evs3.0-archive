@@ -144,6 +144,24 @@
                     templateUrl: 'app/registration/views/editteam.part.html'
                 }
             }, {
+                url: '/registration/:regId',
+                config: {
+                    title: 'Edit Registration',
+                    templateUrl: 'app/registration/views/registrationedit.part.html'
+                }
+            }, {
+                url: '/registration/:regId/edit',
+                config: {
+                    title: 'Edit Registration',
+                    templateUrl: 'app/registration/views/registrationEditConfirm.part.html'
+                }
+            }, {
+                url: '/registration/:regId/transferQuestions',
+                config: {
+                    title: 'Edit Registration',
+                    templateUrl: 'app/registration/views/transferQuestions.part.html'
+				}
+			}, {
                 url: '/shoppingcart',
                 config: {
                     title: 'Shopping Cart',

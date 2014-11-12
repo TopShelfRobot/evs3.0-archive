@@ -1,0 +1,181 @@
+<div class="container" ng-controller="RegistrationEditConfirm as confirm">
+    <div class="row">
+        <div class="col-lg-12 text-center">
+            <img class="logo" src="Content/images/logo.png">
+            <h1>Order Summary</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th class="col-lg-3">From</th>
+                            <th class="col-lg-2">Edit Type</th>
+							<th class="col-lg-3">To</th>
+                            <th class="col-lg-2">Old Price</th>
+                            <th class="col-lg-2">New Price</th>
+                        </tr>
+                    </thead>
+                    <tbody data-role="listview">
+                        <tr>
+                            <td>{{ confirm.model.current.displayName }}</td>
+                            <td>{{ confirm.model.isDefer ? 'Deferral' : 'Transfer' }}</td>
+                            <td>{{ (confirm.model.transferListing) ? confirm.model.transferListing.displayName : '' }}</td>
+                            <td>{{ confirm.model.current.currentFee | currency }}</td>
+                            <td>{{ ((confirm.model.transferListing) ? confirm.model.transferListing.currentFee : '') | currency }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th class="col-lg-11">Description</th>
+                            <th class="col-lg-1">Price</th>
+                        </tr>
+                    </thead>
+                    <tbody data-role="listview">
+                        <tr ng-repeat="charge in confirm.model.surcharges">
+                            <td>{{ charge.desc }}</td>
+                            <td>{{ charge.amount | currency }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-sm-7 text-right">
+            <p class="total-amount"><em>Total:</em>&nbsp;{{ confirm.model.totalPrice | currency }}</p>
+        </div>
+    </div>
+    <br>
+	
+    <div ng-if="confirm.isAdmin">
+       <div class="row">
+
+           <div class="col-3 col-sm-3 col-lg-3 well">
+               <form class="form-horizontal">
+                   <legend>Payment Type</legend>
+                   <div class="radio">
+                       <label>
+                           <input type="radio" name="optionsPayment" ng-model="confirm.paymentEnabled" value="credit">Credit Card</label>
+                   </div>
+                   <div class="radio">
+                       <label>
+                           <input type="radio" name="optionsPayment" ng-model="confirm.paymentEnabled" value="cash">Cash</label>
+                   </div>
+                   <div class="radio">
+                       <label>
+                           <input type="radio" name="optionsPayment" ng-model="confirm.paymentEnabled" value="check">Check</label>
+                   </div>
+                   <div class="radio">
+                       <label>
+                           <input type="radio" name="optionsPayment" ng-model="confirm.paymentEnabled" value="scholarship">Scholarship</label>
+                   </div>
+               </form>
+           </div>
+
+           <div class="col-9 col-sm-9 col-lg-9">
+               <form class="form-horizontal">
+                   <div class="form-group has-error">
+                       <span class="col-lg-12 payment-errors help-block lead" data-bind="text: otherPaymentError"></span>
+                   </div>
+                     <div class="form-group">
+                           <label class="col-lg-3 control-label">Payment Adjustment</label>
+                           <div class="col-lg-9">
+                               <input type="text" size="20" autocomplete="off" class="form-control" ng-model="confirm.otherPaymentAdjustment" ng-change="confirm.otherPaymentChange()"><br />
+                           </div>
+                           <hr>
+                           <label class="col-lg-3 control-label">Payment Amount</label>
+                           <div class="col-lg-9">
+                               <span type="text" size="20" class="form-control" disabled> {{ confirm.otherPaymentAmmount | currency }}</span><br />
+                           </div>
+                           <hr>
+                           <label class="col-lg-3 control-label">Notes</label>
+                           <div class="col-lg-9">
+                               <textarea type="text" size="20" rows="3" autocomplete="off" class="form-control" ng-model="confirm.otherPaymentNotes"></textarea><br />
+                           </div>
+                       </div>
+				</form>
+				
+				<form>
+					<div class="row" ng-if="confirm.paymentEnabled == 'credit'">
+					    <div class="col-sm-12 text-center">
+					        <h3>Payment Information</h3>
+					        <p class="text-muted">We accept all major credit and debit cards</p>
+					        <img src="/Content/images/creditcards.png" />
+					        <hr>
+					        <p class="text-muted">Your card will be charged for the amount of <strong>{{ confirm.otherPaymentAmmount | currency }}</strong>.</p>
+					<label class="checkbox" ng-show="$parent.allowZeroPayment">
+					            <input type="checkbox" data-bind="checked: isTerms" ng-model="$parent.fullPaymentRequired">
+					            I am paying an amount of $0.00 and understand my team is still responsible for the full amount.
+					        </label>
+					    </div>
+					</div>
+					<div class="row">
+					    <div class="col-sm-6 col-sm-offset-3">
+					        <br>
+					        <label class="checkbox agreement">
+					            <input type="checkbox" data-bind="checked: isTerms" ng-model="confirm.waiverSigned">
+					            I have read and agree to the
+					            <a id="terms" data-contents="{{show.msg}}" rel="popover">Terms and Conditions</a>,
+					            <a id="refund">Refund Policy</a>,
+					            and
+					            <a id="waiver">Waiver</a>.
+					        </label>
+					        <button type="button"
+					                class="btn btn-success btn-block pull-right"
+					                ng-disabled="(!confirm.waiverSigned) || (confirm.userPaying == 0 && !confirm.fullPaymentRequired) || (confirm.submitDisabled)"
+					                ng-click="confirm.submitPayment(confirm.paymentEnabled)">
+								Complete
+					        </button>
+					    </div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<div ng-if="!confirm.isAdmin">
+	    <div class="row">
+	        <div class="col-sm-12 text-center">
+	            <h3>Payment Information</h3>
+	            <p class="text-muted">We accept all major credit and debit cards</p>
+	            <img src="/Content/images/creditcards.png" />
+	            <hr>
+	            <p class="text-muted">Your card will be charged for the amount of <strong>{{ confirm.otherPaymentAmmount | currency }}</strong>.</p>
+		<label class="checkbox" ng-show="$parent.allowZeroPayment">
+	                <input type="checkbox" data-bind="checked: isTerms" ng-model="$parent.fullPaymentRequired">
+	                I am paying an amount of $0.00 and understand my team is still responsible for the full amount.
+	            </label>
+	        </div>
+	    </div>
+	    <div class="row">
+	        <div class="col-sm-6 col-sm-offset-3">
+	            <br>
+	            <label class="checkbox agreement">
+	                <input type="checkbox" data-bind="checked: isTerms" ng-model="confirm.waiverSigned">
+	                I have read and agree to the
+	                <a id="terms" data-contents="{{show.msg}}" rel="popover">Terms and Conditions</a>,
+	                <a id="refund">Refund Policy</a>,
+	                and
+	                <a id="waiver">Waiver</a>.
+	            </label>
+	            <button type="button"
+		                class="btn btn-success btn-block pull-right"
+		                ng-disabled="(!confirm.waiverSigned) || (confirm.userPaying == 0 && !confirm.fullPaymentRequired) || (confirm.submitDisabled)"
+		                ng-click="checkout()">
+					Complete
+	            </button>
+	        </div>
+	    </div>
+	</div>
+</div>

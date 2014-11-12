@@ -19,11 +19,13 @@
             this.manager = mgr;
             // Exposed data access functions
             this.getAll = getAll;
+			this.getAllRegistrations = getAllRegistrations;
 
             this.getOrderById = getOrderById;
             this.getOrderByRegistrationId = getOrderByRegistrationId;
 
             this.createTransfer = createTransfer;
+			this.createDeferral = createDeferral;
             this.getTransferById = getTransferById;
             this.getTransferInfoById = getTransferInfoById;
             this.getRegistrationById = getRegistrationById;
@@ -61,7 +63,7 @@
             function querySucceeded(data) {
                 return data.results[0];
             }
-        };
+        }
 
         function getOrderByRegistrationId(regId) {
             var self = this;
@@ -74,7 +76,19 @@
             function querySucceeded(data) {
                 return data.results[0];
             }
-        };
+        }
+
+		function getAllRegistrations() {
+		     var self = this;
+		     var query = entityQuery.from('Registrations')
+
+		     return self.manager.executeQuery(query)
+		         .then(querySucceeded, self._queryFailed);
+
+		     function querySucceeded(data) {
+		         return data.results;
+		     }
+		 }
 
        function getRegistrationById(registrationId, registrationObservable) {
             var self = this;
@@ -103,8 +117,15 @@
                 return data.results[0];
             }
         }
+		
+        function createDeferral(regId, oldListId, partId) {
+			var self = this;
+            return self.manager.createEntity('EventureDeferral',
+                { registrationId: regId, eventureListIdFrom: oldListId, isComplete: false, participantId: partId, dateCreated: moment().format("MM/DD/YYYY") });
+        }
 
         function createTransfer(regId, oldListId, newListId, answerId, partId) {
+			var self = this;
             return self.manager.createEntity('EventureTransfer',
                 { registrationId: regId, eventureListIdFrom: oldListId, eventureListIdTo: newListId, stockAnswerSetId: answerId, isComplete: false, participantId: partId, dateCreated: moment().format("MM/DD/YYYY") });
         }

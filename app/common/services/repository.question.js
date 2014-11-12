@@ -28,6 +28,8 @@
             this.getStockQuestionSetByRegistrationId = getStockQuestionSetByRegistrationId;
             this.getCustomQuestionSetByEventureListId = getCustomQuestionSetByEventureListId;
             this.getCustomAnswersSetByEventureListId = getCustomAnswersSetByEventureListId;
+			this.getCustomAnswerSetByRegistrationId = getCustomAnswerSetByRegistrationId;
+			this.createCustomAnswer = createCustomAnswer;
         }
 
         // Allow this repo to have access to the Abstract Repo's functions,
@@ -136,6 +138,25 @@
         function createStockQuestionSet(eventureListId) {
             var self = this;
             return self.manager.createEntity('StockQuestionSet', { eventureListId: eventureListId });
+        }
+		
+        function getCustomAnswerSetByRegistrationId(regId) {
+            var self = this;
+			regId = Number(regId);
+            var query = entityQuery.from('Answers')
+                .where('registrationId', '==', regId);
+
+            return self.manager.executeQuery(query)
+                .then(querySucceeded, self._queryFailed);
+
+            function querySucceeded(data) {
+                return data.results;
+            }
+        }
+		
+        function createCustomAnswer(regId, questId) {
+            var self = this;
+            return self.manager.createEntity('Answer', {registrationId: regId, questionId: questId});
         }
     }
 })();

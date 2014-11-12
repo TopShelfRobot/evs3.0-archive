@@ -19,7 +19,8 @@
         var service = {
             cancel: cancel,
             prime: prime,
-            save: save
+            save: save,
+			saveChanges: saveChanges,
             // Repositories to be added on demand:
             //      attendees
             //      lookups
@@ -98,6 +99,23 @@
                 function set(resourceName, entityName) {
                     metadataStore.setEntityTypeForResourceName(resourceName, entityName);
                 }
+            }
+        }
+		
+        function saveChanges(entity) {
+            return manager.saveChanges(entity)
+               .then(saveSucceeded, saveFailed);
+
+            function saveSucceeded(result) {
+                logSuccess('Saved data', result, true);
+            }
+
+            function saveFailed(error) {
+                var msg = config.appErrorPrefix + 'Save failed: ' +
+                    breeze.saveErrorMessageService.getErrorMessage(error);
+                error.message = msg;
+                logError(msg, error);
+                throw error;
             }
         }
 

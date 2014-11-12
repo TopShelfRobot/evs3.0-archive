@@ -1,0 +1,72 @@
+
+<div ng-controller="EditRegistration as editReg">
+	<div class="row">
+	  <div class="col-lg-12">
+	    <button ng-click="editReg.cancel()" class="btn btn-danger btn-xs pull-right"><i class="glyphicon glyphicon-ban-circle"></i>&nbsp;Cancel</button>
+	  </div>
+	</div>
+	<div class="row">
+	  <form class="form-horizontal">
+	    <legend >Registration Edit</legend>
+	    <div class="col-sm-6">
+	      <h3>Questions</h3>
+		  <custom-questions questions="editReg.model.customQuestions" answers="editReg.model.customAnswers"></custom-questions>
+		  <button class="btn btn-success pull-right" ng-click="editReg.saveAnswers()"><i class="glyphicon glyphicon-save"></i>&nbsp;Save Changes</button>
+
+	    </div>
+	</form>
+	<form class="form-horizontal">
+	    <div class="col-sm-6">
+	      <h3>Transfers and Deferrals</h3>
+	      <div class="row">
+	        <div class="col-xs-6">
+	          <button class="btn btn-warning btn-sm" ng-click="editReg.loadTransfer()" ng-disabled="editReg.model.current.eventure.transfersAllowed" ng-cloak>
+				  <i class="glyphicon glyphicon-refresh"></i>&nbsp;Transfer Registration
+			  </button>
+	        </div>
+	        <div class="col-xs-6">
+	          <button class="btn btn-danger btn-sm" ng-click="editReg.loadDefer()" ng-disabled="editReg.model.current.eventure.deferralsAllowed" ng-cloak>
+				  <i class="glyphicon glyphicon-time"></i>&nbsp;Defer Registration
+			  </button>
+	        </div>
+	      </div>
+	      <hr>
+		  <div ng-show="editReg.showTransfer">
+		      <form id="transferform" class="form-inline">
+		        <div class="form-group">
+		          <label for="StartListing">Current Listing</label>
+		          <input type="text" disabled class="form-control" ng-model="editReg.model.current.displayName">
+		        </div>
+		        <div class="form-group">
+		          <label for="defer">New Listing</label>
+		          <select class="form-control" id="listdropdown" ng-model="editReg.newListing" ng-options="li.displayName for li in editReg.model.possibles"></select>
+		        </div>
+		        <div class="row">
+		          <div class="col-xs-6">
+		            <button id="canceltransfer" class="btn btn-danger btn-sm"  ng-click="editReg.cancelTransfer()"><i class="glyphicon glyphicon-ban-circle"></i>&nbsp;Cancel</button>
+		          </div>
+		          <div class="col-xs-6">
+		            <button type="button" id="submittransfer" class="btn btn-default" aria-hidden="true" ng-click="editReg.submitTransfer()" ng-disabled="editReg.newListing == null"><i class="glyphicon glyphicon-ok-circle"></i>&nbsp;Submit Transfer</button>
+		          </div>
+		        </div>
+		        <br>
+		        <br>
+		      </form>
+		  </div>
+	      <div id="deferalert" class="alert alert-warning" ng-show="editReg.showDefer">
+	        <strong><i class="glyphicon glyphicon-warning-sign"></i>&nbsp;Warning!</strong><hr />
+	        Are you sure you wish to defer your registration?
+	        <br><br>
+	        <div class="row">
+	          <div class="col-xs-4">
+	            <button id="canceldefer" class="btn btn-danger btn-sm" ng-click="editReg.cancelDefer()"><i class="glyphicon glyphicon-ban-circle"></i>&nbsp;Cancel</button>
+	          </div>
+	          <div class="col-xs-8">
+	            <button id="submitdefer" class="btn btn-default btn-sm" ng-click="editReg.submitDefer()"><i class="glyphicon glyphicon-ok-circle"></i>&nbsp;Yes! Defer My Registration</button>
+	          </div>
+	        </div>
+	      </div>
+	    </div>
+	  </form>
+	</div>
+</div>
