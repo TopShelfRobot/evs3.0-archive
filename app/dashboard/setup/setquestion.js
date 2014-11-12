@@ -5,7 +5,8 @@
 		"questionType",
 		"active",
 		"isRequired",
-		"options"
+		"options",
+		"order",
 	];
 	
 	

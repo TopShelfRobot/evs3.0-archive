@@ -9,18 +9,19 @@
                     <tr>
                         <th class="col-lg-4">Question</th>
                         <th class="col-lg-2">Type</th>
-                        <th class="col-lg-3">Active</th>
-                        <th class="col-lg-3">Required</th>
+                        <th class="col-lg-2">Active</th>
+                        <th class="col-lg-2">Required</th>
+						<th class="col-lg-2">Order</th>
                         <th />
                     </tr>
                   </thead>
                     <tbody>
                         <tr>
                             <td>
-                                <input type="text" class="form-control" ng-model="setq.workingQuestion.questionText" />
+                                <input type="text" class="form-control" ng-model="setq.workingQuestion.questionText" required/>
                             </td>
                             <td>
-                                <select class="form-control" ng-model="setq.workingQuestion.questionType">
+                                <select class="form-control" ng-model="setq.workingQuestion.questionType" required>
                                   <option value="text">Text Box</option>
                                   <option value="dropdown">Dropdown</option>
                                   <!--<option value="radio">Radio</option>-->
@@ -28,7 +29,7 @@
                               </select>
                           </td>
                           <td>
-                              <div class="col-lg-6">
+                              <div class="col-lg-12">
                                   <div class="btn-group">
                                       <button type="button" class="btn btn-default" ng-model="setq.workingQuestion.active" btn-radio="true">Yes</button>
                                       <button type="button" class="btn btn-default" ng-model="setq.workingQuestion.active" btn-radio="false">No</button>
@@ -36,12 +37,15 @@
                               </div>
                           </td>
                           <td>
-                              <div class="col-lg-6">
+                              <div class="col-lg-12">
                                   <div class="btn-group">
                                       <button type="button" class="btn btn-default" ng-model="setq.workingQuestion.isRequired" btn-radio="true">Yes</button>
                                       <button type="button" class="btn btn-default" ng-model="setq.workingQuestion.isRequired" btn-radio="false">No</button>
                                   </div>
                               </div>
+                          </td>
+                          <td>
+                              <input type="number" class="form-control" ng-model="setq.workingQuestion.order" required/>
                           </td>
                       </tr>
                   </tbody>
@@ -64,7 +68,7 @@
                       </tbody>
                     </table>
                 </div>
-                <button class="btn btn-primary" ng-click="setq.saveQuestion()"><em class="glyphicon glyphicon-save"></em>&nbsp;Save Question</button>
+                <button type="submit" class="btn btn-primary" ng-click="setq.saveQuestion()"><em class="glyphicon glyphicon-save"></em>&nbsp;Save Question</button>
 				<button class="btn btn-danger" ng-show="setq.isEdit" ng-click="setq.clearEdits()"><em class="glyphicon glyphicon-ban-circle"></em>&nbsp;Cancel Edits</button>
           </div>
       </div>
@@ -77,10 +81,11 @@
               <thead>
                   <tr>
                       <th class="col-xs-3">Question</th>
-                      <th class="col-xs-3">Type</th>
+                      <th class="col-xs-2">Type</th>
                       <th class="col-xs-3">Answers</th>
                       <th class="col-xs-1">Required</th>
                       <th class="col-xs-1">Active</th>
+					  <th class="col-xs-1">Order</th>
                       <th class="col-xs-1"/>
                   </tr>
               </thead>
@@ -91,6 +96,7 @@
                       <td>{{q.options}}</td>
                       <td>{{q.isRequired}}</td>
                       <td>{{q.active}}</td>
+					  <td>{{q.order}}</td>
                       <td><button class="btn btn-default btn-block" ng-click="setq.editQuestion(key)"><em class="glyphicon glyphicon-edit"></em>&nbsp;Edit</button></td>
                   </tr>
               </tbody>
