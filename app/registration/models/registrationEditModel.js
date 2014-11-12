@@ -78,16 +78,20 @@
 		
 		this.getTransferId = function () {
             var transfer = datacontext.registration.createTransfer(self.regId, self.current.id, self.transferListing.id, null, self.registration.participantId);
-            return datacontext.save(transfer)
+            return datacontext.saveChanges([transfer])
                 .then(function(){
                 	return transfer.id;
                 });
 	    };
 		
-		this.submitTransfer = function(token, total, type){
+		this.submitTransfer = function(token, total, paymentType){
+			var type = "online";
+			if(config.owner.isAdmin){
+				type = "manual";
+			}
 			return self.getTransferId()
 				.then(function(id){
-				
+					
 					var source = {
 						'token': token,
 						'ownerId': config.owner.ownerId,
@@ -95,7 +99,8 @@
 						'partId': self.registration.participantId,
 						'amount': total,
 						'transferNewListName': self.transferListing.name,
-						'paymentType': type,
+						'paymentType': paymentType,
+						'type': type
 					};
 					return $http.post(config.apiPath + "/api/Registrations/Transfer", source);
 				});

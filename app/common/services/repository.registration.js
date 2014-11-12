@@ -25,6 +25,7 @@
             this.getOrderByRegistrationId = getOrderByRegistrationId;
 
             this.createTransfer = createTransfer;
+			this.createDeferral = createDeferral;
             this.getTransferById = getTransferById;
             this.getTransferInfoById = getTransferInfoById;
             this.getRegistrationById = getRegistrationById;
@@ -115,6 +116,12 @@
             function querySucceeded(data) {
                 return data.results[0];
             }
+        }
+		
+        function createDeferral(regId, oldListId, partId) {
+			var self = this;
+            return self.manager.createEntity('EventureDeferral',
+                { registrationId: regId, eventureListIdFrom: oldListId, isComplete: false, participantId: partId, dateCreated: moment().format("MM/DD/YYYY") });
         }
 
         function createTransfer(regId, oldListId, newListId, answerId, partId) {

@@ -114,7 +114,7 @@
 					        <p class="text-muted">We accept all major credit and debit cards</p>
 					        <img src="/Content/images/creditcards.png" />
 					        <hr>
-					        <p class="text-muted">Your card will be charged for the amount of <strong>{{ confirm.model.totalPrice | currency }}</strong>.</p>
+					        <p class="text-muted">Your card will be charged for the amount of <strong>{{ confirm.otherPaymentAmmount | currency }}</strong>.</p>
 					<label class="checkbox" ng-show="$parent.allowZeroPayment">
 					            <input type="checkbox" data-bind="checked: isTerms" ng-model="$parent.fullPaymentRequired">
 					            I am paying an amount of $0.00 and understand my team is still responsible for the full amount.
@@ -151,7 +151,7 @@
 	            <p class="text-muted">We accept all major credit and debit cards</p>
 	            <img src="/Content/images/creditcards.png" />
 	            <hr>
-	            <p class="text-muted">Your card will be charged for the amount of <strong>{{ confirm.model.totalPrice | currency }}</strong>.</p>
+	            <p class="text-muted">Your card will be charged for the amount of <strong>{{ confirm.otherPaymentAmmount | currency }}</strong>.</p>
 		<label class="checkbox" ng-show="$parent.allowZeroPayment">
 	                <input type="checkbox" data-bind="checked: isTerms" ng-model="$parent.fullPaymentRequired">
 	                I am paying an amount of $0.00 and understand my team is still responsible for the full amount.
