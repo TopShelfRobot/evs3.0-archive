@@ -12,7 +12,10 @@
                     <div class="form-group">
                         <label for="bundlelist" class="col-lg-6 control-label">Bundled Lists:</label>
                         <div class="col-lg-6">
-                            <select id="bundlelist" kendo-multi-select="vm.listingSelect" k-ng-model="vm.selectedLists" k-options="vm.bundledListOptions"></select>
+                            <select id="bundlelist" 
+								kendo-multi-select="vm.multiSelect" k-options="vm.bundledListOptions"
+								ng-model="vm.selectedLists">
+							</select>
                         </div>
                     </div>
                     <!-- /field -->

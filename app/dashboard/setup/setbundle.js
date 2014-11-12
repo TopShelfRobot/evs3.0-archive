@@ -49,16 +49,18 @@
         }
 
         function multiSelect(listings) {
-            vm.bundledListOptions = {
-                placeholder: "Select listing...",
-                dataTextField: "name",
-                dataValueField: "id",
-                dataSource: {
-                    data: listings
-                }
-            };
-            console.log(vm.bundledListOptions);
+			// vm.multiSelect.value(listings);
+			for(var i = 0; i < listings.length; i++){
+				vm.multiSelect.dataSource.add({name: listings[i].name, id: listings[i].id});
+			}
         }
+		
+		vm.selectedLists = [];
+        vm.bundledListOptions = {
+            placeholder: "Select listing...",
+            dataTextField: "name",
+            dataValueField: "id",
+        };
 
         vm.cancel = function() {
             return datacontext.cancel()
@@ -70,6 +72,7 @@
         };
 
         vm.saveAndNav = function() {
+			console.log("selectedLists:", vm.selectedLists);
             return datacontext.save(vm.addon)
                 .then(complete);
 
