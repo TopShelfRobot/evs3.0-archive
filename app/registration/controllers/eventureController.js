@@ -7,7 +7,7 @@
 		$scope.cart = cartModel;
 		
         var all = [];
-        var viewLength = 10;
+        var viewLength = 12;
         var currentPage = 0;
         //alert('heryhr');
         //datacontext.getEventuresByOwnerId(config.owner.ownerId)

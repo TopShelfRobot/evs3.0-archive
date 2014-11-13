@@ -7,8 +7,8 @@
     //var remoteServiceName = 'breeze/Breeze';
 	var apiPath = "";
 	//apiPath = "http://localhost:55972";
-    apiPath = "http://localhost:49822";
-    //apiPath = "http://dev30.eventuresports.info";
+    //apiPath = "http://localhost:49822";
+    apiPath = "http://dev30.eventuresports.info";
     
 
     var remoteServiceName = apiPath + '/breeze/breeze/';
@@ -22,6 +22,8 @@
         imageBasePath: '../content/images/photos/',
         unknownPersonImageSource: 'unknown_person.jpg'
     };
+
+    var isAuth = false;
 
     var owner = {
         ownerId: 1,   //this is temp needs to be removed //mjb
@@ -77,7 +79,8 @@
         imageSettings: imageSettings,
         version: '3.0.0',
         remoteApiName: remoteApiName,
-        owner: owner
+        owner: owner,
+        isAuth: isAuth
     };
 
     app.value('config', config);

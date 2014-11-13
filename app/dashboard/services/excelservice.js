@@ -1,6 +1,6 @@
 (function () {
-    angular.module("evReg").service("ExcelService", ["$q", "config", Service]);
-    function Service($q, config) {
+    angular.module("app").service("ExcelService", [Service]);
+    function Service() {
 
         var service = {};
 

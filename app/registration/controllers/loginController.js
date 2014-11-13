@@ -10,6 +10,8 @@
             password: ""
         };
 
+        $scope.loginData.useRefreshTokens = true;
+
         $scope.message = "";
 
         common.activateController(controllerId);

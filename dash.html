@@ -29,6 +29,8 @@
     <link href="Content/registration.css" rel="stylesheet" />
     <link href="content/toastr.css" rel="stylesheet" />
 	<link href="/Content/nsPopover.custom.css" rel="stylesheet" />
+    <link href="Content/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <link href="Content/social-buttons.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
@@ -80,6 +82,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.blockUI/2.61.0-2013.06.06/jquery.blockUI.min.js"></script>
     <script src="scripts/jszip.min.js"></script>
     <script src="scripts/xlsx.js"></script>
+    <script src="scripts/sb-date-select.js"></script>
+    <script src="scripts/angular-local-storage.min.js"></script>
 
     <!-- Bootstrapping -->
     <script src="app/app.js"></script>
@@ -138,8 +142,11 @@
     <script src="app/dashboard/services/excelservice.js"></script>
 
 	<!-- registration -->
-	<script src="app/registration/config.route.js"></script>
-	<script src="app/registration/controllers/registrationHeaderController.js"></script>
+    <script src="app/registration/app.js"></script>
+    <script src="app/registration/config.js"></script>
+    <script src="app/registration/config.route.js"></script>
+    <script src="app/registration/config.exceptionHandler.js"></script>
+    <script src="app/registration/controllers/registrationHeaderController.js"></script>
     <script src="app/registration/controllers/createteamController.js"></script>
     <script src="app/registration/controllers/teampaymentController.js"></script>
     <script src="app/registration/controllers/eventureController.js"></script>
@@ -147,23 +154,29 @@
     <script src="app/registration/controllers/memberPaymentController.js"></script>
     <script src="app/registration/controllers/setParticipantController.js"></script>
     <script src="app/registration/controllers/addParticipantController.js"></script>
-	<script src="app/registration/controllers/questionsController.js"></script>
-	<script src="app/registration/controllers/confirmController.js"></script>
-	<script src="app/registration/controllers/profileController.js"></script>
-	<script src="app/registration/controllers/addProfileController.js"></script>
-	<script src="app/registration/controllers/editteamController.js"></script>
+    <script src="app/registration/controllers/questionsController.js"></script>
+    <script src="app/registration/controllers/confirmController.js"></script>
+    <script src="app/registration/controllers/profileController.js"></script>
+    <script src="app/registration/controllers/addProfileController.js"></script>
+    <script src="app/registration/controllers/editteamController.js"></script>
     <script src="app/registration/controllers/viewReceiptController.js"></script>
-	<script src="app/registration/controllers/registrationeditController.js"></script>
-	<script src="app/registration/controllers/registrationEditConfirmController.js"></script>
-	<script src="app/registration/controllers/transferQuestionsController.js"></script>
-	<script src="app/registration/services/StripeService.js"></script>
+    <script src="app/registration/controllers/registrationeditController.js"></script>
+    <script src="app/registration/controllers/registrationEditConfirmController.js"></script>
+    <script src="app/registration/controllers/transferQuestionsController.js"></script>
+    <script src="app/registration/controllers/orderReceiptController.js"></script>
+    <script src="app/registration/controllers/shoppingCartController.js"></script>
+    <script src="app/registration/controllers/signupController.js"></script>
+    <script src="app/registration/controllers/loginController.js"></script>
+    <script src="app/registration/controllers/headerController.js"></script>
+    <script src="app/registration/services/authService.js"></script>
+    <script src="app/registration/services/StripeService.js"></script>
+    <script src="app/registration/services/authInterceptorService.js"></script>
     <script src="app/registration/models/registrationCartModel.js"></script>
     <script src="app/registration/models/memberCartModel.js"></script>
-	<script src="app/registration/models/cartModel.js"></script>
-	<script src="app/registration/models/registrationEditModel.js"></script>
-	<script src="app/registration/directives/cart-view.js"></script>
-	<script src="app/registration/directives/custom-questions.js"></script>
-    <script src="scripts/sb-date-select.js"></script>
+    <script src="app/registration/models/cartModel.js"></script>
+    <script src="app/registration/models/registrationEditModel.js"></script>
+    <script src="app/registration/directives/cart-view.js"></script>
+    <script src="app/registration/directives/custom-questions.js"></script>
 
     <!-- common Services -->
 	<script src="app/common/layout/shell.js"></script>

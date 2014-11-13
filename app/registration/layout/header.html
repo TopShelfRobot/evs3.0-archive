@@ -1,4 +1,4 @@
-<nav class="navbar navbar-default" role="navigation" ng-controller="Header">
+<nav class="navbar navbar-default" role="navigation" ng-controller="HeaderController">
 	<div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
 		<div class="navbar-header">
@@ -8,7 +8,7 @@
 				<span class="icon-bar"></span> 
 				<span class="icon-bar"></span> 
 			</button>
-			<a class="navbar-brand" href="#/eventure">Louisville City FC</a> 
+			<a class="navbar-brand" href="#/eventure">{{owner.name}}</a>
 		</div>
 
 		<!-- Collect the nav links, forms, and other content for toggling -->
@@ -17,28 +17,30 @@
 				<li>
 					<a class="hidden-xs hidden-sm visible-md visible-lg" ns-popover
 						ns-popover-template="/app/registration/views/cart.part.html" 
-						ns-popover-trigger="click" 
+						ns-popover-trigger="mouseenter"
 						ns-popover-theme="ns-popover-tooltip-theme" 
 						ns-popover-placement="bottom"
 						ns-popover-hide-on-click="false"
-						ns-popover-timeout="5">
+						ns-popover-timeout="0">
 						<span class="badge pull-right">{{cart.registrations.length}}</span>
 						<i class="glyphicon glyphicon-shopping-cart"></i>
 						&nbsp;
 					</a>
-					<a class="visible-xs visible-sm hidden-md hidden-lg"><i class="glyphicon glyphicon-shopping-cart"></i>&nbsp;<span class="badge">{{cart.registrations.length}}</span></a>
+					<a class="visible-xs visible-sm hidden-md hidden-lg" href="#/shoppingcart"><i class="glyphicon glyphicon-shopping-cart"></i>&nbsp;<span class="badge">{{cart.registrations.length}}</span></a>
 				</li>
-				<li class="dropdown">
+				<li class="dropdown" ng-if="isAuth">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 						<i class="glyphicon glyphicon-cog"></i>
 					</a>
 					<ul class="dropdown-menu">
 						<li><a href="#/user-profile">User Profile</a></li>
-						<li><a href="#">Another action</a></li>
-						<li><a href="#">Something else here</a></li>
+						<li><a href="#/participant/add">Add A Participant</a></li>
 						<li class="divider"></li>
 						<li><a href="#">Logout</a></li>
 					</ul>
+				</li>
+				<li>
+					<a href="#/login"><strong ng-if="!isAuth">Sign In</strong></a>
 				</li>
 			</ul>
 		</div><!-- /.navbar-collapse -->
