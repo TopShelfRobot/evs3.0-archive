@@ -8,9 +8,8 @@
 
         // Custom modules
         'common',           // common functions, logger, spinner
-
          'LocalStorageModule',
-     
+
         // 3rd Party Modules
         'breeze.angular',    // configures breeze for an angular app
         'breeze.directives', // contains the breeze validation directive (zValidate)
@@ -20,7 +19,7 @@
 		'nsPopover',
         'sbDateSelect'
     ]);
-    
+
     //var serviceBase = 'http://localhost:26264/';
     var serviceBase = 'http://localhost:49822/';
     //var serviceBase = 'http://ngauthenticationapi.azurewebsites.net/';
