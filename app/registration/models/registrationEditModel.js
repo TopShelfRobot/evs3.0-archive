@@ -139,10 +139,10 @@
 			return datacontext.save();
 		};
 		
-		var loaded = false;
+		self.regId = null;
 		this.load = function(regId){
 			
-			if(!loaded){
+			if(self.regId != regId){
 				self.regId = regId;
 				return datacontext.registration.getRegistrationById(regId)
 					.then(function(reg){

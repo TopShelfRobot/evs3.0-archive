@@ -18,8 +18,9 @@
 		this.otherPaymentAmmount = 0;
 		
 		this.otherPaymentChange = function(){
-			self.otherPaymentAmmount = Number(model.getTotalPrice() + self.otherPaymentAdjustment);
+			self.otherPaymentAmmount = Number(model.getTotalPrice()) + Number(self.otherPaymentAdjustment);
 		};
+		this.otherPaymentChange();
 		
 		var process = function (token, total, type){
 			$.blockUI({ message: 'Processing order...' });

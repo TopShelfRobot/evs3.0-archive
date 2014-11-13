@@ -20,9 +20,9 @@
                     </thead>
                     <tbody data-role="listview">
                         <tr>
-                            <td>{{ confirm.model.current.displayName }}</td>
+                            <td>{{ confirm.model.current.name }}</td>
                             <td>{{ confirm.model.isDefer ? 'Deferral' : 'Transfer' }}</td>
-                            <td>{{ (confirm.model.transferListing) ? confirm.model.transferListing.displayName : '' }}</td>
+                            <td>{{ (confirm.model.transferListing) ? confirm.model.transferListing.name : '' }}</td>
                             <td>{{ confirm.model.current.currentFee | currency }}</td>
                             <td>{{ ((confirm.model.transferListing) ? confirm.model.transferListing.currentFee : '') | currency }}</td>
                         </tr>
