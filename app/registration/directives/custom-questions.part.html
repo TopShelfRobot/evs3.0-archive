@@ -1,5 +1,5 @@
 <!-- Custom Questions -->
-<div ng-repeat="(key, question) in questions">
+<div ng-repeat="(key, question) in questions | orderBy:'order'">
 	<div class="row" ng-switch on="question.questionType" ng-if="question.active">
         <div class="form-group" 
 				ng-switch-when="dropdown"
@@ -26,7 +26,7 @@
 							name="raiod-{{question.id}}"
 							ng-model="answers[question.id].answerText"
 							ng-value="o"
-							ng-required="$parent.isRequired"/>
+							ng-required="question.isRequired"/>
 						<span>{{o}}</span>
                     </label>
                 </div>
