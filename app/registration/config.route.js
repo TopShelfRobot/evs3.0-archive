@@ -167,7 +167,19 @@
                     title: 'Shopping Cart',
                     templateUrl: 'app/registration/views/shoppingcart.part.html'
                 }
-            }, {
+			}, {
+			    url: '/login',
+			    config: {
+			        title: 'Login',
+			        templateUrl: 'app/registration/views/login.part.html'
+			    }
+			}, {
+			    url: '/signup',
+			    config: {
+			        title: 'Sign-Up',
+			        templateUrl: 'app/registration/views/signup.part.html'
+			    }
+			}, {
                 url: '/kitchensink',
                 config: {
                     title: 'Kitchen Sink',

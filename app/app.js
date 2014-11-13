@@ -12,7 +12,6 @@
         'common', // common functions, logger, spinner
         'common.bootstrap', // bootstrap dialog wrapper functions
 
-
         // 3rd Party Modules
         'breeze.angular', // configures breeze for an angular app
         'breeze.directives', // contains the breeze validation directive (zValidate)
@@ -33,8 +32,6 @@
     app.run(['$route', function ($route) {
         // Include $route to kick start the router.
     }]);
-
-
 
     //app.run(['$route', '$rootScope', '$q', 'routemediator',
     //function ($route, $rootScope, $q, routemediator) {

@@ -8,6 +8,8 @@
 
         // Custom modules
         'common',           // common functions, logger, spinner
+
+         'LocalStorageModule',
      
         // 3rd Party Modules
         'breeze.angular',    // configures breeze for an angular app
@@ -18,10 +20,23 @@
 		'nsPopover',
         'sbDateSelect'
     ]);
+    
+    //var serviceBase = 'http://localhost:26264/';
+    var serviceBase = 'http://localhost:49822/';
+    //var serviceBase = 'http://ngauthenticationapi.azurewebsites.net/';
+
+    app.constant('ngAuthSettings', {
+        apiServiceBaseUri: serviceBase,
+        clientId: 'ngAuthApp'
+    });
+
+    app.config(function ($httpProvider) {
+        $httpProvider.interceptors.push('authInterceptorService');
+    });
 
     // Handle routing errors and success events.
-    app.run(['$route', function ($route) {
+    app.run(['$route', 'authService', function ($route, authService) {
         // Include $route to kick start the router.
+        authService.fillAuthData();
     }]);
-
 })();

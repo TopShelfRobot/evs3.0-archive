@@ -69,13 +69,13 @@
 
         function prime() {
 
-            if (primePromise) return primePromise;
+            //if (primePromise) return primePromise;
 
-            primePromise = $q.all([service.eventure.getAll()])
-                .then(extendMetadata)
-                .then(success);
-            return primePromise;
-            //return true;
+            //primePromise = $q.all([service.eventure.getAll()])
+            //    .then(extendMetadata)
+            //    .then(success);
+            //return primePromise;
+            return true;
 
             function success() {
                 //service.lookup.setLookups();

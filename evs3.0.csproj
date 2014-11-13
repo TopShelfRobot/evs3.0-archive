@@ -104,15 +104,27 @@
     <Content Include="app\registration\config.js" />
     <Content Include="app\registration\config.route.js" />
     <Content Include="app\registration\controllers\addParticipantController.js" />
+    <Content Include="app\registration\controllers\addProfileController.js" />
     <Content Include="app\registration\controllers\confirmController.js" />
     <Content Include="app\registration\controllers\editteamController.js" />
+    <Content Include="app\registration\controllers\loginController.js" />
     <Content Include="app\registration\controllers\orderReceiptController.js" />
     <Content Include="app\registration\controllers\profileController.js" />
     <Content Include="app\registration\controllers\questionsController.js" />
+    <Content Include="app\registration\controllers\registrationEditConfirmController.js" />
+    <Content Include="app\registration\controllers\registrationeditController.js" />
+    <Content Include="app\registration\controllers\signupController.js" />
+    <Content Include="app\registration\controllers\transferQuestionsController.js" />
     <Content Include="app\registration\controllers\viewReceiptController.js" />
+    <Content Include="app\registration\directives\custom-questions.js" />
+    <Content Include="app\registration\directives\custom-questions.part.html" />
     <Content Include="app\registration\models\cartModel.js" />
     <Content Include="app\registration\models\cartModel_old.js" />
+    <Content Include="app\registration\models\registrationEditModel.js" />
+    <Content Include="app\registration\services\authInterceptorService.js" />
+    <Content Include="app\registration\services\authService.js" />
     <Content Include="app\registration\views\addparticipant.part.html" />
+    <Content Include="app\registration\views\addprofile.part.html" />
     <Content Include="app\registration\views\cart.part.html" />
     <Content Include="app\registration\views\confirm.part.html" />
     <Content Include="app\registration\controllers\createteamController.js" />
@@ -129,9 +141,11 @@
     <Content Include="app\registration\models\memberCartModel.js" />
     <Content Include="app\registration\models\registrationCartModel.js" />
     <Content Include="app\registration\views\editteam.part.html" />
+    <Content Include="app\registration\views\login.part.html" />
     <Content Include="app\registration\views\orderreceipt.part.html" />
     <Content Include="app\registration\views\participantForm.part.html" />
     <Content Include="app\registration\views\profile.part.html" />
+    <Content Include="app\registration\views\profileForm.part.html" />
     <Content Include="app\registration\views\receipt.part.html" />
     <Content Include="app\registration\services\StripeService.js" />
     <Content Include="app\registration\views\createteam.part.html" />
@@ -141,11 +155,15 @@
     <Content Include="app\registration\views\memberPayment.part.html" />
     <Content Include="app\registration\views\payment.part.html" />
     <Content Include="app\registration\views\questions.part.html" />
+    <Content Include="app\registration\views\registrationedit.part.html" />
+    <Content Include="app\registration\views\registrationEditConfirm.part.html" />
     <Content Include="app\registration\views\setparticipant.part.html" />
     <Content Include="app\registration\views\shoppingcart.part.html" />
+    <Content Include="app\registration\views\signup.part.html" />
     <Content Include="app\registration\views\teamForm.part.html" />
     <Content Include="app\registration\views\teamPayment.part.html" />
     <Content Include="app\common\services\repository.ZZZ.js" />
+    <Content Include="app\registration\views\transferQuestions.part.html" />
     <Content Include="back-favicon.png" />
     <Content Include="app\common\bootstrap\bootstrap.dialog.js" />
     <Content Include="app\common\common.js" />
@@ -332,6 +350,7 @@
     <Content Include="Scripts\angular-animate.js" />
     <Content Include="Scripts\angular-animate.min.js" />
     <Content Include="Scripts\angular-kendo.js" />
+    <Content Include="Scripts\angular-local-storage.min.js" />
     <Content Include="Scripts\angular-moment-input.js" />
     <Content Include="Scripts\angular-moment.min.js" />
     <Content Include="Scripts\angular-route.js" />
@@ -387,7 +406,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="packages.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

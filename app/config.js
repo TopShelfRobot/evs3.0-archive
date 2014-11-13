@@ -13,12 +13,9 @@
     //var remoteApiName = 'http://evs30api.eventuresports.info/kendo/';
 	
 	var apiPath = "";
-    //apiPath = "http://localhost:55972";
+	//apiPath = "http://localhost:55972";
+	apiPath = "http://localhost:49822";
     apiPath = "http://dev30.eventuresports.info";
-	
-
-	 //apiPath = "http://localhost:55972";
-	apiPath = "http://dev30.eventuresports.info";
 	
 	var remoteServiceName = apiPath + '/breeze/breeze/';
 	var remoteApiName = apiPath + '/kendo/';
