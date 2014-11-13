@@ -90,14 +90,14 @@
                   </tr>
               </thead>
               <tbody>
-                  <tr ng-repeat="(key, q) in setq.customQuestions">
+                  <tr ng-repeat="(key, q) in setq.customQuestions | orderBy:'order'">
                       <td>{{q.questionText}}</td>
                       <td>{{q.questionType}}</td>
                       <td>{{q.options}}</td>
                       <td>{{q.isRequired}}</td>
                       <td>{{q.active}}</td>
 					  <td>{{q.order}}</td>
-                      <td><button class="btn btn-default btn-block" ng-click="setq.editQuestion(key)"><em class="glyphicon glyphicon-edit"></em>&nbsp;Edit</button></td>
+                      <td><button class="btn btn-default btn-block" ng-click="setq.editQuestion(q.id)"><em class="glyphicon glyphicon-edit"></em>&nbsp;Edit</button></td>
                   </tr>
               </tbody>
           </table>

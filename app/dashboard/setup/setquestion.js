@@ -31,11 +31,19 @@
 		
 		loadCustomQuestions();
 		
-		this.editQuestion = function(key){
+		this.editQuestion = function(id){
 			self.isEdit = true;
-			self.activeQuestion = key;
-			for(var i = 0; i < questionKeys.length; i++){
-				self.workingQuestion[questionKeys[i]] = self.customQuestions[key][questionKeys[i]];
+			self.activeQuestion = null;
+			for(var j = 0; j < self.customQuestions.length; j++){
+				if(self.customQuestions[j].id == id){
+					self.activeQuestion = j;
+					break;
+				}
+			}
+			if(self.activeQuestion !== null){
+				for(var i = 0; i < questionKeys.length; i++){
+					self.workingQuestion[questionKeys[i]] = self.customQuestions[self.activeQuestion][questionKeys[i]];
+				}
 			}
 		};
 		
