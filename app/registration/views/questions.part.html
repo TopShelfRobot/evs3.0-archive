@@ -39,7 +39,7 @@
             <div class="col-sm-6">
 				
                 <!-- Custom Questions -->
-				<div ng-repeat="(key, question) in customQuestions">
+				<div ng-repeat="(key, question) in customQuestions | orderBy:'order'">
 					<!-- <span>{{question.questionText}}, {{question.questionType}}</span> -->
 					<div class="row" ng-switch on="question.questionType" ng-if="question.active">
 	                    <div class="form-group" 
@@ -67,7 +67,7 @@
 											name="raiod-{{question.id}}"
 											ng-model="customAnswers[key]"
 											ng-value="o"
-											ng-required="$parent.isRequired"/>
+											ng-required="question.isRequired"/>
 										<span>{{o}}</span>
 	                                </label>
 	                            </div>
