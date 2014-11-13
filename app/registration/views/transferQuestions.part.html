@@ -9,12 +9,12 @@
 		</div>
 	</div>
 	<div class="row">
-	  	<form class="form-horizontal">
+	  	<form class="form-horizontal" name="questionsForm">
 		    <legend >Registration Edit</legend>
 		    <div class="col-sm-6">
 				<h3>Questions</h3>
 				<custom-questions questions="transq.model.transferQuestions" answers="transq.model.transferAnswers"></custom-questions>
-				<button class="btn btn-success pull-right" ng-click="transq.submit()">
+				<button class="btn btn-success pull-right" ng-disabled="!questionsForm.$valid" ng-click="transq.submit()">
 					<i class="glyphicon glyphicon-save"></i>
 					&nbsp;Save
 				</button>
