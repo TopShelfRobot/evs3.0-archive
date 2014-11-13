@@ -1,4 +1,4 @@
-<section>
+<section ng-controller="ShoppingCart as cart">
     <div class="row">
         <div class="col-sm-9">
             <h1>Shopping Cart</h1>
@@ -16,12 +16,12 @@
                     </thead>
                     <tbody data-role="listview" data-template="large-cart-item">
 
-                    <tr ng-repeat='reg in cart.registrations'>
-                        <td><span class="product-name">{{reg.displayEvent}}</span></td>
-                        <td><span class="product-name">{{reg.displayList}}</span></td>
-                        <td><span class="product-name">{{reg.fee | currency}}</span></td>
-                        <td><button type="button" class="close remove-item" ng-click="$parent.$parent.removeItem(reg)">&times;</button></td>
-                    </tr>
+	                    <tr ng-repeat='reg in cart.model.registrations'>
+	                        <td><span class="product-name">{{reg.displayEvent}}</span></td>
+	                        <td><span class="product-name">{{reg.displayList}}</span></td>
+	                        <td><span class="product-name">{{reg.fee | currency}}</span></td>
+	                        <td><button type="button" class="close remove-item" ng-click="cart.removeItem(reg)">&times;</button></td>
+	                    </tr>
                     </tbody>
                 </table>
             </div>
@@ -35,8 +35,8 @@
         <div class="col-sm-3">
             <br>
             <div class="well well-sm">
-                <h4>Subtotal: $342.34</h4>
-                <a class="btn btn-warning btn-block" data-ng-click="checkout()">Go To Checkout</a>
+                <h4>Subtotal: {{cart.model.getTotalPrice() | currency }}</h4>
+                <a class="btn btn-warning btn-block" ng-click="cart.checkout()">Go To Checkout</a>
             </div>
 
         </div>
