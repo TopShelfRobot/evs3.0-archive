@@ -164,7 +164,10 @@
 								if(self.possibles.length > 0){
 									self.newListing = self.possibles[0];
 								}
-								return self.possibles;
+								return datacontext.eventure.getEventureById(self.current.eventureId);
+							})
+							.then(function(eventure){
+								console.log("eventure:", eventure);
 							});
 				
 						var defQuestions = datacontext.question.getCustomQuestionSetByEventureListId(reg.eventureListId)
