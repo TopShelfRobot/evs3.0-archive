@@ -424,11 +424,18 @@
           var gridname = data;
           excel.export(gridname);
         };
-
-
-
-
-
+		
+		vm.clone = function(){
+			var manager = vm.eventure.entityAspect.entityManager;
+			var cEventure = copyItem(vm.eventure);
+			console.log(cEventure);
+			cEventure.copy.name = "cloned: " + cEventure.copy.name;
+			var clonedEventure = manager.createEntity(cEventure.type, cEventure.copy);
+			datacontext.saveChanges([clone])
+				.then(function(){
+					return datacontext.
+				});
+		}
     }
 
 })();
