@@ -131,7 +131,7 @@
         <form class="form-horizontal">
           <div class="row">
             <div class="col-sm-6">
-            <p class="text-muted text-center">Cart Rules</p>
+              <p class="text-muted text-center">Cart Rules</p>
               <hr>
               <div class="form-group">
                 <label for="SingleFee" class="col-lg-6 control-label">Single Fee for all Registrations:</label>
@@ -144,20 +144,11 @@
                 </div>
               </div>
               <div class="form-group">
-                <label for="MultiDiscount" class="col-lg-6 control-label">Multiple Discount:</label>
+                <label for="MultiDiscount" class="col-lg-6 control-label">Allow Duplicate Orders:</label>
                 <div class="col-lg-6">
                   <div class="btn-group">
-                    <button type="button" class="btn btn-default" ng-model="vm.owner.isMultiDiscountCartRule" btn-radio="true">Yes</button>
-                    <button type="button" class="btn btn-default" ng-model="vm.owner.isMultiDiscountCartRule" btn-radio="false">No</button>
-                  </div>
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="AllFour" class="col-lg-6 control-label">All Four:</label>
-                <div class="col-lg-6">
-                  <div class="btn-group">
-                    <button type="button" class="btn btn-default" ng-model="vm.owner.isAllFourCartRule" btn-radio="true">Yes</button>
-                    <button type="button" class="btn btn-default" ng-model="vm.owner.isAllFourCartRule" btn-radio="false">No</button>
+                    <button type="button" class="btn btn-default" ng-model="vm.owner.isDuplicateOrderAllowed" btn-radio="true">Yes</button>
+                    <button type="button" class="btn btn-default" ng-model="vm.owner.isDuplicateOrderAllowed" btn-radio="false">No</button>
                   </div>
                 </div>
               </div>
