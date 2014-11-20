@@ -2,9 +2,9 @@
     'use strict';
 
     var controllerId = 'setexpense';
-    angular.module('app').controller(controllerId, ['$q', '$routeParams', '$upload', '$http', '$timeout', '$location', 'common', 'datacontext', 'config', setexpense]);
+    angular.module('app').controller(controllerId, ['$q', '$routeParams', '$upload', '$http', '$timeout', '$location', '$scope', 'common', 'datacontext', 'config', setexpense]);
 
-    function setexpense($q, $routeParams, $upload, $http, $timeout, $location, common, datacontext, config) {
+    function setexpense($q, $routeParams, $upload, $http, $timeout, $location, $scope, common, datacontext, config) {
 
         var getLogFn = common.logger.getLogFn;
         var log = getLogFn(controllerId);
@@ -23,6 +23,7 @@
         activate();
 
         function activate() {
+            onDestroy();
             common.activateController(getExpense(), getResourceItemCategories(), getResourceItems(), controllerId)
                 .then(function() {
                     vm.expense.eventureId = vm.eventureId;
@@ -67,7 +68,15 @@
               $location.path("/eventuredetail/" + vm.eventureId);
             }
         };
-      
+
+        function onDestroy() {
+            //alert('destroy my contextttttttt!!!!');
+            $scope.$on('$destroy', function () {
+                //alert('destroymy contextttttttt!!!!!!!');
+                //autoStoreWip(true);
+                datacontext.cancel();
+            });
+        }
 
         vm.saveAndNav = function() {
             return datacontext.save()

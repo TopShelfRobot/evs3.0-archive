@@ -2,9 +2,9 @@
     'use strict';
 
     var controllerId = 'seteventplanitem';
-    angular.module('app').controller(controllerId, ['$q', '$routeParams', '$upload', '$http', '$timeout', '$location', 'common', 'datacontext', 'config', seteventplanitem]);
+    angular.module('app').controller(controllerId, ['$q', '$routeParams', '$upload', '$http', '$timeout', '$location', '$scope', 'common', 'datacontext', 'config', seteventplanitem]);
 
-    function seteventplanitem($q, $routeParams, $upload, $http, $timeout, $location, common, datacontext, config) {
+    function seteventplanitem($q, $routeParams, $upload, $http, $timeout, $location, $scope, common, datacontext, config) {
 
         var getLogFn = common.logger.getLogFn;
         var log = getLogFn(controllerId);
@@ -29,6 +29,7 @@
         activate();
 
         function activate() {
+            onDestroy();
             common.activateController(getPlanItem(), getResources(), controllerId)
                 .then(function() {
                     //log('Activated set addon');
@@ -86,6 +87,15 @@
               $location.path("/eventuredetail/" + vm.eventureId);
             }
         };
+
+        function onDestroy() {
+            //alert('destroy my contextttttttt!!!!');
+            $scope.$on('$destroy', function () {
+                //alert('destroymy contextttttttt!!!!!!!');
+                //autoStoreWip(true);
+                datacontext.cancel();
+            });
+        }
       
         vm.saveAndNav = function() {
             return datacontext.save(vm.planItem)

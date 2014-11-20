@@ -2,9 +2,9 @@
 	'use strict';
 
 	var controllerId = 'seteventure';
-	angular.module('app').controller(controllerId, ['$q', '$routeParams', '$upload', '$http', '$timeout', '$location', 'common', 'datacontext', 'config', seteventure]);
+	angular.module('app').controller(controllerId, ['$q', '$routeParams', '$upload', '$http', '$timeout', '$location', '$scope', 'common', 'datacontext', 'config', seteventure]);
 
-	function seteventure($q, $routeParams, $upload, $http, $timeout, $location, common, datacontext, config) {
+	function seteventure($q, $routeParams, $upload, $http, $timeout, $location, $scope, common, datacontext, config) {
 
 		var getLogFn = common.logger.getLogFn;
 		var log = getLogFn(controllerId);
@@ -19,6 +19,7 @@
 		activate();
 
 		function activate() {
+			onDestroy();
 			common.activateController(getEventure(), controllerId)
 				.then(function() {
 					//log('Activated set eventure');
@@ -46,6 +47,15 @@
               $location.path("/eventurecenter");
             }
         };
+
+		function onDestroy() {
+			//alert('destroy my contextttttttt!!!!');
+			$scope.$on('$destroy', function () {
+				//alert('destroymy contextttttttt!!!!!!!');
+				//autoStoreWip(true);
+				datacontext.cancel();
+			});
+		}
 
         vm.saveAndNav = function() {
             return datacontext.save(vm.eventure)

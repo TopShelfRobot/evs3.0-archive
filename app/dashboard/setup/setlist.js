@@ -2,9 +2,9 @@
 	'use strict';
 
 	var controllerId = 'setlist';
-	angular.module('app').controller(controllerId, ['$q', '$routeParams', '$upload', '$http', '$timeout', '$location', 'common', 'datacontext', 'config', setlist]);
+	angular.module('app').controller(controllerId, ['$q', '$routeParams', '$upload', '$http', '$timeout', '$location', '$scope', 'common', 'datacontext', 'config', setlist]);
 
-	function setlist($q, $routeParams, $upload, $http, $timeout, $location, common, datacontext, config) {
+	function setlist($q, $routeParams, $upload, $http, $timeout, $location, $scope, common, datacontext, config) {
 
 		var getLogFn = common.logger.getLogFn;
 		var log = getLogFn(controllerId);
@@ -20,6 +20,7 @@
 	    activate();
 
 		function activate() {
+			onDestroy();
 		    common.activateController(getEventureList(), getListTypes(), controllerId)
 				.then(function() {
 				    //log('Activated list typessssss');
@@ -204,6 +205,15 @@
               $location.path("/eventuredetail/" + vm.list.eventureId);
             }
         };
+
+		function onDestroy() {
+			//alert('destroy my contextttttttt!!!!');
+			$scope.$on('$destroy', function () {
+				//alert('destroymy contextttttttt!!!!!!!');
+				//autoStoreWip(true);
+				datacontext.cancel();
+			});
+		}
 
 		vm.saveAndNav = function() {
 
