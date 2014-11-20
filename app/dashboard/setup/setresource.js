@@ -2,9 +2,9 @@
     'use strict';
 
     var controllerId = 'setresource';
-    angular.module('app').controller(controllerId, ['$q', '$routeParams', '$upload', '$http', '$timeout', '$location', 'common', 'datacontext', 'config', setresource]);
+    angular.module('app').controller(controllerId, ['$q', '$routeParams', '$upload', '$http', '$timeout', '$location', '$scope', 'common', 'datacontext', 'config', setresource]);
 
-    function setresource($q, $routeParams, $upload, $http, $timeout, $location, common, datacontext, config) {
+    function setresource($q, $routeParams, $upload, $http, $timeout, $location, $scope, common, datacontext, config) {
         //logger.log('made it ehre!');
         var getLogFn = common.logger.getLogFn;
         var log = getLogFn(controllerId);
@@ -17,6 +17,7 @@
         activate();
 
         function activate() {
+            onDestroy();
             common.activateController(getResource(), controllerId)
                 .then(function () { 
                   //log('Activated set resource'); 
@@ -34,6 +35,12 @@
             } else {
                 return vm.resource = datacontext.resource.createResource();
             }
+        }
+
+        function onDestroy() {
+            $scope.$on('$destroy', function () {
+                datacontext.cancel();
+            });
         }
       
         vm.cancel = function() {

@@ -2,9 +2,9 @@
 	'use strict';
 
 	var controllerId = 'setresourceitem';
-	angular.module('app').controller(controllerId, ['$q', '$routeParams', '$upload', '$http', '$timeout', '$location', 'common', 'datacontext', 'config', setresourceitem]);
+	angular.module('app').controller(controllerId, ['$q', '$routeParams', '$upload', '$http', '$timeout', '$location', '$scope', 'common', 'datacontext', 'config', setresourceitem]);
 
-	function setresourceitem($q, $routeParams, $upload, $http, $timeout, $location, common, datacontext, config) {
+	function setresourceitem($q, $routeParams, $upload, $http, $timeout, $location, $scope, common, datacontext, config) {
 
 		var getLogFn = common.logger.getLogFn;
 		var log = getLogFn(controllerId);
@@ -22,6 +22,7 @@
 		activate();
 
 		function activate() {
+		    onDestroy();
 			common.activateController(getResourceItem(), getResourceCategories(), getResources(), controllerId)
 				.then(function() {
 					//log('Activated set coupon');
@@ -55,6 +56,12 @@
                     //applyFilter();
                     return vm.resources = data;
                 });
+        }
+
+        function onDestroy() {
+            $scope.$on('$destroy', function () {
+                datacontext.cancel();
+            });
         }
       
         vm.cancel = function() {

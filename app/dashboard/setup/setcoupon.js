@@ -22,12 +22,10 @@
 		activate();
 
 		function activate() {
-			//alert('dedsrty?????');
-			
+			onDestroy();
 			common.activateController(getCoupon(), getEventures(), getEventureLists(), controllerId)
 				.then(function() {
 				    //log('Activated set coupon');
-				    onDestroy();
 				});
 		}
 
@@ -45,7 +43,6 @@
 		}
 
 		function onDestroy() {
-			//alert('destroy my contextttttttt!!!!');
 			$scope.$on('$destroy', function () {
 			    //alert('destroymy contextttttttt!!!!!!!');
 				//autoStoreWip(true);

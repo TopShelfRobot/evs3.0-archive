@@ -2,9 +2,9 @@
     'use strict';
 
     var controllerId = 'setvolunteerschedule';
-    angular.module('app').controller(controllerId, ['$q', '$routeParams', '$upload', '$http', '$timeout', '$location', 'common', 'datacontext', 'config', setvolunteerschedule]);
+    angular.module('app').controller(controllerId, ['$q', '$routeParams', '$upload', '$http', '$timeout', '$location', '$scope', 'common', 'datacontext', 'config', setvolunteerschedule]);
 
-    function setvolunteerschedule($q, $routeParams, $upload, $http, $timeout, $location, common, datacontext, config) {
+    function setvolunteerschedule($q, $routeParams, $upload, $http, $timeout, $location, $scope, common, datacontext, config) {
         var getLogFn = common.logger.getLogFn;
         var log = getLogFn(controllerId);
 
@@ -15,6 +15,7 @@
         activate();
 
         function activate() {
+            onDestroy();
             common.activateController(getVolunteerSchedule(), controllerId)
                 .then(function () { 
                   //log('Activated Volunteer Schedule Edit'); 
@@ -28,6 +29,12 @@
                         console.log(data);
                         return vm.volunteerschedule = data;
                     });
+        }
+
+        function onDestroy() {
+            $scope.$on('$destroy', function () {
+                datacontext.cancel();
+            });
         }
       
         vm.cancel = function() {

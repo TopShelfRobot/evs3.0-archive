@@ -29,6 +29,7 @@
 				});
 		};
 		
+		onDestroy();
 		loadCustomQuestions();
 		
 		this.editQuestion = function(id){
@@ -73,6 +74,12 @@
 					console.error("save unsuccessful:", err);
 					return loadCustomQuestions();
 				});
+		}
+
+		function onDestroy() {
+		    $scope.$on('$destroy', function () {
+		        datacontext.cancel();
+		    });
 		}
 		
 		this.saveAndNav = function(){
