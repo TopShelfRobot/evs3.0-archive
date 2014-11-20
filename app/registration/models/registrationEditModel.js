@@ -141,10 +141,11 @@
 		
 		self.regId = null;
 		this.load = function(regId){
+			var dd = $q.when(0);
 			
 			if(self.regId != regId){
 				self.regId = regId;
-				return datacontext.registration.getRegistrationById(regId)
+				dd = datacontext.registration.getRegistrationById(regId)
 					.then(function(reg){
 					
 						self.registration = reg;
@@ -202,9 +203,8 @@
 								return xx;
 							});
 					});
-			}else{
-				return;
 			}
+			return dd;
 		};
 	}
 	

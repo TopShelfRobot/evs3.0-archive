@@ -58,10 +58,14 @@
 			
 			switch(type){
 			case "credit":
-				stripe.checkout(total)
-	                .then(function(res){
-	                	return process(res.id, total, type);
-	                });
+				if(total > 0){
+					stripe.checkout(total)
+		                .then(function(res){
+		                	return process(res.id, total, type);
+		                });
+				}else{
+					return process(null, total, type);
+				}
 				break;
 			default:
 				process(null, total, type);

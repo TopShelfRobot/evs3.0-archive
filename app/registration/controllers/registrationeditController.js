@@ -51,7 +51,7 @@
 			$location.path("/registration/" + self.regId + "/edit");
 		};
 		
-		common.activateController(model.load(self.regId), controllerId);
+		common.activateController([model.load(self.regId)], controllerId);
 	}
 	
 	angular.module("evReg").controller(controllerId, ["$routeParams", "$location", "$q", "RegistrationEditModel", "common", "config", Controller]);
