@@ -20,12 +20,12 @@
 	      <h3>Transfers and Deferrals</h3>
 	      <div class="row">
 	        <div class="col-xs-6">
-	          <button class="btn btn-warning btn-sm" ng-click="editReg.loadTransfer()" ng-disabled="editReg.model.current.eventure.transfersAllowed" ng-cloak>
+	          <button class="btn btn-warning btn-sm" ng-click="editReg.loadTransfer()" ng-disabled="!editReg.model.current.eventure.transfersAllowed" ng-cloak>
 				  <i class="glyphicon glyphicon-refresh"></i>&nbsp;Transfer Registration
 			  </button>
 	        </div>
 	        <div class="col-xs-6">
-	          <button class="btn btn-danger btn-sm" ng-click="editReg.loadDefer()" ng-disabled="editReg.model.current.eventure.deferralsAllowed" ng-cloak>
+	          <button class="btn btn-danger btn-sm" ng-click="editReg.loadDefer()" ng-disabled="!editReg.model.current.eventure.deferralsAllowed" ng-cloak>
 				  <i class="glyphicon glyphicon-time"></i>&nbsp;Defer Registration
 			  </button>
 	        </div>
