@@ -62,10 +62,15 @@
 		);
 		common.activateController(promises, controllerId);
 
+		$scope.date = {
+			dateBirth: ''
+		};
+
 		$scope.submit = function(){
 
 			var newPart = datacontext.participant.createParticipant($scope.participant.ownerId, $scope.participant.houseId, $scope.participant.email)
-
+			$scope.date.dateBirth = moment($scope.date.dateBirth).toISOString();
+			$scope.participant.dateBirth = $scope.date.dateBirth;
 			for(key in $scope.participant){
 				newPart[key] = $scope.participant[key];
 			}

@@ -132,6 +132,12 @@
                     templateUrl: 'app/registration/views/profile.part.html'
                 }
             }, {
+                url: '/user-profile/:participantId',
+                config: {
+                    title: 'User Profile',
+                    templateUrl: 'app/registration/views/profile.part.html'
+                }
+            }, {
                 url: '/user-profile/add',
                 config: {
                     title: 'Add User Profile',

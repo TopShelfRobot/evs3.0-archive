@@ -2,9 +2,9 @@
     'use strict';
 
     var controllerId = 'eventuredetail';
-    angular.module('app').controller(controllerId, ['$routeParams', 'common', 'datacontext', 'config', 'ExcelService', "$q", "$timeout", eventuredetail]);
+    angular.module('app').controller(controllerId, ['$routeParams', 'common', 'datacontext', 'config', 'ExcelService', "$q", "$timeout", "Cloner", eventuredetail]);
 
-    function eventuredetail($routeParams, common, datacontext, config, excel, $q, $timeout) {
+    function eventuredetail($routeParams, common, datacontext, config, excel, $q, $timeout, cloner) {
         var getLogFn = common.logger.getLogFn;
         var log = getLogFn(controllerId);
 
@@ -17,7 +17,7 @@
         vm.eventureId = $routeParams.eventureId;
 
         activate();
-
+		
         function activate() {
           var promises = [getEventure(), Registrations(), Capacity(), ListingsGrid(), ExpenseGrid(), EventPlanGrid(), ParticipantGrid(), VolunteerGrid()];
 
@@ -25,7 +25,7 @@
               .then(function () {
                   //log('Activated Eventure Detail View');
               });
-      }
+        }
 
         function getEventure() {
           return datacontext.eventure.getEventureById(vm.eventureId)
@@ -424,11 +424,18 @@
           var gridname = data;
           excel.export(gridname);
         };
-
-
-
-
-
+		
+		vm.clone = function(){
+			$.blockUI({ message: "Cloning the Eventure..." });
+			cloner.cloneEventure(vm.eventure)
+				.then(function(out){
+					console.log("done:", out);
+					$.unblockUI();
+				})
+				.catch(function(err){
+					console.log("err:", err);
+				});
+		}
     }
 
 })();

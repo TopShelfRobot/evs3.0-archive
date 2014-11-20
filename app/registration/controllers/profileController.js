@@ -3,11 +3,13 @@
 	
 	var controllerId = "UserProfile";
 
-	function Controller($scope, config, datacontext, common){
+	function Controller($scope, $routeParams, config, datacontext, common){
 
 		$scope.participant = {};
 		
 		$scope.disableEmail = true;
+
+		$scope.participantId = $routeParams.participantId || config.owner.houseId;
 		
 		var promises = [getParticipant()];
 		
@@ -20,7 +22,7 @@
 			});
 
 		function getParticipant() {
-			return datacontext.participant.getParticipantById(config.owner.houseId)
+			return datacontext.participant.getParticipantById($scope.participantId)
 				.then(function(participant) {
 						$scope.participant = participant;
 						$scope.date.dateBirth = moment($scope.participant.dateBirth).format('YYYY-MM-DD');
@@ -361,5 +363,5 @@
 		}
 	}
 
-	angular.module("evReg").controller(controllerId, ["$scope", "config", "datacontext", "common", Controller]);
+	angular.module("evReg").controller(controllerId, ["$scope", "$routeParams", "config", "datacontext", "common", Controller]);
 })();

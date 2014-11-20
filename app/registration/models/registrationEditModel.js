@@ -141,10 +141,11 @@
 		
 		self.regId = null;
 		this.load = function(regId){
+			var dd = $q.when(0);
 			
 			if(self.regId != regId){
 				self.regId = regId;
-				return datacontext.registration.getRegistrationById(regId)
+				dd = datacontext.registration.getRegistrationById(regId)
 					.then(function(reg){
 					
 						self.registration = reg;
@@ -164,7 +165,10 @@
 								if(self.possibles.length > 0){
 									self.newListing = self.possibles[0];
 								}
-								return self.possibles;
+								return datacontext.eventure.getEventureById(self.current.eventureId);
+							})
+							.then(function(eventure){
+								console.log("eventure:", eventure);
 							});
 				
 						var defQuestions = datacontext.question.getCustomQuestionSetByEventureListId(reg.eventureListId)
@@ -199,9 +203,8 @@
 								return xx;
 							});
 					});
-			}else{
-				return;
 			}
+			return dd;
 		};
 	}
 	
