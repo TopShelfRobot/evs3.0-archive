@@ -14,4 +14,12 @@
 	}
 	
 	angular.module("common").service("Helpers", Service);
+	
+	
+	function Dropbox(){
+				
+		return Dropbox;
+	}
+	
+	angular.module("common").factory("Dropbox", Dropbox);
 })();

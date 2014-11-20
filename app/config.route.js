@@ -350,7 +350,13 @@
                     title: 'Participant Communication',
                     templateUrl: 'app/dashboard/email.html'
                 }
-            }
+            }, {
+                url: '/filecenter',
+                config: {
+                    title: 'File Center',
+                    templateUrl: 'app/dashboard/filecenter.html'
+                }
+            },
         ];
     }
 })();

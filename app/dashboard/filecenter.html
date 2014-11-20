@@ -1,0 +1,151 @@
+<div ng-controller="FileCenterController as fileCenter">
+	<div class="row" >
+		<div class="col-lg-6 col-lg-offset-6">
+			<div class="col-sm-6">
+				<button type="button" class="btn btn-block btn-warning btn-sm" ng-click="fileCenter.connect()">Connect Dropbox</button>
+			</div>
+			<div class="col-sm-6">
+				<button type="button" class="btn btn-block btn-success btn-sm" ng-click="fileCenter.addFile()">Add File</button>
+			</div>
+		</div>	
+	</div>	
+	<div class="row">
+		<div class="col-sm-12">
+			<div class="k-grid k-widget">
+				<div class="k-grid-header" style="padding-right: 0px;">
+					<div class="k-grid-header-wrap">
+						<table role="grid">
+							<colgroup>
+								<col class="k-hierarchy-col">
+								<col style="width:200px">
+								<col style="width:200px">
+								<col style="width:220px">
+								<col style="width:120px">
+							</colgroup>
+							<thead role="rowgroup">
+								<tr role="row">
+									<th class="k-hierarchy-cell k-header ng-scope">&nbsp;</th>
+									<th role="columnheader" data-field="FirstName" data-title="First Name" class="k-header ng-scope k-with-icon k-filterable" data-role="columnsorter">
+										<a class="k-grid-filter" href="#" tabindex="-1">
+											<span class="k-icon k-filter"></span>
+										</a>
+										<a class="k-link" href="#">First Name</a>
+									</th>
+									<th role="columnheader" data-field="LastName" data-title="Last Name" class="k-header ng-scope k-with-icon k-filterable" data-role="columnsorter">
+										<a class="k-grid-filter" href="#" tabindex="-1">
+											<span class="k-icon k-filter"></span>
+										</a>
+										<a class="k-link" href="#">Last Name</a>
+									</th>
+									<th role="columnheader" data-field="Email" data-title="Email Address" class="k-header ng-scope k-with-icon k-filterable" data-role="columnsorter">
+										<a class="k-grid-filter" href="#" tabindex="-1">
+											<span class="k-icon k-filter"></span>
+										</a>
+										<a class="k-link" href="#">Email Address</a>
+									</th>
+									<th role="columnheader" data-field="" class="k-header ng-scope"></th>
+								</tr>
+							</thead>
+						</table>
+					</div>
+				</div>
+				<div class="k-grid-content">
+					<table role="treegrid">
+						<colgroup>
+							<col class="k-hierarchy-col">
+							<col style="width:200px">
+							<col style="width:200px">
+							<col style="width:220px">
+							<col style="width:120px">
+						</colgroup>
+						<tbody role="rowgroup">
+							<tr class="k-master-row ng-scope" data-uid="089f2f12-2bc7-46d4-809a-089718c3a75f" role="row">
+								<td class="k-hierarchy-cell">
+									<a class="k-icon k-plus" href="#" tabindex="-1"></a>
+								</td>
+								<td role="gridcell">
+									<span ng-bind="dataItem.FirstName" class="ng-binding">Robert</span>
+								</td>
+									<td role="gridcell">
+										<span ng-bind="dataItem.LastName" class="ng-binding">Smith</span>
+									</td>
+									<td role="gridcell">
+										<span ng-bind="dataItem.Email" class="ng-binding">john@oal.com</span>
+									</td>
+									<td role="gridcell">
+										<a class="btn btn-default btn-block" href="#user-profile/26">
+											<em class="glyphicon glyphicon-edit"></em>&nbsp;Edit
+										</a>
+									</td>
+								</tr>
+								<tr class="k-alt k-master-row ng-scope" data-uid="2e7d459d-88d2-4fdb-ad12-16513246a9ce" role="row">
+									<td class="k-hierarchy-cell"><a class="k-icon k-plus" href="#" tabindex="-1"></a></td>
+									<td role="gridcell">
+										<span ng-bind="dataItem.FirstName" class="ng-binding">William</span>
+									</td>
+									<td role="gridcell">
+										<span ng-bind="dataItem.LastName" class="ng-binding">Goolsby</span>
+									</td>
+									<td role="gridcell">
+										<span ng-bind="dataItem.Email" class="ng-binding">john@oal.com</span>
+									</td>
+									<td role="gridcell">
+										<a class="btn btn-default btn-block" href="#user-profile/25">
+											<em class="glyphicon glyphicon-edit"></em>&nbsp;Edit
+										</a>
+									</td>
+								</tr>
+								<tr class="k-master-row ng-scope" data-uid="abf543aa-61a4-4a3c-9ee2-ac72cd89cdf2" role="row">
+									<td class="k-hierarchy-cell">
+										<a class="k-icon k-plus" href="#" tabindex="-1"></a>
+									</td>
+									<td role="gridcell">
+										<span ng-bind="dataItem.FirstName" class="ng-binding">Wil</span>
+									</td>
+									<td role="gridcell">
+										<span ng-bind="dataItem.LastName" class="ng-binding">Goolsby</span>
+									</td>
+									<td role="gridcell">
+										<span ng-bind="dataItem.Email" class="ng-binding">john@oal.com</span>
+									</td>
+									<td role="gridcell">
+										<a class="btn btn-default btn-block" href="#user-profile/24">
+											<em class="glyphicon glyphicon-edit"></em>&nbsp;Edit
+										</a>
+									</td>
+								</tr>
+								<tr class="k-alt k-master-row ng-scope" data-uid="e28813a9-cf07-4be2-93a3-a25973ed0dc7" role="row"><td class="k-hierarchy-cell"><a class="k-icon k-plus" href="#" tabindex="-1"></a></td><td role="gridcell"><span ng-bind="dataItem.FirstName" class="ng-binding">Billy</span></td><td role="gridcell"><span ng-bind="dataItem.LastName" class="ng-binding">Rich</span></td><td role="gridcell"><span ng-bind="dataItem.Email" class="ng-binding">john@oal.com</span></td><td role="gridcell"><a class="btn btn-default btn-block" href="#user-profile/23"><em class="glyphicon glyphicon-edit"></em>&nbsp;Edit</a></td></tr><tr class="k-master-row ng-scope" data-uid="f1211f92-6997-4984-ad47-32e6b3596dd2" role="row"><td class="k-hierarchy-cell"><a class="k-icon k-plus" href="#" tabindex="-1"></a></td><td role="gridcell"><span ng-bind="dataItem.FirstName" class="ng-binding">Jilly</span></td><td role="gridcell"><span ng-bind="dataItem.LastName" class="ng-binding">Boo</span></td><td role="gridcell"><span ng-bind="dataItem.Email" class="ng-binding">jill@boo.com</span></td><td role="gridcell"><a class="btn btn-default btn-block" href="#user-profile/22"><em class="glyphicon glyphicon-edit"></em>&nbsp;Edit</a></td></tr><tr class="k-alt k-master-row ng-scope" data-uid="4428a22f-d4ee-48b5-a1c0-dfdd8e2db2d9" role="row"><td class="k-hierarchy-cell"><a class="k-icon k-plus" href="#" tabindex="-1"></a></td><td role="gridcell"><span ng-bind="dataItem.FirstName" class="ng-binding">Billy</span></td><td role="gridcell"><span ng-bind="dataItem.LastName" class="ng-binding">Bob</span></td><td role="gridcell"><span ng-bind="dataItem.Email" class="ng-binding">bill@bob.com</span></td><td role="gridcell"><a class="btn btn-default btn-block" href="#user-profile/21"><em class="glyphicon glyphicon-edit"></em>&nbsp;Edit</a></td></tr><tr class="k-master-row ng-scope" data-uid="5fddc160-0f63-4eeb-8f9d-ab460e61c046" role="row"><td class="k-hierarchy-cell"><a class="k-icon k-plus" href="#" tabindex="-1"></a></td><td role="gridcell"><span ng-bind="dataItem.FirstName" class="ng-binding">asdf</span></td><td role="gridcell"><span ng-bind="dataItem.LastName" class="ng-binding">asdf</span></td><td role="gridcell"><span ng-bind="dataItem.Email" class="ng-binding">asdf@khjl.com</span></td><td role="gridcell"><a class="btn btn-default btn-block" href="#user-profile/20"><em class="glyphicon glyphicon-edit"></em>&nbsp;Edit</a></td></tr><tr class="k-alt k-master-row ng-scope" data-uid="3199b35f-3692-4d04-8698-f516621c29f5" role="row"><td class="k-hierarchy-cell"><a class="k-icon k-plus" href="#" tabindex="-1"></a></td><td role="gridcell"><span ng-bind="dataItem.FirstName" class="ng-binding">James</span></td><td role="gridcell"><span ng-bind="dataItem.LastName" class="ng-binding">James</span></td><td role="gridcell"><span ng-bind="dataItem.Email" class="ng-binding">poiu@qwer.qwe</span></td><td role="gridcell"><a class="btn btn-default btn-block" href="#user-profile/19"><em class="glyphicon glyphicon-edit"></em>&nbsp;Edit</a></td></tr><tr class="k-master-row ng-scope" data-uid="7ec01462-9d48-455a-be1c-394f479314c4" role="row"><td class="k-hierarchy-cell"><a class="k-icon k-plus" href="#" tabindex="-1"></a></td><td role="gridcell"><span ng-bind="dataItem.FirstName" class="ng-binding">Jim</span></td><td role="gridcell"><span ng-bind="dataItem.LastName" class="ng-binding">James</span></td><td role="gridcell"><span ng-bind="dataItem.Email" class="ng-binding">qwer@qwerf.com</span></td><td role="gridcell"><a class="btn btn-default btn-block" href="#user-profile/18"><em class="glyphicon glyphicon-edit"></em>&nbsp;Edit</a></td></tr><tr class="k-alt k-master-row ng-scope" data-uid="66678d37-21a7-4341-9c8d-4d07bb036391" role="row"><td class="k-hierarchy-cell"><a class="k-icon k-plus" href="#" tabindex="-1"></a></td><td role="gridcell"><span ng-bind="dataItem.FirstName" class="ng-binding">Will</span></td><td role="gridcell"><span ng-bind="dataItem.LastName" class="ng-binding">Williams</span></td><td role="gridcell"><span ng-bind="dataItem.Email" class="ng-binding">tmattes@eventuresports.com</span></td><td role="gridcell"><a class="btn btn-default btn-block" href="#user-profile/17"><em class="glyphicon glyphicon-edit"></em>&nbsp;Edit</a></td></tr>
+							</tbody>
+						</table>
+					</div>
+					<div class="k-pager-wrap k-grid-pager k-widget" data-role="pager">
+						<a href="#" title="Go to the first page" class="k-link k-pager-nav k-pager-first k-state-disabled" data-page="1" tabindex="-1">
+							<span class="k-icon k-i-seek-w">Go to the first page</span>
+						</a>
+						<a href="#" title="Go to the previous page" class="k-link k-pager-nav  k-state-disabled" data-page="1" tabindex="-1">
+							<span class="k-icon k-i-arrow-w">Go to the previous page</span>
+						</a>
+						<ul class="k-pager-numbers k-reset">
+							<li>
+								<span class="k-state-selected">1</span>
+							</li>
+							<li>
+								<a tabindex="-1" href="#" class="k-link" data-page="2">2</a>
+							</li>
+							<li>
+								<a tabindex="-1" href="#" class="k-link" data-page="3">3</a>
+							</li>
+						</ul>
+						<a href="#" title="Go to the next page" class="k-link k-pager-nav" data-page="2" tabindex="-1">
+							<span class="k-icon k-i-arrow-e">Go to the next page</span>
+						</a>
+						<a href="#" title="Go to the last page" class="k-link k-pager-nav k-pager-last" data-page="3" tabindex="-1">
+							<span class="k-icon k-i-seek-e">Go to the last page</span>
+						</a>
+						<span class="k-pager-info k-label">1 - 10 of 26 items</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
