@@ -2,9 +2,9 @@
 	'use strict';
 
 	var controllerId = 'setcoupon';
-	angular.module('app').controller(controllerId, ['$q', '$routeParams', '$upload', '$http', '$timeout', '$location', 'common', 'datacontext', 'config', setcoupon]);
+	angular.module('app').controller(controllerId, ['$q', '$routeParams', '$upload', '$http', '$timeout', '$location', '$scope', 'common', 'datacontext', 'config', setcoupon]);
 
-	function setcoupon($q, $routeParams, $upload, $http, $timeout, $location, common, datacontext, config) {
+	function setcoupon($q, $routeParams, $upload, $http, $timeout, $location, $scope, common, datacontext, config) {
 
 		var getLogFn = common.logger.getLogFn;
 		var log = getLogFn(controllerId);
@@ -13,18 +13,21 @@
 		vm.title = 'Eventure';
 		vm.couponId = $routeParams.couponId || 0;
 
-        vm.ownerId = 1;
+		vm.ownerId = 1;
 
-        vm.coupon = {};
-        vm.eventures = [];
-        vm.listings = [];
+		vm.coupon = {};
+		vm.eventures = [];
+		vm.listings = [];
 
 		activate();
 
 		function activate() {
+			//alert('dedsrty?????');
+			
 			common.activateController(getCoupon(), getEventures(), getEventureLists(), controllerId)
 				.then(function() {
-					//log('Activated set coupon');
+				    //log('Activated set coupon');
+				    onDestroy();
 				});
 		}
 
@@ -41,21 +44,30 @@
 			}
 		}
 
-        function getEventures() {
-            return datacontext.eventure.getEventuresByOwnerId(vm.ownerId)
-                .then(function(data) {
-                    //applyFilter();
-                    return vm.eventures = data;
-                });
-        }
+		function onDestroy() {
+			//alert('destroy my contextttttttt!!!!');
+			$scope.$on('$destroy', function () {
+			    //alert('destroymy contextttttttt!!!!!!!');
+				//autoStoreWip(true);
+				datacontext.cancel();
+			});
+		}
 
-        function getEventureLists() {
-            return datacontext.eventure.getEventureListsByOwnerId(vm.ownerId)
-                .then(function(data) {
-                    //applyFilter();
-                    return vm.listings = data;
-                });
-        }
+		function getEventures() {
+			return datacontext.eventure.getEventuresByOwnerId(vm.ownerId)
+				.then(function(data) {
+					//applyFilter();
+					return vm.eventures = data;
+				});
+		}
+
+		function getEventureLists() {
+			return datacontext.eventure.getEventureListsByOwnerId(vm.ownerId)
+				.then(function(data) {
+					//applyFilter();
+					return vm.listings = data;
+				});
+		}
 
 		vm.today = function () {
 		   vm.coupon.dateStart = new Date();
@@ -78,22 +90,22 @@
 		vm.formats = ['MM-dd-yyyy', 'yyyy/MM/dd', 'shortDate'];
 
 		vm.format = vm.formats[0];
-        
-        vm.cancel = function() {
-          return datacontext.cancel()
-            .then(complete);
-          
-            function complete() {
-              $location.path("/discounts");
-            }
-        };
-      
+		
+		vm.cancel = function() {
+		  return datacontext.cancel()
+			.then(complete);
+		  
+			function complete() {
+			  $location.path("/discounts");
+			}
+		};
+	  
 		vm.saveAndNav = function() {
 			return datacontext.save(vm.coupon)
 				.then(complete);
 
 			function complete() {
-                $location.path("/discounts");
+				$location.path("/discounts");
 			}
 		};
 

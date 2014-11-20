@@ -18,7 +18,7 @@
 
         $scope.signUp = function () {
 
-            //alert('yo yoy yo');
+            alert('yo yoy yo');
 
             authService.saveRegistration($scope.registration).then(function (response) {
 

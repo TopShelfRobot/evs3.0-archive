@@ -31,16 +31,16 @@
 					.then(function (result) {
 						nextUrl = "/receipt/" + result;
 						return null;
-	                });
+					});
 			}else{
 				def =  model.submitTransfer(token, total, type)
 					.then(function (result) {
 						nextUrl = "/receipt/" + result;
 						return model.saveAnswers()
-	                });
+					});
 			}
 			
-            def.then(function(){
+			def.then(function(){
 				$location.path(nextUrl);
 				return null;
 			})
@@ -59,9 +59,9 @@
 			switch(type){
 			case "credit":
 				stripe.checkout(total)
-	                .then(function(res){
-	                	return process(res.id, total, type);
-	                });
+					.then(function(res){
+						return process(res.id, total, type);
+					});
 				break;
 			default:
 				process(null, total, type);
