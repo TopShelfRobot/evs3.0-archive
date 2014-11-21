@@ -24,8 +24,8 @@
                   <label for="MultiPart" class="col-lg-6 control-label">Multi-Participant Discount:</label>
                   <div class="col-lg-6">
                     <div class="btn-group">
-                      <button type="button" class="btn btn-default" ng-model="vm.discount.multipart" btn-radio="true">On</button>
-                      <button type="button" class="btn btn-default" ng-model="vm.discount.multipart" btn-radio="false">Off</button>
+                      <button type="button" class="btn btn-default" ng-model="vm.owner.isMultiParticipantDiscountCartRule" btn-radio="true">On</button>
+                      <button type="button" class="btn btn-default" ng-model="vm.owner.isMultiParticipantDiscountCartRule" btn-radio="false">Off</button>
                     </div>
                   </div>
                 </div>
@@ -34,14 +34,14 @@
               <form class="form-inline">
                 <div class="form-group">
                   <label for="partdiscounttype">Discount Amount&nbsp;</label>
-                  <select class="form-control" id="partdiscounttype">
-                    <option selected>$ Off</option>
-                    <option>% Off</option>
+                  <select class="form-control" ng-model="vm.owner." id="partdiscounttype">
+                    <option selected value="0">$ Off</option>
+                    <option value="1">% Off</option>
                   </select>
                 </div>
                 <div class="form-group">
                   <label class="sr-only" for="partvalue">Value</label>
-                  <input type="number" step="any" class="form-control" id="partvalue" placeholder="0.00">
+                  <input type="number" step="any" class="form-control" ng-model="vm.owner." id="partvalue" placeholder="0.00">
                 </div>
               </form>
             </div>
@@ -51,8 +51,8 @@
                   <label for="MultiReg" class="col-lg-6 control-label">Multi-Registration Discount:</label>
                   <div class="col-lg-6">
                     <div class="btn-group">
-                      <button type="button" class="btn btn-default" ng-model="vm.discount.multireg" btn-radio="true">On</button>
-                      <button type="button" class="btn btn-default" ng-model="vm.discount.multireg" btn-radio="false">Off</button>
+                      <button type="button" class="btn btn-default" ng-model="vm.owner.isMultiRegistrationDiscountCartRule" btn-radio="true">On</button>
+                      <button type="button" class="btn btn-default" ng-model="vm.owner.isMultiRegistrationDiscountCartRule" btn-radio="false">Off</button>
                     </div>
                   </div>
                 </div>
@@ -61,14 +61,14 @@
               <form class="form-inline">
                 <div class="form-group">
                   <label for="regdiscounttype">Discount Amount&nbsp;</label>
-                  <select class="form-control" id="regdiscounttype">
-                    <option selected>$ Off</option>
-                    <option>% Off</option>
+                  <select class="form-control" id="regdiscounttype" ng-model="vm.owner.">
+                    <option selected value="0">$ Off</option>
+                    <option value="1">% Off</option>
                   </select>
                 </div>
                 <div class="form-group">
                   <label class="sr-only" for="regvalue">Value</label>
-                  <input type="number" step="any" class="form-control" id="regvalue" placeholder="0.00">
+                  <input type="number" step="any" class="form-control" ng-model="vm.owner." id="regvalue" placeholder="0.00">
                 </div>
               </form>
             </div>

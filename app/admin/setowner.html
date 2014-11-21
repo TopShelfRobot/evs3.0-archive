@@ -30,7 +30,7 @@
               </div>
               <!-- /field -->
               <div class="form-group">
-                <label class="col-lg-6 control-label">Email</label>
+                <label class="col-lg-6 control-label">Contact Email</label>
                 <div class="col-lg-6">
                   <input type="text" class="form-control" ng-model="vm.owner.email" />
                 </div>
@@ -116,6 +116,13 @@
                 </div>
               </div>
               <!-- /field -->
+              <div class="form-group">
+                <label class="col-lg-6 control-label">Participant Button Text</label>
+                <div class="col-lg-6">
+                  <input type="text" class="form-control" ng-model="vm.owner.participantButtonText" />
+                </div>
+              </div>
+              <!-- /field -->
             </div>
           </div>
         </form>
@@ -127,29 +134,48 @@
         </tab>
         <!-- end Information -->
 
-        <tab heading="Rules"> <br>
+        <tab heading="Cart Rules"> <br>
         <form class="form-horizontal">
           <div class="row">
             <div class="col-sm-6">
-              <p class="text-muted text-center">Cart Rules</p>
-              <hr>
               <div class="form-group">
                 <label for="SingleFee" class="col-lg-6 control-label">Single Fee for all Registrations:</label>
                 <div class="col-lg-6">
                   <div class="btn-group">
                     <button type="button" class="btn btn-default" ng-model="vm.owner.isAddSingleFeeForAllRegs" btn-radio="true">Yes</button>
                     <button type="button" class="btn btn-default" ng-model="vm.owner.isAddSingleFeeForAllRegs" btn-radio="false">No</button>
-                    {{ vm.owner.IsAddSingleFeeForAllRegs }}
                   </div>
                 </div>
               </div>
-              <div class="form-group" ng-show="vm.owner.isAddSingleFeeForAllRegs === true">
+              <div ng-show="vm.owner.isAddSingleFeeForAllRegs === true">
+                <div class="form-group">
+                  <label for="SingleFeeType" class="col-lg-4 control-label">Single Fee Type:</label>
+                  <div class="col-lg-8">
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-primary" ng-model="vm.owner.AddSingleFeeType" btn-radio="'percent'">Percent</button>
+                      <button type="button" class="btn btn-primary" ng-model="vm.owner.AddSingleFeeType" btn-radio="'flat'">Flat</button>
+                      <button type="button" class="btn btn-primary" ng-model="vm.owner.AddSingleFeeType" btn-radio="'both'">Percent & Flat</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group" ng-if="(vm.owner.AddSingleFeeType === 'percent' || vm.owner.AddSingleFeeType === 'both') && vm.owner.isAddSingleFeeForAllRegs === true">
                 <label class="col-lg-6 control-label">Single Fee Cart Rule Percent</label>
                 <div class="col-lg-6">
                   <input type="number" class="form-control" step="any" ng-model="vm.owner.addSingleFeeForAllRegsPercent" />
                 </div>
               </div>
               <!--/field -->
+              <div class="form-group" ng-if="(vm.owner.AddSingleFeeType === 'flat' || vm.owner.AddSingleFeeType === 'both') && vm.owner.isAddSingleFeeForAllRegs === true">
+                <label class="col-lg-6 control-label">Single Fee Cart Rule Flat</label>
+                <div class="col-lg-6">
+                  <input type="number" class="form-control" step="any" ng-model="vm.owner.addSingleFeeForAllRegsFlat" />
+                </div>
+              </div>
+              <!--/field -->
+
+            </div>
+            <div class="col-sm-6">
               <div class="form-group">
                 <label for="MultiDiscount" class="col-lg-6 control-label">Allow Duplicate Orders:</label>
                 <div class="col-lg-6">
@@ -159,64 +185,7 @@
                   </div>
                 </div>
               </div>
-            </div>
-            <div class="col-sm-6">
-              <p class="text-muted text-center">Menu Control</p>
-              <hr>
-              <div class="form-group">
-                <label for="DisplayEnterprise" class="col-lg-6 control-label">Display Enterprise:</label>
-                <div class="col-lg-6">
-                  <div class="btn-group">
-                    <button type="button" class="btn btn-default" ng-model="vm.owner.isEnterpriseDisplayedOnMenu" btn-radio="true">Yes</button>
-                    <button type="button" class="btn btn-default" ng-model="vm.owner.isEnterpriseDisplayedOnMenu" btn-radio="false">No</button>
-                  </div>
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="DisplayEventure" class="col-lg-6 control-label">Display Eventure:</label>
-                <div class="col-lg-6">
-                  <div class="btn-group">
-                    <button type="button" class="btn btn-default" ng-model="vm.owner.isEventureDisplayedOnMenu" btn-radio="true">Yes</button>
-                    <button type="button" class="btn btn-default" ng-model="vm.owner.isEventureDisplayedOnMenu" btn-radio="false">No</button>
-                  </div>
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="DisplayParticipant" class="col-lg-6 control-label">Display Participant:</label>
-                <div class="col-lg-6">
-                  <div class="btn-group">
-                    <button type="button" class="btn btn-default" ng-model="vm.owner.isPartDisplayedOnMenu" btn-radio="true">Yes</button>
-                    <button type="button" class="btn btn-default" ng-model="vm.owner.isPartDisplayedOnMenu" btn-radio="false">No</button>
-                  </div>
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="DisplayCoupon" class="col-lg-6 control-label">Display Coupon:</label>
-                <div class="col-lg-6">
-                  <div class="btn-group">
-                    <button type="button" class="btn btn-default" ng-model="vm.owner.isCouponDisplayedOnMenu" btn-radio="true">Yes</button>
-                    <button type="button" class="btn btn-default" ng-model="vm.owner.isCouponDisplayedOnMenu" btn-radio="false">No</button>
-                  </div>
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="DisplayResource" class="col-lg-6 control-label">Display Resource:</label>
-                <div class="col-lg-6">
-                  <div class="btn-group">
-                    <button type="button" class="btn btn-default" ng-model="vm.owner.isResourceDisplayedOnMenu" btn-radio="true">Yes</button>
-                    <button type="button" class="btn btn-default" ng-model="vm.owner.isResourceDisplayedOnMenu" btn-radio="false">No</button>
-                  </div>
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="DisplayReporting" class="col-lg-6 control-label">Display Reporting:</label>
-                <div class="col-lg-6">
-                  <div class="btn-group">
-                    <button type="button" class="btn btn-default" ng-model="vm.owner.isReportingDisplayedOnMenu" btn-radio="true">Yes</button>
-                    <button type="button" class="btn btn-default" ng-model="vm.owner.isReportingDisplayedOnMenu" btn-radio="false">No</button>
-                  </div>
-                </div>
-              </div>
+              <!--/field -->
             </div>
           </div>
         </form>
@@ -340,8 +309,8 @@
                 <label for="StripeConnect" class="col-lg-6 control-label">Stripe Connect Live:</label>
                 <div class="col-lg-6">
                   <div class="btn-group">
-                    <button type="button" class="btn btn-default" ng-model="vm.owner.livemode" btn-radio="true">Yes</button>
-                    <button type="button" class="btn btn-default" ng-model="vm.owner.livemode" btn-radio="false">No</button>
+                    <button type="button" ng-if="vm.owner.livemode === true" class="btn btn-default" ng-model="vm.owner.livemode" btn-radio="true" disabled>Yes</button>
+                    <button type="button" ng-if="vm.owner.livemode === false" class="btn btn-default" ng-model="vm.owner.livemode" btn-radio="false" disabled>No</button>
                   </div>
                 </div>
               </div>
@@ -383,9 +352,9 @@
               </div>
               <!--/field -->
               <p class="text-right">
-                 <a href="https://connect.stripe.com/oauth/authorize?response_type=code&scope=read_write&stripe_landing=login&client_id=ca_2JOTAhBu2gVayLgbZaYy8KQXBm2GveXD" class="stripe-connect">Connect with Stripe</a>
+                 <button class="btn btn-danger" ng-click="vm.stripeConnect()">Connect with Stripe</button>
                  <br><br>
-                 <a href="https://connect.stripe.com/oauth/authorize?response_type=code&scope=read_write&stripe_landing=login&client_id=ca_2JOTjDvfxSx9tzuIN9f5ZCLELpfdgJdn" class="stripe-connect">Connect with StripeDev</a>
+                 <button class="btn btn-warning" ng-click="vm.stripeDevConnect()">Connect with Stripe Dev</button>
               </p>
             </div>
           </div>
