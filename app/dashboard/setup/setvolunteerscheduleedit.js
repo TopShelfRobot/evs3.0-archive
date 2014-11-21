@@ -38,12 +38,7 @@
         }
       
         vm.cancel = function() {
-          return datacontext.cancel()
-            .then(complete);
-          
-            function complete() {
-              $location.path("/volunteercenter");
-            }
+            $location.path("/volunteercenter");
         };
 
         vm.saveAndNav = function() {

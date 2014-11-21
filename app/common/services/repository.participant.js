@@ -25,6 +25,7 @@
             this.getParticipantsByHouseId = getParticipantsByHouseId;
             this.getParticipantByEmailAddress = getParticipantByEmailAddress;
             this.getOwnerById = getOwnerById;
+            this.getAmountTypes = getAmountTypes;
             this.getOwnerByGuid = getOwnerByGuid;
             this.getOwnerInfo = getOwnerInfo;
 			this.getParticipantsBySearchingEmail = getParticipantsBySearchingEmail;
@@ -62,6 +63,18 @@
                 return data.results[0];
             }
         };
+
+        function getAmountTypes() {
+            var self = this;
+            var query = entityQuery.from('AmountTypeLookups');
+
+            return self.manager.executeQuery(query)
+                .then(querySucceeded, self._queryFailed);
+
+            function querySucceeded(data) {
+                return data.results;
+            }
+        }
 
         function getOwnerByGuid(guid) {
             var self = this;

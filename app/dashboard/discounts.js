@@ -18,7 +18,7 @@
         activate();
 
         function activate() {
-            var promises = [couponGrid(), getOwner()];
+            var promises = [couponGrid(), getOwner(), getAmountTypes()];
             common.activateController(promises, controllerId)
                 .then(function () {
                     //log('Activated Coupon Addon Center View');
@@ -122,6 +122,14 @@
                 .then(function(data) {
                    vm.owner = data;
                    return vm.owner;
+                });
+        }
+
+        function getAmountTypes() {
+            return datacontext.participant.getAmountTypes()
+                .then(function(data) {
+                    vm.amountTypes = data;
+                    return vm.amountTypes;
                 });
         }
 
