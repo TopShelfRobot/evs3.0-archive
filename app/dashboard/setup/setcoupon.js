@@ -1,4 +1,4 @@
-(function() {
+;(function() {
 	'use strict';
 
 	var controllerId = 'setcoupon';
@@ -43,7 +43,7 @@
 		}
 
 		function onDestroy() {
-			$scope.$on('$destroy', function () {
+			$scope.$on("$destroy", function () {
 			    //alert('destroymy contextttttttt!!!!!!!');
 				//autoStoreWip(true);
 				datacontext.cancel();
@@ -80,7 +80,7 @@
 		};
 
 		vm.dateOptions = {
-			'year-format': "'yy'",
+			'year-format': '"yy"',
 			'starting-day': 1
 		};
 
@@ -93,7 +93,7 @@
 			.then(complete);
 		  
 			function complete() {
-			  $location.path("/discounts");
+			  $location.path('/discounts');
 			}
 		};
 	  
@@ -102,7 +102,7 @@
 				.then(complete);
 
 			function complete() {
-				$location.path("/discounts");
+				$location.path('/discounts');
 			}
 		};
 

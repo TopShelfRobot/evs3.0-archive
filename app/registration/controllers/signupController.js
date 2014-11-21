@@ -1,5 +1,5 @@
 ﻿'use strict';
-(function () {
+;(function () {
 
     var controllerId = "signupController";
 
@@ -18,13 +18,13 @@
 
         $scope.signUp = function () {
 
-            alert('yo yoy yo');
+            //alert('yo yoy yo');
 
             authService.saveRegistration($scope.registration).then(function (response) {
 
                 $scope.savedSuccessfully = true;
                 $scope.message = "User has been registered successfully, you will be redicted to login page in 2 seconds.";
-                startTimer();
+                //startTimer();
 
             },
              function (response) {
@@ -38,12 +38,12 @@
              });
         };
 
-        var startTimer = function () {
-            var timer = $timeout(function () {
-                $timeout.cancel(timer);
-                $location.path('/login');
-            }, 2000);
-        };
+    //    var startTimer = function () {
+    //        var timer = $timeout(function () {
+    //            $timeout.cancel(timer);
+    //            $location.path('/login');
+    //        }, 2000);
+    //    };
     }
    
     angular.module("evReg").controller(controllerId, ['$scope', '$location', '$timeout', 'authService', 'common', Controller]);

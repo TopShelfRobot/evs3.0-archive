@@ -66,7 +66,6 @@
     <Content Include="app\common\services\repository.team.js" />
     <Content Include="app\common\services\repository.volunteer.js" />
     <Content Include="app\common\services\routemediator.js" />
-    <Content Include="app\dashboard\couponaddon.js" />
     <Content Include="app\dashboard\discounts.html" />
     <Content Include="app\dashboard\discounts.js" />
     <Content Include="app\dashboard\elistcenter.js" />
@@ -171,7 +170,6 @@
     <Content Include="app\common\spinner.js" />
     <Content Include="app\config.exceptionHandler.js" />
     <Content Include="app\config.js" />
-    <Content Include="app\dashboard\couponaddon.html" />
     <Content Include="app\dashboard\elistcenter.html" />
     <Content Include="app\dashboard\enterpriseeventure.html" />
     <Content Include="app\dashboard\enterpriselaunchpad.html" />
