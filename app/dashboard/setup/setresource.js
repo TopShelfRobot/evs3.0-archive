@@ -2,9 +2,9 @@
     'use strict';
 
     var controllerId = 'setresource';
-    angular.module('app').controller(controllerId, ['$q', '$routeParams', '$upload', '$http', '$timeout', '$location', '$scope', 'common', 'datacontext', 'config', setresource]);
+    angular.module('app').controller(controllerId, ['$routeParams', '$location', '$scope', 'common', 'datacontext', setresource]);
 
-    function setresource($q, $routeParams, $upload, $http, $timeout, $location, $scope, common, datacontext, config) {
+    function setresource($routeParams, $location, $scope, common, datacontext) {
         //logger.log('made it ehre!');
         var getLogFn = common.logger.getLogFn;
         var log = getLogFn(controllerId);

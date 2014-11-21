@@ -2,9 +2,9 @@
 	'use strict';
 
 	var controllerId = 'setvolunteerjob';
-	angular.module('app').controller(controllerId, ['$q', '$routeParams', '$upload', '$http', '$timeout', '$location', '$scope', 'common', 'datacontext', 'config', setvolunteerjob]);
+	angular.module('app').controller(controllerId, ['$routeParams', '$location', '$scope', 'common', 'datacontext', setvolunteerjob]);
 
-	function setvolunteerjob($q, $routeParams, $upload, $http, $timeout, $location, $scope, common, datacontext, config) {
+	function setvolunteerjob($routeParams, $location, $scope, common, datacontext) {
 		var getLogFn = common.logger.getLogFn;
 		var log = getLogFn(controllerId);
 

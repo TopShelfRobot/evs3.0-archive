@@ -2,9 +2,9 @@
     'use strict';
 
     var controllerId = 'setbundle';
-    angular.module('app').controller(controllerId, ['$q', '$routeParams', '$upload', '$http', '$timeout', '$location', 'common', 'datacontext', 'config', setbundle]);
+    angular.module('app').controller(controllerId, ['$routeParams', '$location', '$scope', 'common', 'datacontext', 'config', setbundle]);
 
-    function setbundle($q, $routeParams, $upload, $http, $timeout, $location, common, datacontext, config) {
+    function setbundle($routeParams, $location, $scope, common, datacontext, config) {
 
         var getLogFn = common.logger.getLogFn;
         var log = getLogFn(controllerId);
@@ -21,6 +21,7 @@
         activate();
 
         function activate() {
+            onDestroy();
             common.activateController(getEventureLists(),  controllerId)
                 .then(function() {
 
@@ -70,6 +71,15 @@
                 $location.path("/#");
             }
         };
+
+        function onDestroy() {
+            //alert('destroy my contextttttttt!!!!');
+            $scope.$on('$destroy', function () {
+                //alert('destroymy contextttttttt!!!!!!!');
+                //autoStoreWip(true);
+                datacontext.cancel();
+            });
+        }
 
         vm.saveAndNav = function() {
 			console.log("selectedLists:", vm.selectedLists);

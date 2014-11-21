@@ -13,12 +13,12 @@
 
         vm.couponGridOptions = {};
 
-        vm.ownerId = 1;
+        vm.owner = {};
 
         activate();
 
         function activate() {
-            var promises = [couponGrid()];
+            var promises = [couponGrid(), getOwner(), getAmountTypes()];
             common.activateController(promises, controllerId)
                 .then(function () {
                     //log('Activated Coupon Addon Center View');
@@ -35,7 +35,7 @@
             "text": "Inactive"
           }];
 
-          var couponapi = config.remoteApiName + 'Coupon/GetCouponsByOwnerId/' + vm.ownerId;
+          var couponapi = config.remoteApiName + 'Coupon/GetCouponsByOwnerId/' + config.owner.ownerId;
           vm.couponGridOptions = {
             toolbar: '<a download="Coupons.xlsx" class="k-button" ng-click="vm.excel(vm.coupongrid)"><em class="glyphicon glyphicon-save"></em>&nbsp;Export</a>',
             dataSource: {
@@ -116,6 +116,22 @@
           var gridname = data;
           excel.export(gridname);
         };
+
+        function getOwner() {
+            return datacontext.participant.getOwnerById(config.owner.ownerId)
+                .then(function(data) {
+                   vm.owner = data;
+                   return vm.owner;
+                });
+        }
+
+        function getAmountTypes() {
+            return datacontext.participant.getAmountTypes()
+                .then(function(data) {
+                    vm.amountTypes = data;
+                    return vm.amountTypes;
+                });
+        }
 
     }
 })();

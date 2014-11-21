@@ -1,9 +1,9 @@
 (function () {
     'use strict';
     var controllerId = 'partcenter';
-    angular.module('app').controller(controllerId, ['common', 'datacontext', 'config', 'ExcelService', partcenter]);
+    angular.module('app').controller(controllerId, ['common', 'config', 'ExcelService', partcenter]);
 
-    function partcenter(common, datacontext, config, excel) {
+    function partcenter(common, config, excel) {
         var getLogFn = common.logger.getLogFn;
         var log = getLogFn(controllerId);
 

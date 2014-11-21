@@ -1,10 +1,10 @@
-;(function() {
+(function() {
 	'use strict';
 
 	var controllerId = 'setcoupon';
-	angular.module('app').controller(controllerId, ['$q', '$routeParams', '$upload', '$http', '$timeout', '$location', '$scope', 'common', 'datacontext', 'config', setcoupon]);
+	angular.module('app').controller(controllerId, ['$routeParams','$location', '$scope', 'common', 'datacontext', setcoupon]);
 
-	function setcoupon($q, $routeParams, $upload, $http, $timeout, $location, $scope, common, datacontext, config) {
+	function setcoupon($routeParams, $location, $scope, common, datacontext) {
 
 		var getLogFn = common.logger.getLogFn;
 		var log = getLogFn(controllerId);
@@ -43,7 +43,7 @@
 		}
 
 		function onDestroy() {
-			$scope.$on("$destroy", function () {
+			$scope.$on('$destroy', function () {
 			    //alert('destroymy contextttttttt!!!!!!!');
 				//autoStoreWip(true);
 				datacontext.cancel();
@@ -80,21 +80,16 @@
 		};
 
 		vm.dateOptions = {
-			'year-format': '"yy"',
+			'year-format': "'yy'",
 			'starting-day': 1
 		};
 
 		vm.formats = ['MM-dd-yyyy', 'yyyy/MM/dd', 'shortDate'];
 
 		vm.format = vm.formats[0];
-		
+
 		vm.cancel = function() {
-		  return datacontext.cancel()
-			.then(complete);
-		  
-			function complete() {
-			  $location.path('/discounts');
-			}
+			$location.path("/discounts");
 		};
 	  
 		vm.saveAndNav = function() {
@@ -102,7 +97,7 @@
 				.then(complete);
 
 			function complete() {
-				$location.path('/discounts');
+				$location.path("/discounts");
 			}
 		};
 

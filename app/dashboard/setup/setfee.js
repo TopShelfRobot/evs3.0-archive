@@ -2,9 +2,9 @@
     'use strict';
 
     var controllerId = 'setfee';
-    angular.module('app').controller(controllerId, ['$q', '$routeParams', '$upload', '$http', '$timeout', '$location', 'common', 'datacontext', 'config', setfee]);
+    angular.module('app').controller(controllerId, ['$routeParams', '$location', '$scope', 'common', 'datacontext', 'config', setfee]);
 
-    function setfee($q, $routeParams, $upload, $http, $timeout, $location, common, datacontext, config) {
+    function setfee($routeParams, $location, $scope, common, datacontext, config) {
 
         var getLogFn = common.logger.getLogFn;
         var log = getLogFn(controllerId);
@@ -23,6 +23,7 @@
         activate();
 
         function activate() {
+            onDestroy();
             common.activateController(getFees(), getGroups(), getEventureList(), controllerId)
                 .then(function() {
                     //log('Activated set addon');
@@ -77,6 +78,15 @@
         vm.formats = ['MM-dd-yyyy', 'yyyy/MM/dd', 'shortDate'];
 
         vm.format = vm.formats[0];
+
+        function onDestroy() {
+            //alert('destroy my contextttttttt!!!!');
+            $scope.$on('$destroy', function () {
+                //alert('destroymy contextttttttt!!!!!!!');
+                //autoStoreWip(true);
+                datacontext.cancel();
+            });
+        }
 
         vm.saveAndNav = function() {
             return datacontext.save()

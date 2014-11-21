@@ -1,9 +1,9 @@
 (function () {
     'use strict';
     var controllerId = 'eventurecenter';
-    angular.module('app').controller(controllerId, ['common', 'datacontext', 'config', 'ExcelService', eventurecenter]);
+    angular.module('app').controller(controllerId, ['common', 'config', 'ExcelService', eventurecenter]);
 
-    function eventurecenter(common, datacontext, config, excel) {
+    function eventurecenter(common, config, excel) {
         var getLogFn = common.logger.getLogFn;
         var log = getLogFn(controllerId);
 

@@ -2,9 +2,9 @@
     'use strict';
 
     var controllerId = 'sendemail';
-    angular.module('app').controller(controllerId, ['$routeParams', 'config', 'common', 'datacontext', 'ExcelService', sendemail]);
+    angular.module('app').controller(controllerId, ['$scope', 'config', 'common', 'datacontext', 'ExcelService', sendemail]);
 
-    function sendemail($routeParams, config, common, datacontext, excel) {
+    function sendemail($scope, config, common, datacontext, excel) {
         var getLogFn = common.logger.getLogFn;
         var log = getLogFn(controllerId);
 
@@ -18,6 +18,7 @@
         activate();
 
         function activate() {
+            onDestroy();
             var promises = [getEvents(), getListings()];
 
             common.activateController(promises, controllerId)
@@ -38,6 +39,15 @@
                 .then(function (data) {
                     return vm.listings = data;
                 });
+        }
+
+        function onDestroy() {
+            //alert('destroy my contextttttttt!!!!');
+            $scope.$on('$destroy', function () {
+                //alert('destroymy contextttttttt!!!!!!!');
+                //autoStoreWip(true);
+                datacontext.cancel();
+            });
         }
 
 

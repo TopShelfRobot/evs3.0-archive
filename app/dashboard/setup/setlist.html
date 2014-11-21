@@ -179,6 +179,29 @@
           </div>
         </div>
         <!-- /field -->
+
+        <div class="form-group">
+          <label for="" class="col-lg-6 control-label">Bundle:</label>
+          <div class="col-lg-6">
+            <div class="btn-group">
+              <button type="button" class="btn btn-default" ng-model="vm.list.isBundle" btn-radio="true">Yes</button>
+              <button type="button" class="btn btn-default" ng-model="vm.list.isBundle" btn-radio="false">No</button>
+            </div>
+          </div>
+        </div>
+        <!-- /field -->
+
+        <div class="form-group" ng-show="vm.list.isBundle === true">
+          <label for="bundlelist" class="col-lg-6 control-label">Bundled Lists:</label>
+          <div class="col-lg-6">
+            <select id="bundlelist"
+                    kendo-multi-select="vm.multiSelect" k-options="vm.bundledListOptions"
+                    ng-model="vm.selectedLists">
+            </select>
+          </div>
+        </div>
+        <!-- /field -->
+
       </div>
     </form>
   </div>

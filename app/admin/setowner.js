@@ -1,9 +1,9 @@
 ﻿(function () {
     'use strict';
     var controllerId = 'ownerController';
-    angular.module('app').controller(controllerId, ['config', 'common', 'datacontext', ownerController]);
+    angular.module('app').controller(controllerId, ['$location','config', 'common', 'datacontext', ownerController]);
 
-    function ownerController(config, common, datacontext) {
+    function ownerController($location, config, common, datacontext) {
         var getLogFn = common.logger.getLogFn;
         var log = getLogFn(controllerId);
 
@@ -11,7 +11,7 @@
 
         vm.title = 'app';
 
-        vm.ownerId = 1 //$routeParams.ownerId || 0;
+        vm.ownerId = config.owner.ownerId
         vm.owner = {};
 
 
@@ -29,6 +29,28 @@
                         //applyFilter();
                         return vm.owner = data;
                     });
+        }
+
+        vm.stripeConnect = function() {
+            if (confirm('Are you sure you wish to proceed?')) {
+                alert('true');
+                //Not sure if you can use $location. Might have to use window.location
+                //$location('https://connect.stripe.com/oauth/authorize?response_type=code&scope=read_write&stripe_landing=login&client_id=ca_2JOTAhBu2gVayLgbZaYy8KQXBm2GveXD');
+            } else {
+                // Do nothing!
+                alert('false');
+            }
+        }
+
+        vm.stripeDevConnect = function() {
+            if (confirm('Are you sure you wish to proceed?')) {
+                alert('true');
+                //Not sure if you can use $location. Might have to use window.location
+                //$location('https://connect.stripe.com/oauth/authorize?response_type=code&scope=read_write&stripe_landing=login&client_id=ca_2JOTjDvfxSx9tzuIN9f5ZCLELpfdgJdn');
+            } else {
+                // Do nothing!
+                alert('false');
+            }
         }
 
         //File Upload
