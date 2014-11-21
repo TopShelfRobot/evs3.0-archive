@@ -6,11 +6,11 @@
 		"active",
 		"isRequired",
 		"options",
-		"order",
+		"order"
 	];
 	
 	
-	function Controller($scope, $routeParams, $location, datacontext, config){
+	function Controller($scope, $routeParams, $location, datacontext){
 		var self = this;
 		
 		var listId = $routeParams.listId;
@@ -92,5 +92,5 @@
 		}
 	}
 	
-	angular.module("app").controller("SetQuestion", ['$scope', '$routeParams', '$location', 'datacontext', 'config', Controller]);
+	angular.module("app").controller("SetQuestion", ['$scope', '$routeParams', '$location', 'datacontext', Controller]);
 })();

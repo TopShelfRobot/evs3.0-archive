@@ -2,9 +2,9 @@
     'use strict';
 
     var controllerId = 'setbundle';
-    angular.module('app').controller(controllerId, ['$q', '$routeParams', '$upload', '$http', '$timeout', '$location', '$scope', 'common', 'datacontext', 'config', setbundle]);
+    angular.module('app').controller(controllerId, ['$routeParams', '$location', '$scope', 'common', 'datacontext', 'config', setbundle]);
 
-    function setbundle($q, $routeParams, $upload, $http, $timeout, $scope, $location, common, datacontext, config) {
+    function setbundle($routeParams, $location, $scope, common, datacontext, config) {
 
         var getLogFn = common.logger.getLogFn;
         var log = getLogFn(controllerId);

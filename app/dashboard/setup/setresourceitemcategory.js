@@ -2,9 +2,9 @@
 	'use strict';
 
 	var controllerId = 'setresourceitemcategory';
-	angular.module('app').controller(controllerId, ['$q', '$routeParams', '$upload', '$http', '$timeout', '$location', '$scope', 'common', 'datacontext', 'config', setresourceitemcategory]);
+	angular.module('app').controller(controllerId, ['$routeParams', '$location', '$scope', 'common', 'datacontext', 'config', setresourceitemcategory]);
 
-	function setresourceitemcategory($q, $routeParams, $upload, $http, $timeout, $location, $scope, common, datacontext, config) {
+	function setresourceitemcategory($routeParams, $location, $scope, common, datacontext, config) {
 
 		var getLogFn = common.logger.getLogFn;
 		var log = getLogFn(controllerId);

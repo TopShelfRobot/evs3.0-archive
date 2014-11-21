@@ -2,9 +2,9 @@
     'use strict';
 
     var controllerId = 'setexpense';
-    angular.module('app').controller(controllerId, ['$q', '$routeParams', '$upload', '$http', '$timeout', '$location', '$scope', 'common', 'datacontext', 'config', setexpense]);
+    angular.module('app').controller(controllerId, ['$routeParams', '$location', '$scope', 'common', 'datacontext', 'config', setexpense]);
 
-    function setexpense($q, $routeParams, $upload, $http, $timeout, $location, $scope, common, datacontext, config) {
+    function setexpense($routeParams, $location, $scope, common, datacontext, config) {
 
         var getLogFn = common.logger.getLogFn;
         var log = getLogFn(controllerId);

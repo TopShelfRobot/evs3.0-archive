@@ -2,9 +2,9 @@
     'use strict';
 
     var controllerId = 'seteventplanitem';
-    angular.module('app').controller(controllerId, ['$q', '$routeParams', '$upload', '$http', '$timeout', '$location', '$scope', 'common', 'datacontext', 'config', seteventplanitem]);
+    angular.module('app').controller(controllerId, ['$routeParams', '$location', '$scope', 'common', 'datacontext', 'config', seteventplanitem]);
 
-    function seteventplanitem($q, $routeParams, $upload, $http, $timeout, $location, $scope, common, datacontext, config) {
+    function seteventplanitem($routeParams, $location, $scope, common, datacontext, config) {
 
         var getLogFn = common.logger.getLogFn;
         var log = getLogFn(controllerId);

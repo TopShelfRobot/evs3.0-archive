@@ -2,9 +2,9 @@
     'use strict';
 
     var controllerId = 'sendemail';
-    angular.module('app').controller(controllerId, ['$routeParams', '$scope', 'config', 'common', 'datacontext', 'ExcelService', sendemail]);
+    angular.module('app').controller(controllerId, ['$scope', 'config', 'common', 'datacontext', 'ExcelService', sendemail]);
 
-    function sendemail($routeParams, $scope, config, common, datacontext, excel) {
+    function sendemail($scope, config, common, datacontext, excel) {
         var getLogFn = common.logger.getLogFn;
         var log = getLogFn(controllerId);
 

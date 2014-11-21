@@ -2,9 +2,9 @@
 	'use strict';
 
 	var controllerId = 'setcoupon';
-	angular.module('app').controller(controllerId, ['$q', '$routeParams', '$upload', '$http', '$timeout', '$location', '$scope', 'common', 'datacontext', 'config', setcoupon]);
+	angular.module('app').controller(controllerId, ['$routeParams','$location', '$scope', 'common', 'datacontext', setcoupon]);
 
-	function setcoupon($q, $routeParams, $upload, $http, $timeout, $location, $scope, common, datacontext, config) {
+	function setcoupon($routeParams, $location, $scope, common, datacontext) {
 
 		var getLogFn = common.logger.getLogFn;
 		var log = getLogFn(controllerId);

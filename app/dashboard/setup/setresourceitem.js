@@ -2,9 +2,9 @@
 	'use strict';
 
 	var controllerId = 'setresourceitem';
-	angular.module('app').controller(controllerId, ['$q', '$routeParams', '$upload', '$http', '$timeout', '$location', '$scope', 'common', 'datacontext', 'config', setresourceitem]);
+	angular.module('app').controller(controllerId, ['$routeParams', '$location', '$scope', 'common', 'datacontext', 'config', setresourceitem]);
 
-	function setresourceitem($q, $routeParams, $upload, $http, $timeout, $location, $scope, common, datacontext, config) {
+	function setresourceitem($routeParams, $location, $scope, common, datacontext, config) {
 
 		var getLogFn = common.logger.getLogFn;
 		var log = getLogFn(controllerId);

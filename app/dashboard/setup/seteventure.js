@@ -2,9 +2,9 @@
 	'use strict';
 
 	var controllerId = 'seteventure';
-	angular.module('app').controller(controllerId, ['$q', '$routeParams', '$upload', '$http', '$timeout', '$location', '$scope', 'common', 'datacontext', 'config', seteventure]);
+	angular.module('app').controller(controllerId, ['$routeParams', '$upload', '$timeout', '$location', '$scope', 'common', 'datacontext', seteventure]);
 
-	function seteventure($q, $routeParams, $upload, $http, $timeout, $location, $scope, common, datacontext, config) {
+	function seteventure($routeParams, $upload, $timeout, $location, $scope, common, datacontext) {
 
 		var getLogFn = common.logger.getLogFn;
 		var log = getLogFn(controllerId);

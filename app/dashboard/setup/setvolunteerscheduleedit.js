@@ -2,9 +2,9 @@
     'use strict';
 
     var controllerId = 'setvolunteerschedule';
-    angular.module('app').controller(controllerId, ['$q', '$routeParams', '$upload', '$http', '$timeout', '$location', '$scope', 'common', 'datacontext', 'config', setvolunteerschedule]);
+    angular.module('app').controller(controllerId, ['$routeParams', '$location', '$scope', 'common', 'datacontext', setvolunteerschedule]);
 
-    function setvolunteerschedule($q, $routeParams, $upload, $http, $timeout, $location, $scope, common, datacontext, config) {
+    function setvolunteerschedule($routeParams,$location, $scope, common, datacontext) {
         var getLogFn = common.logger.getLogFn;
         var log = getLogFn(controllerId);
 
