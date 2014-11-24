@@ -65,12 +65,7 @@
         }
       
         vm.cancel = function() {
-          return datacontext.cancel()
-            .then(complete);
-          
-            function complete() {
-              $location.path("/resourcedetail/" + vm.resourceId);
-            }
+            $location.path("/resourcedetail/" + vm.resourceId);
         };
       
         vm.saveAndNav = function() {

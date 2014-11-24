@@ -44,12 +44,7 @@
         }
       
         vm.cancel = function() {
-          return datacontext.cancel()
-            .then(complete);
-          
-            function complete() {
-              $location.path("/resourcecenter");
-            }
+            $location.path("/resourcecenter");
         };
 
         vm.saveAndNav = function() {
