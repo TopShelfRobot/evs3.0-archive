@@ -89,6 +89,13 @@
     };
 
     app.value('config', config);
+	
+	app.constant('USER_ROLES', {
+		user: "user",
+		admin: "admin",
+		superUser: "super-user",
+		money: "money",
+	});
 
     app.config(['$logProvider', function ($logProvider) {
         // turn debugging off/on (no info or warn)

@@ -3,9 +3,9 @@
 
     var controllerId = 'shell';   //mjb test push
     angular.module('common').controller(controllerId,
-        ['$rootScope', 'common', 'config', "$timeout", shell]);
+        ['$rootScope', 'common', 'config', "$timeout", "Authentication", shell]);
 
-    function shell($rootScope, common, config, $timeout) {
+    function shell($rootScope, common, config, $timeout, auth) {
         var vm = this;
         var logSuccess = common.logger.getLogFn(controllerId, 'success!!!');
         var events = config.events;
@@ -29,7 +29,7 @@
         function activate() {
             vm.showSplash = true;
 			vm.progBar = 55;
-            common.activateController([], controllerId)
+            common.activateController([auth.login()], controllerId)
                 .then(function () {
 					vm.progBar = 89;
 					$timeout(function(){
