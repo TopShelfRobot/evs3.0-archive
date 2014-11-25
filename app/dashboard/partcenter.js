@@ -30,8 +30,13 @@
           var partapi = config.remoteApiName + 'Participants/GetParticipantsByOwnerId/' + vm.ownerId;
 
           vm.participantGridOptions = {
-            toolbar: '<a download="detail.xlsx" class="k-button" ng-click="vm.excel(vm.partgrid)"><em class="glyphicon glyphicon-save"></em>&nbsp;Export</a>',
-            dataSource: {
+            //toolbar: '<a download="detail.xlsx" class="k-button" ng-click="vm.excel(vm.partgrid)"><em class="glyphicon glyphicon-save"></em>&nbsp;Export</a>',
+              toolbar: ["excel"],
+              excel: {
+                  fileName: "Participants.xlsx",
+                  filterable: true
+              },
+              dataSource: {
                 type: "json",
                 transport: {
                     read: partapi
@@ -103,7 +108,7 @@
                 },{
                     field: '',
                     title: '',
-                    template: '<a href="\\\#receipt/#=EventureOrderId#" class="btn btn-success btn-block"><em class="glyphicon glyphicon-tags"></em>&nbsp;&nbsp;View Receipt</a>'
+                    template: '<a href="\\\#receipt/#=EventureOrderId#" class="btn btn-success btn-block"><em class="glyphicon glyphicon-tags"></em>&nbsp;&nbsp;Receipt</a>'
                 }, {
                     field: '',
                     title: '',
