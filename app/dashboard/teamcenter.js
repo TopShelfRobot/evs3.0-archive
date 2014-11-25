@@ -146,12 +146,12 @@
                         field: '',
                         title: '',
                         template: '<button ng-click="vm.resend(#=Id#)" class="btn btn-success btn-block"><em class="glyphicon glyphicon-send"></em>&nbsp;Resend Invitation</button>',
-                        width: 180
+                        width: 210
                     },{
                         field: '',
                         title: '',
                         template: '<button ng-click="vm.remove()" class="btn btn-danger btn-block"><em class="glyphicon glyphicon-remove"></em>&nbsp;Remove</button>',
-                        width: 100
+                        width: 120
                     }]
             };
           };
