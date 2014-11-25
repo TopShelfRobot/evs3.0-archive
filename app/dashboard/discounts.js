@@ -37,8 +37,9 @@
 
           var couponapi = config.remoteApiName + 'Coupon/GetCouponsByOwnerId/' + config.owner.ownerId;
           vm.couponGridOptions = {
-            toolbar: '<a download="Coupons.xlsx" class="k-button" ng-click="vm.excel(vm.coupongrid)"><em class="glyphicon glyphicon-save"></em>&nbsp;Export</a>',
-            dataSource: {
+            //toolbar: '<a download="Coupons.xlsx" class="k-button" ng-click="vm.excel(vm.coupongrid)"><em class="glyphicon glyphicon-save"></em>&nbsp;Export</a>',
+              toolbar: ['excel'],
+              dataSource: {
                 type: "json",
                 transport: {
                     read: couponapi
@@ -74,7 +75,8 @@
             var couponuseapi = config.remoteApiName + 'GetCouponUseByCouponId/' + e.Id;
 
             return {
-                toolbar: '<a download="detailexport.xlsx" class="k-button" ng-click="vm.detailexcel(vm.detailgrid)"><em class="glyphicon glyphicon-save"></em>&nbsp;Export</a>',
+                //toolbar: '<a download="detailexport.xlsx" class="k-button" ng-click="vm.detailexcel(vm.detailgrid)"><em class="glyphicon glyphicon-save"></em>&nbsp;Export</a>',
+                toolbar: ['pdf', 'excel'],
                 dataSource: {
                     type: "json",
                     transport: {

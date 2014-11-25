@@ -38,7 +38,11 @@
           var eventureapi = config.remoteApiName + 'eventures/GetAllEventuresByOwnerId/' + vm.ownerId;
           vm.eventureGridOptions = {
             //toolbar: '<a download="download.xlsx" class="k-button" ng-click="vm.excel(vm.eventuregrid)"><em class="glyphicon glyphicon-save"></em>&nbsp;Export</a>',
-              toolbar: ["excel"],
+              toolbar: ['excel'],
+              excel: {
+                  fileName: 'Eventures.xlsx',
+                  filterable: true
+              },
               dataSource: {
                 type: "json",
                 transport: {

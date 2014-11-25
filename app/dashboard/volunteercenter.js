@@ -30,8 +30,13 @@
           var volunteerapi = config.remoteApiName + 'Participants/GetVolunteersByOwnerId/' + vm.ownerId;
 
           vm.volunteerGridOptions = {
-            toolbar: '<a download="Teams.xlsx" class="k-button" ng-click="vm.excel(vm.volunteergrid)"><em class="glyphicon glyphicon-save"></em>&nbsp;Export</a>',
-            dataSource: {
+            //toolbar: '<a download="Teams.xlsx" class="k-button" ng-click="vm.excel(vm.volunteergrid)"><em class="glyphicon glyphicon-save"></em>&nbsp;Export</a>',
+              toolbar: ['excel'],
+              excel: {
+                  fileName: 'Volunteers.xlsx',
+                  filterable: true
+              },
+              dataSource: {
                 type: "json",
                 transport: {
                     read: volunteerapi
@@ -70,7 +75,12 @@
             var volunteerapi = config.remoteApiName + 'Participants/GetVolunteerScheduleByVolunteerId' + e.Id;
             
             return {
-                toolbar: '<a download="detailexport.xlsx" class="k-button" ng-click="vm.excel(vm.detailgrid)"><em class="glyphicon glyphicon-save"></em>&nbsp;Export</a>',
+                //toolbar: '<a download="detailexport.xlsx" class="k-button" ng-click="vm.excel(vm.detailgrid)"><em class="glyphicon glyphicon-save"></em>&nbsp;Export</a>',
+                toolbar: ['excel'],
+                excel: {
+                    fileName: 'Volunteer Schedule.xlsx',
+                    filterable: true
+                },
                 dataSource: {
                     type: "json",
                     transport: {

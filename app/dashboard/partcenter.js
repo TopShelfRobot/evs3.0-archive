@@ -31,9 +31,9 @@
 
           vm.participantGridOptions = {
             //toolbar: '<a download="detail.xlsx" class="k-button" ng-click="vm.excel(vm.partgrid)"><em class="glyphicon glyphicon-save"></em>&nbsp;Export</a>',
-              toolbar: ["excel"],
+              toolbar: ['excel'],
               excel: {
-                  fileName: "Participants.xlsx",
+                  fileName: 'Participants.xlsx',
                   filterable: true
               },
               dataSource: {
@@ -73,7 +73,12 @@
             var regapi = config.remoteApiName + 'Registrations/GetRegistrationsByPartId/' + e.Id;
 
             return {
-                toolbar: '<a download="detail.xlsx" class="k-button" ng-click="vm.excel(vm.detailgrid)"><em class="glyphicon glyphicon-save"></em>&nbsp;Export</a>',
+                //toolbar: '<a download="detail.xlsx" class="k-button" ng-click="vm.excel(vm.detailgrid)"><em class="glyphicon glyphicon-save"></em>&nbsp;Export</a>',
+                toolbar: ['excel'],
+                excel: {
+                    fileName: 'Participant Registrations.xlsx',
+                    filterable: true
+                },
                 dataSource: {
                     type: "json",
                     transport: {
