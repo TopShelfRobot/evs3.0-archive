@@ -27,7 +27,12 @@
             var resourceApi = config.remoteApiName + 'Resources/GetResourcesByOwnerId/' + vm.ownerId;
 
             vm.resourceGridOptions = {
-              toolbar: '<a download="download.xlsx" class="k-button" ng-click="vm.excel(vm.resourcegrid)"><em class="glyphicon glyphicon-save"></em>&nbsp;Export</a>',
+              //toolbar: '<a download="download.xlsx" class="k-button" ng-click="vm.excel(vm.resourcegrid)"><em class="glyphicon glyphicon-save"></em>&nbsp;Export</a>',
+                toolbar: ['excel'],
+                excel: {
+                    fileName: 'Resources.xlsx',
+                    filterable: true
+                },
                 dataSource: {
                     type: "json",
                     transport: {
@@ -43,21 +48,14 @@
                 serverFiltering: true,
                 detailTemplate: kendo.template($("#template").html()),
                 filterable: {
-                    extra: false,
-                    operators: {
-                        string: {
-                            startswith: "Starts with",
-                            eq: "Is equal to",
-                            neq: "Is not equal to"
-                        }
-                    }
+                    mode: "row"
                 },
                 dataBound: function() {
                 },
                 columns: [//{ field: "Name", title: "Resource", width: "325px" },
                     { field: "Name", title: "Resource", width: "325px" },
                     { field: "Email", title: "Email", width: "225px" },
-                    { field: "Phone", title: "Phone", width: "175px" },
+                    { field: "Phone", title: "Phone", width: "175px", filterable: false },
                     { field: "ResourceType", title: "Type", width: "175px" },
                     { title: "", width: "120px", template: '<a class="btn btn-default btn-block" href="\\\#resourcedetail/#=Id#"><em class="glyphicon glyphicon-edit"></em>&nbsp;Edit</a>'
             }
@@ -78,16 +76,6 @@
                         serverPaging: false,
                         serverFiltering: false,
                         serverSorting: true
-                    },
-                    filterable: {
-                        extra: false,
-                        operators: {
-                            string: {
-                                contains: "Contains",
-                                startswith: "Starts with",
-                                eq: "Equal to"
-                            }
-                        }
                     },
                     sortable: true,
                     pageable: true,

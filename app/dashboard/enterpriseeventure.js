@@ -44,8 +44,13 @@
 
           var listapi = config.remoteApiName + 'EventureLists/getEventureListsByEventureId/' + vm.eventureId;
           vm.listGridOptions = {
-            toolbar: '<a download="download.xlsx" class="k-button" ng-click="vm.excel(vm.listGrid)"><em class="glyphicon glyphicon-save"></em>&nbsp;Export</a>',
-            dataSource: {
+            //toolbar: '<a download="download.xlsx" class="k-button" ng-click="vm.excel(vm.listGrid)"><em class="glyphicon glyphicon-save"></em>&nbsp;Export</a>',
+              toolbar: ['excel'],
+              excel: {
+                  fileName: 'Listings.xlsx',
+                  filterable: true
+              },
+              dataSource: {
                 type: "json",
                 transport: {
                     read: listapi
@@ -197,8 +202,13 @@
         function ServicesGrid() {
           var serviceApi = config.remoteApiName + 'Resources/GetEventureServiceByEventureId/' + vm.eventureId;
           vm.servicesGridOptions = {
-            toolbar: '<a download="download.xlsx" class="k-button" ng-click="vm.excel(vm.serviceGrid)"><em class="glyphicon glyphicon-save"></em>&nbsp;Export</a>',
-            dataSource: {
+            //toolbar: '<a download="download.xlsx" class="k-button" ng-click="vm.excel(vm.serviceGrid)"><em class="glyphicon glyphicon-save"></em>&nbsp;Export</a>',
+              toolbar: ['excel'],
+              excel: {
+                  fileName: 'Services.xlsx',
+                  filterable: true
+              },
+              dataSource: {
                     transport: {
                         read: serviceApi
                     },

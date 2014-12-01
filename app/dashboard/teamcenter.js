@@ -30,8 +30,13 @@
           var teamapi = config.remoteApiName + 'Teams/GetTeamRegistrationsByOwnerId/' + vm.ownerId;
 
           vm.teamGridOptions = {
-            toolbar: '<a download="Teams.xlsx" class="k-button" ng-click="vm.excel(vm.teamgrid)"><em class="glyphicon glyphicon-save"></em>&nbsp;Export</a>',
-            dataSource: {
+            //toolbar: '<a download="Teams.xlsx" class="k-button" ng-click="vm.excel(vm.teamgrid)"><em class="glyphicon glyphicon-save"></em>&nbsp;Export</a>',
+              toolbar: ['excel'],
+              excel: {
+                  fileName: 'Teams.xlsx',
+                  filterable: true
+              },
+              dataSource: {
                 type: "json",
                 transport: {
                     read: teamapi
@@ -43,7 +48,9 @@
             },
             sortable: true,
             pageable: true,
-            filterable: true,
+            filterable: {
+                mode: "row"
+            },
             detailTemplate: kendo.template($("#template").html()),
             columns: [{
                 field: "Name",
@@ -65,12 +72,14 @@
                 field: "Amount",
                 title: "Total Paid",
                 width: "120px",
-                format: "{0:c}"
+                format: "{0:c}",
+                filterable: false
             }, {
                 field: "Balance",
                 title: "Balance",
                 width: "120px",
                 format: "{0:c}",
+                filterable: false,
                 template: kendo.template($("#balanceTemplate").html())
             }, {
                 title: "",
@@ -100,7 +109,12 @@
             };
 
             return {
-                toolbar: '<a download="detailexport.xlsx" class="k-button" ng-click="vm.excel(vm.detailgrid)"><em class="glyphicon glyphicon-save"></em>&nbsp;Export</a>',
+                //toolbar: '<a download="detailexport.xlsx" class="k-button" ng-click="vm.excel(vm.detailgrid)"><em class="glyphicon glyphicon-save"></em>&nbsp;Export</a>',
+                toolbar: ['excel'],
+                excel: {
+                    fileName: 'Team Participants.xlsx',
+                    filterable: true
+                },
                 dataSource: {
                     type: "json",
                     transport: {
@@ -136,12 +150,12 @@
                         field: '',
                         title: '',
                         template: '<button ng-click="vm.resend(#=Id#)" class="btn btn-success btn-block"><em class="glyphicon glyphicon-send"></em>&nbsp;Resend Invitation</button>',
-                        width: 180
+                        width: 210
                     },{
                         field: '',
                         title: '',
                         template: '<button ng-click="vm.remove()" class="btn btn-danger btn-block"><em class="glyphicon glyphicon-remove"></em>&nbsp;Remove</button>',
-                        width: 100
+                        width: 120
                     }]
             };
           };

@@ -35,7 +35,7 @@
             var overviewapi = config.remoteApiName +'Registrations/GetOwnerGraph/' + vm.ownerId;
 
             vm.overviewByOwner = {
-                theme: "flat",
+                theme: "material",
                 dataSource: {
                     transport: {
                         read: {
@@ -92,8 +92,13 @@
         function NotificationGrid() {
           var notifApi = config.remoteApiName + 'Resources/GetNotificationsByOwnerId/' + vm.ownerId;
           vm.notificationGridOptions = {
-            toolbar: '<a download="download.xlsx" class="k-button" ng-click="vm.excel(vm.notificationGrid)"><em class="glyphicon glyphicon-save"></em>&nbsp;Export</a>',
-            dataSource: {
+            //toolbar: '<a download="download.xlsx" class="k-button" ng-click="vm.excel(vm.notificationGrid)"><em class="glyphicon glyphicon-save"></em>&nbsp;Export</a>',
+              toolbar: ['excel'],
+              excel: {
+                  fileName: 'To Do.xlsx',
+                  filterable: true
+              },
+              dataSource: {
                     transport: {
                         read: notifApi
                     },
@@ -110,14 +115,7 @@
                     serverSorting: true
                 },
                 filterable: {
-                    extra: false,
-                    operators: {
-                        string: {
-                            contains: "Contains",
-                            startswith: "Starts with",
-                            eq: "Equal to"
-                        }
-                    }
+                  mode: "row"
                 },
                 sortable: true,
                 pageable: true,

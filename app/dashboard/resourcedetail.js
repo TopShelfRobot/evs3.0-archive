@@ -47,7 +47,12 @@
             //alert(ResourceApi);
 
             vm.resourceDetailGridOptions = {
-                toolbar: '<a download="detail.xlsx" class="k-button" ng-click="vm.excel(vm.resourcegrid)"><em class="glyphicon glyphicon-save"></em>&nbsp;Export</a>',
+                //toolbar: '<a download="detail.xlsx" class="k-button" ng-click="vm.excel(vm.resourcegrid)"><em class="glyphicon glyphicon-save"></em>&nbsp;Export</a>',
+                toolbar: ['excel'],
+                excel: {
+                    fileName: 'Resource Items.xlsx',
+                    filterable: true
+                },
                 dataSource: {
                     type: "",
                     transport: {
@@ -60,6 +65,9 @@
                 },
                 sortable: true,
                 pageable: true,
+                filterable: {
+                    mode: "row"
+                },
                 columns: [
                     { field: "Name", title: "Item Name", width: "150px" },
                     { field: "Cost", title: "Cost", width: "70px" },
