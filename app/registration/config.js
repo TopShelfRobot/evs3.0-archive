@@ -5,13 +5,13 @@
 
     // For use with the HotTowel-Angular-Breeze add-on that uses Breeze
     //var remoteServiceName = 'breeze/Breeze';
-	var apiPath = "";
-	//apiPath = "http://localhost:55972";
-   // apiPath = "http://localhost:49822";
-    apiPath = "http://dev30.eventuresports.info";
-    
+    var apiPath = "";
+    //apiPath = "http://localhost:55972";
+    apiPath = "http://localhost:49822";
+    //apiPath = "http://dev30.eventuresports.info";
 
-    var remoteServiceName = apiPath + '/breeze/breeze/';
+
+    var remoteServiceName = apiPath + '/breeze/registration/';
     var remoteApiName = apiPath + '/kendo/';
     var events = {
         controllerActivateSuccess: 'controller.activateSuccess',
@@ -25,13 +25,22 @@
 
     var isAuth = false;
 
+    var eventureListType =
+    {
+        standard: 1,
+        TteamSponsored: 2,
+        teamSuggest: 3,
+        teamIndividual: 4
+    }
+
+   
     var owner = {
         ownerId: 1,   //this is temp needs to be removed //mjb
-        houseEmail: 18,   //this is temp needs to be removed //mjb
+        houseEmail: 1,   //this is temp needs to be removed //mjb
         guid: 0,
         logoImageName: '/Content/images/logo.png',
 
-        houseId: 2,    //this is temp needs to be removed //mjb
+        houseId: 1,    //this is temp needs to be removed //mjb
         mr_houseId: 0,
         houseName: "",
         accessType: "none",
@@ -74,12 +83,13 @@
         appErrorPrefix: '[evs Error] ', //Configure the exceptionHandler decorator
         docTitle: 'eventure sports: ',
         events: events,
-		apiPath : apiPath,
+        apiPath: apiPath,
         remoteServiceName: remoteServiceName,
         imageSettings: imageSettings,
         version: '3.0.0',
         remoteApiName: remoteApiName,
         owner: owner,
+        eventureListType: eventureListType,
         isAuth: isAuth
     };
 
@@ -96,7 +106,7 @@
     app.config(['commonConfigProvider', "$httpProvider", function (cfg, $httpProvider) {
         cfg.config.controllerActivateSuccessEvent = config.events.controllerActivateSuccess;
         cfg.config.spinnerToggleEvent = config.events.spinnerToggle;
-		$httpProvider.defaults.useXDomain = true;
+        $httpProvider.defaults.useXDomain = true;
         delete $httpProvider.defaults.headers.common['X-Requested-With'];
     }]);
     //#endregion

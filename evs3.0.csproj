@@ -73,6 +73,8 @@
     <Content Include="app\dashboard\enterpriselaunchpad.js" />
     <Content Include="app\dashboard\eventurecenter.js" />
     <Content Include="app\dashboard\eventuredetail.js" />
+    <Content Include="app\dashboard\login.part.html" />
+    <Content Include="app\dashboard\loginController.js" />
     <Content Include="app\dashboard\manreg.html" />
     <Content Include="app\dashboard\partcenter.js" />
     <Content Include="app\dashboard\resourcecenter.js" />
@@ -128,7 +130,7 @@
     <Content Include="app\registration\views\confirm.part.html" />
     <Content Include="app\registration\controllers\createteamController.js" />
     <Content Include="app\registration\controllers\eventureController.js" />
-    <Content Include="app\registration\controllers\eventurelistController.js" />
+    <Content Include="app\registration\controllers\eventureListController.js" />
     <Content Include="app\registration\controllers\memberPaymentController.js" />
     <Content Include="app\registration\controllers\registrationHeaderController.js" />
     <Content Include="app\registration\controllers\setParticipantController.js" />
