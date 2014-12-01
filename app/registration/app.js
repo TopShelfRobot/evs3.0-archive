@@ -17,6 +17,8 @@
 		'kendo.directives', // kendo-angular (grid, dataviz)
 		'common.bootstrap', // bootstrap dialog wrapper functions
 		'nsPopover',
+		'angulartics',  //analytics
+		'angulartics.google.analytics', //analytics
 		'sbDateSelect'
 	]);
 
