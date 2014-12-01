@@ -65,6 +65,9 @@
                 },
                 sortable: true,
                 pageable: true,
+                filterable: {
+                    mode: "row"
+                },
                 columns: [
                     { field: "Name", title: "Item Name", width: "150px" },
                     { field: "Cost", title: "Cost", width: "70px" },

@@ -353,14 +353,7 @@
                 serverFiltering: true,
                 detailTemplate: kendo.template($("#template").html()),
                 filterable: {
-                    extra: false,
-                    operators: {
-                        string: {
-                            startswith: "Starts with",
-                            eq: "Is equal to",
-                            neq: "Is not equal to"
-                        }
-                    }
+                    mode: "row"
                 },
                 dataBound: function() {
                 },
@@ -406,16 +399,6 @@
                         serverPaging: false,
                         serverFiltering: false,
                         serverSorting: true
-                    },
-                    filterable: {
-                        extra: false,
-                        operators: {
-                            string: {
-                                contains: "Contains",
-                                startswith: "Starts with",
-                                eq: "Equal to"
-                            }
-                        }
                     },
                     sortable: true,
                     pageable: true,

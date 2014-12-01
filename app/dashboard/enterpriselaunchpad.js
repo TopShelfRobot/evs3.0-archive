@@ -35,7 +35,7 @@
             var overviewapi = config.remoteApiName +'Registrations/GetOwnerGraph/' + vm.ownerId;
 
             vm.overviewByOwner = {
-                theme: "flat",
+                theme: "material",
                 dataSource: {
                     transport: {
                         read: {

@@ -168,10 +168,13 @@
                 pageSize: 10,
                 serverPaging: false,
                 serverSorting: false
-            },
-            sortable: true,
-            pageable: true,
-            columns: [{
+              },
+              sortable: true,
+              pageable: true,
+              filterable: {
+                  mode: "row"
+              },
+              columns: [{
                         field: "FirstName",
                         title: "First Name",
                     },

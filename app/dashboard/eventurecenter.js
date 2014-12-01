@@ -64,23 +64,22 @@
             },
             sortable: true,
             pageable: true,
-            filterable: true,
+            filterable: {
+                mode: "row"
+            },
             columns: [{
                 field: "Name",
                 title: "Event",
                 template: '<a href="\\\#eventuredetail/#=Id#">#=Name#</a>',
-                width: "400px"
+                width: "500px",
             },{
                 field: "DisplayDate",
                 title: "Date",
-                width: "220px"
             },{
                 field: "Active",
-                width: "100px",
                 values: status
             },{
                 title: "",
-                width: "120px",
                 template:'<a class="btn btn-default btn-block" href="\\\#seteventure/#=Id#"><em class="glyphicon glyphicon-edit"></em>&nbsp;Edit</a>'
             }]
           };

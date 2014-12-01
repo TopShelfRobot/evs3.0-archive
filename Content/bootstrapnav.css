@@ -45,13 +45,13 @@ html, body {
   padding: 0;
   padding-top: 55px;
   height: 100%;
-  border-right: 1px solid #d6d6d6;
-  background-color:#ecf0f1;
-  background: linear-gradient(to bottom right,#ffffff 13%,#ecf0f1 100%);
-  background: -webkit-linear-gradient(top left,#ffffff 13%,#ecf0f1 100%);
+  border-right: 1px solid #FF80AB;
+  background-color:#FAFAFA;
+  /*background: linear-gradient(to bottom right,#ffffff 13%,#ecf0f1 100%);*/
+  /*background: -webkit-linear-gradient(top left,#ffffff 13%,#ecf0f1 100%);*/
 }
 #sidebar, #sidebar a {
-  color: #222222;
+  color: #424242;
   font-size:.95em;
   line-height:normal;
   font-weight:400;
@@ -63,7 +63,7 @@ html, body {
 #sidebar .nav > li > a > .glyphicon {
   margin: 10px;
   font-size: 2em;
-  color: #494949;
+  color: #424242;
 }
 
 .navbar-fixed-top .navbar-collapse, .navbar-static-top .navbar-collapse, .navbar-fixed-bottom .navbar-collapse {
@@ -71,7 +71,7 @@ html, body {
 }
 
 #sidebar .nav li>a:hover {
-  border-left:9px solid #428bca;
+  border-left:9px solid #FF4081;
 }
 
 /*
