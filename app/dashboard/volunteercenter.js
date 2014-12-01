@@ -68,7 +68,8 @@
                     }, {
                         field: "PhoneMobile",
                         title: "Phone",
-                        width: 300
+                        width: 300,
+                        filterable: false
                     }]
           };
 

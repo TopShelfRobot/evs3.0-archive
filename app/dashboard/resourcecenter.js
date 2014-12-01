@@ -55,7 +55,7 @@
                 columns: [//{ field: "Name", title: "Resource", width: "325px" },
                     { field: "Name", title: "Resource", width: "325px" },
                     { field: "Email", title: "Email", width: "225px" },
-                    { field: "Phone", title: "Phone", width: "175px" },
+                    { field: "Phone", title: "Phone", width: "175px", filterable: false },
                     { field: "ResourceType", title: "Type", width: "175px" },
                     { title: "", width: "120px", template: '<a class="btn btn-default btn-block" href="\\\#resourcedetail/#=Id#"><em class="glyphicon glyphicon-edit"></em>&nbsp;Edit</a>'
             }

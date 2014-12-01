@@ -72,12 +72,14 @@
                 field: "Amount",
                 title: "Total Paid",
                 width: "120px",
-                format: "{0:c}"
+                format: "{0:c}",
+                filterable: false
             }, {
                 field: "Balance",
                 title: "Balance",
                 width: "120px",
                 format: "{0:c}",
+                filterable: false,
                 template: kendo.template($("#balanceTemplate").html())
             }, {
                 title: "",
