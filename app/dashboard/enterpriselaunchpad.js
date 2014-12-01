@@ -115,14 +115,7 @@
                     serverSorting: true
                 },
                 filterable: {
-                    extra: false,
-                    operators: {
-                        string: {
-                            contains: "Contains",
-                            startswith: "Starts with",
-                            eq: "Equal to"
-                        }
-                    }
+                  mode: "row"
                 },
                 sortable: true,
                 pageable: true,
