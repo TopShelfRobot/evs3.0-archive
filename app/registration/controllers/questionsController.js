@@ -85,7 +85,7 @@
 			(function () {
 				var partId = $location.search()["uid"];
 				if (!partId) {
-					partId = config.owner.houseId;
+					partId = cart.houseId;
 				}
 				return datacontext.participant.getParticipantById(partId)
 					.then(function (result) {

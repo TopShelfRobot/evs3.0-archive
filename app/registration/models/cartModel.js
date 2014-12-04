@@ -4,23 +4,44 @@
     function Model(config) {
 
         var cart = {};
-        cart.participantId = null;
+        cart.houseId = 1;
+        cart.participantId = 0;
+        cart.ownerId = 1;
         cart.waiverSigned = false;
         cart.teamName = '';
         cart.teamMembers = [];
         cart.teamId = '';
         cart.currentlyPaid = 0;
         cart.allowZeroPayment = false;
-        
+
         cart.teamMemberId = null;
         cart.registrations = [];
         cart.surcharges = [];
 
+        cart.regSettings = {
+
+            isGroupRequired: false,      //this comes from list
+            isDuplicateOrderAllowed: false,
+            isAddSingleFeeForAllRegs: true,
+            addSingleFeeForAllRegsPercent: 6,
+            addSingleFeeType: 'percent',
+            addSingleFeeForAllRegsFlat: 0,
+
+            eventureName: 'Event',
+            listName: 'List',
+            groupName: 'Group',
+            partButtonText: 'Select Party!',
+            listStatement: 'Select a desired start time',
+            termsText: '',
+            refundsText: ''
+
+        }
+
         cart.order = function () {
             var order = {
                 orderAmount: cart.getTotalPrice(),
-                orderHouseId: config.owner.houseId,
-                ownerId: config.owner.ownerId,
+                orderHouseId: cart.houseId,
+                ownerId: cart.ownerId,
                 teamId: cart.teamId,
                 teamMemberId: cart.teamMemberId,
                 regs: cart.registrations
@@ -28,9 +49,26 @@
             return order;
         };
 
+        cart.configureSettings = function (data) {
+            alert(data.ParticipantButtonText);
+            cart.regSettings.isDuplicateOrderAllowed = data.isDuplicateOrderAllowed;
+            cart.regSettings.isAddSingleFeeForAllRegs = data.isAddSingleFeeForAllRegs;
+            cart.regSettings.addSingleFeeForAllRegsPercent = data.addSingleFeeForAllRegsPercent;
+            cart.regSettings.addSingleFeeType = data.addSingleFeeType;
+            cart.regSettings.addSingleFeeForAllRegsFlat = data.addSingleFeeForAllRegsFlat;
+
+            cart.regSettings.eventureName = data.eventureName;
+            cart.regSettings.listName = data.listingName;
+            cart.regSettings.groupName = data.groupName;
+            cart.regSettings.partButtonText = data.participantButtonText;
+            cart.regSettings.listStatement = data.listStatement;
+            cart.regSettings.termsText = data.termsText;
+            cart.regSettings.refundsText = data.refundsText;
+        };
+
         cart.addRegistration = function (eventure, eventureList, participant, answers, groupId, group2Id, quantity) {
             var isRegDupe = false;
-            if (!config.owner.isDuplicateOrderAllowed) {
+            if (!cart.regSettings.isDuplicateOrderAllowed) {
                 for (var i = 0; i < cart.registrations.length; i++) {
                     var currentReg = cart.registrations[i];
 
@@ -66,17 +104,17 @@
                 regCount++;
             }
 
-            if (config.owner.isAddSingleFeeForAllRegs) {
+            if (cart.regSettings.isAddSingleFeeForAllRegs) {
                 var feeAmount = 0;
-                switch (config.owner.addSingleFeeType) {
+                switch (cart.regSettings.addSingleFeeType) {
                     case 'percent':
-                        feeAmount = config.owner.addSingleFeeForAllRegsPercent * regTotalAmount / 100;
+                        feeAmount = cart.regSettings.addSingleFeeForAllRegsPercent * regTotalAmount / 100;
                         break;
                     case 'flat':
-                        feeAmount = regCount * config.owner.addSingleFeeForAllRegsFlat;
+                        feeAmount = regCount * cart.regSettings.addSingleFeeForAllRegsFlat;
                         break;
                     case 'both':
-                        feeAmount = (config.owner.addSingleFeeForAllRegsPercent * regTotalAmount / 100) + (regCount * config.owner.addSingleFeeForAllRegsFlat);
+                        feeAmount = (cart.regSettings.addSingleFeeForAllRegsPercent * regTotalAmount / 100) + (regCount * cart.regSettings.addSingleFeeForAllRegsFlat);
                         break;
                     default:
                         feeAmount = 0;

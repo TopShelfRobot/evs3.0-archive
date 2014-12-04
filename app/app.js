@@ -35,6 +35,27 @@
 		// Include $route to kick start the router.
 	}]);
 
+
+	//var serviceBase = 'http://localhost:26264/';
+	var serviceBase = 'http://localhost:49822/';
+	//var serviceBase = 'http://ngauthenticationapi.azurewebsites.net/';
+
+	app.constant('ngAuthSettings', {
+		apiServiceBaseUri: serviceBase,
+		clientId: 'ngAuthApp'
+	});
+
+	app.config(function ($httpProvider) {
+		$httpProvider.interceptors.push('authInterceptorService');
+	});
+
+	// Handle routing errors and success events.
+	app.run(['$route', 'authService', function ($route, authService) {
+		// Include $route to kick start the router.
+		authService.fillAuthData();
+	}]);
+
+
 	//app.run(['$route', '$rootScope', '$q', 'routemediator',
 	//function ($route, $rootScope, $q, routemediator) {
 	//    // Include $route to kick start the router.

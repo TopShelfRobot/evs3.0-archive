@@ -89,25 +89,30 @@
             }
         }
 
+        //var p1 = new Predicate("CompanyName", "StartsWith", "B");
+        //var query = new EntityQuery("Customers").where(p1);
+
         function getEventuresByOwnerId(ownerId) {
             var self = this;
-            var pred = predicate.create("active", "==", true)
-              .and("ownerId", "==", ownerId);
+            var pred = predicate.create("active", "eq", true)
+              .and("ownerId", "eq", ownerId);
 
-            return entityQuery.from('Eventures')
+           return entityQuery.from('Eventures')
                 .where(pred)
                 .orderBy('sortOrder')
                 .using(self.manager).execute()
                 .then(querySucceeded, self._queryFailed);
 
             function querySucceeded(data) {
+                //alert('it woekrd?');
+                //console.log(data);
                 return data.results;
             }
         }
 
         function getFirstEventureByOwnerId() {
             var self = this;
-            var pred = predicate.create("ownerId", "==", config.ownerId)
+            var pred = predicate.create("ownerId", "==", cart.ownerId)
               .and("active", "==", true);
 
             return entityQuery.from('Eventures')
@@ -124,7 +129,7 @@
 
         function createEventure() {
             var self = this;
-            return self.manager.createEntity('Eventure', { imageFileName: "", ownerId: config.owner.ownerId });
+            return self.manager.createEntity('Eventure', { imageFileName: "", ownerId: cart.ownerId });
         }
 
         function getEventureListById(id) {

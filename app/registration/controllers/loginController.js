@@ -6,7 +6,7 @@
     var controllerId = "loginController";
 
 
-    function controller($scope, $location, authService, common) {
+    function controller($scope, $location, authService, datacontext, common, cart) {
 
         $scope.loginData = {
             userName: "",
@@ -22,7 +22,14 @@
 
         $scope.login = function () {
             authService.login($scope.loginData).then(function (response) {
-                //alert('we are logged oin...  go someplace');
+                alert('we are logged oin... check particiaptn');
+
+                datacontext.participant.getParticipantByEmailAddress($scope.loginData.userName, cart.ownerId)
+                    .then(function (data) {
+                        console.log(data);
+                    });
+                
+                alert($scope.loginData.userName);
                 $location.path('/eventure');   //http://localhost:65468/index.html#/eventure
             },
                  function (err) {
@@ -37,7 +44,7 @@
 
             alert(redirectUri);
 
-            var externalProviderUrl = "http://localhost:49822/" + "api/Account/ExternalLogin?provider=" + provider
+            var externalProviderUrl = config.apiPath + "api/Account/ExternalLogin?provider=" + provider
                                                                         + "&response_type=token&client_id=" + "ngAuthApp"
                                                                         + "&redirect_uri=" + redirectUri;
             window.$windowScope = $scope;
@@ -81,5 +88,5 @@
     }
 
     
-    angular.module("evReg").controller(controllerId, ["$scope", "$location", "authService", "common", controller]);
+    angular.module("evReg").controller(controllerId, ["$scope", "$location", "authService", "datacontext", "common", "CartModel", controller]);
 })();
