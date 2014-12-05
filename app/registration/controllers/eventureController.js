@@ -10,7 +10,10 @@
 		var viewLength = 12;
 		var currentPage = 0;
 		//alert('heryhr');
-		//datacontext.getEventuresByOwnerId(config.owner.ownerId)
+	    //datacontext.getEventuresByOwnerId(config.owner.ownerId)
+
+		console.log(cart.ownerId);
+		console.log(cart.regSettings.eventureName);
 
 		var promises = [];
 		promises.push(

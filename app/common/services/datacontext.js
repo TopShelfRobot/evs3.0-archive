@@ -72,7 +72,7 @@
 			//if (primePromise) return primePromise;
 
 			//ideally right here i would configure ownerId by url??
-
+		   console.log('priming');
 			primePromise = $q.all([service.owner.setPublicOwnerSettings(1)])
 				.then(extendMetadata)
 				.then(success);
@@ -81,8 +81,8 @@
 
 			function success(data) {
 				//service.lookup.setLookups();
-				log('Primed the data');
-				//console.log(data);
+				//log('Primed the data');
+			    console.log('Primed the data');
 			}
 
 			function extendMetadata() {

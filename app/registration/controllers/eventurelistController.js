@@ -38,7 +38,7 @@
 
 		$scope.register = function (eventure, eventureList, participant) {
 			//mjb cartModel.fee = $scope.selection.currentFee;
-			alert(eventureList.eventureListType);
+			console.log(eventureList.eventureListType);
 			if (eventureList.eventureListType == "Standard") {   //enum? mjb
 			    $location.path("/eventure/" + eventure.id + "/list/" + eventureList.id + "/questions")
 						.search("uid", participant.id);

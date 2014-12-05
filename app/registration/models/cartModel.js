@@ -19,7 +19,6 @@
         cart.surcharges = [];
 
         cart.regSettings = {
-
             isGroupRequired: false,      //this comes from list
             isDuplicateOrderAllowed: false,
             isAddSingleFeeForAllRegs: true,
@@ -34,7 +33,6 @@
             listStatement: 'Select a desired start time',
             termsText: '',
             refundsText: ''
-
         }
 
         cart.order = function () {
@@ -50,7 +48,7 @@
         };
 
         cart.configureSettings = function (data) {
-            alert(data.ParticipantButtonText);
+           
             cart.regSettings.isDuplicateOrderAllowed = data.isDuplicateOrderAllowed;
             cart.regSettings.isAddSingleFeeForAllRegs = data.isAddSingleFeeForAllRegs;
             cart.regSettings.addSingleFeeForAllRegsPercent = data.addSingleFeeForAllRegsPercent;
@@ -64,6 +62,9 @@
             cart.regSettings.listStatement = data.listStatement;
             cart.regSettings.termsText = data.termsText;
             cart.regSettings.refundsText = data.refundsText;
+
+            cart.regSettings.name = data.name;
+            cart.regSettings.stripePublishableKey = data.stripePublishableKey
         };
 
         cart.addRegistration = function (eventure, eventureList, participant, answers, groupId, group2Id, quantity) {

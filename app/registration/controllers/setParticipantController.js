@@ -38,13 +38,13 @@
 		//};
 		//
 		//$scope.formats = ['MM-dd-yyyy', 'yyyy/MM/dd', 'shortDate'];
-        //
+		//
 		//$scope.format = $scope.formats[0];
 		//
 		//$scope.today = function () {
 		//	$scope.participant.dateBirth = new Date();
 		//};
-        //
+		//
 		//$scope.open = function($event, open) {
 		//	$event.preventDefault();
 		//	$event.stopPropagation();
