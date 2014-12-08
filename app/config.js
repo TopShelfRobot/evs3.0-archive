@@ -14,7 +14,7 @@
 	
 	var apiPath = "";
 	//apiPath = "http://localhost:55972";
-	apiPath = "http://localhost:49822";
+	//apiPath = "http://localhost:49822";
 	//apiPath = "http://30api.eventuresports.info";
 	
 	var remoteServiceName = apiPath + '/breeze/dashboard/';
