@@ -4,9 +4,9 @@
 	angular.module("evReg").controller(controllerId,
 					["$scope", "$location", "$routeParams", "config", "CartModel", "datacontext", "common", controller]);
 
-	function controller($scope, $location, $routeParams, config, cartModel, datacontext, common) {
+	function controller($scope, $location, $routeParams, config, cart, datacontext, common) {
 
-		$scope.cart = cartModel;
+		//$scope.cart = cartModel;
 
 		var promises = [];
 
@@ -26,7 +26,7 @@
 		);
 
 		promises.push(
-			datacontext.participant.getParticipantsByHouseId(config.owner.houseId)
+			datacontext.participant.getParticipantsByHouseId(cart.houseId)
 				.then(function (list) {
 					$scope.selectedParticipant = list[0];
 					$scope.participants = list;
@@ -38,23 +38,23 @@
 
 		$scope.register = function (eventure, eventureList, participant) {
 			//mjb cartModel.fee = $scope.selection.currentFee;
-			//alert(eventureList.eventureListType);
-			//if (eventureList.eventureListType == "Standard") {   //enum? mjb
-			//    $location.path("/eventure/" + eventure.id + "/list/" + eventureList.id + "/questions")
-			//			.search("uid", participant.id);
-			//} else {
-			//    $location.path("/eventure/" + eventure.id + "/list/" + eventureList.id + "/team")
-			//			.search("uid", participant.id);
-			//}
-
-
-			if (eventureList.eventureListType == config.eventureListType.standard) {   //enum? mjb
-				$location.path("/eventure/" + eventure.id + "/list/" + eventureList.id + "/questions")
+			console.log(eventureList.eventureListType);
+			if (eventureList.eventureListType == "Standard") {   //enum? mjb
+			    $location.path("/eventure/" + eventure.id + "/list/" + eventureList.id + "/questions")
 						.search("uid", participant.id);
 			} else {
-				$location.path("/eventure/" + eventure.id + "/list/" + eventureList.id + "/team")
+			    $location.path("/eventure/" + eventure.id + "/list/" + eventureList.id + "/team")
 						.search("uid", participant.id);
 			}
+
+
+			//if (eventureList.eventureListType == config.eventureListType.standard) {   //enum? mjb
+			//	$location.path("/eventure/" + eventure.id + "/list/" + eventureList.id + "/questions")
+			//			.search("uid", participant.id);
+			//} else {
+			//	$location.path("/eventure/" + eventure.id + "/list/" + eventureList.id + "/team")
+			//			.search("uid", participant.id);
+			//}
 
 
 		};

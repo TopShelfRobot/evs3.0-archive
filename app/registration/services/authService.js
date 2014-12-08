@@ -20,7 +20,7 @@ angular.module('evReg').factory('authService', ['$http', '$q', 'localStorageServ
     var _saveRegistration = function (registration) {
         //alert('here');
         _logOut();
-        console.log(registration);
+        //console.log(registration);
         //alert(serviceBase);
 
         return $http.post(serviceBase + 'api/account/register', registration).then(function (response) {
@@ -46,6 +46,7 @@ angular.module('evReg').factory('authService', ['$http', '$q', 'localStorageServ
             else {
                 localStorageService.set('authorizationData', { token: response.access_token, userName: loginData.userName, refreshToken: "", useRefreshTokens: false });
             }
+            alert('authed!!');
             _authentication.isAuth = true;
             _authentication.userName = loginData.userName;
             _authentication.useRefreshTokens = loginData.useRefreshTokens;
@@ -64,6 +65,8 @@ angular.module('evReg').factory('authService', ['$http', '$q', 'localStorageServ
     var _logOut = function () {
 
         localStorageService.remove('authorizationData');
+
+        alert('unauthed');
 
         _authentication.isAuth = false;
         _authentication.userName = "";

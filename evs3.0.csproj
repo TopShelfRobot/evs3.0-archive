@@ -53,7 +53,6 @@
     <Content Include="app\common\layout\shell.js" />
     <Content Include="app\common\services\datacontext.js" />
     <Content Include="app\common\services\entityManagerFactory.js" />
-    <Content Include="app\common\services\model.js" />
     <Content Include="app\common\services\repositories.js" />
     <Content Include="app\common\services\repository.abstract.js" />
     <Content Include="app\common\services\repository.analytic.js" />
@@ -65,6 +64,7 @@
     <Content Include="app\common\services\repository.surcharge.js" />
     <Content Include="app\common\services\repository.team.js" />
     <Content Include="app\common\services\repository.volunteer.js" />
+    <Content Include="app\common\services\repository.owner.js" />
     <Content Include="app\common\services\routemediator.js" />
     <Content Include="app\dashboard\discounts.html" />
     <Content Include="app\dashboard\discounts.js" />
@@ -73,7 +73,6 @@
     <Content Include="app\dashboard\enterpriselaunchpad.js" />
     <Content Include="app\dashboard\eventurecenter.js" />
     <Content Include="app\dashboard\eventuredetail.js" />
-    <Content Include="app\dashboard\login.part.html" />
     <Content Include="app\dashboard\loginController.js" />
     <Content Include="app\dashboard\manreg.html" />
     <Content Include="app\dashboard\partcenter.js" />
@@ -108,12 +107,14 @@
     <Content Include="app\registration\controllers\addProfileController.js" />
     <Content Include="app\registration\controllers\confirmController.js" />
     <Content Include="app\registration\controllers\editteamController.js" />
+    <Content Include="app\registration\controllers\headerController.js" />
     <Content Include="app\registration\controllers\loginController.js" />
     <Content Include="app\registration\controllers\orderReceiptController.js" />
     <Content Include="app\registration\controllers\profileController.js" />
     <Content Include="app\registration\controllers\questionsController.js" />
     <Content Include="app\registration\controllers\registrationEditConfirmController.js" />
     <Content Include="app\registration\controllers\registrationeditController.js" />
+    <Content Include="app\registration\controllers\shoppingCartController.js" />
     <Content Include="app\registration\controllers\signupController.js" />
     <Content Include="app\registration\controllers\transferQuestionsController.js" />
     <Content Include="app\registration\controllers\viewReceiptController.js" />
