@@ -11,6 +11,7 @@
 		// Custom modules
 		'common', // common functions, logger, spinner
 		'common.bootstrap', // bootstrap dialog wrapper functions
+		'LocalStorageModule',
 
 		// 3rd Party Modules
 		'breeze.angular', // configures breeze for an angular app
@@ -37,8 +38,9 @@
 
 
 	//var serviceBase = 'http://localhost:26264/';
-	var serviceBase = 'http://localhost:49822/';
+	//var serviceBase = 'http://localhost:49822/';
 	//var serviceBase = 'http://ngauthenticationapi.azurewebsites.net/';
+	var serviceBase = 'http://dev30.eventuresports.info/';
 
 	app.constant('ngAuthSettings', {
 		apiServiceBaseUri: serviceBase,

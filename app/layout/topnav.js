@@ -3,10 +3,20 @@
 
     var controllerId = 'topnav';
     angular.module('app').controller(controllerId,
-        ['$route', 'config', 'routes', topnav]);
+        ['$route', '$location', 'config', 'routes', 'authService', topnav]);
 
-    function topnav($route, config, routes) {
+    function topnav($route, $location, config, routes, authService) {
+
         var vm = this;
+
+        vm.logOut = function () {
+            authService.logOut();
+            $location.path('/eventurecenter');
+        }
+
+        vm.authentication = authService.authentication;
+
+        console.log(vm.authentication.isAuth);
 
         vm.isCurrent = isCurrent;
 
