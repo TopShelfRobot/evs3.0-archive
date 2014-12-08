@@ -18,7 +18,6 @@ angular.module('evReg').factory('authService', ['$http', '$q', 'localStorageServ
     };
 
     var _saveRegistration = function (registration) {
-        //alert('here');
         _logOut();
         //console.log(registration);
         //alert(serviceBase);

@@ -35,7 +35,7 @@
             "text": "Inactive"
           }];
 
-          var eventureapi = config.remoteApiName + 'widget/GetAllEventuresByOwnerId/' + vm.ownerId;
+          var eventureapi = config.remoteServiceName + 'GetAllEventuresByOwnerId/' + vm.ownerId;
           vm.eventureGridOptions = {
             //toolbar: '<a download="download.xlsx" class="k-button" ng-click="vm.excel(vm.eventuregrid)"><em class="glyphicon glyphicon-save"></em>&nbsp;Export</a>',
               toolbar: ['excel'],
