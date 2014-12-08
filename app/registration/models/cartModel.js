@@ -42,7 +42,8 @@
                 ownerId: cart.ownerId,
                 teamId: cart.teamId,
                 teamMemberId: cart.teamMemberId,
-                regs: cart.registrations
+                regs: cart.registrations,
+                charges: cart.surcharges
             };
             return order;
         };
@@ -86,7 +87,7 @@
         };
 
         cart.processCartRules = function () {
-            //clear all rules
+           //clear all rules
             var temp = [];
             for (var j = 0; j < cart.surcharges.length; j++) {
                 var currCharge = cart.surcharges[j];
@@ -104,6 +105,8 @@
                 regTotalAmount = regTotalAmount + currentReg.fee;
                 regCount++;
             }
+            //console.log(cart.regSettings.isAddSingleFeeForAllRegs);
+            //console.log(cart.regSettings.addSingleFeeType);
 
             if (cart.regSettings.isAddSingleFeeForAllRegs) {
                 var feeAmount = 0;
