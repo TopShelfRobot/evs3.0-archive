@@ -6,13 +6,15 @@
     var controllerId = "loginController";
 
 
-    function controller($scope, $location, authService, datacontext, common, cart) {
+    function controller($scope, $location, $routeParams, authService, datacontext, common, cart) {
 
         $scope.loginData = {
             userName: "",
             password: "",
             useRefreshTokens: false
         };
+
+        $scope.requestPath = $routeParams.requestPath;
 
         //$scope.loginData.useRefreshTokens = true;
 
@@ -30,7 +32,21 @@
                     });
                 
                 alert($scope.loginData.userName);
-                $location.path('/eventure');   //http://localhost:65468/index.html#/eventure
+
+                    var requestPath = window.location.pathname;
+                    if(requestPath === '/dash.html') {
+                        $location.path('/eventurecenter');
+                    }
+                    else {
+                        if(typeof $scope.requestPath === 'undefined') {
+                            $location.path('/eventure');
+                        }
+                        else {
+                            window.location.href = $scope.requestPath;
+                        }
+
+                    }
+
             },
                  function (err) {
                      $scope.message = err.error_description;
@@ -88,5 +104,5 @@
     }
 
     
-    angular.module("evReg").controller(controllerId, ["$scope", "$location", "authService", "datacontext", "common", "CartModel", controller]);
+    angular.module("evReg").controller(controllerId, ["$scope", "$location", "$routeParams", "authService", "datacontext", "common", "CartModel", controller]);
 })();

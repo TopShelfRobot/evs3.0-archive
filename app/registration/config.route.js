@@ -174,7 +174,13 @@
                     templateUrl: 'app/registration/views/shoppingcart.part.html'
                 }
 			}, {
-			    url: '/login',
+                url: '/login',
+                config: {
+                    title: 'Login',
+                    templateUrl: 'app/registration/views/login.part.html'
+                }
+            }, {
+			    url: '/login/:requestPath*',
 			    config: {
 			        title: 'Login',
 			        templateUrl: 'app/registration/views/login.part.html'
