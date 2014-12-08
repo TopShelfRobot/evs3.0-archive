@@ -69,7 +69,7 @@
 
 		function prime() {
 
-			//if (primePromise) return primePromise;
+			if (primePromise) return primePromise;
 
 			//ideally right here i would configure ownerId by url??
 		   console.log('priming');
