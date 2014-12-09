@@ -14,6 +14,9 @@
 		$scope.allowPartialPayment = false;
 		$scope.allowZeroPayment = false;
 
+		$scope.eventureName = cart.regSettings.eventureName;
+		$scope.listName = cart.regSettings.listName;
+
 		// initialize it
 		$scope.submitDisabled = true;
 		console.log('in confirm');

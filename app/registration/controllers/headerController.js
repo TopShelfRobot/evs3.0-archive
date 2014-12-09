@@ -6,6 +6,9 @@
 
         //$scope.cart = cart;
 
+        $scope.eventureName = cart.regSettings.eventureName;
+        $scope.listName = cart.regSettings.listName;
+
         $scope.logOut = function () {
             authService.logOut();
             $location.path('/eventure');

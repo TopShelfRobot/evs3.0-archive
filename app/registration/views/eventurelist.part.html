@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-lg-12 text-center">
       <img class="logo" src="content/images/logo.png">
-      <h3>Which list would you like to participate in?</h3>
+      <h3>Which {{listName}} would you like to participate in?</h3>
       <hr>
     </div>
   </div>
@@ -17,7 +17,7 @@
 					<br>
 					<span class="list-description">{{selection.desc}}</span>
 					<br>
-					<a ng-click="register(eventure, selection, selectedParticipant)" class="btn btn-default hidden-xs">Register</a>
+					<a ng-click="register(eventure, selection, selectedParticipant)" class="btn btn-success hidden-xs">Register</a>
 	            </figcaption>
 			</figure>
         </li>
@@ -28,10 +28,10 @@
       <h1 class="text-center">{{selection.currentFee | currency}}</h1>
       <div class="panel panel-default">
         <div class="panel-heading">
-          <h3 class="panel-title">Listings</h3>
+          <h3 class="panel-title">{{listName}}</h3>
         </div>
         <div class="panel-body">
-          <p class="text-muted">Choose a listing.</p>
+          <p class="text-muted">{{listStatement}}.</p>
           <select class="form-control" ng-model="selection" ng-options="selection.name for selection in list"></select>
         </div>
       </div>
@@ -55,7 +55,7 @@
             </li>
           </ul>
           <hr>
-          <a class="btn btn-primary btn-block" href="#/participant/add">Add New Participant</a>
+          <a class="btn btn-primary btn-block" href="#/participant/add">{{buttonText}}</a>
         </div>
       </div>
       <button ng-click="register(eventure, selection, selectedParticipant)" class="btn btn-success btn-block visible-xs">Register</button>

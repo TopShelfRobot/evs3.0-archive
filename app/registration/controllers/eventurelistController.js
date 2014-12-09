@@ -10,6 +10,10 @@
 
 		var promises = [];
 
+		$scope.listName = cart.regSettings.listName;
+		$scope.buttonText = cart.regSettings.partButtonText;
+		$scope.listStatement = cart.regSettings.listStatement;
+
 		promises.push(
 			datacontext.eventure.getEventureById($routeParams.eventureId)
 				.then(function (item) {
