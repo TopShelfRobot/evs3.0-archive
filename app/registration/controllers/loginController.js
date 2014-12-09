@@ -15,6 +15,13 @@
         };
 
         $scope.requestPath = $routeParams.requestPath;
+        $scope.isDash = false;
+
+        var requestPath = window.location.pathname;
+
+        if(requestPath === '/dash.html') {
+            $scope.isDash = true;
+        }
 
         //$scope.loginData.useRefreshTokens = true;
 
@@ -33,7 +40,6 @@
                 
                 alert($scope.loginData.userName);
 
-                    var requestPath = window.location.pathname;
                     if(requestPath === '/dash.html') {
                         $location.path('/eventurecenter');
                     }
