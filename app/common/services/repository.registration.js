@@ -52,7 +52,7 @@
 		}
 
 		function getOrderById(Id) {
-			alert('in the dc');
+			//alert('in the dc');
 			var self = this;
 			var query = entityQuery.from('OrderById')
 				.withParameters({ id: Id });

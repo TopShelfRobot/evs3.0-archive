@@ -44,8 +44,7 @@
 
 		function onDestroy() {
 			$scope.$on('$destroy', function () {
-			    //alert('destroymy contextttttttt!!!!!!!');
-				//autoStoreWip(true);
+			    //autoStoreWip(true);
 				datacontext.cancel();
 			});
 		}

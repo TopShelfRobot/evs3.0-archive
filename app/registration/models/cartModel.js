@@ -63,6 +63,10 @@
             cart.regSettings.listStatement = data.listStatement;
             cart.regSettings.termsText = data.termsText;
             cart.regSettings.refundsText = data.refundsText;
+            cart.regSettings.stripeCheckoutButtonText = data.StripeCheckoutButtonText;
+            cart.regSettings.stripeOrderDescription = data.StripeOrderDescription;
+            
+                  
 
             cart.regSettings.name = data.name;
             cart.regSettings.stripePublishableKey = data.stripePublishableKey
