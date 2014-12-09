@@ -22,6 +22,7 @@
 		console.log('in confirm');
 		console.log(cart.ownerId);
 		console.log(cart.regSettings.eventureName);
+		console.log(cart.regSettings);
 
 		var promises = [
 			$q.all([datacontext.participant.getParticipantById(cart.ownerId)])     //datacontext.participant.getOwnerById(cart.ownerId),
