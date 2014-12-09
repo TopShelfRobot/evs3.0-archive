@@ -43,7 +43,7 @@
 	//var serviceBase = 'http://dev30.eventuresports.info/';
 
 	app.constant('ngAuthSettings', {
-		apiServiceBaseUri: serviceBase,
+		//apiServiceBaseUri: serviceBase,
 		clientId: 'ngAuthApp'
 	});
 

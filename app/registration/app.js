@@ -22,13 +22,7 @@
 		'sbDateSelect'
 	]);
 
-	//var serviceBase = 'http://localhost:26264/';
-	var serviceBase = 'http://localhost:49822/';
-	//var serviceBase = 'http://dev30.eventuresports.info/';
-	//var serviceBase = 'http://ngauthenticationapi.azurewebsites.net/';
-
 	app.constant('ngAuthSettings', {
-		apiServiceBaseUri: serviceBase,
 		clientId: 'ngAuthApp'
 	});
 

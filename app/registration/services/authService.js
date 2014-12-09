@@ -1,8 +1,9 @@
 ﻿'use strict';
-angular.module('evReg').factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSettings',
-    function ($http, $q, localStorageService, ngAuthSettings) {
+angular.module('evReg').factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSettings', 'config',
+    function ($http, $q, localStorageService, ngAuthSettings, config) {
 
-    var serviceBase = ngAuthSettings.apiServiceBaseUri;
+    //var serviceBase = ngAuthSettings.apiServiceBaseUri;
+    var serviceBase = config.apiPath;
     var authServiceFactory = {};
 
     var _authentication = {
