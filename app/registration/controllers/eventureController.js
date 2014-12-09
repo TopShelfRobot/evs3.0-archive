@@ -12,6 +12,8 @@
 		//alert('heryhr');
 	    //datacontext.getEventuresByOwnerId(config.owner.ownerId)
 
+		$scope.eventureName = cart.regSettings.eventureName;
+
 		console.log(cart.ownerId);
 		console.log(cart.regSettings.eventureName);
 
