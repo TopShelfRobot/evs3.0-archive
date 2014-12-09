@@ -20,8 +20,9 @@
                 amount: userPaying * 100,  //** expects an integer **/
                 currency: 'usd',
                 name: cart.regSettings.name,
-                description: 'Registration',   //add customization here
-                panelLabel: 'Checkout',        //add customization here  
+                description: cart.regSettings.stripeOrderDescription,
+                panelLabel: cart.regSettings.stripeCheckoutButtonText,
+                //image: cart.regSettings.stripeLogoPath,
                 token: token
             });
             return deferred.promise;

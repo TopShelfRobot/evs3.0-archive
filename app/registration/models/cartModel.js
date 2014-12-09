@@ -32,7 +32,11 @@
             partButtonText: 'Select Party!',
             listStatement: 'Select a desired start time',
             termsText: '',
-            refundsText: ''
+            refundsText: '',
+            //stripeLogoPath: '',
+            stripeCheckoutButtonText: '',
+            stripeOrderDescription: ''
+
         }
 
         cart.order = function () {
@@ -63,8 +67,9 @@
             cart.regSettings.listStatement = data.listStatement;
             cart.regSettings.termsText = data.termsText;
             cart.regSettings.refundsText = data.refundsText;
-            cart.regSettings.stripeCheckoutButtonText = data.StripeCheckoutButtonText;
-            cart.regSettings.stripeOrderDescription = data.StripeOrderDescription;
+            cart.regSettings.stripeCheckoutButtonText = data.stripeCheckoutButtonText;
+            cart.regSettings.stripeOrderDescription = data.stripeOrderDescription;
+            //cart.regSettings.stripeLogoPath = data.stripeLogoPath;
             
                   
 
