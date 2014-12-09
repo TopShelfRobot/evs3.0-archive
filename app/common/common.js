@@ -30,6 +30,8 @@
     function common($q, $rootScope, $timeout, commonConfig, logger) {
         var throttles = {};
 
+
+
         var service = {
             // common angular dependencies
             $broadcast: $broadcast,

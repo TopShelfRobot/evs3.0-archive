@@ -40,10 +40,10 @@
 	//var serviceBase = 'http://localhost:26264/';
 	//var serviceBase = 'http://localhost:49822/';
 	//var serviceBase = 'http://ngauthenticationapi.azurewebsites.net/';
-	var serviceBase = 'http://dev30.eventuresports.info/';
+	//var serviceBase = 'http://dev30.eventuresports.info/';
 
 	app.constant('ngAuthSettings', {
-		apiServiceBaseUri: serviceBase,
+		//apiServiceBaseUri: serviceBase,
 		clientId: 'ngAuthApp'
 	});
 
