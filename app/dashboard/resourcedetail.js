@@ -1,7 +1,7 @@
 (function () {
     'use strict';
     var controllerId = 'resourcedetail';
-    angular.module('app').controller(controllerId, ['$routeParams', '$location', 'common', 'datacontext','config', 'ExcelService', resourcedetail]);
+    angular.module('app').controller(controllerId, ['$routeParams', '$location', 'common', 'datacontext', 'config', 'ExcelService', resourcedetail]);
 
     function resourcedetail($routeParams, $location, common, datacontext, config, excel) {
         var getLogFn = common.logger.getLogFn;
@@ -18,28 +18,28 @@
         function activate() {
             var promises = [createresourceDetailGrid(), getResource()];
             common.activateController(promises, controllerId)
-                .then(function() { 
-                  //log('Activated Resource Detail View'); 
-                });
+				.then(function () {
+				    //log('Activated Resource Detail View'); 
+				});
         }
 
-        function getResource () {
-        //    resourceId = parseInt(routeData.id);
+        function getResource() {
+            //    resourceId = parseInt(routeData.id);
             return datacontext.resource.getResourceById(vm.resourceId)
-                .then(function(data) {
-                    return vm.resource = data;
-                });
+				.then(function (data) {
+				    return vm.resource = data;
+				});
         };
 
 
-        vm.saveAndNav = function() {
-			return datacontext.save()
+        vm.saveAndNav = function () {
+            return datacontext.save()
 				.then(complete);
 
-			function complete() {
+            function complete() {
                 $location.path("/resourcecenter/");
-			}
-		};
+            }
+        };
 
         function createresourceDetailGrid() {
 
@@ -69,16 +69,16 @@
                     mode: "row"
                 },
                 columns: [
-                    { field: "Name", title: "Item Name", width: "150px" },
-                    { field: "Cost", title: "Cost", width: "70px" },
-                    { field: "Category", title: "Category", width: "100px" }                                                                                 //:rid/:riid',
+					{ field: "Name", title: "Item Name", width: "150px" },
+					{ field: "Cost", title: "Cost", width: "70px" },
+					{ field: "Category", title: "Category", width: "100px" }                                                                                 //:rid/:riid',
                 ]
             };
         }
-      
-        vm.excel = function(data) {
-          var gridname = data;
-          excel.export(gridname);
+
+        vm.excel = function (data) {
+            var gridname = data;
+            excel.export(gridname);
         };
     }
 })();

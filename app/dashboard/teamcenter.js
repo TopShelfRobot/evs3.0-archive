@@ -101,7 +101,7 @@
             vm.resend = function (memberId) {
                 $http.post(config.apiPath + "/breeze/breeze/SendSoccerTryoutInviteMail/" + memberId)
                     .success(function(result) {
-                        alert('Invitation has been sent');
+                        alert('Invitation has been sent');    //toast mjb
                     })
                     .error(function(err) {
                         console.error("ERROR:", err.toString());

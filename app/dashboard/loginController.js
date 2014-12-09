@@ -22,7 +22,7 @@
 
         $scope.login = function () {
             authService.login($scope.loginData).then(function (response) {
-                alert('we are logged oin...  go someplace');
+                //alert('we are logged oin...  go someplace');
                 //$location.path('/orders');
             },
                  function (err) {

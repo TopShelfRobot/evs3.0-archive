@@ -80,9 +80,7 @@
         vm.format = vm.formats[0];
 
         function onDestroy() {
-            //alert('destroy my contextttttttt!!!!');
             $scope.$on('$destroy', function () {
-                //alert('destroymy contextttttttt!!!!!!!');
                 //autoStoreWip(true);
                 datacontext.cancel();
             });

@@ -136,7 +136,7 @@
 		//}
 
 		function getParticipantByEmailAddress(partEmail, ownerId) {
-			alert('in the dc');
+			//alert('in the dc');
 			var self = this;
 			var pred = predicate.create("email", "==", partEmail)
 			  .and("ownerId", "==", ownerId);
@@ -148,7 +148,7 @@
 				.then(querySucceeded, self._queryFailed);
 
 			function querySucceeded(data) {
-				alert('succeed  beeatcfh');
+				//alert('succeed  beeatcfh');
 				return data.results[0];
 			}
 		}
