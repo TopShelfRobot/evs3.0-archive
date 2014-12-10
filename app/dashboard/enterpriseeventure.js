@@ -42,7 +42,7 @@
             "text": "Inactive"
           }];
 
-          var listapi = config.remoteApiName + 'EventureLists/getEventureListsByEventureId/' + vm.eventureId;
+          var listapi = config.remoteApiName + 'widget/getEventureListsByEventureId/' + vm.eventureId;
           vm.listGridOptions = {
             //toolbar: '<a download="download.xlsx" class="k-button" ng-click="vm.excel(vm.listGrid)"><em class="glyphicon glyphicon-save"></em>&nbsp;Export</a>',
               toolbar: ['excel'],
@@ -58,12 +58,12 @@
                 schema: {
                     model: {
                         fields: {
-                            Active: { type: "boolean" },
-                            DateEventureList: { type: "date" },
-                            DateBeginReg: { type: "date" },
-                            DateEndReg: { type: "date" },
-                            Id: { type: "number" },
-                            Name: { type: "string" }
+                            active: { type: "boolean" },
+                            dateEventureList: { type: "date" },
+                            dateBeginReg: { type: "date" },
+                            dateEndReg: { type: "date" },
+                            id: { type: "number" },
+                            name: { type: "string" }
                         }
                     }
                 },
@@ -75,7 +75,7 @@
             pageable: true,
             columns: [{
                 title: "Listing",
-                template: '<a href="\\\#elistcenter/#=id#">#=Name#</a>'
+                template: '<a href="\\\#elistcenter/#=id#">#=name#</a>'
             },{
                 field: "dateEventureList",
                 title: "Date",
@@ -106,7 +106,7 @@
 
         function PieChart() {
 
-          var revapi = config.remoteApiName + 'Registrations/GetRevenuePerEvent/' + vm.ownerId;
+          var revapi = config.remoteApiName + 'widget/GetRevenuePerEvent/' + vm.ownerId;
           vm.revByList = {
             theme: "flat",
             dataSource: {
