@@ -6,9 +6,8 @@
     // For use with the HotTowel-Angular-Breeze add-on that uses Breeze
     //var remoteServiceName = 'breeze/Breeze';
     var apiPath = "";
-    //apiPath = "http://localhost:55972";
-    apiPath = "http://localhost:49822/";
-    //apiPath = "http://dev30.eventuresports.info/";
+    //apiPath = "http://localhost:49822/";
+    apiPath = "http://dev30.eventuresports.info/";
 
 
     var remoteServiceName = apiPath + 'breeze/registration/';
@@ -24,62 +23,6 @@
         logoImageName: '/Content/images/logo.png'
     };
 
-    //var isAuth = false;
-
-    //var eventureListType =
-    //{
-    //    standard: 1,
-    //    teamSponsored: 2,
-    //    teamSuggest: 3,
-    //    teamIndividual: 4
-    //}
-
-   
-    var owner = {
-        //ownerId: 1,   //this is temp needs to be removed //mjb
-        //houseEmail: 1,   //this is temp needs to be removed //mjb
-        //guid: 0,
-        //logoImageName: '/Content/images/logo.png',
-
-        //houseId: 1,    //this is temp needs to be removed //mjb
-        //mr_houseId: 0,
-        //houseName: "",
-        //accessType: "none",
-        //isReg: false,
-
-        //isHeadfirst: false,
-        //isSportsComm: false,
-
-        //wizard: true,
-        //wizEventureId: 0,
-        //wizEventureListId: 0,
-
-        //isGroupRequired: false,
-
-        ////multItemDiscount: false,
-        ////fourDeLisDiscount: false,
-
-        //isDuplicateOrderAllowed: false,
-        //isAddSingleFeeForAllRegs: true,
-        //addSingleFeeForAllRegsPercent: 6,   //this is temp needs to be removed //mjb
-        //addSingleFeeType: 'percent',
-        //addSingleFeeForAllRegsFlat: 0,
-
-        //eventureName: 'Event',
-        //listName: 'List',
-        //groupName: 'Group',
-        //partButtonText: 'Select Party!',
-
-        //listStatement: 'Select a desired start time',
-
-        isEnterpriseDisplayedOnMenu: true,
-        isEventureDisplayedOnMenu: true,
-        isPartDisplayedOnMenu: true,
-        isCouponDisplayedOnMenu: true,
-        isResourceDisplayedOnMenu: true,
-        isReportingDisplayedOnMenu: true
-    };
-
     var config = {
         appErrorPrefix: '[evs Error] ', //Configure the exceptionHandler decorator
         docTitle: 'eventure sports: ',
@@ -88,10 +31,7 @@
         remoteServiceName: remoteServiceName,
         imageSettings: imageSettings,
         version: '3.0.0',
-        remoteApiName: remoteApiName,
-        owner: owner
-        //eventureListType: eventureListType,
-        //isAuth: isAuth
+        remoteApiName: remoteApiName
     };
 
     app.value('config', config);

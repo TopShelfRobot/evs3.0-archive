@@ -6,16 +6,10 @@
 	// Configure Toastr
 	toastr.options.timeOut = 4000;
 	toastr.options.positionClass = 'toast-bottom-right';
-
-	// For use with the HotTowel-Angular-Breeze add-on that uses Breeze
-	//var remoteServiceName = 'breeze/Breeze';
-	//var remoteServiceName = 'http://evs30api.eventuresports.info/breeze/breeze/';
-	//var remoteApiName = 'http://evs30api.eventuresports.info/api/';
 	
 	var apiPath = "";
-	//apiPath = "http://localhost:55972";
-	apiPath = "http://localhost:49822/";
-	//apiPath = "http://dev30.eventuresports.info/";
+	//apiPath = "http://localhost:49822/";
+	apiPath = "http://dev30.eventuresports.info/";
 	
 	var remoteServiceName = apiPath + 'breeze/dashboard/';
 	var remoteApiName = apiPath + 'api/';
