@@ -36,7 +36,7 @@
           }];
 
             // var eventureapi = config.remoteServiceName + 'GetAllEventuresByOwnerId/' + vm.ownerId;
-          var eventureapi = config.remoteServiceName + 'GetAllEventuresByOwnerId?Id=1';
+          var eventureapi = config.remoteApiName + 'widget/GetAllEventuresByOwnerId/' + vm.ownerId;
           vm.eventureGridOptions = {
             //toolbar: '<a download="download.xlsx" class="k-button" ng-click="vm.excel(vm.eventuregrid)"><em class="glyphicon glyphicon-save"></em>&nbsp;Export</a>',
               toolbar: ['excel'],
@@ -52,10 +52,10 @@
                 schema: {
                     model: {
                         fields: {
-                            Active: { type: "boolean" },
-                            DisplayDate: { type: "text" },
-                            Id: { type: "number" },
-                            Name: { type: "string" }
+                            active: { type: "boolean" },
+                            displayDate: { type: "text" },
+                            id: { type: "number" },
+                            name: { type: "string" }
                         }
                     }
                 },
@@ -71,7 +71,7 @@
             columns: [{
                 field: "name",
                 title: "Event",
-                template: '<a href="\\\#eventuredetail/#=Id#">#=Name#</a>',
+                template: '<a href="\\\#eventuredetail/#=id#">#=name#</a>',
                 width: "500px",
             },{
                 field: "displayDate",
