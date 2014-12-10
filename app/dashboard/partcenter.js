@@ -27,7 +27,8 @@
 
         function ParticipantGrid() {
 
-          var partapi = config.remoteApiName + 'Participants/GetParticipantsByOwnerId/' + vm.ownerId;
+            var partapi = config.remoteApiName + 'widget/GetParticipantsByOwnerId/' + vm.ownerId;
+            //var partapi = config.remoteApiName + 'widget/parts/' + vm.ownerId;
 
           vm.participantGridOptions = {
             //toolbar: '<a download="detail.xlsx" class="k-button" ng-click="vm.excel(vm.partgrid)"><em class="glyphicon glyphicon-save"></em>&nbsp;Export</a>',
@@ -52,27 +53,27 @@
             },
             detailTemplate: kendo.template($("#template").html()),
             columns: [{
-                field: "FirstName",
+                field: "firstName",
                 title: "First Name",
                 width: "200px"
             },{
-                field: "LastName",
+                field: "lastName",
                 title: "Last Name",
                 width: "200px"
             },{
-                field: "Email",
+                field: "email",
                 title: "Email Address",
                 width: "220px"
             },{
                 title: "",
                 width: "120px",
-                template:'<a class="btn btn-default btn-block" href="\\\#user-profile/#=Id#"><em class="glyphicon glyphicon-edit"></em>&nbsp;Edit</a>'
+                template:'<a class="btn btn-default btn-block" href="\\\#user-profile/#=id#"><em class="glyphicon glyphicon-edit"></em>&nbsp;Edit</a>'
             }]
           };
 
           vm.detailGridOptions = function(e) {
 
-            var regapi = config.remoteApiName + 'Registrations/GetRegistrationsByPartId/' + e.Id;
+            var regapi = config.remoteApiName + 'Registrations/GetRegistrationsByPartId/' + e.id;
 
             return {
                 //toolbar: '<a download="detail.xlsx" class="k-button" ng-click="vm.excel(vm.detailgrid)"><em class="glyphicon glyphicon-save"></em>&nbsp;Export</a>',

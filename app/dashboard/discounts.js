@@ -35,7 +35,7 @@
             "text": "Inactive"
           }];
 
-          var couponapi = config.remoteApiName + 'Coupon/GetCouponsByOwnerId/' + config.owner.ownerId;
+          var couponapi = config.remoteApiName + 'widget/GetCouponsByOwnerId/' + config.owner.ownerId;
           vm.couponGridOptions = {
             //toolbar: '<a download="Coupons.xlsx" class="k-button" ng-click="vm.excel(vm.coupongrid)"><em class="glyphicon glyphicon-save"></em>&nbsp;Export</a>',
               toolbar: ['excel'],

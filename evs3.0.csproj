@@ -80,6 +80,8 @@
     <Content Include="app\dashboard\resourcedetail.js" />
     <Content Include="app\dashboard\services\excelservice.js" />
     <Content Include="app\dashboard\setup\setaddon.js" />
+    <Content Include="app\dashboard\setup\setbundle.html" />
+    <Content Include="app\dashboard\setup\setbundle.js" />
     <Content Include="app\dashboard\setup\setclient.js" />
     <Content Include="app\dashboard\setup\setcoupon.js" />
     <Content Include="app\dashboard\setup\seteventplan.js" />

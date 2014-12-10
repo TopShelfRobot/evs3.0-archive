@@ -27,7 +27,7 @@
 
         function teamGrid() {
 
-          var teamapi = config.remoteApiName + 'Teams/GetTeamRegistrationsByOwnerId/' + vm.ownerId;
+          var teamapi = config.remoteApiName + 'widget/GetTeamRegistrationsByOwnerId/' + vm.ownerId;
 
           vm.teamGridOptions = {
             //toolbar: '<a download="Teams.xlsx" class="k-button" ng-click="vm.excel(vm.teamgrid)"><em class="glyphicon glyphicon-save"></em>&nbsp;Export</a>',

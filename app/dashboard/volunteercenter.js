@@ -27,7 +27,7 @@
 
         function volunteerGrid() {
 
-          var volunteerapi = config.remoteApiName + 'Participants/GetVolunteersByOwnerId/' + vm.ownerId;
+          var volunteerapi = config.remoteApiName + 'widget/GetVolunteersByOwnerId/' + vm.ownerId;
 
           vm.volunteerGridOptions = {
             //toolbar: '<a download="Teams.xlsx" class="k-button" ng-click="vm.excel(vm.volunteergrid)"><em class="glyphicon glyphicon-save"></em>&nbsp;Export</a>',
@@ -75,7 +75,7 @@
 
           vm.detailGridOptions = function(e) {
 
-            var volunteerapi = config.remoteApiName + 'Participants/GetVolunteerScheduleByVolunteerId' + e.Id;
+            var volunteerapi = config.remoteApiName + 'widget/GetVolunteerScheduleByVolunteerId' + e.Id;
             
             return {
                 //toolbar: '<a download="detailexport.xlsx" class="k-button" ng-click="vm.excel(vm.detailgrid)"><em class="glyphicon glyphicon-save"></em>&nbsp;Export</a>',

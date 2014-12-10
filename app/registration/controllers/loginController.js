@@ -53,8 +53,6 @@
         };
 
         $scope.authExternalProvider = function (provider) {
-            // alert('calling this');
-
             var redirectUri = location.protocol + '//' + location.host + '/authcomplete.html';
             alert(redirectUri);
             var externalProviderUrl = config.apiPath + "api/Account/ExternalLogin?provider=" + provider + "&response_type=token&client_id=" + ngAuthSettings.clientId + "&redirect_uri=" + redirectUri;
