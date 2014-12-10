@@ -9,7 +9,7 @@
 	
 	var apiPath = "";
 	//apiPath = "http://localhost:49822/";
-	apiPath = "http://dev30.eventuresports.info/";
+	//apiPath = "http://dev30.eventuresports.info/";
 	
 	var remoteServiceName = apiPath + 'breeze/dashboard/';
 	var remoteApiName = apiPath + 'api/';
@@ -26,48 +26,9 @@
 
 	var owner = {
 		ownerId: 1,
-
-		isAdmin : true,
-		houseEmail: 0,
-		guid: 0,
-		logoImageName: '/Content/images/logo.png',
-
-		houseId: 2,    //this will be set by shell
-		mr_houseId: 0,
-		houseName: "",
-		accessType: "none",
-		isReg: false,
-
-		isHeadfirst: false,
-		isSportsComm: false,
-
-		wizard: true,
-		wizEventureId: 0,
-		wizEventureListId: 0,
-
-		isGroupRequired: false,
-
-		multItemDiscount: false,
-		fourDeLisDiscount: false,
-
-		isAddSingleFeeForAllRegs: false,
-		addSingleFeeForAllRegsPercent: 0,
-		addSingleFeeType: '',
-		addSingleFeeForAllRegsFlat: 0,
-
-		eventureName: 'Event',
-		listName: 'List',
-		groupName: 'Group',
-		partButtonText: 'Select PArty!',
-
-		listStatement: 'Select a desired start time',
-
-		isEnterpriseDisplayedOnMenu: true,
-		isEventureDisplayedOnMenu: true,
-		isPartDisplayedOnMenu: true,
-		isCouponDisplayedOnMenu: true,
-		isResourceDisplayedOnMenu: true,
-		isReportingDisplayedOnMenu: true
+		//accessType: "none",
+		isAdmin: true,
+		mr_houseId: 0
 	};
 
 	var config = {

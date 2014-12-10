@@ -24,7 +24,7 @@
         function createResourceGrid() {
 
             //var resourceApi = '/kendo/Resources/GetResourcesByOwnerId/' + vm.ownerId;
-            var resourceApi = config.remoteApiName + 'Resources/GetResourcesByOwnerId/' + vm.ownerId;
+            var resourceApi = config.remoteApiName + 'widget/GetResourcesByOwnerId/' + vm.ownerId;
 
             vm.resourceGridOptions = {
               //toolbar: '<a download="download.xlsx" class="k-button" ng-click="vm.excel(vm.resourcegrid)"><em class="glyphicon glyphicon-save"></em>&nbsp;Export</a>',
@@ -53,17 +53,17 @@
                 dataBound: function() {
                 },
                 columns: [//{ field: "Name", title: "Resource", width: "325px" },
-                    { field: "Name", title: "Resource", width: "325px" },
-                    { field: "Email", title: "Email", width: "225px" },
-                    { field: "Phone", title: "Phone", width: "175px", filterable: false },
-                    { field: "ResourceType", title: "Type", width: "175px" },
-                    { title: "", width: "120px", template: '<a class="btn btn-default btn-block" href="\\\#resourcedetail/#=Id#"><em class="glyphicon glyphicon-edit"></em>&nbsp;Edit</a>'
+                    { field: "name", title: "Resource", width: "325px" },
+                    { field: "email", title: "Email", width: "225px" },
+                    { field: "phone", title: "Phone", width: "175px", filterable: false },
+                    { field: "resourceType", title: "Type", width: "175px" },
+                    { title: "", width: "120px", template: '<a class="btn btn-default btn-block" href="\\\#resourcedetail/#=id#"><em class="glyphicon glyphicon-edit"></em>&nbsp;Edit</a>'
             }
                 ]
             };
           
             vm.detailGridOptions = function(e) {
-                var resourceApi = config.remoteApiName + 'Resources/GetResourceItemsByResourceId/' + e.Id;
+                var resourceApi = config.remoteApiName + 'Resources/GetResourceItemsByResourceId/' + e.id;
 
                 return {
                   toolbar: '<a download="download.xlsx" class="k-button" ng-click="vm.excel(vm.detailgrid)"><em class="glyphicon glyphicon-save"></em>&nbsp;Export</a>',
@@ -82,10 +82,10 @@
                     dataBound: function() {
                     },
                     columns: [
-                        { field: "Name", title: "Item Name", width: "150px" },
-                        { field: "Cost", title: "Cost", width: "70px", format: "{0:c}" },
-                        { field: "Category", title: "Category", width: "100px" },
-                        { title: "", width: 100, template: '<a class="btn btn-default btn-block" href="\\\#setresourceitem/#=Id#"><em class="glyphicon glyphicon-edit"></em>&nbsp;Edit</a>' }
+                        { field: "name", title: "Item Name", width: "150px" },
+                        { field: "cost", title: "Cost", width: "70px", format: "{0:c}" },
+                        { field: "category", title: "Category", width: "100px" },
+                        { title: "", width: 100, template: '<a class="btn btn-default btn-block" href="\\\#setresourceitem/#=id#"><em class="glyphicon glyphicon-edit"></em>&nbsp;Edit</a>' }
                     ]
                 };
             };

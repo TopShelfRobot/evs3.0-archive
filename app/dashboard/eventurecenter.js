@@ -69,19 +69,19 @@
                 mode: "row"
             },
             columns: [{
-                field: "Name",
+                field: "name",
                 title: "Event",
                 template: '<a href="\\\#eventuredetail/#=Id#">#=Name#</a>',
                 width: "500px",
             },{
-                field: "DisplayDate",
+                field: "displayDate",
                 title: "Date",
             },{
-                field: "Active",
+                field: "active",
                 values: status
             },{
                 title: "",
-                template:'<a class="btn btn-default btn-block" href="\\\#seteventure/#=Id#"><em class="glyphicon glyphicon-edit"></em>&nbsp;Edit</a>'
+                template:'<a class="btn btn-default btn-block" href="\\\#seteventure/#=id#"><em class="glyphicon glyphicon-edit"></em>&nbsp;Edit</a>'
             }]
           };
 

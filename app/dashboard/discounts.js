@@ -55,21 +55,21 @@
             },
             detailTemplate: kendo.template($("#template").html()),
             columns: [{
-                field: "Code",
+                field: "code",
                 title: "Coupon",
                 width: "400px"
             },{
-                field: "Amount",
+                field: "amount",
                 title: "Amount",
                 width: "220px"
             },{
-                field: "Active",
+                field: "active",
                 width: "100px",
                 values: status
             },{
                 title: "",
                 width: "120px",
-                template:'<a class="btn btn-default btn-block" href="\\\#setcoupon/#=Id#"><em class="glyphicon glyphicon-edit"></em>&nbsp;Edit</a>'
+                template:'<a class="btn btn-default btn-block" href="\\\#setcoupon/#=id#"><em class="glyphicon glyphicon-edit"></em>&nbsp;Edit</a>'
             }]
           };
 
@@ -93,23 +93,23 @@
                 pageable: true,
                 columns: [
                    {
-                       field: "Name",
+                       field: "name",
                        title: "List",
                        width: 300
                    }, {
-                       field: "Amount",
+                       field: "amount",
                        title: "Amount",
                        format: "{0:c}",
                        width: 150
                    }, {
-                       field: "Description",
+                       field: "description",
                        title: "Coupon",
                        width: 225
                    }, {
-                       field: "FirstName",
+                       field: "firstName",
                        title: "First Name"
                    }, {
-                       field: "LastName",
+                       field: "lastName",
                        title: "Last Name"
                    }]
             };

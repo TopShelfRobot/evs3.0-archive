@@ -123,10 +123,10 @@
                 dataBound: function () {
                 },
                 columns: [
-                    { field: "Task", width: "100px" },    //template is controlling this now //mjb
-                    { field: "Resource", width: "80px" },
-                    { field: "Eventure", width: "80px" },
-                    { field: "DateDue", format: "{0:MM/dd/yyyy}", width: "70px" }
+                    { field: "task", width: "100px" },    //template is controlling this now //mjb
+                    { field: "resource", width: "80px" },
+                    { field: "eventure", width: "80px" },
+                    { field: "dateDue", format: "{0:MM/dd/yyyy}", width: "70px" }
                 ]
           };
         }

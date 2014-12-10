@@ -112,7 +112,7 @@
 
         function getFirstEventureByOwnerId() {
             var self = this;
-            var pred = predicate.create("ownerId", "==", cart.ownerId)
+            var pred = predicate.create("ownerId", "==", config.ownerId)
               .and("active", "==", true);
 
             return entityQuery.from('Eventures')
@@ -129,7 +129,7 @@
 
         function createEventure() {
             var self = this;
-            return self.manager.createEntity('Eventure', { imageFileName: "", ownerId: cart.ownerId });
+            return self.manager.createEntity('Eventure', { imageFileName: "", ownerId: config.owner.ownerId });
         }
 
         function getEventureListById(id) {

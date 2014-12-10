@@ -175,24 +175,24 @@
                   mode: "row"
               },
               columns: [{
-                        field: "FirstName",
+                        field: "firstName",
                         title: "First Name",
                     },
                     {
-                        field: "LastName",
+                        field: "lastName",
                         title: "Last Name",
                     },
                     {
-                        field: "Email",
+                        field: "email",
                         title: "Email Address",
                     },
                     {
-                        field: "City",
+                        field: "city",
                         title: "City",
                         width: 200
                     },
                     {
-                        field: "State",
+                        field: "state",
                         title: "State",
                         width: 80
                     },
@@ -200,7 +200,7 @@
                         title: "",
                         width: 100,
                         filterable: false,
-                        template: '<a href="\\\#partedit/#=Id#" class="btn btn-default btn-block "><em class="glyphicon glyphicon-edit"></em>&nbsp;Edit</a>'
+                        template: '<a href="\\\#partedit/#=id#" class="btn btn-default btn-block "><em class="glyphicon glyphicon-edit"></em>&nbsp;Edit</a>'
             }]
           };
         }

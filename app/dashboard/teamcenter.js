@@ -53,29 +53,29 @@
             },
             detailTemplate: kendo.template($("#template").html()),
             columns: [{
-                field: "Name",
+                field: "name",
                 title: "Team Name",
                 width: "200px"
             },{
-                field: "EventName",
+                field: "eventName",
                 title: "Eventure",
                 width: "200px"
             },{
-                field: "ListName",
+                field: "listName",
                 title: "Listing",
                 width: "220px"
             },{
-                field: "CoachName",
+                field: "coachName",
                 title: "Coach Name",
                 width: "220px"
             }, {
-                field: "Amount",
+                field: "amount",
                 title: "Total Paid",
                 width: "120px",
                 format: "{0:c}",
                 filterable: false
             }, {
-                field: "Balance",
+                field: "balance",
                 title: "Balance",
                 width: "120px",
                 format: "{0:c}",
@@ -84,13 +84,13 @@
             }, {
                 title: "",
                 width: "120px",
-                template:'<a class="btn btn-default btn-block" href="\\\#/editteam/#=Id#"><em class="glyphicon glyphicon-edit"></em>&nbsp;Edit</a>'
+                template:'<a class="btn btn-default btn-block" href="\\\#/editteam/#=id#"><em class="glyphicon glyphicon-edit"></em>&nbsp;Edit</a>'
             }]
           };
 
           vm.detailGridOptions = function(e) {
 
-            var teamapi = config.remoteApiName + 'Teams/GetTeamMembersByTeamId/' + e.Id;
+            var teamapi = config.remoteApiName + 'Teams/GetTeamMembersByTeamId/' + e.id;
             vm.remove = function() {
                 alert('Removing: ' + e.Id );
                 //datacontext.team.removeTeamMemberById(e.Id);
@@ -123,7 +123,7 @@
                     schema: {
                         model: {
                             fields: {
-                                Id: { type: "number" }
+                                id: { type: "number" }
                             }
                         }
                     },
@@ -136,20 +136,20 @@
                 pageable: true,
                 detailTemplate: kendo.template($("#paymenttemplate").html()),
                 columns: [{
-                        field: "Name",
+                        field: "name",
                         title: "Name"
                     }, {
-                        field: "Email",
+                        field: "email",
                         title: "Email"
                     }, {
-                        field: "Amount",
+                        field: "amount",
                         title: "Paid",
                         width: 100,
                         format: "{0:c}"
                     },{
                         field: '',
                         title: '',
-                        template: '<button ng-click="vm.resend(#=Id#)" class="btn btn-success btn-block"><em class="glyphicon glyphicon-send"></em>&nbsp;Resend Invitation</button>',
+                        template: '<button ng-click="vm.resend(#=id#)" class="btn btn-success btn-block"><em class="glyphicon glyphicon-send"></em>&nbsp;Resend Invitation</button>',
                         width: 210
                     },{
                         field: '',
@@ -162,7 +162,7 @@
 
             vm.paymentDetailGridOptions = function(e) {
 
-                var paymentapi = config.remoteApiName + 'Teams/GetPaymentsByTeamMemberId/' + e.Id;
+                var paymentapi = config.remoteApiName + 'widget/GetPaymentsByTeamMemberId/' + e.Id;
 
                 vm.refund = function() {
                     alert('Refunding: ' + e.Id );
@@ -189,10 +189,10 @@
                     sortable: true,
                     pageable: true,
                     columns: [{
-                        field: "Id",
+                        field: "id",
                         title: "Confirmation Number"
                     }, {
-                        field: "Amount",
+                        field: "amount",
                         title: "Amount",
                         format: "{0:c}"
                     },{

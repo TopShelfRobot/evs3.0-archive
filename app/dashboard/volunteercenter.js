@@ -53,20 +53,20 @@
             },
             detailTemplate: kendo.template($("#template").html()),
             columns: [{
-                    field: "FirstName",
+                    field: "firstName",
                     title: "First Name",
                     width: 225
                 },
                     {
-                        field: "LastName",
+                        field: "lastName",
                         title: "Last Name",
                         width: 225
                     }, {
-                        field: "Email",
+                        field: "email",
                         title: "Email Address",
                         width: 300
                     }, {
-                        field: "PhoneMobile",
+                        field: "phoneMobile",
                         title: "Phone",
                         width: 300,
                         filterable: false
@@ -105,22 +105,22 @@
                 sortable: true,
                 pageable: true,
                 columns: [{
-                        field: "JobName",
+                        field: "jobName",
                         title: "Job Name",
                         width: 200
                    }, {
-                       field: "EventName",
+                       field: "eventName",
                        title: "Event",
                        width: 300
                     }, {
-                        field: "TimeBegin",
+                        field: "timeBegin",
                         title: "Shift Begin",
                         type: "date",
                         //format: "{0:h:mm tt}",
                         template: "#=moment(TimeBegin).format('h:mm a')#",
                         width: 125
                     }, {
-                        field: "TimeEnd",
+                        field: "timeEnd",
                         title: "Shift End",
                         type: "date",
                         format: "{0:h:mm tt}"

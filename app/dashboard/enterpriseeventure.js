@@ -75,30 +75,30 @@
             pageable: true,
             columns: [{
                 title: "Listing",
-                template: '<a href="\\\#elistcenter/#=Id#">#=Name#</a>'
+                template: '<a href="\\\#elistcenter/#=id#">#=Name#</a>'
             },{
-                field: "DateEventureList",
+                field: "dateEventureList",
                 title: "Date",
                 width: "220px",
                 format: "{0:MM/dd/yyyy}"
             },{
-                field: "DateBeginReg",
+                field: "dateBeginReg",
                 title: "Registration Begins",
                 width: "220px",
                 format: "{0:MM/dd/yyyy}"
             },{
-                field: "DateEndReg",
+                field: "dateEndReg",
                 title: "Registration Ends",
                 width: "220px",
                 format: "{0:MM/dd/yyyy}"
             },{
-                field: "Active",
+                field: "active",
                 width: "100px",
                 values: status
             },{
                 title: "",
                 width: "120px",
-                template:'<a class="btn btn-default btn-block" href="\\\#setlist/#=Id#"><em class="glyphicon glyphicon-edit"></em>&nbsp;Edit</a>'
+                template:'<a class="btn btn-default btn-block" href="\\\#setlist/#=id#"><em class="glyphicon glyphicon-edit"></em>&nbsp;Edit</a>'
             }]
           };
 
@@ -137,7 +137,7 @@
                 }
             },
             series: [{
-                field: "RevenuePercent",
+                field: "revenuePercent",
                 data: [20, 40, 45, 33],
                 padding: 0,
                 categoryField: "Listing"
@@ -151,7 +151,7 @@
         }
 
         function Overview() {
-          var overviewapi = config.remoteApiName +'Registrations/GetEventureGraph/' + vm.ownerId;
+          var overviewapi = config.remoteApiName +'widget/GetEventureGraph/' + vm.ownerId;
 
           vm.overviewByOwner = {
             theme: "flat",
@@ -179,13 +179,13 @@
                 valueAxes: [{
                     title: { text: "Profit" }
                 }, {
-                    name: "Expense",
+                    name: "expense",
                     title: { text: "Expense" }
                 }, {
-                    name: "Revenue",
+                    name: "revenue",
                     title: { text: "Revenue" }
                 }, {
-                    name: "Registrations",
+                    name: "registrations",
                     title: { text: "Registrations" }
                 }],
                 categoryAxis: {
@@ -200,7 +200,7 @@
         };
 
         function ServicesGrid() {
-          var serviceApi = config.remoteApiName + 'Resources/GetEventureServiceByEventureId/' + vm.eventureId;
+          var serviceApi = config.remoteApiName + 'widget/GetEventureServiceByEventureId/' + vm.eventureId;
           vm.servicesGridOptions = {
             //toolbar: '<a download="download.xlsx" class="k-button" ng-click="vm.excel(vm.serviceGrid)"><em class="glyphicon glyphicon-save"></em>&nbsp;Export</a>',
               toolbar: ['excel'],
@@ -215,7 +215,7 @@
                     schema: {
                         model: {
                             fields: {
-                                DateDue: { type: "date" }
+                                dateDue: { type: "date" }
                             }
                         }
                     },
@@ -239,9 +239,9 @@
                 dataBound: function () {
                 },
                 columns: [
-                  { field: "ResourceServiceText", title: "Service", width: "225px" },
-                  { field: "Amount", title: "Amount", format: "{0:c}", width: "175px" },
-                  { field: "IsVariable", title: "Variable Cost", width: "275px" }
+                  { field: "resourceServiceText", title: "Service", width: "225px" },
+                  { field: "amount", title: "Amount", format: "{0:c}", width: "175px" },
+                  { field: "isVariable", title: "Variable Cost", width: "275px" }
                 ]
           };
         }

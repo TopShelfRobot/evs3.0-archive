@@ -41,20 +41,20 @@
 				pageable: true,
 				filterable: true,
 				columns: [{
-					field: "DisplayName",
+					field: "displayName",
 					title: "Listing",
 					width: 300
 				}, {
-					field: "TotalAmount",
+					field: "totalAmount",
 					title: "Amount",
 					format: "{0:c}",
 					width: 150
 				}, {
-					field: "Quantity",
+					field: "quantity",
 					title: "Quantity",
 					width: 125
 				}, {
-					field: "DateCreated",
+					field: "dateCreated",
 					title: "Registration Date",
 					type: "date",
 					format: "{0:MM/dd/yyyy}",
@@ -62,11 +62,11 @@
 				},{
 					field: '',
 					title: '',
-					template: '<a href="\\\#viewreceipt/#=EventureOrderId#" class="btn btn-success btn-block">View Receipt</a>'
+					template: '<a href="\\\#viewreceipt/#=eventureOrderId#" class="btn btn-success btn-block">View Receipt</a>'
 				}, {
 					field: '',
 					title: '',
-					template: '<a href="\\\#registration/#=Id#" class="btn btn-default btn-block">Edit</a>'
+					template: '<a href="\\\#registration/#=id#" class="btn btn-default btn-block">Edit</a>'
 				}]
 			};
 			console.log($scope.registrationGridOptions);
@@ -126,21 +126,21 @@
 				filterable: true,
 				detailTemplate: kendo.template($("#parttemplate").html()),
 				columns: [{
-					field: "FirstName",
+					field: "firstName",
 					title: "First Name",
 					width: "200px"
 				},{
-					field: "LastName",
+					field: "lastName",
 					title: "Last Name",
 					width: "200px"
 				},{
-					field: "Email",
+					field: "email",
 					title: "Email Address",
 					width: "220px"
 				},{
 					title: "",
 					width: "120px",
-					template:'<a class="btn btn-default btn-block" href="\\\#participant/#=Id#">Edit</a>'
+					template:'<a class="btn btn-default btn-block" href="\\\#participant/#=id#">Edit</a>'
 				}]
 			};
 
@@ -162,20 +162,20 @@
 					sortable: true,
 					pageable: true,
 					columns: [{
-						field: "Name",
+						field: "name",
 						title: "Listing",
 						width: 300
 					}, {
-						field: "TotalAmount",
+						field: "totalAmount",
 						title: "Amount",
 						format: "{0:c}",
 						width: 150
 					}, {
-						field: "Quantity",
+						field: "quantity",
 						title: "Quantity",
 						width: 125
 					}, {
-						field: "DateCreated",
+						field: "dateCreated",
 						title: "Registration Date",
 						type: "date",
 						format: "{0:MM/dd/yyyy}",
@@ -183,11 +183,11 @@
 					},{
 						field: '',
 						title: '',
-						template: '<a href="\\\#viewreceipt/#=EventureOrderId#" class="btn btn-success btn-block">View Receipt</a>'
+						template: '<a href="\\\#viewreceipt/#=eventureOrderId#" class="btn btn-success btn-block">View Receipt</a>'
 					}, {
 						field: '',
 						title: '',
-						template: '<a href="\\\#registration/#=Id#" class="btn btn-default btn-block">Edit</a>'
+						template: '<a href="\\\#registration/#=id#" class="btn btn-default btn-block">Edit</a>'
 					}
 					]
 				};
@@ -212,19 +212,19 @@
 				filterable: true,
 				detailTemplate: kendo.template($("#teamtemplate").html()),
 				columns: [{
-					field: "Name",
+					field: "name",
 					title: "Team Name",
 					width: "200px"
 				},{
-					field: "EventName",
+					field: "eventName",
 					title: "Eventure",
 					width: "200px"
 				},{
-					field: "ListName",
+					field: "listName",
 					title: "Listing",
 					width: "220px"
 				},{
-					field: "CoachName",
+					field: "coachName",
 					title: "Coach Name",
 					width: "120px"
 				}]
@@ -232,7 +232,7 @@
 
 			$scope.teamDetailGridOptions = function(e) {
 
-				var teamdetailapi = config.remoteApiName + 'Teams/GetTeamMembersByTeamId/' + e.Id;
+				var teamdetailapi = config.remoteApiName + 'widget/GetTeamMembersByTeamId/' + e.Id;
 
 				return {
 					dataSource: {
@@ -248,10 +248,10 @@
 					sortable: true,
 					pageable: true,
 					columns: [{
-						field: "Name",
+						field: "name",
 						title: "Name"
 					},{
-						field: "Email",
+						field: "email",
 						title: "Email"
 					}
 					]
@@ -260,7 +260,7 @@
 		}
 
 		function Coach() {
-			var coachapi = config.remoteApiName + 'Teams/GetTeamRegistrationsByCoachId/' + config.owner.houseId;
+			var coachapi = config.remoteApiName + 'widget/GetTeamRegistrationsByCoachId/' + config.owner.houseId;
 
 			$scope.coachGridOptions = {
 				dataSource: {
@@ -277,37 +277,37 @@
 				filterable: true,
 				detailTemplate: kendo.template($("#coachtemplate").html()),
 				columns: [{
-					field: "Name",
+					field: "name",
 					title: "Team Name",
 					width: "200px"
 				}, {
-					field: "EventName",
+					field: "eventName",
 					title: "Eventure",
 					width: "200px"
 				}, {
-					field: "ListName",
+					field: "listName",
 					title: "Listing",
 					width: "220px"
 				}, {
-					field: "Amount",
+					field: "amount",
 					title: "Total Paid",
 					//width: "120px",
 					format: "{0:c}"
 				}, {
-					field: "Balance",
+					field: "balance",
 					title: "Balance",
-//width: "120px",
+                    //width: "120px",
 					format: "{0:c}"
 				}, {
 					title: "",
 					width: "120px",
-					template: '<a class="btn btn-default btn-block" href="\\\#/editteam/#=Id#">Edit</a>'
+					template: '<a class="btn btn-default btn-block" href="\\\#/editteam/#=id#">Edit</a>'
 				}]
 			};
 
 			$scope.coachDetailGridOptions = function(e) {
 
-				var coachdetailapi = config.remoteApiName + 'Teams/GetTeamMembersByTeamId/' + e.Id;
+				var coachdetailapi = config.remoteApiName + 'widget/GetTeamMembersByTeamId/' + e.Id;
 
 				$scope.remove = function() {
 					alert('Removing: ' + e.Id );
@@ -332,13 +332,13 @@
 					sortable: true,
 					pageable: true,
 					columns: [{
-						field: "Name",
+						field: "name",
 						title: "Name"
 					}, {
-						field: "Email",
+						field: "email",
 						title: "Email"
 					}, {
-						field: "Amount",
+						field: "amount",
 						title: "Paid",
 						width: 100,
 						format: "{0:c}"
