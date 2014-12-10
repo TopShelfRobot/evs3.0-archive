@@ -32,7 +32,7 @@
         }
 
         function Overview() {
-            var overviewapi = config.remoteApiName +'Registrations/GetOwnerGraph/' + vm.ownerId;
+            var overviewapi = config.remoteApiName +'widget/GetOwnerGraph/' + vm.ownerId;
 
             vm.overviewByOwner = {
                 theme: "material",
@@ -90,7 +90,7 @@
         };
 
         function NotificationGrid() {
-          var notifApi = config.remoteApiName + 'Resources/GetNotificationsByOwnerId/' + vm.ownerId;
+          var notifApi = config.remoteApiName + 'widget/GetNotificationsByOwnerId/' + vm.ownerId;
           vm.notificationGridOptions = {
             //toolbar: '<a download="download.xlsx" class="k-button" ng-click="vm.excel(vm.notificationGrid)"><em class="glyphicon glyphicon-save"></em>&nbsp;Export</a>',
               toolbar: ['excel'],
