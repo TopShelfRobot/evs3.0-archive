@@ -25,7 +25,7 @@
 		}
 
 		function Registrations() {
-			var regapi = config.remoteApiName + 'Registrations/GetRegistrationsByPartId/' + $scope.participant.id;
+			var regapi = config.remoteApiName + 'widget/GetRegistrationsByPartId/' + $scope.participant.id;
 
 			$scope.registrationGridOptions = {
 				dataSource: {
@@ -109,7 +109,7 @@
 
 
 		function Participants() {
-			var partapi = config.remoteApiName + 'Participants/GetParticipantsByHouseId/' + config.owner.houseId;
+			var partapi = config.remoteApiName + 'widget/GetParticipantsByHouseId/' + config.owner.houseId;
 
 			$scope.participantGridOptions = {
 				dataSource: {
@@ -146,7 +146,7 @@
 
 			$scope.partDetailGridOptions = function(e) {
 
-				var regapi = config.remoteApiName + 'Registrations/GetRegistrationsByPartId/' + e.Id;
+				var regapi = config.remoteApiName + 'widget/GetRegistrationsByPartId/' + e.Id;
 
 				return {
 					dataSource: {
@@ -195,7 +195,7 @@
 		}
 
 		function Team() {
-			var teamapi = config.remoteApiName + 'Teams/GetTeamRegistrationsByHouseId/' + config.owner.houseId;
+			var teamapi = config.remoteApiName + 'widget/GetTeamRegistrationsByHouseId/' + config.owner.houseId;
 
 			$scope.teamGridOptions = {
 				dataSource: {

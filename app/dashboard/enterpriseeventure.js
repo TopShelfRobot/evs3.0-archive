@@ -42,7 +42,7 @@
             "text": "Inactive"
           }];
 
-          var listapi = config.remoteApiName + 'EventureLists/getEventureListsByEventureId/' + vm.eventureId;
+          var listapi = config.remoteApiName + 'widget/getEventureListsByEventureId/' + vm.eventureId;
           vm.listGridOptions = {
             //toolbar: '<a download="download.xlsx" class="k-button" ng-click="vm.excel(vm.listGrid)"><em class="glyphicon glyphicon-save"></em>&nbsp;Export</a>',
               toolbar: ['excel'],
@@ -106,7 +106,7 @@
 
         function PieChart() {
 
-          var revapi = config.remoteApiName + 'Registrations/GetRevenuePerEvent/' + vm.ownerId;
+          var revapi = config.remoteApiName + 'widget/GetRevenuePerEvent/' + vm.ownerId;
           vm.revByList = {
             theme: "flat",
             dataSource: {

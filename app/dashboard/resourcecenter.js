@@ -63,7 +63,7 @@
             };
           
             vm.detailGridOptions = function(e) {
-                var resourceApi = config.remoteApiName + 'Resources/GetResourceItemsByResourceId/' + e.id;
+                var resourceApi = config.remoteApiName + 'widget/GetResourceItemsByResourceId/' + e.id;
 
                 return {
                   toolbar: '<a download="download.xlsx" class="k-button" ng-click="vm.excel(vm.detailgrid)"><em class="glyphicon glyphicon-save"></em>&nbsp;Export</a>',
