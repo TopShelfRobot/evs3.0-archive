@@ -58,12 +58,12 @@
                 schema: {
                     model: {
                         fields: {
-                            Active: { type: "boolean" },
-                            DateEventureList: { type: "date" },
-                            DateBeginReg: { type: "date" },
-                            DateEndReg: { type: "date" },
-                            Id: { type: "number" },
-                            Name: { type: "string" }
+                            active: { type: "boolean" },
+                            dateEventureList: { type: "date" },
+                            dateBeginReg: { type: "date" },
+                            dateEndReg: { type: "date" },
+                            id: { type: "number" },
+                            name: { type: "string" }
                         }
                     }
                 },
@@ -75,7 +75,7 @@
             pageable: true,
             columns: [{
                 title: "Listing",
-                template: '<a href="\\\#elistcenter/#=id#">#=Name#</a>'
+                template: '<a href="\\\#elistcenter/#=id#">#=name#</a>'
             },{
                 field: "dateEventureList",
                 title: "Date",
