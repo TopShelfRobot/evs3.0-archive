@@ -10,7 +10,7 @@
     //apiPath = "http://dev30.eventuresports.info/";
 
 
-    var remoteServiceName = apiPath + 'breeze/registration/';
+    var remoteServiceName = apiPath + 'api/registration/';
     var remoteApiName = apiPath + 'api/';
     var events = {
         controllerActivateSuccess: 'controller.activateSuccess',
