@@ -55,7 +55,7 @@
         }
 
         function Registrations() {
-          var regapi = config.remoteApiName + 'Registrations/GetEventureListGraph/' + vm.listingId;
+          var regapi = config.remoteApiName + 'widget/GetEventureListGraph/' + vm.listingId;
 
           vm.registrations = {
             theme: "bootstrap",
@@ -102,7 +102,7 @@
         }
 
         vm.Groups = function() {
-          var groupapi = config.remoteApiName + 'Registrations/GetEventureGroupGraphByList/' + vm.listingId;
+          var groupapi = config.remoteApiName + 'widget/GetEventureGroupGraphByList/' + vm.listingId;
 
           vm.groups = {
             theme: "bootstrap",
@@ -152,7 +152,7 @@
 
         function ParticipantGrid() {
 
-          var participantapi = config.remoteApiName +  'Participants/GetRegisteredParticipantsByEventureListId/' + vm.listingId;
+          var participantapi = config.remoteApiName +  'widget/GetRegisteredParticipantsByEventureListId/' + vm.listingId;
           vm.participantGridOptions = {
             //toolbar: '<a download="download.xlsx" class="k-button" ng-click="vm.excel(vm.partgrid)"><em class="glyphicon glyphicon-save"></em>&nbsp;Export</a>',
               toolbar: ['excel'],
