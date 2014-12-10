@@ -14,6 +14,14 @@
             confirmPassword: ""
         };
 
+        $scope.isDash = false;
+
+        var requestPath = window.location.pathname;
+
+        if (requestPath === '/dash.html') {
+            $scope.isDash = true;
+        }
+
         common.activateController(controllerId);
 
         $scope.signUp = function () {
