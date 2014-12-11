@@ -2,13 +2,15 @@
 
 	var controllerId = "UserProfile";
 
-	function Controller($scope, $routeParams, config, datacontext, common){
+	function Controller($scope, $routeParams, config, datacontext, common, cart){
 
 		$scope.participant = {};
 
 		$scope.disableEmail = true;
 
-		$scope.participantId = $routeParams.participantId || config.owner.houseId;
+		$scope.participantId = $routeParams.participantId || cart.participantId;
+
+		$scope.partButton = cart.regSettings.partButtonText
 
 		var promises = [getParticipant(), Registrations(), Participants(), Team(), Coach()];
 
@@ -25,7 +27,7 @@
 		}
 
 		function Registrations() {
-			var regapi = config.remoteApiName + 'widget/GetRegistrationsByPartId/' + $scope.participant.id;
+			var regapi = config.remoteApiName + 'widget/GetRegistrationsByPartId/' + $scope.participantId;
 
 			$scope.registrationGridOptions = {
 				dataSource: {
@@ -109,7 +111,7 @@
 
 
 		function Participants() {
-			var partapi = config.remoteApiName + 'widget/GetParticipantsByHouseId/' + config.owner.houseId;
+			var partapi = config.remoteApiName + 'widget/GetParticipantsByHouseId/' + cart.houseId;
 
 			$scope.participantGridOptions = {
 				dataSource: {
@@ -195,7 +197,7 @@
 		}
 
 		function Team() {
-			var teamapi = config.remoteApiName + 'widget/GetTeamRegistrationsByHouseId/' + config.owner.houseId;
+			var teamapi = config.remoteApiName + 'widget/GetTeamRegistrationsByHouseId/' + cart.houseId;
 
 			$scope.teamGridOptions = {
 				dataSource: {
@@ -260,7 +262,7 @@
 		}
 
 		function Coach() {
-			var coachapi = config.remoteApiName + 'widget/GetTeamRegistrationsByCoachId/' + config.owner.houseId;
+			var coachapi = config.remoteApiName + 'widget/GetTeamRegistrationsByCoachId/' + cart.houseId;
 
 			$scope.coachGridOptions = {
 				dataSource: {
@@ -358,5 +360,5 @@
 		}
 	}
 
-	angular.module("evReg").controller(controllerId, ["$scope", "$routeParams", "config", "datacontext", "common", Controller]);
+	angular.module("evReg").controller(controllerId, ["$scope", "$routeParams", "config", "datacontext", "common", "CartModel", Controller]);
 })();

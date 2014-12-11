@@ -2,9 +2,9 @@
 
 	var controllerId = "EventureListController";
 	angular.module("evReg").controller(controllerId,
-					["$scope", "$location", "$routeParams", "config", "CartModel", "datacontext", "common", controller]);
+					["$scope", "$location", "$routeParams", "config", "CartModel", "datacontext", "common", "AgeService", controller]);
 
-	function controller($scope, $location, $routeParams, config, cart, datacontext, common) {
+	function controller($scope, $location, $routeParams, config, cart, datacontext, common, dt) {
 
 		//$scope.cart = cartModel;
 
@@ -34,6 +34,8 @@
 				.then(function (list) {
 					$scope.selectedParticipant = list[0];
 					$scope.participants = list;
+					$scope.age = dt.age($scope.selectedParticipant.dateBirth);
+					console.log($scope.age);
 				})
 		);
 
@@ -43,14 +45,21 @@
 		$scope.register = function (eventure, eventureList, participant) {
 			//mjb cartModel.fee = $scope.selection.currentFee;
 			console.log(eventureList.eventureListType);
-			if (eventureList.eventureListType == "Standard") {   //enum? mjb
-			    $location.path("/eventure/" + eventure.id + "/list/" + eventureList.id + "/questions")
-						.search("uid", participant.id);
-			} else {
-			    $location.path("/eventure/" + eventure.id + "/list/" + eventureList.id + "/team")
-						.search("uid", participant.id);
-			}
 
+
+			if(($scope.selection.minAge && $scope.age < $scope.selection.minAge) ||
+				($scope.selection.maxAge && $scope.age > $scope.selection.maxAge)) {
+				alert("You do not meet the age restrictions for this event. You must be between " + $scope.selection.minAge + " and " + $scope.selection.maxAge);
+			}
+			else {
+				if (eventureList.eventureListType == "Standard") {   //enum? mjb
+					$location.path("/eventure/" + eventure.id + "/list/" + eventureList.id + "/questions")
+						.search("uid", participant.id);
+				} else {
+					$location.path("/eventure/" + eventure.id + "/list/" + eventureList.id + "/team")
+						.search("uid", participant.id);
+				}
+			}
 
 			//if (eventureList.eventureListType == config.eventureListType.standard) {   //enum? mjb
 			//	$location.path("/eventure/" + eventure.id + "/list/" + eventureList.id + "/questions")

@@ -28,8 +28,8 @@
                     </a>
                     <a class="visible-xs visible-sm hidden-md hidden-lg" href="#/shoppingcart"><i class="glyphicon glyphicon-shopping-cart"></i>&nbsp;<span class="badge">{{cart.registrations.length}}</span></a>
                 </li>
-                <li class="dropdown" ng-hide="!authentication.isAuth">
-                    <a dropdown-toggle>
+                <li class="dropdown" dropdown on-toggle="toggled(open)" ng-hide="!authentication.isAuth">
+                    <a dropdown-toggle class="dropdown-toggle">
                         <i class="glyphicon glyphicon-cog"></i>
                     </a>
                     <ul class="dropdown-menu">
