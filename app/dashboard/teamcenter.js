@@ -90,7 +90,7 @@
 
           vm.detailGridOptions = function(e) {
 
-            var teamapi = config.remoteApiName + 'Teams/GetTeamMembersByTeamId/' + e.id;
+            var teamapi = config.remoteApiName + 'widget/GetTeamMembersByTeamId/' + e.id;
             vm.remove = function() {
                 alert('Removing: ' + e.Id );
                 //datacontext.team.removeTeamMemberById(e.Id);
