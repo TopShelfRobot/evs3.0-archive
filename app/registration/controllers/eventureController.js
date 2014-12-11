@@ -12,6 +12,8 @@
 		//alert('heryhr');
 	    //datacontext.getEventuresByOwnerId(config.owner.ownerId)
 
+		$scope.isPaginationVisible = false;
+
 		$scope.eventureName = cart.regSettings.eventureName;
 
 		console.log(cart.ownerId);
@@ -25,6 +27,10 @@
 					$scope.eventures = all.slice(0, viewLength);
 				})
 		);
+
+		if(all.length > viewLength) {
+			$scope.isPaginationVisible = true;
+		}
 
 		common.activateController(promises, controllerId);
 
