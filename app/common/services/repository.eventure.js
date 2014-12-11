@@ -172,8 +172,8 @@
 
         function getEventureListsByOwnerId(ownerId) {
             var self = this;
-            var query = entityQuery.from('EventureListsByOwnerId')
-                .withParameters({ ownerId: ownerId })
+            var query = entityQuery.from('GetEventureListsByOwnerId')
+                .withParameters({ id: ownerId })
                 .orderBy('sortOrder');
 
             return self.manager.executeQuery(query)

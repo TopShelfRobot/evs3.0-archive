@@ -73,7 +73,7 @@
 
           vm.detailGridOptions = function(e) {
 
-            var regapi = config.remoteApiName + 'Registrations/GetRegistrationsByPartId/' + e.id;
+            var regapi = config.remoteApiName + 'widget/GetRegistrationsByPartId/' + e.id;
 
             return {
                 //toolbar: '<a download="detail.xlsx" class="k-button" ng-click="vm.excel(vm.detailgrid)"><em class="glyphicon glyphicon-save"></em>&nbsp;Export</a>',
