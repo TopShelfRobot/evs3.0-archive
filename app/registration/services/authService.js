@@ -28,6 +28,27 @@ angular.module('evReg').factory('authService', ['$http', '$q', 'localStorageServ
         });
     };
 
+    var _forgotPassword = function (registration) {
+        _logOut();
+        //console.log(registration);
+        //alert(serviceBase);
+
+        return $http.post(serviceBase + 'api/account/ForgotPassword', registration).then(function (response) {   //, registration
+            return response;
+        });
+    };
+
+    var _resetPassword = function (registration) {
+        //_logOut();
+        //console.log(registration);
+        //alert(serviceBase);
+
+        return $http.post(serviceBase + 'api/account/ResetPassword', registration).then(function (response) {   //
+            return response;
+        });
+    };
+
+
     var _login = function (loginData) {
 
         var data = "grant_type=password&username=" + loginData.userName + "&password=" + loginData.password;
@@ -170,6 +191,9 @@ angular.module('evReg').factory('authService', ['$http', '$q', 'localStorageServ
     authServiceFactory.obtainAccessToken = _obtainAccessToken;
     authServiceFactory.externalAuthData = _externalAuthData;
     authServiceFactory.registerExternal = _registerExternal;
+
+    authServiceFactory.forgotPassword = _forgotPassword;
+    authServiceFactory.resetPassword = _resetPassword;
 
     return authServiceFactory;
 }]);

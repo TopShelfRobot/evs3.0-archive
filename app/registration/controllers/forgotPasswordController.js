@@ -8,14 +8,18 @@
         $scope.message = "";
 
         $scope.registration = {
-            userName: "",
-            password: "",
-            confirmPassword: ""
+            email: "boone.mike@gmail.com"  //,
+            //password: "",
+            //confirmPassword: ""
         };
 
         common.activateController(controllerId);
 
         $scope.requestPassword = function () {
+
+            authService.forgotPassword($scope.registration);
+
+
 
         };
 

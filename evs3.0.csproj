@@ -109,6 +109,7 @@
     <Content Include="app\registration\controllers\addProfileController.js" />
     <Content Include="app\registration\controllers\confirmController.js" />
     <Content Include="app\registration\controllers\editteamController.js" />
+    <Content Include="app\registration\controllers\forgotPasswordController.js" />
     <Content Include="app\registration\controllers\headerController.js" />
     <Content Include="app\registration\controllers\loginController.js" />
     <Content Include="app\registration\controllers\orderReceiptController.js" />
@@ -116,6 +117,7 @@
     <Content Include="app\registration\controllers\questionsController.js" />
     <Content Include="app\registration\controllers\registrationEditConfirmController.js" />
     <Content Include="app\registration\controllers\registrationeditController.js" />
+    <Content Include="app\registration\controllers\resetPasswordController.js" />
     <Content Include="app\registration\controllers\shoppingCartController.js" />
     <Content Include="app\registration\controllers\signupController.js" />
     <Content Include="app\registration\controllers\transferQuestionsController.js" />
@@ -146,6 +148,7 @@
     <Content Include="app\registration\models\memberCartModel.js" />
     <Content Include="app\registration\models\registrationCartModel.js" />
     <Content Include="app\registration\views\editteam.part.html" />
+    <Content Include="app\registration\views\forgotpassword.part.html" />
     <Content Include="app\registration\views\login.part.html" />
     <Content Include="app\registration\views\orderreceipt.part.html" />
     <Content Include="app\registration\views\participantForm.part.html" />
@@ -162,6 +165,7 @@
     <Content Include="app\registration\views\questions.part.html" />
     <Content Include="app\registration\views\registrationedit.part.html" />
     <Content Include="app\registration\views\registrationEditConfirm.part.html" />
+    <Content Include="app\registration\views\resetpassword.part.html" />
     <Content Include="app\registration\views\setparticipant.part.html" />
     <Content Include="app\registration\views\shoppingcart.part.html" />
     <Content Include="app\registration\views\signup.part.html" />
