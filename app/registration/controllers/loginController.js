@@ -5,7 +5,6 @@
 
     var controllerId = "loginController";
 
-
     function controller($scope, $location, $routeParams, authService, datacontext, common, cart, ngAuthSettings) {
 
         $scope.loginData = {
@@ -31,21 +30,33 @@
 
         $scope.login = function () {
             authService.login($scope.loginData).then(function (response) {
-                datacontext.participant.getParticipantByEmailAddress($scope.loginData.userName, cart.ownerId)
+
+                $scope.authentication = authService.authentication;
+
+                alert($scope.authentication.userName);
+                datacontext.participant.getParticipantByEmailAddress($scope.authentication.userName, cart.ownerId)
                    .then(function (data) {
-                       console.log(data);
+                       if (data.typeof == null) {
+                           //get participant data
+                           $location.path('/part');
+                       }
+                       else {
+                           console.log(data);
+                           //write house id to cart
+                           if (requestPath === '/dash.html') {
+                               $location.path('/eventurecenter');
+                           }
+                           else {
+                               if (typeof $scope.requestPath === 'undefined') {
+                                   cart.houseId = 
+                                   $location.path('/eventure');
+                               }
+                               else {
+                                   window.location.href = $scope.requestPath;
+                               }
+                           }
+                       }
                    });
-                if (requestPath === '/dash.html') {
-                    $location.path('/eventurecenter');
-                }
-                else {
-                    if (typeof $scope.requestPath === 'undefined') {
-                        $location.path('/eventure');
-                    }
-                    else {
-                        window.location.href = $scope.requestPath;
-                    }
-                }
             },
                  function (err) {
                      $scope.message = err.error_description;
