@@ -31,7 +31,7 @@
             authService.saveRegistration($scope.registration).then(function (response) {
 
                 $scope.savedSuccessfully = true;
-                $scope.message = "User has been registered successfully, you will be redicted to login page in 2 seconds.";
+                $scope.message = "User has been registered successfully, you will be redirected to login page in 2 seconds.";
                 //startTimer();
 
             },
