@@ -405,6 +405,7 @@
     <Content Include="Content\bootstrap\glyphicons-halflings-regular.woff" />
     <Content Include="Content\images\kendoui.ttf" />
     <Content Include="Content\images\kendoui.woff" />
+    <Content Include="Web.config" />
     <None Include="Scripts\jquery-2.0.3.intellisense.js" />
     <Content Include="Scripts\angular-mocks.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -433,20 +434,17 @@
     <Content Include="Scripts\ui-bootstrap-tpls-0.10.0.min.js" />
     <Content Include="Scripts\ui-bootstrap-tpls-0.11.0.js" />
     <Content Include="Scripts\xlsx.js" />
-    <Content Include="Web.config" />
     <Content Include="Scripts\jquery-2.0.3.min.map" />
     <Content Include="Scripts\toastr.min.js.map" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
