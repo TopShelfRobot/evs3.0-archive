@@ -26,7 +26,7 @@
         vm.eventures = new kendo.data.HierarchicalDataSource({
             transport: {
                 read: {
-                    url: config.remoteApiName + "widget/GetEventuresGroupedByYearByOwnerId" + vm.ownerId,
+                    url: config.remoteApiName + "widget/GetEventuresGroupedByYearByOwnerId/" + vm.ownerId,
                     dataType: "jsonp"
                 }
             }
