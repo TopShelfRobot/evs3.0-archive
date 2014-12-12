@@ -10,29 +10,26 @@
         var vm = this;
         vm.title = 'app';
         vm.EventureGridOptions = {};
-        vm.ownerId = config.owner.ownerId;
+        vm.ownerId = 1;
         vm.eventures = [];
 
         activate();
 
         function activate() {
-            var promises = [NotificationGrid(),  Overview()];
+            var promises = [getEvents(), NotificationGrid(),  Overview()];
             common.activateController(promises, controllerId)
                 .then(function () {
                     //log('Activated Eventure Center View');
                 });
         }
 
-        vm.eventures = new kendo.data.HierarchicalDataSource({
-            transport: {
-                read: {
-                    url: config.remoteApiName + 'widget/GetEventuresGroupedByYearByOwnerId/' + vm.ownerId,
-                    dataType: 'json'
-                }
-            }
-        });
-
-
+        function getEvents() {
+            return datacontext.eventure.getEventuresGroupedByYearByOwnerId(vm.ownerId)
+              .then(function (data) {
+                  vm.eventures = data;
+                  return vm.eventures;
+              });
+        }
 
         function Overview() {
             var overviewapi = config.remoteApiName +'widget/GetOwnerGraph/' + vm.ownerId;
@@ -86,6 +83,10 @@
 
         vm.overview = function() {
             vm.overviewChart.redraw();
+        };
+
+        vm.treeviewOptions = {
+            template: kendo.template($("#treeview-template").html())
         };
 
         function NotificationGrid() {
