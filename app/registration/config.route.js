@@ -192,10 +192,22 @@
 			        templateUrl: 'app/registration/views/signup.part.html'
 			    }
 			}, {
-                url: '/kitchensink',
+                url: '/forgotpassword',
                 config: {
-                    title: 'Kitchen Sink',
-                    templateUrl: 'app/registration/views/kitchensink.html'
+                    title: 'Forgot Password',
+                    templateUrl: 'app/registration/views/forgotpassword.part.html'
+                }
+            }, {
+                url: '/resetpassword',
+                config: {
+                    title: 'Reset Password',
+                    templateUrl: 'app/registration/views/resetpassword.part.html'
+                }
+            }, {
+                url: '/resetpassword/:token',
+                config: {
+                    title: 'Reset Password',
+                    templateUrl: 'app/registration/views/resetpassword.part.html'
                 }
             }
         ];
