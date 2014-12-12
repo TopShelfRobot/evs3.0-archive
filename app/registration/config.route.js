@@ -203,13 +203,14 @@
                     title: 'Reset Password',
                     templateUrl: 'app/registration/views/resetpassword.part.html'
                 }
-            }, {
-                url: '/resetpassword/:token',
-                config: {
-                    title: 'Reset Password',
-                    templateUrl: 'app/registration/views/resetpassword.part.html'
-                }
             }
+            //, {
+            //    url: '/resetpassword/:token',
+            //    config: {
+            //        title: 'Reset Password',
+            //        templateUrl: 'app/registration/views/resetpassword.part.html'
+            //    }
+            //}
         ];
     }
 })();
