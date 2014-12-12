@@ -350,6 +350,12 @@
                     title: 'Participant Communication',
                     templateUrl: 'app/dashboard/email.html'
                 }
+            }, {
+                url: '/demographics/:eventureId',
+                config: {
+                    title: 'Demographics',
+                    templateUrl: 'app/admin/analytics/demographics.html'
+                }
             }
         ];
     }
