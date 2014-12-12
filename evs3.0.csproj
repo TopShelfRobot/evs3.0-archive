@@ -127,6 +127,7 @@
     <Content Include="app\registration\models\registrationEditModel.js" />
     <Content Include="app\registration\services\authInterceptorService.js" />
     <Content Include="app\registration\services\authService.js" />
+    <Content Include="app\registration\services\tokensManagerService.js" />
     <Content Include="app\registration\views\addparticipant.part.html" />
     <Content Include="app\registration\views\addprofile.part.html" />
     <Content Include="app\registration\views\cart.part.html" />

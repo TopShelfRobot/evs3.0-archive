@@ -4,7 +4,7 @@
     function Model(config) {
 
         var cart = {};
-        cart.houseId = 1;
+        cart.houseId = 0;
         cart.participantId = 0;
         cart.ownerId = 1;
         cart.waiverSigned = false;
