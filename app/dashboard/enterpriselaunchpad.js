@@ -23,18 +23,16 @@
                 });
         }
 
-        vm.eventures = new kendo.data.HierarchicalDataSource({
+        vm.eventures = new kendo.data.HierarchicalDataSourcee({
             transport: {
                 read: {
-                    url: config.remoteApiName + "widget/GetEventuresGroupedByYearByOwnerId" + vm.ownerId,
-                    dataType: "jsonp"
+                    url: config.remoteApiName + 'widget/GetEventuresGroupedByYearByOwnerId' + vm.ownerId,
+                    dataType: 'json'
                 }
             }
         });
 
-        vm.treeviewOptions = {
-            template: kendo.template($("#treeview-template").html())
-        };
+
 
         function Overview() {
             var overviewapi = config.remoteApiName +'widget/GetOwnerGraph/' + vm.ownerId;
