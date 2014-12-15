@@ -47,60 +47,27 @@
         }
 
         vm.generateChart = function () {
+            var dataSource = new kendo.data.DataSource({
+                 transport: {
+                     read: {
+                         url: function () {
+                             return config.remoteApiName + 'analytic/GetYearOverYearData/' + vm.ownerId + '/' + vm.chart.eventure  + '/' + vm.chart.startYear  + '/' + vm.chart.endYear  + '/' + vm.chart.type;
+                         },
+                         dataType: "json"
+                     }
+                 }
+            });
 
-            //var chart = vm.summaryChart,
-            //            categoryAxis = chart.options.categoryAxis,
-            //            baseUnitInputs = $("input:radio[name=baseUnit]");
+            chart.setDataSource(dataSource);
 
-            //        categoryAxis.baseUnit = baseUnitInputs.filter(":checked").val();
-
-            //        if(categoryAxis.baseUnit === "weeks") {
-            //          chart.options.chartArea.height = 1300;
-            //        } else {
-            //          chart.options.chartArea.height = 475;
-            //        }
-
-                    chart.refresh();
-
-            // var dataSource = new kendo.data.DataSource({
-            //     transport: {
-            //         read: {
-            //             url: function () {
-            //                 return config.remoteApiName + 'Registrations/GetYearOverYearData/2';
-            //             },
-            //             dataType: "json"
-            //         }
-            //     }
-            // });
-            // chart.setDataSource(dataSource);
+            chart.refresh();
         };
 
          function Chart() {
-            var title = "Number of Registrations";
-            //var yearapi = config.remoteApiName + 'Registrations/GetYearOverYearData/1'; //+ vm.ownerId;
 
-            //var stats = [
-            //        { value: 1, date: new Date("01/01/2013") },
-            //        { value: 2, date: new Date("05/08/2013") },
-            //        { value: 3, date: new Date("08/15/2013") },
-            //        { value: 4, date: new Date("09/01/2013") },
-            //        { value: 5, date: new Date("10/08/2013") },
-            //        { value: 6, date: new Date("11/15/2013") },
-            //        { value: 7, date: new Date("12/22/2013") },
-            //        { value: 7, date: new Date("05/08/2014") },
-            //        { value: 6, date: new Date("08/15/2014") },
-            //        { value: 5, date: new Date("09/01/2014") },
-            //        { value: 4, date: new Date("10/08/2014") }
-            //    ];
+            //var yearapi = config.remoteApiName + 'analytic/GetYearOverYearData/1/1/2013/2014/0';
 
-            //var yearOverYearSeries = [{
-            //        field: "value",
-            //        name: "Event",
-            //        categoryField: "date"
-            //    }
-             //    ];
-
-            var yearapi = config.remoteApiName + 'analytic/GetYearOverYearData/1/1/2013/2014';//  + vm.ownerId; + "/" +
+            var yearapi = config.remoteApiName + 'analytic/GetYearOverYearData/' + vm.ownerId + '/' + vm.chart.eventure  + '/' + vm.chart.startYear  + '/' + vm.chart.endYear  + '/' + vm.chart.type;
 
             vm.yearOverYear = {
                 theme: "material",
