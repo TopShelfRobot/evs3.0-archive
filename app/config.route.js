@@ -327,7 +327,7 @@
                     templateUrl: 'app/dashboard/setup/setbundle.html'
                 }
             }, {
-                url: '/yearsummary/',  //Move this
+                url: '/yearsummary/:eventureId',  //Move this
                 config: {
                     title: 'Year Summary',
                     templateUrl: 'app/admin/yearsummary.html'
