@@ -52,6 +52,9 @@ build/
 [Tt]est[Rr]esult*/
 [Bb]uild[Ll]og.*
 
+bin/
+web.config
+
 *_i.c
 *_p.c
 *.ilk
