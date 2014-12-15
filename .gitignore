@@ -54,6 +54,9 @@ build/
 
 bin/
 web.config
+packages/
+.nuget/
+*.dgml
 
 *_i.c
 *_p.c
