@@ -11,13 +11,14 @@
 
         vm.title = 'app';
 
+        vm.eventureId = $routeParams.eventureId;
+
         vm.chart = {
             startYear: 2013,
             endYear: 2014,
+            //eventureId: 1,
             type: 0
         };
-
-        vm.eventureId = $routeParams.eventureId;
 
         vm.eventures = [];
 
@@ -53,30 +54,46 @@
         }
 
         vm.generateChart = function () {
-
+                    
             var chart = vm.summaryChart;
-
+            
             var dataSource = new kendo.data.DataSource({
                  transport: {
                      read: {
                          url: function () {
-                             return config.remoteApiName + 'analytic/GetYearOverYearData/' + vm.ownerId + '/' + vm.chart.eventure  + '/' + vm.chart.startYear  + '/' + vm.chart.endYear  + '/' + vm.chart.type;
+                             return config.remoteApiName + 'analytic/GetYearOverYearData/' + vm.ownerId + '/' + vm.eventureId  + '/' + vm.chart.startYear  + '/' + vm.chart.endYear  + '/' + vm.chart.type;
                          },
                          dataType: "json"
                      }
+                 },
+                 group: {
+                     field: "year"
+                 },
+                 sort: {
+                     field: "month",
+                     dir: "asc"
+                 },
+                 schema: {
+                     model: {
+                         fields: {
+                             month: {
+                                 type: "date"
+                             }
+                         }
+                     }
                  }
-            });
-
+               });
+            
             chart.setDataSource(dataSource);
-
-            chart.refresh();
+           
+            //.refresh();
         };
 
          function Chart() {
 
             //var yearapi = config.remoteApiName + 'analytic/GetYearOverYearData/1/1/2013/2014/0';
 
-            var yearapi = config.remoteApiName + 'analytic/GetYearOverYearData/' + vm.ownerId + '/' + vm.chart.eventure  + '/' + vm.chart.startYear  + '/' + vm.chart.endYear  + '/' + vm.chart.type;
+             var yearapi = config.remoteApiName + 'analytic/GetYearOverYearData/' + vm.ownerId + '/' + vm.eventureId + '/' + vm.chart.startYear + '/' + vm.chart.endYear + '/' + vm.chart.type;
 
             vm.yearOverYear = {
                 theme: "material",
