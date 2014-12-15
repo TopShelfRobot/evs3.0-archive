@@ -1,9 +1,9 @@
 (function () {
     'use strict';
     var controllerId = 'enterpriselaunchpad';
-    angular.module('app').controller(controllerId, ['common', 'datacontext', 'config', 'ExcelService', enterpriselaunchpad]);
+    angular.module('app').controller(controllerId, ['common', 'datacontext', 'config', enterpriselaunchpad]);
 
-    function enterpriselaunchpad(common, datacontext, config, excel) {
+    function enterpriselaunchpad(common, datacontext, config) {
         var getLogFn = common.logger.getLogFn;
         var log = getLogFn(controllerId);
 
@@ -11,6 +11,7 @@
         vm.title = 'app';
         vm.EventureGridOptions = {};
         vm.ownerId = 1;
+        vm.treeData = [];
         vm.eventures = [];
 
         activate();
@@ -23,13 +24,24 @@
                 });
         }
 
+
         function getEvents() {
             return datacontext.eventure.getEventuresGroupedByYearByOwnerId(vm.ownerId)
-              .then(function (data) {
-                  vm.eventures = data;
-                  return vm.eventures;
-              });
+                .then(function (data) {
+                    vm.eventures = data;
+
+                    vm.treeviewOptions = {
+                        dataSource: {
+                            data: data
+                        },
+                        template: kendo.template($('#treeview-template').html())
+                    };
+
+                    return vm.eventures;
+                });
         }
+
+
 
         function Overview() {
             var overviewapi = config.remoteApiName +'widget/GetOwnerGraph/' + vm.ownerId;
@@ -83,10 +95,6 @@
 
         vm.overview = function() {
             vm.overviewChart.redraw();
-        };
-
-        vm.treeviewOptions = {
-            template: kendo.template($("#treeview-template").html())
         };
 
         function NotificationGrid() {
