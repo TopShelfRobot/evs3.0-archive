@@ -14,31 +14,47 @@
   <br>
   <form class="form-horizontal">
     <div class="row">
-        <div class="col-sm-4">
+        <div class="col-sm-3">
             <div class="form-group">
-                <label for="year1dropdown" class="col-lg-4 control-label">Year 1:</label>
+                <label for="year1dropdown" class="col-lg-4 control-label">Start Year:</label>
                 <div class="col-lg-8">
-                    <select class="form-control" id="year1dropdown">
+                    <select class="form-control" id="year1dropdown" ng-model="vm.chart.startYear" ng-options="y for y in vm.years">
+                        <option value="">Please Select</option>
                     </select>
                 </div>
             </div>
             <!-- /field -->
         </div>
-        <div class="col-sm-4">
+        <div class="col-sm-3">
             <div class="form-group">
-                <label for="year2dropdown" class="col-lg-4 control-label">Year 2:</label>
+                <label for="year2dropdown" class="col-lg-4 control-label">End Year:</label>
                 <div class="col-lg-8">
-                    <select class="form-control" id="year2dropdown">
+                    <select class="form-control" id="year2dropdown" ng-model="vm.chart.endYear" ng-options="y for y in vm.years">
+                        <option value="">Please Select</option>
                     </select>
                 </div>
             </div>
             <!-- /field -->
         </div>
-        <div class="col-sm-4">
+        <div class="col-sm-3">
             <div class="form-group">
                 <label for="eventuredropdown" class="col-lg-4 control-label">Event:</label>
                 <div class="col-lg-8">
-                    <select class="form-control" id="eventuredropdown">
+                    <select class="form-control" id="eventuredropdown" ng-model="vm.chart.eventure" ng-options="e.id as e.name for e in vm.eventures">
+                        <option value="">Please Select</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <!-- /field -->
+        <div class="col-sm-3">
+            <div class="form-group">
+                <label for="typedropdown" class="col-lg-4 control-label">Type:</label>
+                <div class="col-lg-8">
+                    <select class="form-control" id="typedropdown" ng-model="vm.chart.type">
+                        <option value="">Please Select</option>
+                        <option value="registrations">Registrations</option>
+                        <option value="revenue">Revenue</option>
                     </select>
                 </div>
             </div>

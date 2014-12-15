@@ -11,18 +11,38 @@
 
         vm.title = 'app';
 
+        vm.chart = {};
 
+        vm.eventures = [];
 
-        vm.ownerId = 1;
+        vm.ownerId = config.owner.ownerId;
 
         activate();
 
         function activate() {
-            var promises = [Chart()];
+            var promises = [getEventures(), Chart()];
             //var promises = [];
             common.activateController(promises, controllerId)
                 .then(function () {
                     //log('Activated Coupon Addon Center View');
+                });
+        }
+
+        var min = vm.min = moment('2000-01-01');
+        var max = vm.max = moment(new Date()); // Defaults to now
+
+        vm.years = [];
+
+        for (var i=max.years(); i>=min.years(); i--) {
+            vm.years.push(i);
+        }
+
+        function getEventures() {
+            return datacontext.eventure.getEventuresByOwnerId(vm.ownerId)
+                .then(function(data) {
+                    //applyFilter();
+                    vm.eventures = data;
+                    return vm.eventures;
                 });
         }
 
