@@ -1,9 +1,9 @@
 (function () {
     'use strict';
     var controllerId = 'yearsummary';
-    angular.module('app').controller(controllerId, ['config', 'common', 'datacontext', yearsummary]);
+    angular.module('app').controller(controllerId, ['$routeParams', 'config', 'common', 'datacontext', yearsummary]);
 
-    function yearsummary(config, common, datacontext) {
+    function yearsummary($routeParams, config, common, datacontext) {
         var getLogFn = common.logger.getLogFn;
         var log = getLogFn(controllerId);
 
@@ -16,6 +16,8 @@
             endYear: 2014,
             type: 0
         };
+
+        vm.eventureId = $routeParams.eventureId;
 
         vm.eventures = [];
 
