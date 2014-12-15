@@ -47,13 +47,16 @@
         }
 
         vm.generateChart = function () {
+
+            var chart = vm.summaryChart;
+
             var dataSource = new kendo.data.DataSource({
                  transport: {
                      read: {
                          url: function () {
                              return config.remoteApiName + 'analytic/GetYearOverYearData/' + vm.ownerId + '/' + vm.chart.eventure  + '/' + vm.chart.startYear  + '/' + vm.chart.endYear  + '/' + vm.chart.type;
                          },
-                         dataType: 'json'
+                         dataType: "json"
                      }
                  }
             });
