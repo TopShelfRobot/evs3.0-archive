@@ -11,7 +11,7 @@
 
         vm.title = 'app';
 
-        vm.eventureId = 1; //$routeParams.eventureId;
+        vm.eventureId = $routeParams.eventureId;
 
         vm.ownerId = 1;
 
@@ -32,20 +32,27 @@
                 });
         }
 
-        //var ageApi = config.remoteApiName + 'analytic/GetAgePieChartByEventureId/1/' + vm.eventureId;
+        vm.chartOptions = {
+            theme: 'material',
+            tooltip: {
+                visible: true,
+                format: '{0}%',
+                template: '#= series.key #: #= value #'
+            }
+        };
 
-        //vm.age= new kendo.data.DataSource({
-        //    transport: {
-        //        read: {
-        //            url: ageApi,
-        //            dataType: 'json'
-        //        }
-        //    }
-        //});
+        var ageApi = config.remoteApiName + 'analytic/GetAgePieChartByEventureId/' + vm.ownerId + '/' + vm.eventureId;
 
-        var genderApi = config.remoteApiName + 'analytic/GetGenderPieChartByEventureId/1/' + vm.eventureId;
+        vm.age= new kendo.data.DataSource({
+            transport: {
+                read: {
+                    url: ageApi,
+                    dataType: 'json'
+                }
+            }
+        });
 
-
+        var genderApi = config.remoteApiName + 'analytic/GetGenderPieChartByEventureId/' + vm.ownerId + '/' + vm.eventureId;
 
         vm.gender= new kendo.data.DataSource({
             transport: {
@@ -56,30 +63,27 @@
             }
         });
 
-        //var zipApi = config.remoteApiName + 'analytic/GetZipCodeBarChartByEventureId/1/' + vm.eventureId;
+        var zipApi = config.remoteApiName + 'analytic/GetZipCodeBarChartByEventureId/' + vm.ownerId + '/' + vm.eventureId;
 
-        //vm.zip = new kendo.data.DataSource({
-        //    transport: {
-        //        read: {
-        //            url: zipApi,
-        //            dataType: "json"
-        //        }
-        //    }
-        //});
+        vm.zip = new kendo.data.DataSource({
+            transport: {
+                read: {
+                    url: zipApi,
+                    dataType: "json"
+                }
+            }
+        });
 
+        var stateApi = config.remoteApiName + 'analytic/GetStateColumnChartByEventureId/' + vm.ownerId + '/' + vm.eventureId;
 
-
-
-        //var stateApi = config.remoteApiName + 'analytic/GetStateColumnChartByEventureId/1/' + vm.eventureId;
-
-        //vm.state = new kendo.data.DataSource({
-        //    transport: {
-        //        read: {
-        //            url: stateApi,
-        //            dataType: "json"
-        //        }
-        //    }
-        //});
+        vm.state = new kendo.data.DataSource({
+            transport: {
+                read: {
+                    url: stateApi,
+                    dataType: "json"
+                }
+            }
+        });
 
     }
 })();
