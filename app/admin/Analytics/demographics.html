@@ -11,8 +11,8 @@
                  k-title="{ text: 'Gender', position: 'top' }"
                  k-series-defaults="{ type: 'pie' }"
                  k-series="[{
-                                field: 'share',
-                                categoryField: 'ageRange',
+                                field: 'value',
+                                categoryField: 'key',
                                 padding: 0
                               }]"
                  k-data-source="vm.gender"
@@ -24,8 +24,8 @@
                  k-title="{ text: 'Age', position: 'top' }"
                  k-series-defaults="{ type: 'pie' }"
                  k-series="[{
-                                field: 'share',
-                                categoryField: 'gender',
+                                field: 'value',
+                                categoryField: 'key',
                                 padding: 0
                               }]"
                  k-data-source="vm.age"
@@ -40,7 +40,7 @@
                  k-legend="{ position: 'bottom' }"
                  k-series-defaults="{ type: 'bar' }"
                  k-series="[
-                                 { field: 'zipCode' }
+                                 { field: 'value' }
                              ]"
                  k-data-source="vm.zip"
                  k-options="vm.chartOptions"></div>
@@ -51,7 +51,7 @@
                  k-legend="{ position: 'bottom' }"
                  k-series-defaults="{ type: 'column' }"
                  k-series="[
-                                 { field: 'state' }
+                                 { field: 'value' }
                              ]"
                  k-data-source="vm.state"
                  k-options="vm.chartOptions"></div>
