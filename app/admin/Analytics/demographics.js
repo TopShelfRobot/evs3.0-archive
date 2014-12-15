@@ -32,18 +32,18 @@
                 });
         }
 
-        var ageApi = config.remoteApiName + 'analytic/GetAgePieChartByEventureId/' + vm.eventureId;
+        //var ageApi = config.remoteApiName + 'analytic/GetAgePieChartByEventureId/1/' + vm.eventureId;
 
-        vm.age= new kendo.data.DataSource({
-            transport: {
-                read: {
-                    url: ageApi,
-                    dataType: 'json'
-                }
-            }
-        });
+        //vm.age= new kendo.data.DataSource({
+        //    transport: {
+        //        read: {
+        //            url: ageApi,
+        //            dataType: 'json'
+        //        }
+        //    }
+        //});
 
-        var genderApi = config.remoteApiName + 'analytic/GetGenderPieChartByEventureId/' + vm.eventureId;
+        var genderApi = config.remoteApiName + 'analytic/GetGenderPieChartByEventureId/1/' + vm.eventureId;
 
 
 
@@ -56,30 +56,30 @@
             }
         });
 
-        var zipApi = config.remoteApiName + 'analytic/GetZipCodeBarChartByEventureId/' + vm.eventureId;
+        //var zipApi = config.remoteApiName + 'analytic/GetZipCodeBarChartByEventureId/1/' + vm.eventureId;
 
-        vm.zip = new kendo.data.DataSource({
-            transport: {
-                read: {
-                    url: zipApi,
-                    dataType: "json"
-                }
-            }
-        });
-
-
+        //vm.zip = new kendo.data.DataSource({
+        //    transport: {
+        //        read: {
+        //            url: zipApi,
+        //            dataType: "json"
+        //        }
+        //    }
+        //});
 
 
-        var stateApi = config.remoteApiName + 'analytic/GetStateColumnChartByEventureId/' + vm.eventureId;
 
-        vm.state = new kendo.data.DataSource({
-            transport: {
-                read: {
-                    url: stateApi,
-                    dataType: "json"
-                }
-            }
-        });
+
+        //var stateApi = config.remoteApiName + 'analytic/GetStateColumnChartByEventureId/1/' + vm.eventureId;
+
+        //vm.state = new kendo.data.DataSource({
+        //    transport: {
+        //        read: {
+        //            url: stateApi,
+        //            dataType: "json"
+        //        }
+        //    }
+        //});
 
     }
 })();

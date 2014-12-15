@@ -11,7 +11,11 @@
 
         vm.title = 'app';
 
-        vm.chart = {};
+        vm.chart = {
+            startYear: 2013,
+            endYear: 2014,
+            type: 0
+        };
 
         vm.eventures = [];
 

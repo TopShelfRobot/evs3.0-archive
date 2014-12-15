@@ -42,6 +42,8 @@
   <ItemGroup>
     <Content Include="app\admin\admin.html" />
     <Content Include="app\admin\admin.js" />
+    <Content Include="app\admin\Analytics\demographics.html" />
+    <Content Include="app\admin\Analytics\demographics.js" />
     <Content Include="app\admin\dashboard.html" />
     <Content Include="app\admin\dashboard.js" />
     <Content Include="app\admin\setowner.html" />
@@ -69,12 +71,15 @@
     <Content Include="app\dashboard\discounts.html" />
     <Content Include="app\dashboard\discounts.js" />
     <Content Include="app\dashboard\elistcenter.js" />
+    <Content Include="app\dashboard\email.html" />
+    <Content Include="app\dashboard\email.js" />
     <Content Include="app\dashboard\enterpriseeventure.js" />
     <Content Include="app\dashboard\enterpriselaunchpad.js" />
     <Content Include="app\dashboard\eventurecenter.js" />
     <Content Include="app\dashboard\eventuredetail.js" />
     <Content Include="app\dashboard\loginController.js" />
     <Content Include="app\dashboard\manreg.html" />
+    <Content Include="app\dashboard\manreg.js" />
     <Content Include="app\dashboard\partcenter.js" />
     <Content Include="app\dashboard\resourcecenter.js" />
     <Content Include="app\dashboard\resourcedetail.js" />
