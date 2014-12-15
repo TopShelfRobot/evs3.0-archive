@@ -356,7 +356,62 @@
                     title: 'Demographics',
                     templateUrl: 'app/admin/analytics/demographics.html'
                 }
+            }, {
+                url: '/marketing/:eventureId',
+                config: {
+                    title: 'Marketing',
+                    templateUrl: 'app/admin/analytics/marketing.html'
+                }
+            }, {
+                url: '/coupons/:eventureId',
+                config: {
+                    title: 'Coupons',
+                    templateUrl: 'app/admin/analytics/coupons.html'
+                }
+            }, {
+                url: '/financials/:eventureId',
+                config: {
+                    title: 'Financials',
+                    templateUrl: 'app/admin/analytics/financials.html'
+                }
+            }, {
+                url: '/volunteers/:eventureId',
+                config: {
+                    title: 'Volunteers',
+                    templateUrl: 'app/admin/analytics/volunteers.html'
+                }
+            }, {
+                url: '/charities/:eventureId',
+                config: {
+                    title: 'Charities',
+                    templateUrl: 'app/admin/analytics/charities.html'
+                }
+            }, {
+                url: '/teams/:eventureId',
+                config: {
+                    title: 'Teams',
+                    templateUrl: 'app/admin/analytics/teams.html'
+                }
+            }, {
+                url: '/deferrals/:eventureId',
+                config: {
+                    title: 'Deferrals',
+                    templateUrl: 'app/admin/analytics/deferrals.html'
+                }
+            }, {
+                url: '/transfers/:eventureId',
+                config: {
+                    title: 'Transfers',
+                    templateUrl: 'app/admin/analytics/transfers.html'
+                }
+            }, {
+                url: '/manregs/:eventureId',
+                config: {
+                    title: 'Manual Registrations',
+                    templateUrl: 'app/admin/analytics/manreg.html'
+                }
             }
+
         ];
     }
 })();
