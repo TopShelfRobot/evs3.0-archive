@@ -53,7 +53,7 @@ build/
 [Bb]uild[Ll]og.*
 
 bin/
-web.config
+Web.config
 packages/
 .nuget/
 *.dgml
