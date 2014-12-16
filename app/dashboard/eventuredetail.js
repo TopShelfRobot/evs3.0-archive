@@ -187,19 +187,19 @@
 						filterable: false
 					},
 					{
-						field: "Cost",
+						field: "cost",
 						title: "Cost",
 						width: 140,
 						filterable: false
 					},
 					{
-						field: "CostType",
+						field: "costType",
 						title: "Type",
 						width: 140,
 						filterable: false
 					},
 					{
-						field: "PerRegNumber",
+						field: "perRegNumber",
 						title: "Formula",
 						width: 140,
 						filterable: false
@@ -271,7 +271,7 @@
 						title: "",
 						width: "100px",
 						filterable: false,
-						template: '<a class="btn btn-default btn-block" ng-href="\\#/seteventplan/#=Id#"><em class="glyphicon glyphicon-edit"></em>&nbsp;Edit</a>'    //\\\#seteventplan//#=Id#
+						template: '<a class="btn btn-default btn-block" ng-href="\\#/seteventplan/#=id#"><em class="glyphicon glyphicon-edit"></em>&nbsp;Edit</a>'    //\\\#seteventplan//#=Id#
 			}]
 		  };
 		}
