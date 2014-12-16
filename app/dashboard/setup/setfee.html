@@ -61,7 +61,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr ng-repeat="fee in vm.fees">
+                <tr ng-repeat="(key, fee) in vm.fees">
                   <td>
                     <p class="input-group">
                       <span class="input-group-addon">$</span>
@@ -70,9 +70,15 @@
                   </td>
                   <td>
                     <p class="input-group">
-                      <input type="text" name="DateBegin" class="form-control" datepicker-popup="{{vm.format}}" ng-model="fee.dateBegin" is-open="vm.opened" datepicker-options="vm.dateOptions" date-disabled="disabled(date, mode)" close-text="Close" />
+                      <input type="text" name="DateBegin" class="form-control" 
+					  	datepicker-popup="{{vm.format}}" 
+						ng-model="fee.dateBegin" 
+						is-open="vm.opened[key]" 
+						datepicker-options="vm.dateOptions" 
+						date-disabled="disabled(date, mode)" 
+						close-text="Close" />
                       <span class="input-group-btn">
-                        <button class="btn btn-default" ng-click="vm.open($event, 'opened')">
+                        <button class="btn btn-default" ng-click="vm.open($event, key)">
                           <i class="glyphicon glyphicon-calendar"></i>
                         </button>
                       </span>
