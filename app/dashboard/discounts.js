@@ -13,6 +13,8 @@
 
         vm.couponGridOptions = {};
 
+        vm.ownerId = config.owner.ownerId;
+
         vm.owner = {};
 
         activate();
@@ -122,7 +124,7 @@
         };
 
         function getOwner() {
-            return datacontext.participant.getOwnerById(config.owner.ownerId)
+            return datacontext.participant.getOwnerById(vm.ownerId)
                 .then(function(data) {
                    vm.owner = data;
                    return vm.owner;
