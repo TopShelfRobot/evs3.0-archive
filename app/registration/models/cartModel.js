@@ -151,6 +151,64 @@
                 }
                 cart.surcharges.push(new surcharge('Online Service Fee', feeAmount.toFixed(2), 'cartRule', 0, 0, 0));
             }
+			
+			if(cart.regSettings.IsMultiParticipantDiscountCartRule){
+				var items = {}; // hash table with eventureListId and hash of count and cost
+				var reg;
+				for(var i = 0; i < cart.registrations.length; i++){
+					reg = cart.registrations[i];
+					if(typeof items[reg.eventureListId] === "undefined"){
+						items[reg.eventureListId] = {cnt: 0, cost: 0};
+					}
+					items[reg.eventureListId].cnt++;
+					items[reg.eventureListId].cost += reg.fee;
+				}
+				for(var key in items){
+					if(items[key].length > 1){
+						// MultiParticipantDiscountAmount: 0,
+						// MultiParticipantDiscountAmountType: 0,
+						switch(cart.regSettings.MultiParticipantDiscountAmountType){
+						case "Percentage":  // precentage
+							var discount = items[key].cost * cart.regSettings.MultiParticipantDiscountAmount;
+							cart.surcharges.push(new surcharge("percentage based multi-participant discount", discount.toFixed(2), 'cartRule', key, 0, 0));
+							break;
+						case "Dollars":  // flat rate
+							var discount = cart.regSettings.MultiParticipantDiscountAmount;
+							cart.surcharges.push(new surcharge("flat fee based multi-participant discount", discount.toFixed(2), 'cartRule', key, 0, 0));
+							break;
+						}
+					}
+				}
+			}
+			
+			if(cart.regSettings.IsMultiRegistrationDiscountCartRule){
+				var items = {}; // hash table with participantId and hash of count and cost.
+				var reg;
+				for(var i = 0; i < cart.registrations.length; i++){
+					reg = cart.registrations[i];
+					if(typeof items[reg.partId] === "undefined"){
+						items[reg.partId] = {cnt: 0, cost: 0};
+					}
+					items[reg.partId].cnt++;
+					items[reg.partId].cost += reg.fee;
+				}
+				for(var key in items){
+					if(items[key].length > 1){
+						// MultiRegistrationDiscountAmount: 0,
+			            // MultiRegistrationDiscountAmountType: 0,
+						switch(cart.regSettings.MultiRegistrationDiscountAmountType){
+						case "Percentage":  // precentage
+							var discount = items[key].cost * cart.regSettings.MultiRegistrationDiscountAmount;
+							cart.surcharges.push(new surcharge("percentage based multi-registration discount", discount.toFixed(2), 'cartRule', key, 0, 0));
+							break;
+						case "Dollars":  // flat rate
+							var discount = cart.regSettings.MultiRegistrationDiscountAmount;
+							cart.surcharges.push(new surcharge("flat fee based multi-registration discount", discount.toFixed(2), 'cartRule', key, 0, 0));
+							break;
+						}
+					}
+				}
+			}
         };
 
         cart.removeCoupons = function () {
