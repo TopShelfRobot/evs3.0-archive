@@ -22,7 +22,8 @@
 		'angularFileUpload',  // file upload functions
 		'angulartics',  //analytics
 		'angulartics.google.analytics', //analytics
-		'evReg'
+		'evReg',
+		"ngRoleAuth"
 	]);
 
 	app.config(['$httpProvider', function ($httpProvider) {
