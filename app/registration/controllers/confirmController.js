@@ -91,7 +91,7 @@
 					$.blockUI({ message: 'Processing order...' });
 					order.stripeToken = res.id;
 					//$http.post(config.apiPath + "/api/Payment/Post", order)
-					$http.post(config.apiPath + "/api/order/Post", order)   //mjb
+					$http.post(config.apiPath + "api/order/Post", order)   //mjb
 						.success(function (result) {
 							console.log("result: " + result);
 							//mjb $location.path("/orderreceipt/" + result);

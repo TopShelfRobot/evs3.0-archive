@@ -16,10 +16,8 @@
 
         $scope.authentication = authService.authentication;
 
-        console.log($scope.authentication.isAuth);
-        console.log($scope.authentication.userName);
-
-        
+        //console.log($scope.authentication.isAuth);
+        //console.log($scope.authentication.userName);
 
         //$scope.isAuth = authService._authentication.isAuth;
 
@@ -35,7 +33,6 @@
             );
         }
         common.activateController(promises, controllerId);
-
     }
 
     angular.module("evReg").controller(controllerId, ["$scope", "$location", "config", "datacontext", "CartModel", "authService", "common", controller]);

@@ -20,11 +20,11 @@
             var order = {
                 orderAmount: Number(value),
                 orderHouseId: model.participantId,
-                ownerId: config.owner.ownerId,
+                ownerId: 1,      //config.owner.ownerId,  //mjb
                 regs: [{
                     regType: "teamreg",
                     eventureListId: model.eventureListId,
-                    houseId: config.owner.houseId,
+                    houseId: model.participantId,        // config.owner.houseId,   this will be ok once cart are consolidated
                     partId: model.participantId,
                     fee: Number(model.fee), //total cost of registration
                     quantity: 1,
