@@ -3,11 +3,13 @@
 
     var controllerId = 'topnav';
     angular.module('app').controller(controllerId,
-        ['$route', '$location', 'config', 'routes', 'authService', topnav]);
+        ['$route', '$location', 'config', 'routes', 'authService', 'CartModel', topnav]);
 
-    function topnav($route, $location, config, routes, authService) {
+    function topnav($route, $location, config, routes, authService, cart) {
 
         var vm = this;
+
+        vm.cart = cart;
 
         vm.logOut = function () {
             authService.logOut();

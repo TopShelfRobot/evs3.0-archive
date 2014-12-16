@@ -28,6 +28,14 @@
             addSingleFeeType: 'percent',
             addSingleFeeForAllRegsFlat: 0,
 
+           IsMultiParticipantDiscountCartRule: false,
+           IsMultiRegistrationDiscountCartRule: false,
+
+           MultiParticipantDiscountAmount: 0,
+           MultiParticipantDiscountAmountType: 0,
+           MultiRegistrationDiscountAmount: 0,
+           MultiRegistrationDiscountAmountType: 0,
+
             eventureName: 'Event',
             listName: 'List',
             groupName: 'Group',
@@ -72,9 +80,15 @@
             cart.regSettings.stripeCheckoutButtonText = data.stripeCheckoutButtonText;
             cart.regSettings.stripeOrderDescription = data.stripeOrderDescription;
             //cart.regSettings.stripeLogoPath = data.stripeLogoPath;
-            
-                  
 
+            cart.regSettings.isMultiParticipantDiscountCartRule = data.IsMultiParticipantDiscountCartRule;
+            cart.regSettings.isMultiRegistrationDiscountCartRule = data.IsMultiRegistrationDiscountCartRule;
+
+            cart.regSettings.multiParticipantDiscountAmount = data.multiParticipantDiscountAmount;
+            cart.regSettings.multiParticipantDiscountAmountType = data.multiParticipantDiscountAmountType;
+            cart.regSettings.multiRegistrationDiscountAmount = data.multiRegistrationDiscountAmount;
+            cart.regSettings.multiRegistrationDiscountAmountType = data.multiRegistrationDiscountAmountType;
+            
             cart.regSettings.name = data.name;
             cart.regSettings.stripePublishableKey = data.stripePublishableKey
         };

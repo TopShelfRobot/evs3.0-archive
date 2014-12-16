@@ -8,7 +8,7 @@
     function controller($scope, $location, $routeParams, authService, datacontext, common, cart, ngAuthSettings) {
 
         $scope.loginData = {
-            userName: "boone.mike@gmail.com",
+            userName: "",
             password: "",
             useRefreshTokens: false
         };

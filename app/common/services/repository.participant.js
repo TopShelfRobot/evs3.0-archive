@@ -171,7 +171,8 @@
 			var self = this;
 			var predicate = breeze.Predicate;
 			var p1 = new predicate("email", breeze.FilterQueryOp.Contains, str);
-			var p2 = new predicate("ownerId", "==", config.owner.ownerId);
+			//var p2 = new predicate("ownerId", "==", config.owner.ownerId);
+			var p2 = new predicate("ownerId", "==", cart.ownerId);
 
 			var query = entityQuery.from('Participants')
 				.where(p1.and(p2));
@@ -193,7 +194,8 @@
 			if (check.length > 1) {
 				pName = pFirstName.and(new predicate("lastName", breeze.FilterQueryOp.Contains, check[1]));
 			}
-			var pOwner = new predicate("ownerId", "==", config.owner.ownerId);
+			//var pOwner = new predicate("ownerId", "==", config.owner.ownerId);
+			var pOwner = new predicate("ownerId", "==", cart.ownerId);
 
 			var query = entityQuery.from('Participants')
 				.where(pOwner.and(pName));

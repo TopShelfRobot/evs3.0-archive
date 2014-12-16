@@ -16,7 +16,7 @@
                 orderAmount: Number(userPaying),
                 teamId: model.teamId,
                 teamMemberId: model.teamMemberId,
-                ownerId: config.owner.ownerId,
+                ownerId: 1,         // config.owner.ownerId,  
                 participant: part    
             };
             return order;
