@@ -28,13 +28,13 @@
             addSingleFeeType: 'percent',
             addSingleFeeForAllRegsFlat: 0,
 
-           IsMultiParticipantDiscountCartRule: false,
-           IsMultiRegistrationDiscountCartRule: false,
+            IsMultiParticipantDiscountCartRule: false,
+            IsMultiRegistrationDiscountCartRule: false,
 
-           MultiParticipantDiscountAmount: 0,
-           MultiParticipantDiscountAmountType: 0,
-           MultiRegistrationDiscountAmount: 0,
-           MultiRegistrationDiscountAmountType: 0,
+            MultiParticipantDiscountAmount: 0,
+            MultiParticipantDiscountAmountType: 0,
+            MultiRegistrationDiscountAmount: 0,
+            MultiRegistrationDiscountAmountType: 0,
 
             eventureName: 'Event',
             listName: 'List',
@@ -46,7 +46,6 @@
             //stripeLogoPath: '',
             stripeCheckoutButtonText: '',
             stripeOrderDescription: ''
-
         }
 
         cart.order = function () {
@@ -63,7 +62,7 @@
         };
 
         cart.configureSettings = function (data) {
-           
+
             cart.regSettings.isDuplicateOrderAllowed = data.isDuplicateOrderAllowed;
             cart.regSettings.isAddSingleFeeForAllRegs = data.isAddSingleFeeForAllRegs;
             cart.regSettings.addSingleFeeForAllRegsPercent = data.addSingleFeeForAllRegsPercent;
@@ -88,7 +87,7 @@
             cart.regSettings.multiParticipantDiscountAmountType = data.multiParticipantDiscountAmountType;
             cart.regSettings.multiRegistrationDiscountAmount = data.multiRegistrationDiscountAmount;
             cart.regSettings.multiRegistrationDiscountAmountType = data.multiRegistrationDiscountAmountType;
-            
+
             cart.regSettings.name = data.name;
             cart.regSettings.stripePublishableKey = data.stripePublishableKey
         };
@@ -112,7 +111,7 @@
         };
 
         cart.processCartRules = function () {
-           //clear all rules
+            //clear all rules
             var temp = [];
             for (var j = 0; j < cart.surcharges.length; j++) {
                 var currCharge = cart.surcharges[j];
