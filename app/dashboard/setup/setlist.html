@@ -88,7 +88,7 @@
           <label for="RegCloseDate" class="col-lg-6 control-label">Registration Closes:</label>
           <div class="col-lg-6">
             <p class="input-group">
-              <input type="text"name="RegCloseDate"  class="form-control" datepicker-popup="{{vm.format}}" ng-model="vm.list.dateEndReg" is-open="vm.regCloseOpen" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" close-text="Close" />
+              <input type="text"name="RegCloseDate"  class="form-control" datepicker-popup="{{vm.format}}" ng-model="vm.list.dateEndReg" is-open="vm.regCloseOpen" datepicker-options="vm.dateOptions" date-disabled="disabled(date, mode)" close-text="Close" />
               <span class="input-group-btn">
               <button class="btn btn-default" ng-click="vm.open($event, 'regCloseOpen')"><i class="glyphicon glyphicon-calendar"></i></button>
               </span> </p>
