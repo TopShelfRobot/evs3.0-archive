@@ -28,14 +28,17 @@
 			  <h3 class="text-center">Registration Trends</h3>
 			  <ul class="list-group">
 				<li class="list-group-item">
-				  <h4>Last 30 Days: <span>0 - $0</span> </h4>
+				  <h4>Last 30 Days: <span>{{vm.trend.last30Count}} - {{vm.trend.last30Amount | currency}}</span> </h4>
 				</li>
 				<li class="list-group-item">
-				  <h4>Last 7 Days: <span>0 - $0</span> </h4>
+				  <h4>Last 7 Days: <span>{{vm.trend.last7Count}} - {{vm.trend.last7Amount | currency}}</span> </h4>
 				</li>
 				<li class="list-group-item">
-				  <h4>Last 24 Hours: <span>1 - $35</span> </h4>
+				  <h4>Last 24 Hours: <span>{{vm.trend.last1Count}} - {{vm.trend.last1Amount | currency}}</span> </h4>
 				</li>
+				  <li class="list-group-item">
+					  <h4>Total: <span>{{vm.trend.totalCount}} - {{vm.trend.totalAmount | currency}}</span> </h4>
+				  </li>
 			  </ul>
 			  <h3 class="text-center">Capacity: <small>{{ vm.capacity.regs }}&nbsp;/&nbsp;{{ vm.capacity.capacity }}</small></h3>
 			  <br>
