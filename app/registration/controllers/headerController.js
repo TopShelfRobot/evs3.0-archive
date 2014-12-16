@@ -4,7 +4,7 @@
 
     function controller($scope, $location, config, datacontext, cart, authService, common) {
 
-        //$scope.cart = cart;
+        $scope.cart = cart;
 
         $scope.eventureName = cart.regSettings.eventureName;
         $scope.listName = cart.regSettings.listName;
