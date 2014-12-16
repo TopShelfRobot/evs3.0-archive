@@ -5,7 +5,7 @@
 
         var cart = {};
         cart.houseId = 0;
-        cart.participantId = 0;
+        //cart.participantId = 0;
         cart.ownerId = 1;
         cart.waiverSigned = false;
         cart.teamName = '';
@@ -13,6 +13,8 @@
         cart.teamId = '';
         cart.currentlyPaid = 0;
         cart.allowZeroPayment = false;
+
+        cart.navUrl = '';
 
         cart.teamMemberId = null;
         cart.registrations = [];

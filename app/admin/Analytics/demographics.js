@@ -37,7 +37,7 @@
             tooltip: {
                 visible: true,
                 format: '{0}%',
-                template: '#= series.key #: #= value #'
+                template: '#= value #'
             }
         };
 

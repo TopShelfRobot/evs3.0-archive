@@ -59,7 +59,8 @@
                     <h4>{{eventure.displayHeading}}</h4>
                     <span class="event-info"><i class="glyphicon glyphicon-calendar text-muted"></i>&nbsp;{{eventure.dateEventure | date}}</span><br>
                     <span class="event-info"><i class="glyphicon glyphicon-map-marker text-muted"></i>&nbsp;{{eventure.location}}</span><br>
-                    <a class="btn btn-success btn-block" ng-href="#/eventure/{{eventure.id}}/list">Register</a>
+                    <!--<a class="btn btn-success btn-block" ng-href="#/eventure/{{eventure.id}}/list">Register</a>-->
+                      <a class="btn btn-success btn-block" ng-click="NavigateToList(eventure.id)">Register</a>
                   </figcaption>
                 </figure>
             </li>

@@ -29,14 +29,17 @@
 				})
 		);
 
+		//alert(cart.houseId);
+		//alert('cart.houseId');
 		promises.push(
-			datacontext.participant.getParticipantsByHouseId(cart.houseId)
-				.then(function (list) {
-					$scope.selectedParticipant = list[0];
-					$scope.participants = list;
-					$scope.age = dt.age($scope.selectedParticipant.dateBirth);
-					console.log($scope.age);
-				})
+		   datacontext.participant.getParticipantsByHouseId(cart.houseId)
+					.then(function (list) {
+					    //console.log(list)
+						$scope.selectedParticipant = list[0];
+						$scope.participants = list;
+						$scope.age = dt.age($scope.selectedParticipant.dateBirth);
+						//console.log($scope.age);
+					})
 		);
 
 		common.activateController(promises, controllerId);

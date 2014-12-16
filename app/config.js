@@ -8,8 +8,8 @@
 	toastr.options.positionClass = 'toast-bottom-right';
 	
 	var apiPath = "";
-	//apiPath = "http://localhost:49822/";
-	apiPath = "http://dev30.eventuresports.info/";
+	apiPath = "http://localhost:49822/";
+	//apiPath = "http://dev30.eventuresports.info/";
 	
 	var remoteServiceName = apiPath + 'api/dashboard/';
 	var remoteApiName = apiPath + 'api/';
@@ -26,7 +26,8 @@
 
 	var owner = {
 		ownerId: 1,
-		//accessType: "none",
+	    //accessType: "none",
+        authEmail: '',
 		isAdmin: true,
 		mr_houseId: 0
 	};

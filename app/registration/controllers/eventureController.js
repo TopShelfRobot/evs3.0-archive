@@ -16,8 +16,8 @@
 
 		$scope.eventureName = cart.regSettings.eventureName;
 
-		console.log(cart.ownerId);
-		console.log(cart.regSettings.eventureName);
+		//console.log(cart.ownerId);
+		//console.log(cart.regSettings.eventureName);
 
 		var promises = [];
 		promises.push(
@@ -33,6 +33,14 @@
 		}
 
 		common.activateController(promises, controllerId);
+
+		$scope.NavigateToList = function (listId) {
+		    //#/eventure/{{eventure.id}}/list
+		    //alert(listId);
+		    listpath = '/eventure/' + listId + '/list';
+		    cart.navUrl = listpath;
+		    $location.path(listpath);
+		};
 
 		$scope.nextPage = function () {
 			if (all.length >= (currentPage + 1) * viewLength) {

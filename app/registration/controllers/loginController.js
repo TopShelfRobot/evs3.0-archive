@@ -8,7 +8,7 @@
     function controller($scope, $location, $routeParams, authService, datacontext, common, cart, ngAuthSettings) {
 
         $scope.loginData = {
-            userName: "",
+            userName: "boone.mike@gmail.com",
             password: "",
             useRefreshTokens: false
         };
@@ -33,27 +33,37 @@
 
                 $scope.authentication = authService.authentication;
 
-                alert($scope.authentication.userName);
                 datacontext.participant.getParticipantByEmailAddress($scope.authentication.userName, cart.ownerId)
                    .then(function (data) {
-                       if (data.typeof == null) {
+                       //console.log(data);
+                       //alert('why so diff');
+                       //alert(data.id);
+                       //alert(data.id.typeof);
+                       if (data == null) {
+                           //alert('not here i exist');
                            //get participant data
                            $location.path('/part');
                        }
                        else {
-                           console.log(data);
+                           //console.log(data);
+                           //alert(data.id);
                            //write house id to cart
+                           
                            if (requestPath === '/dash.html') {
+                               // set login in stuff for dash side
                                $location.path('/eventurecenter');
                            }
                            else {
-                               if (typeof $scope.requestPath === 'undefined') {
-                                   cart.houseId = 
-                                   $location.path('/eventure');
-                               }
-                               else {
-                                   window.location.href = $scope.requestPath;
-                               }
+                               cart.houseId = data.id;
+                               $location.path(cart.navUrl);
+                               //this is wil's trying to pass in path
+                               //if (typeof $scope.requestPath === 'undefined') {
+                               //    cart.houseId = 
+                               //    $location.path('/eventure');
+                               //}
+                               //else {
+                               //    window.location.href = $scope.requestPath;
+                               //}
                            }
                        }
                    });

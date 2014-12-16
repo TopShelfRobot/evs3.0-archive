@@ -17,17 +17,23 @@
         $scope.authentication = authService.authentication;
 
         console.log($scope.authentication.isAuth);
+        console.log($scope.authentication.userName);
+
+        
 
         //$scope.isAuth = authService._authentication.isAuth;
 
         var promises = [];
-        promises.push(
-            datacontext.participant.getOwnerById(cart.ownerId)
-                .then(function(data){
-                    $scope.owner = data;
-                })
-        );
 
+        if ($scope.authentication.isAuth) {
+
+            promises.push(
+                datacontext.participant.getParticipantByEmailAddress($scope.authentication.userName, cart.ownerId)
+                    .then(function (data) {
+                        cart.houseId = data.id;
+                    })
+            );
+        }
         common.activateController(promises, controllerId);
 
     }
