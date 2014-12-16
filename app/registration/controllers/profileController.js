@@ -255,8 +255,11 @@
 					},{
 						field: "email",
 						title: "Email"
-					}
-					]
+					}, {
+						title: "",
+						width: "120px",
+						template:'<a class="btn btn-default btn-block" href="\\\#/editteam/#=id#"><em class="glyphicon glyphicon-edit"></em>&nbsp;Edit</a>'
+					}]
 				};
 			};
 		}
