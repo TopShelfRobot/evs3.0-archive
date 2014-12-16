@@ -19,7 +19,7 @@
 		activate();
 		
 		function activate() {
-		  var promises = [getEventure(), Registrations(), Capacity(), ListingsGrid(), ExpenseGrid(), EventPlanGrid(), ParticipantGrid(), VolunteerGrid()];
+		  var promises = [getEventure(), getEventureTrends(), Registrations(), Capacity(), ListingsGrid(), ExpenseGrid(), EventPlanGrid(), ParticipantGrid(), VolunteerGrid()];
 
 		  common.activateController(promises, controllerId)
 			  .then(function () {
@@ -30,8 +30,17 @@
 		function getEventure() {
 		  return datacontext.eventure.getEventureById(vm.eventureId)
 			.then(function (data) {
-				return vm.eventure = data;
+				  vm.eventure = data;
+				  return vm.eventure;
 			});
+		}
+
+		function getEventureTrends() {
+			return datacontext.analytic.getTrendsByEventId(vm.eventureId)
+				.then(function(data) {
+					vm.trend = data;
+					return vm.trend;
+				});
 		}
 
 		function Registrations() {

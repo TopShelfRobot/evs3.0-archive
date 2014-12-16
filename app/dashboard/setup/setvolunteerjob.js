@@ -13,6 +13,8 @@
 		vm.jobId = $routeParams.jobId;
 		vm.eventureId = $routeParams.eventureId;
 		vm.shifts = [];
+		vm.opened = [];
+
 		activate();
 
 		function activate() {
@@ -42,25 +44,25 @@
 		  if(vm.jobId > 0) {
 			return datacontext.volunteer.getVolunteerShiftsByVolunteerJobId(vm.jobId)
 			  .then(function(data) {
-				return vm.shifts = data;
+					for(var i = 0; i < data.length; i++){
+						vm.opened.push(false);
+					}
+
+					return vm.shifts = data;
 				});
 		  }
 		}
 	  
 		vm.addNewShift = function () {
 		   vm.shifts.push(datacontext.volunteer.createVolunteerShift(vm.jobId));
-		};
-	  
-		vm.today = function () {
-		   vm.shifts.dateShift = new Date();
+
+			vm.opened.push(true);
 		};
 
-		vm.today();
-
-		vm.open = function($event, open) {
+		vm.open = function($event, key) {
 			$event.preventDefault();
 			$event.stopPropagation();
-			vm[open] = true;
+			vm.opened[key] = true;
 		};
 
 		vm.dateOptions = {
@@ -84,6 +86,7 @@
 		};
 
 		vm.saveAndNav = function() {
+
 			return datacontext.save()
 				.then(complete);
 
