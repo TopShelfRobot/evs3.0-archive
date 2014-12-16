@@ -11,6 +11,8 @@
                 data-ng-repeat="r in vm.navRoutes">
                 <a href="#{{r.url}}" data-ng-bind-html="r.config.settings.content"></a>
             </li>
+            <li><a href="#/login"><strong ng-hide="vm.authentication.isAuth">Sign In</strong></a></li>
+            <li><a ng-click="vm.logOut()"><strong ng-hide="!vm.authentication.isAuth">Sign Out</strong></a></li>
         </ul>
     </nav>
 </div>

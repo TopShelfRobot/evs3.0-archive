@@ -27,11 +27,17 @@
 
         function ParticipantGrid() {
 
-          var partapi = config.remoteApiName + 'Participants/GetParticipantsByOwnerId/' + vm.ownerId;
+            var partapi = config.remoteApiName + 'widget/GetParticipantsByOwnerId/' + vm.ownerId;
+            //var partapi = config.remoteApiName + 'widget/parts/' + vm.ownerId;
 
           vm.participantGridOptions = {
-            toolbar: '<a download="detail.xlsx" class="k-button" ng-click="vm.excel(vm.partgrid)"><em class="glyphicon glyphicon-save"></em>&nbsp;Export</a>',
-            dataSource: {
+            //toolbar: '<a download="detail.xlsx" class="k-button" ng-click="vm.excel(vm.partgrid)"><em class="glyphicon glyphicon-save"></em>&nbsp;Export</a>',
+              toolbar: ['excel'],
+              excel: {
+                  fileName: 'Participants.xlsx',
+                  filterable: true
+              },
+              dataSource: {
                 type: "json",
                 transport: {
                     read: partapi
@@ -42,33 +48,40 @@
             },
             sortable: true,
             pageable: true,
-            filterable: true,
+            filterable: {
+                mode: "row"
+            },
             detailTemplate: kendo.template($("#template").html()),
             columns: [{
-                field: "FirstName",
+                field: "firstName",
                 title: "First Name",
                 width: "200px"
             },{
-                field: "LastName",
+                field: "lastName",
                 title: "Last Name",
                 width: "200px"
             },{
-                field: "Email",
+                field: "email",
                 title: "Email Address",
                 width: "220px"
             },{
                 title: "",
                 width: "120px",
-                template:'<a class="btn btn-default btn-block" href="\\\#user-profile/#=Id#"><em class="glyphicon glyphicon-edit"></em>&nbsp;Edit</a>'
+                template:'<a class="btn btn-default btn-block" href="\\\#user-profile/#=id#"><em class="glyphicon glyphicon-edit"></em>&nbsp;Edit</a>'
             }]
           };
 
           vm.detailGridOptions = function(e) {
 
-            var regapi = config.remoteApiName + 'Registrations/GetRegistrationsByPartId/' + e.Id;
+            var regapi = config.remoteApiName + 'widget/GetRegistrationsByPartId/' + e.id;
 
             return {
-                toolbar: '<a download="detail.xlsx" class="k-button" ng-click="vm.excel(vm.detailgrid)"><em class="glyphicon glyphicon-save"></em>&nbsp;Export</a>',
+                //toolbar: '<a download="detail.xlsx" class="k-button" ng-click="vm.excel(vm.detailgrid)"><em class="glyphicon glyphicon-save"></em>&nbsp;Export</a>',
+                toolbar: ['excel'],
+                excel: {
+                    fileName: 'Participant Registrations.xlsx',
+                    filterable: true
+                },
                 dataSource: {
                     type: "json",
                     transport: {
@@ -82,20 +95,20 @@
                 sortable: true,
                 pageable: true,
                 columns: [{
-                    field: "DisplayName",
+                    field: "displayName",
                     title: "Listing",
                     width: 300
                 }, {
-                    field: "TotalAmount",
+                    field: "totalAmount",
                     title: "Amount",
                     format: "{0:c}",
                     width: 150
                 }, {
-                    field: "Quantity",
+                    field: "quantity",
                     title: "Quantity",
                     width: 125
                 }, {
-                    field: "DateCreated",
+                    field: "dateCreated",
                     title: "Registration Date",
                     type: "date",
                     format: "{0:MM/dd/yyyy}",
@@ -103,11 +116,11 @@
                 },{
                     field: '',
                     title: '',
-                    template: '<a href="\\\#receipt/#=EventureOrderId#" class="btn btn-success btn-block"><em class="glyphicon glyphicon-tags"></em>&nbsp;&nbsp;View Receipt</a>'
+                    template: '<a href="\\\#receipt/#=eventureOrderId#" class="btn btn-success btn-block"><em class="glyphicon glyphicon-tags"></em>&nbsp;&nbsp;Receipt</a>'
                 }, {
                     field: '',
                     title: '',
-                    template: '<a href="\\\#registration/#=Id#" class="btn btn-default btn-block"><em class="glyphicon glyphicon-edit"></em>&nbsp;Edit</a>'
+                    template: '<a href="\\\#registration/#=id#" class="btn btn-default btn-block"><em class="glyphicon glyphicon-edit"></em>&nbsp;Edit</a>'
                 }]
             };
           };

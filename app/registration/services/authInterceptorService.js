@@ -21,7 +21,8 @@ angular.module('evReg').factory('authInterceptorService', ['$q', '$location', 'l
 
     var _responseError = function (rejection) {
         if (rejection.status === 401) {
-            $location.path('/login');
+            var requestPath = window.location;
+            $location.path('/login/' + requestPath);
         }
         return $q.reject(rejection);
     }

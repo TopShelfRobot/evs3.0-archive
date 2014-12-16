@@ -4,33 +4,84 @@
     function Model(config) {
 
         var cart = {};
-        cart.participantId = null;
+        cart.houseId = 0;
+        //cart.participantId = 0;
+        cart.ownerId = 1;
         cart.waiverSigned = false;
         cart.teamName = '';
         cart.teamMembers = [];
         cart.teamId = '';
         cart.currentlyPaid = 0;
         cart.allowZeroPayment = false;
-        
+
+        cart.navUrl = '';
+
         cart.teamMemberId = null;
         cart.registrations = [];
         cart.surcharges = [];
 
+        cart.regSettings = {
+            isGroupRequired: false,      //this comes from list
+            isDuplicateOrderAllowed: false,
+            isAddSingleFeeForAllRegs: true,
+            addSingleFeeForAllRegsPercent: 6,
+            addSingleFeeType: 'percent',
+            addSingleFeeForAllRegsFlat: 0,
+
+            eventureName: 'Event',
+            listName: 'List',
+            groupName: 'Group',
+            partButtonText: 'Select Party!',
+            listStatement: 'Select a desired start time',
+            termsText: '',
+            refundsText: '',
+            //stripeLogoPath: '',
+            stripeCheckoutButtonText: '',
+            stripeOrderDescription: ''
+
+        }
+
         cart.order = function () {
             var order = {
                 orderAmount: cart.getTotalPrice(),
-                orderHouseId: config.owner.houseId,
-                ownerId: config.owner.ownerId,
+                orderHouseId: cart.houseId,
+                ownerId: cart.ownerId,
                 teamId: cart.teamId,
                 teamMemberId: cart.teamMemberId,
-                regs: cart.registrations
+                regs: cart.registrations,
+                charges: cart.surcharges
             };
             return order;
         };
 
+        cart.configureSettings = function (data) {
+           
+            cart.regSettings.isDuplicateOrderAllowed = data.isDuplicateOrderAllowed;
+            cart.regSettings.isAddSingleFeeForAllRegs = data.isAddSingleFeeForAllRegs;
+            cart.regSettings.addSingleFeeForAllRegsPercent = data.addSingleFeeForAllRegsPercent;
+            cart.regSettings.addSingleFeeType = data.addSingleFeeType;
+            cart.regSettings.addSingleFeeForAllRegsFlat = data.addSingleFeeForAllRegsFlat;
+
+            cart.regSettings.eventureName = data.eventureName;
+            cart.regSettings.listName = data.listingName;
+            cart.regSettings.groupName = data.groupName;
+            cart.regSettings.partButtonText = data.participantButtonText;
+            cart.regSettings.listStatement = data.listStatement;
+            cart.regSettings.termsText = data.termsText;
+            cart.regSettings.refundsText = data.refundsText;
+            cart.regSettings.stripeCheckoutButtonText = data.stripeCheckoutButtonText;
+            cart.regSettings.stripeOrderDescription = data.stripeOrderDescription;
+            //cart.regSettings.stripeLogoPath = data.stripeLogoPath;
+            
+                  
+
+            cart.regSettings.name = data.name;
+            cart.regSettings.stripePublishableKey = data.stripePublishableKey
+        };
+
         cart.addRegistration = function (eventure, eventureList, participant, answers, groupId, group2Id, quantity) {
             var isRegDupe = false;
-            if (!config.owner.isDuplicateOrderAllowed) {
+            if (!cart.regSettings.isDuplicateOrderAllowed) {
                 for (var i = 0; i < cart.registrations.length; i++) {
                     var currentReg = cart.registrations[i];
 
@@ -42,12 +93,12 @@
             }
             if (!isRegDupe) {
                 cart.registrations.push(new registration(eventure.displayHeading, eventureList.displayName, participant.email, eventureList.currentFee, eventure.id, eventureList.id, participant.id, participant.firstName + ' ' + participant.lastName, answers, groupId, group2Id, quantity, eventureList.eventureListTypeId));
-                toastr.success('<strong class="text-center">Your Item Was Added To Your Cart!</strong><br><br><a class="btn btn-warning btn-block" href="#/shoppingcart">View Cart</a>');
+                toastr.success('<strong class="text-center">Your Item Was Added To Your Cart!</strong><br><br><a class="btn btn-primary btn-block" href="#/shoppingcart">View Cart</a>');
             }
         };
 
         cart.processCartRules = function () {
-            //clear all rules
+           //clear all rules
             var temp = [];
             for (var j = 0; j < cart.surcharges.length; j++) {
                 var currCharge = cart.surcharges[j];
@@ -65,18 +116,20 @@
                 regTotalAmount = regTotalAmount + currentReg.fee;
                 regCount++;
             }
+            //console.log(cart.regSettings.isAddSingleFeeForAllRegs);
+            //console.log(cart.regSettings.addSingleFeeType);
 
-            if (config.owner.isAddSingleFeeForAllRegs) {
+            if (cart.regSettings.isAddSingleFeeForAllRegs) {
                 var feeAmount = 0;
-                switch (config.owner.addSingleFeeType) {
+                switch (cart.regSettings.addSingleFeeType) {
                     case 'percent':
-                        feeAmount = config.owner.addSingleFeeForAllRegsPercent * regTotalAmount / 100;
+                        feeAmount = cart.regSettings.addSingleFeeForAllRegsPercent * regTotalAmount / 100;
                         break;
                     case 'flat':
-                        feeAmount = regCount * config.owner.addSingleFeeForAllRegsFlat;
+                        feeAmount = regCount * cart.regSettings.addSingleFeeForAllRegsFlat;
                         break;
                     case 'both':
-                        feeAmount = (config.owner.addSingleFeeForAllRegsPercent * regTotalAmount / 100) + (regCount * config.owner.addSingleFeeForAllRegsFlat);
+                        feeAmount = (cart.regSettings.addSingleFeeForAllRegsPercent * regTotalAmount / 100) + (regCount * cart.regSettings.addSingleFeeForAllRegsFlat);
                         break;
                     default:
                         feeAmount = 0;

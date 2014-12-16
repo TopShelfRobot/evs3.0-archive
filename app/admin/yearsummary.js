@@ -1,9 +1,9 @@
 (function () {
     'use strict';
     var controllerId = 'yearsummary';
-    angular.module('app').controller(controllerId, ['config', 'common', 'datacontext', yearsummary]);
+    angular.module('app').controller(controllerId, ['$routeParams', 'config', 'common', 'datacontext', yearsummary]);
 
-    function yearsummary(config, common, datacontext) {
+    function yearsummary($routeParams, config, common, datacontext) {
         var getLogFn = common.logger.getLogFn;
         var log = getLogFn(controllerId);
 
@@ -11,14 +11,23 @@
 
         vm.title = 'app';
 
+        vm.eventureId = $routeParams.eventureId;
 
+        vm.chart = {
+            startYear: 2013,
+            endYear: 2014,
+            //eventureId: 1,
+            type: 0
+        };
 
-        vm.ownerId = 1;
+        vm.eventures = [];
+
+        vm.ownerId = config.owner.ownerId;
 
         activate();
 
         function activate() {
-            var promises = [Chart()];
+            var promises = [getEventures(), Chart()];
             //var promises = [];
             common.activateController(promises, controllerId)
                 .then(function () {
@@ -26,97 +35,108 @@
                 });
         }
 
+        var min = vm.min = moment('2000-01-01');
+        var max = vm.max = moment(new Date()); // Defaults to now
+
+        vm.years = [];
+
+        for (var i=max.years(); i>=min.years(); i--) {
+            vm.years.push(i);
+        }
+
+        function getEventures() {
+            return datacontext.eventure.getEventuresByOwnerId(vm.ownerId)
+                .then(function(data) {
+                    //applyFilter();
+                    vm.eventures = data;
+                    return vm.eventures;
+                });
+        }
+
         vm.generateChart = function () {
-
-            var chart = vm.summaryChart,
-                        categoryAxis = chart.options.categoryAxis,
-                        baseUnitInputs = $("input:radio[name=baseUnit]");
-
-                    categoryAxis.baseUnit = baseUnitInputs.filter(":checked").val();
-
-                    if(categoryAxis.baseUnit === "weeks") {
-                      chart.options.chartArea.height = 1300;
-                    } else {
-                      chart.options.chartArea.height = 475;
-                    }
-
-                    chart.refresh();
-
-            // var dataSource = new kendo.data.DataSource({
-            //     transport: {
-            //         read: {
-            //             url: function () {
-            //                 return config.remoteApiName + 'Registrations/GetYearOverYearData/2';
-            //             },
-            //             dataType: "json"
-            //         }
-            //     }
-            // });
-            // chart.setDataSource(dataSource);
+                    
+            var chart = vm.summaryChart;
+            
+            var dataSource = new kendo.data.DataSource({
+                 transport: {
+                     read: {
+                         url: function () {
+                             return config.remoteApiName + 'analytic/GetYearOverYearData/' + vm.ownerId + '/' + vm.eventureId  + '/' + vm.chart.startYear  + '/' + vm.chart.endYear  + '/' + vm.chart.type;
+                         },
+                         dataType: "json"
+                     }
+                 },
+                 group: {
+                     field: "year"
+                 },
+                 sort: {
+                     field: "month",
+                     dir: "asc"
+                 },
+                 schema: {
+                     model: {
+                         fields: {
+                             month: {
+                                 type: "date"
+                             }
+                         }
+                     }
+                 }
+               });
+            
+            chart.setDataSource(dataSource);
+           
+            //.refresh();
         };
 
          function Chart() {
-            var title = "Number of Registrations";
-            //var yearapi = config.remoteApiName + 'Registrations/GetYearOverYearData/1'; //+ vm.ownerId;
 
-            var stats = [
-                    { value: 1, date: new Date("01/01/2013") },
-                    { value: 2, date: new Date("05/08/2013") },
-                    { value: 3, date: new Date("08/15/2013") },
-                    { value: 4, date: new Date("09/01/2013") },
-                    { value: 5, date: new Date("10/08/2013") },
-                    { value: 6, date: new Date("11/15/2013") },
-                    { value: 7, date: new Date("12/22/2013") },
-                    { value: 7, date: new Date("05/08/2014") },
-                    { value: 6, date: new Date("08/15/2014") },
-                    { value: 5, date: new Date("09/01/2014") },
-                    { value: 4, date: new Date("10/08/2014") }
-                ];
+            //var yearapi = config.remoteApiName + 'analytic/GetYearOverYearData/1/1/2013/2014/0';
 
-            var yearOverYearSeries = [{
-                    field: "value",
-                    name: "Event",
-                    categoryField: "date"
-                }
-                ];
+             var yearapi = config.remoteApiName + 'analytic/GetYearOverYearData/' + vm.ownerId + '/' + vm.eventureId + '/' + vm.chart.startYear + '/' + vm.chart.endYear + '/' + vm.chart.type;
 
             vm.yearOverYear = {
-                theme: "bootstrap",
-                // dataSource: {
-                //     transport: {
-                //         read: yearapi,
-                //         dataType: "json"
-                //     }
-                // },
-                dataSource: {
-                            data: stats
-                        },
-                title: {
-                    text: title
-                },
+                theme: "material",
+                 dataSource: {
+                     transport: {
+                         read: yearapi,
+                         dataType: "json"
+                     },
+                     group: {
+                        field: "year"
+                     },
+                     sort: {
+                         field: "month",
+                         dir: "asc"
+                     },
+                     schema: {
+                         model: {
+                             fields: {
+                                 month: {
+                                     type: "date"
+                                 }
+                             }
+                         }
+                     }
+                 },
+                 
                 legend: {
                     position: "bottom"
                 },
-                seriesDefaults: {
-                    type: "bar",
-                    labels: {
-                        visible: true,
-                        background: "transparent"
-                    }
-                },
-                chartArea: {
-                  height: 475
-                },
-                series: yearOverYearSeries,
+                series: [{
+                    type: "column",
+                    field: "registrations"   //,
+                    //name: "#= group.value # (close)"   //tool tips
+                }],
                 valueAxis: {
                     line: {
                         visible: false
                     }
                 },
                 categoryAxis: {
-                    baseUnit: "months",
-                    majorGridLines: {
-                        visible: false
+                    field: "month",
+                    labels: {
+                        format: "MMM"
                     }
                 }
             };

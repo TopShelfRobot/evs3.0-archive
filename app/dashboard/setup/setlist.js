@@ -218,12 +218,7 @@
 		//};
       
         vm.cancel = function() {
-          return datacontext.cancel()
-            .then(complete);
-          
-            function complete() {
-              $location.path('/eventuredetail/' + vm.list.eventureId);
-            }
+			$location.path('/eventuredetail/' + vm.list.eventureId);
         };
 
 		function onDestroy() {

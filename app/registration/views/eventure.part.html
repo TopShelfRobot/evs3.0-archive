@@ -6,7 +6,7 @@
     </div>
     <div class="row">
       <div class="col-lg-12 text-center">
-        <h3>Which event would you like to participate in?</h3>
+        <h3>Which {{eventureName}} would you like to participate in?</h3>
         <br>
         <!--<p class="text-muted">Choose an event style to see only matching events.</p>-->
         <!--<div class="btn-group hidden-xs">-->
@@ -57,16 +57,17 @@
                 <figure> <img ng-src="content/images/{{eventure.imageFileName || 'eventure-default.jpg'}}" alt="img01">
                   <figcaption>
                     <h4>{{eventure.displayHeading}}</h4>
-                    <span class="event-info">{{eventure.dateEventure | date}}</span><br>
-                    <span class="event-info">{{eventure.location}}</span><br>
-                    <a ng-href="#/eventure/{{eventure.id}}/list">Register</a>
+                    <span class="event-info"><i class="glyphicon glyphicon-calendar text-muted"></i>&nbsp;{{eventure.dateEventure | date}}</span><br>
+                    <span class="event-info"><i class="glyphicon glyphicon-map-marker text-muted"></i>&nbsp;{{eventure.location}}</span><br>
+                    <!--<a class="btn btn-success btn-block" ng-href="#/eventure/{{eventure.id}}/list">Register</a>-->
+                      <a class="btn btn-success btn-block" ng-click="NavigateToList(eventure.id)">Register</a>
                   </figcaption>
                 </figure>
             </li>
         </ul>
       </div>
     </div>
-    <div class="row">
+    <div class="row" ng-show="isPaginationVisible">
       <div class="col-lg-12">
         <ul class="pager">
           <li class="previous"><a ng-click="prevPage()">&larr; Previous</a></li>

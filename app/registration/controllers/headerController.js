@@ -2,24 +2,42 @@
 
     var controllerId = "HeaderController";
 
-    function controller($scope, config, datacontext, cartModel, common) {
+    function controller($scope, $location, config, datacontext, cart, authService, common) {
 
-        $scope.cart = cartModel;
+        //$scope.cart = cart;
 
-        $scope.isAuth = config.isAuth;
+        $scope.eventureName = cart.regSettings.eventureName;
+        $scope.listName = cart.regSettings.listName;
+
+        $scope.logOut = function () {
+            authService.logOut();
+            $location.path('/eventure');
+        }
+
+        $scope.authentication = authService.authentication;
+
+        console.log($scope.authentication.isAuth);
+        console.log($scope.authentication.userName);
+
+        
+
+        //$scope.isAuth = authService._authentication.isAuth;
 
         var promises = [];
-        promises.push(
-            datacontext.participant.getOwnerById(config.owner.ownerId)
-                .then(function(data){
-                    $scope.owner = data;
-                })
-        );
 
+        if ($scope.authentication.isAuth) {
+
+            promises.push(
+                datacontext.participant.getParticipantByEmailAddress($scope.authentication.userName, cart.ownerId)
+                    .then(function (data) {
+                        cart.houseId = data.id;
+                    })
+            );
+        }
         common.activateController(promises, controllerId);
 
     }
 
-    angular.module("evReg").controller(controllerId, ["$scope", "config", "datacontext", "CartModel", "common", controller]);
+    angular.module("evReg").controller(controllerId, ["$scope", "$location", "config", "datacontext", "CartModel", "authService", "common", controller]);
 
 })();

@@ -13,7 +13,7 @@
 		var logSuccess = getLogFn(serviceId, 'success');
 		var manager = emFactory.newManager();
 		var primePromise;
-		var repoNames = ['eventure', 'resource', 'participant', 'registration', 'analytic', 'surcharge', 'volunteer', 'team', 'question'];
+		var repoNames = ['eventure', 'resource', 'participant', 'registration', 'analytic', 'surcharge', 'volunteer', 'team', 'question', 'owner'];
 		var $q = common.$q;
 
 		var service = {
@@ -69,36 +69,39 @@
 
 		function prime() {
 
-			//if (primePromise) return primePromise;
+			if (primePromise) return primePromise;
 
-			primePromise = $q.all([service.eventure.getAll()])
-			    .then(extendMetadata)
-			    .then(success);
+			//ideally right here i would configure ownerId by url??
+		   console.log('priming');
+			primePromise = $q.all([service.owner.setPublicOwnerSettings(1)])
+				.then(extendMetadata)
+				.then(success);
 			return primePromise;
 			//return true;
 
-			function success() {
+			function success(data) {
 				//service.lookup.setLookups();
 				//log('Primed the data');
+			    console.log('Primed the data');
 			}
 
 			function extendMetadata() {
-			    var metadataStore = manager.metadataStore;
-			    var types = metadataStore.getEntityTypes();
-			    types.forEach(function (type) {
-			        if (type instanceof breeze.EntityType) {
-			            set(type.shortName, type);
-			        }
-			    });
+				var metadataStore = manager.metadataStore;
+				var types = metadataStore.getEntityTypes();
+				types.forEach(function (type) {
+					if (type instanceof breeze.EntityType) {
+						set(type.shortName, type);
+					}
+				});
 
-			    //var personEntityName = entityNames.person;
-			    //['Speakers', 'Speaker', 'Attendees', 'Attendee'].forEach(function (r) {
-			    //    set(r, personEntityName);
-			    //});
+				//var personEntityName = entityNames.person;
+				//['Speakers', 'Speaker', 'Attendees', 'Attendee'].forEach(function (r) {
+				//    set(r, personEntityName);
+				//});
 
-			    function set(resourceName, entityName) {
-			        metadataStore.setEntityTypeForResourceName(resourceName, entityName);
-			    }
+				function set(resourceName, entityName) {
+					metadataStore.setEntityTypeForResourceName(resourceName, entityName);
+				}
 			}
 		}
 		

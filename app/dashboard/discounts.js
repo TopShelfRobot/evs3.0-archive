@@ -35,10 +35,11 @@
             "text": "Inactive"
           }];
 
-          var couponapi = config.remoteApiName + 'Coupon/GetCouponsByOwnerId/' + config.owner.ownerId;
+          var couponapi = config.remoteApiName + 'widget/GetCouponsByOwnerId/' + config.owner.ownerId;
           vm.couponGridOptions = {
-            toolbar: '<a download="Coupons.xlsx" class="k-button" ng-click="vm.excel(vm.coupongrid)"><em class="glyphicon glyphicon-save"></em>&nbsp;Export</a>',
-            dataSource: {
+            //toolbar: '<a download="Coupons.xlsx" class="k-button" ng-click="vm.excel(vm.coupongrid)"><em class="glyphicon glyphicon-save"></em>&nbsp;Export</a>',
+              toolbar: ['excel'],
+              dataSource: {
                 type: "json",
                 transport: {
                     read: couponapi
@@ -49,32 +50,35 @@
             },
             sortable: true,
             pageable: true,
-            filterable: true,
+            filterable: {
+                mode: "row"
+            },
             detailTemplate: kendo.template($("#template").html()),
             columns: [{
-                field: "Code",
+                field: "code",
                 title: "Coupon",
                 width: "400px"
             },{
-                field: "Amount",
+                field: "amount",
                 title: "Amount",
                 width: "220px"
             },{
-                field: "Active",
+                field: "active",
                 width: "100px",
                 values: status
             },{
                 title: "",
                 width: "120px",
-                template:'<a class="btn btn-default btn-block" href="\\\#setcoupon/#=Id#"><em class="glyphicon glyphicon-edit"></em>&nbsp;Edit</a>'
+                template:'<a class="btn btn-default btn-block" href="\\\#setcoupon/#=id#"><em class="glyphicon glyphicon-edit"></em>&nbsp;Edit</a>'
             }]
           };
 
           vm.detailGridOptions = function(e) {
-            var couponuseapi = config.remoteApiName + 'GetCouponUseByCouponId/' + e.Id;
+            var couponuseapi = config.remoteApiName + 'widget/GetCouponUseByCouponId/' + e.Id;
 
             return {
-                toolbar: '<a download="detailexport.xlsx" class="k-button" ng-click="vm.detailexcel(vm.detailgrid)"><em class="glyphicon glyphicon-save"></em>&nbsp;Export</a>',
+                //toolbar: '<a download="detailexport.xlsx" class="k-button" ng-click="vm.detailexcel(vm.detailgrid)"><em class="glyphicon glyphicon-save"></em>&nbsp;Export</a>',
+                toolbar: ['pdf', 'excel'],
                 dataSource: {
                     type: "json",
                     transport: {
@@ -89,23 +93,23 @@
                 pageable: true,
                 columns: [
                    {
-                       field: "Name",
+                       field: "name",
                        title: "List",
                        width: 300
                    }, {
-                       field: "Amount",
+                       field: "amount",
                        title: "Amount",
                        format: "{0:c}",
                        width: 150
                    }, {
-                       field: "Description",
+                       field: "description",
                        title: "Coupon",
                        width: 225
                    }, {
-                       field: "FirstName",
+                       field: "firstName",
                        title: "First Name"
                    }, {
-                       field: "LastName",
+                       field: "lastName",
                        title: "Last Name"
                    }]
             };

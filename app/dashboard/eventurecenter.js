@@ -35,10 +35,16 @@
             "text": "Inactive"
           }];
 
-          var eventureapi = config.remoteApiName + 'eventures/GetAllEventuresByOwnerId/' + vm.ownerId;
+            // var eventureapi = config.remoteServiceName + 'GetAllEventuresByOwnerId/' + vm.ownerId;
+          var eventureapi = config.remoteApiName + 'widget/GetAllEventuresByOwnerId/' + vm.ownerId;
           vm.eventureGridOptions = {
-            toolbar: '<a download="download.xlsx" class="k-button" ng-click="vm.excel(vm.eventuregrid)"><em class="glyphicon glyphicon-save"></em>&nbsp;Export</a>',
-            dataSource: {
+            //toolbar: '<a download="download.xlsx" class="k-button" ng-click="vm.excel(vm.eventuregrid)"><em class="glyphicon glyphicon-save"></em>&nbsp;Export</a>',
+              toolbar: ['excel'],
+              excel: {
+                  fileName: 'Eventures.xlsx',
+                  filterable: true
+              },
+              dataSource: {
                 type: "json",
                 transport: {
                     read: eventureapi
@@ -46,10 +52,10 @@
                 schema: {
                     model: {
                         fields: {
-                            Active: { type: "boolean" },
-                            DisplayDate: { type: "text" },
-                            Id: { type: "number" },
-                            Name: { type: "string" }
+                            active: { type: "boolean" },
+                            displayDate: { type: "text" },
+                            id: { type: "number" },
+                            name: { type: "string" }
                         }
                     }
                 },
@@ -59,24 +65,23 @@
             },
             sortable: true,
             pageable: true,
-            filterable: true,
+            filterable: {
+                mode: "row"
+            },
             columns: [{
-                field: "Name",
+                field: "name",
                 title: "Event",
-                template: '<a href="\\\#eventuredetail/#=Id#">#=Name#</a>',
-                width: "400px"
+                template: '<a href="\\\#eventuredetail/#=id#">#=name#</a>',
+                width: "500px",
             },{
-                field: "DisplayDate",
+                field: "displayDate",
                 title: "Date",
-                width: "220px"
             },{
-                field: "Active",
-                width: "100px",
+                field: "active",
                 values: status
             },{
                 title: "",
-                width: "120px",
-                template:'<a class="btn btn-default btn-block" href="\\\#seteventure/#=Id#"><em class="glyphicon glyphicon-edit"></em>&nbsp;Edit</a>'
+                template:'<a class="btn btn-default btn-block" href="\\\#seteventure/#=id#"><em class="glyphicon glyphicon-edit"></em>&nbsp;Edit</a>'
             }]
           };
 

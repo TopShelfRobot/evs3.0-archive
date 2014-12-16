@@ -55,7 +55,7 @@
         }
 
         function Registrations() {
-          var regapi = config.remoteApiName + 'Registrations/GetEventureListGraph/' + vm.listingId;
+          var regapi = config.remoteApiName + 'widget/GetEventureListGraph/' + vm.listingId;
 
           vm.registrations = {
             theme: "bootstrap",
@@ -102,7 +102,7 @@
         }
 
         vm.Groups = function() {
-          var groupapi = config.remoteApiName + 'Registrations/GetEventureGroupGraphByList/' + vm.listingId;
+          var groupapi = config.remoteApiName + 'widget/GetEventureGroupGraphByList/' + vm.listingId;
 
           vm.groups = {
             theme: "bootstrap",
@@ -152,10 +152,15 @@
 
         function ParticipantGrid() {
 
-          var participantapi = config.remoteApiName +  'Participants/GetRegisteredParticipantsByEventureListId/' + vm.listingId;
+          var participantapi = config.remoteApiName +  'widget/GetRegisteredParticipantsByEventureListId/' + vm.listingId;
           vm.participantGridOptions = {
-            toolbar: '<a download="download.xlsx" class="k-button" ng-click="vm.excel(vm.partgrid)"><em class="glyphicon glyphicon-save"></em>&nbsp;Export</a>',
-            dataSource: {
+            //toolbar: '<a download="download.xlsx" class="k-button" ng-click="vm.excel(vm.partgrid)"><em class="glyphicon glyphicon-save"></em>&nbsp;Export</a>',
+              toolbar: ['excel'],
+              excel: {
+                  fileName: 'Registered Participants.xlsx',
+                  filterable: true
+              },
+              dataSource: {
                 type: "json",
                 transport: {
                     read: participantapi
@@ -163,28 +168,31 @@
                 pageSize: 10,
                 serverPaging: false,
                 serverSorting: false
-            },
-            sortable: true,
-            pageable: true,
-            columns: [{
-                        field: "FirstName",
+              },
+              sortable: true,
+              pageable: true,
+              filterable: {
+                  mode: "row"
+              },
+              columns: [{
+                        field: "firstName",
                         title: "First Name",
                     },
                     {
-                        field: "LastName",
+                        field: "lastName",
                         title: "Last Name",
                     },
                     {
-                        field: "Email",
+                        field: "email",
                         title: "Email Address",
                     },
                     {
-                        field: "City",
+                        field: "city",
                         title: "City",
                         width: 200
                     },
                     {
-                        field: "State",
+                        field: "state",
                         title: "State",
                         width: 80
                     },
@@ -192,7 +200,7 @@
                         title: "",
                         width: 100,
                         filterable: false,
-                        template: '<a href="\\\#partedit/#=Id#" class="btn btn-default btn-block "><em class="glyphicon glyphicon-edit"></em>&nbsp;Edit</a>'
+                        template: '<a href="\\\#partedit/#=id#" class="btn btn-default btn-block "><em class="glyphicon glyphicon-edit"></em>&nbsp;Edit</a>'
             }]
           };
         }

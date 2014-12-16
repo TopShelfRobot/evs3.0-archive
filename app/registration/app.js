@@ -17,15 +17,12 @@
 		'kendo.directives', // kendo-angular (grid, dataviz)
 		'common.bootstrap', // bootstrap dialog wrapper functions
 		'nsPopover',
+		'angulartics',  //analytics
+		'angulartics.google.analytics', //analytics
 		'sbDateSelect'
 	]);
 
-	//var serviceBase = 'http://localhost:26264/';
-	var serviceBase = 'http://localhost:49822/';
-	//var serviceBase = 'http://ngauthenticationapi.azurewebsites.net/';
-
 	app.constant('ngAuthSettings', {
-		apiServiceBaseUri: serviceBase,
 		clientId: 'ngAuthApp'
 	});
 

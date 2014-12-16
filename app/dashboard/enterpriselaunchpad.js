@@ -1,9 +1,9 @@
 (function () {
     'use strict';
     var controllerId = 'enterpriselaunchpad';
-    angular.module('app').controller(controllerId, ['common', 'datacontext', 'config', 'ExcelService', enterpriselaunchpad]);
+    angular.module('app').controller(controllerId, ['common', 'datacontext', 'config', enterpriselaunchpad]);
 
-    function enterpriselaunchpad(common, datacontext, config, excel) {
+    function enterpriselaunchpad(common, datacontext, config) {
         var getLogFn = common.logger.getLogFn;
         var log = getLogFn(controllerId);
 
@@ -11,6 +11,7 @@
         vm.title = 'app';
         vm.EventureGridOptions = {};
         vm.ownerId = 1;
+        vm.treeData = [];
         vm.eventures = [];
 
         activate();
@@ -23,19 +24,30 @@
                 });
         }
 
+
         function getEvents() {
-            return datacontext.eventure.getEventuresGroupedByYearByOwnerId(1)
-              .then(function (data) {
-                  vm.eventures = data;
-                  return vm.eventures;
-              });
+            return datacontext.eventure.getEventuresGroupedByYearByOwnerId(vm.ownerId)
+                .then(function (data) {
+                    vm.eventures = data;
+
+                    vm.treeviewOptions = {
+                        dataSource: {
+                            data: data
+                        },
+                        template: kendo.template($('#treeview-template').html())
+                    };
+
+                    return vm.eventures;
+                });
         }
 
+
+
         function Overview() {
-            var overviewapi = config.remoteApiName +'Registrations/GetOwnerGraph/' + vm.ownerId;
+            var overviewapi = config.remoteApiName +'widget/GetOwnerGraph/' + vm.ownerId;
 
             vm.overviewByOwner = {
-                theme: "flat",
+                theme: "material",
                 dataSource: {
                     transport: {
                         read: {
@@ -85,15 +97,16 @@
             vm.overviewChart.redraw();
         };
 
-        vm.treeviewOptions = {
-            template: kendo.template($("#treeview-template").html())
-        };
-
         function NotificationGrid() {
-          var notifApi = config.remoteApiName + 'Resources/GetNotificationsByOwnerId/' + vm.ownerId;
+          var notifApi = config.remoteApiName + 'widget/GetNotificationsByOwnerId/' + vm.ownerId;
           vm.notificationGridOptions = {
-            toolbar: '<a download="download.xlsx" class="k-button" ng-click="vm.excel(vm.notificationGrid)"><em class="glyphicon glyphicon-save"></em>&nbsp;Export</a>',
-            dataSource: {
+            //toolbar: '<a download="download.xlsx" class="k-button" ng-click="vm.excel(vm.notificationGrid)"><em class="glyphicon glyphicon-save"></em>&nbsp;Export</a>',
+              toolbar: ['excel'],
+              excel: {
+                  fileName: 'To Do.xlsx',
+                  filterable: true
+              },
+              dataSource: {
                     transport: {
                         read: notifApi
                     },
@@ -110,14 +123,7 @@
                     serverSorting: true
                 },
                 filterable: {
-                    extra: false,
-                    operators: {
-                        string: {
-                            contains: "Contains",
-                            startswith: "Starts with",
-                            eq: "Equal to"
-                        }
-                    }
+                  mode: "row"
                 },
                 sortable: true,
                 pageable: true,
@@ -125,10 +131,10 @@
                 dataBound: function () {
                 },
                 columns: [
-                    { field: "Task", width: "100px" },    //template is controlling this now //mjb
-                    { field: "Resource", width: "80px" },
-                    { field: "Eventure", width: "80px" },
-                    { field: "DateDue", format: "{0:MM/dd/yyyy}", width: "70px" }
+                    { field: "task", width: "100px" },    //template is controlling this now //mjb
+                    { field: "resource", width: "80px" },
+                    { field: "eventure", width: "80px" },
+                    { field: "dateDue", format: "{0:MM/dd/yyyy}", width: "70px" }
                 ]
           };
         }

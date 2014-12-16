@@ -27,11 +27,16 @@
 
         function volunteerGrid() {
 
-          var volunteerapi = config.remoteApiName + 'Participants/GetVolunteersByOwnerId/' + vm.ownerId;
+          var volunteerapi = config.remoteApiName + 'widget/GetVolunteersByOwnerId/' + vm.ownerId;
 
           vm.volunteerGridOptions = {
-            toolbar: '<a download="Teams.xlsx" class="k-button" ng-click="vm.excel(vm.volunteergrid)"><em class="glyphicon glyphicon-save"></em>&nbsp;Export</a>',
-            dataSource: {
+            //toolbar: '<a download="Teams.xlsx" class="k-button" ng-click="vm.excel(vm.volunteergrid)"><em class="glyphicon glyphicon-save"></em>&nbsp;Export</a>',
+              toolbar: ['excel'],
+              excel: {
+                  fileName: 'Volunteers.xlsx',
+                  filterable: true
+              },
+              dataSource: {
                 type: "json",
                 transport: {
                     read: volunteerapi
@@ -43,34 +48,42 @@
             },
             sortable: true,
             pageable: true,
-            filterable: true,
+            filterable: {
+                mode: "row"
+            },
             detailTemplate: kendo.template($("#template").html()),
             columns: [{
-                    field: "FirstName",
+                    field: "firstName",
                     title: "First Name",
                     width: 225
                 },
                     {
-                        field: "LastName",
+                        field: "lastName",
                         title: "Last Name",
                         width: 225
                     }, {
-                        field: "Email",
+                        field: "email",
                         title: "Email Address",
                         width: 300
                     }, {
-                        field: "PhoneMobile",
+                        field: "phoneMobile",
                         title: "Phone",
-                        width: 300
+                        width: 300,
+                        filterable: false
                     }]
           };
 
           vm.detailGridOptions = function(e) {
 
-            var volunteerapi = config.remoteApiName + 'Participants/GetVolunteerScheduleByVolunteerId' + e.Id;
+            var volunteerapi = config.remoteApiName + 'widget/GetVolunteerScheduleByVolunteerId' + e.Id;
             
             return {
-                toolbar: '<a download="detailexport.xlsx" class="k-button" ng-click="vm.excel(vm.detailgrid)"><em class="glyphicon glyphicon-save"></em>&nbsp;Export</a>',
+                //toolbar: '<a download="detailexport.xlsx" class="k-button" ng-click="vm.excel(vm.detailgrid)"><em class="glyphicon glyphicon-save"></em>&nbsp;Export</a>',
+                toolbar: ['excel'],
+                excel: {
+                    fileName: 'Volunteer Schedule.xlsx',
+                    filterable: true
+                },
                 dataSource: {
                     type: "json",
                     transport: {
@@ -92,22 +105,22 @@
                 sortable: true,
                 pageable: true,
                 columns: [{
-                        field: "JobName",
+                        field: "jobName",
                         title: "Job Name",
                         width: 200
                    }, {
-                       field: "EventName",
+                       field: "eventName",
                        title: "Event",
                        width: 300
                     }, {
-                        field: "TimeBegin",
+                        field: "timeBegin",
                         title: "Shift Begin",
                         type: "date",
                         //format: "{0:h:mm tt}",
                         template: "#=moment(TimeBegin).format('h:mm a')#",
                         width: 125
                     }, {
-                        field: "TimeEnd",
+                        field: "timeEnd",
                         title: "Shift End",
                         type: "date",
                         format: "{0:h:mm tt}"

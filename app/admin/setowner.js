@@ -168,7 +168,7 @@
                 .then(complete);
 
             function complete() {
-                alert("Changes have been saved.");
+                //alert("Changes have been saved.");
             }
         };
 

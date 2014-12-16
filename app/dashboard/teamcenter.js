@@ -27,11 +27,16 @@
 
         function teamGrid() {
 
-          var teamapi = config.remoteApiName + 'Teams/GetTeamRegistrationsByOwnerId/' + vm.ownerId;
+          var teamapi = config.remoteApiName + 'widget/GetTeamRegistrationsByOwnerId/' + vm.ownerId;
 
           vm.teamGridOptions = {
-            toolbar: '<a download="Teams.xlsx" class="k-button" ng-click="vm.excel(vm.teamgrid)"><em class="glyphicon glyphicon-save"></em>&nbsp;Export</a>',
-            dataSource: {
+            //toolbar: '<a download="Teams.xlsx" class="k-button" ng-click="vm.excel(vm.teamgrid)"><em class="glyphicon glyphicon-save"></em>&nbsp;Export</a>',
+              toolbar: ['excel'],
+              excel: {
+                  fileName: 'Teams.xlsx',
+                  filterable: true
+              },
+              dataSource: {
                 type: "json",
                 transport: {
                     read: teamapi
@@ -43,45 +48,49 @@
             },
             sortable: true,
             pageable: true,
-            filterable: true,
+            filterable: {
+                mode: "row"
+            },
             detailTemplate: kendo.template($("#template").html()),
             columns: [{
-                field: "Name",
+                field: "name",
                 title: "Team Name",
                 width: "200px"
             },{
-                field: "EventName",
+                field: "eventName",
                 title: "Eventure",
                 width: "200px"
             },{
-                field: "ListName",
+                field: "listName",
                 title: "Listing",
                 width: "220px"
             },{
-                field: "CoachName",
+                field: "coachName",
                 title: "Coach Name",
                 width: "220px"
             }, {
-                field: "Amount",
+                field: "amount",
                 title: "Total Paid",
                 width: "120px",
-                format: "{0:c}"
+                format: "{0:c}",
+                filterable: false
             }, {
-                field: "Balance",
+                field: "balance",
                 title: "Balance",
                 width: "120px",
                 format: "{0:c}",
+                filterable: false,
                 template: kendo.template($("#balanceTemplate").html())
             }, {
                 title: "",
                 width: "120px",
-                template:'<a class="btn btn-default btn-block" href="\\\#/editteam/#=Id#"><em class="glyphicon glyphicon-edit"></em>&nbsp;Edit</a>'
+                template:'<a class="btn btn-default btn-block" href="\\\#/editteam/#=id#"><em class="glyphicon glyphicon-edit"></em>&nbsp;Edit</a>'
             }]
           };
 
           vm.detailGridOptions = function(e) {
 
-            var teamapi = config.remoteApiName + 'Teams/GetTeamMembersByTeamId/' + e.Id;
+            var teamapi = config.remoteApiName + 'widget/GetTeamMembersByTeamId/' + e.id;
             vm.remove = function() {
                 alert('Removing: ' + e.Id );
                 //datacontext.team.removeTeamMemberById(e.Id);
@@ -92,7 +101,7 @@
             vm.resend = function (memberId) {
                 $http.post(config.apiPath + "/breeze/breeze/SendSoccerTryoutInviteMail/" + memberId)
                     .success(function(result) {
-                        alert('Invitation has been sent');
+                        alert('Invitation has been sent');    //toast mjb
                     })
                     .error(function(err) {
                         console.error("ERROR:", err.toString());
@@ -100,7 +109,12 @@
             };
 
             return {
-                toolbar: '<a download="detailexport.xlsx" class="k-button" ng-click="vm.excel(vm.detailgrid)"><em class="glyphicon glyphicon-save"></em>&nbsp;Export</a>',
+                //toolbar: '<a download="detailexport.xlsx" class="k-button" ng-click="vm.excel(vm.detailgrid)"><em class="glyphicon glyphicon-save"></em>&nbsp;Export</a>',
+                toolbar: ['excel'],
+                excel: {
+                    fileName: 'Team Participants.xlsx',
+                    filterable: true
+                },
                 dataSource: {
                     type: "json",
                     transport: {
@@ -109,7 +123,7 @@
                     schema: {
                         model: {
                             fields: {
-                                Id: { type: "number" }
+                                id: { type: "number" }
                             }
                         }
                     },
@@ -122,33 +136,33 @@
                 pageable: true,
                 detailTemplate: kendo.template($("#paymenttemplate").html()),
                 columns: [{
-                        field: "Name",
+                        field: "name",
                         title: "Name"
                     }, {
-                        field: "Email",
+                        field: "email",
                         title: "Email"
                     }, {
-                        field: "Amount",
+                        field: "amount",
                         title: "Paid",
                         width: 100,
                         format: "{0:c}"
                     },{
                         field: '',
                         title: '',
-                        template: '<button ng-click="vm.resend(#=Id#)" class="btn btn-success btn-block"><em class="glyphicon glyphicon-send"></em>&nbsp;Resend Invitation</button>',
-                        width: 180
+                        template: '<button ng-click="vm.resend(#=id#)" class="btn btn-success btn-block"><em class="glyphicon glyphicon-send"></em>&nbsp;Resend Invitation</button>',
+                        width: 210
                     },{
                         field: '',
                         title: '',
                         template: '<button ng-click="vm.remove()" class="btn btn-danger btn-block"><em class="glyphicon glyphicon-remove"></em>&nbsp;Remove</button>',
-                        width: 100
+                        width: 120
                     }]
             };
           };
 
             vm.paymentDetailGridOptions = function(e) {
 
-                var paymentapi = config.remoteApiName + 'Teams/GetPaymentsByTeamMemberId/' + e.Id;
+                var paymentapi = config.remoteApiName + 'widget/GetPaymentsByTeamMemberId/' + e.Id;
 
                 vm.refund = function() {
                     alert('Refunding: ' + e.Id );
@@ -175,10 +189,10 @@
                     sortable: true,
                     pageable: true,
                     columns: [{
-                        field: "Id",
+                        field: "id",
                         title: "Confirmation Number"
                     }, {
-                        field: "Amount",
+                        field: "amount",
                         title: "Amount",
                         format: "{0:c}"
                     },{

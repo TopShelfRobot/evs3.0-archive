@@ -52,6 +52,12 @@ build/
 [Tt]est[Rr]esult*/
 [Bb]uild[Ll]og.*
 
+bin/
+Web.config
+packages/
+.nuget/
+*.dgml
+
 *_i.c
 *_p.c
 *.ilk

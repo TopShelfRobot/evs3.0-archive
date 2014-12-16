@@ -11,6 +11,7 @@
 		// Custom modules
 		'common', // common functions, logger, spinner
 		'common.bootstrap', // bootstrap dialog wrapper functions
+		'LocalStorageModule',
 
 		// 3rd Party Modules
 		'breeze.angular', // configures breeze for an angular app
@@ -19,6 +20,8 @@
 		'kendo.directives', // kendo-angular (grid, dataviz)
 		'angularMoment', // Date and Time Format
 		'angularFileUpload',  // file upload functions
+		'angulartics',  //analytics
+		'angulartics.google.analytics', //analytics
 		'evReg'
 	]);
 
@@ -32,6 +35,28 @@
 	app.run(['$route', function ($route) {
 		// Include $route to kick start the router.
 	}]);
+
+
+	//var serviceBase = 'http://localhost:26264/';
+	var serviceBase = 'http://localhost:49822/';
+	//var serviceBase = 'http://ngauthenticationapi.azurewebsites.net/';
+	//var serviceBase = 'http://dev30.eventuresports.info/';
+
+	app.constant('ngAuthSettings', {
+		//apiServiceBaseUri: serviceBase,
+		clientId: 'ngAuthApp'
+	});
+
+	app.config(function ($httpProvider) {
+		$httpProvider.interceptors.push('authInterceptorService');
+	});
+
+	// Handle routing errors and success events.
+	app.run(['$route', 'authService', function ($route, authService) {
+		// Include $route to kick start the router.
+		authService.fillAuthData();
+	}]);
+
 
 	//app.run(['$route', '$rootScope', '$q', 'routemediator',
 	//function ($route, $rootScope, $q, routemediator) {
