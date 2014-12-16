@@ -58,9 +58,8 @@
           <div class="form-group">
             <label class="col-lg-6 control-label" for="couponmodifier">Coupon Type</label>
             <div class="col-lg-6">
-              <select class="form-control" id="couponmodifier" width="100" ng-model="vm.coupon.discountType">
-                <option value="0">$ OFF</option>
-                <option value="1">% Off</option>
+              <select class="form-control" id="couponmodifier" width="100" ng-model="vm.coupon.amountType" ng-options="t.text as t.text for t in vm.amountTypes">
+                <option value="">Please Select</option>
               </select>
             </div>
           </div>
