@@ -53,12 +53,16 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr ng-repeat="shift in vm.shifts">
+                        <tr ng-repeat="(key,shift) in vm.shifts">
                             <td>
                                 <p class="input-group">
-                                  <input type="text" name="DateShift"  class="form-control" datepicker-popup="{{vm.format}}" ng-model="vm.shift.dateShift" is-open="vm.shiftOpen" datepicker-options="vm.dateOptions" date-disabled="disabled(date, mode)" close-text="Close" />
+                                  <input type="text" name="DateShift"
+                                         class="form-control"
+                                         datepicker-popup="{{vm.format}}"
+                                         ng-model="shift.dateShift"
+                                         is-open="vm.opened[key]" datepicker-options="vm.dateOptions" date-disabled="disabled(date, mode)" close-text="Close" />
                                   <span class="input-group-btn">
-                                      <button class="btn btn-default" ng-click="vm.open($event, 'shiftOpen')"><i class="glyphicon glyphicon-calendar"></i></button>
+                                      <button class="btn btn-default" ng-click="vm.open($event, key)"><i class="glyphicon glyphicon-calendar"></i></button>
                                   </span>
                                  </p>
                             </td>

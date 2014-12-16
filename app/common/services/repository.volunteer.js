@@ -77,7 +77,7 @@
         
         function createVolunteerShift(jobId) {
             var self = this;
-            return self.manager.createEntity('VolunteerShift', { volunteerJobId: jobId, timeBegin: '', timeEnd: '' });
+            return self.manager.createEntity('VolunteerShift', { volunteerJobId: jobId, timeBegin: '', timeEnd: '', dateShift: new Date() });
         }
         
         function getVolunteerJobById(id) {
