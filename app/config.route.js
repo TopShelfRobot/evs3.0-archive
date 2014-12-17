@@ -51,6 +51,7 @@
                 config: {
                     title: 'Enterprise Launchpad',
                     templateUrl: 'app/dashboard/enterpriselaunchpad.html',
+					authorized: ["money"],
                     settings: {
                         nav: 1,
                         content: 'Enterprise'
@@ -138,7 +139,8 @@
                 url: '/enterpriseeventure/:eventureId',
                 config: {
                     title: 'Enterprise Eventure',
-                    templateUrl: 'app/dashboard/enterpriseeventure.html'
+                    templateUrl: 'app/dashboard/enterpriseeventure.html',
+					authorized: ["money"],
                 }
             }, {
                 url: '/eventuredetail/:eventureId',
@@ -162,7 +164,8 @@
                 url: '/setowner',
                 config: {
                     title: 'Owner Setup',
-                    templateUrl: 'app/admin/setowner.html'
+                    templateUrl: 'app/admin/setowner.html',
+					authorized: ["admin", "super-user"]
                 }
             }, {
                 url: '/setaddon',

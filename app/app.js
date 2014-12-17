@@ -33,8 +33,12 @@
 
 	// Handle routing errors and success events.
 	// Trigger breeze configuration
-	app.run(['$route', function ($route) {
+	app.run(['$route', "AuthService", function ($route, auth) {
 		// Include $route to kick start the router.
+		
+		auth.getRole = function(){
+			return ["user", "admin"]
+		};
 	}]);
 
 
