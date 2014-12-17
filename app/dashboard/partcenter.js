@@ -106,13 +106,13 @@
                 }, {
                     field: "quantity",
                     title: "Quantity",
-                    width: 125
+                    width: 100
                 }, {
                     field: "dateCreated",
                     title: "Registration Date",
                     type: "date",
                     format: "{0:MM/dd/yyyy}",
-                    width: 200
+                    width: 180
                 },{
                     field: '',
                     title: '',
@@ -120,6 +120,7 @@
                 }, {
                     field: '',
                     title: '',
+                    width: 130,
                     template: '<a href="\\\#registration/#=id#" class="btn btn-default btn-block"><em class="glyphicon glyphicon-edit"></em>&nbsp;Edit</a>'
                 }]
             };
