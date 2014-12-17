@@ -234,7 +234,7 @@
 
 			$scope.teamDetailGridOptions = function(e) {
 
-				var teamdetailapi = config.remoteApiName + 'widget/GetTeamMembersByTeamId/' + e.Id;
+				var teamdetailapi = config.remoteApiName + 'widget/GetTeamMembersByTeamId/' + e.id;
 
 				return {
 					dataSource: {
@@ -255,10 +255,6 @@
 					},{
 						field: "email",
 						title: "Email"
-					}, {
-						title: "",
-						width: "120px",
-						template:'<a class="btn btn-default btn-block" href="\\\#/editteam/#=id#"><em class="glyphicon glyphicon-edit"></em>&nbsp;Edit</a>'
 					}]
 				};
 			};
@@ -312,7 +308,7 @@
 
 			$scope.coachDetailGridOptions = function(e) {
 
-				var coachdetailapi = config.remoteApiName + 'widget/GetTeamMembersByTeamId/' + e.Id;
+				var coachdetailapi = config.remoteApiName + 'widget/GetTeamMembersByTeamId/' + e.id;
 
 				$scope.remove = function() {
 					alert('Removing: ' + e.Id );
@@ -357,6 +353,10 @@
 						title: '',
 						template: '<button ng-click="remove()" class="btn btn-danger btn-block">Remove</button>',
 						width: 100
+					}, {
+						title: "",
+						width: "120px",
+						template:'<a class="btn btn-default btn-block" href="\\\#/editteam/#=id#"><em class="glyphicon glyphicon-edit"></em>&nbsp;Edit</a>'
 					}]
 				};
 			};
