@@ -53,6 +53,10 @@
             },
             detailTemplate: kendo.template($("#template").html()),
             columns: [{
+                title: "Invited",
+                width: "170px",
+                template:'<div class="btn-group"><button type="button" class="btn btn-default" btn-radio="true">Yes</button><button type="button" class="btn btn-default" btn-radio="false">No</button></div>'
+            },{
                 field: "name",
                 title: "Team Name",
                 width: "200px"
@@ -67,14 +71,16 @@
             },{
                 field: "coachName",
                 title: "Coach Name",
-                width: "220px"
-            }, {
-                field: "amount",
-                title: "Total Paid",
-                width: "120px",
-                format: "{0:c}",
-                filterable: false
-            }, {
+                width: "180px"
+            },
+            // {
+            //    field: "amount",
+            //    title: "Total Paid",
+            //    width: "120px",
+            //    format: "{0:c}",
+            //    filterable: false
+            //},
+            {
                 field: "balance",
                 title: "Balance",
                 width: "120px",
@@ -83,10 +89,12 @@
                 template: kendo.template($("#balanceTemplate").html())
             }, {
                 title: "",
-                width: "120px",
+                width: "100px",
                 template:'<a class="btn btn-default btn-block" href="\\\#/editteam/#=id#"><em class="glyphicon glyphicon-edit"></em>&nbsp;Edit</a>'
             }]
           };
+
+
 
           vm.detailGridOptions = function(e) {
 
@@ -156,7 +164,12 @@
                         title: '',
                         template: '<button ng-click="vm.remove()" class="btn btn-danger btn-block"><em class="glyphicon glyphicon-remove"></em>&nbsp;Remove</button>',
                         width: 120
-                    }]
+                    },{
+                    field: '',
+                    title: '',
+                    template: '<button ng-click="vm.remove()" class="btn btn-default btn-block"><em class="glyphicon glyphicon-edit"></em>&nbsp;Edit</button>',
+                    width: 120
+                }]
             };
           };
 
@@ -210,6 +223,10 @@
             };
 
         }
+
+        vm.inviteTeams = function() {
+            alert('Invitations have been sent.');
+        };
       
         vm.excel = function(data) {
           var gridname = data;
