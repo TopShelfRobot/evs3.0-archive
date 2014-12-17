@@ -98,6 +98,7 @@
 .grid figcaption span.event-info {
   display:inline-block;
   width:260px;
+  height: 17px;
   overflow-x:hidden;
 }
 
@@ -139,13 +140,14 @@
 }
 
 .event-tiles figcaption {
-	height: 100%;
+	height: 330px;
 	width: 100%;
 }
 
 .event-tiles figcaption h4 {
 	margin-top: 65%;
-  white-space:normal;
+    white-space:normal;
+    height:40px;
 }
 
 /*.event-tiles figcaption a {*/
