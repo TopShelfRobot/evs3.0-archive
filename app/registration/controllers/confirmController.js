@@ -36,6 +36,7 @@
 					$('#refund').popover({ title: "Refund Policy", html: true, content: function () { msg = '<div id="popover_content_wrapper"><p>' + cart.regSettings.refundsText + '</p></div>'; return $(msg).html(); }, placement: 'auto', container: 'body', trigger: 'click' });
 				})
 				.finally(function () {
+				    //alert('getting ready to process cart ruls');
 					cart.processCartRules();
 					console.log(cart.registrations);
 					console.log(cart.surcharges);

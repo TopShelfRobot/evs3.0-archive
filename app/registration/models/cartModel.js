@@ -129,12 +129,17 @@
                 regTotalAmount = regTotalAmount + currentReg.fee;
                 regCount++;
             }
-            //console.log(cart.regSettings.isAddSingleFeeForAllRegs);
-            //console.log(cart.regSettings.addSingleFeeType);
+           
+            console.log(cart.regSettings.isAddSingleFeeForAllRegs);
+            console.log(cart.regSettings.addSingleFeeType);
+            alert('now');
 
             if (cart.regSettings.isAddSingleFeeForAllRegs) {
                 var feeAmount = 0;
                 switch (cart.regSettings.addSingleFeeType) {
+                    case "0":
+                        feeAmount = cart.regSettings.addSingleFeeForAllRegsPercent * regTotalAmount / 100;     ///this is a hack fix it //mjb
+                        break;
                     case 'percent':
                         feeAmount = cart.regSettings.addSingleFeeForAllRegsPercent * regTotalAmount / 100;
                         break;
