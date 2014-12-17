@@ -64,8 +64,8 @@
 					console.log(res);
 					$.blockUI({ message: 'Processing order...' });
 					cartOrder.stripeToken = res.id;
-				    //$http.post(config.apiPath + "api/payment/PostTeamPayment", cartOrder)
-				    $http.post(config.apiPath + "api/payment/PostTeamPayment/testet")
+				    $http.post(config.apiPath + "api/payment/PostTeam", cartOrder)
+				    //$http.post(config.apiPath + "api/payment/PostTeamPayment/testet")
 						.success(function (result) {
 							console.log("result: " + result);
 							$location.path("/receipt/" + result);
