@@ -10,7 +10,17 @@
 
 		$scope.participantId = $routeParams.participantId || cart.participantId;
 
-		$scope.partButton = cart.regSettings.partButtonText
+		$scope.partButton = cart.regSettings.partButtonText;
+
+		$scope.social = {
+			twitter:true,
+			facebook: true,
+			google: true
+		};
+
+		$scope.ambassador = {
+			isActive: true
+		};
 
 		var promises = [getParticipant(), Registrations(), Participants(), Team(), Coach()];
 
@@ -45,30 +55,30 @@
 				columns: [{
 					field: "displayName",
 					title: "Listing",
-					width: 300
+					width: 270
 				}, {
 					field: "totalAmount",
 					title: "Amount",
 					format: "{0:c}",
-					width: 150
+					width: 110
 				}, {
 					field: "quantity",
-					title: "Quantity",
-					width: 125
+					title: "Qty",
+					width: 77
 				}, {
 					field: "dateCreated",
 					title: "Registration Date",
 					type: "date",
 					format: "{0:MM/dd/yyyy}",
-					width: 200
+					width: 188
 				},{
 					field: '',
 					title: '',
-					template: '<a href="\\\#viewreceipt/#=eventureOrderId#" class="btn btn-success btn-block">View Receipt</a>'
+					template: '<a href="\\\#viewreceipt/#=eventureOrderId#" class="btn btn-success btn-block"><em class="glyphicon glyphicon-tags"></em>&nbsp;Receipt</a>'
 				}, {
 					field: '',
 					title: '',
-					template: '<a href="\\\#registration/#=id#" class="btn btn-default btn-block">Edit</a>'
+					template: '<a href="\\\#registration/#=id#" class="btn btn-default btn-block"><em class="glyphicon glyphicon-edit"></em>&nbsp;Edit</a>'
 				}]
 			};
 			console.log($scope.registrationGridOptions);
@@ -142,13 +152,13 @@
 				},{
 					title: "",
 					width: "120px",
-					template:'<a class="btn btn-default btn-block" href="\\\#participant/#=id#">Edit</a>'
+					template:'<a class="btn btn-default btn-block" href="\\\#participant/#=id#"><em class="glyphicon glyphicon-edit"></em>&nbsp;Edit</a>'
 				}]
 			};
 
 			$scope.partDetailGridOptions = function(e) {
 
-				var regapi = config.remoteApiName + 'widget/GetRegistrationsByPartId/' + e.Id;
+				var regapi = config.remoteApiName + 'widget/GetRegistrationsByPartId/' + e.id;
 
 				return {
 					dataSource: {
@@ -164,32 +174,33 @@
 					sortable: true,
 					pageable: true,
 					columns: [{
-						field: "name",
+						field: "displayName",
 						title: "Listing",
 						width: 300
 					}, {
 						field: "totalAmount",
 						title: "Amount",
 						format: "{0:c}",
-						width: 150
+						width: 100
 					}, {
 						field: "quantity",
-						title: "Quantity",
-						width: 125
+						title: "Qty",
+						width: 67
 					}, {
 						field: "dateCreated",
 						title: "Registration Date",
 						type: "date",
 						format: "{0:MM/dd/yyyy}",
-						width: 200
+						width: 170
 					},{
 						field: '',
 						title: '',
-						template: '<a href="\\\#viewreceipt/#=eventureOrderId#" class="btn btn-success btn-block">View Receipt</a>'
+						template: '<a href="\\\#viewreceipt/#=eventureOrderId#" class="btn btn-success btn-block"><em class="glyphicon glyphicon-tags"></em>&nbsp;Receipt</a>',
+						width:110
 					}, {
 						field: '',
 						title: '',
-						template: '<a href="\\\#registration/#=id#" class="btn btn-default btn-block">Edit</a>'
+						template: '<a href="\\\#registration/#=id#" class="btn btn-default btn-block"><em class="glyphicon glyphicon-edit"></em>&nbsp;Edit</a>'
 					}
 					]
 				};
@@ -227,7 +238,7 @@
 					width: "220px"
 				},{
 					field: "coachName",
-					title: "Coach Name",
+					title: "Coach",
 					width: "120px"
 				}]
 			};
@@ -284,11 +295,10 @@
 				}, {
 					field: "eventName",
 					title: "Eventure",
-					width: "200px"
 				}, {
 					field: "listName",
 					title: "Listing",
-					width: "220px"
+					width:150
 				}, {
 					field: "amount",
 					title: "Total Paid",
@@ -302,7 +312,7 @@
 				}, {
 					title: "",
 					width: "120px",
-					template: '<a class="btn btn-default btn-block" href="\\\#/editteam/#=id#">Edit</a>'
+					template: '<a class="btn btn-default btn-block" href="\\\#/editteam/#=id#"><em class="glyphicon glyphicon-edit"></em>&nbsp;Edit</a>'
 				}]
 			};
 
