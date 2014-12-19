@@ -26,6 +26,26 @@
 .badge {
   background-color:#5cb85c;
 }
+
+.profile-social .btn {
+  padding: 6px 9px;
+}
+
+.jumbotron {
+  margin-bottom:10px;
+}
+
+.street-team {
+  color:#1A237E;
+}
+
+.ambassador-badge {
+  float:right;
+  position:absolute;
+  top: 20px;
+  right: 30px;
+}
+
 .total-amount {
   font-size:28px;
   font-weight:bold;
