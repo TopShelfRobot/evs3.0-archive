@@ -19,25 +19,6 @@
                         <label for="Birthdate" class="col-lg-5 control-label">Date Of Birth</label>
                         <div class="col-lg-7">
                             <div sb-date-select ng-model="date.dateBirth"></div>
-							<!--<div class="input-group">-->
-							 <!--&lt;!&ndash; <datepicker ng-model="participant.dateBirth" min-date="minDate" show-weeks="true" class="well well-sm"></datepicker> &ndash;&gt;-->
-                            <!--&lt;!&ndash; <input class="form-control" name="Birthdate" ng-model="participant.dateBirth" date-input required> &ndash;&gt;-->
-								<!--<input type="text" class="form-control"-->
-									<!--datepicker-popup="{{format}}"-->
-									<!--ng-model="participant.dateBirth"-->
-									<!--is-open="datePicker.opened"-->
-									<!--min-date="minDate"-->
-									<!--datepicker-options="dateOptions"-->
-									<!--date-disabled="disabled(date, mode)"-->
-									<!--ng-required="true"-->
-									<!--close-text="Close"-->
-									<!--ng-click="datePicker.opened = true"/>-->
-								<!--<span class="input-group-btn">-->
-									<!--<button type="button" class="btn btn-default" ng-click="open($event)">-->
-										<!--<i class="glyphicon glyphicon-calendar"></i>-->
-									<!--</button>-->
-								<!--</span>-->
-							<!--</div>-->
                         </div>
                     </div>
                     <div class="form-group">
@@ -52,8 +33,7 @@
                     <div class="form-group">
                         <label for="EmailAddress" class="col-lg-5 control-label">Email Address</label>
                         <div class="col-lg-7">
-                            <input type="email" class="form-control" id="EmailAddress" name="EmailAddress"
-								ng-model="participant.email" required>
+                            <input type="text" class="form-control" id="EmailAddress" name="EmailAddress" ng-model="participant.email" required>
                         </div>
                     </div>
                 </div>
@@ -62,7 +42,7 @@
                         <label for="StreetAddress" class="col-lg-5 control-label">Street Address</label>
                         <div class="col-lg-7">
                             <input type="text" class="form-control" id="StreetAddress" name="StreetAddress"
-								ng-model="participant.street1" required>
+                                   ng-model="participant.street1" required>
                         </div>
                     </div>
 
@@ -70,7 +50,7 @@
                         <label for="City" class="col-lg-5 control-label">City</label>
                         <div class="col-lg-7">
                             <input type="text" class="form-control" id="City" name="City" data-bind="value: city"
-								ng-model="participant.city" required>
+                                   ng-model="participant.city" required>
                         </div>
                     </div>
                     <div class="form-group">
@@ -141,7 +121,7 @@
                         <label for="ZipCode" class="col-lg-5 control-label">Zip Code</label>
                         <div class="col-lg-7">
                             <input type="text" class="form-control" id="ZipCode" name="ZipCode" minlength="5"
-								ng-model="participant.zip" required>
+                                   ng-model="participant.zip" required>
                         </div>
                     </div>
                     <div class="form-group">

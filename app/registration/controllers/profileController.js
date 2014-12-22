@@ -120,7 +120,7 @@
 
 
 		function Participants() {
-			var partapi = config.remoteApiName + 'widget/GetParticipantsByHouseId/' + cart.houseId;
+		    var partapi = config.remoteApiName + 'widget/GetParticipantsByHouseId/' + $scope.participantId;
 
 			$scope.participantGridOptions = {
 				dataSource: {
@@ -207,7 +207,7 @@
 		}
 
 		function Team() {
-			var teamapi = config.remoteApiName + 'widget/GetTeamRegistrationsByHouseId/' + cart.houseId;
+		    var teamapi = config.remoteApiName + 'widget/GetTeamRegistrationsByHouseId/' + $scope.participantId;
 
 			$scope.teamGridOptions = {
 				dataSource: {
@@ -271,7 +271,7 @@
 		}
 
 		function Coach() {
-			var coachapi = config.remoteApiName + 'widget/GetTeamRegistrationsByCoachId/' + cart.houseId;
+		    var coachapi = config.remoteApiName + 'widget/GetTeamRegistrationsByCoachId/' + $scope.participantId;
 
 			$scope.coachGridOptions = {
 				dataSource: {

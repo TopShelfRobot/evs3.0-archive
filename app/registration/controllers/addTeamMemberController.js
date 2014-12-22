@@ -5,7 +5,18 @@
     function controller($scope, $window, $routeParams, datacontext, common){
 
         $scope.teamMemberId = $routeParams.teamMemberId;
-        $scope.participant = {};
+        $scope.participant = {
+            firstName: '',
+            lastName: '',
+            gender: '',
+            street1: '',
+            city: '',
+            state: '',
+            zip: '',
+            phoneMobile: '',
+            email: '',
+            country: 'US'
+        };
 
         $scope.title = 'Create Your Team Member\'s Participant Profile';
 
@@ -17,23 +28,22 @@
         common.activateController(promises, controllerId);
 
         function createTeamMemberProfile() {
-            datacontext.participant.createProfile().then(function(data){
-                $scope.participant = data;
-                return $scope.participant;
-            });
+            return $scope.participant = datacontext.participant.createProfile();
         }
 
         $scope.submit = function(){
             $scope.date.dateBirth = moment($scope.date.dateBirth).toISOString();
-            datacontext.save().then(function(){
-                    datacontext.team.getTeamMemberById().then(function(data) {
+            datacontext.save().then(function () {
+                console.log('in the first promise');
+                datacontext.team.getTeamMemberById($scope.teamMemberId).then(function (data) {
+                    console.log('in the second promise');
+                    console.log($scope.participant.id);
                         data.participantId = $scope.participant.id;
                         datacontext.save();
                     });
                 $window.history.back();
             });
         };
-
     }
 
     angular.module("evReg").controller(controllerId,

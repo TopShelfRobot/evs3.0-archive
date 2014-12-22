@@ -102,10 +102,10 @@
 
 			alert($scope.participant.lastName);
 
-			//var newPart = datacontext.participant.createParticipant($scope.participant.ownerId, $scope.participant.houseId, $scope.participant.email)
-			//$scope.participant = datacontext.participant.createProfile($scope.participant.email);
-			//newPart.lastName = $scope.participant.lastName;
-			//newPart.firstName = $scope.participant.lastName;
+			var newPart = datacontext.participant.createParticipant($scope.participant.ownerId, $scope.participant.houseId, $scope.participant.email)
+			$scope.participant = datacontext.participant.createProfile($scope.participant.email);
+			newPart.lastName = $scope.participant.lastName;
+			newPart.firstName = $scope.participant.lastName;
 
 
 			$scope.date.dateBirth = moment($scope.date.dateBirth).toISOString();
