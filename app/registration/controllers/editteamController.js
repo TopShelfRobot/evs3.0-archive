@@ -31,8 +31,7 @@
 		
 		var promises = [
 			getTeam(),
-			getPlayers(),
-			getPayments(),
+			getPlayers()
 		];
 		common.activateController(promises, controllerId)
 	        .then(function () {
