@@ -21,6 +21,7 @@
             this.getAll = getAll;
             this.getTeamMemberPaymentInfoByTeamMemberGuid = getTeamMemberPaymentInfoByTeamMemberGuid;
 			this.getTeamById  = getTeamById;
+            this.getTeamMemberById = getTeamMemberById;
 			this.getTeamMembersByTeamId = getTeamMembersByTeamId;
 			this.addTeamMember = addTeamMember;
 			this.getTeamPaymentsByTeamId = getTeamPaymentsByTeamId;
@@ -84,6 +85,21 @@
 		    return self.manager.executeQuery(query)
                 .then(querySucceeded, self.queryFailed);
 				
+            function querySucceeded(data) {
+                return data.results[0];
+            }
+        }
+
+        function getTeamMemberById(id){
+
+            var self = this;
+
+            var query = entityQuery.from("TeamMembers")
+                .where('id', '==', id);
+
+            return self.manager.executeQuery(query)
+                .then(querySucceeded, self.queryFailed);
+
             function querySucceeded(data) {
                 return data.results[0];
             }

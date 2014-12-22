@@ -81,7 +81,6 @@
 					template: '<a href="\\\#registration/#=id#" class="btn btn-default btn-block"><em class="glyphicon glyphicon-edit"></em>&nbsp;Edit</a>'
 				}]
 			};
-			console.log($scope.registrationGridOptions);
 		}
 
 		$scope.date = {
@@ -366,7 +365,7 @@
 					}, {
 						title: "",
 						width: "120px",
-						template:'<a class="btn btn-default btn-block" href="\\\#/editteam/#=id#"><em class="glyphicon glyphicon-edit"></em>&nbsp;Edit</a>'
+						template: kendo.template($("#teamMemberTemplate").html())
 					}]
 				};
 			};

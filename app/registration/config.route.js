@@ -132,6 +132,12 @@
                     templateUrl: 'app/registration/views/addProfile.part.html'
                 }
             }, {
+                url: '/new-member/add/:teamMemberId',
+                config: {
+                    title: 'Add User Profile',
+                    templateUrl: 'app/registration/views/addTeamMember.part.html'
+                }
+            }, {
                 url: '/user-profile/:participantId',
                 config: {
                     title: 'User Profile',
