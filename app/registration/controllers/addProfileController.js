@@ -10,7 +10,7 @@
 		$scope.title = 'Create Your Participant Profile';
 
 		$scope.date = {
-			dateBirth: '1993-07-03'
+			dateBirth: ''
 		};
 
 		$scope.submit = function(){
