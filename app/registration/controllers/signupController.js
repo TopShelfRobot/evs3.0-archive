@@ -55,7 +55,8 @@
                         datacontext.participant.getParticipantByEmailAddress($scope.authentication.userName, cart.ownerId)
                             .then(function (data) {
                                 if (data === null || typeof data === 'undefined') {
-                                    $location.path('/part');
+
+                                    $location.path('/new-user/add');
                                 }
                                 else {
 
