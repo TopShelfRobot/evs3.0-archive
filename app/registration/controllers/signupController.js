@@ -3,7 +3,7 @@
 
     var controllerId = "signupController";
 
-    function Controller($scope, $location, $timeout, authService, common) {
+    function Controller($scope, $location, $timeout, authService, datacontext, cart, common) {
 
         $scope.savedSuccessfully = false;
         $scope.message = "";
@@ -31,7 +31,7 @@
             authService.saveRegistration($scope.registration).then(function (response) {
 
                 $scope.savedSuccessfully = true;
-                $scope.message = "User has been registered successfully, you will be redirected to login page in 2 seconds.";
+                $scope.message = "User has been registered successfully, you will be redirected in 2 seconds.";
                 startTimer();
 
             },
@@ -49,10 +49,41 @@
         var startTimer = function () {
             var timer = $timeout(function () {
                 $timeout.cancel(timer);
-                $location.path('/login');
+                authService.login($scope.registration).then(function() {
+                        $scope.authentication = authService.authentication;
+
+                        datacontext.participant.getParticipantByEmailAddress($scope.authentication.userName, cart.ownerId)
+                            .then(function (data) {
+                                if (data === null || typeof data === 'undefined') {
+                                    $location.path('/part');
+                                }
+                                else {
+
+                                    if (requestPath === '/dash.html') {
+                                        // set login in stuff for dash side
+                                        $location.path('/eventurecenter');
+                                    }
+                                    else {
+                                        cart.houseId = data.id;
+                                        $location.path(cart.navUrl);
+                                        //this is wil's trying to pass in path
+                                        //if (typeof $scope.requestPath === 'undefined') {
+                                        //    cart.houseId =
+                                        //    $location.path('/eventure');
+                                        //}
+                                        //else {
+                                        //    window.location.href = $scope.requestPath;
+                                        //}
+                                    }
+                                }
+                            });
+                    },
+                    function (err) {
+                        $scope.message = err.error_description;
+                    });
             }, 2000);
         };
     }
    
-    angular.module("evReg").controller(controllerId, ['$scope', '$location', '$timeout', 'authService', 'common', Controller]);
+    angular.module("evReg").controller(controllerId, ['$scope', '$location', '$timeout', 'authService', 'datacontext', 'CartModel', 'common', Controller]);
 })();

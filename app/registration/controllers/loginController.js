@@ -39,7 +39,7 @@
                        //alert('why so diff');
                        //alert(data.id);
                        //alert(data.id.typeof);
-                       if (data == null) {
+                       if (data === null || typeof data === 'undefined') {
                            //alert('not here i exist');
                            //get participant data
                            $location.path('/part');
