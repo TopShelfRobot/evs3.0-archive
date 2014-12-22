@@ -73,7 +73,8 @@
 .grid li {
 	display: inline-block;
 	width: 300px;
-	margin: 0;
+    height:340px;
+	margin: 0 0 20px;
 	padding: 10px;
 	text-align: left;
 	position: relative;
