@@ -40,7 +40,7 @@
 			});
 		
 		$scope.addPlayer = function(name, email){
-			$scope.players.push({name : null, email: null});
+			$scope.players.push({name : null, email: null, position: null});
 		};
 		
 		$scope.editTeam = function(){
@@ -48,7 +48,7 @@
 			for(var i = 0; i < $scope.players.length; i++){
 				if(typeof $scope.players[i].id == "undefined"){
 					if($scope.players[i].name && $scope.players[i].email){
-						datacontext.team.addTeamMember({teamId: $routeParams.teamId, name: $scope.players[i].name, email: $scope.players[i].email, active: true});
+						datacontext.team.addTeamMember({teamId: $routeParams.teamId, name: $scope.players[i].name, email: $scope.players[i].email, position: $scope.players[i].position, active: true});
 					}
 				}
 			}
