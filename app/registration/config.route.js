@@ -114,7 +114,7 @@
                     templateUrl: 'app/registration/views/confirm.part.html'
                 }
             }, {
-                url: '/receipt/:paymentId',
+                url: '/receipt/:registrationId',
                 config: {
                     title: 'Receipt',
                     templateUrl: 'app/registration/views/receipt.part.html'

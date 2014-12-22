@@ -27,7 +27,7 @@
 			this.getTeamPaymentsByTeamId = getTeamPaymentsByTeamId;
             this.getNotPaidTeamMemberCountByTeamGuid = getNotPaidTeamMemberCountByTeamGuid;
             this.getTeamMemberPaymentSumByTeamGuid = getTeamMemberPaymentSumByTeamGuid;
-            this.getTeamMemberPaymentInfoByPaymentId = getTeamMemberPaymentInfoByPaymentId;
+            this.GetTeamInfoByRegistrationId = GetTeamInfoByRegistrationId;
         }
 
         // Allow this repo to have access to the Abstract Repo's functions,
@@ -62,9 +62,9 @@
             }
         };
 
-        function getTeamMemberPaymentInfoByPaymentId(id) {
+        function GetTeamInfoByRegistrationId(id) {
             var self = this;
-            var query = entityQuery.from('getTeamMemberPaymentInfoByPaymentId')
+            var query = entityQuery.from('GetTeamInfoByRegistrationId')
                 .withParameters({ id: id });
 
             return self.manager.executeQuery(query)
