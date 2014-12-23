@@ -101,7 +101,8 @@
 							console.log("ERROR:", err.toString());
 						})
 						.finally(function () {
-							$.unblockUI();
+						    $.unblockUI();
+						    cart.emptyCart();
 						});
 				});
 		};
