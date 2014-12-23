@@ -1,6 +1,6 @@
-(function(){
-    "use strict";
-    var controllerId = "AddTeamMemberController";
+;(function(){
+
+    var controllerId = "AddTeamMember";
 
     function controller($scope, $window, $routeParams, datacontext, common){
 
