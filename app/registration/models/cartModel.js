@@ -132,7 +132,7 @@
            
             console.log(cart.regSettings.isAddSingleFeeForAllRegs);
             console.log(cart.regSettings.addSingleFeeType);
-            alert('now');
+            //alert('now');
 
             if (cart.regSettings.isAddSingleFeeForAllRegs) {
                 var feeAmount = 0;
