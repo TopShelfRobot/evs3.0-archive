@@ -20,7 +20,6 @@
           <table class="table table-striped">
             <thead>
               <tr>
-                <th>Position</th>
                 <th>Name</th>
                 <th>Email Address</th>
                 <th />
@@ -28,14 +27,6 @@
             </thead>
             <tbody>
               <tr ng-repeat="player in players">
-                <td>
-                  <select ng-model="player.position" class="form-control">
-                    <option value="0" ng-selected="true">Please Select</option>
-                    <option value="driver">Driver</option>
-                    <option value="runner">Runner</option>
-                    <option value="captain">Captain</option>
-                  </select>
-                </td>
                 <td>
                   <input ng-model="player.name" type="text" class="form-control" placeholder="Enter the full name of the person you would like to invite." />
                 </td>

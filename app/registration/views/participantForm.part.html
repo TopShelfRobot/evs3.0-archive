@@ -33,7 +33,18 @@
                     <div class="form-group">
                         <label for="EmailAddress" class="col-lg-5 control-label">Email Address</label>
                         <div class="col-lg-7">
-                            <input type="text" class="form-control" id="EmailAddress" name="EmailAddress" ng-model="participant.email" required>
+                            <input type="email" class="form-control" id="EmailAddress" name="EmailAddress" ng-model="participant.email" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="position" class="col-lg-5 control-label">Position</label>
+                        <div class="col-lg-7">
+                            <select ng-model="participant.position" class="form-control" required>
+                                <option value="0" ng-selected="true">Please Select</option>
+                                <option value="driver">Driver</option>
+                                <option value="runner">Runner</option>
+                                <option value="captain">Captain</option>
+                            </select>
                         </div>
                     </div>
                 </div>
@@ -128,6 +139,18 @@
                         <label for="CellPhone" class="col-lg-5 control-label">Cell Phone</label>
                         <div class="col-lg-7">
                             <input type="tel" class="form-control" id="CellPhone" name="CellPhone" ng-model="participant.phoneMobile" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-5 control-label">T-Shirt Size</label>
+                        <div class="col-lg-7">
+                            <select class="form-control" ng-model="participant.shirtSize" required>
+                                <option>XS</option>
+                                <option>Small</option>
+                                <option>Medium</option>
+                                <option>Large</option>
+                                <option>XL</option>
+                            </select>
                         </div>
                     </div>
                 </div>
