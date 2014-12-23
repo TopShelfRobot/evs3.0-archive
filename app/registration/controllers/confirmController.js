@@ -95,7 +95,7 @@
 					$http.post(config.apiPath + "api/order/Post", order)   //mjb
 						.success(function (result) {
 							//console.log("result: " + result);
-							$location.path("/receipt/" + result);
+							$location.path("/orderreceipt/" + result);
 						})
 						.error(function (err) {
 							console.log("ERROR:", err.toString());
