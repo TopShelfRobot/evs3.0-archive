@@ -122,7 +122,8 @@
 		};
 
 		$scope.next = function () {
-			cartModel.registrations.currentGroupId = $scope.groupId;
+		    //cartModel.registrations.currentGroupId = $scope.groupId;
+		    //alert($scope.groupId);
 			//cartModel.currentStockAnswerSet = $scope.stockAnswerSet;
 			//cartModel.currentCustomAnswerSet = getCustomAnswers();
 			//cartModel.setCurrentParticipant($scope.participant);
