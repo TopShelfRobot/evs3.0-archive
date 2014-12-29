@@ -15,10 +15,10 @@
 
         $scope.team = {};
         $scope.team.teamName = "";
-        $scope.players = [{name : "", email : ""}];
+        $scope.players = [{name : "", email : "", position: ""}];
 
         $scope.addPlayer = function() {
-            $scope.players.push({ name: "", email: "" });
+            $scope.players.push({ name: "", email: "", position: "" });
         };
 		
 		var promises = [];
@@ -36,7 +36,7 @@
             for (var i = 0; i < $scope.players.length; i++) {
                 var name, email;
                 if ($scope.players[i].name.length > minNameLength && $scope.players[i].email) {
-                    cartModel.teamMembers.push({ name: $scope.players[i].name, email: $scope.players[i].email });
+                    cartModel.teamMembers.push({ name: $scope.players[i].name, email: $scope.players[i].email, position: $scope.players[i].position });
                 } else if ($scope.players[i].name.length == 0 && $scope.players[i].email.length == 0) {
                     // ignore this entry
                     // it's still valid

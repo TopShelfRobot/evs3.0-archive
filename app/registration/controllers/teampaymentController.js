@@ -21,7 +21,8 @@
 								$scope.userPaying = item.currentFee;
 								break;
 							case "TeamSuggest":   //team suggest
-								$scope.isSuggestPayVisible = true;
+							    $scope.isSuggestPayVisible = true;
+							    $scope.userPaying = 0;
 							
 								break;
 							case "TeamIndividual":    //team all pays the same
@@ -58,25 +59,48 @@
 			//    //'charges': cart.surcharges
 			//};
 
-			//$.blockUI({ message: 'Processing order...' });
-			stripe.checkout(cartOrder.orderAmount)
-				.then(function(res){
-					console.log(res);
-					$.blockUI({ message: 'Processing order...' });
-					cartOrder.stripeToken = res.id;
-				    //$http.post(config.apiPath + "api/payment/PostTeamPayment", cartOrder)
-				    $http.post(config.apiPath + "api/payment/PostTeamPayment/testet")
-						.success(function (result) {
-							console.log("result: " + result);
-							$location.path("/receipt/" + result);
-						})
-						.error(function(err){
-							console.error("ERROR:", err.toString());
-						})
-						.finally(function () {
-						 $.unblockUI();
-					 });
-				});
+		    //$.blockUI({ message: 'Processing order...' });
+
+			console.log($scope.userPaying);
+
+			if ($scope.userPaying > 0) {
+			    stripe.checkout(cartOrder.orderAmount)
+                    .then(function (res) {
+                        console.log(res);
+                        $.blockUI({ message: 'Processing order...' });
+                        cartOrder.stripeToken = res.id;
+                        $http.post(config.apiPath + "api/payment/PostTeam", cartOrder)
+                        //$http.post(config.apiPath + "api/payment/PostTeamPayment/testet")
+                            .success(function (result) {
+                                console.log("result: " + result);
+                                $location.path("/receipt/" + result);
+                            })
+                            .error(function (err) {
+                                console.error("ERROR:", err.toString());
+                            })
+                            .finally(function () {
+                                $.unblockUI();
+                            });
+                    });
+			}
+			else
+			{
+			    //console.log(res);
+			    $.blockUI({ message: 'Processing order...' });
+			   // cartOrder.stripeToken = res.id;
+			    $http.post(config.apiPath + "api/payment/PostTeam", cartOrder)
+                //$http.post(config.apiPath + "api/payment/PostTeamPayment/testet")
+                    .success(function (result) {
+                        console.log("result: " + result);
+                        $location.path("/receipt/" + result);
+                    })
+                    .error(function (err) {
+                        console.error("ERROR:", err.toString());
+                    })
+                    .finally(function () {
+                        $.unblockUI();
+                    });
+			}
 		};
 	}
 	

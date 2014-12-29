@@ -29,36 +29,26 @@
 				});
 		}
 		
-		function getPayments(){
-			return datacontext.team.getTeamPaymentsByTeamId($routeParams.teamId)
-				.then(function(payments){
-					console.log("Payments:", payments);
-				});
-		}
-		
 		var promises = [
 			getTeam(),
-			getPlayers(),
-			getPayments(),
+			getPlayers()
 		];
 		common.activateController(promises, controllerId)
-	        .then(function () { 
-				console.log('Activated Dashboard View'); 
+	        .then(function () {
 			})
 			.finally(function(){
-				console.log("done");
 			});
 		
 		$scope.addPlayer = function(name, email){
-			$scope.players.push({name : null, email: null});
-		}
+			$scope.players.push({name : null, email: null, position: null});
+		};
 		
 		$scope.editTeam = function(){
 			team.name = $scope.team.teamName;
 			for(var i = 0; i < $scope.players.length; i++){
 				if(typeof $scope.players[i].id == "undefined"){
 					if($scope.players[i].name && $scope.players[i].email){
-						datacontext.team.addTeamMember({teamId: $routeParams.teamId, name: $scope.players[i].name, email: $scope.players[i].email, active: true});
+						datacontext.team.addTeamMember({teamId: $routeParams.teamId, name: $scope.players[i].name, email: $scope.players[i].email, position: $scope.players[i].position, active: true});
 					}
 				}
 			}
@@ -66,7 +56,7 @@
 				.then(function(){
 					$window.history.back();
 				});
-		}
+		};
 	}
 	
 	angular.module("evReg").controller(controllerId, ["$scope", "$location", "$routeParams", "$window", "common", "datacontext", Controller]);

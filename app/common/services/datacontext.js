@@ -117,7 +117,7 @@
 				var msg = config.appErrorPrefix + 'Save failed: ' +
 					breeze.saveErrorMessageService.getErrorMessage(error);
 				error.message = msg;
-				logError(msg, error);
+				//logError(msg, error);   //mjb
 				throw error;
 			}
 		}
@@ -134,7 +134,7 @@
 				var msg = config.appErrorPrefix + 'Save failed: ' +
 					breeze.saveErrorMessageService.getErrorMessage(error);
 				error.message = msg;
-				logError(msg, error);
+				//logError(msg, error);  //mjb
 				throw error;
 			}
 		}

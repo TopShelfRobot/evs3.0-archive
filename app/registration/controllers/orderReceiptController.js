@@ -34,7 +34,7 @@
         $scope.title = "Registration Complete";
         //$scope.paymentId = $routeParams.paymentId;
         $scope.orderId = $routeParams.orderId;
-        alert($scope.orderId);
+        //alert($scope.orderId);
 
         var promises = [
 	        datacontext.registration.getOrderById($scope.orderId)

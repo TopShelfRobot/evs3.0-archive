@@ -12,14 +12,16 @@
                         <thead>
                         <tr>
                             <th class="col-lg-4">Listing</th>
-                            <th class="col-lg-4">Team Name</th>
-                            <th class="col-lg-2">Price</th>
+                            <th class="col-lg-4">Participant</th>
+                            <th class="col-lg-3">Group</th>
+                            <th class="col-lg-1">Price</th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr>
-                            <td>{{ receipt.listName }}</td>
-                            <td>{{ receipt.name }}</td>
+                            <td>{{ receipt.displayName }}</td>
+                            <td>{{ receipt.participant }}</td>
+                            <td>{{ receipt.groupName }}</td>
                             <td>{{ receipt.amount | currency }}</td>
                         </tr>
                         </tbody>

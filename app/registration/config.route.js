@@ -114,7 +114,7 @@
                     templateUrl: 'app/registration/views/confirm.part.html'
                 }
             }, {
-                url: '/receipt/:paymentId',
+                url: '/receipt/:registrationId',
                 config: {
                     title: 'Receipt',
                     templateUrl: 'app/registration/views/receipt.part.html'
@@ -126,22 +126,22 @@
                     templateUrl: 'app/registration/views/orderreceipt.part.html'
                 }
             }, {
-                url: '/user-profile',
+                url: '/new-user/add',
                 config: {
-                    title: 'User Profile',
-                    templateUrl: 'app/registration/views/profile.part.html'
+                    title: 'Add User Profile',
+                    templateUrl: 'app/registration/views/addProfile.part.html'
+                }
+            }, {
+                url: '/new-member/add/:teamMemberId',
+                config: {
+                    title: 'Add User Profile',
+                    templateUrl: 'app/registration/views/addTeamMember.part.html'
                 }
             }, {
                 url: '/user-profile/:participantId',
                 config: {
                     title: 'User Profile',
                     templateUrl: 'app/registration/views/profile.part.html'
-                }
-            }, {
-                url: '/user-profile/add',
-                config: {
-                    title: 'Add User Profile',
-                    templateUrl: 'app/registration/views/addProfile.part.html'
                 }
             },{
                 url: '/editteam/:teamId',

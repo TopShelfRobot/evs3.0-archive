@@ -75,7 +75,7 @@
             },
             series: [{
               name: "Registrations",
-              field: "Regs",
+              field: "regs",
               colorField: "userColor",
               axis: "registrations",
               tooltip: { visible: true }
@@ -88,7 +88,7 @@
             },
             categoryAxis: {
               baseUnit: "months",
-              field: "Month",
+              field: "month",
               majorGridLines: {
                   visible: false
               }
