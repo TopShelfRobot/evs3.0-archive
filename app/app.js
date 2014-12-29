@@ -31,16 +31,6 @@
 		delete $httpProvider.defaults.headers.common['X-Requested-With'];
 	}]);
 
-	// Handle routing errors and success events.
-	// Trigger breeze configuration
-	app.run(['$route', "AuthService", function ($route, auth) {
-		// Include $route to kick start the router.
-		
-		auth.getRole = function(){
-			return ["user", "admin"]
-		};
-	}]);
-
 
 	//var serviceBase = 'http://localhost:26264/';
 	var serviceBase = 'http://localhost:49822/';
@@ -57,9 +47,14 @@
 	});
 
 	// Handle routing errors and success events.
-	app.run(['$route', 'authService', function ($route, authService) {
+	app.run(['$route', 'authService', "AuthService", function ($route, authService, rba) {
 		// Include $route to kick start the router.
 		authService.fillAuthData();
+    
+		rba.getRole = function(){
+      // TODO: return the roles
+			return ["user", "admin"]
+		};
 	}]);
 
 
