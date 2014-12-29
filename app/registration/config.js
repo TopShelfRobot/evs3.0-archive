@@ -9,7 +9,7 @@
     //apiPath = "http://localhost:49822/";
     apiPath = "http://dev30.eventuresports.info/";
 
-    var remoteServiceName = apiPath + 'api/registration/';
+    var remoteServiceName = apiPath + 'bdc/registration/';
     var remoteApiName = apiPath + 'api/';
     var events = {
         controllerActivateSuccess: 'controller.activateSuccess',

@@ -11,7 +11,7 @@
 	//apiPath = "http://localhost:49822/";
 	apiPath = "http://dev30.eventuresports.info/";
 	
-	var remoteServiceName = apiPath + 'api/dashboard/';
+	var remoteServiceName = apiPath + 'bdc/dashboard/';
 	var remoteApiName = apiPath + 'api/';
 
 	var events = {
@@ -26,8 +26,8 @@
 
 	var owner = {
 		ownerId: 1,
-	    //accessType: "none",
-        authEmail: '',
+		//accessType: "none",
+		authEmail: '',
 		isAdmin: true,
 		mr_houseId: 0
 	};

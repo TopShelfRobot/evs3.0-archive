@@ -4,7 +4,10 @@
       <h1>Registered Teams</h1>
       <p class="text-muted">Manage each team and their registrations.</p>
       <div id="partgrid" kendo-grid="vm.teamgrid" k-options="vm.teamGridOptions"></div>
+      <br>
+      <button class="btn btn-success" ng-click="vm.inviteTeams()"><i class="glyphicon glyphicon-send"></i>&nbsp;Send Team Invitations</button>
     </div>
+
     <!-- /4 -->
   </div>
   <!-- /row -->
@@ -20,9 +23,9 @@
 </script>
 
 <script type="text/x-kendo-template" id="balanceTemplate">
-    #if(EventureListTypeId === 4){#
+    #if(eventureListType === 4){#
         N/A
     #}else{#
-        #: '$' + Balance.toFixed(2) #
+        #: '$' + balance.toFixed(2) #
     #}#
 </script>

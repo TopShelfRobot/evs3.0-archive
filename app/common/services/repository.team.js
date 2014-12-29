@@ -21,12 +21,13 @@
             this.getAll = getAll;
             this.getTeamMemberPaymentInfoByTeamMemberGuid = getTeamMemberPaymentInfoByTeamMemberGuid;
 			this.getTeamById  = getTeamById;
+            this.getTeamMemberById = getTeamMemberById;
 			this.getTeamMembersByTeamId = getTeamMembersByTeamId;
 			this.addTeamMember = addTeamMember;
 			this.getTeamPaymentsByTeamId = getTeamPaymentsByTeamId;
             this.getNotPaidTeamMemberCountByTeamGuid = getNotPaidTeamMemberCountByTeamGuid;
             this.getTeamMemberPaymentSumByTeamGuid = getTeamMemberPaymentSumByTeamGuid;
-            this.getTeamMemberPaymentInfoByPaymentId = getTeamMemberPaymentInfoByPaymentId;
+            this.GetTeamInfoByRegistrationId = GetTeamInfoByRegistrationId;
         }
 
         // Allow this repo to have access to the Abstract Repo's functions,
@@ -61,9 +62,9 @@
             }
         };
 
-        function getTeamMemberPaymentInfoByPaymentId(id) {
+        function GetTeamInfoByRegistrationId(id) {
             var self = this;
-            var query = entityQuery.from('getTeamMemberPaymentInfoByPaymentId')
+            var query = entityQuery.from('GetTeamInfoByRegistrationId')
                 .withParameters({ id: id });
 
             return self.manager.executeQuery(query)
@@ -84,6 +85,21 @@
 		    return self.manager.executeQuery(query)
                 .then(querySucceeded, self.queryFailed);
 				
+            function querySucceeded(data) {
+                return data.results[0];
+            }
+        }
+
+        function getTeamMemberById(id){
+
+            var self = this;
+
+            var query = entityQuery.from("TeamMembers")
+                .where('id', '==', id);
+
+            return self.manager.executeQuery(query)
+                .then(querySucceeded, self.queryFailed);
+
             function querySucceeded(data) {
                 return data.results[0];
             }

@@ -244,6 +244,7 @@
         }
 
         function createExpense() {
+            //alert('earth to major tom');
             var self = this;
             return self.manager.createEntity('EventureExpense');
         }

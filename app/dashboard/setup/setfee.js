@@ -19,6 +19,7 @@
         vm.fees = [];
         vm.groups = [];
         vm.listing = {};
+		vm.opened = [];
 
         activate();
 
@@ -34,6 +35,9 @@
             return datacontext.surcharge.getFeeSchedulesByEventureListId(vm.listId)
                 .then(function(data) {
                     //applyFilter();
+					for(var i = 0; i < data.length; i++){
+						vm.opened.push(false);
+					}
                     return vm.fees = data;
                 });
         }
@@ -53,10 +57,12 @@
                     return vm.listing = data;
                 });
         }
-
+		
         vm.addFee = function() {
             vm.newFee = datacontext.surcharge.createFeeSchedule(vm.listId);
             vm.fees.push(vm.newFee);
+			
+			vm.opened.push(true);
         };
 
         vm.addGroup = function() {
@@ -64,17 +70,17 @@
             vm.groups.push(vm.newGroup);
         };
 
-        vm.open = function($event, open) {
+        vm.open = function($event, key) {
             $event.preventDefault();
             $event.stopPropagation();
-            vm[open] = true;
+			vm.opened[key] = true;
         };
 
         vm.dateOptions = {
             'year-format': "'yy'",
             'starting-day': 1
         };
-
+		
         vm.formats = ['MM-dd-yyyy', 'yyyy/MM/dd', 'shortDate'];
 
         vm.format = vm.formats[0];

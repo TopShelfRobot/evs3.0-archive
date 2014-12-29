@@ -208,10 +208,10 @@
 			}
 		}
 
-		function createProfile(email) {
+		function createProfile() {    //mjb removed email from here
 			var self = this;
 			return self.manager.createEntity('Participant',
-				{ ownerId: cart.ownerId, country: "US", email: email, });
+				{ ownerId: cart.ownerId, country: "US" });
 		}
 
 		function createParticipant(ownerId, email, houseId) {

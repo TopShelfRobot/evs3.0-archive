@@ -28,13 +28,13 @@
             addSingleFeeType: 'percent',
             addSingleFeeForAllRegsFlat: 0,
 
-           IsMultiParticipantDiscountCartRule: false,
-           IsMultiRegistrationDiscountCartRule: false,
+            IsMultiParticipantDiscountCartRule: false,
+            IsMultiRegistrationDiscountCartRule: false,
 
-           MultiParticipantDiscountAmount: 0,
-           MultiParticipantDiscountAmountType: 0,
-           MultiRegistrationDiscountAmount: 0,
-           MultiRegistrationDiscountAmountType: 0,
+            MultiParticipantDiscountAmount: 0,
+            MultiParticipantDiscountAmountType: 0,
+            MultiRegistrationDiscountAmount: 0,
+            MultiRegistrationDiscountAmountType: 0,
 
             eventureName: 'Event',
             listName: 'List',
@@ -46,7 +46,6 @@
             //stripeLogoPath: '',
             stripeCheckoutButtonText: '',
             stripeOrderDescription: ''
-
         }
 
         cart.order = function () {
@@ -63,7 +62,7 @@
         };
 
         cart.configureSettings = function (data) {
-           
+
             cart.regSettings.isDuplicateOrderAllowed = data.isDuplicateOrderAllowed;
             cart.regSettings.isAddSingleFeeForAllRegs = data.isAddSingleFeeForAllRegs;
             cart.regSettings.addSingleFeeForAllRegsPercent = data.addSingleFeeForAllRegsPercent;
@@ -88,7 +87,7 @@
             cart.regSettings.multiParticipantDiscountAmountType = data.multiParticipantDiscountAmountType;
             cart.regSettings.multiRegistrationDiscountAmount = data.multiRegistrationDiscountAmount;
             cart.regSettings.multiRegistrationDiscountAmountType = data.multiRegistrationDiscountAmountType;
-            
+
             cart.regSettings.name = data.name;
             cart.regSettings.stripePublishableKey = data.stripePublishableKey
         };
@@ -107,12 +106,12 @@
             }
             if (!isRegDupe) {
                 cart.registrations.push(new registration(eventure.displayHeading, eventureList.displayName, participant.email, eventureList.currentFee, eventure.id, eventureList.id, participant.id, participant.firstName + ' ' + participant.lastName, answers, groupId, group2Id, quantity, eventureList.eventureListTypeId));
-                toastr.success('<strong class="text-center">Your Item Was Added To Your Cart!</strong><br><br><a class="btn btn-primary btn-block" href="#/shoppingcart">View Cart</a>');
+                //toastr.success('<strong class="text-center">Your Item Was Added To Your Cart!</strong><br><br><a class="btn btn-primary btn-block" href="#/shoppingcart">View Cart</a>');
             }
         };
 
         cart.processCartRules = function () {
-           //clear all rules
+            //clear all rules
             var temp = [];
             for (var j = 0; j < cart.surcharges.length; j++) {
                 var currCharge = cart.surcharges[j];
@@ -130,12 +129,17 @@
                 regTotalAmount = regTotalAmount + currentReg.fee;
                 regCount++;
             }
-            //console.log(cart.regSettings.isAddSingleFeeForAllRegs);
-            //console.log(cart.regSettings.addSingleFeeType);
+           
+            console.log(cart.regSettings.isAddSingleFeeForAllRegs);
+            console.log(cart.regSettings.addSingleFeeType);
+            //alert('now');
 
             if (cart.regSettings.isAddSingleFeeForAllRegs) {
                 var feeAmount = 0;
                 switch (cart.regSettings.addSingleFeeType) {
+                    case "0":
+                        feeAmount = cart.regSettings.addSingleFeeForAllRegsPercent * regTotalAmount / 100;     ///this is a hack fix it //mjb
+                        break;
                     case 'percent':
                         feeAmount = cart.regSettings.addSingleFeeForAllRegsPercent * regTotalAmount / 100;
                         break;

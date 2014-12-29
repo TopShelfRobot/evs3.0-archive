@@ -19,7 +19,7 @@
 		activate();
 		
 		function activate() {
-		  var promises = [getEventure(), Registrations(), Capacity(), ListingsGrid(), ExpenseGrid(), EventPlanGrid(), ParticipantGrid(), VolunteerGrid()];
+		  var promises = [getEventure(), getEventureTrends(), Registrations(), Capacity(), ListingsGrid(), ExpenseGrid(), EventPlanGrid(), ParticipantGrid(), VolunteerGrid()];
 
 		  common.activateController(promises, controllerId)
 			  .then(function () {
@@ -30,15 +30,24 @@
 		function getEventure() {
 		  return datacontext.eventure.getEventureById(vm.eventureId)
 			.then(function (data) {
-				return vm.eventure = data;
+				  vm.eventure = data;
+				  return vm.eventure;
 			});
+		}
+
+		function getEventureTrends() {
+			return datacontext.analytic.getTrendsByEventId(vm.eventureId)
+				.then(function(data) {
+					vm.trend = data;
+					return vm.trend;
+				});
 		}
 
 		function Registrations() {
 		  var regapi = config.remoteApiName +'widget/GetEventureGraph/' + vm.eventureId;
 
 		  vm.registrations = {
-			theme: "bootstrap",
+			theme: "material",
 			dataSource: {
 			  transport: {
 				  read: {
@@ -55,7 +64,7 @@
 			},
 			series: [{
 			  name: "Registrations",
-			  field: "Regs",
+			  field: "regs",
 			  colorField: "userColor",
 			  axis: "registrations",
 			  tooltip: { visible: true }
@@ -68,7 +77,7 @@
 			},
 			categoryAxis: {
 			  baseUnit: "months",
-			  field: "Month",
+			  field: "month",
 			  majorGridLines: {
 				  visible: false
 			  }
@@ -187,19 +196,19 @@
 						filterable: false
 					},
 					{
-						field: "Cost",
+						field: "cost",
 						title: "Cost",
 						width: 140,
 						filterable: false
 					},
 					{
-						field: "CostType",
+						field: "costType",
 						title: "Type",
 						width: 140,
 						filterable: false
 					},
 					{
-						field: "PerRegNumber",
+						field: "perRegNumber",
 						title: "Formula",
 						width: 140,
 						filterable: false
@@ -271,7 +280,7 @@
 						title: "",
 						width: "100px",
 						filterable: false,
-						template: '<a class="btn btn-default btn-block" ng-href="\\#/seteventplan/#=Id#"><em class="glyphicon glyphicon-edit"></em>&nbsp;Edit</a>'    //\\\#seteventplan//#=Id#
+						template: '<a class="btn btn-default btn-block" ng-href="\\#/seteventplan/#=id#"><em class="glyphicon glyphicon-edit"></em>&nbsp;Edit</a>'    //\\\#seteventplan//#=Id#
 			}]
 		  };
 		}

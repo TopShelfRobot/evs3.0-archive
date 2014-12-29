@@ -23,9 +23,17 @@
 
 		function activate() {
 			onDestroy();
-			common.activateController(getCoupon(), getEventures(), getEventureLists(), controllerId)
+			common.activateController(getCoupon(), getEventures(), getEventureLists(), getAmountTypes(), controllerId)
 				.then(function() {
 				    //log('Activated set coupon');
+				});
+		}
+
+		function getAmountTypes() {
+			return datacontext.participant.getAmountTypes()
+				.then(function(data) {
+					vm.amountTypes = data;
+					return vm.amountTypes;
 				});
 		}
 

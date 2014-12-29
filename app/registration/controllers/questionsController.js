@@ -122,7 +122,8 @@
 		};
 
 		$scope.next = function () {
-			//cartModel.currentGroupId = $scope.groupId;
+		    //cartModel.registrations.currentGroupId = $scope.groupId;
+		    //alert($scope.groupId);
 			//cartModel.currentStockAnswerSet = $scope.stockAnswerSet;
 			//cartModel.currentCustomAnswerSet = getCustomAnswers();
 			//cartModel.setCurrentParticipant($scope.participant);
@@ -130,7 +131,8 @@
 			//cartModel.setCurrentEventureList($scope.eventureList);
 			cartModel.addRegistration($scope.eventure, $scope.eventureList, $scope.participant, getCustomAnswers(), $scope.groupId, $scope.group2Id, $scope.quantity);
 			$location.$$search = {};
-			$location.path("/eventure/");
+			//$location.path("/eventure/");
+			$location.path("/confirm");
 		};
 	}
 
