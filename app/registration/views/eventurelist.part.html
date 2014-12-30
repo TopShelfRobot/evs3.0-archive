@@ -8,20 +8,36 @@
   </div>
   <div class="row">
     <div class="col-md-8 col-lg-8 col-md-push-4 clearfix">
-      <ul class="list-image grid">
-        <li>
-			<figure>
-				<img ng-src="content/images/{{selection.imageFileName || 'list-default.jpg'}}" alt="img01">
-				<figcaption>
-					<h4>{{selection.displayName}}</h4>
-					<br>
-					<span class="list-description">{{selection.desc}}</span>
-					<br>
-					<a ng-click="register(eventure, selection, selectedParticipant)" class="btn btn-success hidden-xs">Register</a>
-	            </figcaption>
-			</figure>
-        </li>
-      </ul>
+      <div class="list-tile">
+        <img ng-src="content/images/{{selection.imageFileName || 'list-default.jpg'}}" alt="img01">
+        <div class="list-desc-box">
+          <h4 class="text-center">{{selection.displayName}}</h4>
+          <br>
+          <p class="list-description text-center">{{selection.desc}}</p>
+          <br>
+          <div class="row">
+            <div class="col-md-6 col-lg-6 col-lg-offset-3 col-md-offset-3">
+              <a ng-click="register(eventure, selection, selectedParticipant)" class="btn btn-warning btn-block hidden-xs">Apply</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <!--<ul class="list-image grid">-->
+        <!--<li>-->
+			<!--<figure>-->
+				<!--<img ng-src="content/images/{{selection.imageFileName || 'list-default.jpg'}}" alt="img01">-->
+				<!--<figcaption>-->
+					<!--<h4>{{selection.displayName}}</h4>-->
+					<!--<br>-->
+					<!--<span class="list-description">{{selection.desc}}</span>-->
+					<!--<br>-->
+					<!--<a ng-click="register(eventure, selection, selectedParticipant)" class="btn btn-warning hidden-xs">Register</a>-->
+	            <!--</figcaption>-->
+			<!--</figure>-->
+        <!--</li>-->
+      <!--</ul>-->
     </div>
 
     <div class="col-md-4 col-lg-4 col-md-pull-8 clearfix">
@@ -58,7 +74,7 @@
           <a class="btn btn-primary btn-block" href="#/participant/add">{{buttonText}}</a>
         </div>
       </div>
-      <button ng-click="register(eventure, selection, selectedParticipant)" class="btn btn-success btn-block visible-xs">Register</button>
+      <button ng-click="register(eventure, selection, selectedParticipant)" class="btn btn-warning btn-block visible-xs">Register</button>
     </div>
   </div>
 </div>
