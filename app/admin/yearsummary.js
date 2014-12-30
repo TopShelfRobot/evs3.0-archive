@@ -14,7 +14,7 @@
         vm.eventureId = $routeParams.eventureId;
 
         vm.chart = {
-            startYear: 2013,
+            startYear: 2012,
             endYear: 2014,
             //eventureId: 1,
             type: 0
@@ -61,7 +61,8 @@
                  transport: {
                      read: {
                          url: function () {
-                             return config.remoteApiName + 'analytic/GetYearOverYearData/' + vm.ownerId + '/' + vm.eventureId  + '/' + vm.chart.startYear  + '/' + vm.chart.endYear  + '/' + vm.chart.type;
+                             return config.remoteApiName + 'analytic/GetYearOverYearData/' + vm.ownerId + '/' + vm.eventureId + '/' + vm.chart.startYear + '/' + vm.chart.endYear + '/' + vm.chart.type;
+                             //return 'http://dev30.eventuresports.info/' + 'analytic/GetYearOverYearData/' + vm.ownerId + '/' + vm.eventureId + '/' + vm.chart.startYear + '/' + vm.chart.endYear + '/' + vm.chart.type;
                          },
                          dataType: "json"
                      }
