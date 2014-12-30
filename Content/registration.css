@@ -61,6 +61,26 @@
   font-size:12px;
 }
 
+.list-tile {
+  border-top: 4px solid #bc4800;
+}
+
+.list-tile img {
+  width: 100%;
+  max-width: 100%;
+  border:2px solid #E0E0E0;
+}
+
+.list-desc-box {
+  padding:10px;
+  background: #FAFAFA;
+  color: #757575;
+  border: 1px solid #EEEEEE;
+  -moz-box-shadow:    inset 0 0 10px #EEEEEE;
+  -webkit-box-shadow: inset 0 0 10px #EEEEEE;
+  box-shadow:         inset 0 0 10px #EEEEEE;
+}
+
 /* Tile Layout */
 .grid {
 	padding: 20px;
