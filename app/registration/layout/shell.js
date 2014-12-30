@@ -53,7 +53,6 @@
 					$timeout(function(){
 						self.showSplash = false;
 					}, 300);
-					
 				});
 		}
 
