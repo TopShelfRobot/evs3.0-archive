@@ -3,12 +3,17 @@ background-color:transparent;
 }
 
 .navbar-inverse {
-    background-color: #1A237E;
+    background-color: #bc4800;
+    border-color:#ffc107;
 }
 
 .navbar-inverse .navbar-nav > .active > a, .navbar-inverse .navbar-nav > .active > a:hover, .navbar-inverse .navbar-nav > .active > a:focus {
-    background-color: #303F9F;
-    border-bottom:2px inset #FF4081;
+    background-color: #ffc107;
+    border-bottom:2px inset #FFFF00;
+}
+
+.navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form {
+    border-color:#ffc107;
 }
 
 .navbar-inverse .navbar-nav > li > a {
@@ -25,7 +30,7 @@ background-color:transparent;
     border:none;
 }
 .navbar-inverse .navbar-toggle .icon-bar {
-    background-color:#FF4081;
+    background-color:#FFFF00;
 }
 .btn:focus,
 .btn:active:focus,
@@ -223,7 +228,7 @@ fieldset[disabled] .btn-info.active {
 }
 .btn-warning {
     color: #ffffff;
-    background-color: #ff9800;
+    background-color: #bc4800;
     border-color: transparent;
 }
 .btn-warning:hover,
@@ -232,7 +237,7 @@ fieldset[disabled] .btn-info.active {
 .btn-warning.active,
 .open > .dropdown-toggle.btn-warning {
     color: #ffffff;
-    background-color: #cc7a00;
+    background-color: #F57C00;
     border-color: rgba(0, 0, 0, 0);
 }
 .btn-warning:active,
@@ -255,11 +260,11 @@ fieldset[disabled] .btn-warning:active,
 .btn-warning.disabled.active,
 .btn-warning[disabled].active,
 fieldset[disabled] .btn-warning.active {
-    background-color: #ff9800;
+    background-color: #bc4800;
     border-color: transparent;
 }
 .btn-warning .badge {
-    color: #ff9800;
+    color: #bc4800;
     background-color: #ffffff;
 }
 .btn-danger {
@@ -428,8 +433,8 @@ fieldset[disabled] .btn-link:focus {
     box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
 }
 .btn-warning {
-    background-image: -webkit-radial-gradient(circle, #ff9800 80%, #e08600 81%);
-    background-image: radial-gradient(circle, #ff9800 80%, #e08600 81%);
+    background-image: -webkit-radial-gradient(circle, #bc4800 80%, #F57C00 81%);
+    background-image: radial-gradient(circle, #bc4800 80%, #F57C00 81%);
     background-repeat: no-repeat;
     background-size: 200%;
     background-position: 50%;
@@ -437,12 +442,12 @@ fieldset[disabled] .btn-link:focus {
 }
 .btn-warning:hover {
     background-size: 100%;
-    border-color: #e08600;
+    border-color: #F57C00;
 }
 .btn-warning:active {
-    background-color: #e08600;
-    background-image: -webkit-radial-gradient(circle, #e08600 10%, #ff9800 11%);
-    background-image: radial-gradient(circle, #e08600 10%, #ff9800 11%);
+    background-color: #F57C00;
+    background-image: -webkit-radial-gradient(circle, #F57C00 10%, #bc4800 11%);
+    background-image: radial-gradient(circle, #F57C00 10%, #bc4800 11%);
     background-repeat: no-repeat;
     background-size: 1000%;
     -webkit-box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
