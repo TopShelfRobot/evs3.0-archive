@@ -88,13 +88,13 @@
 
 	                    <div class="form-group" 
 								ng-switch-when="checkbox">
-	                        <label class="col-6 col-sm-6 col-lg-6 control-label">{{question.questionText}}</label>
-							<div class="col-6 col-sm-6 col-lg-6">
-	                            <input type="checkbox" 
-									ng-model="customAnswers[key]" 
-									ng-required="question.isRequired">
+							<div class="col-1 col-sm-1 col-lg-1">
+								<input type="checkbox"
+									   ng-model="customAnswers[key]"
+									   ng-required="question.isRequired">
 								</input>
-	                        </div>
+							</div>
+	                        <label class="col-11 col-sm-11 col-lg-11">{{question.questionText}}</label>
 						</div>
 					</div>
                 </div>
@@ -104,7 +104,7 @@
 					<label class="col-xs-4 control-label">{{cart.regSettings.groupName}}:</label>
 					<div class="col-xs-8">
 						<select class="form-control" ng-model="groupId" ng-options="g.id as g.name for g in groups">
-							<option value="0">Please Select</option>
+							<option value="">Please Select Your {{cart.regSettings.groupName}}</option>
 						</select>
 					</div>
 				</div>
