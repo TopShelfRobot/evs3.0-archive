@@ -23,6 +23,7 @@
 			trail: 100,
 			color: '#F58A00'
 		};
+		vm.resolved = false;
 
 		activate();  
 
