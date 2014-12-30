@@ -122,17 +122,28 @@
 		};
 
 		$scope.next = function () {
-		    //cartModel.registrations.currentGroupId = $scope.groupId;
-		    //alert($scope.groupId);
-			//cartModel.currentStockAnswerSet = $scope.stockAnswerSet;
-			//cartModel.currentCustomAnswerSet = getCustomAnswers();
-			//cartModel.setCurrentParticipant($scope.participant);
-			//cartModel.setCurrentEventure($scope.eventure);
-			//cartModel.setCurrentEventureList($scope.eventureList);
-			cartModel.addRegistration($scope.eventure, $scope.eventureList, $scope.participant, getCustomAnswers(), $scope.groupId, $scope.group2Id, $scope.quantity);
-			$location.$$search = {};
-			//$location.path("/eventure/");
-			$location.path("/confirm");
+			if ($scope.questionsForm.$valid) {
+				// Submit as normal
+				cartModel.addRegistration($scope.eventure, $scope.eventureList, $scope.participant, getCustomAnswers(), $scope.groupId, $scope.group2Id, $scope.quantity);
+				$location.$$search = {};
+				$location.path("/confirm");
+			} else {
+				toastr.options = {
+					'positionClass': 'toast-bottom-right'
+				};
+				toastr['error']('Please answer all questions and accept all terms.');
+			}
+            ////cartModel.registrations.currentGroupId = $scope.groupId;
+            ////alert($scope.groupId);
+			////cartModel.currentStockAnswerSet = $scope.stockAnswerSet;
+			////cartModel.currentCustomAnswerSet = getCustomAnswers();
+			////cartModel.setCurrentParticipant($scope.participant);
+			////cartModel.setCurrentEventure($scope.eventure);
+			////cartModel.setCurrentEventureList($scope.eventureList);
+			//cartModel.addRegistration($scope.eventure, $scope.eventureList, $scope.participant, getCustomAnswers(), $scope.groupId, $scope.group2Id, $scope.quantity);
+			//$location.$$search = {};
+			////$location.path("/eventure/");
+			//$location.path("/confirm");
 		};
 	}
 
