@@ -17,7 +17,7 @@
 					<br>
 					<span class="list-description">{{selection.desc}}</span>
 					<br>
-					<a ng-click="register(eventure, selection, selectedParticipant)" class="btn btn-success hidden-xs">Register</a>
+					<a ng-click="register(eventure, selection, selectedParticipant)" class="btn btn-warning hidden-xs">Register</a>
 	            </figcaption>
 			</figure>
         </li>
@@ -36,7 +36,7 @@
         </div>
       </div>
       <hr>
-      <div class="panel panel-default">
+      <div class="panel panel-default" ng-hide="true">
         <div class="panel-heading">
           <h3 class="panel-title">Participants</h3>
         </div>
@@ -58,7 +58,7 @@
           <a class="btn btn-primary btn-block" href="#/participant/add">{{buttonText}}</a>
         </div>
       </div>
-      <button ng-click="register(eventure, selection, selectedParticipant)" class="btn btn-success btn-block visible-xs">Register</button>
+      <button ng-click="register(eventure, selection, selectedParticipant)" class="btn btn-warning btn-block visible-xs">Register</button>
     </div>
   </div>
 </div>

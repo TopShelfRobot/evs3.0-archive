@@ -12,7 +12,7 @@
 }
 
 .navbar-inverse .navbar-nav > li > a:hover {
-  color:#e91e63;
+  color:#FFFF00;
 }
 
 .navbar .glyphicon {
@@ -36,7 +36,7 @@
 }
 
 .street-team {
-  color:#1A237E;
+  color:#bc4800;
 }
 
 .ambassador-badge {
@@ -106,7 +106,7 @@
   overflow-x:hidden;
   white-space:nowrap;
   border: 1px solid #EEEEEE;
-  border-top: 4px solid #3F51B5;
+  border-top: 4px solid #bc4800;
   -moz-box-shadow:    inset 0 0 10px #EEEEEE;
   -webkit-box-shadow: inset 0 0 10px #EEEEEE;
   box-shadow:         inset 0 0 10px #EEEEEE;
@@ -125,7 +125,7 @@
 
 .grid figcaption h4 {
 	padding: 0;
-	color: #3F51B5;
+	color: #bc4800;
 }
 
 .grid figcaption a.btn {
@@ -216,7 +216,7 @@ div.popover.fade.bottom.in {
 }
 
 .list-image.grid figure {
-  border-top:5px solid #3F51B5;
+  border-top:5px solid #bc4800;
 }
 
 .list-image.grid figcaption:hover {
@@ -244,7 +244,7 @@ div.popover.fade.bottom.in {
 .list-image.grid figcaption h4 {
   margin: 0;
   padding: 0;
-  color: #3F51B5;
+  color: #bc4800;
 }
 
 
