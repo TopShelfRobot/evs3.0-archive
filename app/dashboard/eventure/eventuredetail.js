@@ -2,9 +2,9 @@
 	'use strict';
 
 	var controllerId = 'eventuredetail';
-	angular.module('app').controller(controllerId, ['$routeParams', 'common', 'datacontext', 'config', 'ExcelService', 'Cloner', eventuredetail]);
+	angular.module('app').controller(controllerId, ['$routeParams', 'common', 'datacontext', 'config', 'Cloner', eventuredetail]);
 
-	function eventuredetail($routeParams, common, datacontext, config, excel, cloner) {
+	function eventuredetail($routeParams, common, datacontext, config, cloner) {
 		var getLogFn = common.logger.getLogFn;
 		var log = getLogFn(controllerId);
 

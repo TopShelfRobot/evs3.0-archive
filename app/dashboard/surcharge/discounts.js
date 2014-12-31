@@ -1,9 +1,9 @@
 (function () {
     'use strict';
     var controllerId = 'discounts';
-    angular.module('app').controller(controllerId, ['config', 'common', 'datacontext', 'ExcelService', discounts]);
+    angular.module('app').controller(controllerId, ['config', 'common', 'datacontext', discounts]);
 
-    function discounts(config, common, datacontext, excel) {
+    function discounts(config, common, datacontext) {
         var getLogFn = common.logger.getLogFn;
         var log = getLogFn(controllerId);
 

@@ -1,9 +1,9 @@
 (function () {
     'use strict';
     var controllerId = 'resourcecenter';
-    angular.module('app').controller(controllerId, ['common', 'config', 'ExcelService', resourcecenter]);
+    angular.module('app').controller(controllerId, ['common', 'config', resourcecenter]);
 
-    function resourcecenter(common, config, excel) {
+    function resourcecenter(common, config) {
         var getLogFn = common.logger.getLogFn;
         var log = getLogFn(controllerId);
 

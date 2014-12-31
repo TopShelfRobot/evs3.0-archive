@@ -1,9 +1,9 @@
 (function () {
     'use strict';
     var controllerId = 'volunteercenter';
-    angular.module('app').controller(controllerId, ['common', 'datacontext', 'config', 'ExcelService', volunteercenter]);
+    angular.module('app').controller(controllerId, ['common', 'datacontext', 'config', volunteercenter]);
 
-    function volunteercenter(common, datacontext, config, excel) {
+    function volunteercenter(common, datacontext, config) {
         var getLogFn = common.logger.getLogFn;
         var log = getLogFn(controllerId);
 

@@ -2,9 +2,9 @@
     'use strict';
 
     var controllerId = 'listingdetail';
-    angular.module('app').controller(controllerId, ['$routeParams', 'config', 'common', 'datacontext', 'ExcelService', listingdetail]);
+    angular.module('app').controller(controllerId, ['$routeParams', 'config', 'common', 'datacontext', listingdetail]);
 
-    function listingdetail($routeParams, config, common, datacontext, excel) {
+    function listingdetail($routeParams, config, common, datacontext) {
         var getLogFn = common.logger.getLogFn;
         var log = getLogFn(controllerId);
 

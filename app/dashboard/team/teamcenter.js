@@ -1,9 +1,9 @@
 (function () {
     'use strict';
     var controllerId = 'teamcenter';
-    angular.module('app').controller(controllerId, ['$http', 'common', 'datacontext', 'config', 'ExcelService', teamcenter]);
+    angular.module('app').controller(controllerId, ['$http', 'common', 'datacontext', 'config', teamcenter]);
 
-    function teamcenter($http, common, datacontext, config, excel) {
+    function teamcenter($http, common, datacontext, config) {
         var getLogFn = common.logger.getLogFn;
         var log = getLogFn(controllerId);
 

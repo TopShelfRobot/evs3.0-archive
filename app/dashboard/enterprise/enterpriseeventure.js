@@ -1,9 +1,9 @@
 (function () {
     'use strict';
     var controllerId = 'enterpriseeventure';
-    angular.module('app').controller(controllerId, ['$routeParams', 'common', 'datacontext', 'config', 'ExcelService', enterpriseeventure]);
+    angular.module('app').controller(controllerId, ['$routeParams', 'common', 'datacontext', 'config', enterpriseeventure]);
 
-    function enterpriseeventure($routeParams, common, datacontext, config, excel) {
+    function enterpriseeventure($routeParams, common, datacontext, config) {
         var getLogFn = common.logger.getLogFn;
         var log = getLogFn(controllerId);
 

@@ -1,9 +1,9 @@
 (function () {
 	'use strict';
 	var controllerId = 'resourcedetail';
-	angular.module('app').controller(controllerId, ['$routeParams', '$location', 'common', 'datacontext', 'config', 'ExcelService', resourcedetail]);
+	angular.module('app').controller(controllerId, ['$routeParams', '$location', 'common', 'datacontext', 'config', resourcedetail]);
 
-	function resourcedetail($routeParams, $location, common, datacontext, config, excel) {
+	function resourcedetail($routeParams, $location, common, datacontext, config) {
 		var getLogFn = common.logger.getLogFn;
 		var log = getLogFn(controllerId);
 
