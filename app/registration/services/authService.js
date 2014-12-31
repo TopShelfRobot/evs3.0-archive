@@ -1,6 +1,6 @@
 ﻿'use strict';
 
-var testRoles = ["user"];
+var testRoles = ["user", "admin", "super-user", "money"];
 
 angular.module('evReg').factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSettings', 'config',
     function ($http, $q, localStorageService, ngAuthSettings, config) {

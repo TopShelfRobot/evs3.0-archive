@@ -239,8 +239,10 @@
         </tab>
         <!-- end Reporting -->
 
-        <tab heading="Payment & Technical" nra-auth="'super-user'"> <br>
-        <form class="form-horizontal" nra-auth="'super-user'">
+		
+        <tab heading="Payment & Technical"> <br>
+			<div nra-auth="'super-user'">
+        <form class="form-horizontal">
           <div class="row">
             <div class="col-sm-6">
               <div class="form-group">
@@ -364,7 +366,9 @@
             <button class="btn btn-success pull-right" ng-click="vm.saveAndNav()">Save Changes</button>
           </div>
         </div>
+	</div>
         </tab>
+	
         <!-- end Payment & Technical -->
 
       </tabset>
