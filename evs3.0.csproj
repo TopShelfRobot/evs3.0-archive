@@ -49,8 +49,8 @@
     <Content Include="app\dashboard\admin\setowner.js" />
     <Content Include="app\dashboard\analytic\yearsummary.html" />
     <Content Include="app\dashboard\analytic\yearsummary.js" />
-    <Content Include="app\common\directives\date-input.js" />
-    <Content Include="app\common\directives\directives.js" />
+    <Content Include="app\common\components\date-input.js" />
+    <Content Include="app\common\components\directives.js" />
     <Content Include="app\common\services\datacontext.js" />
     <Content Include="app\common\services\entityManagerFactory.js" />
     <Content Include="app\common\services\repositories.js" />
