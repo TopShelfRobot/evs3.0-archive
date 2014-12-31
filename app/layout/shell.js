@@ -3,7 +3,7 @@
 
 	var controllerId = 'shell';   //mjb test push
 
-	function Controller($rootScope, $location, common, config, $timeout, accountModel, rba) {
+	function Controller($rootScope, $location, common, config, $timeout, authService) {
 		var self = this;
 		
 		var logSuccess = common.logger.getLogFn(controllerId, 'success!!!');
@@ -25,11 +25,6 @@
 		};
 		this.resolved = false;
 		
-		rba.getRole = function(){
-			var roles = accountModel.roles;
-			return roles;
-		};
-		
 		function toggleSpinner(on) {
 			self.isBusy = on;
 		}
@@ -40,28 +35,22 @@
 			self.progBar = 30;
 			
 			var promises = [];
-			promises.push(
-				accountModel.init()
-				.then(function(){
-					self.progBar += 30;
-				})
-				.then(function(){
-					self.progBar += 30;
-					if(!accountModel.loggedIn){
-						$location.path("/login");
-					}
-				})
-			);
 			
 			common.activateController(promises, controllerId)
 				.then(function () {
 					self.resolved = true;
 					self.progBar = 90;
+					if(!authService.authentication.isAuth){
+						$location.path("/login");
+					}
 					$timeout(function(){
 						self.progBar = 100;
 						self.showSplash = false;
 					}, 300);		
-				});
+				})
+				.then(function(){
+					
+				})
 		}
 
 		$rootScope.$on('$routeChangeStart', function (event, next, last) {
@@ -82,5 +71,5 @@
 		activate();  
 	};
 	
-	angular.module('app').controller(controllerId, ['$rootScope', "$location", 'common', 'config', "$timeout", "AccountModel", "AuthService", Controller]);
+	angular.module('app').controller(controllerId, ['$rootScope', "$location", 'common', 'config', "$timeout", 'authService', Controller]);
 })();

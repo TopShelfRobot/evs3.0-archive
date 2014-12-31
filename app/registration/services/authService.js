@@ -1,4 +1,7 @@
 ﻿'use strict';
+
+var testRoles = ["user"];
+
 angular.module('evReg').factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSettings', 'config',
     function ($http, $q, localStorageService, ngAuthSettings, config) {
 
@@ -9,7 +12,8 @@ angular.module('evReg').factory('authService', ['$http', '$q', 'localStorageServ
     var _authentication = {
         isAuth: false,
         userName: "",
-        useRefreshTokens: false
+        useRefreshTokens: false,
+		roles: []
     };
 
     var _externalAuthData = {
@@ -60,13 +64,28 @@ angular.module('evReg').factory('authService', ['$http', '$q', 'localStorageServ
         var deferred = $q.defer();
 
         $http.post(serviceBase + 'token', data, { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } })
-            .success(function (response) {
+        .success(function (response) {
+				
+			//TODO: remove this
+			response.roles = testRoles;
 
             if (loginData.useRefreshTokens) {
-                localStorageService.set('authorizationData', { token: response.access_token, userName: loginData.userName, refreshToken: response.refresh_token, useRefreshTokens: true });
+                localStorageService.set('authorizationData', { 
+					token: response.access_token, 
+					userName: loginData.userName, 
+					refreshToken: response.refresh_token, 
+					useRefreshTokens: true,
+					roles: response.roles
+				});
             }
             else {
-                localStorageService.set('authorizationData', { token: response.access_token, userName: loginData.userName, refreshToken: "", useRefreshTokens: false });
+                localStorageService.set('authorizationData', { 
+					token: response.access_token, 
+					userName: loginData.userName, 
+					refreshToken: "", 
+					useRefreshTokens: false,
+					roles: response.roles
+				});
             }
             //alert('authed!!');
                 //need to do something here incase of token login ?????  //mjb  think we are good here
@@ -74,6 +93,7 @@ angular.module('evReg').factory('authService', ['$http', '$q', 'localStorageServ
             _authentication.isAuth = true;
             _authentication.userName = loginData.userName;
             _authentication.useRefreshTokens = loginData.useRefreshTokens;
+			_authentication.roles = response.roles;
 
             deferred.resolve(response);
 
@@ -95,6 +115,7 @@ angular.module('evReg').factory('authService', ['$http', '$q', 'localStorageServ
         _authentication.isAuth = false;
         _authentication.userName = "";
         _authentication.useRefreshTokens = false;
+		_authentication.roles = [];
 
     };
 
@@ -105,6 +126,7 @@ angular.module('evReg').factory('authService', ['$http', '$q', 'localStorageServ
             _authentication.isAuth = true;
             _authentication.userName = authData.userName;
             _authentication.useRefreshTokens = authData.useRefreshTokens;
+			_authentication.roles = authData.roles;
         }
 
     };
@@ -123,8 +145,17 @@ angular.module('evReg').factory('authService', ['$http', '$q', 'localStorageServ
                 localStorageService.remove('authorizationData');
 
                 $http.post(serviceBase + 'token', data, { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }).success(function (response) {
-
-                    localStorageService.set('authorizationData', { token: response.access_token, userName: response.userName, refreshToken: response.refresh_token, useRefreshTokens: true });
+					
+					//TODO: remove this
+					response.roles = testRoles;
+					
+                    localStorageService.set('authorizationData', { 
+						token: response.access_token, 
+						userName: response.userName, 
+						refreshToken: response.refresh_token, 
+						useRefreshTokens: true,
+						roles : response.roles, 
+					});
 
                     deferred.resolve(response);
 
@@ -144,11 +175,21 @@ angular.module('evReg').factory('authService', ['$http', '$q', 'localStorageServ
 
         $http.get(serviceBase + 'api/account/ObtainLocalAccessToken', { params: { provider: externalData.provider, externalAccessToken: externalData.externalAccessToken } }).success(function (response) {
 
-            localStorageService.set('authorizationData', { token: response.access_token, userName: response.userName, refreshToken: "", useRefreshTokens: false });
+			//TODO: remove this
+			response.roles = testRoles;
+			
+            localStorageService.set('authorizationData', { 
+				token: response.access_token, 
+				userName: response.userName, 
+				refreshToken: "", 
+				useRefreshTokens: false, 
+				roles: response.roles
+			});
 
             _authentication.isAuth = true;
             _authentication.userName = response.userName;
             _authentication.useRefreshTokens = false;
+			_authentication.roles = response.roles;
 
             deferred.resolve(response);
 
@@ -167,11 +208,21 @@ angular.module('evReg').factory('authService', ['$http', '$q', 'localStorageServ
 
         $http.post(serviceBase + 'api/account/registerexternal', registerExternalData).success(function (response) {
 
-            localStorageService.set('authorizationData', { token: response.access_token, userName: response.userName, refreshToken: "", useRefreshTokens: false });
+			//TODO: remove this
+			response.roles = testRoles;
+			
+            localStorageService.set('authorizationData', { 
+				token: response.access_token, 
+				userName: response.userName, 
+				refreshToken: "", 
+				useRefreshTokens: false,
+				roles: response.roles
+			});
 
             _authentication.isAuth = true;
             _authentication.userName = response.userName;
             _authentication.useRefreshTokens = false;
+			_authentication.roles = roles;
 
             deferred.resolve(response);
 

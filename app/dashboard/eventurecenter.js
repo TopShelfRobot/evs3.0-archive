@@ -1,9 +1,13 @@
 (function () {
     'use strict';
     var controllerId = 'eventurecenter';
-    angular.module('app').controller(controllerId, ['common', 'config', 'ExcelService', eventurecenter]);
+    angular.module('app').controller(controllerId, ["$location", 'common', 'config', 'ExcelService', "authService", eventurecenter]);
 
-    function eventurecenter(common, config, excel) {
+    function eventurecenter($location, common, config, excel, authService) {
+		
+		if(!authService.authentication.isAuth){
+			$location.href = "/login";
+		}
         var getLogFn = common.logger.getLogFn;
         var log = getLogFn(controllerId);
 

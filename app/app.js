@@ -47,9 +47,16 @@
 	});
 
 	// Handle routing errors and success events.
-	app.run(['$route', 'authService', function ($route, authService, rba) {
+	app.run(['$route', 'authService', "AuthService", function ($route, authService, rbs) {
 		// Include $route to kick start the router.
 		authService.fillAuthData();
+		rbs.getRole = function(){
+			var roles = [];
+			if(authService.authentication.roles){
+				roles = authService.authentication.roles;
+			}
+			return roles;
+		};
 	}]);
 
 
