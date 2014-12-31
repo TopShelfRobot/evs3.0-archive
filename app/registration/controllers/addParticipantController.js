@@ -3,7 +3,7 @@
 	
 	var controllerId = "addParticipant";
 
-	function Controller($scope, $window, config, datacontext, common){
+	function Controller($scope, $window, config, datacontext, common, cart){
 
 		// console.log("config:", config);
 		$scope.participant = config.participant;
@@ -18,7 +18,7 @@
 			email: null,
 			firstName: null,
 			gender: null,
-			houseId: config.owner.houseId,
+			houseId: cart.houseId,
 			lastName: null,
 			ownerId: config.owner.ownerId,
 			phoneMobile: null,
@@ -49,7 +49,7 @@
 			
 		var promises = [];
 		promises.push(
-			datacontext.participant.getParticipantById(config.owner.houseId)
+			datacontext.participant.getParticipantById(cart.houseId)
 				.then(function(owner){
 					for(key in owner){
 						if(key == "city"
@@ -68,7 +68,7 @@
 
 		$scope.submit = function(){
 
-			var newPart = datacontext.participant.createParticipant($scope.participant.ownerId, $scope.participant.houseId, $scope.participant.email)
+			var newPart = datacontext.participant.createParticipant(cart.ownerId, cart.houseId, $scope.participant.email)
 			$scope.date.dateBirth = moment($scope.date.dateBirth).toISOString();
 			$scope.participant.dateBirth = $scope.date.dateBirth;
 			for(key in $scope.participant){
@@ -84,5 +84,5 @@
 
 	}
 
-	angular.module("evReg").controller(controllerId, ["$scope", "$window", "config", "datacontext", "common", Controller]);
+	angular.module("evReg").controller(controllerId, ["$scope", "$window", "config", "datacontext", "common", "CartModel", Controller]);
 })();

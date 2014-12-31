@@ -22,7 +22,7 @@
 	
 	    <div data-ng-include="'/app/registration/layout/header.html'"></div>
 
-	    <div ng-view></div>
+	    <div ng-view ng-if="vm.resolved"></div>
 
 	    <div data-ng-include="'/app/registration/layout/footer.html'"></div>
 	</div>

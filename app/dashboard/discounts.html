@@ -34,13 +34,13 @@
               <form class="form-inline">
                 <div class="form-group">
                   <label for="partdiscounttype">Discount Type</label>
-                  <select class="form-control" ng-model="vm.owner.MultiParticipantDiscountAmountType" id="partdiscounttype" ng-options="t.text as t.text for t in vm.amountTypes">
+                  <select class="form-control" ng-model="vm.owner.multiParticipantDiscountAmountType" id="partdiscounttype" ng-options="t.text as t.text for t in vm.amountTypes">
                     <option value="">Please Select</option>
                   </select>
                 </div>
                 <div class="form-group">
                   <label class="sr-only" for="partvalue">Amount</label>
-                  <input type="number" step="any" class="form-control" ng-model="vm.owner.MultiParticipantDiscountAmount" id="partvalue" placeholder="0.00">
+                  <input type="number" step="any" class="form-control" ng-model="vm.owner.multiParticipantDiscountAmount" id="partvalue" placeholder="0.00">
                 </div>
               </form>
             </div>
@@ -60,15 +60,22 @@
               <form class="form-inline">
                 <div class="form-group">
                   <label for="regdiscounttype">Discount Type</label>
-                  <select class="form-control" id="regdiscounttype" ng-model="vm.owner.MultiRegistrationDiscountAmountType" ng-options="t.text as t.text for t in vm.amountTypes">
+                  <select class="form-control" id="regdiscounttype" ng-model="vm.owner.multiRegistrationDiscountAmountType" ng-options="t.text as t.text for t in vm.amountTypes">
                     <option value="">Please Select</option>
                   </select>
                 </div>
                 <div class="form-group">
                   <label class="sr-only" for="regvalue">Amount</label>
-                  <input type="number" step="any" class="form-control" ng-model="vm.owner.MultiRegistrationDiscountAmount" id="regvalue" placeholder="0.00">
+				  <input type="number" step="any" class="form-control" ng-model="vm.owner.multiRegistrationDiscountAmount" placeholder="0.00">
                 </div>
               </form>
+            </div>
+            <div class="col-lg-1 pull-right" style="padding-top: 20px">
+                <form class="form-inline">
+                    <div class="form-group">
+                        <button type="button" class="btn btn-primary" ng-click="vm.saveDiscounts()">Save</button>
+                    </div>
+                </form>
             </div>
           </div>
         </tab>

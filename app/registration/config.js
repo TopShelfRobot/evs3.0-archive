@@ -9,7 +9,6 @@
     //apiPath = "http://localhost:49822/";
     apiPath = "http://dev30.eventuresports.info/";
 
-
     var remoteServiceName = apiPath + 'bdc/registration/';
     var remoteApiName = apiPath + 'api/';
     var events = {
@@ -31,7 +30,13 @@
         remoteServiceName: remoteServiceName,
         imageSettings: imageSettings,
         version: '3.0.0',
-        remoteApiName: remoteApiName
+        remoteApiName: remoteApiName,
+		owner : {
+			ownerId: 1,
+			authEmail: '',
+			isAdmin: true,
+			mr_houseId: 0
+		}
     };
 
     app.value('config', config);
