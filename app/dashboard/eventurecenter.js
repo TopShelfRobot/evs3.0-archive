@@ -6,7 +6,7 @@
     function eventurecenter($location, common, config, excel, authService) {
 		
 		if(!authService.authentication.isAuth){
-			$location.href = "/login";
+			$location.path("/login");
 		}
         var getLogFn = common.logger.getLogFn;
         var log = getLogFn(controllerId);
