@@ -138,6 +138,13 @@
                     return vm.amountTypes;
                 });
         }
+        
+        vm.saveDiscounts = function(){
+			datacontext.save()
+			.then(function(){
+				console.log("saved");
+			})
+        }
 
     }
 })();

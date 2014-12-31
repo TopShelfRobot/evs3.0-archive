@@ -2,6 +2,8 @@
     angular.module("evReg").service("CartModel",
                 ["config", Model]);
     function Model(config) {
+		
+		var self = this;
 
         var cart = {};
         cart.houseId = 0;
@@ -15,7 +17,7 @@
         cart.allowZeroPayment = false;
 
         cart.navUrl = '';
-
+        
         cart.teamMemberId = null;
         cart.registrations = [];
         cart.surcharges = [];
@@ -28,13 +30,13 @@
             addSingleFeeType: 'percent',
             addSingleFeeForAllRegsFlat: 0,
 
-            IsMultiParticipantDiscountCartRule: false,
-            IsMultiRegistrationDiscountCartRule: false,
+            isMultiParticipantDiscountCartRule: false,
+            isMultiRegistrationDiscountCartRule: false,
 
-            MultiParticipantDiscountAmount: 0,
-            MultiParticipantDiscountAmountType: 0,
-            MultiRegistrationDiscountAmount: 0,
-            MultiRegistrationDiscountAmountType: 0,
+            multiParticipantDiscountAmount: 0,
+            multiParticipantDiscountAmountType: 0,
+            multiRegistrationDiscountAmount: 0,
+            multiRegistrationDiscountAmountType: 0,
 
             eventureName: 'Event',
             listName: 'List',
@@ -80,8 +82,8 @@
             cart.regSettings.stripeOrderDescription = data.stripeOrderDescription;
             //cart.regSettings.stripeLogoPath = data.stripeLogoPath;
 
-            cart.regSettings.isMultiParticipantDiscountCartRule = data.IsMultiParticipantDiscountCartRule;
-            cart.regSettings.isMultiRegistrationDiscountCartRule = data.IsMultiRegistrationDiscountCartRule;
+            cart.regSettings.isMultiParticipantDiscountCartRule = data.isMultiParticipantDiscountCartRule;
+            cart.regSettings.isMultiRegistrationDiscountCartRule = data.isMultiRegistrationDiscountCartRule;
 
             cart.regSettings.multiParticipantDiscountAmount = data.multiParticipantDiscountAmount;
             cart.regSettings.multiParticipantDiscountAmountType = data.multiParticipantDiscountAmountType;
@@ -112,15 +114,7 @@
 
         cart.processCartRules = function () {
             //clear all rules
-            var temp = [];
-            for (var j = 0; j < cart.surcharges.length; j++) {
-                var currCharge = cart.surcharges[j];
-
-                if (currCharge.chargeType != 'cartRule') {
-                    temp.push(currCharge);
-                }
-            }
-            surcharges = temp;
+			cart.surcharges = []
             var regCount = 0;
             var regTotalAmount = 0;
 
@@ -155,6 +149,64 @@
                 }
                 cart.surcharges.push(new surcharge('Online Service Fee', feeAmount.toFixed(2), 'cartRule', 0, 0, 0));
             }
+			
+			if(cart.regSettings.isMultiParticipantDiscountCartRule){
+				var items = {}; // hash table with eventureListId and hash of count and cost
+				var reg;
+				for(var i = 0; i < cart.registrations.length; i++){
+					reg = cart.registrations[i];
+					if(typeof items[reg.eventureListId] === "undefined"){
+						items[reg.eventureListId] = {cnt: 0, cost: 0};
+					}
+					items[reg.eventureListId].cnt++;
+					items[reg.eventureListId].cost += reg.fee;
+				}
+				for(var key in items){
+					if(items[key].cnt > 1){
+						// multiParticipantDiscountAmount: 0,
+						// multiParticipantDiscountAmountType: 0,
+						switch(cart.regSettings.multiParticipantDiscountAmountType){
+						case "Percent":  // precentage
+							var discount = -1 * items[key].cost * (cart.regSettings.multiParticipantDiscountAmount / 100);
+							cart.surcharges.push(new surcharge("percentage based multi-participant discount", discount.toFixed(2), 'cartRule', key, 0, 0));
+							break;
+						case "Dollars":  // flat rate
+							var discount = -1 * cart.regSettings.multiParticipantDiscountAmount;
+							cart.surcharges.push(new surcharge("flat fee based multi-participant discount", discount.toFixed(2), 'cartRule', key, 0, 0));
+							break;
+						}
+					}
+				}
+			}
+			
+			if(cart.regSettings.isMultiRegistrationDiscountCartRule){
+				var items = {}; // hash table with participantId and hash of count and cost.
+				var reg;
+				for(var i = 0; i < cart.registrations.length; i++){
+					reg = cart.registrations[i];
+					if(typeof items[reg.partId] === "undefined"){
+						items[reg.partId] = {cnt: 0, cost: 0};
+					}
+					items[reg.partId].cnt++;
+					items[reg.partId].cost += reg.fee;
+				}
+				for(var key in items){
+					if(items[key].cnt > 1){
+						// multiRegistrationDiscountAmount: 0,
+			            // multiRegistrationDiscountAmountType: 0,
+						switch(cart.regSettings.multiRegistrationDiscountAmountType){
+						case "Percent":  // precentage
+							var discount = -1 * items[key].cost * (cart.regSettings.multiRegistrationDiscountAmount / 100);
+							cart.surcharges.push(new surcharge("percentage based multi-registration discount", discount.toFixed(2), 'cartRule', key, 0, 0));
+							break;
+						case "Dollars":  // flat rate
+							var discount = -1 * cart.regSettings.multiRegistrationDiscountAmount;
+							cart.surcharges.push(new surcharge("flat fee based multi-registration discount", discount.toFixed(2), 'cartRule', key, 0, 0));
+							break;
+						}
+					}
+				}
+			}
         };
 
         cart.removeCoupons = function () {
