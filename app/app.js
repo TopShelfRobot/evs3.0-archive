@@ -47,14 +47,9 @@
 	});
 
 	// Handle routing errors and success events.
-	app.run(['$route', 'authService', "AuthService", function ($route, authService, rba) {
+	app.run(['$route', 'authService', function ($route, authService, rba) {
 		// Include $route to kick start the router.
 		authService.fillAuthData();
-    
-		rba.getRole = function(){
-      // TODO: return the roles
-			return ["user", "admin"]
-		};
 	}]);
 
 

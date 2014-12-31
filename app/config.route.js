@@ -11,7 +11,10 @@
     function routeConfigurator($routeProvider, routes, regRoutes) {
 
         routes.forEach(function (r) {
-            //$routeProvider.when(r.url, r.config);
+			if(typeof r.config.authorized === "undefined"){
+				r.config.authorized = [];
+			}
+			r.config.authorized.push("user");
             setRoute(r.url, r.config);
         });
         $routeProvider.otherwise({ redirectTo: '/eventurecenter' });
