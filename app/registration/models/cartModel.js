@@ -40,13 +40,15 @@
             listName: 'List',
             groupName: 'Group',
             partButtonText: 'Select Party!',
+            confirmButtonText: 'Complete Registration',
+            registerButtonText: 'Register',
             listStatement: 'Select a desired start time',
             termsText: '',
             refundsText: '',
             //stripeLogoPath: '',
             stripeCheckoutButtonText: '',
             stripeOrderDescription: ''
-        }
+        };
 
         cart.order = function () {
             var order = {

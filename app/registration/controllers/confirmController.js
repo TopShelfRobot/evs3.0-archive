@@ -17,6 +17,8 @@
 		$scope.eventureName = cart.regSettings.eventureName;
 		$scope.listName = cart.regSettings.listName;
 
+		$scope.confirmButtonText = cart.regSettings.confirmButtonText;
+
 		// initialize it
 		$scope.submitDisabled = true;
 		console.log('in confirm');
@@ -91,10 +93,11 @@
 				controller: 'TermsModalInstance'
 			});
 
-			modalInstance.result.then(function () { checkout(); });
+			modalInstance.result.then(function () { $scope.checkout(); });
 
 		};
-		function checkout() {
+
+		$scope.checkout =function() {
 			var order = cart.order();
 
 			stripe.checkout(cart.getTotalPrice())
@@ -112,8 +115,8 @@
 							console.log("ERROR:", err.toString());
 						})
 						.finally(function () {
-						    $.unblockUI();
-						    cart.emptyCart();
+							$.unblockUI();
+							cart.emptyCart();
 						});
 				});
 		};

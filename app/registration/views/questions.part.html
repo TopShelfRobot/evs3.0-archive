@@ -88,14 +88,21 @@
 
 	                    <div class="form-group" 
 								ng-switch-when="checkbox"
-								ng-if="question.active">
-							<div class="col-1 col-sm-1 col-lg-1">
-								<input type="checkbox"
-									   ng-model="customAnswers[key]"
-									   ng-required="question.isRequired">
-								</input>
+								ng-if="question.active"
+								ng-class="{'has-error': questionsForm.$invalid}">
+							<div class="checkbox">
+								<label>
+									<input type="checkbox"
+										   ng-model="customAnswers[key]"
+										   ng-required="question.isRequired">
+									</input>
+									{{question.questionText}}
+								</label>
 							</div>
-	                        <label class="col-11 col-sm-11 col-lg-11">{{question.questionText}}</label>
+							<!--<div class="col-1 col-sm-1 col-lg-1">-->
+								<!---->
+							<!--</div>-->
+	                        <!--<label class="col-11 col-sm-11 col-lg-11">{{question.questionText}}</label>-->
 						</div>
 					</div>
                 </div>

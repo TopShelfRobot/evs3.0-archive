@@ -95,7 +95,7 @@
                 class="btn btn-warning btn-block pull-right"
                 ng-disabled="(!$parent.waiverSigned) || ($parent.userPaying == 0 && !$parent.fullPaymentRequired) || ($parent.submitDisabled)"
                 ng-click="checkout()">
-                Complete Registration
+                {{cart.regSettings.confirmButtonText}}
             </button>
         </div>
     </div>
