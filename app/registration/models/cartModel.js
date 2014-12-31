@@ -77,6 +77,8 @@
 			cart.regSettings.listName = data.listingName;
 			cart.regSettings.groupName = data.groupName;
 			cart.regSettings.partButtonText = data.participantButtonText;
+			cart.regSettings.confirmButtonText = data.confirmButtonText;
+			cart.regSettings.registerButtonText = data.registerButtonText;
 			cart.regSettings.listStatement = data.listStatement;
 			cart.regSettings.termsText = data.termsText;
 			cart.regSettings.refundsText = data.refundsText;
