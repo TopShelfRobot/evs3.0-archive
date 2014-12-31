@@ -44,7 +44,7 @@
 					<div class="row" ng-switch on="question.questionType" ng-if="question.active">
 	                    <div class="form-group" 
 								ng-switch-when="dropdown"
-								ng-if"question.active">
+								ng-if="question.active">
 	                        <label class="col-6 col-sm-6 col-lg-6 control-label" >{{question.questionText}}</label>
 	                        <div class="col-6 col-sm-6 col-lg-6">
 	                            <select class="form-control" 
@@ -58,7 +58,7 @@
                     
 	                    <div class="form-group" 
 								ng-switch-when="radio"
-								ng-if"question.active">
+								ng-if="question.active">
 	                        <label class="col-6 col-sm-6 col-lg-6 control-label" >{{question.questionText}}</label>
 	                        <div class="col-6 col-sm-6 col-lg-6">
 	                            <div ng-repeat="o in question.qOptions">
@@ -76,7 +76,7 @@
 
 	                    <div class="form-group" 
 								ng-switch-when="text"
-								ng-if"question.active">
+								ng-if="question.active">
 	                        <label class="col-6 col-sm-6 col-lg-6 control-label" >{{question.questionText}}</label>
 	                        <div class="col-6 col-sm-6 col-lg-6">
 	                            <input type="text" class="form-control" 
@@ -87,14 +87,22 @@
 	                    </div>
 
 	                    <div class="form-group" 
-								ng-switch-when="checkbox">
-							<div class="col-1 col-sm-1 col-lg-1">
-								<input type="checkbox"
-									   ng-model="customAnswers[key]"
-									   ng-required="question.isRequired">
-								</input>
+								ng-switch-when="checkbox"
+								ng-if="question.active"
+								ng-class="{'has-error': questionsForm.$invalid}">
+							<div class="checkbox">
+								<label>
+									<input type="checkbox"
+										   ng-model="customAnswers[key]"
+										   ng-required="question.isRequired">
+									</input>
+									{{question.questionText}}
+								</label>
 							</div>
-	                        <label class="col-11 col-sm-11 col-lg-11">{{question.questionText}}</label>
+							<!--<div class="col-1 col-sm-1 col-lg-1">-->
+								<!---->
+							<!--</div>-->
+	                        <!--<label class="col-11 col-sm-11 col-lg-11">{{question.questionText}}</label>-->
 						</div>
 					</div>
                 </div>
@@ -127,7 +135,7 @@
             <div class="col-lg-12">
                 <!--ng-disabled="!questionsForm.$valid || notAllowedToContinue()"   -->
                 <button class="btn btn-warning pull-right"
-                        ng-disabled="!questionsForm.$valid || notAllowedToContinue()"
+                        ng-disabled="!isWaiverChecked"
                         ng-click="next()">Next</button>
             </div>
         </div>

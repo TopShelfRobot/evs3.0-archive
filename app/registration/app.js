@@ -31,7 +31,7 @@
 	});
 
 	// Handle routing errors and success events.
-	app.run(['$route', 'authService', function ($route, authService) {
+	app.run(['$route', 'authService', "datacontext", "config", function ($route, authService, datacontext, config) {
 		// Include $route to kick start the router.
 		authService.fillAuthData();
 	}]);

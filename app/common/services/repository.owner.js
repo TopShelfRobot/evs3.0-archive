@@ -18,6 +18,7 @@
 			this.entityName = entityName;
 			this.manager = mgr;
 			this.setPublicOwnerSettings = setPublicOwnerSettings;
+			this.setOwnerSettings = setOwnerSettings;
 			// Exposed data access functions
 			//this.getAll = getAll;
 		}
@@ -54,7 +55,19 @@
 			    return cart.configureSettings(data.results[0]);
 			}
 		}
+		
+		function setOwnerSettings(ownerId){
+			
+			var self = this;
+			var query = entityQuery.from('Owners')
+				.where('id', '==', ownerId);
 
+			return self.manager.executeQuery(query)
+				.then(querySucceeded, self._queryFailed);
 
+			function querySucceeded(data) {
+			    return cart.configureSettings(data.results[0]);
+			}
+		}
 	}
 })();

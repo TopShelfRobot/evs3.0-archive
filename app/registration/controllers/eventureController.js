@@ -15,6 +15,7 @@
 		$scope.isPaginationVisible = false;
 
 		$scope.eventureName = cart.regSettings.eventureName;
+		$scope.registerButtonText = cart.regSettings.registerButtonText;
 
 		//console.log(cart.ownerId);
 		//console.log(cart.regSettings.eventureName);

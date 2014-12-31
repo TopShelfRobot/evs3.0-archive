@@ -1,7 +1,7 @@
 (function () {
     angular.module("evReg").service("RegistrationCartModel",
-                ["$http", "$routeParams", "$location", "config", Model]);
-    function Model($http, $routeParams, $location, config) {
+                ["$http", "$routeParams", "$location", "CartModel", "config", Model]);
+    function Model($http, $routeParams, $location, cart, config) {
 
         var model = {};
 
@@ -15,6 +15,8 @@
         model.teamId = "tbd";
         model.currentlyPaid = 0;
         model.allowZeroPayment = false;
+
+        model.confirmButtonText = cart.regSettings.confirmButtonText;
 
         model.order = function (value) {
             var order = {
