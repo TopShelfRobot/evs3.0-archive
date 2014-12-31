@@ -88,6 +88,8 @@
             cart.regSettings.multiRegistrationDiscountAmount = data.multiRegistrationDiscountAmount;
             cart.regSettings.multiRegistrationDiscountAmountType = data.multiRegistrationDiscountAmountType;
 
+
+
             cart.regSettings.name = data.name;
             cart.regSettings.stripePublishableKey = data.stripePublishableKey
         };

@@ -120,7 +120,7 @@
 
 
 		function Participants() {
-		    var partapi = config.remoteApiName + 'widget/GetParticipantsByHouseId/' + $scope.participantId;
+			var partapi = config.remoteApiName + 'widget/GetParticipantsByHouseId/' + $scope.participantId;
 
 			$scope.participantGridOptions = {
 				dataSource: {
@@ -207,7 +207,7 @@
 		}
 
 		function Team() {
-		    var teamapi = config.remoteApiName + 'widget/GetTeamRegistrationsByHouseId/' + $scope.participantId;
+			var teamapi = config.remoteApiName + 'widget/GetTeamRegistrationsByHouseId/' + $scope.participantId;
 
 			$scope.teamGridOptions = {
 				dataSource: {
@@ -271,7 +271,7 @@
 		}
 
 		function Coach() {
-		    var coachapi = config.remoteApiName + 'widget/GetTeamRegistrationsByCoachId/' + $scope.participantId;
+			var coachapi = config.remoteApiName + 'widget/GetTeamRegistrationsByCoachId/' + $scope.participantId;
 
 			$scope.coachGridOptions = {
 				dataSource: {
@@ -294,19 +294,31 @@
 				}, {
 					field: "eventName",
 					title: "Eventure",
+				}
+				//, {
+				//	field: "listName",
+				//	title: "Listing",
+				//	width:150
+				//}
+				, {
+					field: "division",
+					title: "Division",
+					width: 150
 				}, {
-					field: "listName",
-					title: "Listing",
-					width:150
-				}, {
-					field: "amount",
-					title: "Total Paid",
-					//width: "120px",
-					format: "{0:c}"
-				}, {
+					field: "timeFinish",
+					title: "Est. Finish Time",
+					width: 150
+				}
+				//, {
+				//	field: "amount",
+				//	title: "Total Paid",
+				//	//width: "120px",
+				//	format: "{0:c}"
+				//}
+				, {
 					field: "balance",
 					title: "Balance",
-                    //width: "120px",
+					//width: "120px",
 					format: "{0:c}"
 				}, {
 					title: "",
