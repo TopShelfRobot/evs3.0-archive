@@ -29,14 +29,17 @@
 			self.progBar = 30;
 			
 			var promises = [];
-            promises.push(
-                datacontext.participant.getParticipantByEmailAddress(authService.authentication.userName, config.owner.ownerId)
-                    .then(function (data) {
-                        cart.houseId = data.id;
-						self.progBar += 20;
-						return data;
-                    })
-            );
+			
+			if(authService.authentication.userName){
+	            promises.push(
+	                datacontext.participant.getParticipantByEmailAddress(authService.authentication.userName, config.owner.ownerId)
+	                    .then(function (data) {
+	                        cart.houseId = data.id;
+							self.progBar += 20;
+							return data;
+	                    })
+	            );
+			}
 			
 			promises.push(
 				datacontext.owner.setOwnerSettings(config.owner.ownerId)
