@@ -58,6 +58,7 @@ packages/
 .nuget/
 *.dgml
 *.dll
+evs3.0.dll
 
 *_i.c
 *_p.c
