@@ -60,8 +60,8 @@
 
         function _queryFailed(error) {
             //var msg = config.appErrorPrefix + 'Error retrieving data.' + error.message;
-            var msg = 'Error retrieving data.' + error.message;
-            logError(msg, error);
+            var msg = 'Error retrieving data.' +  error.message; //
+            console.log(msg, error);
             throw error;
         }
     }

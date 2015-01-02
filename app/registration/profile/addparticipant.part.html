@@ -1,0 +1,14 @@
+<div ng-controller="addParticipant">
+	<div class="container">
+		<div class="row">
+		<div class="col-lg-12 text-center">
+			<img class="logo" src="content/images/logo.png">
+			<h1 class="text-center">{{title || 'Account Profile Information'}}</h1>
+			<p class="text-center text-muted">{{subTitle || 'Adding a participant to your account is easy, just provide the info below once and you will never have to enter it again.'}}</p>
+			<hr>
+		</div>
+		</div>
+		<ng-include src="'/app/registration/profile/participantForm.part.html'"></ng-include>
+		<button class="btn btn-success pull-right" ng-click="submit()">{{buttonText || 'Save Changes'}}</button>
+	</div>
+</div>

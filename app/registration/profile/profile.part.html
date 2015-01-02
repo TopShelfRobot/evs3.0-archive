@@ -1,0 +1,210 @@
+﻿<div class="container" ng-controller="UserProfile">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="jumbotron">
+                <!--<p class="badge ambassador-badge">Ambassador&nbsp;<small><i class="glyphicon glyphicon-star"></i></small></p>-->
+                <h1 class="highlight">Hello, {{ participant.firstName }}&nbsp;{{ participant.lastName }}</h1>
+                <p class="lead text-muted">
+                    Here is where you can manage your Information, Registrations, Teams, and Associated Participants.
+                </p>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <!--<div class="col-sm-2">-->
+            <!--<div class="row">-->
+                <!--<div class="col-lg-3">-->
+                    <!--<a class="btn btn-social-icon btn-twitter">-->
+                        <!--<i class="fa fa-twitter"></i>-->
+                    <!--</a>-->
+                <!--</div>-->
+                <!--<div class="col-lg-9">-->
+                    <!--<div class="btn-group profile-social">-->
+                        <!--<button type="button" class="btn btn-default" ng-model="social.twitter" btn-radio="true">Yes</button>-->
+                        <!--<button type="button" class="btn btn-default" ng-model="social.twitter" btn-radio="false">No</button>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+            <!--<br>-->
+            <!--<div class="row">-->
+                <!--<div class="col-lg-3">-->
+                    <!--<a class="btn btn-social-icon btn-facebook">-->
+                        <!--<i class="fa fa-facebook"></i>-->
+                    <!--</a>-->
+                <!--</div>-->
+                <!--<div class="col-lg-9">-->
+                    <!--<div class="btn-group profile-social">-->
+                        <!--<button type="button" class="btn btn-default" ng-model="social.facebook" btn-radio="true">Yes</button>-->
+                        <!--<button type="button" class="btn btn-default" ng-model="social.facebook" btn-radio="false">No</button>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+            <!--<br>-->
+            <!--<div class="row">-->
+                <!--<div class="col-lg-3">-->
+                    <!--<a class="btn btn-social-icon btn-google">-->
+                        <!--<i class="fa fa-google"></i>-->
+                    <!--</a>-->
+                <!--</div>-->
+                <!--<div class="col-lg-9">-->
+                    <!--<div class="btn-group profile-social">-->
+                        <!--<button type="button" class="btn btn-default" ng-model="social.google" btn-radio="true">Yes</button>-->
+                        <!--<button type="button" class="btn btn-default" ng-model="social.google" btn-radio="false">No</button>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+            <!--<hr>-->
+            <!--<p>Share your referral code with your friends and earn points towards rewards!</p>-->
+            <!--<button class="btn btn-social btn-twitter btn-block" ng-if="social.twitter" type="button"><i class="fa fa-twitter"></i>Share Code</button>-->
+            <!--<button class="btn btn-social btn-facebook btn-block" ng-if="social.facebook" type="button"><i class="fa fa-facebook"></i>Share Code</button>-->
+            <!--<button class="btn btn-social btn-google-plus btn-block" ng-if="social.google" type="button"><i class="fa fa-google-plus"></i>Share Code</button>-->
+
+            <!--<div>-->
+            <!--<h4>Street Promoter</h4>-->
+            <!--<hr>-->
+            <!--<small><p class="text-muted">Earn rewards by sharing your referral code through social media.</p></small>-->
+            <!--<hr>-->
+            <!--<button class="btn btn-success btn-block">Sign Up</button>-->
+            <!--</div>-->
+            <!--<div>-->
+                <!--<br>-->
+                <!--<br>-->
+                <!--<h4>Ambassador</h4>-->
+                <!--<hr>-->
+                <!--<small><p class="text-muted">Apply to become an ambassador. Join our race and help grow our event in your area.</p></small>-->
+                <!--<hr>-->
+                <!--<button class="btn btn-success btn-block">Sign Up</button>-->
+            <!--</div>-->
+
+        <!--</div>-->
+        <div class="col-lg-12">
+            <!--<div class="pull-right">-->
+                <!--<label class="control-label">Ambassador</label>-->
+                <!--<div class="btn-group profile-social">-->
+                    <!--<button type="button" class="btn btn-default" ng-model="ambassador.isActive" btn-radio="true">Yes</button>-->
+                    <!--<button type="button" class="btn btn-default" ng-model="ambassador.isActive" btn-radio="false">No</button>-->
+                <!--</div>-->
+            <!--</div>-->
+            <!--<br class="clearfix">-->
+            <!--<div class="row">-->
+                <!--<div class="col-sm-6">-->
+                    <!--<h2 class="street-team">Street Promoter Points: 63</h2>-->
+                    <!--<small><a href="#">View Rewards</a></small>-->
+                <!--</div>-->
+                <!--<div class="col-sm-6">-->
+                    <!--<h2 class="street-team">Referral Code: 6QX79E3A</h2>-->
+                    <!--<small><p class="text-muted">The first time you share this on a social network you will earn 1 point.</p></small>-->
+                <!--</div>-->
+            <!--</div>-->
+            <br>
+            <br>
+            <tabset justified="true">
+                <tab heading="Information">
+                    <br>
+                    <ng-include src="'/app/registration/profile/profileForm.part.html'"></ng-include>
+                    <div class="row">
+                        <div class="col-lg-3 col-lg-offset-9">
+                            <div class="pull-right">
+                                <button class="btn btn-success" ng-click="save()" type="submit"><i class="glyphicon glyphicon-saved"></i>&nbsp;Save Changes</button>
+                                <br class="clearfix">
+                            </div>
+                        </div>
+                    </div>
+                </tab>
+                <!-- Tab -->
+                <!--<tab heading="Ambassador">-->
+                    <!--<br>-->
+                    <!--<div class="alert alert-info"><i class="glyphicon glyphicon-star"></i>&nbsp;Ambassador Wil, there is a new message for you to deliver!-->
+                    <!--<hr>-->
+                        <!--<strong>These five #winterrunning tips always come in handy- #running #marathontraining #racemanagement #eventmanagement... http://fb.me/3w8j5GCxO</strong>-->
+                    <!--</div>-->
+                    <!--<div class="alert alert-warning">-->
+                        <!--<i class="glyphicon glyphicon-star"></i>&nbsp;Keep up the good work. This week we would like everyone to pass out 100 fliers and share at least 5 messages!-->
+                    <!--</div>-->
+
+                    <!--<div class="row">-->
+                        <!--<div class="col-sm-4">-->
+                            <!--<button class="btn btn-social btn-twitter btn-block" ng-if="social.twitter" type="button"><i class="fa fa-twitter"></i>Share On Twitter</button>-->
+                        <!--</div>-->
+                        <!--<div class="col-sm-4">-->
+                            <!--<button class="btn btn-social btn-facebook btn-block" ng-if="social.facebook" type="button"><i class="fa fa-facebook"></i>Share On Facebook</button>-->
+                        <!--</div>-->
+                        <!--<div class="col-sm-4">-->
+                            <!--<button class="btn btn-social btn-google-plus btn-block" ng-if="social.google" type="button"><i class="fa fa-google-plus"></i>Share On Google</button>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</tab>-->
+                <tab heading="Registrations" ng-hide="true">
+                <br>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div id="openregistrationgrid" kendo-grid k-options="registrationGridOptions"></div>
+                        </div>
+                    </div>
+                    <br>
+                </tab>
+                <!-- Tab -->
+                <tab heading="Team Registrations" ng-hide="true">
+                <br>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div id="teamgrid" kendo-grid k-options="teamGridOptions"></div>
+                        </div>
+                    </div>
+                </tab>
+                <!-- Tab -->
+                <tab heading="Participants" ng-hide="true">
+                <br>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div id="partgrid" kendo-grid k-options="participantGridOptions"></div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-3 col-lg-offset-9">
+                            <div class="pull-right">
+								<br class="clearfix">
+								<a class="btn btn-primary" href="#/participant/add"><i class="glyphicon glyphicon-plus-sign"></i>&nbsp;{{partButton}}</a>
+                                <br class="clearfix">
+                            </div>
+                        </div>
+                    </div>
+                </tab>
+                <!-- Tab -->
+                <tab heading="Captain View">
+                <br>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div kendo-grid="vm.coachgrid" k-options="coachGridOptions"></div>
+                        </div>
+                    </div>
+                </tab>
+                <!-- Tab -->
+            </tabset>
+            <!-- Tabs -->
+            <div class="modal fade" id="shareModal" role="dialog" tabindex="-1" aria-hidden="true"></div>
+        </div>
+    </div>
+</div>
+
+<script type="text/x-kendo-template" id="parttemplate">
+  <div kendo-grid k-options="partDetailGridOptions(dataItem)"></div>
+</script>
+
+<script type="text/x-kendo-template" id="teamtemplate">
+    <div kendo-grid k-options="teamDetailGridOptions(dataItem)"></div>
+</script>
+
+<script type="text/x-kendo-template" id="coachtemplate">
+  <div kendo-grid k-options="coachDetailGridOptions(dataItem)"></div>
+</script>
+
+<script type="text/x-kendo-template" id="teamMemberTemplate">
+    #if(participantId !== null){#
+        <a class="btn btn-default btn-block" href="\\\#user-profile/#=participantId#"><em class="glyphicon glyphicon-edit"></em>&nbsp;Edit</a>
+    #}else{#
+        Not Registered
+        <!--<a class="btn btn-default btn-block" href="\\\#new-member/add/#=id#"><em class="glyphicon glyphicon-edit"></em>&nbsp;Create</a>-->
+    #}#
+</script>

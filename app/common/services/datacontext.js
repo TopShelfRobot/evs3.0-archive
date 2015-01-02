@@ -73,7 +73,8 @@
 
 			//ideally right here i would configure ownerId by url??
 		   console.log('priming');
-			primePromise = $q.all([service.owner.setPublicOwnerSettings(1)])
+			//primePromise = $q.all([service.owner.setPublicOwnerSettings(1)])
+		   primePromise = $q.all([service.owner.setOwnerSettings(config.owner.ownerId)])
 				.then(extendMetadata)
 				.then(success);
 			return primePromise;
