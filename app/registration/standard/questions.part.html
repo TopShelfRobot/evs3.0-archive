@@ -108,7 +108,7 @@
                 </div>
             </div>
 			<div class="col-sm-6">
-				<div class="form-group">
+				<div class="form-group" ng-if="groups.length > 0">
 					<label class="col-xs-4 control-label">{{cart.regSettings.groupName}}:</label>
 					<div class="col-xs-8">
 						<select class="form-control" ng-model="groupId" ng-options="g.id as g.name for g in groups">

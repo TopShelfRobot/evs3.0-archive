@@ -1,6 +1,5 @@
 ﻿(function () {
-	angular.module("evReg").service("CartModel",
-				["config", Model]);
+	angular.module("evReg").service("CartModel", ["config", Model]);
 	function Model(config) {
 		
 		var self = this;
@@ -65,42 +64,7 @@
 			return order;
 		};
 
-		cart.configureSettings = function (data) {
-
-			cart.regSettings.isDuplicateOrderAllowed = data.isDuplicateOrderAllowed;
-			cart.regSettings.isAddSingleFeeForAllRegs = data.isAddSingleFeeForAllRegs;
-			cart.regSettings.addSingleFeeForAllRegsPercent = data.addSingleFeeForAllRegsPercent;
-			cart.regSettings.addSingleFeeType = data.addSingleFeeType;
-			cart.regSettings.addSingleFeeForAllRegsFlat = data.addSingleFeeForAllRegsFlat;
-
-			cart.regSettings.eventureName = data.eventureName;
-			cart.regSettings.listName = data.listingName;
-			cart.regSettings.groupName = data.groupName;
-			cart.regSettings.partButtonText = data.participantButtonText;
-			cart.regSettings.confirmButtonText = data.confirmButtonText;
-			cart.regSettings.registerButtonText = data.registerButtonText;
-			cart.regSettings.listStatement = data.listStatement;
-			cart.regSettings.termsText = data.termsText;
-			cart.regSettings.refundsText = data.refundsText;
-			cart.regSettings.stripeCheckoutButtonText = data.stripeCheckoutButtonText;
-			cart.regSettings.stripeOrderDescription = data.stripeOrderDescription;
-			//cart.regSettings.stripeLogoPath = data.stripeLogoPath;
-
-			cart.regSettings.isMultiParticipantDiscountCartRule = data.isMultiParticipantDiscountCartRule;
-			cart.regSettings.isMultiRegistrationDiscountCartRule = data.isMultiRegistrationDiscountCartRule;
-
-			cart.regSettings.multiParticipantDiscountAmount = data.multiParticipantDiscountAmount;
-			cart.regSettings.multiParticipantDiscountAmountType = data.multiParticipantDiscountAmountType;
-			cart.regSettings.multiRegistrationDiscountAmount = data.multiRegistrationDiscountAmount;
-			cart.regSettings.multiRegistrationDiscountAmountType = data.multiRegistrationDiscountAmountType;
-
-
-
-			cart.regSettings.name = data.name;
-			cart.regSettings.stripePublishableKey = data.stripePublishableKey
-		};
-
-		cart.addRegistration = function (eventure, eventureList, participant, answers, groupId, group2Id, quantity) {
+        cart.addRegistration = function (eventure, eventureList, participant, answers, groupId, group2Id, quantity) {
 			var isRegDupe = false;
 			if (!cart.regSettings.isDuplicateOrderAllowed) {
 				for (var i = 0; i < cart.registrations.length; i++) {
@@ -263,7 +227,41 @@
 			return price;
 		};
 
+		cart.configureSettings = function (data) {
 
+		    cart.regSettings.isDuplicateOrderAllowed = data.isDuplicateOrderAllowed;
+		    cart.regSettings.isAddSingleFeeForAllRegs = data.isAddSingleFeeForAllRegs;
+		    cart.regSettings.addSingleFeeForAllRegsPercent = data.addSingleFeeForAllRegsPercent;
+		    cart.regSettings.addSingleFeeType = data.addSingleFeeType;
+		    cart.regSettings.addSingleFeeForAllRegsFlat = data.addSingleFeeForAllRegsFlat;
+
+		    cart.regSettings.eventureName = data.eventureName;
+		    cart.regSettings.listName = data.listingName;
+		    cart.regSettings.groupName = data.groupName;
+		    cart.regSettings.partButtonText = data.participantButtonText;
+		    cart.regSettings.confirmButtonText = data.confirmButtonText;
+		    cart.regSettings.registerButtonText = data.registerButtonText;
+		    cart.regSettings.listStatement = data.listStatement;
+		    cart.regSettings.termsText = data.termsText;
+		    cart.regSettings.refundsText = data.refundsText;
+		    cart.regSettings.stripeCheckoutButtonText = data.stripeCheckoutButtonText;
+		    cart.regSettings.stripeOrderDescription = data.stripeOrderDescription;
+		    //cart.regSettings.stripeLogoPath = data.stripeLogoPath;
+
+		    cart.regSettings.isMultiParticipantDiscountCartRule = data.isMultiParticipantDiscountCartRule;
+		    cart.regSettings.isMultiRegistrationDiscountCartRule = data.isMultiRegistrationDiscountCartRule;
+
+		    cart.regSettings.multiParticipantDiscountAmount = data.multiParticipantDiscountAmount;
+		    cart.regSettings.multiParticipantDiscountAmountType = data.multiParticipantDiscountAmountType;
+		    cart.regSettings.multiRegistrationDiscountAmount = data.multiRegistrationDiscountAmount;
+		    cart.regSettings.multiRegistrationDiscountAmountType = data.multiRegistrationDiscountAmountType;
+
+
+
+		    cart.regSettings.name = data.name;
+		    cart.regSettings.stripePublishableKey = data.stripePublishableKey
+		};
+        
 		function registration(displayEvent, displayList, email, fee, eventureId, eventureListId, partId, name, answers, groupId, group2Id, quantity, eventureListTypeId) {
 			var me = this;
 			me.displayEvent = displayEvent;
