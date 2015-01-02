@@ -294,27 +294,16 @@
 				}, {
 					field: "eventName",
 					title: "Eventure",
-				}
-				//, {
-				//	field: "listName",
-				//	title: "Listing",
-				//	width:150
-				//}
-				, {
-					field: "division",
-					title: "Division",
-					width: 150
 				}, {
-					field: "timeFinish",
-					title: "Est. Finish Time",
-					width: 150
+					field: "listName",
+					title: "Listing",
+					width:150
+				}, {
+					field: "amount",
+					title: "Total Paid",
+					//width: "120px",
+					format: "{0:c}"
 				}
-				//, {
-				//	field: "amount",
-				//	title: "Total Paid",
-				//	//width: "120px",
-				//	format: "{0:c}"
-				//}
 				, {
 					field: "balance",
 					title: "Balance",

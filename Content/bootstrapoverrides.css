@@ -3,17 +3,17 @@ background-color:transparent;
 }
 
 .navbar-inverse {
-    background-color: #bc4800;
-    border-color:#ffc107;
+    background-color: #3F51B5;
+    border-color:#1A237E;
 }
 
 .navbar-inverse .navbar-nav > .active > a, .navbar-inverse .navbar-nav > .active > a:hover, .navbar-inverse .navbar-nav > .active > a:focus {
-    background-color: #ffc107;
-    border-bottom:2px inset #FFFF00;
+    background-color: #1A237E;
+    border-bottom:2px inset #1A237E;
 }
 
 .navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form {
-    border-color:#ffc107;
+    border-color:#1A237E;
 }
 
 .navbar-inverse .navbar-nav > li > a {
@@ -30,7 +30,7 @@ background-color:transparent;
     border:none;
 }
 .navbar-inverse .navbar-toggle .icon-bar {
-    background-color:#FFFF00;
+    background-color:#E91E63;
 }
 .btn:focus,
 .btn:active:focus,
@@ -228,7 +228,7 @@ fieldset[disabled] .btn-info.active {
 }
 .btn-warning {
     color: #ffffff;
-    background-color: #bc4800;
+    background-color: #FFC107;
     border-color: transparent;
 }
 .btn-warning:hover,
@@ -237,7 +237,7 @@ fieldset[disabled] .btn-info.active {
 .btn-warning.active,
 .open > .dropdown-toggle.btn-warning {
     color: #ffffff;
-    background-color: #F57C00;
+    background-color: #FFC107;
     border-color: rgba(0, 0, 0, 0);
 }
 .btn-warning:active,
@@ -260,11 +260,11 @@ fieldset[disabled] .btn-warning:active,
 .btn-warning.disabled.active,
 .btn-warning[disabled].active,
 fieldset[disabled] .btn-warning.active {
-    background-color: #bc4800;
+    background-color: #FFC107;
     border-color: transparent;
 }
 .btn-warning .badge {
-    color: #bc4800;
+    color: #FFC107;
     background-color: #ffffff;
 }
 .btn-danger {
@@ -433,8 +433,8 @@ fieldset[disabled] .btn-link:focus {
     box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
 }
 .btn-warning {
-    background-image: -webkit-radial-gradient(circle, #bc4800 80%, #F57C00 81%);
-    background-image: radial-gradient(circle, #bc4800 80%, #F57C00 81%);
+    background-image: -webkit-radial-gradient(circle, #FFC107 80%, #FFD54F 81%);
+    background-image: radial-gradient(circle, #FFC107 80%, #FFD54F 81%);
     background-repeat: no-repeat;
     background-size: 200%;
     background-position: 50%;
@@ -442,12 +442,12 @@ fieldset[disabled] .btn-link:focus {
 }
 .btn-warning:hover {
     background-size: 100%;
-    border-color: #F57C00;
+    border-color: #FFD54F;
 }
 .btn-warning:active {
-    background-color: #F57C00;
-    background-image: -webkit-radial-gradient(circle, #F57C00 10%, #bc4800 11%);
-    background-image: radial-gradient(circle, #F57C00 10%, #bc4800 11%);
+    background-color: #FFD54F;
+    background-image: -webkit-radial-gradient(circle, #FFD54F 10%, #FFC107 11%);
+    background-image: radial-gradient(circle, #FFD54F 10%, #FFC107 11%);
     background-repeat: no-repeat;
     background-size: 1000%;
     -webkit-box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);

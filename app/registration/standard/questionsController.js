@@ -126,7 +126,7 @@
 				// Submit as normal
 				cartModel.addRegistration($scope.eventure, $scope.eventureList, $scope.participant, getCustomAnswers(), $scope.groupId, $scope.group2Id, $scope.quantity);
 				$location.$$search = {};
-				$location.path("/confirm");
+				$location.path("/eventure");
 			} else {
 				toastr.options = {
 					'positionClass': 'toast-bottom-right'
