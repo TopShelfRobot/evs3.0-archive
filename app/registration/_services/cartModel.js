@@ -77,7 +77,7 @@
 				}
 			}
 			if (!isRegDupe) {
-				cart.registrations.push(new registration(eventure.displayHeading, eventureList.displayName, participant.email, eventureList.currentFee, eventure.id, eventureList.id, participant.id, participant.firstName + ' ' + participant.lastName, answers, groupId, group2Id, quantity, eventureList.eventureListTypeId));
+			    cart.registrations.push(new registration(eventure.displayHeading, eventureList.displayName, participant.email, eventureList.currentFee, eventure.id, eventureList.id, participant.id, participant.firstName + ' ' + participant.lastName, answers, groupId, group2Id, quantity, eventureList.eventureListTypeId, eventureList.isBundle));
 				//toastr.success('<strong class="text-center">Your Item Was Added To Your Cart!</strong><br><br><a class="btn btn-primary btn-block" href="#/shoppingcart">View Cart</a>');
 			}
 		};
@@ -262,12 +262,12 @@
 		    cart.regSettings.stripePublishableKey = data.stripePublishableKey
 		};
         
-		function registration(displayEvent, displayList, email, fee, eventureId, eventureListId, partId, name, answers, groupId, group2Id, quantity, eventureListTypeId) {
+		function registration(displayEvent, displayList, email, fee, eventureId, eventureListId, partId, name, answers, groupId, group2Id, quantity, eventureListTypeId, isBundle) {
 			var me = this;
 			me.displayEvent = displayEvent;
 			me.displayList = displayList;
 			//me.image = image;
-			me.Email = email;
+			me.email = email;
 			me.fee = fee;
 			me.eventureId = eventureId;
 			me.eventureListId = eventureListId;
@@ -279,6 +279,7 @@
 			me.quantity = quantity;
 			me.lineTotal = quantity * fee;
 			me.eventureListTypeId = eventureListTypeId;
+			me.isBundle = isBundle;
 		};
 
 		function surcharge(chargeDesc, amount, chargeType, listId, partId, couponId, context) {
