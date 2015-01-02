@@ -31,19 +31,11 @@
 		delete $httpProvider.defaults.headers.common['X-Requested-With'];
 	}]);
 
-<<<<<<< HEAD:app/app.js
-
-	//var serviceBase = 'http://localhost:26264/';
-	var serviceBase = 'http://localhost:49822/';
-	//var serviceBase = 'http://ngauthenticationapi.azurewebsites.net/';
-	//var serviceBase = 'http://dev30.eventuresports.info/';
-=======
 	// Handle routing errors and success events.
 	// Trigger breeze configuration
 	app.run(['$route', function ($route) {
 		// Include $route to kick start the router.
 	}]);
->>>>>>> development:app/dashboard/app.js
 
 	app.constant('ngAuthSettings', {
 		//apiServiceBaseUri: serviceBase,
