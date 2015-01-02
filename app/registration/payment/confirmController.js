@@ -4,7 +4,7 @@
 
 	var controllerId = "ConfirmController";
 
-	function Controller($scope, $http, $location, $q, $modal, stripe, datacontext, logger, cart, config, common) {
+	function Controller($scope, $http, $location, $q, stripe, datacontext, cart, config, common) {
 		$scope.isTerms = false;
 		$scope.isRefund = false;
 		//$scope.owner = null;
@@ -80,24 +80,7 @@
 			$scope.couponCode = "";
 		};
 
-		//$scope.completeRegistration = function(){
-		//    $scope.errorMessage = "";  //clears any previous errors
-		//    $scope.submitDisabled = true; // Disable the submit button to prevent repeated clicks
-		//};
-
-		$scope.open = function () {
-			var modalInstance = $modal.open({
-				templateUrl: 'termsAndConditions.html',
-				size: 'lg',
-				backdrop: 'static',
-				controller: 'TermsModalInstance'
-			});
-
-			modalInstance.result.then(function () { $scope.checkout(); });
-
-		};
-
-		$scope.checkout =function() {
+		$scope.checkout = function() {
 			var order = cart.order();
 
 			stripe.checkout(cart.getTotalPrice())
@@ -129,6 +112,6 @@
 
 
 
-	angular.module("evReg").controller(controllerId, ["$scope", "$http", "$location", "$q", "$modal", "StripeService", "datacontext", "logger", "CartModel", "config", "common", Controller]);
+	angular.module("evReg").controller(controllerId, ["$scope", "$http", "$location", "$q", "StripeService", "datacontext", "CartModel", "config", "common", Controller]);
 
 })();
