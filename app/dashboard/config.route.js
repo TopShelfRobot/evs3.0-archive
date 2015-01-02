@@ -14,7 +14,7 @@
             //$routeProvider.when(r.url, r.config);
             setRoute(r.url, r.config);
         });
-        $routeProvider.otherwise({ redirectTo: '/eventurecenter' });
+        $routeProvider.otherwise({ redirectTo: '/login' });
 
         function setRoute(url, definition) {
             // Sets resolvers for all of the routes
