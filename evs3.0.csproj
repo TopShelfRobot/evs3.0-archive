@@ -433,7 +433,9 @@
     <Content Include="Scripts\xlsx.js" />
     <Content Include="Scripts\jquery-2.0.3.min.map" />
     <Content Include="Scripts\toastr.min.js.map" />
-    <Content Include="web.config" />
+    <Content Include="web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>

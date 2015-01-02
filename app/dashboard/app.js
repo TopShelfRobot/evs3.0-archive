@@ -22,7 +22,8 @@
 		'angularFileUpload',  // file upload functions
 		'angulartics',  //analytics
 		'angulartics.google.analytics', //analytics
-		'evReg'
+		'evReg',
+		"ngRoleAuth"
 	]);
 
 	app.config(['$httpProvider', function ($httpProvider) {
@@ -30,11 +31,19 @@
 		delete $httpProvider.defaults.headers.common['X-Requested-With'];
 	}]);
 
+<<<<<<< HEAD:app/app.js
+
+	//var serviceBase = 'http://localhost:26264/';
+	var serviceBase = 'http://localhost:49822/';
+	//var serviceBase = 'http://ngauthenticationapi.azurewebsites.net/';
+	//var serviceBase = 'http://dev30.eventuresports.info/';
+=======
 	// Handle routing errors and success events.
 	// Trigger breeze configuration
 	app.run(['$route', function ($route) {
 		// Include $route to kick start the router.
 	}]);
+>>>>>>> development:app/dashboard/app.js
 
 	app.constant('ngAuthSettings', {
 		//apiServiceBaseUri: serviceBase,
@@ -46,9 +55,16 @@
 	});
 
 	// Handle routing errors and success events.
-	app.run(['$route', 'authService', function ($route, authService) {
+	app.run(['$route', 'authService', "AuthService", function ($route, authService, rbs) {
 		// Include $route to kick start the router.
 		authService.fillAuthData();
+		rbs.getRole = function(){
+			var roles = [];
+			if(authService.authentication.roles){
+				roles = authService.authentication.roles;
+			}
+			return roles;
+		};
 	}]);
 
 

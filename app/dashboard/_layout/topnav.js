@@ -3,9 +3,9 @@
 
     var controllerId = 'topnav';
     angular.module('app').controller(controllerId,
-        ['$route', '$location', 'config', 'routes', 'authService', 'CartModel', topnav]);
+        ['$route', '$location', "$window", 'config', 'routes', 'authService', 'CartModel', topnav]);
 
-    function topnav($route, $location, config, routes, authService, cart) {
+    function topnav($route, $location, $window, config, routes, authService, cart) {
 
         var vm = this;
 
@@ -13,7 +13,9 @@
 
         vm.logOut = function () {
             authService.logOut();
-            $location.path('/eventurecenter');
+            // $location.path('/login');
+			$window.location.href = "/dash.html#/login";
+			$window.location.reload();
         }
 
         vm.authentication = authService.authentication;
