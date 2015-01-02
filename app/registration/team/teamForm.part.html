@@ -23,7 +23,7 @@
           <option>Corporate</option>
         </select>
         <h4>Estimated Time Of Finish</h4>
-        <input type="text" class="form-control" name="TimeFinish" placeholder="HH:MM:SS" ng-model="team.timeFinish">
+        <input type="text" class="form-control" name="TimeFinish" mask="99:99" placeholder="HH:MM" restrict="reject" ng-model="team.timeFinish">
       </div>
     </div>
     <br>

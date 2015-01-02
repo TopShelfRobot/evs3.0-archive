@@ -23,7 +23,7 @@
 		'angulartics',  //analytics
 		'angulartics.google.analytics', //analytics
 		'evReg',
-		"ngRoleAuth"
+		'ngRoleAuth'
 	]);
 
 	app.config(['$httpProvider', function ($httpProvider) {

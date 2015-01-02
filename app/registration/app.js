@@ -19,7 +19,8 @@
 		'nsPopover',
 		'angulartics',  //analytics
 		'angulartics.google.analytics', //analytics
-		'sbDateSelect'
+		'sbDateSelect',
+		'ngMask'
 	]);
 
 	app.constant('ngAuthSettings', {
