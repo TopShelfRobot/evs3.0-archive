@@ -57,6 +57,7 @@ Web.config
 packages/
 .nuget/
 *.dgml
+*.dll
 
 *_i.c
 *_p.c

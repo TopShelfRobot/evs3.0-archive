@@ -237,11 +237,11 @@
 		};
 
 		cart.emptyCart = function () {
-			var length = this.vm.registrations.length;
-			vm.registrations.splice(0, length);
+			var length = this.registrations.length;
+			this.registrations.splice(0, length);
 
 			var chargeLength = this.surcharges.length;
-			surcharges.splice(0, chargeLength);
+			this.surcharges.splice(0, chargeLength);
 		};
 
 		cart.getTotalPrice = function () {
