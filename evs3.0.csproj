@@ -405,6 +405,8 @@
     <Content Include="Content\images\kendoui.woff" />
     <None Include="Scripts\jquery-2.0.3.intellisense.js" />
     <Content Include="Scripts\angular-mocks.js" />
+    <Content Include="Scripts\angulartics-ga.min.js" />
+    <Content Include="Scripts\angulartics.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\breeze.intellisense.js" />
@@ -415,6 +417,7 @@
     <Content Include="Scripts\breeze.saveErrorExtensions.js" />
     <Content Include="Scripts\jquery-2.0.3.js" />
     <Content Include="Scripts\jquery-2.0.3.min.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jszip.min.js" />
     <Content Include="Scripts\kendo.all.min.js" />
     <Content Include="Scripts\modernizr.custom.js" />
@@ -422,20 +425,25 @@
     <Content Include="Scripts\moment-with-langs.min.js" />
     <Content Include="Scripts\moment.js" />
     <Content Include="Scripts\moment.min.js" />
+    <Content Include="Scripts\ng-role-auth.js" />
+    <Content Include="Scripts\ng-role-auth.min.js" />
+    <Content Include="Scripts\nsPopover.js" />
+    <Content Include="Scripts\nsPopover.min.js" />
+    <Content Include="Scripts\sb-date-select.js" />
     <Content Include="Scripts\spin.js" />
     <Content Include="Scripts\spin.min.js" />
+    <Content Include="Scripts\stripe.js" />
     <Content Include="Scripts\toastr.js" />
     <Content Include="Scripts\toastr.min.js" />
     <Content Include="Scripts\toucheffects.js" />
-    <Content Include="Scripts\ui-bootstrap-tpls-0.10.0.js" />
-    <Content Include="Scripts\ui-bootstrap-tpls-0.10.0.min.js" />
-    <Content Include="Scripts\ui-bootstrap-tpls-0.11.0.js" />
+    <Content Include="Scripts\ui-bootstrap-tpls-0.12.0.js" />
     <Content Include="Scripts\xlsx.js" />
     <Content Include="Scripts\jquery-2.0.3.min.map" />
     <Content Include="Scripts\toastr.min.js.map" />
     <Content Include="web.config">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Scripts\kendo.all.min.js.map" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
