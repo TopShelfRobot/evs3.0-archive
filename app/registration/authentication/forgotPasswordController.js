@@ -8,7 +8,7 @@
         $scope.message = "";
 
         $scope.registration = {
-            email: "boone.mike@gmail.com"  //,
+            email: ''  //,
             //password: "",
             //confirmPassword: ""
         };

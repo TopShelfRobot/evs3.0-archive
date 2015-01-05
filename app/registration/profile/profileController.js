@@ -22,6 +22,11 @@
 			isActive: true
 		};
 
+		$scope.isRegistrationOnProfile = cart.regSettings.isRegistrationOnProfile;
+		$scope.isTeamRegistrationOnProfile = cart.regSettings.isTeamRegistrationOnProfile;
+		$scope.isParticipantOnProfile = cart.regSettings.isParticipantOnProfile;
+		$scope.isCaptainOnProfile = cart.regSettings.isCaptainOnProfile;
+
 		var promises = [getParticipant(), Registrations(), Participants(), Team(), Coach()];
 
 		common.activateController(promises, controllerId)

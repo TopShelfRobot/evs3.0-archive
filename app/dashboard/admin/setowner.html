@@ -148,7 +148,7 @@
         </tab>
         <!-- end Information -->
 
-        <tab heading="Cart Rules"> <br>
+        <tab heading="Options"> <br>
         <form class="form-horizontal">
           <div class="row">
             <div class="col-sm-6">
@@ -196,6 +196,46 @@
                   <div class="btn-group">
                     <button type="button" class="btn btn-default" ng-model="vm.owner.isDuplicateOrderAllowed" btn-radio="true">Yes</button>
                     <button type="button" class="btn btn-default" ng-model="vm.owner.isDuplicateOrderAllowed" btn-radio="false">No</button>
+                  </div>
+                </div>
+              </div>
+              <!--/field -->
+              <div class="form-group">
+                <label for="MultiDiscount" class="col-lg-6 control-label">Show Registrations On Profile:</label>
+                <div class="col-lg-6">
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-default" ng-model="vm.owner.isRegistrationOnProfile" btn-radio="true">Yes</button>
+                    <button type="button" class="btn btn-default" ng-model="vm.owner.isRegistrationOnProfile" btn-radio="false">No</button>
+                  </div>
+                </div>
+              </div>
+              <!--/field -->
+              <div class="form-group">
+                <label for="MultiDiscount" class="col-lg-6 control-label">Show Team Registrations On Profile:</label>
+                <div class="col-lg-6">
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-default" ng-model="vm.owner.isTeamRegistrationOnProfile" btn-radio="true">Yes</button>
+                    <button type="button" class="btn btn-default" ng-model="vm.owner.isTeamRegistrationOnProfile" btn-radio="false">No</button>
+                  </div>
+                </div>
+              </div>
+              <!--/field -->
+              <div class="form-group">
+                <label for="MultiDiscount" class="col-lg-6 control-label">Show Participants On Profile:</label>
+                <div class="col-lg-6">
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-default" ng-model="vm.owner.isParticipantOnProfile" btn-radio="true">Yes</button>
+                    <button type="button" class="btn btn-default" ng-model="vm.owner.isParticipantOnProfile" btn-radio="false">No</button>
+                  </div>
+                </div>
+              </div>
+              <!--/field -->
+              <div class="form-group">
+                <label for="MultiDiscount" class="col-lg-6 control-label">Show Captain On Profile:</label>
+                <div class="col-lg-6">
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-default" ng-model="vm.owner.isCaptainOnProfile" btn-radio="true">Yes</button>
+                    <button type="button" class="btn btn-default" ng-model="vm.owner.isCaptainOnProfile" btn-radio="false">No</button>
                   </div>
                 </div>
               </div>
