@@ -53,7 +53,7 @@
 		$scope.applyCoupon = function () {
 
 			$scope.submitDisabled = true;
-			var apiUrl = config.apiPath + "api/Coupon/Post";    //mjb
+			var apiUrl = config.apiPath + "api/coupon/Post";    //mjb
 			var source = {
 				'couponCode': $scope.couponCode,
 				'regs': cart.registrations,
