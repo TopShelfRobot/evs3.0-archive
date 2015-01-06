@@ -37,6 +37,8 @@
 			showWeeks: 'false'
 		};
 
+		$scope.formHolder = {};
+
 		var formats = ['MM-dd-yyyy', 'yyyy/MM/dd', 'shortDate'];
 		$scope.format = formats[0];
 		$scope.open = function($event) {
@@ -68,17 +70,25 @@
 
 		$scope.submit = function(){
 
-			var newPart = datacontext.participant.createParticipant(cart.ownerId, cart.houseId, $scope.participant.email)
-			$scope.date.dateBirth = moment($scope.date.dateBirth).toISOString();
-			$scope.participant.dateBirth = $scope.date.dateBirth;
-			for(key in $scope.participant){
-				newPart[key] = $scope.participant[key];
+			if ($scope.formHolder.participantForm.$valid) {
+				// Submit as normal
+				var newPart = datacontext.participant.createParticipant(cart.ownerId, cart.houseId, $scope.participant.email);
+				$scope.date.dateBirth = moment($scope.date.dateBirth).toISOString();
+				$scope.participant.dateBirth = $scope.date.dateBirth;
+				for(key in $scope.participant){
+					newPart[key] = $scope.participant[key];
+				}
+				datacontext.save()
+					.then(function(){
+						console.log("saved");
+						$window.history.back();
+					});
+			} else {
+				toastr.options = {
+					'positionClass': 'toast-bottom-right'
+				};
+				toastr['error']('Please provide all requested information.');
 			}
-			datacontext.save()
-				.then(function(){
-					console.log("saved");
-					$window.history.back();
-				});
 		};
 
 

@@ -81,15 +81,24 @@
             <p class="text-muted">Your card will be charged for the amount of <strong>{{ cart.getTotalPrice() | currency }}</strong>.</p>
         </div>
     </div>
+    <div class="row hidden-md hidden-lg">
+        <div class="col-xs-6">
+            <h3>Terms & Conditions</h3>
+            {{cart.regSettings.termsText}}
+        </div>
+        <div class="col-xs-6">
+            <h3>Refund Policy</h3>
+            {{cart.regSettings.refundsText}}
+        </div>
+    </div>
     <div class="row">
         <div class="col-sm-6 col-sm-offset-3">
+
             <label class="checkbox agreement">
                 <input type="checkbox" data-bind="checked: isTerms" ng-model="$parent.waiverSigned">
                 I have read and agree to the
-                <a id="terms" data-contents="{{show.msg}}" rel="popover">Terms and Conditions</a>,
-                <a id="refund">Refund Policy</a>,
-                and
-                <a id="waiver">Waiver</a>.
+                <a ng-click="openTerms()">Terms and Conditions</a> and the
+                <a ng-click="openRefund()">Refund Policy</a>.
             </label>
             <button type="button"
                     class="btn btn-success btn-block"
@@ -99,3 +108,27 @@
         </div>
     </div>
 </div>
+
+<script type="text/ng-template" id="termsAndConditions.html">
+    <div class="modal-header">
+        <h3 class="modal-title">Terms and Conditions</h3>
+    </div>
+    <div class="modal-body">
+        {{termsText}}
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-warning" ng-click="ok()">I Accept The Terms & Conditions</button>
+    </div>
+</script>
+
+<script type="text/ng-template" id="refundPolicy.html">
+    <div class="modal-header">
+        <h3 class="modal-title">Refund Policy</h3>
+    </div>
+    <div class="modal-body">
+        {{refundsText}}
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-warning" ng-click="ok()">I Accept The Refund Policy</button>
+    </div>
+</script>
