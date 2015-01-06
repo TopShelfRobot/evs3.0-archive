@@ -64,7 +64,7 @@
 			return order;
 		};
 
-        cart.addRegistration = function (eventure, eventureList, participant, answers, groupId, group2Id, quantity) {
+		cart.addRegistration = function (eventure, eventureList, participant, answers, groupId, group2Id, quantity) {
 			var isRegDupe = false;
 			if (!cart.regSettings.isDuplicateOrderAllowed) {
 				for (var i = 0; i < cart.registrations.length; i++) {
@@ -77,8 +77,8 @@
 				}
 			}
 			if (!isRegDupe) {
-			    cart.registrations.push(new registration(eventure.displayHeading, eventureList.displayName, participant.email, eventureList.currentFee, eventure.id, eventureList.id, participant.id, participant.firstName + ' ' + participant.lastName, answers, groupId, group2Id, quantity, eventureList.eventureListTypeId, eventureList.isBundle));
-				//toastr.success('<strong class="text-center">Your Item Was Added To Your Cart!</strong><br><br><a class="btn btn-primary btn-block" href="#/shoppingcart">View Cart</a>');
+				cart.registrations.push(new registration(eventure.displayHeading, eventureList.displayName, participant.email, eventureList.currentFee, eventure.id, eventureList.id, participant.id, participant.firstName + ' ' + participant.lastName, answers, groupId, group2Id, quantity, eventureList.eventureListTypeId, eventureList.isBundle));
+				toastr.success('<strong class="text-center">Your Item Was Added To Your Cart!</strong><br><br><a class="btn btn-primary btn-block" href="#/shoppingcart">View Cart</a>');
 			}
 		};
 
@@ -229,39 +229,39 @@
 
 		cart.configureSettings = function (data) {
 
-		    cart.regSettings.isDuplicateOrderAllowed = data.isDuplicateOrderAllowed;
-		    cart.regSettings.isAddSingleFeeForAllRegs = data.isAddSingleFeeForAllRegs;
-		    cart.regSettings.addSingleFeeForAllRegsPercent = data.addSingleFeeForAllRegsPercent;
-		    cart.regSettings.addSingleFeeType = data.addSingleFeeType;
-		    cart.regSettings.addSingleFeeForAllRegsFlat = data.addSingleFeeForAllRegsFlat;
+			cart.regSettings.isDuplicateOrderAllowed = data.isDuplicateOrderAllowed;
+			cart.regSettings.isAddSingleFeeForAllRegs = data.isAddSingleFeeForAllRegs;
+			cart.regSettings.addSingleFeeForAllRegsPercent = data.addSingleFeeForAllRegsPercent;
+			cart.regSettings.addSingleFeeType = data.addSingleFeeType;
+			cart.regSettings.addSingleFeeForAllRegsFlat = data.addSingleFeeForAllRegsFlat;
 
-		    cart.regSettings.eventureName = data.eventureName;
-		    cart.regSettings.listName = data.listingName;
-		    cart.regSettings.groupName = data.groupName;
-		    cart.regSettings.partButtonText = data.participantButtonText;
-		    cart.regSettings.confirmButtonText = data.confirmButtonText;
-		    cart.regSettings.registerButtonText = data.registerButtonText;
-		    cart.regSettings.listStatement = data.listStatement;
-		    cart.regSettings.termsText = data.termsText;
-		    cart.regSettings.refundsText = data.refundsText;
-		    cart.regSettings.stripeCheckoutButtonText = data.stripeCheckoutButtonText;
-		    cart.regSettings.stripeOrderDescription = data.stripeOrderDescription;
-		    //cart.regSettings.stripeLogoPath = data.stripeLogoPath;
+			cart.regSettings.eventureName = data.eventureName;
+			cart.regSettings.listName = data.listingName;
+			cart.regSettings.groupName = data.groupName;
+			cart.regSettings.partButtonText = data.participantButtonText;
+			cart.regSettings.confirmButtonText = data.confirmButtonText;
+			cart.regSettings.registerButtonText = data.registerButtonText;
+			cart.regSettings.listStatement = data.listStatement;
+			cart.regSettings.termsText = data.termsText;
+			cart.regSettings.refundsText = data.refundsText;
+			cart.regSettings.stripeCheckoutButtonText = data.stripeCheckoutButtonText;
+			cart.regSettings.stripeOrderDescription = data.stripeOrderDescription;
+			//cart.regSettings.stripeLogoPath = data.stripeLogoPath;
 
-		    cart.regSettings.isMultiParticipantDiscountCartRule = data.isMultiParticipantDiscountCartRule;
-		    cart.regSettings.isMultiRegistrationDiscountCartRule = data.isMultiRegistrationDiscountCartRule;
+			cart.regSettings.isMultiParticipantDiscountCartRule = data.isMultiParticipantDiscountCartRule;
+			cart.regSettings.isMultiRegistrationDiscountCartRule = data.isMultiRegistrationDiscountCartRule;
 
-		    cart.regSettings.multiParticipantDiscountAmount = data.multiParticipantDiscountAmount;
-		    cart.regSettings.multiParticipantDiscountAmountType = data.multiParticipantDiscountAmountType;
-		    cart.regSettings.multiRegistrationDiscountAmount = data.multiRegistrationDiscountAmount;
-		    cart.regSettings.multiRegistrationDiscountAmountType = data.multiRegistrationDiscountAmountType;
+			cart.regSettings.multiParticipantDiscountAmount = data.multiParticipantDiscountAmount;
+			cart.regSettings.multiParticipantDiscountAmountType = data.multiParticipantDiscountAmountType;
+			cart.regSettings.multiRegistrationDiscountAmount = data.multiRegistrationDiscountAmount;
+			cart.regSettings.multiRegistrationDiscountAmountType = data.multiRegistrationDiscountAmountType;
 
 
 
-		    cart.regSettings.name = data.name;
-		    cart.regSettings.stripePublishableKey = data.stripePublishableKey
+			cart.regSettings.name = data.name;
+			cart.regSettings.stripePublishableKey = data.stripePublishableKey
 		};
-        
+		
 		function registration(displayEvent, displayList, email, fee, eventureId, eventureListId, partId, name, answers, groupId, group2Id, quantity, eventureListTypeId, isBundle) {
 			var me = this;
 			me.displayEvent = displayEvent;
