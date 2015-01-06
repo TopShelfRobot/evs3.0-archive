@@ -18,7 +18,10 @@
 				.then(function (item) {
 					if (item) {
 						$scope.fee = item.currentFee;
+						console.log(item);
+						console.log(item.paymentTerms);
 						$scope.paymentTerms = item.paymentTerms;
+						console.log($scope.paymentTerms);
 						cartModel.fee = item.currentFee;
 						//alert('itemlistingtype: ' + item.eventureListTypeId + 'fee: ' + item.currentFee)
 						switch (item.eventureListType) {

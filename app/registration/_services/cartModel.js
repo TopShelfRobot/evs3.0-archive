@@ -37,6 +37,11 @@
 			multiRegistrationDiscountAmount: 0,
 			multiRegistrationDiscountAmountType: 0,
 
+			isRegistrationOnProfile:true,
+			isTeamRegistrationOnProfile:true,
+			isParticipantOnProfile:true,
+			isCaptainOnProfile:true,
+
 			eventureName: 'Event',
 			listName: 'List',
 			groupName: 'Group',
@@ -256,7 +261,10 @@
 			cart.regSettings.multiRegistrationDiscountAmount = data.multiRegistrationDiscountAmount;
 			cart.regSettings.multiRegistrationDiscountAmountType = data.multiRegistrationDiscountAmountType;
 
-
+			cart.regSettings.isRegistrationOnProfile = data.isRegistrationOnProfile;
+			cart.regSettings.isTeamReigstrationOnProfile = data.isTeamRegistrationOnProfile;
+			cart.regSettings.isParticipantOnProfile = data.isParticipantOnProfile;
+			cart.regSettings.isCaptainOnProfile = data.isCaptainOnProfile;
 
 			cart.regSettings.name = data.name;
 			cart.regSettings.stripePublishableKey = data.stripePublishableKey

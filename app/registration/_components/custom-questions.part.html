@@ -47,13 +47,11 @@
 
         <div class="form-group" 
 				ng-switch-when="checkbox">
-            <label class="col-6 col-sm-6 col-lg-6 control-label">{{question.questionText}}</label>
-			<div class="col-6 col-sm-6 col-lg-6">
+            <label>
                 <input type="checkbox" 
 					ng-model="answers[question.id].answerText" 
 					ng-required="question.isRequired">
-				</input>
-            </div>
+				</input>{{question.questionText}}&nbsp;&nbsp;</label>
 		</div>
 	</div>
 </div>

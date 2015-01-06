@@ -10,6 +10,7 @@
 		
 		this.removeItem = function(reg){
 			self.model.removeRegistration(reg);
+			self.model.processCartRules();
 		};
 		
 		this.checkout = function(){
