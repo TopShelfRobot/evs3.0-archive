@@ -4,7 +4,7 @@
 
 	var controllerId = "ConfirmController";
 
-	function Controller($scope, $http, $location, $q, stripe, datacontext, cart, config, common) {
+	function Controller($scope, $http, $location, $q, $modal, stripe, datacontext, cart, config, common) {
 		$scope.isTerms = false;
 		$scope.isRefund = false;
 		//$scope.owner = null;
@@ -18,6 +18,8 @@
 		$scope.listName = cart.regSettings.listName;
 
 		$scope.confirmButtonText = cart.regSettings.confirmButtonText;
+		$scope.termsText = cart.regSettings.termsText;
+		$scope.refundsText = cart.regSettings.refundsText;
 
 		// initialize it
 		$scope.submitDisabled = true;
@@ -87,6 +89,30 @@
 			$scope.couponCode = "";
 		};
 
+		$scope.openTerms = function () {
+			var modalInstance = $modal.open({
+				templateUrl: 'termsAndConditions.html',
+				size: 'lg',
+				backdrop: 'static',
+				controller: 'TermsModalInstance'
+			});
+
+			modalInstance.result.then();
+
+		};
+
+		$scope.openRefund = function () {
+			var modalInstance = $modal.open({
+				templateUrl: 'refundPolicy.html',
+				size: 'lg',
+				backdrop: 'static',
+				controller: 'TermsModalInstance'
+			});
+
+			modalInstance.result.then();
+
+		};
+
 		$scope.checkout = function() {
 			var order = cart.order();
 
@@ -119,6 +145,6 @@
 
 
 
-	angular.module("evReg").controller(controllerId, ["$scope", "$http", "$location", "$q", "StripeService", "datacontext", "CartModel", "config", "common", Controller]);
+	angular.module("evReg").controller(controllerId, ["$scope", "$http", "$location", "$q", "$modal", "StripeService", "datacontext", "CartModel", "config", "common", Controller]);
 
 })();
