@@ -51,14 +51,19 @@
 		$scope.applyCoupon = function () {
 
 			$scope.submitDisabled = true;
-			var apiUrl = config.apiPath + "/api/Coupon/Post";    //mjb
+			var apiUrl = config.apiPath + "api/coupon/Post";    //mjb
 			var source = {
 				'couponCode': $scope.couponCode,
 				'regs': cart.registrations,
 			};
-
-			$http({ type: "POST", url: apiUrl, data: source })
+			console.log(source);
+		    alert(config.apiPath);
+		    //$http.post(config.apiPath + "api/coupon/Post", source)   //mjb
+			//$http({ type: "POST", url: apiUrl, data: source })
+		    $http.post(config.apiPath + "api/coupon/Post", source)
 				.success(function (result) {
+				    console.log(result);
+				    alert('suc');
 					if (result.Amount != 0) {
 						cart.removeCoupons();
 						cart.addSurcharge('Coupon: ' + couponCode, result.Amount, 'coupon', cart.currentEventureListId(), cart.currentPartId, result.CouponId);
@@ -68,9 +73,11 @@
 					}
 				})
 				.error(function (data, status, headers, config) {
+				    alert('err');
 					$scope.couponErrors = "Coupon Not Found(E1)";
 				})
 				.finally(function () {
+				    alert('fin');
 					$scope.submitDisabled = false;
 				});
 		};

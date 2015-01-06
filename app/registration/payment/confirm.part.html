@@ -58,6 +58,7 @@
         <div class="col-sm-5">
             <form class="form-horizontal">
                 <input id="CouponCode" class="form-control" type="text" placeholder="Coupon Code" ng-model="couponCode"/>
+                <span class="has-error help-block">{{couponErrors}}</span>
                 <br>
                 <button class="btn btn-default btn-xs" ng-click="applyCoupon()">
 					<i class="glyphicon glyphicon-plus-sign"></i>&nbsp;Apply Coupon
