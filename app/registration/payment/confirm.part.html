@@ -130,7 +130,7 @@
 
             <button type="button"
                         class="btn btn-warning btn-block pull-right hidden-xs hidden-sm"
-                        ng-disabled="(!$parent.waiverSigned) || ($parent.userPaying == 0 && !$parent.fullPaymentRequired) || ($parent.submitDisabled)"
+                        ng-disabled="($parent.userPaying == 0 && !$parent.fullPaymentRequired)"
                         ng-click="open()">{{confirmButtonText}}
             </button>
             <button type="button"

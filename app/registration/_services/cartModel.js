@@ -259,7 +259,7 @@
 
 
 		    cart.regSettings.name = data.name;
-		    cart.regSettings.stripePublishableKey = data.stripePublishableKey
+		    cart.regSettings.stripePublishableKey = data.stripePublishableKey;
 		};
         
 		function registration(displayEvent, displayList, email, fee, eventureId, eventureListId, partId, name, answers, groupId, group2Id, quantity, eventureListTypeId) {
