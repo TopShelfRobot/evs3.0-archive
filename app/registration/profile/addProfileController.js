@@ -3,9 +3,11 @@
 	
 	var controllerId = "AddUserProfile";
 
-	function Controller($scope, $location, config, datacontext, cart, common){
+	function Controller($scope, $location, config, datacontext, cart, authService, common){
 
 		$scope.participant = {};
+
+		$scope.participant.email = authService.authentication.userName;
 
 		$scope.title = 'Create Your Participant Profile';
 
@@ -15,7 +17,7 @@
 
 		$scope.positions = [
 			{
-				name: 'Driver'
+				name: 'Driver Only'
 			},
 			{
 				name: 'Runner'
@@ -43,6 +45,17 @@
 			}
 		];
 
+		$scope.genders = [
+			{
+				value: 'M',
+				name: 'Male'
+			},
+			{
+				value: 'F',
+				name: 'Female'
+			}
+		];
+
 		$scope.submit = function(){
 			
 			var newPart = datacontext.participant.createProfile($scope.participant.email);
@@ -66,7 +79,80 @@
 				});
 		};
 
+		$scope.stateProvince =[
+			{name: 'AK'},
+			{name: 'AL'},
+			{name: 'AR'},
+			{name: 'AZ'},
+			{name: 'CA'},
+			{name: 'CO'},
+			{name: 'CT'},
+			{name: 'DC'},
+			{name: 'DE'},
+			{name: 'FL'},
+			{name: 'GA'},
+			{name: 'HI'},
+			{name: 'IA'},
+			{name: 'ID'},
+			{name: 'IL'},
+			{name: 'IN'},
+			{name: 'KS'},
+			{name: 'KY'},
+			{name: 'LA'},
+			{name: 'MA'},
+			{name: 'MD'},
+			{name: 'ME'},
+			{name: 'MI'},
+			{name: 'MN'},
+			{name: 'MO'},
+			{name: 'MS'},
+			{name: 'MT'},
+			{name: 'NC'},
+			{name: 'ND'},
+			{name: 'NE'},
+			{name: 'NH'},
+			{name: 'NJ'},
+			{name: 'NM'},
+			{name: 'NV'},
+			{name: 'NY'},
+			{name: 'OH'},
+			{name: 'OK'},
+			{name: 'OR'},
+			{name: 'PA'},
+			{name: 'RI'},
+			{name: 'SC'},
+			{name: 'SD'},
+			{name: 'TN'},
+			{name: 'TX'},
+			{name: 'UT'},
+			{name: 'VA'},
+			{name: 'VT'},
+			{name: 'WA'},
+			{name: 'WI'},
+			{name: 'WV'},
+			{name: 'WY'},
+			{name: 'AS'},
+			{name: 'GU'},
+			{name: 'MP'},
+			{name: 'PR'},
+			{name: 'VI'},
+			{name: 'CZ'},
+			{name: 'AB'},
+			{name: 'BC'},
+			{name: 'MB'},
+			{name: 'NB'},
+			{name: 'NL'},
+			{name: 'NT'},
+			{name: 'NS'},
+			{name: 'NU'},
+			{name: 'ON'},
+			{name: 'PE'},
+			{name: 'QC'},
+			{name: 'SK'},
+			{name: 'YT'}
+		];
+
 	}
 
-	angular.module("evReg").controller(controllerId, ["$scope", "$location", "config", "datacontext", "CartModel", "common", Controller]);
+	angular.module("evReg").controller(controllerId, ["$scope", "$location", "config", "datacontext", "CartModel", "authService", "common", Controller]);
 })();

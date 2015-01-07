@@ -69,6 +69,13 @@
 			datacontext.eventure.getEventureListById($routeParams.listId)
 				.then(function (data) {
 					$scope.eventureList = data;
+					console.log($scope.eventureList.isWaiverDisplayed);
+					if($scope.eventureList.isWaiverDisplayed === false) {
+						$scope.isWaiverChecked = true;
+					}
+					else {
+						$scope.isWaiverChecked = false;
+					}
 					return data;
 				})
 		);

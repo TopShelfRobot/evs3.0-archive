@@ -56,7 +56,7 @@
                 <figure> <img ng-src="content/images/{{eventure.imageFileName || 'eventure-default.jpg'}}" alt="img01">
                   <figcaption>
                     <h4>{{eventure.displayHeading}}</h4>
-                    <span class="event-info"><i class="glyphicon glyphicon-calendar text-muted"></i>&nbsp;{{eventure.dateEventure | date}}</span><br>
+                    <span class="event-info"><i class="glyphicon glyphicon-calendar text-muted"></i>&nbsp;{{eventure.displayDate}}</span><br>
                     <span class="event-info"><i class="glyphicon glyphicon-map-marker text-muted"></i>&nbsp;{{eventure.location}}</span><br>
                       <a class="btn btn-warning btn-block" ng-click="NavigateToList(eventure.id)">{{registerButtonText}}</a>
                   </figcaption>

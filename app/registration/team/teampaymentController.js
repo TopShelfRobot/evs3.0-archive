@@ -19,6 +19,7 @@
 					if (item) {
 						$scope.fee = item.currentFee;
 						$scope.paymentTerms = item.paymentTerms;
+						console.log(item.paymentTerms);
 						cartModel.fee = item.currentFee;
 						//alert('itemlistingtype: ' + item.eventureListTypeId + 'fee: ' + item.currentFee)
 						switch (item.eventureListType) {
@@ -108,6 +109,7 @@
 			else
 			{
 			    //console.log(res);
+				$scope.userPaying = 0;
 			    $.blockUI({ message: 'Processing order...' });
 			   // cartOrder.stripeToken = res.id;
 			    $http.post(config.apiPath + "api/payment/PostTeam", cartOrder)

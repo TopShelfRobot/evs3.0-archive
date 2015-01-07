@@ -3,7 +3,7 @@
         <div class="col-lg-12 text-center">
             <img class="logo" src="content/images/logo.png">
             <h1>{{ eventureList.displayName }}</h1>
-            <p class="text-muted">{{eventureList.desc}}</p>
+            <p class="text-muted">If your team is accepted into the Bourbon Chase; please check each box below indicating your agreement.</p>
             <hr>
         </div>
     </div>
@@ -36,8 +36,16 @@
 
           <!--  </div>-->
 			
-            <div class="col-sm-6">
-				
+            <div class="col-sm-6 col-sm-offset-3">
+				<div class="form-group" ng-if="groups.length > 0">
+					<label class="col-sm-4 control-label">{{cart.regSettings.groupName}}:</label>
+					<div class="col-sm-8">
+						<select class="form-control" ng-model="groupId" ng-options="g.id as g.name for g in groups" ng-required="true">
+							<option value="">Please Select Your {{cart.regSettings.groupName}}</option>
+						</select>
+					</div>
+				</div>
+				<hr>
                 <!-- Custom Questions -->
 				<div ng-repeat="(key, question) in customQuestions | orderBy:'order'">
 					<!-- <span>{{question.questionText}}, {{question.questionType}}</span> -->
@@ -45,8 +53,8 @@
 	                    <div class="form-group" 
 								ng-switch-when="dropdown"
 								ng-if="question.active">
-	                        <label class="col-6 col-sm-6 col-lg-6 control-label" >{{question.questionText}}</label>
-	                        <div class="col-6 col-sm-6 col-lg-6">
+	                        <label class="col-sm-4 control-label" >{{question.questionText}}</label>
+	                        <div class="col-sm-8">
 	                            <select class="form-control" 
 										ng-model="customAnswers[key]" 
 										ng-options="o for o in question.qOptions" 
@@ -77,8 +85,8 @@
 	                    <div class="form-group" 
 								ng-switch-when="text"
 								ng-if="question.active">
-	                        <label class="col-6 col-sm-6 col-lg-6 control-label" >{{question.questionText}}</label>
-	                        <div class="col-6 col-sm-6 col-lg-6">
+	                        <label class="col-sm-4 control-label" >{{question.questionText}}</label>
+	                        <div class="col-sm-8">
 	                            <input type="text" class="form-control" 
 									ng-model="customAnswers[key]"
 									ng-required="question.isRequired">
@@ -107,34 +115,29 @@
 					</div>
                 </div>
             </div>
-			<div class="col-sm-6">
-				<div class="form-group" ng-if="groups.length > 0">
-					<label class="col-xs-4 control-label">{{cart.regSettings.groupName}}:</label>
-					<div class="col-xs-8">
-						<select class="form-control" ng-model="groupId" ng-options="g.id as g.name for g in groups">
-							<option value="">Please Select Your {{cart.regSettings.groupName}}</option>
-						</select>
-					</div>
-				</div>
-				<!-- This is the original waiver stuff. -->
-				<textarea class="form-control" rows="8" name="Waiver" ng-model="eventureList.waiverText" disabled></textarea>
-				<br>
-				<div class="form-group">
-					<label for="WaiverAgree" class="col-xs-4 control-label">I Agree To The Waiver:</label>
-					<div class="col-xs-8">
-						<div class="btn-group">
-							<button type="button" class="btn btn-default" ng-model="isWaiverChecked" btn-radio="true">Agree</button>
-							<button type="button" class="btn btn-default" ng-model="isWaiverChecked" btn-radio="false">Disagree</button>
-						</div>
-					</div>
-				</div>
-			</div>
+			<!--<div class="col-sm-6">-->
+				<!--<div ng-if="eventureList.isWaiverDisplayed">-->
+					<!--<textarea class="form-control" rows="8" name="Waiver" ng-model="eventureList.waiverText" disabled></textarea>-->
+					<!--<br>-->
+					<!--<div class="form-group">-->
+						<!--<label for="WaiverAgree" class="col-xs-4 control-label">I Agree To The Waiver:</label>-->
+						<!--<div class="col-xs-8">-->
+							<!--<div class="btn-group">-->
+								<!--<button type="button" class="btn btn-default" ng-model="isWaiverChecked" btn-radio="true">Agree</button>-->
+								<!--<button type="button" class="btn btn-default" ng-model="isWaiverChecked" btn-radio="false">Disagree</button>-->
+							<!--</div>-->
+						<!--</div>-->
+					<!--</div>-->
+				<!--</div>-->
+			<!--</div>-->
+
+
        <!-- </div>-->
-		
+
         <div class="row">
-            <div class="col-lg-12">
+            <div class="col-sm-3 col-sm-offset-9">
                 <!--ng-disabled="!questionsForm.$valid || notAllowedToContinue()"   -->
-                <button class="btn btn-warning pull-right"
+                <button class="btn btn-warning btn-block"
                         ng-disabled="!isWaiverChecked"
                         ng-click="next()">Next</button>
             </div>
