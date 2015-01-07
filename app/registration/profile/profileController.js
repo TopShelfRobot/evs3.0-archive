@@ -22,6 +22,36 @@
 			isActive: true
 		};
 
+		$scope.positions = [
+			{
+				name: 'Driver'
+			},
+			{
+				name: 'Runner'
+			},
+			{
+				name: 'Captain'
+			}
+		];
+
+		$scope.sizes = [
+			{
+				size: 'XS'
+			},
+			{
+				size: 'S'
+			},
+			{
+				size: 'M'
+			},
+			{
+				size: 'L'
+			},
+			{
+				size: 'XL'
+			}
+		];
+
 		var promises = [getParticipant(), Registrations(), Participants(), Team(), Coach()];
 
 		common.activateController(promises, controllerId)

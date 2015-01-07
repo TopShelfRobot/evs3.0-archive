@@ -13,6 +13,36 @@
 			dateBirth: ''
 		};
 
+		$scope.positions = [
+			{
+				name: 'Driver'
+			},
+			{
+				name: 'Runner'
+			},
+			{
+				name: 'Captain'
+			}
+		];
+
+		$scope.sizes = [
+			{
+				size: 'XS'
+			},
+			{
+				size: 'S'
+			},
+			{
+				size: 'M'
+			},
+			{
+				size: 'L'
+			},
+			{
+				size: 'XL'
+			}
+		];
+
 		$scope.submit = function(){
 			
 			var newPart = datacontext.participant.createProfile($scope.participant.email);
@@ -31,7 +61,8 @@
 				.then(function(){
 					cart.houseId = newPart.houseId;
 					//config.owner.newId = true;  //whg no idea what bill was doing here. also on man reg. 44 : 19, 44 : 17
-					$location.path('/eventure');
+					//$location.path('/eventure');
+					$location.path(cart.navUrl);
 				});
 		};
 

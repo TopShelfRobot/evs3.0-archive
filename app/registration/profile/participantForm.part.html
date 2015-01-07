@@ -39,11 +39,8 @@
                     <div class="form-group">
                         <label for="position" class="col-lg-5 control-label">Position</label>
                         <div class="col-lg-7">
-                            <select ng-model="participant.position" class="form-control" required>
-                                <option value="0" ng-selected="true">Please Select</option>
-                                <option value="driver">Driver</option>
-                                <option value="runner">Runner</option>
-                                <option value="captain">Captain</option>
+                            <select ng-model="participant.position" class="form-control" ng-options="p.name as p.name for p in positions" required>
+                                <option value="">Please Select</option>
                             </select>
                         </div>
                     </div>
@@ -145,12 +142,8 @@
                     <div class="form-group">
                         <label class="col-lg-5 control-label">T-Shirt Size</label>
                         <div class="col-lg-7">
-                            <select class="form-control" ng-model="participant.shirtSize" required>
-                                <option>XS</option>
-                                <option>Small</option>
-                                <option>Medium</option>
-                                <option>Large</option>
-                                <option>XL</option>
+                            <select class="form-control" ng-model="participant.shirtSize" ng-options="s.size as s.size for s in sizes" required>
+                                <option value="">Please Select</option>
                             </select>
                         </div>
                     </div>
