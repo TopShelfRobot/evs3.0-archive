@@ -7,7 +7,7 @@
 				questions : "=questions",
 				answers: "=answers",
 			},
-			templateUrl : "/app/registration/directives/custom-questions.part.html",
+			templateUrl : "/app/registration/_components/custom-questions.part.html",
 		};
 		
 		return out;
