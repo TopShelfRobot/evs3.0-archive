@@ -8,7 +8,7 @@
         $scope.message = "";
 
         $scope.registration = {
-            email: "boone.mike@gmail.com"  //,
+            email: ''  //,
             //password: "",
             //confirmPassword: ""
         };
@@ -17,7 +17,11 @@
 
         $scope.requestPassword = function () {
 
-            authService.forgotPassword($scope.registration);
+            authService.forgotPassword($scope.registration).then(function(){
+                $scope.message = "Please check your email. A link has been provided.";
+            });
+
+
 
 
 
