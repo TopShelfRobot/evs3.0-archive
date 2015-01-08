@@ -3,7 +3,7 @@
 
     var controllerId = "resetPasswordController";
 
-    function Controller($scope, $location, authService, common) {
+    function Controller($scope, $location, $timeout, authService, common) {
 
         $scope.message = "";
 
@@ -15,7 +15,6 @@
             confirmPassword: "",
             code: $scope.token
         };
-  
 
         common.activateController(controllerId);
 
@@ -25,9 +24,8 @@
             authService.resetPassword($scope.registration).then(function (response) {
 
                 $scope.savedSuccessfully = true;
-                $scope.message = "User has been registered successfully, you will be redicted to login page in 2 seconds.";
-                //startTimer();
-
+                $scope.message = "User has been registered successfully, you will be redirected to login page in 2 seconds.";
+                startTimer();
             },
             function (response) {
                 var errors = [];
@@ -40,7 +38,14 @@
             });
         };
 
+        var startTimer = function () {
+            var timer = $timeout(function () {
+                $timeout.cancel(timer);
+                $location.path('/login');
+            }, 2000);
+        };
+
     }
 
-    angular.module("evReg").controller(controllerId, ['$scope', '$location', 'authService', 'common', Controller]);
+    angular.module("evReg").controller(controllerId, ['$scope', '$location', '$timeout','authService', 'common', Controller]);
 })();

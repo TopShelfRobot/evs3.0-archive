@@ -87,6 +87,10 @@
 			}
 		};
 
+		cart.addSurcharge = function (desc, amount, chargeType, listid, partid, couponId) {
+		    cart.surcharges.push(new surcharge(desc, amount, chargeType, listid, partid, couponId));
+		};
+
 		cart.processCartRules = function () {
 			//clear all rules
 			cart.surcharges = []
@@ -186,10 +190,10 @@
 
 		cart.removeCoupons = function () {
 			//mjb need to check for surcharges and remove them
-			for (var j = 0; j < surcharges.length; j++) {
-				var currCharge = surcharges[j];
+			for (var j = 0; j < cart.surcharges.length; j++) {
+				var currCharge = cart.surcharges[j];
 				if (currCharge.chargeType == 'coupon') {
-					surcharges.splice(j, 1);
+					cart.surcharges.splice(j, 1);
 					break;
 				}
 			}

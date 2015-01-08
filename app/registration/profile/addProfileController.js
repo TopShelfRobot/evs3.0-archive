@@ -37,7 +37,8 @@
 					.then(function(){
 						cart.houseId = newPart.houseId;
 						//config.owner.newId = true;  //whg no idea what bill was doing here. also on man reg. 44 : 19, 44 : 17
-						$location.path('/eventure');
+						//$location.path('/eventure');
+						$location.path(cart.navUrl);
 					});
 			} else {
 				toastr.options = {

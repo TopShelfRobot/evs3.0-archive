@@ -23,10 +23,10 @@
 
 		// initialize it
 		$scope.submitDisabled = true;
-		console.log('in confirm');
-		console.log(cart.ownerId);
-		console.log(cart.regSettings.eventureName);
-		console.log(cart.regSettings);
+		//console.log('in confirm');
+		//console.log(cart.ownerId);
+		//console.log(cart.regSettings.eventureName);
+		//console.log(cart.regSettings);
 
 		var promises = [
 			$q.all([datacontext.participant.getParticipantById(cart.ownerId)])     //datacontext.participant.getOwnerById(cart.ownerId),
@@ -42,8 +42,8 @@
 				.finally(function () {
 				    //alert('getting ready to process cart ruls');
 					cart.processCartRules();
-					console.log(cart.registrations);
-					console.log(cart.surcharges);
+					//console.log(cart.registrations);
+					//console.log(cart.surcharges);
 					$scope.submitDisabled = false;
 				})
 		];
@@ -59,27 +59,32 @@
 				'regs': cart.registrations,
 			};
 			console.log(source);
-		    alert(config.apiPath);
+		    //alert(config.apiPath);
 		    //$http.post(config.apiPath + "api/coupon/Post", source)   //mjb
 			//$http({ type: "POST", url: apiUrl, data: source })
 		    $http.post(config.apiPath + "api/coupon/Post", source)
 				.success(function (result) {
 				    console.log(result);
-				    alert('suc');
+				    //alert('suc');
 					if (result.Amount != 0) {
-						cart.removeCoupons();
-						cart.addSurcharge('Coupon: ' + couponCode, result.Amount, 'coupon', cart.currentEventureListId(), cart.currentPartId, result.CouponId);
+					    cart.removeCoupons();
+					    console.log($scope.couponCode);
+					    console.log(result.Amount);
+					    console.log(result.CouponId);
+					    //cart.addSurcharge('Coupon: ' + couponCode, result.Amount, 'coupon', cart.currentEventureListId(), cart.currentPartId, result.CouponId);
+					                        //(desc, amount, chargeType, listid, partid, couponId)
+						cart.addSurcharge('Coupon: ' + $scope.couponCode, result.Amount, 'coupon', 0, 0, result.CouponId);
 						$scope.couponErrors = "";
 					} else {
 						$scope.couponErrors = result.Message;
 					}
 				})
 				.error(function (data, status, headers, config) {
-				    alert('err');
+				    //alert('err');
 					$scope.couponErrors = "Coupon Not Found(E1)";
 				})
 				.finally(function () {
-				    alert('fin');
+				    //alert('fin');
 					$scope.submitDisabled = false;
 				});
 		};
@@ -96,9 +101,7 @@
 				backdrop: 'static',
 				controller: 'TermsModalInstance'
 			});
-
 			modalInstance.result.then();
-
 		};
 
 		$scope.openRefund = function () {
@@ -108,9 +111,7 @@
 				backdrop: 'static',
 				controller: 'TermsModalInstance'
 			});
-
 			modalInstance.result.then();
-
 		};
 
 		$scope.checkout = function() {
@@ -142,9 +143,5 @@
 		};
 		$scope.title = 'Event';
 	}
-
-
-
 	angular.module("evReg").controller(controllerId, ["$scope", "$http", "$location", "$q", "$modal", "StripeService", "datacontext", "CartModel", "config", "common", Controller]);
-
 })();
