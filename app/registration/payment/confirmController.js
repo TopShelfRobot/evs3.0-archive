@@ -21,10 +21,10 @@
 
 		// initialize it
 		$scope.submitDisabled = true;
-		console.log('in confirm');
-		console.log(cart.ownerId);
-		console.log(cart.regSettings.eventureName);
-		console.log(cart.regSettings);
+		//console.log('in confirm');
+		//console.log(cart.ownerId);
+		//console.log(cart.regSettings.eventureName);
+		//console.log(cart.regSettings);
 
 		var promises = [
 			$q.all([datacontext.participant.getParticipantById(cart.ownerId)])     //datacontext.participant.getOwnerById(cart.ownerId),
@@ -40,8 +40,8 @@
 				.finally(function () {
 				    //alert('getting ready to process cart ruls');
 					cart.processCartRules();
-					console.log(cart.registrations);
-					console.log(cart.surcharges);
+					//console.log(cart.registrations);
+					//console.log(cart.surcharges);
 					$scope.submitDisabled = false;
 				})
 		];
@@ -66,9 +66,9 @@
 					//alert('suc');
 					if (result.Amount != 0) {
 						cart.removeCoupons();
-						console.log($scope.couponCode);
-						console.log(result.Amount);
-						console.log(result.CouponId);
+						//console.log($scope.couponCode);
+						//console.log(result.Amount);
+						//console.log(result.CouponId);
 						//cart.addSurcharge('Coupon: ' + couponCode, result.Amount, 'coupon', cart.currentEventureListId(), cart.currentPartId, result.CouponId);
 						//(desc, amount, chargeType, listid, partid, couponId)
 						cart.addSurcharge('Coupon: ' + $scope.couponCode, result.Amount, 'coupon', 0, 0, result.CouponId);

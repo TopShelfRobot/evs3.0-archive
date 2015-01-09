@@ -80,7 +80,12 @@
 				cart.registrations.push(new registration(eventure.displayHeading, eventureList.displayName, participant.email, eventureList.currentFee, eventure.id, eventureList.id, participant.id, participant.firstName + ' ' + participant.lastName, answers, groupId, group2Id, quantity, eventureList.eventureListTypeId));
 				//toastr.success('<strong class="text-center">Your Item Was Added To Your Cart!</strong><br><br><a class="btn btn-primary btn-block" href="#/shoppingcart">View Cart</a>');
 			}
-		};
+        };
+
+
+        cart.addSurcharge = function (desc, amount, chargeType, listid, partid, couponId) {
+            cart.surcharges.push(new surcharge(desc, amount, chargeType, listid, partid, couponId));
+        };
 
 		cart.processCartRules = function () {
 			//clear all rules
@@ -181,10 +186,10 @@
 
 		cart.removeCoupons = function () {
 			//mjb need to check for surcharges and remove them
-			for (var j = 0; j < surcharges.length; j++) {
-				var currCharge = surcharges[j];
+			for (var j = 0; j < cart.surcharges.length; j++) {
+				var currCharge = cart.surcharges[j];
 				if (currCharge.chargeType == 'coupon') {
-					surcharges.splice(j, 1);
+					cart.surcharges.splice(j, 1);
 					break;
 				}
 			}
