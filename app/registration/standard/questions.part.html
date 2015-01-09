@@ -40,7 +40,7 @@
 				<div class="form-group" ng-if="groups.length > 0">
 					<label class="col-sm-4 control-label">{{cart.regSettings.groupName}}:</label>
 					<div class="col-sm-8">
-						<select class="form-control" ng-model="groupId" ng-options="g.id as g.name for g in groups" ng-required="true">
+						<select class="form-control" ng-model="$parent.groupId" ng-options="g.id as g.name for g in groups" ng-required="true">
 							<option value="">Please Select Your {{cart.regSettings.groupName}}</option>
 						</select>
 					</div>
