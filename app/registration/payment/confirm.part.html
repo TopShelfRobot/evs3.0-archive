@@ -79,6 +79,7 @@
             <img src="/Content/images/creditcards.png" />
             <hr>
             <p class="text-muted">Your card will be charged for the amount of <strong>{{ cart.getTotalPrice() | currency }}</strong>.</p>
+            <p class="has-error"><strong>{{stripeError}}</strong></p>
 	<label class="checkbox" ng-show="$parent.allowZeroPayment">
                 <input type="checkbox" data-bind="checked: isTerms" ng-model="$parent.fullPaymentRequired">
                 I am paying an amount of $0.00 and understand my team is still responsible for the full amount.
