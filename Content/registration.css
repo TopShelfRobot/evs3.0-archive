@@ -390,3 +390,8 @@ div.popover.fade.bottom.in {
 #footer a {
   color:#757575;
 }
+
+#footer .support-link > a {
+  color:#ffffff;
+}
+

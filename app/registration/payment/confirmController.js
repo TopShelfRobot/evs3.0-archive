@@ -109,29 +109,53 @@
 
 		};
 
-		$scope.checkout =function() {
-			var order = cart.order();
+			$scope.checkout =function() {
+				var order = cart.order();
 
-			stripe.checkout(cart.getTotalPrice())
-				.then(function (res) {
-					console.log(res);
-					$.blockUI({ message: 'Processing order...' });
-					order.stripeToken = res.id;
-					//$http.post(config.apiPath + "/api/Payment/Post", order)
-					$http.post(config.apiPath + "api/order/Post", order)   //mjb
-						.success(function (result) {
-							//console.log("result: " + result);
-							$location.path("/orderreceipt/" + result);
-						})
-						.error(function (err) {
-							console.log("ERROR:", err.toString());
-						})
-						.finally(function () {
-							$.unblockUI();
-							cart.emptyCart();
+				if (order.orderAmount > 0) {
+					stripe.checkout(cart.getTotalPrice())
+						.then(function (res) {
+							console.log(res);
+							$.blockUI({ message: 'Processing order...' });
+							order.stripeToken = res.id;
+							//$http.post(config.apiPath + "/api/Payment/Post", order)
+							$http.post(config.apiPath + "api/order/Post", order)   //mjb
+								.success(function (result) {
+									//console.log("result: " + result);
+									$location.path("/orderreceipt/" + result);
+								})
+								.error(function (err) {
+									console.log("ERROR:", err.toString());
+								})
+								.finally(function () {
+									$.unblockUI();
+									cart.emptyCart();
+								});
 						});
-				});
-		};
+
+					}
+				else
+					{
+						//console.log(res);
+						order.orderAmount = 0;
+;						$.blockUI({ message: 'Processing order...' });
+						// cartOrder.stripeToken = res.id;
+						$http.post(config.apiPath + "api/order/PostZero", order)   //mjb
+							.success(function (result) {
+								//console.log("result: " + result);
+								$location.path("/orderreceipt/" + result);
+							})
+							.error(function (err) {
+								console.log("ERROR:", err.toString());
+							})
+							.finally(function () {
+								$.unblockUI();
+								cart.emptyCart();
+							});
+					}
+
+
+			};
 
 		$scope.isConfirm = function () {
 			return $scope.isTerms && $scope.isRefund;
