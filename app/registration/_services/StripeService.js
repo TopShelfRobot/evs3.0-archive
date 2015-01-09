@@ -1,6 +1,6 @@
 (function () {
-    angular.module("evReg").service("StripeService", ["$q", "config", "CartModel",  Service]);
-    function Service($q, config, cart) {
+    angular.module("evReg").service("StripeService", ["$q", "config", "CartModel", "authService",  Service]);
+    function Service($q, config, cart, authService) {
 
         var service = {};
 
@@ -22,6 +22,7 @@
                 name: cart.regSettings.name,
                 description: cart.regSettings.stripeOrderDescription,
                 panelLabel: cart.regSettings.stripeCheckoutButtonText,
+                email: authService.userName,
                 //image: cart.regSettings.stripeLogoPath,
                 token: token
             });

@@ -83,6 +83,7 @@
     <br>
     <div class="row">
         <div class="col-lg-4 col-lg-offset-4 clearfix">
+            <p class="has-error text-center">{{stripeError}}</p>
             <button type="button"
                     class="btn btn-success btn-block pull-right hidden-xs hidden-sm"
                     ng-disabled="(!$parent.waiverSigned) || ($parent.userPaying == 0 && !$parent.fullPaymentRequired) || ($parent.submitDisabled)"

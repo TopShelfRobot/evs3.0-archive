@@ -102,6 +102,7 @@
                             })
                             .error(function (err) {
                                 console.error("ERROR:", err.toString());
+								$scope.stripeError = "ERROR: " + err.toString();
                             })
                             .finally(function () {
                                 $.unblockUI();

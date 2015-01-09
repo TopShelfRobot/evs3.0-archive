@@ -272,3 +272,10 @@ div.popover.fade.bottom.in {
   color:#757575;
 }
 
+#footer .support-link > a {
+  color:#ffffff;
+}
+
+.has-error {
+  color:#a94442;
+}
