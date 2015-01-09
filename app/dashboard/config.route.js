@@ -52,10 +52,10 @@
                     title: 'Enterprise Launchpad',
                     templateUrl: 'app/dashboard/enterprise/enterpriselaunchpad.html',
                     authorized: ["money"],
-                    settings: {
-                        nav: 1,
-                        content: 'Enterprise'
-                    }
+                    //settings: {
+                    //    nav: 1,
+                    //    content: 'Enterprise'
+                    //}
                 }
             }, {
                 url: '/eventurecenter',
