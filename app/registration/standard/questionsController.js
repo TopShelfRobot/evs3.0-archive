@@ -131,7 +131,7 @@
 		$scope.next = function () {
 		    if ($scope.questionsForm.$valid) {
 
-		        alert($scope.groupId);
+		        //alert($scope.groupId);
 
 				// Submit as normal
 				cartModel.addRegistration($scope.eventure, $scope.eventureList, $scope.participant, getCustomAnswers(), $scope.groupId, $scope.group2Id, $scope.quantity);
