@@ -117,12 +117,14 @@
                     field: '',
                     title: '',
                     template: '<a href="\\\#orderreceipt/#=eventureOrderId#" class="btn btn-success btn-block"><em class="glyphicon glyphicon-tags"></em>&nbsp;&nbsp;Receipt</a>'
-                }, {
-                    field: '',
-                    title: '',
-                    width: 130,
-                    template: '<a href="\\\#registration/#=id#" class="btn btn-default btn-block"><em class="glyphicon glyphicon-edit"></em>&nbsp;Edit</a>'
-                }]
+                }
+                //, {
+                //    field: '',
+                //    title: '',
+                //    width: 130,
+                //    template: '<a href="\\\#registration/#=id#" class="btn btn-default btn-block"><em class="glyphicon glyphicon-edit"></em>&nbsp;Edit</a>'
+                //}
+                ]
             };
           };
         }
