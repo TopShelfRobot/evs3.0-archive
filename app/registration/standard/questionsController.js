@@ -18,8 +18,6 @@
 
 		$scope.groups = [];
 		$scope.isWaiverChecked = false;
-		$scope.groupId = 0;
-		$scope.group2Id = 0;
 		$scope.quantity = 1;
 
 		var promises = [];
