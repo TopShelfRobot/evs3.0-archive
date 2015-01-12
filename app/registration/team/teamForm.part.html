@@ -11,20 +11,13 @@
         <h4>Team Name</h4>
         <input type="text" class="form-control" name="TeamName" id="TeamName" placeholder="Choose a name for your team." ng-model="team.teamName">
         <br>
-        <label>Wave</label>
-        <select class="form-control">
-          <option value="">Please Select A Wave</option>
-          <option>9:00am</option>
-          <option>9:10am</option>
-          <option>9:20am</option>
-          <option>9:30am</option>
-          <option>9:40am</option>
-          <option>9:50am</option>
-          <option>10:00am</option>
-          <option>10:10am</option>
-          <option>10:20am</option>
-          <option>10:30am</option>
-        </select>
+        <div ng-if="groups.length > 0">
+          <label>Wave</label>
+          <select class="form-control" ng-model="$parent.groupId" ng-options="g.id as g.name for g in groups">
+            <option value="">Please Select A Group</option> <!-- WHG needs binding -->
+          </select>
+        </div>
+
       </div>
     </div>
     <br>
