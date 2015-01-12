@@ -147,7 +147,7 @@
 						cart.emptyCart();
 					})
 					.error(function (err) {
-						console.log("ERROR:", err.toString());
+						console.log('ERROR:', err.toString());
 						$scope.stripeError = 'ERROR: ' + err.toString();
 					})
 					.finally(function () {
