@@ -24,7 +24,7 @@
             authService.resetPassword($scope.registration).then(function (response) {
 
                 $scope.savedSuccessfully = true;
-                $scope.message = "User has been registered successfully, you will be redirected to login page in 2 seconds.";
+                $scope.message = "Your password has been changed successfully, you will be redirected to the login page.";
                 startTimer();
             },
             function (response) {
@@ -34,7 +34,7 @@
                         errors.push(response.data.modelState[key][i]);
                     }
                 }
-                $scope.message = "Failed to register user due to:" + errors.join(' ');
+                $scope.message = "Password change failed:" + errors.join(' ');
             });
         };
 
