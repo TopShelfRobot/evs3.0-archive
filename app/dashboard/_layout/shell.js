@@ -3,7 +3,7 @@
 
     var controllerId = 'shell';   //mjb test push
 
-    function Controller($rootScope, $location, common, config, $timeout, authService) {
+    function Controller($rootScope, $location, $timeout, $css, common, config,  authService) {
         var self = this;
 
         var logSuccess = common.logger.getLogFn(controllerId, 'success!!!');
@@ -30,6 +30,12 @@
         }
 
         function activate() {
+            var isDefault = true;
+
+            if(isDefault) {
+                $css.add('Content/colors.css');
+            }
+
             toggleSpinner(true);
             self.showSplash = true;
             self.progBar = 30;
@@ -50,7 +56,7 @@
                 })
                 .then(function(){
 
-                })
+                });
         }
 
         $rootScope.$on('$routeChangeStart', function (event, next, last) {
@@ -69,7 +75,7 @@
         );
 
         activate();
-    };
+    }
 
-    angular.module('app').controller(controllerId, ['$rootScope', "$location", 'common', 'config', "$timeout", 'authService', Controller]);
+    angular.module('app').controller(controllerId, ['$rootScope', '$location', '$timeout', '$css', 'common', 'config',  'authService', Controller]);
 })();

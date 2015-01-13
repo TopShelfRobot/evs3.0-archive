@@ -1,36 +1,11 @@
 .navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {
 background-color:transparent;
 }
-
-.navbar-inverse {
-    background-color: #3F51B5;
-    border-color:#1A237E;
-}
-
-.navbar-inverse .navbar-nav > .active > a, .navbar-inverse .navbar-nav > .active > a:hover, .navbar-inverse .navbar-nav > .active > a:focus {
-    background-color: #1A237E;
-    border-bottom:2px inset #1A237E;
-}
-
-.navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form {
-    border-color:#1A237E;
-}
-
-.navbar-inverse .navbar-nav > li > a {
-    color:#ffffff;
-}
-
-.navbar-inverse .navbar-brand {
-    color:#ffffff;
-}
 .navbar-inverse .navbar-toggle:hover, .navbar-inverse .navbar-toggle:focus {
     background-color:transparent;
 }
 .navbar-inverse .navbar-toggle {
     border:none;
-}
-.navbar-inverse .navbar-toggle .icon-bar {
-    background-color:#E91E63;
 }
 .btn:focus,
 .btn:active:focus,

@@ -19,6 +19,7 @@
 		'nsPopover',
 		'angulartics',  //analytics
 		'angulartics.google.analytics', //analytics
+		'door3.css', //on-demand stylesheets
 		'sbDateSelect',
 		'ngMask'
 	]);
