@@ -7,7 +7,7 @@ $primary:           #3F51B5;
 $dark:              #1A237E;
 $highlight:         #E91E63;
 $contrast:          #CDDC39;
-
+$overlay:     rgba(140,158,255 ,.1);
 /**********************************
 Neutrals
 ********
@@ -17,8 +17,6 @@ Recommended left at default
 $neutral:           #FFFFFF;
 $neutral-light:     #F5F5F5;
 $neutral-dark:      #424242;
-
-
 
 /***********************************
 Default color theme
@@ -73,8 +71,10 @@ Sidebar Nav
 #sidebar, #sidebar a {
   color: $neutral-dark;
 }
+
 #sidebar .nav li>a:hover {
   border-left:9px solid $highlight;
+  background-color: $overlay;
 }
 
 /************************************
