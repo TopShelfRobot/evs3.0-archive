@@ -59,7 +59,7 @@
 
 .btn.btn-info {
   color:darken($info, 20);
-  background:lighten($info, 40);
+  background:lighten($info, 30);
 }
 
 .btn.btn-info:hover, .btn.btn-info.active, .btn.btn-info.focus,
@@ -81,7 +81,7 @@
 
 .btn.btn-danger {
   color:darken($danger, 20);
-  background:lighten($danger, 40);
+  background:lighten($danger, 35);
 }
 
 .btn.btn-danger:hover, .btn.btn-danger.active, .btn.btn-danger.focus,
@@ -92,4 +92,11 @@
 
 .btn.disabled {
   background:none;
+}
+
+.btn-group > .btn-default:first-child:not(:last-child).active {
+  background-color:lighten($success,40);
+}
+.btn-group > .btn-default:last-child:not(:first-child).active {
+  background-color:lighten($danger,35);
 }

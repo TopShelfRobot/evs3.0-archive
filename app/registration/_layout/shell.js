@@ -25,7 +25,7 @@
 		this.resolved = false;
 
 		function activate() {
-			var isDefault = true;
+			var isDefault = false;
 
 			if(isDefault) {
 				$css.add('Content/custom-colors.css');
