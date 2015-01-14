@@ -19,15 +19,15 @@ Default color theme
  General
 *************************************/
 .navbar-inverse {
-  background-color: #3F51B5;
-  border-color: #1A237E; }
+  background-color: #009688;
+  border-color: #004D40; }
 
 .navbar-inverse .navbar-nav > .active > a, .navbar-inverse .navbar-nav > .active > a:hover, .navbar-inverse .navbar-nav > .active > a:focus {
-  background-color: #1A237E;
-  border-bottom: 2px inset #1A237E; }
+  background-color: #004D40;
+  border-bottom: 2px inset #004D40; }
 
 .navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form {
-  border-color: #1A237E; }
+  border-color: #004D40; }
 
 .navbar-inverse .navbar-nav > li > a {
   color: #FFFFFF; }
@@ -36,50 +36,50 @@ Default color theme
   color: #FFFFFF; }
 
 .navbar-inverse .navbar-toggle .icon-bar {
-  background-color: #E91E63; }
+  background-color: #FFEB3B; }
 
 #cart-list > .table > tbody > tr > td > button.close.remove-item {
-  color: #E91E63 !important; }
+  color: #FFEB3B !important; }
 
 .navbar-inverse .navbar-nav > li > a:hover {
-  color: #E91E63; }
+  color: #FFEB3B; }
 
 .badge {
-  background-color: #CDDC39; }
+  background-color: #3F51B5; }
 
 .street-team {
-  color: #3F51B5; }
+  color: #009688; }
 
 /************************************
 Sidebar Nav
 *************************************/
 #sidebar {
-  border-right: 1px solid #3F51B5;
+  border-right: 1px solid #009688;
   background-color: #F5F5F5; }
 
 #sidebar, #sidebar a {
   color: #424242; }
 
 #sidebar .nav li > a:hover {
-  border-left: 9px solid #E91E63;
+  border-left: 9px solid #FFEB3B;
   background-color: rgba(140, 158, 255, 0.1); }
 
 /************************************
  Event Tile
 *************************************/
 .grid figcaption {
-  border-top: 4px solid #3F51B5; }
+  border-top: 4px solid #009688; }
 
 .grid figcaption h4 {
-  color: #3F51B5; }
+  color: #009688; }
 
 /************************************
  Listing Tile
 *************************************/
 .list-tile {
-  border-top: 4px solid #3F51B5; }
+  border-top: 4px solid #009688; }
 
 .list-desc-box h4 {
-  color: #3F51B5; }
+  color: #009688; }
 
 /*# sourceMappingURL=colors.css.map */

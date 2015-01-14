@@ -1,0 +1,123 @@
+/******************************
+ Grid base
+*******************************/
+.grid {
+  padding: 20px;
+  max-width: 1300px;
+  margin: 0 auto;
+  list-style: none;
+  text-align: center;
+}
+
+.grid li {
+  display: inline-block;
+  width: 265px;
+  height:340px;
+  margin: 0 0 20px;
+  padding: 10px;
+  text-align: left;
+  position: relative;
+
+}
+
+.grid figure {
+  margin: 0;
+  position: relative;
+  padding:10px 0 0;
+}
+
+.grid figure img {
+  display: block;
+  position: relative;
+  border:2px solid #E0E0E0;
+  margin: 0 auto;
+}
+
+.grid figcaption {
+  text-align:center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding:10px;
+  background: #FAFAFA;
+  color: #757575;
+  font-size:12px;
+  overflow-x:hidden;
+  white-space:nowrap;
+  border: 1px solid #EEEEEE;
+  -moz-box-shadow:    inset 0 0 10px #EEEEEE;
+  -webkit-box-shadow: inset 0 0 10px #EEEEEE;
+  box-shadow:         inset 0 0 10px #EEEEEE;
+}
+
+.grid figcaption:hover {
+  border-bottom: 4px solid #EEEEEE;
+}
+
+.grid figcaption span.event-info {
+  display:inline-block;
+  height: 17px;
+  overflow-x:hidden;
+}
+
+.grid figcaption h4 {
+  padding: 0;
+}
+
+.grid figcaption a.btn {
+  text-align: center;
+  display: inline-block;
+  margin-top:5px;
+}
+
+.event-tiles figure img {
+  z-index: 10;
+  height:140px;
+  width:140px;
+}
+
+.event-tiles figcaption {
+  height: 300px;
+  width: 100%;
+  text-align:center;
+}
+
+.event-tiles figcaption h4 {
+  margin-top: 65%;
+  white-space:normal;
+  height:35px;
+  font-size:16px;
+}
+
+/******************************
+ Pagers
+*******************************/
+.pager .previous > a, .pager .previous > span {
+  cursor: pointer;
+}
+
+.pager .next > a, .pager .next > span {
+  cursor: pointer;
+}
+
+/******************************
+ Media Queries
+*******************************/
+@media screen and (max-width: 480px) {
+  .grid {
+    padding: 10px 0 100px 0;
+  }
+  .grid li {
+    width: 100%;
+    min-width: 200px;
+  }
+  .event-tiles figcaption h4 {
+    margin-top: 75%;
+  }
+  .event-tiles figcaption a {
+    left: 20.5244%;
+  }
+  .grid figcaption span.event-info {
+    width:160px;
+  }
+}

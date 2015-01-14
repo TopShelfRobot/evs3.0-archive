@@ -28,7 +28,7 @@
 			var isDefault = true;
 
 			if(isDefault) {
-				$css.add('Content/colors.css');
+				$css.add('Content/custom-colors.css');
 			}
 
 			self.showSplash = true;

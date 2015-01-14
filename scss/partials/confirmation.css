@@ -1,0 +1,17 @@
+/******************************
+Confirmation Order Summary
+*******************************/
+.total-amount {
+  font-size: 28px;
+  font-weight: bold; }
+
+.credit-card-header::before {
+  content: url("../../Content/images/creditcards.png");
+  padding: 5px;
+  height: 19px;
+  width: 126px; }
+
+.agreement {
+  font-size: 12px; }
+
+/*# sourceMappingURL=confirmation.css.map */

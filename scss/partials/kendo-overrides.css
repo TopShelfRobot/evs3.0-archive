@@ -1,0 +1,36 @@
+/******************************
+ Kendo Styles
+*******************************/
+.k-grid-header .k-header, .k-grid-header .k-header .k-link {
+  font-weight: bold;
+  color: #428bca;
+  font-size: 16px; }
+
+.k-grid-content a {
+  font-weight: bold;
+  color: #4e4e4e; }
+
+.k-grid-content a.btn-success,
+.k-grid-content a.btn-info,
+.k-grid-content a.btn-primary,
+.k-grid-content a.btn-warning,
+.k-grid-content a.btn-danger {
+  color: #ffffff; }
+
+/******************************
+ Mobile Styles
+*******************************/
+@media (max-width: 360px) {
+  .kendo-chart {
+    max-width: 310px; } }
+@media (max-width: 480px) {
+  .kendo-chart {
+    max-width: 430px; } }
+@media (max-width: 680px) {
+  .kendo-chart {
+    max-width: 630px; } }
+@media (max-width: 768px) {
+  .kendo-chart {
+    max-width: 718px; } }
+
+/*# sourceMappingURL=kendo-overrides.css.map */

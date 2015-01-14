@@ -33,7 +33,7 @@
             var isDefault = true;
 
             if(isDefault) {
-                $css.add('Content/colors.css');
+                $css.add('Content/custom-colors.css');
             }
 
             toggleSpinner(true);

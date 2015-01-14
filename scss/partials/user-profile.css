@@ -1,0 +1,19 @@
+/******************************
+ Structure Constraints
+*******************************/
+.jumbotron {
+  margin-bottom: 10px; }
+
+/******************************
+ Social Media
+*******************************/
+.profile-social .btn {
+  padding: 6px 9px; }
+
+.ambassador-badge {
+  float: right;
+  position: absolute;
+  top: 20px;
+  right: 30px; }
+
+/*# sourceMappingURL=user-profile.css.map */

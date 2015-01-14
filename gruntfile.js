@@ -8,7 +8,9 @@ module.exports = function(grunt) {
                     style: 'compressed'
                 },
                 files: {
-                    'Content/colors.css': 'scss/colors.scss'
+                    'Content/custom-colors.css': 'scss/custom-colors.scss',
+                    'Content/dashboard.css': 'scss/dashboard.scss',
+                    'Content/registration.css': 'scss/registration.scss'
                 }
             }
         }
