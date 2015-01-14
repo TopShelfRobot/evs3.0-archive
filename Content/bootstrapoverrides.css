@@ -32,6 +32,7 @@ background-color:transparent;
 .navbar-inverse .navbar-toggle .icon-bar {
     background-color:#E91E63;
 }
+
 .btn{background:none;color:black}
 .btn.btn-link{text-decoration:underline}
 .btn.btn-primary{color:#245682;background:#e1edf7}
@@ -44,7 +45,7 @@ background-color:transparent;
 .btn.btn-success.focus,.btn.btn-success:active,
 .btn.btn-success:focus,.open>.dropdown-toggle.btn-success
 {color:#357935;background:#a3d7a3}
-.btn.btn-info{color:#2390b0;background:#fff}
+.btn.btn-info{color:#2390b0;background:#daf1f8}
 .btn.btn-info:hover,.btn.btn-info.active,
 .btn.btn-info.focus,.btn.btn-info:active,
 .btn.btn-info:focus,.open>.dropdown-toggle.btn-info
@@ -54,9 +55,11 @@ background-color:transparent;
 .btn.btn-warning.focus,.btn.btn-warning:active,
 .btn.btn-warning:focus,.open>.dropdown-toggle.btn-warning
 {color:#c77c11;background:#f8d9ac}
-.btn.btn-danger{color:#a02622;background:#fdf7f7}
+.btn.btn-danger{color:#a02622;background:#f9e2e2}
 .btn.btn-danger:hover,.btn.btn-danger.active,
 .btn.btn-danger.focus,.btn.btn-danger:active,
 .btn.btn-danger:focus,.open>.dropdown-toggle.btn-danger
 {color:#a02622;background:#eba5a3}
 .btn.disabled{background:none}
+.btn-group>.btn-default:first-child:not(:last-child).active{background-color:#eaf6ea}
+.btn-group>.btn-default:last-child:not(:first-child).active{background-color:#f9e2e2}
