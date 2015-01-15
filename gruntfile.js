@@ -42,12 +42,49 @@ module.exports = function(grunt) {
         },
 // Uglify Vendor Scripts
             uglify: {
-                my_target: {
+                options: {
+                    mangle: false
+                },
+                //my_target: {
+                //    files: {
+                //        'Scripts/vendor-scripts.min.js': ['Scripts/jquery-2.0.3.js',
+                //            'Scripts/angular.js',
+                //            'Scripts/kendo.all.min.js',
+                //            'Scripts/angular-animate.js',
+                //            'Scripts/angular-route.js',
+                //            'Scripts/angular-sanitize.js',
+                //            'Scripts/bootstrap.js',
+                //            'Scripts/toastr.js',
+                //            'Scripts/moment.js',
+                //            'Scripts/jquery.validate.min.js',
+                //            'Scripts/angular-moment.min.js',
+                //            'Scripts/ui-bootstrap-tpls-0.12.0.js',
+                //            'Scripts/spin.js',
+                //            'Scripts/breeze.debug.js',
+                //            'Scripts/breeze.angular.js',
+                //            'Scripts/breeze.directives.js',
+                //            'Scripts/breeze.saveErrorExtensions.js',
+                //            'Scripts/breeze.intellisense.js',
+                //            'Scripts/nsPopover.js',
+                //            'Scripts/stripe.js',
+                //            'Scripts/sb-date-select.js',
+                //            'Scripts/angular-local-storage.min.js',
+                //            'Scripts/angulartics.min.js',
+                //            'Scripts/angulartics-ga.min.js',
+                //            'Scripts/modernizr.custom.js',
+                //            'Scripts/toucheffects.js',
+                //            'Scripts/ng-role-auth.min.js',
+                //            'Scripts/ngMask.js',
+                //            'Scripts/angular-css.min.js']
+                //    }
+                //}
+                all: {
                     files: [{
-                        expand: true,
-                        cwd: 'scripts',
-                        src: 'scripts/*.js',
-                        dest: 'scripts'
+                        expand: false,
+                        cwd: '<Scripts>',
+                        src: ['**/*.js', '**/*.min.js'],
+                        dest: '<dist/js>',
+                        ext: '.js'
                     }]
                 }
             }
