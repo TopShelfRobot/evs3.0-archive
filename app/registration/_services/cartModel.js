@@ -266,7 +266,7 @@
 			cart.regSettings.multiRegistrationDiscountAmountType = data.multiRegistrationDiscountAmountType;
 
 			cart.regSettings.isRegistrationOnProfile = data.isRegistrationOnProfile;
-			cart.regSettings.isTeamReigstrationOnProfile = data.isTeamRegistrationOnProfile;
+			cart.regSettings.isTeamRegistrationOnProfile = data.isTeamRegistrationOnProfile;
 			cart.regSettings.isParticipantOnProfile = data.isParticipantOnProfile;
 			cart.regSettings.isCaptainOnProfile = data.isCaptainOnProfile;
 
