@@ -39,60 +39,11 @@ module.exports = function(grunt) {
                         'Content/dashboard.css']
                 }
             }
-        },
-// Uglify Vendor Scripts
-            uglify: {
-                options: {
-                    mangle: false
-                },
-                //my_target: {
-                //    files: {
-                //        'Scripts/vendor-scripts.min.js': ['Scripts/jquery-2.0.3.js',
-                //            'Scripts/angular.js',
-                //            'Scripts/kendo.all.min.js',
-                //            'Scripts/angular-animate.js',
-                //            'Scripts/angular-route.js',
-                //            'Scripts/angular-sanitize.js',
-                //            'Scripts/bootstrap.js',
-                //            'Scripts/toastr.js',
-                //            'Scripts/moment.js',
-                //            'Scripts/jquery.validate.min.js',
-                //            'Scripts/angular-moment.min.js',
-                //            'Scripts/ui-bootstrap-tpls-0.12.0.js',
-                //            'Scripts/spin.js',
-                //            'Scripts/breeze.debug.js',
-                //            'Scripts/breeze.angular.js',
-                //            'Scripts/breeze.directives.js',
-                //            'Scripts/breeze.saveErrorExtensions.js',
-                //            'Scripts/breeze.intellisense.js',
-                //            'Scripts/nsPopover.js',
-                //            'Scripts/stripe.js',
-                //            'Scripts/sb-date-select.js',
-                //            'Scripts/angular-local-storage.min.js',
-                //            'Scripts/angulartics.min.js',
-                //            'Scripts/angulartics-ga.min.js',
-                //            'Scripts/modernizr.custom.js',
-                //            'Scripts/toucheffects.js',
-                //            'Scripts/ng-role-auth.min.js',
-                //            'Scripts/ngMask.js',
-                //            'Scripts/angular-css.min.js']
-                //    }
-                //}
-                all: {
-                    files: [{
-                        expand: false,
-                        cwd: '<Scripts>',
-                        src: ['Scripts/*.js', 'Scripts/*.min.js'],
-                        dest: '<dist/js>',
-                        ext: '.js'
-                    }]
-                }
-            }
+        }
     });
 // this is where you say, hey, I'm using that sass thing that I just created settings for.
     grunt.loadNpmTasks('grunt-contrib-sass');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
-    grunt.loadNpmTasks('grunt-contrib-uglify');
 // this is where you have Grunt compile your sass when you type "grunt" into the terminal
     grunt.registerTask('default', ['sass']);
 };
