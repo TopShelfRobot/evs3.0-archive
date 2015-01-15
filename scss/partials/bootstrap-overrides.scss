@@ -91,7 +91,8 @@
 }
 
 .btn.disabled {
-  background:none;
+  background:lighten($dark-gray, 40);
+  color:$dark-gray;
 }
 
 .btn-group > .btn-default:first-child:not(:last-child).active {
@@ -99,4 +100,8 @@
 }
 .btn-group > .btn-default:last-child:not(:first-child).active {
   background-color:lighten($danger,35);
+}
+
+.btn.negative {
+  background:none;
 }
