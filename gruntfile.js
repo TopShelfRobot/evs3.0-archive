@@ -8,9 +8,9 @@ module.exports = function(grunt) {
                     style: 'compressed'
                 },
                 files: {
-                    'Content/custom-colors.css': 'scss/custom-colors.scss',
-                    'Content/dashboard.css': 'scss/dashboard.scss',
-                    'Content/registration.css': 'scss/registration.scss'
+                    'Content/rawcss/custom-colors.css': 'scss/custom-colors.scss',
+                    'Content/rawcss/dashboard.css': 'scss/dashboard.scss',
+                    'Content/rawcss/registration.css': 'scss/registration.scss'
                 }
             }
         },
@@ -18,24 +18,24 @@ module.exports = function(grunt) {
         cssmin: {
             target: {
                 files: {
-                    'Content/framework.css': ['Content/kendo.common.min.css',
-                        'Content/kendo.common-material.core.min.css',
-                        'Content/kendo.common-material.min.css',
-                        'Content/kendo.material.min.css',
-                        'Content/kendo.material.mobile.min.css',
-                        'Content/kendo.mobile.material.min.css',
-                        'Content/kendo.dataviz.min.css',
-                        'Content/kendo.dataviz.default.min.css',
-                        'Content/kendo.dataviz.material.min.css',
-                        'Content/bootstrap.css',
-                        'Content/breeze.directives.css',
-                        'Content/toastr.css',
-                        'Content/nsPopover.custom.css',
-                        'Content/font-awesome.min.css',
-                        'Content/social-buttons.css'],
-                    'css/reg-style.css': ['Content/framework.css',
+                    'Content/rawcss/framework.css': ['Content/rawcss/kendo.common.min.css',
+                        'Content/rawcss/kendo.common-material.core.min.css',
+                        'Content/rawcss/kendo.common-material.min.css',
+                        'Content/rawcss/kendo.material.min.css',
+                        'Content/rawcss/kendo.material.mobile.min.css',
+                        'Content/rawcss/kendo.mobile.material.min.css',
+                        'Content/rawcss/kendo.dataviz.min.css',
+                        'Content/rawcss/kendo.dataviz.default.min.css',
+                        'Content/rawcss/kendo.dataviz.material.min.css',
+                        'Content/rawcss/bootstrap.css',
+                        'Content/rawcss/breeze.directives.css',
+                        'Content/rawcss/toastr.css',
+                        'Content/rawcss/nsPopover.custom.css',
+                        'Content/rawcss/font-awesome.min.css',
+                        'Content/rawcss/social-buttons.css'],
+                    'Content/css/reg-style.css': ['Content/rawcss/framework.css',
                         'Content/registration.css'],
-                    'css/dash-style.css': ['Content/framework.css',
+                    'Content/css/dash-style.css': ['Content/rawcss/framework.css',
                         'Content/dashboard.css']
                 }
             }
