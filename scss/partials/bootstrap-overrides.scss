@@ -31,6 +31,11 @@
   color:black;
 }
 
+.k-grid-content .btn.btn-block {
+  display:block;
+  width: auto;
+}
+
 .btn.btn-link {
   text-decoration:underline;
 }
@@ -93,6 +98,8 @@
 .btn.disabled {
   background:lighten($dark-gray, 40);
   color:$dark-gray;
+  cursor: not-allowed;
+  pointer-events: none;
 }
 
 .btn-group > .btn-default:first-child:not(:last-child).active {
