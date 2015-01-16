@@ -16,6 +16,7 @@
 		'ui.bootstrap',      // ui-bootstrap (ex: carousel, pagination, dialog)
 		'kendo.directives', // kendo-angular (grid, dataviz)
 		'common.bootstrap', // bootstrap dialog wrapper functions
+		'angularFileUpload',  // file upload functions
 		'nsPopover',
 		'angulartics',  //analytics
 		'angulartics.google.analytics', //analytics
