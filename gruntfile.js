@@ -8,9 +8,9 @@ module.exports = function (grunt) {
 					style: 'compressed'
 				},
 				files: {
-					'Content/rawcss/custom-colors.css': 'scss/custom-colors.scss',
-					'Content/rawcss/dashboard.css': 'scss/dashboard.scss',
-					'Content/rawcss/registration.css': 'scss/registration.scss'
+					'Content/css/custom-colors.css': 'scss/custom-colors.scss',
+					'scss/rawcss/dashboard.css': 'scss/dashboard.scss',
+					'scss/rawcss/registration.css': 'scss/registration.scss'
 				}
 			}
 		},
@@ -18,32 +18,42 @@ module.exports = function (grunt) {
 		cssmin: {
 			target: {
 				files: {
-					'Content/rawcss/framework.css': ['Content/rawcss/kendo.common.min.css',
-                        'Content/rawcss/kendo.common-material.core.min.css',
-                        'Content/rawcss/kendo.common-material.min.css',
-                        'Content/rawcss/kendo.material.min.css',
-                        'Content/rawcss/kendo.material.mobile.min.css',
-                        'Content/rawcss/kendo.mobile.material.min.css',
-                        'Content/rawcss/kendo.dataviz.min.css',
-                        'Content/rawcss/kendo.dataviz.default.min.css',
-                        'Content/rawcss/kendo.dataviz.material.min.css',
-                        'Content/rawcss/bootstrap.css',
-                        'Content/rawcss/breeze.directives.css',
-                        'Content/rawcss/toastr.css',
-                        'Content/rawcss/nsPopover.custom.css',
-                        'Content/rawcss/font-awesome.min.css',
-                        'Content/rawcss/social-buttons.css'],
-					'Content/css/reg-style.css': ['Content/rawcss/framework.css',
-                        'Content/registration.css'],
-					'Content/css/dash-style.css': ['Content/rawcss/framework.css',
-                        'Content/dashboard.css']
+					'scss/rawcss/framework.css': ['scss/rawcss/kendo.common.min.css',
+                        'scss/rawcss/kendo.common-material.core.min.css',
+                        'scss/rawcss/kendo.common-material.min.css',
+                        'scss/rawcss/kendo.material.min.css',
+                        'scss/rawcss/kendo.material.mobile.min.css',
+                        'scss/rawcss/kendo.mobile.material.min.css',
+                        'scss/rawcss/kendo.dataviz.min.css',
+                        'scss/rawcss/kendo.dataviz.default.min.css',
+                        'scss/rawcss/kendo.dataviz.material.min.css',
+                        'scss/rawcss/bootstrap.css',
+                        'scss/rawcss/breeze.directives.css',
+                        'scss/rawcss/toastr.css',
+                        'scss/rawcss/nsPopover.custom.css',
+                        'scss/rawcss/font-awesome.min.css',
+                        'scss/rawcss/social-buttons.css'],
+					'Content/css/reg-style.css': ['scss/rawcss/framework.css',
+                        'scss/rawcss/registration.css'],
+					'Content/css/dash-style.css': ['scss/rawcss/framework.css',
+                        'scss/rawcss/dashboard.css']
 				}
 			}
+		},
+		watch: {
+			css: {
+				files: ['scss/*.scss', 'scss/partials/*.scss'],
+				tasks: ['sass', 'cssmin'],
+				options: {
+					spawn: false,
+				},
+			},
 		}
 	});
-	// this is where you say, hey, I'm using that sass thing that I just created settings for.
+	// Individual tasks
 	grunt.loadNpmTasks('grunt-contrib-sass');
 	grunt.loadNpmTasks('grunt-contrib-cssmin');
-	// this is where you have Grunt compile your sass when you type "grunt" into the terminal
-	grunt.registerTask('default', ['sass']);
+	grunt.loadNpmTasks('grunt-contrib-watch');
+	// Default grunt tasks
+	grunt.registerTask('default', ['sass','cssmin']);
 };
