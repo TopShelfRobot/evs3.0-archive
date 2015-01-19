@@ -159,8 +159,7 @@
 		function getTeamInfo() {
 			return $q.all([datacontext.team.getTeamMemberPaymentInfoByTeamMemberGuid($scope.teamMemberGuid),
 				datacontext.team.getNotPaidTeamMemberCountByTeamGuid($scope.teamGuid),
-				datacontext.team.getTeamMemberPaymentSumByTeamGuid($scope.teamGuid),
-		    datacontext.participant.createProfile()])
+				datacontext.team.getTeamMemberPaymentSumByTeamGuid($scope.teamGuid)])
 				.then(function (data) {
 					if (data) {
 						var payment = data[0];
@@ -231,8 +230,8 @@
 		};
 
 		$scope.checkout = function () {
+			var cartOrder = cartModel.order($scope.userPaying);
 
-			cartOrder.orderAmount = 0;
 			alert('User elected to not pay: ' + cartOrder.orderAmount);
 			$.blockUI({
 				message: 'Processing order...'
