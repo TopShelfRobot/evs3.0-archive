@@ -77,7 +77,7 @@
 			var cartOrder = cartModel.order($scope.userPaying);
 
 			if ($scope.isUserPaying === true) {
-				alert('User elected to pay.: ' + $scope.userPaying);
+				alert('User elected to pay.: ' + cartOrder.orderAmount);
 				// Process payment as usual
 				stripe.checkout(cartOrder.orderAmount)
 					.then(function (res) {
@@ -101,8 +101,8 @@
 			} else {
 				//Set userPaying to 0
 				//Process Team Registration
-				$scope.userPaying = 0;
-				alert('User elected to not pay: ' + $scope.userPaying);
+				cartOrder.orderAmount = 0;
+				alert('User elected to not pay: ' + cartOrder.orderAmount);
 				$.blockUI({
 					message: 'Processing order...'
 				});
