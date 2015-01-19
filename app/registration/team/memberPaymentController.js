@@ -2,7 +2,9 @@
 
 	var controllerId = 'MemberPaymentController';
 
-	function Controller($scope, $routeParams, $q, $http, $location, datacontext, stripe, cartModel, common, config, common) {
+	function Controller($scope, $routeParams, $q, $http, $location,
+		datacontext, stripe, cartModel, authService, config, common ) {
+
 		var controller = {};
 		$scope.allowZeroPayment = cartModel.allowZeroPayment;
 		$scope.waiverSigned = false;
@@ -16,23 +18,140 @@
 		$scope.tryoutFee = 150;
 
 		$scope.participant = {
-		    city: null,
-		    dateBirth: null,
-		    email: null,
-		    firstName: null,
-		    gender: null,
-		    houseId: cartModel.houseId,
-		    lastName: null,
-		    ownerId: cartModel.ownerId,
-		    phoneMobile: null,
-		    state: null,
-		    street1: null,
-		    zip: null,
+			city: null,
+			dateBirth: null,
+			email: authService.authentication.userName,
+			firstName: null,
+			gender: null,
+			houseId: cartModel.houseId,
+			lastName: null,
+			ownerId: cartModel.ownerId,
+			phoneMobile: null,
+			state: null,
+			street1: null,
+			zip: null,
 		};
 
 		$scope.date = {
-		    dateBirth: ''
+			dateBirth: ''
 		};
+
+		$scope.positions = [
+			{
+				name: 'Driver Only'
+			},
+			{
+				name: 'Runner'
+			},
+			{
+				name: 'Captain'
+			}
+		];
+
+		$scope.sizes = [
+			{
+				size: 'XS'
+			},
+			{
+				size: 'S'
+			},
+			{
+				size: 'M'
+			},
+			{
+				size: 'L'
+			},
+			{
+				size: 'XL'
+			},
+			{
+				size: 'XXL'
+			}
+		];
+
+		$scope.genders = [
+			{
+				value: 'M',
+				name: 'Male'
+			},
+			{
+				value: 'F',
+				name: 'Female'
+			}
+		];
+
+		$scope.stateProvince =[
+			{name: 'AK'},
+			{name: 'AL'},
+			{name: 'AR'},
+			{name: 'AZ'},
+			{name: 'CA'},
+			{name: 'CO'},
+			{name: 'CT'},
+			{name: 'DC'},
+			{name: 'DE'},
+			{name: 'FL'},
+			{name: 'GA'},
+			{name: 'HI'},
+			{name: 'IA'},
+			{name: 'ID'},
+			{name: 'IL'},
+			{name: 'IN'},
+			{name: 'KS'},
+			{name: 'KY'},
+			{name: 'LA'},
+			{name: 'MA'},
+			{name: 'MD'},
+			{name: 'ME'},
+			{name: 'MI'},
+			{name: 'MN'},
+			{name: 'MO'},
+			{name: 'MS'},
+			{name: 'MT'},
+			{name: 'NC'},
+			{name: 'ND'},
+			{name: 'NE'},
+			{name: 'NH'},
+			{name: 'NJ'},
+			{name: 'NM'},
+			{name: 'NV'},
+			{name: 'NY'},
+			{name: 'OH'},
+			{name: 'OK'},
+			{name: 'OR'},
+			{name: 'PA'},
+			{name: 'RI'},
+			{name: 'SC'},
+			{name: 'SD'},
+			{name: 'TN'},
+			{name: 'TX'},
+			{name: 'UT'},
+			{name: 'VA'},
+			{name: 'VT'},
+			{name: 'WA'},
+			{name: 'WI'},
+			{name: 'WV'},
+			{name: 'WY'},
+			{name: 'AS'},
+			{name: 'GU'},
+			{name: 'MP'},
+			{name: 'PR'},
+			{name: 'VI'},
+			{name: 'CZ'},
+			{name: 'AB'},
+			{name: 'BC'},
+			{name: 'MB'},
+			{name: 'NB'},
+			{name: 'NL'},
+			{name: 'NT'},
+			{name: 'NS'},
+			{name: 'NU'},
+			{name: 'ON'},
+			{name: 'PE'},
+			{name: 'QC'},
+			{name: 'SK'},
+			{name: 'YT'}
+		];
 
 		function getTeamInfo() {
 			return $q.all([datacontext.team.getTeamMemberPaymentInfoByTeamMemberGuid($scope.teamMemberGuid),
@@ -49,30 +168,30 @@
 						cartModel.teamId = payment.teamId;
 						$scope.teamName = payment.name;
 						$scope.listName = payment.listName;
-						console.log("listingType: ", payment.eventureListTypeId);
+						console.log('listingType: ', payment.eventureListTypeId);
 						switch (payment.eventureListTypeId) {
-							case 2:
-								//team sponsor
-								$scope.isSponsorPayVisible = true;
-								//$scope.userPaying = payment.currentFee;
-								break;
-							case 3:
-								//team suggest
-								$scope.isSuggestPayVisible = true;
-								$scope.remaining = payment.regAmount - sum;
-								$scope.suggested = $scope.remaining / count;
-								break;
-							case 4:
-								//team all pays the same
-								$scope.isIndividualVisible = true;
-								console.log("here: ", payment.eventureListTypeId);
-								//$scope.suggested = payment.CurrentFee;
-								$scope.userPaying = payment.currentFee;
-								break;
-							default:
+						case 2:
+							//team sponsor
+							$scope.isSponsorPayVisible = true;
+							//$scope.userPaying = payment.currentFee;
+							break;
+						case 3:
+							//team suggest
+							$scope.isSuggestPayVisible = true;
+							$scope.remaining = payment.regAmount - sum;
+							$scope.suggested = $scope.remaining / count;
+							break;
+						case 4:
+							//team all pays the same
+							$scope.isIndividualVisible = true;
+							console.log('here: ', payment.eventureListTypeId);
+							//$scope.suggested = payment.CurrentFee;
+							$scope.userPaying = payment.currentFee;
+							break;
+						default:
 						}
 					} else {
-						alert("Invalid Team Id! Please contact your team's coach.");
+						alert('Invalid Team Id! Please contact your team\'s coach.');
 					}
 				});
 		}
@@ -82,7 +201,7 @@
 		];
 		common.activateController(promises, controllerId);
 
-		$scope.open = function($event, open) {
+		$scope.open = function ($event, open) {
 			$event.preventDefault();
 			$event.stopPropagation();
 			$scope[open] = true;
@@ -110,7 +229,7 @@
 
 			$scope.date.dateBirth = moment($scope.date.dateBirth).toISOString();
 			$scope.participant.dateBirth = $scope.date.dateBirth;
-			
+
 			datacontext.save()
 
 			alert('Thanks for registering');
@@ -141,7 +260,9 @@
 		};
 		return controller;
 	}
-	
-	angular.module("evReg").controller(controllerId,
-		["$scope", "$routeParams", "$q", "$http", "$location", "datacontext", "StripeService", "MemberCartModel", "common", "config", "common", Controller]);
+
+	angular.module('evReg').controller(controllerId,
+		['$scope', '$routeParams', '$q', '$http', '$location',
+		'datacontext', 'StripeService', 'MemberCartModel', 'authService',
+		'config', 'common', Controller]);
 })();
