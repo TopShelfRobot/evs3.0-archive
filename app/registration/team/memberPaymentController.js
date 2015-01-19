@@ -2,8 +2,8 @@
 
 	var controllerId = 'MemberPaymentController';
 
-	function Controller($scope, $routeParams, $q, $http, $location,
-		datacontext, stripe, cartModel, authService, config, common ) {
+	function Controller($scope, $routeParams, $q, $http, $location, $modal,
+		datacontext, stripe, cartModel, cartRegSettings, authService, config, common ) {
 
 		var controller = {};
 		$scope.allowZeroPayment = cartModel.allowZeroPayment;
@@ -15,7 +15,10 @@
 		$scope.isSuggestPayVisible = false;
 		$scope.isIndividualVisible = false;
 		$scope.isSponsorPayVisible = false;
-		$scope.tryoutFee = 150;
+		// $scope.tryoutFee = 150; whg not sure what this is.
+
+		$scope.regSettings = cartRegSettings.regSettings;
+		console.log($scope.regSettings);
 
 		$scope.participant = {
 			city: null,
@@ -157,7 +160,7 @@
 			return $q.all([datacontext.team.getTeamMemberPaymentInfoByTeamMemberGuid($scope.teamMemberGuid),
 				datacontext.team.getNotPaidTeamMemberCountByTeamGuid($scope.teamGuid),
 				datacontext.team.getTeamMemberPaymentSumByTeamGuid($scope.teamGuid),
-			    datacontext.participant.createProfile()])
+		    datacontext.participant.createProfile()])
 				.then(function (data) {
 					if (data) {
 						var payment = data[0];
@@ -168,27 +171,26 @@
 						cartModel.teamId = payment.teamId;
 						$scope.teamName = payment.name;
 						$scope.listName = payment.listName;
-						console.log('listingType: ', payment.eventureListTypeId);
-						switch (payment.eventureListTypeId) {
-						case 2:
-							//team sponsor
+						console.log('listingType: ', payment.eventureListType);
+						switch (payment.eventureListType) {
+							case "TeamSponsored": //team sponsor
 							$scope.isSponsorPayVisible = true;
-							//$scope.userPaying = payment.currentFee;
+							$scope.userPaying = item.currentFee;
 							break;
-						case 3:
-							//team suggest
+							case "TeamSuggest": //team suggest
 							$scope.isSuggestPayVisible = true;
 							$scope.remaining = payment.regAmount - sum;
-							$scope.suggested = $scope.remaining / count;
+							$scope.suggested = $scope.remaining / count
 							break;
-						case 4:
-							//team all pays the same
+							case "TeamIndividual": //team all pays the same
 							$scope.isIndividualVisible = true;
-							console.log('here: ', payment.eventureListTypeId);
-							//$scope.suggested = payment.CurrentFee;
 							$scope.userPaying = payment.currentFee;
 							break;
-						default:
+							case "Lottery": //Captain pays all or nothing at registration
+							$scope.isLotteryVisible = true;
+							$scope.userPaying = 0;
+							break;
+							default:
 						}
 					} else {
 						alert('Invalid Team Id! Please contact your team\'s coach.');
@@ -216,23 +218,39 @@
 
 		$scope.format = $scope.formats[0];
 
+		$scope.open = function () {
+			var modalInstance = $modal.open({
+				templateUrl: 'termsAndConditions.html',
+				size: 'lg',
+				backdrop: 'static',
+				controller: 'TermsModalInstance'
+			});
+
+			modalInstance.result.then(function () { $scope.checkout(); });
+
+		};
 
 		$scope.checkout = function () {
 
-			alert($scope.participant.lastName);
+			cartOrder.orderAmount = 0;
+			alert('User elected to not pay: ' + cartOrder.orderAmount);
+			$.blockUI({
+				message: 'Processing order...'
+			});
+			// cartOrder.stripeToken = res.id;
+			$http.post(config.apiPath + "api/payment/PostTeam", cartOrder)
+			.success(function (result) {
+				console.log("result: " + result);
+				$location.path("/receipt/" + result);
+			})
+			.error(function (err) {
+				console.error("ERROR:", err.toString());
+			})
+			.finally(function () {
+				$.unblockUI();
+			});
 
-			var newPart = datacontext.participant.createParticipant($scope.participant.ownerId, $scope.participant.houseId, $scope.participant.email)
-			$scope.participant = datacontext.participant.createProfile($scope.participant.email);
-			newPart.lastName = $scope.participant.lastName;
-			newPart.firstName = $scope.participant.lastName;
-
-
-			$scope.date.dateBirth = moment($scope.date.dateBirth).toISOString();
-			$scope.participant.dateBirth = $scope.date.dateBirth;
-
-			datacontext.save()
-
-			alert('Thanks for registering');
+			//alert('Thanks for registering');
 
 			//if ($scope.isSponsorPayVisible == true) {
 			//    alert('Thanks for joining');
@@ -246,7 +264,7 @@
 			//        console.log(res);
 			//        cartOrder.stripeToken = res.id;
 			//        console.log(cartOrder);
-			//        $http.post(config.apiPath + "/api/Payment/Post", cartOrder)
+			//        $http.post(config.apiPath + "/api/Payment/PostTeamPayment", cartOrder)
 			//           .success(function (result) {
 			//               $location.path("/receipt/" + result);
 			//           })
@@ -262,7 +280,7 @@
 	}
 
 	angular.module('evReg').controller(controllerId,
-		['$scope', '$routeParams', '$q', '$http', '$location',
-		'datacontext', 'StripeService', 'MemberCartModel', 'authService',
+		['$scope', '$routeParams', '$q', '$http', '$location', '$modal',
+		'datacontext', 'StripeService', 'MemberCartModel', 'CartModel', 'authService',
 		'config', 'common', Controller]);
 })();
