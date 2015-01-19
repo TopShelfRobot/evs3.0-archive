@@ -244,3 +244,5 @@ pip-log.txt
 .idea/workspace.xml
 
 .idea/jsLinters/jshint.xml
+
+.sass-cache/*
