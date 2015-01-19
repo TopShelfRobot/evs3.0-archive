@@ -20,21 +20,6 @@
 		$scope.regSettings = cartRegSettings.regSettings;
 		console.log($scope.regSettings);
 
-		$scope.participant = {
-			city: null,
-			dateBirth: null,
-			email: authService.authentication.userName,
-			firstName: null,
-			gender: null,
-			houseId: cartModel.houseId,
-			lastName: null,
-			ownerId: cartModel.ownerId,
-			phoneMobile: null,
-			state: null,
-			street1: null,
-			zip: null,
-		};
-
 		$scope.date = {
 			dateBirth: ''
 		};
@@ -165,7 +150,7 @@
 						var payment = data[0];
 						var count = data[1];
 						var sum = data[2];
-						$scope.participant = data[3];
+						// $scope.participant = data[3];
 						cartModel.teamMemberId = payment.teamMemberId;
 						cartModel.teamId = payment.teamId;
 						$scope.teamName = payment.name;
@@ -201,7 +186,7 @@
 			getTeamInfo()
 		];
 		common.activateController(promises, controllerId);
-
+		console.log(cartRegSettings.houseId);
 		$scope.open = function ($event, open) {
 			$event.preventDefault();
 			$event.stopPropagation();
@@ -231,6 +216,7 @@
 
 		$scope.checkout = function () {
 			var cartOrder = cartModel.order($scope.userPaying);
+			cartOrder.participantId = cartRegSettings.houseId;
 
 			alert('User elected to not pay: ' + cartOrder.orderAmount);
 			$.blockUI({

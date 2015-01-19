@@ -2,7 +2,8 @@
 
 	var controllerId = "TeamPaymentController";
 
-	function controller($scope, $location, $http, $modal, datacontext, cartModel, config, stripe, common) {
+	function controller($scope, $location, $http, $modal,
+		datacontext, cartModel, cartRegSettings, config, stripe, common) {
 		$scope.teamName = cartModel.teamName;
 		$scope.waiverSigned = false;
 		$scope.isSuggestPayVisible = false;
@@ -123,6 +124,9 @@
 		};
 	}
 
-	angular.module("evReg").controller(controllerId, ["$scope", "$location", "$http", "$modal", "datacontext", "RegistrationCartModel", "config", "StripeService", "common", controller]);
+	angular.module("evReg").controller(controllerId,
+		["$scope", "$location", "$http", "$modal",
+		"datacontext", "RegistrationCartModel", "CartModel",
+		"config", "StripeService", "common", controller]);
 
 })();
