@@ -211,7 +211,7 @@
 		function createProfile() {    //mjb removed email from here
 			var self = this;
 			return self.manager.createEntity('Participant',
-				{ ownerId: cart.ownerId, country: "US" });
+		{ ownerId: cart.ownerId, country: 'US', dateCreated: new Date() });
 		}
 
 		function createParticipant(ownerId, email, houseId) {
