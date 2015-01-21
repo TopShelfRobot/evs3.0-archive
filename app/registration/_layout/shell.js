@@ -3,7 +3,7 @@
 
 	var controllerId = 'shell';   
 
-	function Controller($rootScope, $timeout, common, config, authService, cart, datacontext) {
+	function Controller($rootScope, $timeout, $css, common, config, authService, cart, datacontext) {
 		var self = this;
 		var logSuccess = common.logger.getLogFn(controllerId, 'success!!!');
 		var events = config.events;
@@ -25,6 +25,12 @@
 		this.resolved = false;
 
 		function activate() {
+			var isDefault = false;
+
+			if(isDefault) {
+				$css.add('Content/custom-colors.css');
+			}
+
 			self.showSplash = true;
 			self.progBar = 30;
 			
@@ -83,5 +89,5 @@
 
 	};
 	
-	angular.module('evReg').controller(controllerId, ['$rootScope', "$timeout", 'common', 'config', "authService", "CartModel", "datacontext", Controller]);
+	angular.module('evReg').controller(controllerId, ['$rootScope', '$timeout', '$css', 'common', 'config', 'authService', 'CartModel', 'datacontext', Controller]);
 })();

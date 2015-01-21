@@ -1,0 +1,22 @@
+/******************************
+ Structure Constraints
+*******************************/
+div.popover.fade.bottom.in {
+  left:-170px !important;
+  min-width:400px !important;
+  max-width:500px !important;
+}
+
+.popover.bottom > .arrow {
+  left:50% !important;
+}
+
+#cart-list > .table > tbody > tr > td{
+  font-size:10px !important;
+}
+
+#cart-list > .table > tbody > tr > td > button.close.remove-item{
+  font-size:15px !important;
+  line-height:12px !important;
+  opacity:.7 !important;
+}

@@ -1,0 +1,73 @@
+@import "variables";
+@import "partials/loading-screen";
+@import "partials/bootstrap-overrides";
+@import "partials/kendo-overrides";
+@import "partials/event-tile-grid";
+@import "partials/listing-tile";
+@import "partials/shopping-cart";
+@import "partials/confirmation";
+@import "partials/user-profile";
+@import "partials/reg-footer";
+@import "partials/default-colors";
+/******************************
+ Structure Constraints
+*******************************/
+.wrap {
+  height: 100%;
+  min-height: 100%;
+  margin-bottom: -400px;
+}
+
+#push, #footer {
+  height: 200px;
+}
+
+/******************************
+ Registration Bootstrap Change
+*******************************/
+.nav.navbar-nav.navbar-right {
+  padding-right:100px;
+}
+
+.navbar .glyphicon {
+  font-size:22px;
+}
+
+/******************************
+ Sizing Constraints
+*******************************/
+.logo {
+  width:200px;
+}
+
+/*****************************
+Context Colors
+******************************/
+.has-error {  color:$danger;  }
+
+.has-success {  color:$success; }
+
+.danger {  color:$danger;  }
+
+.warning {  color:$warning;  }
+
+.success {  color:$success;  }
+
+.info {  color:$info;  }
+
+.primary {  color:$primary;  }
+
+/******************************
+ Table Fixes Constraints
+*******************************/
+@media (max-width:768px) {
+  .table-responsive .input-group {
+    width:200px;
+  }
+  .table-responsive input {
+    width:200px;
+  }
+  .table-responsive .btn-group {
+    width:100px;
+  }
+}

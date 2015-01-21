@@ -1,44 +1,57 @@
 <section ng-controller="ShoppingCart as cart">
-    <div class="row">
-        <div class="col-sm-9">
-            <h1>Shopping Cart</h1>
-            <p class="text-muted">View and manage the events you have added to your shopping cart.</p>
-            <br><br>
-            <div class="table-responsive">
-                <table class="table table-striped">
-                    <thead>
-                    <tr>
-                        <th class="col-lg-5">{{cart.eventureName}}</th>
-                        <th class="col-lg-5">{{cart.listName}}</th>
-                        <th class="col-lg-1">Price</th>
-                        <th class="col-lg-1" />
-                    </tr>
-                    </thead>
-                    <tbody data-role="listview" data-template="large-cart-item">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-9">
+                <h1>Shopping Cart</h1>
+                <p class="text-muted">View and manage the events you have added to your shopping cart.</p>
+                <br>
+                <br>
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th class="col-lg-5">{{cart.eventureName}}</th>
+                                <th class="col-lg-5">{{cart.listName}}</th>
+                                <th class="col-lg-1">Price</th>
+                                <th class="col-lg-1" />
+                            </tr>
+                        </thead>
+                        <tbody data-role="listview" data-template="large-cart-item">
 
-	                    <tr ng-repeat='reg in cart.model.registrations'>
-	                        <td><span class="product-name">{{reg.displayEvent}}</span></td>
-	                        <td><span class="product-name">{{reg.displayList}}</span></td>
-	                        <td><span class="product-name">{{reg.fee | currency}}</span></td>
-	                        <td><button type="button" class="close remove-item" ng-click="cart.removeItem(reg)">&times;</button></td>
-	                    </tr>
-                    </tbody>
-                </table>
+                            <tr ng-repeat='reg in cart.model.registrations'>
+                                <td>
+                                    <span class="product-name">{{reg.displayEvent}}</span>
+                                </td>
+                                <td>
+                                    <span class="product-name">{{reg.displayList}}</span>
+                                </td>
+                                <td>
+                                    <span class="product-name">{{reg.fee | currency}}</span>
+                                </td>
+                                <td>
+                                    <button type="button" class="close remove-item" ng-click="cart.removeItem(reg)">&times;</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <br>
+                <br>
+                <small>Do you have a gift card or promotional code? We'll ask you to enter your code when it's time to pay.
+                    <br>
+                    <hr>
+                    <span class="text-muted">The price and availability of items in your cart are subject to change.
+                        <br>The Cart is a temporary place to store a list of your items, but due to limited availability, you may no longer be able to register for an event in your cart.</span>
+                </small>
             </div>
-            <br>
-            <br>
-            <small>Do you have a gift card or promotional code? We'll ask you to enter your code when it's time to pay.
-                <br><hr><span class="text-muted">The price and availability of items in your cart are subject to change.
-                <br>The Cart is a temporary place to store a list of your items, but due to limited availability, you may no longer be able to register for an event in your cart.</span>
-               </small>
-        </div>
-        <div class="col-sm-3">
-            <br>
-            <div class="well well-sm">
-                <h4>Subtotal: {{cart.model.getTotalPrice() | currency }}</h4>
-                <a class="btn btn-warning btn-block" ng-click="cart.checkout()">Go To Checkout</a>
-            </div>
+            <div class="col-sm-3">
+                <br>
+                <div class="well well-sm">
+                    <h4>Subtotal: {{cart.model.getTotalPrice() | currency }}</h4>
+                    <a class="btn btn-warning btn-block" ng-click="cart.checkout()">Go To Checkout</a>
+                </div>
 
+            </div>
         </div>
     </div>
 </section>

@@ -1,0 +1,124 @@
+/******************************
+ Navigation
+*******************************/
+.navbar-nav > li > a.active { color:$dark-gray; }
+
+.nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
+
+.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {
+  background-color:transparent;
+}
+.navbar-inverse .navbar-toggle:hover, .navbar-inverse .navbar-toggle:focus {
+  background-color:transparent;
+}
+.navbar-inverse .navbar-toggle {
+  border:none;
+}
+
+/******************************
+ Components
+*******************************/
+.tooltip-inner {
+  padding:10px;
+}
+
+/******************************
+ Buttons
+*******************************/
+
+.btn {
+  background:none;
+  color:black;
+}
+
+.k-grid-content .btn.btn-block {
+  display:block;
+  width: auto;
+}
+
+.btn.btn-link {
+  text-decoration:underline;
+}
+
+.btn.btn-default {
+  background:white;
+}
+
+.btn.btn-primary:hover, .btn.btn-primary.active, .btn.btn-primary.focus,
+.btn.btn-primary:active, .btn.btn-primary:focus, .open>.dropdown-toggle.btn-primary {
+  color:darken(white, 40);
+  background:darken(white, 20);
+}
+
+.btn.btn-primary {
+  color:darken($primary, 20);;
+  background:lighten($primary, 40);
+}
+
+.btn.btn-primary:hover, .btn.btn-primary.active, .btn.btn-primary.focus,
+.btn.btn-primary:active, .btn.btn-primary:focus, .open>.dropdown-toggle.btn-primary {
+  color:darken($primary, 20);
+  background:lighten($primary, 20);
+}
+
+.btn.btn-success {
+  color:darken($success, 20);
+  background:lighten($success, 40);
+}
+
+.btn.btn-success:hover, .btn.btn-success.active, .btn.btn-success.focus,
+.btn.btn-success:active, .btn.btn-success:focus, .open>.dropdown-toggle.btn-success {
+  color:darken($success, 20);
+  background:lighten($success, 20);
+}
+
+.btn.btn-info {
+  color:darken($info, 20);
+  background:lighten($info, 30);
+}
+
+.btn.btn-info:hover, .btn.btn-info.active, .btn.btn-info.focus,
+.btn.btn-info:active, .btn.btn-info:focus, .open>.dropdown-toggle.btn-info {
+  color:darken($info, 20);
+  background:lighten($info, 20);
+}
+
+.btn.btn-warning {
+  color:darken($warning, 20);
+  background:lighten($warning, 25);
+}
+
+.btn.btn-warning:hover, .btn.btn-warning.active, .btn.btn-warning.focus,
+.btn.btn-warning:active, .btn.btn-warning:focus, .open>.dropdown-toggle.btn-warning {
+  color:darken($warning, 20);
+  background:lighten($warning, 20);
+}
+
+.btn.btn-danger {
+  color:darken($danger, 20);
+  background:lighten($danger, 35);
+}
+
+.btn.btn-danger:hover, .btn.btn-danger.active, .btn.btn-danger.focus,
+.btn.btn-danger:active, .btn.btn-danger:focus, .open>.dropdown-toggle.btn-danger {
+  color:darken($danger, 20);
+  background:lighten($danger, 20);
+}
+
+.btn.disabled {
+  background:lighten($dark-gray, 40);
+  color:$dark-gray;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.btn-group > .btn-default:first-child:not(:last-child).active {
+  background-color:lighten($success,40);
+}
+.btn-group > .btn-default:last-child:not(:first-child).active {
+  background-color:lighten($danger,35);
+}
+
+.btn.negative {
+  background:none;
+}

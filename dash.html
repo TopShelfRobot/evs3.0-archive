@@ -12,29 +12,9 @@
 	<title>Eventure Sports | Event Management Platform</title>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
-	<link rel="icon" type="image/png" href="/back-favicon.png" />
+	<link rel="icon" type="image/png" href="Content/images/back-favicon.png" />
+	<link href="Content/css/dash-style.css" rel="stylesheet" type="text/css" />
 
-	<link href="content/kendo.common.min.css" rel="stylesheet" type="text/css" />
-	<link href="content/kendo.common-material.core.min.css" rel="stylesheet" type="text/css" />
-	<link href="content/kendo.common-material.min.css" rel="stylesheet" type="text/css" />
-	<link href="content/kendo.material.min.css" rel="stylesheet" type="text/css" />
-	<link href="content/kendo.material.mobile.min.css" rel="stylesheet" type="text/css" />
-	<link href="content/kendo.mobile.material.min.css" rel="stylesheet" type="text/css" />
-	<link href="content/kendo.dataviz.min.css" rel="stylesheet" type="text/css" />
-	<link href="content/kendo.dataviz.default.min.css" rel="stylesheet" type="text/css" />
-	<link href="content/kendo.dataviz.material.min.css" rel="stylesheet" type="text/css" />
-
-
-	<link href="content/bootstrap.css" rel="stylesheet" />
-	<link href="content/bootstrapnav.css" rel="stylesheet" />
-	<link href="content/bootstrapoverrides.css" rel="stylesheet" />
-	<link href="content/breeze.directives.css" rel="stylesheet" />
-	<link href="content/app.css" rel="stylesheet" />
-	<link href="Content/registration.css" rel="stylesheet" />
-	<link href="content/toastr.css" rel="stylesheet" />
-	<link href="/Content/nsPopover.custom.css" rel="stylesheet" />
-	<link href="Content/font-awesome.min.css" rel="stylesheet" type="text/css" />
-	<link href="Content/social-buttons.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
@@ -57,36 +37,33 @@
 	<span data-cc-scroll-to-top></span>
 
 	<!-- Vendor Scripts -->
-	<script src="Scripts/jquery-2.0.3.js"></script>
-	<script src="Scripts/angular.js"></script>
-	<script src="Scripts/kendo.all.min.js"></script>
-	<script src="Scripts/angular-animate.js"></script>
-	<script src="Scripts/angular-route.js"></script>
-	<script src="Scripts/angular-sanitize.js"></script>
-	<script src="Scripts/bootstrap.js"></script>
-	<script src="Scripts/toastr.js"></script>
-	<script src="Scripts/moment.js"></script>
-	<script src="Scripts/angular-moment.min.js"></script>
-	<script src="Scripts/ui-bootstrap-tpls-0.12.0.js"></script>
-	<script src="Scripts/spin.js"></script>
-	<script src="Scripts/breeze.debug.js"></script>
-	<script src="Scripts/breeze.angular.js"></script>
-	<script src="Scripts/breeze.directives.js"></script>
-	<script src="Scripts/breeze.saveErrorExtensions.js"></script>
-	<script src="Scripts/angular-file-upload.min.js"></script>
-	<script src="Scripts/nsPopover.js"></script>
-	<script src="Scripts/stripe.js"></script>
-	<script src="Scripts/jszip.min.js"></script>
-	<script src="Scripts/xlsx.js"></script>
-	<script src="Scripts/sb-date-select.js"></script>
-	<script src="Scripts/angular-local-storage.min.js"></script>
-	<script src="Scripts/angulartics.min.js"></script>
-	<script src="Scripts/angulartics-ga.min.js"></script>
-	<script src="Scripts/modernizr.custom.js"></script>
-	<script src="Scripts/toucheffects.js"></script>
-	<script src="Scripts/angular-file-upload-shim.min.js"></script>
-    <script src="Scripts/ng-role-auth.min.js"></script>
-	<script src="Scripts/ngMask.js"></script>
+	<script src="Content/js/jquery-2.1.3.min.js"></script>
+	<script src="Content/js/angular.min.js"></script>
+	<script src="Content/js/angular-animate.min.js"></script>
+	<script src="Content/js/angular-route.min.js"></script>
+	<script src="Content/js/angular-sanitize.min.js"></script>
+	<script src="Content/js/kendo.all.min.js"></script>
+	<script src="Content/js/bootstrap.min.js"></script>
+	<script src="Content/js/angular-local-storage.min.js"></script>
+	<script src="Content/js/breeze.debug.js"></script>
+	<script src="Content/js/breeze.angular.js"></script>
+	<script src="Content/js/breeze.directives.js"></script>
+	<script src="Content/js/breeze.saveErrorExtensions.js"></script>
+	<script src="Content/js/jquery.validate.js"></script>
+	<script src="Content/js/toastr.js"></script>
+	<script src="Content/js/moment.js"></script>
+	<script src="Content/js/ui-bootstrap-tpls-0.12.0.js"></script>
+	<script src="Content/js/spin.js"></script>
+	<script src="Content/js/nsPopover.js"></script>
+	<script src="Content/js/stripe.js"></script>
+	<script src="Content/js/angular-moment.js"></script>
+	<script src="Content/js/angulartics.js"></script>
+	<script src="Content/js/angulartics-ga.js"></script>
+	<script src="Content/js/ngMask.js"></script>
+	<script src="Content/js/angular-css.js"></script>
+	<script src="Content/js/angular-file-upload-shim.min.js"></script>
+	<script src="Content/js/angular-file-upload.min.js"></script>
+	<script src="Content/js/ng-auth-role.js"></script>
 
 	<!-- Stripe -->
 	<script src="https://checkout.stripe.com/v2/checkout.js"></script>
@@ -202,6 +179,8 @@
 	<script src="app/registration/_services/registrationEditModel.js"></script>
 	<script src="app/registration/_components/cart-view.js"></script>
 	<script src="app/registration/_components/custom-questions.js"></script>
+	<script src="app/registration/_components/sb-date-select.js"></script>
+	<script src="app/registration/_components/ng-role-auth.min.js"></script>
 
 	<!-- common Services -->
 	<script src="app/common/components/directives.js"></script>

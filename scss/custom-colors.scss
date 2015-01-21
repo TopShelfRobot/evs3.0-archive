@@ -1,0 +1,98 @@
+/************************************
+ Variables
+*************************************/
+/* These are the application default colors variables */
+
+$primary:           #009688;
+$dark:              #004D40;
+$highlight:         #FFEB3B;
+$contrast:          #3F51B5;
+$overlay:     rgba(140,158,255 ,.1);
+/**********************************
+Neutrals
+********
+Recommended left at default
+********
+***********************************/
+$neutral:           #FFFFFF;
+$neutral-light:     #F5F5F5;
+$neutral-dark:      #424242;
+
+/***********************************
+Default color theme
+************************************/
+#main {
+  background-color: $neutral;
+}
+/************************************
+ Header Bar
+ General
+*************************************/
+.navbar-inverse {
+  background-color: $primary;
+  border-color: $dark;
+}
+.navbar-inverse .navbar-nav > .active > a, .navbar-inverse .navbar-nav > .active > a:hover, .navbar-inverse .navbar-nav > .active > a:focus {
+  background-color: $dark;
+  border-bottom:2px inset $dark;
+}
+.navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form {
+  border-color: $dark;
+}
+.navbar-inverse .navbar-nav > li > a {
+  color: $neutral;
+}
+.navbar-inverse .navbar-brand {
+  color: $neutral;
+}
+.navbar-inverse .navbar-toggle .icon-bar {
+  background-color: $highlight;
+}
+#cart-list > .table > tbody > tr > td > button.close.remove-item{
+  color: $highlight !important;
+}
+.navbar-inverse .navbar-nav > li > a:hover {
+  color: $highlight;
+}
+.badge {
+  background-color: $contrast;
+}
+.street-team {
+  color: $primary;
+}
+
+/************************************
+Sidebar Nav
+*************************************/
+#sidebar {
+  border-right: 1px solid $primary;
+  background-color: $neutral-light;
+}
+#sidebar, #sidebar a {
+  color: $neutral-dark;
+}
+
+#sidebar .nav li>a:hover {
+  border-left:9px solid $highlight;
+  background-color: $overlay;
+}
+
+/************************************
+ Event Tile
+*************************************/
+.grid figcaption {
+  border-top: 4px solid $primary;
+}
+.grid figcaption h4 {
+  color: $primary;
+}
+
+/************************************
+ Listing Tile
+*************************************/
+.list-tile {
+  border-top: 4px solid $primary;
+}
+.list-desc-box h4 {
+  color: $primary;
+}
