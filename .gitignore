@@ -245,5 +245,5 @@ pip-log.txt
 
 .idea/jsLinters/jshint.xml
 
-.sass-cache/
-
+.sass-cache/*
+>>>>>>> development

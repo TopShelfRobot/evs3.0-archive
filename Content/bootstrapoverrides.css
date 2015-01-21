@@ -1,0 +1,65 @@
+.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {
+background-color:transparent;
+}
+
+.navbar-inverse {
+    background-color: #3F51B5;
+    border-color:#1A237E;
+}
+
+.navbar-inverse .navbar-nav > .active > a, .navbar-inverse .navbar-nav > .active > a:hover, .navbar-inverse .navbar-nav > .active > a:focus {
+    background-color: #1A237E;
+    border-bottom:2px inset #1A237E;
+}
+
+.navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form {
+    border-color:#1A237E;
+}
+
+.navbar-inverse .navbar-nav > li > a {
+    color:#ffffff;
+}
+
+.navbar-inverse .navbar-brand {
+    color:#ffffff;
+}
+.navbar-inverse .navbar-toggle:hover, .navbar-inverse .navbar-toggle:focus {
+    background-color:transparent;
+}
+.navbar-inverse .navbar-toggle {
+    border:none;
+}
+.navbar-inverse .navbar-toggle .icon-bar {
+    background-color:#E91E63;
+}
+
+.btn{background:none;color:black}
+.btn.btn-link{text-decoration:underline}
+.btn.btn-primary{color:#245682;background:#e1edf7}
+.btn.btn-primary:hover,.btn.btn-primary.active,
+.btn.btn-primary.focus,.btn.btn-primary:active,
+.btn.btn-primary:focus,.open>.dropdown-toggle.btn-primary
+{color:#245682;background:#92bce0}
+.btn.btn-success{color:#357935;background:#eaf6ea}
+.btn.btn-success:hover,.btn.btn-success.active,
+.btn.btn-success.focus,.btn.btn-success:active,
+.btn.btn-success:focus,.open>.dropdown-toggle.btn-success
+{color:#357935;background:#a3d7a3}
+.btn.btn-info{color:#2390b0;background:#daf1f8}
+.btn.btn-info:hover,.btn.btn-info.active,
+.btn.btn-info.focus,.btn.btn-info:active,
+.btn.btn-info:focus,.open>.dropdown-toggle.btn-info
+{color:#2390b0;background:#b0e1ef}
+.btn.btn-warning{color:#c77c11;background:#fff}
+.btn.btn-warning:hover,.btn.btn-warning.active,
+.btn.btn-warning.focus,.btn.btn-warning:active,
+.btn.btn-warning:focus,.open>.dropdown-toggle.btn-warning
+{color:#c77c11;background:#f8d9ac}
+.btn.btn-danger{color:#a02622;background:#f9e2e2}
+.btn.btn-danger:hover,.btn.btn-danger.active,
+.btn.btn-danger.focus,.btn.btn-danger:active,
+.btn.btn-danger:focus,.open>.dropdown-toggle.btn-danger
+{color:#a02622;background:#eba5a3}
+.btn.disabled{background:none}
+.btn-group>.btn-default:first-child:not(:last-child).active{background-color:#eaf6ea}
+.btn-group>.btn-default:last-child:not(:first-child).active{background-color:#f9e2e2}
