@@ -34,7 +34,7 @@
             toastr.success('Receipt Sent');
           })
           .error(function (err) {
-            toaster.error('Resend failed');
+            toastr.error('Resend failed');
           })
           .finally(function () {
             //Do NOthing
