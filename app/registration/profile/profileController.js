@@ -59,13 +59,12 @@
 				filterable: true,
 				columns: [{
 					field: "displayName",
-					title: "Listing",
-					width: 270
+					title: "Listing"
 				}, {
 					field: "totalAmount",
 					title: "Amount",
 					format: "{0:c}",
-					width: 110
+					width: 150
 				}, {
 					field: "quantity",
 					title: "Qty",
@@ -79,11 +78,13 @@
 				},{
 					field: '',
 					title: '',
-					template: '<a href="\\\#orderreceipt/#=eventureOrderId#" class="btn btn-success btn-block"><em class="glyphicon glyphicon-tags"></em>&nbsp;Receipt</a>'
+					width: 140,
+					template: '<a href="\\#orderreceipt/#=eventureOrderId#" class="btn btn-success btn-block"><em class="glyphicon glyphicon-tags"></em>&nbsp;&nbsp;Receipt</a>'
 				}, {
 					field: '',
 					title: '',
-					template: '<a href="\\\#registration/#=id#" class="btn btn-default btn-block"><em class="glyphicon glyphicon-edit"></em>&nbsp;Edit</a>'
+					width: 110,
+					template: '<a href="\\#registration/#=id#" class="btn btn-default btn-block"><em class="glyphicon glyphicon-edit"></em>&nbsp;Edit</a>'
 				}]
 			};
 		}
