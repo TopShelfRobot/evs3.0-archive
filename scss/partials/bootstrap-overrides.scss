@@ -40,6 +40,16 @@
   text-decoration:underline;
 }
 
+.btn.btn-default {
+  background:white;
+}
+
+.btn.btn-primary:hover, .btn.btn-primary.active, .btn.btn-primary.focus,
+.btn.btn-primary:active, .btn.btn-primary:focus, .open>.dropdown-toggle.btn-primary {
+  color:darken(white, 40);
+  background:darken(white, 20);
+}
+
 .btn.btn-primary {
   color:darken($primary, 20);;
   background:lighten($primary, 40);
