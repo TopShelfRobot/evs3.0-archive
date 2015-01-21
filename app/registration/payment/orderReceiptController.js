@@ -3,7 +3,7 @@
 
     var controllerId = 'orderReceipt';
 
-    function Controller($scope, $routeParams, datacontext, cart, common) {
+    function Controller($scope, $routeParams, $http, config, datacontext, cart, common) {
 
         $scope.receipt = {};
 
@@ -22,7 +22,26 @@
 
         common.activateController(promises, controllerId);
 
+        $scope.resendReceipt = function () {
+
+          var source = {
+            'orderId': $scope.orderId
+          };
+
+          console.log('Order Id: ' + $scope.orderId);
+          $http.post(config.apiPath + 'api/mail/ResendReceipt', source) //mjb
+          .success(function (result) {
+            toastr.success('Receipt Sent');
+          })
+          .error(function (err) {
+            toaster.error('Resend failed');
+          })
+          .finally(function () {
+            //Do NOthing
+          });
+        };
+
     }
 
-    angular.module("evReg").controller(controllerId, ['$scope', '$routeParams', 'datacontext', 'CartModel', 'common', Controller]);
+    angular.module('evReg').controller(controllerId, ['$scope', '$routeParams', '$http', 'config', 'datacontext', 'CartModel', 'common', Controller]);
 })();
