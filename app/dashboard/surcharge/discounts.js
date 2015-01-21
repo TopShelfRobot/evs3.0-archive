@@ -76,7 +76,7 @@
           };
 
           vm.detailGridOptions = function(e) {
-            var couponuseapi = config.remoteApiName + 'widget/GetCouponUseByCouponId/' + e.Id;
+            var couponuseapi = config.remoteApiName + 'widget/GetCouponUseByCouponId/' + e.id;
 
             return {
                 //toolbar: '<a download="detailexport.xlsx" class="k-button" ng-click="vm.detailexcel(vm.detailgrid)"><em class="glyphicon glyphicon-save"></em>&nbsp;Export</a>',
@@ -117,7 +117,7 @@
             };
           };
         }
-        
+
         vm.excel = function(data) {
           var gridname = data;
           excel.export(gridname);
@@ -138,7 +138,7 @@
                     return vm.amountTypes;
                 });
         }
-        
+
         vm.saveDiscounts = function(){
 			datacontext.save()
 			.then(function(){
