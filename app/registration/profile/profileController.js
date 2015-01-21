@@ -2,7 +2,7 @@
 
 	var controllerId = "UserProfile";
 
-	function Controller($scope, $routeParams, config, datacontext, common, cart){
+	function Controller($scope, $routeParams, $http, config, datacontext, common, cart){
 
 		$scope.participant = {};
 
@@ -42,6 +42,31 @@
 		}
 
 		function Registrations() {
+
+
+		   
+
+		    $scope.resendReceipt = function (e) {
+
+		        var source = {
+		            'orderId': e
+		        };
+
+		        console.log('Order Id: ' + e);
+		        $http.post(config.apiPath + "api/mail/ResendReceipt", source)   //mjb
+		        //$http.post(config.apiPath + "api/mail/SendConfirmMail/5")   //mjb
+				.success(function (result) {
+				    alert('Receipt Sent');
+				})
+				.error(function (err) {
+				    alert('Resend failed');
+				})
+				.finally(function () {
+				    //Do NOthing
+				});
+		    };
+
+
 			var regapi = config.remoteApiName + 'widget/GetRegistrationsByPartId/' + $scope.participantId;
 
 			$scope.registrationGridOptions = {
@@ -84,6 +109,10 @@
 					field: '',
 					title: '',
 					template: '<a href="\\\#registration/#=id#" class="btn btn-default btn-block"><em class="glyphicon glyphicon-edit"></em>&nbsp;Edit</a>'
+				}, {
+				    field: '',
+				    title: '',
+				    template: '<button ng-click="resendReceipt(#=eventureOrderId#)" class="btn btn-success btn-block">Resend Receipt</button>',
 				}]
 			};
 		}
@@ -378,5 +407,5 @@
 		}
 	}
 
-	angular.module("evReg").controller(controllerId, ["$scope", "$routeParams", "config", "datacontext", "common", "CartModel", Controller]);
+	angular.module("evReg").controller(controllerId, ["$scope", "$routeParams", "$http", "config", "datacontext", "common", "CartModel", Controller]);
 })();

@@ -33,27 +33,30 @@
                     });
         }
 
-        vm.stripeConnect = function() {
+        vm.stripeConnect = function () {
             if (confirm('Are you sure you wish to proceed?')) {
-                alert('true');
+                console.log('PRODUCTION');
                 //Not sure if you can use $location. Might have to use window.location
                 //$location('https://connect.stripe.com/oauth/authorize?response_type=code&scope=read_write&stripe_landing=login&client_id=ca_2JOTAhBu2gVayLgbZaYy8KQXBm2GveXD');
+                window.location.href = 'https://connect.stripe.com/oauth/authorize?response_type=code&scope=read_write&stripe_landing=login&client_id=ca_2JOTAhBu2gVayLgbZaYy8KQXBm2GveXD'
             } else {
                 // Do nothing!
-                alert('false');
+                console.log('false');
             }
         };
 
-        vm.stripeDevConnect = function() {
+        vm.stripeDevConnect = function () {
             if (confirm('Are you sure you wish to proceed?')) {
-                alert('true');
+                console.log('dev');
                 //Not sure if you can use $location. Might have to use window.location
                 //$location('https://connect.stripe.com/oauth/authorize?response_type=code&scope=read_write&stripe_landing=login&client_id=ca_2JOTjDvfxSx9tzuIN9f5ZCLELpfdgJdn');
+                window.location.href = 'https://connect.stripe.com/oauth/authorize?response_type=code&scope=read_write&stripe_landing=login&client_id=ca_2JOTjDvfxSx9tzuIN9f5ZCLELpfdgJdn'
             } else {
                 // Do nothing!
-                alert('false');
+                console.log('false');
             }
         };
+
 
         vm.saveAndNav = function() {
             return datacontext.save()
