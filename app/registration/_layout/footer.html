@@ -1,13 +1,15 @@
 <div id="push"></div>
-<div id="footer">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-12">
-        <div class="text-center"><img src="/Content/images/white-logo.png" alt="" /></div>
-        <hr>
-        <h3 class="support-link"><a href="mailto:support@eventuresports.com?subject=Registration%20Support%20Request">Need Help? Contact Us.</a></h3>
-        <p>© 2014 <a href="http://www.eventuresports.com">Eventure Sports</a> | All Rights Reserved.</p>
+<section ng-controller="footerController">
+  <div id="footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="text-center"><img src="/Content/images/white-logo.png" alt="" /></div>
+          <hr>
+          <h3 class="support-link"><a href="mailto:support@eventuresports.com?subject={{cart.regSettings.name}}%20Registration%20Support%20Request">Need Help? Contact Us.</a></h3>
+          <p>© 2014 <a href="http://www.eventuresports.com">Eventure Sports</a> | All Rights Reserved.</p>
+        </div>
       </div>
     </div>
   </div>
-</div>
+</section>
