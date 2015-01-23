@@ -15,37 +15,46 @@
         <div class="collapse navbar-collapse" id="reg-navbar">
             <ul class="nav navbar-nav navbar-right">
                 <li ng-if="cart.registrations.length > 0">
-                    <a class="hidden-xs hidden-sm visible-md visible-lg" ns-popover
-                       ns-popover-template="/app/registration/_layout/cart.part.html"
-                       ns-popover-trigger="mouseenter"
-                       ns-popover-theme="ns-popover-tooltip-theme"
-                       ns-popover-placement="bottom"
-                       ns-popover-hide-on-click="false"
-                       ns-popover-timeout="0"
-                       ng-hide="!authentication.isAuth">
-                        <i class="glyphicon glyphicon-shopping-cart"></i>
-                        &nbsp;<span class="badge">{{cart.registrations.length}}</span>
+                    <a class="hidden-xs hidden-sm visible-md visible-lg" ns-popover ns-popover-template="/app/registration/_layout/cart.part.html" ns-popover-trigger="mouseenter" ns-popover-theme="ns-popover-tooltip-theme" ns-popover-placement="bottom" ns-popover-hide-on-click="false"
+                    ns-popover-timeout="0" ng-hide="!authentication.isAuth">
+                        <i class="glyphicon glyphicon-shopping-cart"></i> &nbsp;
+                        <span class="badge">{{cart.registrations.length}}</span>
                     </a>
-                    <a class="visible-xs visible-sm hidden-md hidden-lg" href="#/shoppingcart"><i class="glyphicon glyphicon-shopping-cart"></i>&nbsp;<span class="badge">{{cart.registrations.length}}</span></a>
+                    <a class="visible-xs visible-sm hidden-md hidden-lg" href="#/shoppingcart">View Shopping Cart&nbsp;<span class="badge">{{cart.registrations.length}}</span></a>
                 </li>
-                <li class="dropdown" dropdown on-toggle="toggled(open)" ng-hide="!authentication.isAuth">
+                <li ng-hide="!authentication.isAuth">
+                    <a href="#/user-profile/{{cart.houseId}}">User Profile&nbsp;<i class="fa fa-user"></i></a>
+                </li>
+                <li ng-hide="!authentication.isAuth">
+                    <a ng-click="logOut()">Sign Out&nbsp;<i class="fa fa-sign-out"></i></a>
+                </li>
+                <!-- <li class="dropdown" dropdown on-toggle="toggled(open)" ng-hide="!authentication.isAuth">
                     <a dropdown-toggle class="dropdown-toggle">
                         <i class="glyphicon glyphicon-cog"></i>
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a href="#/user-profile/{{cart.houseId}}">User Profile</a></li>
-                        <!--<li><a href="#/participant/add">Add A Participant</a></li>-->
-                        <li class="divider"></li>
-                        <li><a ng-click="logOut()">Logout</a></li>
+                        <li><a href="#/user-profile/{{cart.houseId}}">User Profile</a>
+                        </li> -->
+                <!--<li><a href="#/participant/add">Add A Participant</a></li>-->
+                <!-- <li class="divider"></li>
+                        <li><a ng-click="logOut()">Logout</a>
+                        </li>
                     </ul>
+                </li> -->
+                <li>
+                    <a href="#/login">
+                        <strong ng-hide="authentication.isAuth">Sign In&nbsp;<i class="fa fa-sign-in"></i>
+                        </strong>
+                    </a>
                 </li>
                 <li>
-                    <a href="#/login"><strong ng-hide="authentication.isAuth">Sign In</strong></a>
-                </li>
-                <li>
-                    <a href="mailto:support@eventuresports.com?Subject={{cart.regSettings.name}}%20Registration%20Support"><strong>Need Help?</strong></a>
+                    <a href="mailto:support@eventuresports.com?Subject={{cart.regSettings.name}}%20Registration%20Support">
+                        <strong>Need Help?</strong>
+                    </a>
                 </li>
             </ul>
-        </div><!-- /.navbar-collapse -->
-    </div><!-- /.container-fluid -->
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container-fluid -->
 </nav>

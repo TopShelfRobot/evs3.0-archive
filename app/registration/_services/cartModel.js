@@ -1,7 +1,7 @@
 ﻿(function () {
 	angular.module("evReg").service("CartModel", ["config", Model]);
 	function Model(config) {
-		
+
 		var self = this;
 
 		var cart = {};
@@ -16,7 +16,7 @@
 		cart.allowZeroPayment = false;
 
 		cart.navUrl = '';
-		
+
 		cart.teamMemberId = null;
 		cart.registrations = [];
 		cart.surcharges = [];
@@ -83,7 +83,7 @@
 			}
 			if (!isRegDupe) {
 				cart.registrations.push(new registration(eventure.displayHeading, eventureList.displayName, participant.email, eventureList.currentFee, eventure.id, eventureList.id, participant.id, participant.firstName + ' ' + participant.lastName, answers, groupId, group2Id, quantity, eventureList.eventureListTypeId, eventureList.isBundle));
-				toastr.success('<strong class="text-center">Your Item Was Added To Your Cart!</strong><br><br><a class="btn btn-primary btn-block" href="#/shoppingcart">View Cart</a>');
+				toastr.success('<strong class="text-center">Your Item Was Added To Your Cart!</strong><br><br><a class="btn btn-primary btn-block" href="#/shoppingcart"><i class="fa fa-shopping-cart"></i>&nbsp;View Cart</a>');
 			}
 		};
 
@@ -102,7 +102,7 @@
 				regTotalAmount = regTotalAmount + currentReg.fee;
 				regCount++;
 			}
-		   
+
 			console.log(cart.regSettings.isAddSingleFeeForAllRegs);
 			console.log(cart.regSettings.addSingleFeeType);
 			//alert('now');
@@ -128,7 +128,7 @@
 				}
 				cart.surcharges.push(new surcharge('Online Service Fee', feeAmount.toFixed(2), 'cartRule', 0, 0, 0));
 			}
-			
+
 			if(cart.regSettings.isMultiParticipantDiscountCartRule){
 				var items = {}; // hash table with eventureListId and hash of count and cost
 				var reg;
@@ -157,7 +157,7 @@
 					}
 				}
 			}
-			
+
 			if(cart.regSettings.isMultiRegistrationDiscountCartRule){
 				var items = {}; // hash table with participantId and hash of count and cost.
 				var reg;
@@ -273,7 +273,7 @@
 			cart.regSettings.name = data.name;
 			cart.regSettings.stripePublishableKey = data.stripePublishableKey
 		};
-		
+
 		function registration(displayEvent, displayList, email, fee, eventureId, eventureListId, partId, name, answers, groupId, group2Id, quantity, eventureListTypeId, isBundle) {
 			var me = this;
 			me.displayEvent = displayEvent;
