@@ -14,7 +14,7 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="reg-navbar">
             <ul class="nav navbar-nav navbar-right">
-                <li>
+                <li ng-if="cart.registrations.length > 0">
                     <a class="hidden-xs hidden-sm visible-md visible-lg" ns-popover
                        ns-popover-template="/app/registration/_layout/cart.part.html"
                        ns-popover-trigger="mouseenter"
