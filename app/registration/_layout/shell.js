@@ -4,7 +4,7 @@
 
 	var controllerId = 'shell';
 
-	function Controller($rootScope, $timeout, $css, common, config, authService, cart, datacontext) {
+	function Controller($rootScope, $timeout, common, config, authService, cart, datacontext) {
 		var self = this;
 		var logSuccess = common.logger.getLogFn(controllerId, 'success!!!');
 		var events = config.events;
@@ -26,11 +26,6 @@
 		this.resolved = false;
 
 		function activate() {
-			var isDefault = false;
-
-			if (isDefault) {
-				$css.add('Content/custom-colors.css');
-			}
 
 			self.showSplash = true;
 			self.progBar = 30;
@@ -93,15 +88,15 @@
 					addCSSRule(sheet, '#cart-list > .table > tbody > tr > td > button.close.remove-item', 'color:' + highlightColor + '!imporant');
 					addCSSRule(sheet, '.navbar-inverse .navbar-nav > li > a:hover', 'color:' + highlightColor);
 					addCSSRule(sheet, '.badge', 'background-color:' + highlightColor);
-					addCSSRule(sheet, '.grid figcaption', 'border-color:' + mainColor);
+					addCSSRule(sheet, '.grid figcaption', 'border-top-color:' + mainColor);
 					addCSSRule(sheet, '.grid figcaption h4', 'color:' + hoverColor);
-					addCSSRule(sheet, '.list-tile', 'border-color:' + mainColor);
+					addCSSRule(sheet, '.list-tile', 'border-top-color:' + mainColor);
 					addCSSRule(sheet, '.list-desc-box h4', 'color:' + hoverColor);
 					addCSSRule(sheet, '.navbar-inverse .navbar-nav > li > a', 'color:' + navTextColor);
 					addCSSRule(sheet, '.navbar-inverse .navbar-brand', 'color:' + navTextColor);
 					addCSSRule(sheet, '.navbar-inverse .navbar-brand:hover', 'color:' + highlightColor);
-					addCSSRule(sheet, '#sidebar', 'border-color:' + mainColor);
-					addCSSRule(sheet, '#sidebar .nav li > a:hover', 'border-color:' + highlightColor);
+					addCSSRule(sheet, '#sidebar', 'border-right-color:' + mainColor);
+					addCSSRule(sheet, '#sidebar .nav li > a:hover', 'border-left-color:' + highlightColor);
 
 
 					//Dynamic CSS ends
@@ -141,5 +136,5 @@
 
 	};
 
-	angular.module('evReg').controller(controllerId, ['$rootScope', '$timeout', '$css', 'common', 'config', 'authService', 'CartModel', 'datacontext', Controller]);
+	angular.module('evReg').controller(controllerId, ['$rootScope', '$timeout', 'common', 'config', 'authService', 'CartModel', 'datacontext', Controller]);
 })();

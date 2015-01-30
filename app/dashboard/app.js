@@ -22,7 +22,6 @@
 		'angularFileUpload',  // file upload functions
 		'angulartics',  //analytics
 		'angulartics.google.analytics', //analytics
-		'door3.css', //on-demand stylesheets
 		'evReg',
 		'ngRoleAuth'
 	]);
