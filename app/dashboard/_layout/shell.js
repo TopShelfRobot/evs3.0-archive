@@ -65,18 +65,21 @@
         // Apply Colors
         addCSSRule(sheet, '.navbar-inverse', 'background-color:' + mainColor);
         addCSSRule(sheet, '.navbar-inverse', 'border-color:' + hoverColor);
-        addCSSRule(sheet, '.navbar-inverse .navbar-nav > .active > a:hover', 'background-color:' + hoverColor);
+        addCSSRule(sheet, '.navbar-inverse .navbar-nav>li>a:hover', 'background-color:' + hoverColor);
         addCSSRule(sheet, '.navbar-inverse .navbar-toggle .icon-bar', 'background-color:' + highlightColor);
         addCSSRule(sheet, '#cart-list > .table > tbody > tr > td > button.close.remove-item', 'color:' + highlightColor + '!imporant');
         addCSSRule(sheet, '.navbar-inverse .navbar-nav > li > a:hover', 'color:' + highlightColor);
         addCSSRule(sheet, '.badge', 'background-color:' + highlightColor);
+        addCSSRule(sheet, '.grid figcaption', 'border-color:' + mainColor);
+        addCSSRule(sheet, '.grid figcaption h4', 'color:' + hoverColor);
+        addCSSRule(sheet, '.list-tile', 'border-color:' + mainColor);
+        addCSSRule(sheet, '.list-desc-box h4', 'color:' + hoverColor);
+        addCSSRule(sheet, '.navbar-inverse .navbar-nav > li > a', 'color:' + navTextColor);
+        addCSSRule(sheet, '.navbar-inverse .navbar-brand', 'color:' + navTextColor);
+        addCSSRule(sheet, '.navbar-inverse .navbar-brand:hover', 'color:' + highlightColor);
         addCSSRule(sheet, '#sidebar', 'border-color:' + mainColor);
         addCSSRule(sheet, '#sidebar .nav li > a:hover', 'border-color:' + highlightColor);
-        addCSSRule(sheet, '.grid figcaption', 'border-color:' + mainColor);
-        addCSSRule(sheet, '.grid figcaption h4', 'color:' + mainColor);
-        addCSSRule(sheet, '.list-tile', 'border-color:' + mainColor);
-        addCSSRule(sheet, '.list-desc-box h4', 'color:' + mainColor);
-        addCSSRule(sheet, '.navbar-inverse .navbar-nav > li > a', 'color:' + navTextColor);
+
 
         //Dynamic CSS ends
 

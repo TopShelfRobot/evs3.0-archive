@@ -55,10 +55,10 @@
 			stripeCheckoutButtonText: '',
 			stripeOrderDescription: '',
 
-			mainColor: '#00BCD4',
-			hoverColor: '#006064',
-			highlightColor: '#FFEB3B',
-			navTextColor: '#004D40'
+			mainColor: '',
+			hoverColor: '',
+			highlightColor: '',
+			navTextColor: ''
 		};
 
 		cart.order = function () {
