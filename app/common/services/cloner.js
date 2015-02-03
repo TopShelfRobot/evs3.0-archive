@@ -1,19 +1,19 @@
 (function(){
-	
+
 	function Service($q, datacontext){
 		var self = this;
 		this.manager = null;
-		
+
 		function copyItem(item){
 			var manager = item.entityAspect.entityManager;
 		    var exported = JSON.parse(manager.exportEntities([item], false));
 		    var type = item.entityType;
 			var copy = exported.entityGroupMap[type.name].entities[0];
-			delete copy.entityAspect; 
+			delete copy.entityAspect;
 		    type.keyProperties.forEach(function (p) { delete copy[p.name]; });
 			return {type: type, copy: copy};
 		}
-		
+
 		this.cloneEventure = function(original){
 			self.manager = original.entityAspect.entityManager;
 			var cEventure = copyItem(original);
@@ -27,10 +27,21 @@
 				.then(function(){
 					datacontext.save();
 				});
-				
+
 			return def;
 		};
-		
+
+		this.cloneEventureList = function(originalList){
+			self.manager = originalList.entityAspect.entityManager;
+			var cEventureList = copyItem(originalList);
+			cEventureList.copy.name = "cloned: " + cEventureList.copy.name;
+			cEventureList.copy.active = false;
+			var cloned = self.manager.createEntity(cEventureList.type, cEventureList.copy);
+			var def = datacontext.saveChanges([cloned]);
+
+			return def;
+		};
+
 		this.cloneLists = function(oldEventureId, newEventureId){
 			var def = datacontext.eventure.getEventureListsByEventureId(oldEventureId)
 				.then(function(items){
@@ -42,7 +53,7 @@
 				});
 			return def;
 		}
-		
+
 		this.cloneListItem = function(item, eventureId){
 			var copy = copyItem(item);
 			copy.copy.eventureId = eventureId;
@@ -56,7 +67,7 @@
 				});
 			return def;
 		};
-		
+
 		this.cloneQuestions = function(oldListId, newListId){
 			var def = datacontext.question.getCustomQuestionSetByEventureListId(oldListId)
 				.then(function(list){
@@ -68,7 +79,7 @@
 				});
 			return def;
 		};
-		
+
 		this.cloneQuestionItem = function(item, listId){
 			var copy = copyItem(item);
 			copy.copy.eventureListId = listId;
@@ -79,7 +90,7 @@
 				})
 			return def;
 		};
-		
+
 		this.cloneGroups = function(oldListId, newListId){
 			var def = datacontext.eventure.getGroupsByEventureListId(oldListId)
 				.then(function(list){
@@ -91,7 +102,7 @@
 				});
 			return def;
 		};
-		
+
 		this.cloneGroupItem = function(item, listId){
 			var copy = copyItem(item);
 			copy.copy.eventureListId = listId;
@@ -103,6 +114,6 @@
 			return def;
 		};
 	}
-	
+
 	angular.module("common").service("Cloner", ["$q", "datacontext", Service]);
 })();
