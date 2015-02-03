@@ -32,7 +32,12 @@
 .navbar .glyphicon {
   font-size:22px;
 }
-
+.menu-collapse {
+  color:$neutral;
+}
+.menu-collapse:hover {
+  color:$highlight;
+}
 /******************************
  Sizing Constraints
 *******************************/
