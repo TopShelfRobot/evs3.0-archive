@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('imageUpload')
+        .module('app.photo')
         .directive('egUpload', egUpload);
 
     egUpload.$inject = ['$timeout'];

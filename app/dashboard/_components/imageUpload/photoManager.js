@@ -2,18 +2,18 @@
     'use strict';
 
     angular
-        .module('imageUpload')
-        .factory('imageManager', imageManager);
+        .module('app.photo')
+        .factory('photoManager', photoManager);
 
-    imageManager.$inject = ['$q', 'imageManagerClient', 'appInfo'];
+    photoManager.$inject = ['$q', 'photoManagerClient', 'appInfo'];
 
-    function imageManager($q, imageManagerClient, appInfo) {
+    function photoManager($q, photoManagerClient, appInfo) {
         var service = {
-            images: [],
+            photos: [],
             load: load,
             upload: upload,
             remove: remove,
-            imageExists: imageExists,
+            photoExists: photoExists,
             status: {
                 uploading: false
             }
@@ -22,19 +22,19 @@
         return service;
 
         function load() {
-            appInfo.setInfo({busy:true, message:"loading image"})
+            appInfo.setInfo({busy:true, message:"loading photos"})
             
-            service.images.length = 0;
+            service.photos.length = 0;
 
-            return imageManagerClient.query()
+            return photoManagerClient.query()
                                 .$promise
                                 .then(function (result) {                                    
-                                    result.images
-                                            .forEach(function (image) {
-                                                    service.images.push(image);
+                                    result.photos
+                                            .forEach(function (photo) {
+                                                    service.photos.push(photo);
                                                 });
 
-                                    appInfo.setInfo({message: "image loaded successfully"});
+                                    appInfo.setInfo({message: "photos loaded successfully"});
 
                                     return result.$promise;
                                 },
@@ -48,29 +48,29 @@
                                 });
         }
 
-        function upload(images)
+        function upload(photos)
         {
             service.status.uploading = true;
-            appInfo.setInfo({ busy: true, message: "uploading images" });            
+            appInfo.setInfo({ busy: true, message: "uploading photos" });            
 
             var formData = new FormData();
 
-            angular.forEach(images, function (image) {
-                formData.append(image.name, image);
+            angular.forEach(photos, function (photo) {
+                formData.append(photo.name, photo);
             });
 
-            return imageManagerClient.save(formData)
+            return photoManagerClient.save(formData)
                                         .$promise
                                         .then(function (result) {
-                                            if (result && result.images) {
-                                                result.images.forEach(function (image) {
-                                                    if (!imageExists(image.name)) {
-                                                        service.images.push(image);
+                                            if (result && result.photos) {
+                                                result.photos.forEach(function (photo) {
+                                                    if (!photoExists(photo.name)) {
+                                                        service.photos.push(photo);
                                                     }
                                                 });
                                             }
 
-                                            appInfo.setInfo({message: "image uploaded successfully"});
+                                            appInfo.setInfo({message: "photos uploaded successfully"});
 
                                             return result.$promise;
                                         },
@@ -85,17 +85,17 @@
                                         });
         }
 
-        function remove(image) {
-            appInfo.setInfo({ busy: true, message: "deleting image " + image.name });            
+        function remove(photo) {
+            appInfo.setInfo({ busy: true, message: "deleting photo " + photo.name });            
 
-            return imageManagerClient.remove({fileName: image.name})
+            return photoManagerClient.remove({fileName: photo.name})
                                         .$promise
                                         .then(function (result) {
-                                            //if the image was deleted successfully remove it from the images array
-                                            var i = service.images.indexOf(image);
-                                            service.images.splice(i, 1);
+                                            //if the photo was deleted successfully remove it from the photos array
+                                            var i = service.photos.indexOf(photo);
+                                            service.photos.splice(i, 1);
 
-                                            appInfo.setInfo({message: "images deleted"});
+                                            appInfo.setInfo({message: "photos deleted"});
 
                                             return result.$promise;
                                         },
@@ -109,10 +109,10 @@
                                         });
         }
 
-        function imageExists(imageName) {
+        function photoExists(photoName) {
             var res = false
-            service.images.forEach(function (image) {
-                if (image.name === imageName) {
+            service.photos.forEach(function (photo) {
+                if (photo.name === photoName) {
                     res = true;
                 }
             });

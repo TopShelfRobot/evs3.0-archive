@@ -1,5 +1,5 @@
 ﻿(function () {
     'use strict';
 
-    angular.module('imageUpload', []);
+    angular.module('app.photo', []);
 })();

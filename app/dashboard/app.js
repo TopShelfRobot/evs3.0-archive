@@ -23,7 +23,7 @@
 		'angulartics.google.analytics', //analytics
 		'evReg',
 		'ngRoleAuth',
-        'imageUpload'
+        'app.photo'
 	]);
 
 	app.config(['$httpProvider', function ($httpProvider) {

@@ -458,6 +458,13 @@
                     templateUrl: 'app/dashboard/analytic/manreg.html',
                     authorized: ["money", "admin", "super-user"]
                 }
+            }, {
+                url: '/images',
+                config: {
+                    title: 'test',
+                    templateUrl: 'app/dashboard/_components/imageUpload/photos.html',
+                    authorized: ["money", "admin", "super-user"]
+                }
             }
 
         ];
