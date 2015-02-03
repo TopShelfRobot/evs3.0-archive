@@ -42,7 +42,7 @@
 			isParticipantOnProfile:true,
 			isCaptainOnProfile:true,
 
-			eventureName: 'Event',
+			eventureName: 'Evenasdfasdfsadt',
 			listName: 'List',
 			groupName: 'Group',
 			partButtonText: 'Select Party!',
@@ -53,7 +53,12 @@
 			refundsText: '',
 			//stripeLogoPath: '',
 			stripeCheckoutButtonText: '',
-			stripeOrderDescription: ''
+			stripeOrderDescription: '',
+
+			mainColor: '',
+			hoverColor: '',
+			highlightColor: '',
+			navTextColor: ''
 		};
 
 		cart.order = function () {
@@ -271,7 +276,11 @@
 			cart.regSettings.isCaptainOnProfile = data.isCaptainOnProfile;
 
 			cart.regSettings.name = data.name;
-			cart.regSettings.stripePublishableKey = data.stripePublishableKey
+			cart.regSettings.stripePublishableKey = data.stripePublishableKey;
+			cart.regSettings.mainColor = data.mainColor;
+			cart.regSettings.hoverColor = data.hoverColor;
+			cart.regSettings.highlightColor = data.highlightColor;
+			cart.regSettings.navTextColor = data.navTextColor;
 		};
 
 		function registration(displayEvent, displayList, email, fee, eventureId, eventureListId, partId, name, answers, groupId, group2Id, quantity, eventureListTypeId, isBundle) {

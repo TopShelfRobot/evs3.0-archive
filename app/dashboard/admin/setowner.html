@@ -15,17 +15,13 @@
                 </div>
               </div>
               <!--/field -->
+              <!-- File Upload -->
               <div class="form-group">
                 <label for="imagePath" class="col-lg-6 control-label">Image Upload:</label>
                 <div class="col-lg-6">
                   <label class="btn btn-primary">
-                    <input type="file" ng-file-select="onFileSelect($files)" style="display:none;">
-                    Upload Image </label>
+
                   <br>
-                  <br>
-                  <div>
-                    <progressbar class="progress-striped active" value="dynamic" type="{{type}}"></progressbar>
-                  </div>
                 </div>
               </div>
               <!-- /field -->
@@ -193,13 +189,40 @@
                 </div>
               </div>
               <!--/field -->
-              <div class="form-group" ng-if="(vm.owner.addSingleFeeType === 'flat' || vm.owner.addSingleFeeType === 'both') && vm.owner.isAddSingleFeeForAllRegs === true">
-                <label class="col-lg-6 control-label">Single Fee Cart Rule Flat</label>
+              <div class="form-group">
+                <label class="col-lg-6 control-label">Main Color:</label>
                 <div class="col-lg-6">
-                  <input type="number" class="form-control" step="any" ng-model="vm.owner.addSingleFeeForAllRegsFlat" />
+                  <input type="text" class="form-control" ng-model="vm.owner.mainColor" placeholder="#555555"/>
+                  <p class="help-block">Main navigation color.</p>
                 </div>
               </div>
               <!--/field -->
+              <div class="form-group">
+                <label class="col-lg-6 control-label">Shade Color:</label>
+                <div class="col-lg-6">
+                  <input type="text" class="form-control" ng-model="vm.owner.hoverColor" placeholder="#000000"/>
+                  <p class="help-block">Darker hue of your main color.</p>
+                </div>
+              </div>
+              <!--/field -->
+              <div class="form-group">
+                <label class="col-lg-6 control-label">Highlight Color:</label>
+                <div class="col-lg-6">
+                  <input type="text" class="form-control" ng-model="vm.owner.highlightColor" placeholder="#FFFFFF" />
+                  <p class="help-block">Contrast color of your main color.</p>
+                </div>
+              </div>
+              <!--/field -->
+              <div class="form-group">
+                <label class="col-lg-6 control-label">Navigation Text Color:</label>
+                <div class="col-lg-6">
+                  <input type="text" class="form-control" ng-model="vm.owner.navTextColor" placeholder="#FFFFFF"/>
+                  <p class="help-block">Color of the text in the navigation.</p>
+                </div>
+              </div>
+              <!--/field -->
+
+
 
             </div>
             <div class="col-sm-6">
