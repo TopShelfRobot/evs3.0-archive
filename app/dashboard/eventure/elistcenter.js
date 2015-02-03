@@ -2,9 +2,9 @@
     'use strict';
 
     var controllerId = 'listingdetail';
-    angular.module('app').controller(controllerId, ['$routeParams', 'config', 'common', 'datacontext', listingdetail]);
+    angular.module('app').controller(controllerId, ['$routeParams', 'config', 'common', 'datacontext', 'Cloner', listingdetail]);
 
-    function listingdetail($routeParams, config, common, datacontext) {
+    function listingdetail($routeParams, config, common, datacontext, cloner) {
         var getLogFn = common.logger.getLogFn;
         var log = getLogFn(controllerId);
 
@@ -209,6 +209,18 @@
           var gridname = data;
           excel.export(gridname);
         };
+
+        vm.clone = function(){
+          $.blockUI({ message: "Cloning the Eventure List..." });
+          cloner.cloneEventureList(vm.listing)
+            .then(function(out){
+              console.log("done:", out);
+              $.unblockUI();
+            })
+            .catch(function(err){
+              console.log("err:", err);
+            });
+        }
 
 
 
