@@ -19,7 +19,6 @@
 		'ui.bootstrap', // ui-bootstrap (ex: carousel, pagination, dialog)
 		'kendo.directives', // kendo-angular (grid, dataviz)
 		'angularMoment', // Date and Time Format
-		'angularFileUpload',  // file upload functions
 		'angulartics',  //analytics
 		'angulartics.google.analytics', //analytics
 		'evReg',

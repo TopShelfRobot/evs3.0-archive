@@ -48,19 +48,16 @@
             <textarea class="form-control" name="EventDescription" required ng-model="vm.eventure.desc" rows="5"  placeholder="Please enter a description for your event."></textarea>
           </div>
         </div>
+        <!-- File Upload -->
         <div class="form-group">
           <label for="imagePath" class="col-lg-6 control-label">Image Upload:</label>
           <div class="col-lg-6">
             <label class="btn btn-primary">
-              <input type="file" ng-file-select="vm.onFileSelect($files)" style="display:none;"><em class="glyphicon glyphicon-upload"></em>&nbsp;
-              Upload Image </label>
+
             <br>
-            <br>
-            <div>
-              <progressbar class="progress-striped active" value="vm.dynamic" type="{{type}}"></progressbar>
-            </div>
           </div>
         </div>
+        <!-- /field -->
         <div class="form-group">
           <label for="DisplayOrder" class="col-lg-6 control-label">Display Order:</label>
           <div class="col-lg-6">
