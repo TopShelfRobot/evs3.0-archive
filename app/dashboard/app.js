@@ -6,7 +6,7 @@
 		//'ngAnimate', // animations
 		'ngRoute', // routing
 		'ngSanitize', // sanitizes html bindings (ex: sidebar.js)
-		//'dashboard.controllers',
+		'ngResource',
 
 		// Custom modules
 		'common', // common functions, logger, spinner
@@ -22,7 +22,8 @@
 		'angulartics',  //analytics
 		'angulartics.google.analytics', //analytics
 		'evReg',
-		'ngRoleAuth'
+		'ngRoleAuth',
+        'imageUpload'
 	]);
 
 	app.config(['$httpProvider', function ($httpProvider) {
