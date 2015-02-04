@@ -97,7 +97,7 @@
 					addCSSRule(sheet, '.navbar-inverse .navbar-brand:hover', 'color:' + highlightColor);
 					addCSSRule(sheet, '#sidebar', 'border-right-color:' + mainColor);
 					addCSSRule(sheet, '#sidebar .nav li > a:hover', 'border-left-color:' + highlightColor);
-
+					addCSSRule(sheet, '.menu-collapse:hover', 'color:' + highlightColor);
 
 					//Dynamic CSS ends
 

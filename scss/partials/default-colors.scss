@@ -67,9 +67,11 @@ Sidebar Nav
 #sidebar {
   border-right: 1px solid $primary;
   background-color: $neutral-light;
-}
-#sidebar, #sidebar a {
   color: $neutral-dark;
+
+  a {
+    color: $neutral-dark;
+  }
 }
 
 #sidebar .nav li>a:hover {
@@ -82,9 +84,10 @@ Sidebar Nav
 *************************************/
 .grid figcaption {
   border-top: 4px solid $primary;
-}
-.grid figcaption h4 {
-  color: $primary;
+
+  h4 {
+    color: $primary;
+  }
 }
 
 /************************************
@@ -92,7 +95,8 @@ Sidebar Nav
 *************************************/
 .list-tile {
   border-top: 4px solid $primary;
-}
-.list-desc-box h4 {
-  color: $primary;
+
+  h4 {
+    color: $primary;
+  }
 }
