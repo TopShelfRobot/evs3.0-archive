@@ -73,7 +73,8 @@
                     <label for="imagePath" class="col-lg-6 control-label">Image Upload:</label>
                     <div class="col-lg-6">
                       <button class="btn btn-primary" ng-file-select name="file" ng-file-change="vm.upload($files)" accept="image/*"><i class="fa fa-upload"></i>&nbsp;Upload Image</button>
-                      <input type="text" ng-model="vm.listing.imageFileName" disabled />
+                      <br><br>
+                      <input type="text" class="form-control" ng-model="vm.listing.imageFileName" disabled />
                       <p class="has-error">{{vm.errorMsg}}</p>
                     </div>
                 </div>
