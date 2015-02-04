@@ -55,6 +55,8 @@
 			stripeCheckoutButtonText: '',
 			stripeOrderDescription: '',
 
+			imageFileName: '',
+
 			mainColor: '',
 			hoverColor: '',
 			highlightColor: '',
@@ -276,6 +278,7 @@
 			cart.regSettings.isCaptainOnProfile = data.isCaptainOnProfile;
 
 			cart.regSettings.name = data.name;
+			cart.regSettings.imageFileName = data.imageFileName;
 			cart.regSettings.stripePublishableKey = data.stripePublishableKey;
 			cart.regSettings.mainColor = data.mainColor;
 			cart.regSettings.hoverColor = data.hoverColor;

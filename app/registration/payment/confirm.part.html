@@ -1,7 +1,6 @@
 <div class="container" ng-controller="ConfirmController">
     <div class="row">
         <div class="col-lg-12 text-center">
-            <img class="logo" src="Content/images/logo.png">
             <h1>Order Summary</h1>
         </div>
     </div>
@@ -57,19 +56,20 @@
     <div class="row">
         <div class="col-sm-5">
             <form class="form-horizontal">
-                <input id="CouponCode" class="form-control" type="text" placeholder="Coupon Code" ng-model="couponCode"/>
+                <input id="CouponCode" class="form-control" type="text" placeholder="Coupon Code" ng-model="couponCode" />
                 <span class="has-error help-block">{{couponErrors}}</span>
                 <br>
                 <button class="btn btn-default btn-xs" ng-click="applyCoupon()">
-					<i class="glyphicon glyphicon-plus-sign"></i>&nbsp;Apply Coupon
-				</button>
+                    <i class="glyphicon glyphicon-plus-sign"></i>&nbsp;Apply Coupon
+                </button>
                 <button class="btn btn-danger btn-xs" ng-click="removeCoupons()">
-					<i class="glyphicon glyphicon-minus-sign"></i>&nbsp;Remove Coupon
-				</button>
+                    <i class="glyphicon glyphicon-minus-sign"></i>&nbsp;Remove Coupon
+                </button>
             </form>
         </div>
         <div class="col-sm-7 text-right">
-            <p class="total-amount"><em>Total:</em>&nbsp;{{ cart.getTotalPrice() | currency }}</p>
+            <p class="total-amount">
+                <em>Total:</em>&nbsp;{{ cart.getTotalPrice() | currency }}</p>
         </div>
     </div>
     <br>
@@ -79,7 +79,8 @@
             <p class="text-muted">We accept all major credit and debit cards</p>
             <img src="/Content/images/creditcards.png" />
             <hr>
-            <p class="text-muted">Your card will be charged for the amount of <strong>{{ cart.getTotalPrice() | currency }}</strong>.</p>
+            <p class="text-muted">Your card will be charged for the amount of
+                <strong>{{ cart.getTotalPrice() | currency }}</strong>.</p>
             <p class="has-error">{{stripeError}}</p>
         </div>
     </div>
@@ -96,15 +97,11 @@
         <div class="col-sm-6 col-sm-offset-3">
 
             <label class="checkbox agreement">
-                <input type="checkbox" data-bind="checked: isTerms" ng-model="$parent.waiverSigned">
-                I have read and agree to the
+                <input type="checkbox" data-bind="checked: isTerms" ng-model="$parent.waiverSigned"> I have read and agree to the
                 <a ng-click="openTerms()">Terms and Conditions</a> and the
                 <a ng-click="openRefund()">Refund Policy</a>.
             </label>
-            <button type="button"
-                    class="btn btn-success btn-block"
-                    ng-disabled="(!$parent.waiverSigned) || ($parent.userPaying == 0 && !$parent.fullPaymentRequired) || ($parent.submitDisabled)"
-                    ng-click="checkout()">{{confirmButtonText}}
+            <button type="button" class="btn btn-success btn-block" ng-disabled="(!$parent.waiverSigned) || ($parent.userPaying == 0 && !$parent.fullPaymentRequired) || ($parent.submitDisabled)" ng-click="checkout()">{{confirmButtonText}}
             </button>
         </div>
     </div>

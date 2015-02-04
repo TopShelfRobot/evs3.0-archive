@@ -76,8 +76,9 @@
 
 					// Apply Colors
 					addCSSRule(sheet, '.navbar-inverse', 'background-color:' + mainColor);
-					addCSSRule(sheet, '.navbar-inverse', 'border-color:' + hoverColor);
-					addCSSRule(sheet, '.navbar-inverse .navbar-nav>li>a:hover', 'background-color:' + hoverColor);
+					addCSSRule(sheet, '.navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form', 'border-color:' + hoverColor);
+					addCSSRule(sheet, '.navbar-inverse .navbar-nav>.active>a, .navbar-inverse .navbar-nav>.active>a:focus, .navbar-inverse .navbar-nav>.active>a:hover', 'background-color:' + hoverColor);
+					addCSSRule(sheet, '.navbar-inverse .navbar-nav>.active>a, .navbar-inverse .navbar-nav>.active>a:focus, .navbar-inverse .navbar-nav>.active>a:hover', 'border-color:' + highlightColor);
 					addCSSRule(sheet, '.navbar-inverse .navbar-toggle .icon-bar', 'background-color:' + highlightColor);
 					addCSSRule(sheet, '#cart-list > .table > tbody > tr > td > button.close.remove-item', 'color:' + highlightColor + '!imporant');
 					addCSSRule(sheet, '.navbar-inverse .navbar-nav > li > a:hover', 'color:' + highlightColor);
