@@ -1,9 +1,9 @@
 ﻿(function () {
     'use strict';
     var controllerId = 'ownerController';
-    angular.module('app').controller(controllerId, ['config', 'common', 'datacontext', 'photoManager', ownerController]);
+    angular.module('app').controller(controllerId, ['$upload', '$timeout', 'config', 'common', 'datacontext', ownerController]);
 
-    function ownerController(config, common, datacontext, photoManager) {
+    function ownerController($upload, $timeout, config, common, datacontext) {
         var getLogFn = common.logger.getLogFn;
         var log = getLogFn(controllerId);
 
@@ -13,9 +13,6 @@
 
         vm.ownerId = config.owner.ownerId;
         vm.owner = {};
-
-        vm.photos = photoManager.photos;
-        vm.uploading = false;
 
 
         activate();
@@ -59,6 +56,35 @@
                 console.log('false');
             }
         };
+
+        vm.upload = function (file) {
+          var fileReader = new FileReader();
+          fileReader.onload = function(e) {
+            $timeout(function() {
+              file.upload = $upload.http({
+                url: config.remoteApiName + 'image',
+                method: 'POST',
+                headers : {
+                  'Content-Type': file.type
+                },
+                data: e.target.result
+              });
+
+              file.upload.then(function(response) {
+                file.result = response.data;
+              }, function(response) {
+                if (response.status > 0) {
+                    vm.errorMsg = response.status + ': ' + response.data;
+                }
+              });
+
+              file.upload.progress(function(evt) {
+                file.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
+              });
+            }, 5000);
+          }
+          fileReader.readAsArrayBuffer(file);
+        }
 
 
         vm.saveAndNav = function() {

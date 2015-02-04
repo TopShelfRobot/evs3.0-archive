@@ -21,12 +21,8 @@
                                 <div class="form-group">
                                     <label for="imagePath" class="col-lg-6 control-label">Image Upload:</label>
                                     <div class="col-lg-6">
-                                        <eg-photo-uploader></eg-photo-uploader>
-                                        <input type="text" class="form-control" ng-model="photos.name"/>
-                                        <ul>
-                                          <li ng-repeat="photo in photos">{{photo.name}}</li>
-                                        </ul>
-                                        <br>
+                                        <input type="file" ng-file-select ng-model="vm.owner.imageFileName" name="file" ng-file-change="vm.upload($files)" accept="image/*">
+                                        <p class="has-error">{{vm.errorMsg}}</p>
                                     </div>
                                 </div>
                                 <!-- /field -->
@@ -311,17 +307,27 @@
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td><input type="text" class="form-control" /></td>
-                                            <td><input type="text" class="form-control" /></td>
-                                            <td><input type="text" class="form-control" /></td>
+                                            <td>
+                                                <input type="text" class="form-control" />
+                                            </td>
+                                            <td>
+                                                <input type="text" class="form-control" />
+                                            </td>
+                                            <td>
+                                                <input type="text" class="form-control" />
+                                            </td>
                                             <td class="text-center">
                                                 <div class="btn-group">
                                                     <button type="button" class="btn btn-default" ng-model="radioModel" btn-radio="'Yes'">Yes</button>
                                                     <button type="button" class="btn btn-default" ng-model="radioModel" btn-radio="'No'">No</button>
                                                 </div>
                                             </td>
-                                            <td><input type="hidden" class="form-control" data-bind="value: ownerId" /></td>
-                                            <td><input type="hidden" data-bind="value: id" /></td>
+                                            <td>
+                                                <input type="hidden" class="form-control" data-bind="value: ownerId" />
+                                            </td>
+                                            <td>
+                                                <input type="hidden" data-bind="value: id" />
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -454,7 +460,8 @@
                                     <!--/field -->
                                     <p class="text-right">
                                         <button class="btn btn-danger" ng-click="vm.stripeConnect()">Connect with Stripe</button>
-                                        <br><br>
+                                        <br>
+                                        <br>
                                         <button class="btn btn-warning" ng-click="vm.stripeDevConnect()">Connect with Stripe Dev</button>
                                     </p>
                                 </div>
