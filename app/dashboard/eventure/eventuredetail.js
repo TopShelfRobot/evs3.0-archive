@@ -17,7 +17,7 @@
 		vm.eventureId = $routeParams.eventureId;
 
 		activate();
-		
+
 		function activate() {
 		  var promises = [getEventure(), getEventureTrends(), Registrations(), Capacity(), ListingsGrid(), ExpenseGrid(), EventPlanGrid(), ParticipantGrid(), VolunteerGrid()];
 
@@ -108,7 +108,8 @@
 			  toolbar: ['excel'],
 			  excel: {
 				  fileName: 'Listings.xlsx',
-				  filterable: true
+				  filterable: true,
+					allPages: true
 			  },
 			  dataSource: {
 				type: "json",
@@ -171,7 +172,8 @@
 			  toolbar: ['excel'],
 			  excel: {
 				  fileName: 'Expenses.xlsx',
-				  filterable: true
+				  filterable: true,
+					allPages: true
 			  },
 			  dataSource: {
 				type: "json",
@@ -234,7 +236,8 @@
 			  toolbar: ['excel'],
 			  excel: {
 				  fileName: 'Event Plan.xlsx',
-				  filterable: true
+				  filterable: true,
+					allPages: true
 			  },
 			  dataSource: {
 				type: "json",
@@ -267,7 +270,7 @@
 						title: "Due Date",
 						width: "140px",
 						format: "{0:MM/dd/yyyy}"
-					  
+
 					},
 					{
 						field: "isCompleted",
@@ -293,7 +296,8 @@
 			  toolbar: ['excel'],
 			  excel: {
 				  fileName: 'Participants.xlsx',
-				  filterable: true
+				  filterable: true,
+					allPages: true
 			  },
 			  dataSource: {
 				type: "json",
@@ -345,7 +349,8 @@
 				toolbar: ['excel'],
 				excel: {
 					fileName: 'Volunteers.xlsx',
-					filterable: true
+					filterable: true,
+					allPages: true
 				},
 				dataSource: {
 					type: "json",
@@ -387,7 +392,7 @@
 					template: '<a href="\\\#setvolunteerjob/#=Id#" class="btn btn-primary btn-small btn-block"><em class="glyphicon glyphicon-edit"></em>&nbsp;Edit</a>'
 				}]
 			};
-		  
+
 			vm.volunteerDetailGridOptions = function(e) {
 
 				var volunteerApi = config.remoteApiName + 'widget/GetVolunteersByVolunteerJobId/' + e.Id;
@@ -397,7 +402,8 @@
 					toolbar: ['excel'],
 					excel: {
 						fileName: 'Registered Volunteer Jobs.xlsx',
-						filterable: true
+						filterable: true,
+						allPages: true
 					},
 					dataSource: {
 						type: "json",
@@ -439,14 +445,14 @@
 					]
 				};
 			};
-		  
+
 		}
-	  
+
 		vm.excel = function(data) {
 		  var gridname = data;
 		  excel.export(gridname);
 		};
-		
+
 		vm.clone = function(){
 			$.blockUI({ message: "Cloning the Eventure..." });
 			cloner.cloneEventure(vm.eventure)

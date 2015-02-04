@@ -19,7 +19,7 @@
 			var promises = [createresourceDetailGrid(), getResource()];
 			common.activateController(promises, controllerId)
 				.then(function () {
-					//log('Activated Resource Detail View'); 
+					//log('Activated Resource Detail View');
 				});
 		}
 
@@ -51,7 +51,8 @@
 				toolbar: ['excel'],
 				excel: {
 					fileName: 'Resource Items.xlsx',
-					filterable: true
+					filterable: true,
+					allPages: true
 				},
 				dataSource: {
 					type: "",

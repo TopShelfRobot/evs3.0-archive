@@ -6,7 +6,7 @@
         .directive('egUpload', egUpload);
 
     egUpload.$inject = ['$timeout'];
-    
+
     function egUpload($timeout) {
 
         var directive = {

@@ -22,6 +22,10 @@
                                     <label for="imagePath" class="col-lg-6 control-label">Image Upload:</label>
                                     <div class="col-lg-6">
                                         <eg-photo-uploader></eg-photo-uploader>
+                                        <input type="text" class="form-control" ng-model="photos.name"/>
+                                        <ul>
+                                          <li ng-repeat="photo in photos">{{photo.name}}</li>
+                                        </ul>
                                         <br>
                                     </div>
                                 </div>

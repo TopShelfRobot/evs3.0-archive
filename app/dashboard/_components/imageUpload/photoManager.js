@@ -23,12 +23,12 @@
 
         function load() {
             appInfo.setInfo({busy:true, message:"loading photos"})
-            
+
             service.photos.length = 0;
 
             return photoManagerClient.query()
                                 .$promise
-                                .then(function (result) {                                    
+                                .then(function (result) {
                                     result.photos
                                             .forEach(function (photo) {
                                                     service.photos.push(photo);
@@ -41,7 +41,7 @@
                                 function (result) {
                                     appInfo.setInfo({message: "something went wrong: " + result.data.message});
                                     return $q.reject(result);
-                                })                   
+                                })
                                 ['finally'](
                                 function () {
                                     appInfo.setInfo({busy: false});
@@ -51,7 +51,7 @@
         function upload(photos)
         {
             service.status.uploading = true;
-            appInfo.setInfo({ busy: true, message: "uploading photos" });            
+            appInfo.setInfo({ busy: true, message: "uploading photos" });
 
             var formData = new FormData();
 
@@ -70,23 +70,23 @@
                                                 });
                                             }
 
-                                            appInfo.setInfo({message: "photos uploaded successfully"});
+                                            appInfo.setInfo({message: "Photo uploaded successfully"});
 
                                             return result.$promise;
                                         },
                                         function (result) {
-                                            appInfo.setInfo({message: "something went wrong: " + result.data.message});
+                                            appInfo.setInfo({message: "Something went wrong: " + result.data.message});
                                             return $q.reject(result);
                                         })
                                         ['finally'](
                                         function () {
-                                            appInfo.setInfo({ busy: false });                                            
+                                            appInfo.setInfo({ busy: false });
                                             service.status.uploading = false;
                                         });
         }
 
         function remove(photo) {
-            appInfo.setInfo({ busy: true, message: "deleting photo " + photo.name });            
+            appInfo.setInfo({ busy: true, message: "deleting photo " + photo.name });
 
             return photoManagerClient.remove({fileName: photo.name})
                                         .$promise

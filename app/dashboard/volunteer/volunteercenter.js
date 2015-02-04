@@ -34,7 +34,8 @@
               toolbar: ['excel'],
               excel: {
                   fileName: 'Volunteers.xlsx',
-                  filterable: true
+                  filterable: true,
+                  allPages: true
               },
               dataSource: {
                 type: "json",
@@ -76,13 +77,14 @@
           vm.detailGridOptions = function(e) {
 
             var volunteerapi = config.remoteApiName + 'widget/GetVolunteerScheduleByVolunteerId' + e.Id;
-            
+
             return {
                 //toolbar: '<a download="detailexport.xlsx" class="k-button" ng-click="vm.excel(vm.detailgrid)"><em class="glyphicon glyphicon-save"></em>&nbsp;Export</a>',
                 toolbar: ['excel'],
                 excel: {
                     fileName: 'Volunteer Schedule.xlsx',
-                    filterable: true
+                    filterable: true,
+                    allPages: true
                 },
                 dataSource: {
                     type: "json",
@@ -134,7 +136,7 @@
           };
 
         }
-      
+
         vm.excel = function(data) {
           var gridname = data;
           excel.export(gridname);

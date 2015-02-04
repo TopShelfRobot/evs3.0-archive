@@ -20,8 +20,8 @@
 
         function activate() {
             common.activateController(ParticipantGrid(), controllerId)
-                .then(function () { 
-                  //log('Activated Participant Center View'); 
+                .then(function () {
+                  //log('Activated Participant Center View');
                 });
         }
 
@@ -35,7 +35,8 @@
               toolbar: ['excel'],
               excel: {
                   fileName: 'Participants.xlsx',
-                  filterable: true
+                  filterable: true,
+                  allPages: true
               },
               dataSource: {
                 type: "json",
@@ -80,7 +81,8 @@
                 toolbar: ['excel'],
                 excel: {
                     fileName: 'Participant Registrations.xlsx',
-                    filterable: true
+                    filterable: true,
+                    allPages: true
                 },
                 dataSource: {
                     type: "json",

@@ -34,7 +34,8 @@
               toolbar: ['excel'],
               excel: {
                   fileName: 'Teams.xlsx',
-                  filterable: true
+                  filterable: true,
+                  allPages: true
               },
               dataSource: {
                 type: "json",
@@ -121,7 +122,8 @@
                 toolbar: ['excel'],
                 excel: {
                     fileName: 'Team Participants.xlsx',
-                    filterable: true
+                    filterable: true,
+                    allPages: true
                 },
                 dataSource: {
                     type: "json",
@@ -227,7 +229,7 @@
         vm.inviteTeams = function() {
             alert('Invitations have been sent.');
         };
-      
+
         vm.excel = function(data) {
           var gridname = data;
           excel.export(gridname);

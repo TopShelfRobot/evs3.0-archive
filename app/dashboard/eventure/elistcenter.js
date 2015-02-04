@@ -158,7 +158,8 @@
               toolbar: ['excel'],
               excel: {
                   fileName: 'Registered Participants.xlsx',
-                  filterable: true
+                  filterable: true,
+                  allPages: true
               },
               dataSource: {
                 type: "json",

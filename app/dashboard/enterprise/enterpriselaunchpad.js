@@ -104,7 +104,8 @@
               toolbar: ['excel'],
               excel: {
                   fileName: 'To Do.xlsx',
-                  filterable: true
+                  filterable: true,
+                  allPages: true
               },
               dataSource: {
                     transport: {

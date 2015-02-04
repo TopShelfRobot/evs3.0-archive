@@ -4,7 +4,7 @@
 	angular.module('app').controller(controllerId, ["$location", 'common', 'config', "authService", eventurecenter]);
 
 	function eventurecenter($location, common, config, authService) {
-		
+
 		if(!authService.authentication.isAuth){
 			$location.path("/login");
 		}
@@ -25,8 +25,8 @@
 
 		function activate() {
 			common.activateController(EventureGrid(), controllerId)
-				.then(function () { 
-				  //log('Activated Eventure Center View'); 
+				.then(function () {
+				  //log('Activated Eventure Center View');
 				});
 		}
 
@@ -47,7 +47,8 @@
 			  toolbar: ['excel'],
 			  excel: {
 				  fileName: 'Eventures.xlsx',
-				  filterable: true
+				  filterable: true,
+					allPages: true
 			  },
 			  dataSource: {
 				type: "json",
@@ -91,7 +92,7 @@
 		  };
 
 		}
-	  
+
 		vm.excel = function(data) {
 		  var gridname = data;
 		  excel.export(gridname);

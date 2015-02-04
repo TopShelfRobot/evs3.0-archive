@@ -206,7 +206,8 @@
               toolbar: ['excel'],
               excel: {
                   fileName: 'Services.xlsx',
-                  filterable: true
+                  filterable: true,
+                  allPages: true
               },
               dataSource: {
                     transport: {

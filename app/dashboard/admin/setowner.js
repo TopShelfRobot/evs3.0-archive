@@ -1,9 +1,9 @@
 ﻿(function () {
     'use strict';
     var controllerId = 'ownerController';
-    angular.module('app').controller(controllerId, ['config', 'common', 'datacontext', ownerController]);
+    angular.module('app').controller(controllerId, ['config', 'common', 'datacontext', 'photoManager', ownerController]);
 
-    function ownerController(config, common, datacontext) {
+    function ownerController(config, common, datacontext, photoManager) {
         var getLogFn = common.logger.getLogFn;
         var log = getLogFn(controllerId);
 
@@ -13,6 +13,9 @@
 
         vm.ownerId = config.owner.ownerId;
         vm.owner = {};
+
+        vm.photos = photoManager.photos;
+        vm.uploading = false;
 
 
         activate();
@@ -68,4 +71,3 @@
         };
     }
 })();
-

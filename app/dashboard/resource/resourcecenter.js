@@ -16,8 +16,8 @@
         function activate() {
             //var promises = [getMessageCount(), getPeople()];
             common.activateController(createResourceGrid(), controllerId)
-                .then(function() { 
-                  //log('Activated reporting View'); 
+                .then(function() {
+                  //log('Activated reporting View');
                 });
         }
 
@@ -31,7 +31,8 @@
                 toolbar: ['excel'],
                 excel: {
                     fileName: 'Resources.xlsx',
-                    filterable: true
+                    filterable: true,
+                    allPages: true
                 },
                 dataSource: {
                     type: "json",
@@ -61,7 +62,7 @@
             }
                 ]
             };
-          
+
             vm.detailGridOptions = function(e) {
                 var resourceApi = config.remoteApiName + 'widget/GetResourceItemsByResourceId/' + e.id;
 
@@ -90,7 +91,7 @@
                 };
             };
         }
-      
+
         vm.excel = function(data) {
           var gridname = data;
           excel.export(gridname);
