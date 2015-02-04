@@ -58,32 +58,36 @@
         };
 
         vm.upload = function (file) {
-          var fileReader = new FileReader();
-          fileReader.onload = function(e) {
+          file.upload = $upload.upload({
+            url: config.remoteApiName + 'image',
+            method: 'POST',
+            headers: {
+              'my-header' : 'my-header-value'
+            },
+            data: {aaa:'aaa'},
+            sendObjectsAsJsonBlob: false,
+            file: file,
+            fileFormDataName: 'myFile',
+          });
+
+          file.upload.then(function(response) {
             $timeout(function() {
-              file.upload = $upload.http({
-                url: config.remoteApiName + 'image',
-                method: 'POST',
-                headers : {
-                  'Content-Type': file.type
-                },
-                data: e.target.result
-              });
+              file.result = response.data;
+            });
+          }, function(response) {
+            if (response.status > 0) {
+              vm.errorMsg = response.status + ': ' + response.data;
+            }
+          });
 
-              file.upload.then(function(response) {
-                file.result = response.data;
-              }, function(response) {
-                if (response.status > 0) {
-                    vm.errorMsg = response.status + ': ' + response.data;
-                }
-              });
+          file.upload.progress(function(evt) {
+            // Math.min is to fix IE which reports 200% sometimes
+            file.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
+          });
 
-              file.upload.progress(function(evt) {
-                file.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
-              });
-            }, 5000);
-          }
-          fileReader.readAsArrayBuffer(file);
+          file.upload.xhr(function(xhr) {
+            // xhr.upload.addEventListener('abort', function(){console.log('abort complete')}, false);
+          });
         }
 
 
