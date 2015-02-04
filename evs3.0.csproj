@@ -103,18 +103,6 @@
     <Content Include="app\dashboard\team\teamcenter.js" />
     <Content Include="app\dashboard\volunteer\volunteercenter.html" />
     <Content Include="app\dashboard\volunteer\volunteercenter.js" />
-    <Content Include="app\dashboard\_components\imageUpload\appInfo.js" />
-    <Content Include="app\dashboard\_components\imageUpload\egAppStatus.html" />
-    <Content Include="app\dashboard\_components\imageUpload\egAppStatus.js" />
-    <Content Include="app\dashboard\_components\imageUpload\egFiles.js" />
-    <Content Include="app\dashboard\_components\imageUpload\egPhotoUploader.html" />
-    <Content Include="app\dashboard\_components\imageUpload\egPhotoUploader.js" />
-    <Content Include="app\dashboard\_components\imageUpload\egUpload.js" />
-    <Content Include="app\dashboard\_components\imageUpload\photo.module.js" />
-    <Content Include="app\dashboard\_components\imageUpload\photoManager.js" />
-    <Content Include="app\dashboard\_components\imageUpload\photoManagerClient.js" />
-    <Content Include="app\dashboard\_components\imageUpload\photos.html" />
-    <Content Include="app\dashboard\_components\imageUpload\photos.js" />
     <Content Include="app\registration\app.js" />
     <Content Include="app\registration\config.exceptionHandler.js" />
     <Content Include="app\registration\config.js" />
@@ -470,6 +458,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="app\dashboard\_components\imageUpload\" />
     <Folder Include="app\dashboard\_services\" />
   </ItemGroup>
   <PropertyGroup>
