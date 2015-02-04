@@ -88,7 +88,7 @@
           file.upload.xhr(function(xhr) {
             // xhr.upload.addEventListener('abort', function(){console.log('abort complete')}, false);
           });
-        }
+        };
 
 
         vm.saveAndNav = function() {

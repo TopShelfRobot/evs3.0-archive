@@ -1,4 +1,4 @@
-(function() {
+(function () {
 	'use strict';
 
 	var controllerId = 'setlist';
@@ -13,36 +13,36 @@
 		vm.title = 'Eventure Listing';
 		vm.listId = $routeParams.listId || 0;
 		vm.eventureId = $routeParams.eventureId;
-    vm.ownerId = config.owner.ownerId;
+		vm.ownerId = config.owner.ownerId;
 
-	  vm.list = {};
-    vm.listTypes = [];
+		vm.list = {};
+		vm.listTypes = [];
 
 		activate();
 
 		function activate() {
 			onDestroy();
-		    common.activateController(getEventureList(), getListTypes(), controllerId)
-				.then(function() {
-				    //log('Activated list typessssss');
-				    //console.log(vm.listTypes);
-				    //console.log(vm.list);
+			common.activateController(getEventureList(), getListTypes(), controllerId)
+				.then(function () {
+					//log('Activated list typessssss');
+					//console.log(vm.listTypes);
+					//console.log(vm.list);
 				});
 		}
 
 		function getListTypes() {
-		    return datacontext.eventure.getEventureListTypesByOwnerId(vm.ownerId)
-					.then(function (data) {
-					    vm.listTypes = data;
-					    return vm.listTypes;
-					});
-	    }
+			return datacontext.eventure.getEventureListTypesByOwnerId(vm.ownerId)
+				.then(function (data) {
+					vm.listTypes = data;
+					return vm.listTypes;
+				});
+		}
 
 		function getEventureList() {
 
 			if (vm.listId > 0) {
 				return datacontext.eventure.getEventureListById(vm.listId)
-					.then(function(data) {
+					.then(function (data) {
 						vm.list = data;
 						getEventureListsByEventureId(vm.list.eventureId);
 						return vm.list;
@@ -57,15 +57,18 @@
 
 		function getEventureListsByEventureId() {
 			return datacontext.eventure.getEventureListsByEventureId(vm.list.eventureId)
-				.then(function(data) {
+				.then(function (data) {
 					multiSelect(data);
 				});
 		}
 
 		function multiSelect(listings) {
 			// vm.multiSelect.value(listings);
-			for(var i = 0; i < listings.length; i++){
-				vm.multiSelect.dataSource.add({name: listings[i].name, id: listings[i].id});
+			for (var i = 0; i < listings.length; i++) {
+				vm.multiSelect.dataSource.add({
+					name: listings[i].name,
+					id: listings[i].id
+				});
 			}
 		}
 
@@ -77,14 +80,14 @@
 		};
 
 		vm.today = function () {
-		   vm.list.dateEventureList = new Date();
-           vm.list.dateBeginReg = new Date();
-           vm.list.dateEndReg = new Date();
+			vm.list.dateEventureList = new Date();
+			vm.list.dateBeginReg = new Date();
+			vm.list.dateEndReg = new Date();
 		};
 
 		vm.today();
 
-		vm.open = function($event, open) {
+		vm.open = function ($event, open) {
 			$event.preventDefault();
 			$event.stopPropagation();
 			vm[open] = true;
@@ -99,9 +102,9 @@
 
 		vm.format = vm.formats[0];
 
-        vm.cancel = function() {
+		vm.cancel = function () {
 			$location.path('/eventuredetail/' + vm.list.eventureId);
-        };
+		};
 
 		function onDestroy() {
 			$scope.$on('$destroy', function () {
@@ -109,7 +112,42 @@
 			});
 		}
 
-		vm.saveAndNav = function() {
+		vm.upload = function (file) {
+			file.upload = $upload.upload({
+				url: config.remoteApiName + 'image',
+				method: 'POST',
+				headers: {
+					'my-header': 'my-header-value'
+				},
+				data: {
+					aaa: 'aaa'
+				},
+				sendObjectsAsJsonBlob: false,
+				file: file,
+				fileFormDataName: 'myFile',
+			});
+
+			file.upload.then(function (response) {
+				$timeout(function () {
+					file.result = response.data;
+				});
+			}, function (response) {
+				if (response.status > 0) {
+					vm.errorMsg = response.status + ': ' + response.data;
+				}
+			});
+
+			file.upload.progress(function (evt) {
+				// Math.min is to fix IE which reports 200% sometimes
+				file.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
+			});
+
+			file.upload.xhr(function (xhr) {
+				// xhr.upload.addEventListener('abort', function(){console.log('abort complete')}, false);
+			});
+		};
+
+		vm.saveAndNav = function () {
 
 			return datacontext.save(vm.list)
 				.then(complete);
