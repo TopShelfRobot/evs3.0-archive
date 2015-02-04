@@ -1,4 +1,13 @@
 /******************************
+ Typography
+*******************************/
+h1, h2, h3, h4, h5, h6, ul, li,  label, p, div,
+.navbar-nav > li > a, .navbar-brand, .btn  {
+  font-family: 'Open Sans', sans-serif;
+}
+
+
+/******************************
  Navigation
 *******************************/
 .navbar-nav > li > a.active { color:$dark-gray; }
