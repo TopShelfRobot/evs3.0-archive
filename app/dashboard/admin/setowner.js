@@ -58,6 +58,7 @@
         };
 
         vm.upload = function (file) {
+          vm.owner.logoImageName = file[0].name;
           file.upload = $upload.upload({
             url: config.remoteApiName + 'image',
             method: 'POST',

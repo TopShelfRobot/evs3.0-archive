@@ -2,9 +2,9 @@
 	'use strict';
 
 	var controllerId = 'seteventure';
-	angular.module('app').controller(controllerId, ['$routeParams', '$timeout', '$location', '$scope', 'common', 'datacontext', 'config', seteventure]);
+	angular.module('app').controller(controllerId, ['$routeParams', '$timeout', '$location', '$scope', '$upload', 'common', 'datacontext', 'config', seteventure]);
 
-	function seteventure($routeParams, $timeout, $location, $scope, common, datacontext, config) {
+	function seteventure($routeParams, $timeout, $location, $scope, $upload, common, datacontext, config) {
 
 		var getLogFn = common.logger.getLogFn;
 		var log = getLogFn(controllerId);
@@ -53,6 +53,7 @@
 		}
 
 		vm.upload = function (file) {
+			vm.eventure.imageFileName = file[0].name;
 			file.upload = $upload.upload({
 				url: config.remoteApiName + 'image',
 				method: 'POST',
