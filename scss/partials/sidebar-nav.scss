@@ -106,4 +106,8 @@ html, body {
   #sidebar .nav li > a > .glyphicon {
     font-size: 1.3em;
   }
+
+  #sidebar .nav li>a:hover {
+    border:none;
+  }
 }
