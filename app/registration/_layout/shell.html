@@ -31,9 +31,8 @@
                     <br />
                 </div>
             </div>
+            <div ng-view ng-if="vm.resolved"></div>
         </div>
-        <div ng-view ng-if="vm.resolved"></div>
-
         <div data-ng-include="'/app/registration/_layout/footer.html'"></div>
     </div>
 </div>
