@@ -43,7 +43,9 @@
 					self.progBar += 20;
 
 
-					//Dynamic CSS
+				    //Dynamic CSS
+
+					self.logo = cart.regSettings.logoImageName;
 
 					var sheets = document.styleSheets; //get stylesheets as an array
 					var sheet = document.styleSheets[2]; //get first stylesheet
