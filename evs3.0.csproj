@@ -103,6 +103,7 @@
     <Content Include="app\dashboard\team\teamcenter.js" />
     <Content Include="app\dashboard\volunteer\volunteercenter.html" />
     <Content Include="app\dashboard\volunteer\volunteercenter.js" />
+    <Content Include="app\dashboard\_layout\shell.js" />
     <Content Include="app\registration\app.js" />
     <Content Include="app\registration\config.exceptionHandler.js" />
     <Content Include="app\registration\config.js" />
@@ -175,7 +176,6 @@
     <Content Include="app\registration\team\teamPayment.part.html" />
     <Content Include="app\common\services\repository.ZZZ.js" />
     <Content Include="app\registration\profile\transferQuestions.part.html" />
-    <Content Include="back-favicon.png" />
     <Content Include="app\common\bootstrap\bootstrap.dialog.js" />
     <Content Include="app\common\common.js" />
     <Content Include="app\common\logger.js" />
@@ -343,6 +343,7 @@
     <Content Include="bin\zh-Hant\System.Spatial.resources.dll" />
     <Content Include="Content\EmailTemplates\reset-password.html" />
     <Content Include="Content\images\back-favicon.png" />
+    <Content Include="Content\images\crazyhosesstudioo5a_1.jpg" />
     <Content Include="Content\images\creditcards.png" />
     <Content Include="Content\images\eventure-default.jpg" />
     <Content Include="Content\images\Female-Icon.png" />

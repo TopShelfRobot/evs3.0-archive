@@ -43,11 +43,14 @@
 				);
 			}
 
+			console.log('shell getting owner settings');
+
 			promises.push(
 				datacontext.owner.setOwnerSettings(config.owner.ownerId)
 				.then(function (data) {
 					self.progBar += 20;
 
+					self.logo = cart.regSettings.logoImageName;
 
 					//Dynamic CSS
 

@@ -8,8 +8,8 @@
 	toastr.options.positionClass = 'toast-bottom-right';
 
 	var apiPath = '';
-	//apiPath = 'http://localhost:49822/';
-	apiPath = 'http://dev30.eventuresports.info/';
+	apiPath = 'http://localhost:49822/';
+	//apiPath = 'http://dev30.eventuresports.info/';
 
 	var remoteServiceName = apiPath + 'bdc/dashboard/';
 	var remoteApiName = apiPath + 'api/';
