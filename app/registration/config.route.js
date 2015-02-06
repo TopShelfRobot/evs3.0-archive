@@ -8,7 +8,7 @@
 
 	// Configure the routes and route resolvers
 	app.config(['$routeProvider', 'reg.routes', routeConfigurator]);
-	
+
 	function routeConfigurator($routeProvider, routes) {
 		routes.forEach(function (r) {
 			// $routeProvider.when(r.url, r.config);
@@ -29,9 +29,9 @@
 	}
 
 	prime.$inject = ['datacontext'];
-	
-	function prime(dc) { 
-		return dc.prime(); 
+
+	function prime(dc) {
+		return dc.prime();
 	}
 
 	// Define the routes
@@ -196,6 +196,12 @@
 				config: {
 					title: 'Reset Password',
 					templateUrl: 'app/registration/authentication/resetpassword.part.html'
+				}
+			}, {
+				url: '/terms',
+				config: {
+					title: 'Terms & Conditions',
+					templateUrl: 'app/registration/payment/terms.part.html'
 				}
 			}
 			//, {

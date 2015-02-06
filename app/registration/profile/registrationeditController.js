@@ -7,20 +7,17 @@
 		this.showDefer = false;
 		this.showTransfer = false;
 		this.newListing = null;
-		this.newParticipantId = null;
 		this.model = model;
 		this.regId = $routeParams.regId;
+
+		console.log('model in ctrl', model);
+		console.log('pts in ctrl', self.model);
 
 		this.saveAnswers = function(){
 			self.model.saveAnswers()
 			.then(function(){
 				console.log("done");
 			});
-		};
-
-		this.loadParticipants = function () {
-			self.newParticipantId = null;
-			console.log(model.participants);
 		};
 
 		this.loadTransfer = function(){

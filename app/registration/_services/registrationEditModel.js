@@ -183,7 +183,8 @@
 
 						var defParticipant = datacontext.participant.getParticipantsByHouseId(reg.participantId)
 							.then(function (pts) {
-								self.participants = pts;
+								console.log('pts:', pts);
+								return self.participants = pts;
 							});
 
 						var defQuestions = datacontext.question.getCustomQuestionSetByEventureListId(reg.eventureListId)

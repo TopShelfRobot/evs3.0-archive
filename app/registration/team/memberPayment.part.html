@@ -10,9 +10,8 @@
     <div ng-show="isSuggestPayVisible">
         <div class="row">
             <div class="col-lg-12 text-center">
-                <h3>Your team,  {{teamName}},
-                    <br>
-                    has a remaining balance of {{remaining || 1000 | currency}}.</h3>
+                <h3>Your team, {{teamName}},
+                    <br> has a remaining balance of {{remaining || 1000 | currency}}.</h3>
                 <p class="text-muted">You can pay whatever you desire, but your team must have the balanced paid in full in order to participate.</p>
             </div>
         </div>
@@ -34,14 +33,15 @@
     <div class="row" ng-show="isIndividualVisible">
         <div class="col-xs-8 col-md-4 col-xs-offset-2 col-md-offset-4">
             <h3>You have been invited to join {{ teamName }}.</h3>
-            <p>Please enter your information below.</p>  <!--Your card will be charged {{ userPaying | currency }}.-->
+            <p>Please enter your information below.</p>
+            <!--Your card will be charged {{ userPaying | currency }}.-->
         </div>
     </div>
 
     <div class="row" ng-show="isSponsorPayVisible">
         <div class="col-xs-8 col-md-4 col-xs-offset-2 col-md-offset-4">
             <h3>Team {{ teamName }}</h3>
-            <p>You been asked to join team: {{ teamName }}.  The team has been paid for, you just need to sign up and accept the waiver.</p>
+            <p>You been asked to join team: {{ teamName }}. The team has been paid for, you just need to sign up and accept the waiver.</p>
         </div>
     </div>
 
@@ -58,7 +58,7 @@
             <!--<h3>Payment Information</h3>
             <p class="text-muted">We accept all major credit and debit cards</p>
             <img src="Content/images/creditcards.png" /><br>-->
-            <p class="text-muted">You have been invited to join a team for The Bourbon Chase.  </p>
+            <p class="text-muted">You have been invited to join a team for The Bourbon Chase. </p>
         </div>
         <div class="col-sm-7">
 
@@ -74,26 +74,18 @@
             <br>
             <br>
             <label class="checkbox" ng-show="$parent.allowZeroPayment">
-                <input type="checkbox" data-bind="checked: isTerms" ng-model="$parent.fullPaymentRequired">
-                I am paying an amount of $0.00 and understand my team is still responsible for the full amount.
+                <input type="checkbox" data-bind="checked: isTerms" ng-model="$parent.fullPaymentRequired"> I am paying an amount of $0.00 and understand my team is still responsible for the full amount.
             </label>
             <label class="checkbox">
                 <input type="checkbox" data-bind="checked: isTerms" ng-model="$parent.waiverSigned">
-                I have read and agree to the
-                <a id="terms" data-contents="{{show.msg}}" rel="popover">Terms and Conditions</a>,
-                <a id="refund">Refund Policy</a>,
-                and
-                <a id="waiver">Waiver</a>.
+                <a ng-href="#/terms" target="_blank">Terms and Conditions and the Refund Policy</a>
             </label>
         </div>
     </div>
 
     <div class="row">
         <div class="col-lg-3 col-lg-offset-9 clearfix">
-            <button type="button"
-                class="btn btn-warning btn-block pull-right"
-                ng-disabled="(!$parent.waiverSigned) || ($parent.userPaying == 0 && !$parent.fullPaymentRequired) || ($parent.submitDisabled)"
-                ng-click="checkout()">
+            <button type="button" class="btn btn-warning btn-block pull-right" ng-disabled="(!$parent.waiverSigned) || ($parent.userPaying == 0 && !$parent.fullPaymentRequired) || ($parent.submitDisabled)" ng-click="checkout()">
                 {{cart.regSettings.confirmButtonText}}
             </button>
         </div>

@@ -1,4 +1,3 @@
-
 (function () {
 	'use strict';
 
@@ -29,23 +28,43 @@
 		//console.log(cart.regSettings);
 
 		var promises = [
-			$q.all([datacontext.participant.getParticipantById(cart.ownerId)])     //datacontext.participant.getOwnerById(cart.ownerId),
+			$q.all([datacontext.participant.getParticipantById(cart.ownerId)]) //datacontext.participant.getOwnerById(cart.ownerId),
 				.then(function (output) {
-				    //var owner = output[0];
-				    //$scope.owner = owner;
-				    var house = output[0];
-				    $scope.house = house;
-					//Stripe.setPublishableKey(owner.stripePublishableKey);
-					$('#terms').popover({ title: "Terms and Conditions", html: true, content: function () { msg = '<div id="popover_content_wrapper"><p>' + cart.regSettings.termsText + '</p></div>'; return $(msg).html(); }, placement: 'auto', container: 'body', trigger: 'click' });
-					$('#refund').popover({ title: "Refund Policy", html: true, content: function () { msg = '<div id="popover_content_wrapper"><p>' + cart.regSettings.refundsText + '</p></div>'; return $(msg).html(); }, placement: 'auto', container: 'body', trigger: 'click' });
-				})
+				//var owner = output[0];
+				//$scope.owner = owner;
+				var house = output[0];
+				$scope.house = house;
+				//Stripe.setPublishableKey(owner.stripePublishableKey);
+				$('#terms').popover({
+					title: "Terms and Conditions",
+					html: true,
+					content: function () {
+						msg = '<div id="popover_content_wrapper"><p>' + cart.regSettings.termsText + '</p></div>';
+						return $(msg).html();
+					},
+					placement: 'auto',
+					container: 'body',
+					trigger: 'click'
+				});
+				$('#refund').popover({
+					title: "Refund Policy",
+					html: true,
+					content: function () {
+						msg = '<div id="popover_content_wrapper"><p>' + cart.regSettings.refundsText + '</p></div>';
+						return $(msg).html();
+					},
+					placement: 'auto',
+					container: 'body',
+					trigger: 'click'
+				});
+			})
 				.finally(function () {
-				    //alert('getting ready to process cart ruls');
-					cart.processCartRules();
-					//console.log(cart.registrations);
-					//console.log(cart.surcharges);
-					$scope.submitDisabled = false;
-				})
+				//alert('getting ready to process cart ruls');
+				cart.processCartRules();
+				//console.log(cart.registrations);
+				//console.log(cart.surcharges);
+				$scope.submitDisabled = false;
+			})
 		];
 
 		common.activateController(promises, controllerId);
@@ -53,26 +72,26 @@
 		$scope.applyCoupon = function () {
 
 			$scope.submitDisabled = true;
-			var apiUrl = config.apiPath + "api/coupon/Post";    //mjb
+			var apiUrl = config.apiPath + "api/coupon/Post"; //mjb
 			var source = {
 				'couponCode': $scope.couponCode,
 				'regs': cart.registrations,
 			};
 			console.log(source);
-		    //alert(config.apiPath);
-		    //$http.post(config.apiPath + "api/coupon/Post", source)   //mjb
+			//alert(config.apiPath);
+			//$http.post(config.apiPath + "api/coupon/Post", source)   //mjb
 			//$http({ type: "POST", url: apiUrl, data: source })
-		    $http.post(config.apiPath + "api/coupon/Post", source)
+			$http.post(config.apiPath + "api/coupon/Post", source)
 				.success(function (result) {
-				    console.log(result);
-				    //alert('suc');
+					console.log(result);
+					//alert('suc');
 					if (result.Amount != 0) {
-					    cart.removeCoupons();
-					    console.log($scope.couponCode);
-					    console.log(result.Amount);
-					    console.log(result.CouponId);
-					    //cart.addSurcharge('Coupon: ' + couponCode, result.Amount, 'coupon', cart.currentEventureListId(), cart.currentPartId, result.CouponId);
-					                        //(desc, amount, chargeType, listid, partid, couponId)
+						cart.removeCoupons();
+						console.log($scope.couponCode);
+						console.log(result.Amount);
+						console.log(result.CouponId);
+						//cart.addSurcharge('Coupon: ' + couponCode, result.Amount, 'coupon', cart.currentEventureListId(), cart.currentPartId, result.CouponId);
+						//(desc, amount, chargeType, listid, partid, couponId)
 						cart.addSurcharge('Coupon: ' + $scope.couponCode, result.Amount, 'coupon', 0, 0, result.CouponId);
 						$scope.couponErrors = "";
 					} else {
@@ -80,11 +99,11 @@
 					}
 				})
 				.error(function (data, status, headers, config) {
-				    //alert('err');
+					//alert('err');
 					$scope.couponErrors = "Coupon Not Found(E1)";
 				})
 				.finally(function () {
-				    //alert('fin');
+					//alert('fin');
 					$scope.submitDisabled = false;
 				});
 		};
@@ -114,17 +133,19 @@
 			modalInstance.result.then();
 		};
 
-		$scope.checkout = function() {
+		$scope.checkout = function () {
 			var order = cart.order();
 
-			if(order.orderAmount > 0) {
+			if (order.orderAmount > 0) {
 				stripe.checkout(cart.getTotalPrice())
 					.then(function (res) {
 						console.log(res);
-						$.blockUI({ message: 'Processing order...' });
+						$.blockUI({
+							message: 'Processing order...'
+						});
 						order.stripeToken = res.id;
 						//$http.post(config.apiPath + "/api/Payment/Post", order)
-						$http.post(config.apiPath + "api/order/Post", order)   //mjb
+						$http.post(config.apiPath + "api/order/Post", order) //mjb
 							.success(function (result) {
 								//console.log("result: " + result);
 								$location.path("/orderreceipt/" + result);
@@ -138,9 +159,8 @@
 								$.unblockUI();
 							});
 					});
-			}
-			else {
-				$http.post(config.apiPath + "api/order/PostZero", order)   //mjb
+			} else {
+				$http.post(config.apiPath + "api/order/PostZero", order) //mjb
 					.success(function (result) {
 						//console.log("result: " + result);
 						$location.path("/orderreceipt/" + result);
