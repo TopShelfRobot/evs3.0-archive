@@ -6,16 +6,16 @@
 	  </div>
 	</div>
 	<div class="row">
-	  <form class="form-horizontal">
+	  <form class="form-horizontal" name="editForm">
 	    <legend >Registration Edit</legend>
 	    <div class="col-sm-6">
 				<h4>Participant Change</h4>
-				<select class="form-control" ng-options="p.id as p.name for p in editReg.model.participants">
+				<select class="form-control" ng-model="editReg.model.registration.participantId" ng-options="p.id as p.firstName + ' ' + p.lastName for p in editReg.model.participants">
 					<option>--Choose New Participant--</option>
 				</select>
 	      <h3>Questions</h3>
 		  <custom-questions questions="editReg.model.customQuestions" answers="editReg.model.customAnswers"></custom-questions>
-		  <button class="btn btn-success pull-right" ng-click="editReg.saveAnswers()"><i class="glyphicon glyphicon-save"></i>&nbsp;Save Changes</button>
+		  <button class="btn btn-success pull-right" ng-click="editReg.saveAnswers()" ng-disabled="editForm.$valid"><i class="glyphicon glyphicon-save"></i>&nbsp;Save Changes</button>
 
 	    </div>
 	</form>

@@ -10,9 +10,6 @@
 		this.model = model;
 		this.regId = $routeParams.regId;
 
-		console.log('model in ctrl', model);
-		console.log('pts in ctrl', self.model);
-
 		this.saveAnswers = function(){
 			self.model.saveAnswers()
 			.then(function(){

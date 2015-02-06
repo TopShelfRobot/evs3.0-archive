@@ -202,11 +202,12 @@
 							title: '',
 							template: '<a href="\\\#orderreceipt/#=eventureOrderId#" class="btn btn-success btn-block"><em class="glyphicon glyphicon-tags"></em>&nbsp;Receipt</a>',
 							width: 110
-					}, {
-							field: '',
-							title: '',
-							template: '<a href="\\\#registration/#=id#" class="btn btn-default btn-block"><em class="glyphicon glyphicon-edit"></em>&nbsp;Edit</a>'
 					}
+					// , {
+					// 		field: '',
+					// 		title: '',
+					// 		template: '<a href="\\\#registration/#=id#" class="btn btn-default btn-block"><em class="glyphicon glyphicon-edit"></em>&nbsp;Edit</a>'
+					// }
 					]
 				};
 			};

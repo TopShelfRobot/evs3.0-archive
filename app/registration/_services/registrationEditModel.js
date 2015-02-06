@@ -181,10 +181,16 @@
 								console.log("eventure:", eventure);
 							});
 
-						var defParticipant = datacontext.participant.getParticipantsByHouseId(reg.participantId)
+							//Need to get HouseId by Participant Id reg.participantId
+							//Then
+
+						var defParticipants = datacontext.participant.getParticipantsByRegistrationId(regId)
 							.then(function (pts) {
-								console.log('pts:', pts);
-								return self.participants = pts;
+								for (var m in pts) {
+									console.log('pts:', pts);
+									self.participants = [];
+									self.participants.push(pts[m]);
+								}
 							});
 
 						var defQuestions = datacontext.question.getCustomQuestionSetByEventureListId(reg.eventureListId)
@@ -213,7 +219,7 @@
 								return self.customAnswers;
 							});
 
-						return $q.all([defListing, defQuestions])
+						return $q.all([defListing, defQuestions, defParticipants])
 							.then(function (xx) {
 								loaded = true;
 								return xx;
