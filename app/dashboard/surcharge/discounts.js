@@ -41,6 +41,11 @@
           vm.couponGridOptions = {
             //toolbar: '<a download="Coupons.xlsx" class="k-button" ng-click="vm.excel(vm.coupongrid)"><em class="glyphicon glyphicon-save"></em>&nbsp;Export</a>',
               toolbar: ['excel'],
+              excel: {
+                  fileName: 'Coupons.xlsx',
+                  filterable: true,
+                  allPages: true
+              },
               dataSource: {
                 type: "json",
                 transport: {
@@ -76,11 +81,16 @@
           };
 
           vm.detailGridOptions = function(e) {
-            var couponuseapi = config.remoteApiName + 'widget/GetCouponUseByCouponId/' + e.Id;
+            var couponuseapi = config.remoteApiName + 'widget/GetCouponUseByCouponId/' + e.id;
 
             return {
                 //toolbar: '<a download="detailexport.xlsx" class="k-button" ng-click="vm.detailexcel(vm.detailgrid)"><em class="glyphicon glyphicon-save"></em>&nbsp;Export</a>',
-                toolbar: ['pdf', 'excel'],
+                toolbar: ['excel'],
+                excel: {
+                    fileName: 'CouponsDetails.xlsx',       //'CouponsDetails-' + e.code + '.xlsx',
+                    filterable: true,
+                    allPages: true
+                },
                 dataSource: {
                     type: "json",
                     transport: {

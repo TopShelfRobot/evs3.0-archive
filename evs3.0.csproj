@@ -67,6 +67,7 @@
     <Content Include="app\common\services\repository.volunteer.js" />
     <Content Include="app\common\services\repository.owner.js" />
     <Content Include="app\common\services\routemediator.js" />
+    <Content Include="app\dashboard\config.js" />
     <Content Include="app\dashboard\surcharge\discounts.html" />
     <Content Include="app\dashboard\surcharge\discounts.js" />
     <Content Include="app\dashboard\eventure\elistcenter.js" />
@@ -181,7 +182,6 @@
     <Content Include="app\common\logger.js" />
     <Content Include="app\common\spinner.js" />
     <Content Include="app\dashboard\config.exceptionHandler.js" />
-    <Content Include="app\dashboard\config.js" />
     <Content Include="app\dashboard\eventure\elistcenter.html" />
     <Content Include="app\dashboard\enterprise\enterpriseeventure.html" />
     <Content Include="app\dashboard\enterprise\enterpriselaunchpad.html" />
