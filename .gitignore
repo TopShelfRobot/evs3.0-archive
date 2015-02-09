@@ -247,7 +247,4 @@ pip-log.txt
 
 .sass-cache/*
 
-app/dashboard/config.js
-app/registration/config.js
-
 Content/Images/*
