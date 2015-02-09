@@ -249,3 +249,5 @@ pip-log.txt
 
 app/dashboard/config.js
 app/registration/config.js
+
+Content/Images/*
