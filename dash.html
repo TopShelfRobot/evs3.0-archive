@@ -1,218 +1,227 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html data-ng-app="app">
-<head>
-	<style>
-		/* This helps the ng-show/ng-hide animations start at the right place. */
-		/* Since Angular has this but needs to load, this gives us the class early. */
-		.ng-hide {
-			display: none !important;
-		}
-	</style>
 
-	<title>Eventure Sports | Event Management Platform</title>
-	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
-	<link rel="icon" type="image/png" href="Content/images/back-favicon.png" />
-	<link href="Content/css/dash-style.css" rel="stylesheet" type="text/css" />
-	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,700' rel='stylesheet' type='text/css'>
+<head>
+    <style>
+        /* This helps the ng-show/ng-hide animations start at the right place. */
+        /* Since Angular has this but needs to load, this gives us the class early. */
+
+        .ng-hide {
+            display: none !important;
+        }
+    </style>
+
+    <title>Eventure Sports | Event Management Platform</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
+    <link rel="icon" type="image/png" href="Content/images/back-favicon.png" />
+    <link href="Content/css/dash-style.css" rel="stylesheet" type="text/css" />
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,700' rel='stylesheet' type='text/css'>
 
 </head>
 
 <body>
-	<div data-ng-include="'/app/dashboard/_layout/shell.html'"></div>
-	<div id="splash-page" data-ng-show="false" class="container">
-		<div class="row">
-			<div class="page-splash col-lg-12">
-				<div class="page-splash-message text-center">
-					<img class="img-responsive" src="/Content/images/logo.png">
-					<br>
-					<h1>Loading...</h1>
-				</div>
-				<div class="progress progress-striped active page-progress-bar">
-					<div class="bar"></div>
-				</div>
-			</div>
-		</div>
-	</div>
+    <div data-ng-include="'/app/dashboard/_layout/shell.html'"></div>
+    <div id="splash-page" data-ng-show="false" class="container">
+        <div class="row">
+            <div class="page-splash col-lg-12">
+                <div class="page-splash-message text-center">
+                    <img class="img-responsive" src="/Content/images/logo.png">
+                    <br>
+                    <h1>Loading...</h1>
+                </div>
+                <div class="progress progress-striped active page-progress-bar">
+                    <div class="bar"></div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-	<!-- <span data-cc-scroll-to-top></span> -->
+    <!-- <span data-cc-scroll-to-top></span> -->
 
-	<!-- Vendor Scripts -->
-	<script src="Content/js/jquery-2.1.3.min.js"></script>
-	<script src="Content/js/angular.min.js"></script>
-	<script src="Content/js/angular-animate.min.js"></script>
-	<script src="Content/js/angular-route.min.js"></script>
-	<script src="Content/js/angular-sanitize.min.js"></script>
-  <script src="Content/js/angular-resource.min.js"></script>
-<script src="Content/js/jszip.min.js"></script>
-	<script src="Content/js/kendo.all.min.js"></script>
-	<script src="Content/js/bootstrap.min.js"></script>
-	<script src="Content/js/angular-local-storage.min.js"></script>
-	<script src="Content/js/breeze.debug.js"></script>
-	<script src="Content/js/breeze.angular.js"></script>
-	<script src="Content/js/breeze.directives.js"></script>
-	<script src="Content/js/breeze.saveErrorExtensions.js"></script>
-	<script src="Content/js/jquery.validate.js"></script>
-	<script src="Content/js/toastr.js"></script>
-	<script src="Content/js/moment.js"></script>
-	<script src="Content/js/ui-bootstrap-tpls-0.12.0.js"></script>
-	<script src="Content/js/spin.js"></script>
-	<script src="Content/js/nsPopover.js"></script>
-	<script src="Content/js/stripe.js"></script>
-	<script src="Content/js/angular-moment.js"></script>
-	<script src="Content/js/angulartics.js"></script>
-	<script src="Content/js/angulartics-ga.js"></script>
-	<script src="Content/js/ngMask.js"></script>
-	<script src="Content/js/ng-role-auth.js"></script>
-	<script src="app/dashboard/_components/fileUpload/angular-file-upload-shim.min.js"></script>
-	<script src="app/dashboard/_components/fileUpload/angular-file-upload.min.js"></script>
-
-
-
-	<!-- Stripe -->
-	<script src="https://checkout.stripe.com/v2/checkout.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/3.32/jquery.form.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.blockUI/2.61.0-2013.06.06/jquery.blockUI.min.js"></script>
-
-	<!-- Bootstrapping -->
-	<script src="app/dashboard/app.js"></script>
-	<script src="app/dashboard/config.js"></script>
-	<script src="app/dashboard/config.exceptionHandler.js"></script>
-	<script src="app/dashboard/config.route.js"></script>
-
-	<!-- common Modules -->
-	<script src="app/registration/app.js"></script>
-	<script src="app/common/common.js"></script>
-	<script src="app/common/logger.js"></script>
-	<script src="app/common/spinner.js"></script>
-	<script src="app/common/services/helpers.js"></script>
-	<script src="app/common/services/cloner.js"></script>
-
-	<!-- common.bootstrap Modules -->
-	<script src="app/common/bootstrap/bootstrap.dialog.js"></script>
-
-	<!-- app -->
-	<script src="app/dashboard/_layout/topnav.js"></script>
-	<script src="app/dashboard/_layout/shell.js"></script>
-
-	<script src="app/dashboard/admin/manreg.js"></script>
-	<script src="app/dashboard/admin/email.js"></script>
-	<script src="app/dashboard/admin/setowner.js"></script>
-	<script src="app/dashboard/admin/reporting.js"></script>
-
-	<script src="app/dashboard/analytic/demographics.js"></script>
-	<script src="app/dashboard/analytic/yearsummary.js"></script>
-
-	<script src="app/dashboard/enterprise/enterpriselaunchpad.js"></script>
-	<script src="app/dashboard/enterprise/enterpriseeventure.js"></script>
-
-	<script src="app/dashboard/eventure/seteventure.js"></script>
-	<script src="app/dashboard/eventure/setlist.js"></script>
-	<script src="app/dashboard/eventure/setfee.js"></script>
-	<script src="app/dashboard/eventure/elistcenter.js"></script>
-	<script src="app/dashboard/eventure/eventurecenter.js"></script>
-	<script src="app/dashboard/eventure/eventuredetail.js"></script>
-	<script src="app/dashboard/eventure/setquestion.js"></script>
-
-	<script src="app/dashboard/participant/partcenter.js"></script>
-
-	<script src="app/dashboard/resource/setexpense.js"></script>
-	<script src="app/dashboard/resource/seteventplan.js"></script>
-	<script src="app/dashboard/resource/setresource.js"></script>
-	<script src="app/dashboard/resource/setresourceitem.js"></script>
-	<script src="app/dashboard/resource/setresourceitemcategory.js"></script>
-	<script src="app/dashboard/resource/resourcedetail.js"></script>
-	<script src="app/dashboard/resource/resourcecenter.js"></script>
-	<script src="app/dashboard/resource/resourcedetail.js"></script>
-
-	<script src="app/dashboard/surcharge/setbundle.js"></script>
-	<script src="app/dashboard/surcharge/setaddon.js"></script>
-	<script src="app/dashboard/surcharge/setcoupon.js"></script>
-	<script src="app/dashboard/surcharge/discounts.js"></script>
-
-	<script src="app/dashboard/team/teamcenter.js"></script>
-
-	<script src="app/dashboard/volunteer/setvolunteerjob.js"></script>
-	<script src="app/dashboard/volunteer/setvolunteerscheduleedit.js"></script>
-	<script src="app/dashboard/volunteer/volunteercenter.js"></script>
-
-	<!-- registration module dependencies -->
-	<script src="app/registration/app.js"></script>
-	<script src="app/registration/config.js"></script>
-	<script src="app/registration/config.route.js"></script>
-	<script src="app/registration/config.exceptionHandler.js"></script>
-
-	<script src="app/registration/_layout/shell.js"></script>
-
-	<script src="app/registration/_layout/registrationHeaderController.js"></script>
-	<script src="app/registration/team/createteamController.js"></script>
-	<script src="app/registration/team/teampaymentController.js"></script>
-	<script src="app/registration/standard/eventureController.js"></script>
-	<script src="app/registration/standard/eventurelistController.js"></script>
-	<script src="app/registration/team/memberPaymentController.js"></script>
-	<script src="app/registration/profile/setParticipantController.js"></script>
-	<script src="app/registration/profile/addParticipantController.js"></script>
-	<script src="app/registration/standard/questionsController.js"></script>
-	<script src="app/registration/payment/confirmController.js"></script>
-	<script src="app/registration/profile/profileController.js"></script>
-	<script src="app/registration/profile/addProfileController.js"></script>
-	<script src="app/registration/team/editteamController.js"></script>
-	<script src="app/registration/payment/teamMemberReceiptController.js"></script>
-	<script src="app/registration/profile/registrationeditController.js"></script>
-	<script src="app/registration/profile/registrationEditConfirmController.js"></script>
-	<script src="app/registration/profile/transferQuestionsController.js"></script>
-	<script src="app/registration/payment/orderReceiptController.js"></script>
-	<script src="app/registration/_layout/shoppingCartController.js"></script>
-	<script src="app/registration/authentication/signupController.js"></script>
-	<script src="app/registration/authentication/loginController.js"></script>
-	<script src="app/registration/_layout/headerController.js"></script>
-	<script src="app/registration/_layout/footerController.js"></script>
-	<script src="app/registration/_layout/TermsModalInstance.js"></script>
+    <!-- Vendor Scripts -->
+    <script src="Content/js/jquery-2.1.3.min.js"></script>
+    <script src="Content/js/angular.min.js"></script>
+    <script src="Content/js/angular-animate.min.js"></script>
+    <script src="Content/js/angular-route.min.js"></script>
+    <script src="Content/js/angular-sanitize.min.js"></script>
+    <script src="Content/js/angular-resource.min.js"></script>
+    <script src="Content/js/jszip.min.js"></script>
+    <script src="Content/js/kendo.all.min.js"></script>
+    <script src="Content/js/bootstrap.min.js"></script>
+    <script src="Content/js/angular-local-storage.min.js"></script>
+    <script src="Content/js/breeze.debug.js"></script>
+    <script src="Content/js/breeze.angular.js"></script>
+    <script src="Content/js/breeze.directives.js"></script>
+    <script src="Content/js/breeze.saveErrorExtensions.js"></script>
+    <script src="Content/js/jquery.validate.js"></script>
+    <script src="Content/js/toastr.js"></script>
+    <script src="Content/js/moment.js"></script>
+    <script src="Content/js/ui-bootstrap-tpls-0.12.0.js"></script>
+    <script src="Content/js/spin.js"></script>
+    <script src="Content/js/nsPopover.js"></script>
+    <script src="Content/js/stripe.js"></script>
+    <script src="Content/js/angular-moment.js"></script>
+    <script src="Content/js/angulartics.js"></script>
+    <script src="Content/js/angulartics-ga.js"></script>
+    <script src="Content/js/ngMask.js"></script>
+    <script src="Content/js/ng-role-auth.js"></script>
+    <script src="app/dashboard/_components/fileUpload/angular-file-upload-shim.min.js"></script>
+    <script src="app/dashboard/_components/fileUpload/angular-file-upload.min.js"></script>
 
 
-	<script src="app/registration/authentication/forgotPasswordController.js"></script>
-	<script src="app/registration/authentication/resetPasswordController.js"></script>
 
-	<script src="app/registration/_services/authService.js"></script>
-	<script src="app/registration/_services/StripeService.js"></script>
-	<script src="app/registration/_services/authInterceptorService.js"></script>
-	<script src="app/registration/_services/AgeService.js"></script>
-	<script src="app/registration/_services/registrationCartModel.js"></script>
-	<script src="app/registration/_services/memberCartModel.js"></script>
-	<script src="app/registration/_services/cartModel.js"></script>
-	<script src="app/registration/_services/registrationEditModel.js"></script>
-	<script src="app/registration/_components/cart-view.js"></script>
-	<script src="app/registration/_components/custom-questions.js"></script>
-	<script src="app/registration/_components/sb-date-select.js"></script>
-	<script src="app/registration/_components/ng-role-auth.min.js"></script>
+    <!-- Stripe -->
+    <script src="https://checkout.stripe.com/v2/checkout.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/3.32/jquery.form.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.blockUI/2.61.0-2013.06.06/jquery.blockUI.min.js"></script>
 
-	<!-- common Services -->
-	<script src="app/common/components/directives.js"></script>
-	<script src="app/common/services/routemediator.js"></script>
-	<script src="app/common/services/model.js"></script>
-	<script src="app/common/services/datacontext.js"></script>
-	<script src="app/common/services/entityManagerFactory.js"></script>
-	<script src="app/common/services/repositories.js"></script>
-	<script src="app/common/services/repository.abstract.js"></script>
-	<script src="app/common/services/repository.analytic.js"></script>
-	<script src="app/common/services/repository.eventure.js"></script>
-	<script src="app/common/services/repository.participant.js"></script>
-	<script src="app/common/services/repository.question.js"></script>
-	<script src="app/common/services/repository.registration.js"></script>
-	<script src="app/common/services/repository.resource.js"></script>
-	<script src="app/common/services/repository.surcharge.js"></script>
-	<script src="app/common/services/repository.team.js"></script>
-	<script src="app/common/services/repository.volunteer.js"></script>
-	<script src="app/common/services/repository.owner.js"></script>
+    <!-- Bootstrapping -->
+    <script src="app/dashboard/app.js"></script>
+    <script src="app/dashboard/config.js"></script>
+    <script src="app/dashboard/config.exceptionHandler.js"></script>
+    <script src="app/dashboard/config.route.js"></script>
 
-	<script>
-		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-				m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-		})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    <!-- common Modules -->
+    <script src="app/registration/app.js"></script>
+    <script src="app/common/common.js"></script>
+    <script src="app/common/logger.js"></script>
+    <script src="app/common/spinner.js"></script>
+    <script src="app/common/services/helpers.js"></script>
+    <script src="app/common/services/cloner.js"></script>
 
-		ga('create', 'UA-57238021-1', 'auto');
-	</script>
+    <!-- common.bootstrap Modules -->
+    <script src="app/common/bootstrap/bootstrap.dialog.js"></script>
+
+    <!-- app -->
+    <script src="app/dashboard/_layout/topnav.js"></script>
+    <script src="app/dashboard/_layout/shell.js"></script>
+
+    <script src="app/dashboard/admin/manreg.js"></script>
+    <script src="app/dashboard/admin/email.js"></script>
+    <script src="app/dashboard/admin/setowner.js"></script>
+    <script src="app/dashboard/admin/reporting.js"></script>
+
+    <script src="app/dashboard/analytic/demographics.js"></script>
+    <script src="app/dashboard/analytic/yearsummary.js"></script>
+    <script src="app/dashboard/analytic/coupon.js"></script>
+
+    <script src="app/dashboard/enterprise/enterpriselaunchpad.js"></script>
+    <script src="app/dashboard/enterprise/enterpriseeventure.js"></script>
+
+    <script src="app/dashboard/eventure/seteventure.js"></script>
+    <script src="app/dashboard/eventure/setlist.js"></script>
+    <script src="app/dashboard/eventure/setfee.js"></script>
+    <script src="app/dashboard/eventure/elistcenter.js"></script>
+    <script src="app/dashboard/eventure/eventurecenter.js"></script>
+    <script src="app/dashboard/eventure/eventuredetail.js"></script>
+    <script src="app/dashboard/eventure/setquestion.js"></script>
+
+    <script src="app/dashboard/participant/partcenter.js"></script>
+
+    <script src="app/dashboard/resource/setexpense.js"></script>
+    <script src="app/dashboard/resource/seteventplan.js"></script>
+    <script src="app/dashboard/resource/setresource.js"></script>
+    <script src="app/dashboard/resource/setresourceitem.js"></script>
+    <script src="app/dashboard/resource/setresourceitemcategory.js"></script>
+    <script src="app/dashboard/resource/resourcedetail.js"></script>
+    <script src="app/dashboard/resource/resourcecenter.js"></script>
+    <script src="app/dashboard/resource/resourcedetail.js"></script>
+
+    <script src="app/dashboard/surcharge/setbundle.js"></script>
+    <script src="app/dashboard/surcharge/setaddon.js"></script>
+    <script src="app/dashboard/surcharge/setcoupon.js"></script>
+    <script src="app/dashboard/surcharge/discounts.js"></script>
+
+    <script src="app/dashboard/team/teamcenter.js"></script>
+
+    <script src="app/dashboard/volunteer/setvolunteerjob.js"></script>
+    <script src="app/dashboard/volunteer/setvolunteerscheduleedit.js"></script>
+    <script src="app/dashboard/volunteer/volunteercenter.js"></script>
+
+    <!-- registration module dependencies -->
+    <script src="app/registration/app.js"></script>
+    <script src="app/registration/config.js"></script>
+    <script src="app/registration/config.route.js"></script>
+    <script src="app/registration/config.exceptionHandler.js"></script>
+
+    <script src="app/registration/_layout/shell.js"></script>
+
+    <script src="app/registration/_layout/registrationHeaderController.js"></script>
+    <script src="app/registration/team/createteamController.js"></script>
+    <script src="app/registration/team/teampaymentController.js"></script>
+    <script src="app/registration/standard/eventureController.js"></script>
+    <script src="app/registration/standard/eventurelistController.js"></script>
+    <script src="app/registration/team/memberPaymentController.js"></script>
+    <script src="app/registration/profile/setParticipantController.js"></script>
+    <script src="app/registration/profile/addParticipantController.js"></script>
+    <script src="app/registration/standard/questionsController.js"></script>
+    <script src="app/registration/payment/confirmController.js"></script>
+    <script src="app/registration/profile/profileController.js"></script>
+    <script src="app/registration/profile/addProfileController.js"></script>
+    <script src="app/registration/team/editteamController.js"></script>
+    <script src="app/registration/payment/teamMemberReceiptController.js"></script>
+    <script src="app/registration/profile/registrationeditController.js"></script>
+    <script src="app/registration/profile/registrationEditConfirmController.js"></script>
+    <script src="app/registration/profile/transferQuestionsController.js"></script>
+    <script src="app/registration/payment/orderReceiptController.js"></script>
+    <script src="app/registration/_layout/shoppingCartController.js"></script>
+    <script src="app/registration/authentication/signupController.js"></script>
+    <script src="app/registration/authentication/loginController.js"></script>
+    <script src="app/registration/_layout/headerController.js"></script>
+    <script src="app/registration/_layout/footerController.js"></script>
+    <script src="app/registration/_layout/TermsModalInstance.js"></script>
+
+    <script src="app/registration/authentication/forgotPasswordController.js"></script>
+    <script src="app/registration/authentication/resetPasswordController.js"></script>
+
+    <script src="app/registration/_services/authService.js"></script>
+    <script src="app/registration/_services/StripeService.js"></script>
+    <script src="app/registration/_services/authInterceptorService.js"></script>
+    <script src="app/registration/_services/AgeService.js"></script>
+    <script src="app/registration/_services/registrationCartModel.js"></script>
+    <script src="app/registration/_services/memberCartModel.js"></script>
+    <script src="app/registration/_services/cartModel.js"></script>
+    <script src="app/registration/_services/registrationEditModel.js"></script>
+    <script src="app/registration/_components/cart-view.js"></script>
+    <script src="app/registration/_components/custom-questions.js"></script>
+    <script src="app/registration/_components/sb-date-select.js"></script>
+    <script src="app/registration/_components/ng-role-auth.min.js"></script>
+
+    <!-- common Services -->
+    <script src="app/common/components/directives.js"></script>
+    <script src="app/common/services/routemediator.js"></script>
+    <script src="app/common/services/model.js"></script>
+    <script src="app/common/services/datacontext.js"></script>
+    <script src="app/common/services/entityManagerFactory.js"></script>
+    <script src="app/common/services/repositories.js"></script>
+    <script src="app/common/services/repository.abstract.js"></script>
+    <script src="app/common/services/repository.analytic.js"></script>
+    <script src="app/common/services/repository.eventure.js"></script>
+    <script src="app/common/services/repository.participant.js"></script>
+    <script src="app/common/services/repository.question.js"></script>
+    <script src="app/common/services/repository.registration.js"></script>
+    <script src="app/common/services/repository.resource.js"></script>
+    <script src="app/common/services/repository.surcharge.js"></script>
+    <script src="app/common/services/repository.team.js"></script>
+    <script src="app/common/services/repository.volunteer.js"></script>
+    <script src="app/common/services/repository.owner.js"></script>
+
+    <script>
+        (function(i, s, o, g, r, a, m) {
+        	i['GoogleAnalyticsObject'] = r;
+        	i[r] = i[r] || function() {
+        		(i[r].q = i[r].q || []).push(arguments)
+        	}, i[r].l = 1 * new Date();
+        	a = s.createElement(o),
+        		m = s.getElementsByTagName(o)[0];
+        	a.async = 1;
+        	a.src = g;
+        	m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-57238021-1', 'auto');
+    </script>
 </body>
 
 </html>
