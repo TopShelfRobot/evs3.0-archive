@@ -44,6 +44,7 @@
     <Content Include="app\common\services\cloner.js" />
     <Content Include="app\common\services\helpers.js" />
     <Content Include="app\common\services\model.js" />
+    <Content Include="app\common\services\userAgent.js" />
     <Content Include="app\dashboard\analytic\demographics.html" />
     <Content Include="app\dashboard\analytic\demographics.js" />
     <Content Include="app\dashboard\admin\setowner.html" />

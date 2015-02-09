@@ -130,7 +130,7 @@
 				.then(querySucceeded, self._queryFailed);
 
 			function querySucceeded(data) {
-				return data.results[0];
+				return data.results;    //wil this was issue
 			}
 		}
 

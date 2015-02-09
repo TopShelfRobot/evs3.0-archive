@@ -166,10 +166,13 @@
 								return datacontext.eventure.getEventureListsByOwnerId(config.owner.ownerId)
 							})
 							.then(function (listings) {
-								self.possibles = [];
+							    self.possibles = [];
+							    console.log('boone listing next');
+							    console.log(listings);
 								for (var k in listings) {
 									if (listings[k].active && listings[k].id !== self.current.id) {
-										self.possibles.push(listings[k]);
+									    self.possibles.push(listings[k]);
+									   console.log(listings[k].name);
 									}
 								}
 								if (self.possibles.length > 0) {
@@ -186,11 +189,26 @@
 
 						var defParticipants = datacontext.participant.getParticipantsByRegistrationId(regId)
 							.then(function (pts) {
-								for (var m in pts) {
-									console.log('pts:', pts);
-									self.participants = [];
-									self.participants.push(pts[m]);
-								}
+							    console.log('boone parts mnext');
+							    console.log(pts)
+
+							    self.participants = pts
+							    console.log(self.participants);
+
+							    console.log('how many: ' + self.participants.length);
+							    for (var mike in self.participants) {
+							        console.log('hello');
+							        //console.log(self.participants.id);
+							    }
+
+							    //for (var mike in pts) {
+							    //    console.log(pts[mike].lastName);
+							    ////    //console.log(pts[m]);
+								////	console.log('pts:', pts[m].id);
+								////	self.participants = [];
+								////	self.participants.push(pts[m]);
+								////	//console.log(self.participants[m]);
+								//}
 							});
 
 						var defQuestions = datacontext.question.getCustomQuestionSetByEventureListId(reg.eventureListId)

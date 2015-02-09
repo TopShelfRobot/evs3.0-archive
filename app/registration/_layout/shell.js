@@ -1,10 +1,9 @@
-﻿
-(function () {
+﻿(function () {
 	'use strict';
 
 	var controllerId = 'shell';
 
-	function Controller($rootScope, $timeout, common, config, authService, cart, datacontext) {
+	function Controller($rootScope, $timeout, $http, common, config, authService, cart, datacontext) {
 		var self = this;
 		var logSuccess = common.logger.getLogFn(controllerId, 'success!!!');
 		var events = config.events;
@@ -29,6 +28,9 @@
 
 			self.showSplash = true;
 			self.progBar = 30;
+
+			
+
 
 			var promises = [];
 
@@ -139,5 +141,5 @@
 
 	};
 
-	angular.module('evReg').controller(controllerId, ['$rootScope', '$timeout', 'common', 'config', 'authService', 'CartModel', 'datacontext', Controller]);
+	angular.module('evReg').controller(controllerId, ['$rootScope', '$timeout', '$http', 'common', 'config', 'authService', 'CartModel', 'datacontext', Controller]);
 })();
