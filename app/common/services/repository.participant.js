@@ -31,6 +31,7 @@
 			this.getParticipantsBySearchingEmail = getParticipantsBySearchingEmail;
 			this.getParticipantsBySearchingName = getParticipantsBySearchingName;
 			this.getParticipantsByRegistrationId = getParticipantsByRegistrationId;
+			this.createUserAgent = createUserAgent;
 		}
 
 		// Allow this repo to have access to the Abstract Repo's functions,
@@ -235,5 +236,12 @@
 			return self.manager.createEntity('Participant',
 				{ dateBirth: moment().format("MM/DD/YYYY"), ownerId: ownerId, email: email, houseId: houseId, country: "US" });
 		}
+
+		function createUserAgent(ownerId) {
+		    var self = this;
+		    return self.manager.createEntity('UserAgent',
+				{ dateCreated: moment().format("MM/DD/YYYY")});
+		}
+
 	}
 })();

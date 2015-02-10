@@ -1,54 +1,38 @@
 ﻿; (function () {
 
-    function Service(http, datacontext) {
-        this.logAgentInfo = function (participant) {
-            //var today = new Date();
-            //var birthDate = new Date(dateString);
-            //var age = today.getFullYear() - birthDate.getFullYear();
-            //var m = today.getMonth() - birthDate.getMonth();
-            //if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
-            //    age--;
-            //}
-            //return age;
+    function Service($http, datacontext) {
+        this.logAgentInfo = function (ownerId, participantId) {
 
+            vm = this;
+            vm.userAgent = datacontext.participant.createUserAgent(ownerId);   
+            vm.userAgent.participantId = participantId;
+            vm.userAgent.ownerId = ownerId;
 
-            //var logText = "<p>Browser CodeName: " + navigator.appCodeName + "</p>";
-            //logText += "<p>Browser Name: " + navigator.appName + "</p>";
-            //logText += "<p>Browser Version: " + navigator.appVersion + "</p>";
-            //logText += "<p>Cookies Enabled: " + navigator.cookieEnabled + "</p>";
-            //logText += "<p>Platform: " + navigator.platform + "</p>";
-            //logText += "<p>User-agent header: " + navigator.userAgent + "</p>";
-            //logText += "<p>User-agent language: " + navigator.systemLanguage + "</p>";
-            //alert(logText);
-            var vm = this;
+            vm.userAgent.browserCodeName = navigator.appCodeName;
+            vm.userAgent.browserName = navigator.appName;
+            vm.userAgent.browserVersion = navigator.appVersion;
+            vm.userAgent.cookiesEnabled = navigator.cookieEnabled || false;
+            vm.userAgent.platform = navigator.platform;
+            vm.userAgent.header = navigator.userAgent;
+            vm.userAgent.systemLanguage = navigator.systemLanguage;
 
-
-            vm.userAgent = datacontext.participant.createUserAgent();
-
-            vm.appCodeName = navigator.appName;
-            vm.appVersion = navigator.appVersion
-            vm.cookieEnabled = navigator.cookieEnabled
-            vm.platform = navigator.platform
-            vm.userAgent = navigator.userAgent
-            vm.systemLanguage = navigator.systemLanguage
-            
-
-            $http.jsonp('http://ipinfo.io/?callback=JSON_CALLBACK')
+           $http.jsonp('http://ipinfo.io/?callback=JSON_CALLBACK')
                 .success(function (data) {
-                    vm.ip = data.ip;
-                    vm.hostname = data.hostname;
-                    vm.loc = data.loc; //Latitude and Longitude
-                    vm.org = data.org; //organization
-                    vm.city = data.city;
-                    vm.region = data.region; //state
-                    vm.country = data.country;
-                    vm.phone = data.phone; //city area code
+                    vm.userAgent.ip = data.ip;
+                    vm.userAgent.hostname = data.hostname;
+                    vm.userAgent.latitude = data.loc.split(",")[0]; //Latitude and Longitude
+                    vm.userAgent.longitude = data.loc.split(",")[1]; //Latitude and Longitude
+                    vm.userAgent.org = data.org; //organization
+                    vm.userAgent.city = data.city;
+                    vm.userAgent.region = data.region; //state
+                    vm.userAgent.country = data.country;
+                    vm.userAgent.phone = data.phone; //city area code
                 }).error(function () {
                     console.log('no ip info');
                 }).finally(function () {
-                    //save changes
+                    datacontext.save(vm.userAgent);
+                    return vm.userAgent;
                 });
-
         };
     }
 
