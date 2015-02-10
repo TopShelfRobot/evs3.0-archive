@@ -193,6 +193,13 @@
                                     </div>
                                 </div>
                                 <!--/field -->
+                                <div class="form-group" ng-if="(vm.owner.addSingleFeeType === 'flat' || vm.owner.addSingleFeeType === 'both') && vm.owner.isAddSingleFeeForAllRegs === true">
+                                    <label class="col-lg-6 control-label">Single Fee Cart Rule Flat</label>
+                                    <div class="col-lg-6">
+                                        <input type="number" class="form-control" step="any" ng-model="vm.owner.addSingleFeeForAllRegsFlat" />
+                                    </div>
+                                </div>
+                                <!--/field -->
                                 <div class="form-group">
                                     <label class="col-lg-6 control-label">Main Color:</label>
                                     <div class="col-lg-6">

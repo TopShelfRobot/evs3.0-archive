@@ -122,7 +122,7 @@
 		$scope.next = function () {
 			if ($scope.questionsForm.$valid) {
 				// Submit as normal
-				cartModel.addRegistration($scope.eventure, $scope.eventureList, $scope.participant, getCustomAnswers(), $scope.groupId, $scope.group2Id, $scope.quantity);
+				cartModel.addRegistration($scope.eventure, $scope.eventureList, $scope.participant, getCustomAnswers(), $scope.groupId, $scope.group2Id, $scope.quantity, null);
 				$location.$$search = {};
 				$location.path("/eventure");
 			} else {

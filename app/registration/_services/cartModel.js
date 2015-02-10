@@ -1,12 +1,13 @@
-﻿(function () {
-	angular.module("evReg").service("CartModel", ["config", Model]);
+
+(function () {
+	angular.module('evReg').service('CartModel', ['config', Model]);
+
 	function Model(config) {
 
 		var self = this;
 
 		var cart = {};
 		cart.houseId = 0;
-		//cart.participantId = 0;
 		cart.ownerId = 1;
 		cart.waiverSigned = false;
 		cart.teamName = '';
@@ -22,26 +23,22 @@
 		cart.surcharges = [];
 
 		cart.regSettings = {
-			isGroupRequired: false,      //this comes from list
+			isGroupRequired: false, //this comes from list
 			isDuplicateOrderAllowed: false,
 			isAddSingleFeeForAllRegs: true,
 			addSingleFeeForAllRegsPercent: 6,
 			addSingleFeeType: 'percent',
 			addSingleFeeForAllRegsFlat: 0,
-
 			isMultiParticipantDiscountCartRule: false,
 			isMultiRegistrationDiscountCartRule: false,
-
 			multiParticipantDiscountAmount: 0,
 			multiParticipantDiscountAmountType: 0,
 			multiRegistrationDiscountAmount: 0,
 			multiRegistrationDiscountAmountType: 0,
-
-			isRegistrationOnProfile:true,
-			isTeamRegistrationOnProfile:true,
-			isParticipantOnProfile:true,
-			isCaptainOnProfile:true,
-
+			isRegistrationOnProfile: true,
+			isTeamRegistrationOnProfile: true,
+			isParticipantOnProfile: true,
+			isCaptainOnProfile: true,
 			eventureName: 'Evenasdfasdfsadt',
 			listName: 'List',
 			groupName: 'Group',
@@ -51,12 +48,9 @@
 			listStatement: 'Select a desired start time',
 			termsText: '',
 			refundsText: '',
-			//stripeLogoPath: '',
 			stripeCheckoutButtonText: '',
 			stripeOrderDescription: '',
-
 			logoImageName: '',
-
 			mainColor: '',
 			hoverColor: '',
 			highlightColor: '',
@@ -71,38 +65,62 @@
 				teamId: cart.teamId,
 				teamMemberId: cart.teamMemberId,
 				regs: cart.registrations,
-				charges: cart.surcharges
+				charges: cart.surcharges,
+				//participant: cart.participant //from memberCartModel
 			};
 			return order;
 		};
 
-		cart.addRegistration = function (eventure, eventureList, participant, answers, groupId, group2Id, quantity) {
+		cart.addRegistration = function (eventure, eventureList, participant, answers, groupId, group2Id, quantity, team) {
 			var isRegDupe = false;
 			if (!cart.regSettings.isDuplicateOrderAllowed) {
 				for (var i = 0; i < cart.registrations.length; i++) {
 					var currentReg = cart.registrations[i];
 
-					if (eventureList.id == currentReg.eventureListId && participant.id == currentReg.partId) {
-						alert('Duplicate Registration.  Removed from cart.');   //wg make toast
+					if (eventureList.id === currentReg.eventureListId && participant.id === currentReg.partId) {
+						toastr.error('Duplicate Registration.  Removed from cart.');
 						isRegDupe = true;
 					}
 				}
 			}
 			if (!isRegDupe) {
-				cart.registrations.push(new registration(eventure.displayHeading, eventureList.displayName, participant.email, eventureList.currentFee, eventure.id, eventureList.id, participant.id, participant.firstName + ' ' + participant.lastName, answers, groupId, group2Id, quantity, eventureList.eventureListTypeId, eventureList.isBundle));
-				toastr.success('<strong class="text-center">Your Item Was Added To Your Cart!</strong><br><br><a class="btn btn-primary btn-block" href="#/shoppingcart"><i class="fa fa-shopping-cart"></i>&nbsp;View Cart</a>');
+				if (eventureList.eventureListType === 'Standard') {
+					//If Standard Registration
+					cart.registrations.push(new Registration(eventure.displayHeading,
+						eventureList.displayName, participant.email, eventureList.currentFee,
+						eventure.id, eventureList.id, participant.id,
+						participant.firstName + ' ' + participant.lastName, answers,
+						groupId, group2Id, quantity, eventureList.eventureListType, eventureList.isBundle));
+					toastr.success('<strong class="text-center">Your Item Was Added To Your Cart!</strong>' +
+						'<br><br><a class="btn btn-primary btn-block" href="#/shoppingcart">' +
+						'<i class="fa fa-shopping-cart"></i>&nbsp;View Cart</a>');
+				}
+				else {
+					//If Team Registration
+					cart.registrations.push(new TeamRegistration(eventure.displayHeading,
+						eventureList.displayName, participant.email, eventure.id, eventureList.id, participant.id,
+						participant.firstName + ' ' + participant.lastName, groupId, group2Id,
+						eventureList.currentFee, team.teamName, team.teamMembers, eventureList.eventureListType, eventureList.isBundle));
+					toastr.success('<strong class="text-center">Your Item Was Added To Your Cart!</strong>' +
+						'<br><br><a class="btn btn-primary btn-block" href="#/shoppingcart">' +
+						'<i class="fa fa-shopping-cart"></i>&nbsp;View Cart</a>');
+				}
+
 			}
 		};
 
 		cart.addSurcharge = function (desc, amount, chargeType, listid, partid, couponId) {
-		    cart.surcharges.push(new surcharge(desc, amount, chargeType, listid, partid, couponId));
+			cart.surcharges.push(new Surcharge(desc, amount, chargeType, listid, partid, couponId));
 		};
 
 		cart.processCartRules = function () {
 			//clear all rules
-			cart.surcharges = []
+			cart.surcharges = [];
 			var regCount = 0;
 			var regTotalAmount = 0;
+			var discount;
+			var items = {}; // hash table with participantId and hash of count and cost.
+			var reg;
 
 			for (var i = 0; i < cart.registrations.length; i++) {
 				var currentReg = cart.registrations[i];
@@ -110,84 +128,86 @@
 				regCount++;
 			}
 
-			console.log(cart.regSettings.isAddSingleFeeForAllRegs);
-			console.log(cart.regSettings.addSingleFeeType);
-			//alert('now');
-
 			if (cart.regSettings.isAddSingleFeeForAllRegs) {
 				var feeAmount = 0;
 				switch (cart.regSettings.addSingleFeeType) {
-					case "0":
-						feeAmount = cart.regSettings.addSingleFeeForAllRegsPercent * regTotalAmount / 100;     ///this is a hack fix it //mjb
-						break;
-					case 'percent':
-						feeAmount = cart.regSettings.addSingleFeeForAllRegsPercent * regTotalAmount / 100;
-						break;
-					case 'flat':
-						feeAmount = regCount * cart.regSettings.addSingleFeeForAllRegsFlat;
-						break;
-					case 'both':
-						feeAmount = (cart.regSettings.addSingleFeeForAllRegsPercent * regTotalAmount / 100) + (regCount * cart.regSettings.addSingleFeeForAllRegsFlat);
-						break;
-					default:
-						feeAmount = 0;
-						break;
+				case '0':
+					feeAmount = cart.regSettings.addSingleFeeForAllRegsPercent *
+						regTotalAmount / 100; ///this is a hack fix it //mjb
+					break;
+				case 'percent':
+					feeAmount = cart.regSettings.addSingleFeeForAllRegsPercent *
+						regTotalAmount / 100;
+					break;
+				case 'flat':
+					feeAmount = regCount * cart.regSettings.addSingleFeeForAllRegsFlat;
+					break;
+				case 'both':
+					feeAmount = (cart.regSettings.addSingleFeeForAllRegsPercent *
+						regTotalAmount / 100) + (regCount * cart.regSettings.addSingleFeeForAllRegsFlat);
+					break;
+				default:
+					feeAmount = 0;
+					break;
 				}
-				cart.surcharges.push(new surcharge('Online Service Fee', feeAmount.toFixed(2), 'cartRule', 0, 0, 0));
+				cart.surcharges.push(new Surcharge('Online Service Fee', feeAmount.toFixed(2), 'cartRule', 0, 0, 0));
 			}
 
-			if(cart.regSettings.isMultiParticipantDiscountCartRule){
-				var items = {}; // hash table with eventureListId and hash of count and cost
-				var reg;
-				for(var i = 0; i < cart.registrations.length; i++){
+			if (cart.regSettings.isMultiParticipantDiscountCartRule) {
+				for (i = 0; i < cart.registrations.length; i++) {
 					reg = cart.registrations[i];
-					if(typeof items[reg.eventureListId] === "undefined"){
-						items[reg.eventureListId] = {cnt: 0, cost: 0};
+					if (typeof items[reg.eventureListId] === 'undefined') {
+						items[reg.eventureListId] = {
+							cnt: 0,
+							cost: 0
+						};
 					}
 					items[reg.eventureListId].cnt++;
 					items[reg.eventureListId].cost += reg.fee;
 				}
-				for(var key in items){
-					if(items[key].cnt > 1){
+				for (var key in items) {
+					if (items[key].cnt > 1) {
 						// multiParticipantDiscountAmount: 0,
 						// multiParticipantDiscountAmountType: 0,
-						switch(cart.regSettings.multiParticipantDiscountAmountType){
-						case "Percent":  // precentage
-							var discount = -1 * items[key].cost * (cart.regSettings.multiParticipantDiscountAmount / 100);
-							cart.surcharges.push(new surcharge("percentage based multi-participant discount", discount.toFixed(2), 'cartRule', key, 0, 0));
+						switch (cart.regSettings.multiParticipantDiscountAmountType) {
+						case 'Percent': // precentage
+							discount = -1 * items[key].cost *
+							(cart.regSettings.multiParticipantDiscountAmount / 100);
+							cart.surcharges.push(new Surcharge('percentage based multi-participant discount', discount.toFixed(2), 'cartRule', key, 0, 0));
 							break;
-						case "Dollars":  // flat rate
-							var discount = -1 * cart.regSettings.multiParticipantDiscountAmount;
-							cart.surcharges.push(new surcharge("flat fee based multi-participant discount", discount.toFixed(2), 'cartRule', key, 0, 0));
+						case 'Dollars': // flat rate
+							discount = -1 * cart.regSettings.multiParticipantDiscountAmount;
+							cart.surcharges.push(new Surcharge('flat fee based multi-participant discount', discount.toFixed(2), 'cartRule', key, 0, 0));
 							break;
 						}
 					}
 				}
 			}
 
-			if(cart.regSettings.isMultiRegistrationDiscountCartRule){
-				var items = {}; // hash table with participantId and hash of count and cost.
-				var reg;
-				for(var i = 0; i < cart.registrations.length; i++){
+			if (cart.regSettings.isMultiRegistrationDiscountCartRule) {
+				for (i = 0; i < cart.registrations.length; i++) {
 					reg = cart.registrations[i];
-					if(typeof items[reg.partId] === "undefined"){
-						items[reg.partId] = {cnt: 0, cost: 0};
+					if (typeof items[reg.partId] === 'undefined') {
+						items[reg.partId] = {
+							cnt: 0,
+							cost: 0
+						};
 					}
 					items[reg.partId].cnt++;
 					items[reg.partId].cost += reg.fee;
 				}
-				for(var key in items){
-					if(items[key].cnt > 1){
+				for (var key in items) {
+					if (items[key].cnt > 1) {
 						// multiRegistrationDiscountAmount: 0,
 						// multiRegistrationDiscountAmountType: 0,
-						switch(cart.regSettings.multiRegistrationDiscountAmountType){
-						case "Percent":  // precentage
-							var discount = -1 * items[key].cost * (cart.regSettings.multiRegistrationDiscountAmount / 100);
-							cart.surcharges.push(new surcharge("percentage based multi-registration discount", discount.toFixed(2), 'cartRule', key, 0, 0));
+						switch (cart.regSettings.multiRegistrationDiscountAmountType) {
+						case 'Percent': // precentage
+							discount = -1 * items[key].cost * (cart.regSettings.multiRegistrationDiscountAmount / 100);
+							cart.surcharges.push(new Surcharge('percentage based multi-registration discount', discount.toFixed(2), 'cartRule', key, 0, 0));
 							break;
-						case "Dollars":  // flat rate
-							var discount = -1 * cart.regSettings.multiRegistrationDiscountAmount;
-							cart.surcharges.push(new surcharge("flat fee based multi-registration discount", discount.toFixed(2), 'cartRule', key, 0, 0));
+						case 'Dollars': // flat rate
+							discount = -1 * cart.regSettings.multiRegistrationDiscountAmount;
+							cart.surcharges.push(new Surcharge('flat fee based multi-registration discount', discount.toFixed(2), 'cartRule', key, 0, 0));
 							break;
 						}
 					}
@@ -199,7 +219,7 @@
 			//mjb need to check for surcharges and remove them
 			for (var j = 0; j < cart.surcharges.length; j++) {
 				var currCharge = cart.surcharges[j];
-				if (currCharge.chargeType == 'coupon') {
+				if (currCharge.chargeType === 'coupon') {
 					cart.surcharges.splice(j, 1);
 					break;
 				}
@@ -244,13 +264,11 @@
 		};
 
 		cart.configureSettings = function (data) {
-
 			cart.regSettings.isDuplicateOrderAllowed = data.isDuplicateOrderAllowed;
 			cart.regSettings.isAddSingleFeeForAllRegs = data.isAddSingleFeeForAllRegs;
 			cart.regSettings.addSingleFeeForAllRegsPercent = data.addSingleFeeForAllRegsPercent;
 			cart.regSettings.addSingleFeeType = data.addSingleFeeType;
 			cart.regSettings.addSingleFeeForAllRegsFlat = data.addSingleFeeForAllRegsFlat;
-
 			cart.regSettings.eventureName = data.eventureName;
 			cart.regSettings.listName = data.listingName;
 			cart.regSettings.groupName = data.groupName;
@@ -262,21 +280,16 @@
 			cart.regSettings.refundsText = data.refundsText;
 			cart.regSettings.stripeCheckoutButtonText = data.stripeCheckoutButtonText;
 			cart.regSettings.stripeOrderDescription = data.stripeOrderDescription;
-			//cart.regSettings.stripeLogoPath = data.stripeLogoPath;
-
 			cart.regSettings.isMultiParticipantDiscountCartRule = data.isMultiParticipantDiscountCartRule;
 			cart.regSettings.isMultiRegistrationDiscountCartRule = data.isMultiRegistrationDiscountCartRule;
-
 			cart.regSettings.multiParticipantDiscountAmount = data.multiParticipantDiscountAmount;
 			cart.regSettings.multiParticipantDiscountAmountType = data.multiParticipantDiscountAmountType;
 			cart.regSettings.multiRegistrationDiscountAmount = data.multiRegistrationDiscountAmount;
 			cart.regSettings.multiRegistrationDiscountAmountType = data.multiRegistrationDiscountAmountType;
-
 			cart.regSettings.isRegistrationOnProfile = data.isRegistrationOnProfile;
 			cart.regSettings.isTeamRegistrationOnProfile = data.isTeamRegistrationOnProfile;
 			cart.regSettings.isParticipantOnProfile = data.isParticipantOnProfile;
 			cart.regSettings.isCaptainOnProfile = data.isCaptainOnProfile;
-
 			cart.regSettings.name = data.name;
 			cart.regSettings.logoImageName = data.logoImageName;
 			cart.regSettings.stripePublishableKey = data.stripePublishableKey;
@@ -286,11 +299,11 @@
 			cart.regSettings.navTextColor = data.navTextColor;
 		};
 
-		function registration(displayEvent, displayList, email, fee, eventureId, eventureListId, partId, name, answers, groupId, group2Id, quantity, eventureListTypeId, isBundle) {
+		function Registration(displayEvent, displayList, email, fee, eventureId,
+			eventureListId, partId, name, answers, groupId, group2Id, quantity, eventureListType, isBundle) {
 			var me = this;
 			me.displayEvent = displayEvent;
 			me.displayList = displayList;
-			//me.image = image;
 			me.email = email;
 			me.fee = fee;
 			me.eventureId = eventureId;
@@ -302,11 +315,32 @@
 			me.answers = answers;
 			me.quantity = quantity;
 			me.lineTotal = quantity * fee;
-			me.eventureListTypeId = eventureListTypeId;
+			me.eventureListType = eventureListType;
 			me.isBundle = isBundle;
-		};
+		}
 
-		function surcharge(chargeDesc, amount, chargeType, listId, partId, couponId, context) {
+		function TeamRegistration (displayEvent, displayList, email, eventureId, eventureListId,
+			partId, name, groupId, group2Id, fee, teamName, teamMembers, isBundle) {
+				var me = this;
+				me.displayEvent = displayEvent;
+				me.displayList = displayList;
+				me.email = email;
+				me.eventureId = eventureId;
+				me.eventureListId = eventureListId;
+				me.houseId = partId;  //should be house id
+				me.partId = partId;
+				me.name = name;
+				me.groupId = groupId;
+				me.group2Id = group2Id;
+				me.fee = fee;
+				me.quantity = 1;
+				me.lineTotal = me.quantity * fee;
+				me.teamName = teamName;
+				me.teamMembers = teamMembers;
+				me.isBundle = isBundle;
+}
+
+		function Surcharge(chargeDesc, amount, chargeType, listId, partId, couponId, context) {
 			var me = this;
 			me.desc = chargeDesc;
 			me.amount = amount;
@@ -314,8 +348,8 @@
 			me.listId = listId;
 			me.partId = partId;
 			me.couponId = couponId;
-		};
+		}
 
 		return cart;
 	}
-})()
+})();

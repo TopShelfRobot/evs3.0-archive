@@ -136,6 +136,8 @@
 		$scope.checkout = function () {
 			var order = cart.order();
 
+			console.log(order);
+
 			if (order.orderAmount > 0) {
 				stripe.checkout(cart.getTotalPrice())
 					.then(function (res) {
