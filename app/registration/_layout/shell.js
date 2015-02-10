@@ -3,7 +3,7 @@
 
 	var controllerId = 'shell';
 
-	function Controller($rootScope, $timeout, $http, common, config, authService, cart, datacontext) {
+	function Controller($rootScope, $timeout, $http, common, config, authService, cart, datacontext, userAgent) {
 		var self = this;
 		var logSuccess = common.logger.getLogFn(controllerId, 'success!!!');
 		var events = config.events;
@@ -29,7 +29,7 @@
 			self.showSplash = true;
 			self.progBar = 30;
 
-			
+			//alert(userAgent.logAgentInfo(32));
 
 
 			var promises = [];
@@ -38,7 +38,8 @@
 				promises.push(
 					datacontext.participant.getParticipantByEmailAddress(authService.authentication.userName, config.owner.ownerId)
 					.then(function (data) {
-						cart.houseId = data.id;
+					    cart.houseId = data.id;
+					    userAgent.logAgentInfo(config.owner.ownerId, data.id)
 						self.progBar += 20;
 						return data;
 					})
@@ -141,5 +142,5 @@
 
 	};
 
-	angular.module('evReg').controller(controllerId, ['$rootScope', '$timeout', '$http', 'common', 'config', 'authService', 'CartModel', 'datacontext', Controller]);
+	angular.module('evReg').controller(controllerId, ['$rootScope', '$timeout', '$http', 'common', 'config', 'authService', 'CartModel', 'datacontext', 'UserAgent', Controller]);
 })();
