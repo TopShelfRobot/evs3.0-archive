@@ -60,7 +60,10 @@
 			mainColor: '',
 			hoverColor: '',
 			highlightColor: '',
-			navTextColor: ''
+			navTextColor: '',
+
+			supportEmail: '',
+            supportPhone: ''
 		};
 
 		cart.order = function () {
@@ -284,6 +287,9 @@
 			cart.regSettings.hoverColor = data.hoverColor;
 			cart.regSettings.highlightColor = data.highlightColor;
 			cart.regSettings.navTextColor = data.navTextColor;
+
+			cart.regSettings.supportPhone = data.supportPhone;
+			cart.regSettings.supportEmail = data.supportEmail;
 		};
 
 		function registration(displayEvent, displayList, email, fee, eventureId, eventureListId, partId, name, answers, groupId, group2Id, quantity, eventureListTypeId, isBundle) {
