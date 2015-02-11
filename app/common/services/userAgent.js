@@ -3,8 +3,8 @@
     function Service($http, datacontext) {
         this.logAgentInfo = function (ownerId, participantId) {
 
-            vm = this;
-            vm.userAgent = datacontext.participant.createUserAgent(ownerId);   
+            var vm = this;
+            vm.userAgent = datacontext.participant.createUserAgent(ownerId);
             vm.userAgent.participantId = participantId;
             vm.userAgent.ownerId = ownerId;
 
@@ -20,8 +20,8 @@
                 .success(function (data) {
                     vm.userAgent.ip = data.ip;
                     vm.userAgent.hostname = data.hostname;
-                    vm.userAgent.latitude = data.loc.split(",")[0]; //Latitude and Longitude
-                    vm.userAgent.longitude = data.loc.split(",")[1]; //Latitude and Longitude
+                    vm.userAgent.latitude = data.loc.split(',')[0]; //Latitude and Longitude
+                    vm.userAgent.longitude = data.loc.split(',')[1]; //Latitude and Longitude
                     vm.userAgent.org = data.org; //organization
                     vm.userAgent.city = data.city;
                     vm.userAgent.region = data.region; //state
@@ -36,5 +36,5 @@
         };
     }
 
-    angular.module("common").service("UserAgent",['$http', 'datacontext', Service]);
+    angular.module('common').service('UserAgent',['$http', 'datacontext', Service]);
 })();

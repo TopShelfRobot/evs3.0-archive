@@ -240,7 +240,7 @@
 		function createUserAgent(ownerId) {
 		    var self = this;
 		    return self.manager.createEntity('UserAgent',
-				{ dateCreated: moment().format("MM/DD/YYYY")});
+				{ dateCreated: new Date()});
 		}
 
 	}
