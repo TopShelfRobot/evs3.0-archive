@@ -22,23 +22,25 @@
                                     <label for="imagePath" class="col-lg-6 control-label">Image Upload:</label>
                                     <div class="col-lg-6">
                                         <button class="btn btn-primary" ng-file-select name="file" ng-file-change="vm.upload($files)" accept="image/*"><i class="fa fa-upload"></i>&nbsp;Upload Logo</button>
-                                        <br><br>
+                                        <br>
+                                        <br>
                                         <input type="text" class="form-control" ng-model="vm.owner.logoImageName" disabled />
                                         <p class="has-error">{{vm.errorMsg}}</p>
                                     </div>
                                 </div>
                                 <!-- /field -->
-                                <!-- <div class="form-group">
-                                    <label class="col-lg-6 control-label">Contact Email</label>
+                                <div class="form-group">
+                                    <label class="col-lg-6 control-label">Confirm Email</label>
                                     <div class="col-lg-6">
-                                        <input type="text" class="form-control" ng-model="vm.owner.email" />
+                                        <input type="text" class="form-control" ng-model="vm.owner.email" tooltip-placement="left" tooltip="Order Confirmations Are Delivered Here" />
                                     </div>
-                                </div> -->
+                                </div>
                                 <!--/field -->
                                 <div class="form-group">
                                     <label class="col-lg-6 control-label">Email Sender Address</label>
                                     <div class="col-lg-6">
                                         <input type="text" class="form-control" ng-model="vm.owner.sendMailEmailAddress" tooltip-placement="left" tooltip="Your Sent From Email Address" />
+                                        <p class="help-block">Must be verified by our email service</p>
                                     </div>
                                 </div>
                                 <!-- /field -->
@@ -80,10 +82,13 @@
                                 <div class="form-group">
                                     <label class="col-lg-6 control-label">Support Phone</label>
                                     <div class="col-lg-6">
-                                        <input type="text" class="form-control" ng-model="vm.owner.supportPhone" tooltip-placement="left" tooltip="Phone Number For Support Requests" />
+                                        <input type="text" class="form-control" ng-model="vm.owner.supportPhone" mask="(999) 999-9999"  restrict="reject" tooltip-placement="left" tooltip="Phone Number For Support Requests" />
                                     </div>
                                 </div>
                                 <!--/field -->
+
+                            </div>
+                            <div class="col-sm-6">
                                 <div class="form-group">
                                     <label class="col-lg-6 control-label">Terms and Conditions</label>
                                     <div class="col-lg-6">
@@ -91,8 +96,6 @@
                                     </div>
                                 </div>
                                 <!--/field -->
-                            </div>
-                            <div class="col-sm-6">
                                 <div class="form-group">
                                     <label class="col-lg-6 control-label">Refund Policy</label>
                                     <div class="col-lg-6">
@@ -124,7 +127,7 @@
                                 <div class="form-group">
                                     <label class="col-lg-6 control-label">List Statement</label>
                                     <div class="col-lg-6">
-                                        <input type="text" class="form-control" ng-model="vm.owner.listStatement"  tooltip-placement="left" tooltip="How You Instruct Users To Choose A Listing" />
+                                        <input type="text" class="form-control" ng-model="vm.owner.listStatement" tooltip-placement="left" tooltip="How You Instruct Users To Choose A Listing" />
                                     </div>
                                 </div>
                                 <!-- /field -->
@@ -138,28 +141,28 @@
                                 <div class="form-group">
                                     <label class="col-lg-6 control-label">Register Button Text</label>
                                     <div class="col-lg-6">
-                                        <input type="text" class="form-control" ng-model="vm.owner.registerButtonText"  tooltip-placement="left" tooltip="Your Verb For Registration" />
+                                        <input type="text" class="form-control" ng-model="vm.owner.registerButtonText" tooltip-placement="left" tooltip="Your Verb For Registration" />
                                     </div>
                                 </div>
                                 <!-- /field -->
                                 <div class="form-group">
                                     <label class="col-lg-6 control-label">Checkout Button Text</label>
                                     <div class="col-lg-6">
-                                        <input type="text" class="form-control" ng-model="vm.owner.confirmButtonText"  tooltip-placement="left" tooltip="Your Verb For Checkout" />
+                                        <input type="text" class="form-control" ng-model="vm.owner.confirmButtonText" tooltip-placement="left" tooltip="Your Verb For Checkout" />
                                     </div>
                                 </div>
                                 <!-- /field -->
                                 <div class="form-group">
                                     <label class="col-lg-6 control-label">Stripe Button Text</label>
                                     <div class="col-lg-6">
-                                        <input type="text" class="form-control" ng-model="vm.owner.stripeCheckoutButtonText"  tooltip-placement="left" tooltip="Your Text For The Pay Button" />
+                                        <input type="text" class="form-control" ng-model="vm.owner.stripeCheckoutButtonText" tooltip-placement="left" tooltip="Your Text For The Pay Button" />
                                     </div>
                                 </div>
                                 <!--/field -->
                                 <div class="form-group">
                                     <label class="col-lg-6 control-label">Stripe Order Description</label>
                                     <div class="col-lg-6">
-                                        <input type="text" class="form-control" ng-model="vm.owner.stripeOrderDescription"  tooltip-placement="left" tooltip="Your Noun For An Order" />
+                                        <input type="text" class="form-control" ng-model="vm.owner.stripeOrderDescription" tooltip-placement="left" tooltip="Your Noun For An Order" />
                                     </div>
                                 </div>
                                 <!--/field -->
