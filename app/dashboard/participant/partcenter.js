@@ -106,8 +106,8 @@
                     width: 150
                 }, {
                     field: "quantity",
-                    title: "Quantity",
-                    width: 100
+                    title: "Qty",
+                    width: 55
                 }, {
                     field: "dateCreated",
                     title: "Registration Date",
@@ -117,13 +117,18 @@
                 },{
                     field: '',
                     title: '',
-                    width:180,
+                    width:130,
                     template: '<a href="\\#receipt/#=eventureOrderId#" class="btn btn-success btn-block"><em class="glyphicon glyphicon-tags"></em>&nbsp;&nbsp;Receipt</a>'
                 }, {
                    field: '',
                    title: '',
                    width: 130,
                    template: '<a href="\\#registration/#=id#" class="btn btn-default btn-block"><em class="glyphicon glyphicon-edit"></em>&nbsp;Edit</a>'
+                },{
+                    field: '',
+                    title: '',
+                    width:130,
+                    template: '<a href="\\#setrefund/#=id#" class="btn btn-danger btn-block"><em class="fa fa-warning"></em>&nbsp;&nbsp;Refund</a>'
                 }
                 ]
             };

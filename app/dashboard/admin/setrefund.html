@@ -1,4 +1,4 @@
-<section data-ng-controller="">
+<section ng-controller="SetRefundController as vm">
   <div class="row">
     <div class="col-lg-12">
       <button ng-click="vm.cancel()" class="btn btn-danger btn-xs pull-right"><i class="glyphicon glyphicon-ban-circle"></i>&nbsp;Cancel</button>
@@ -8,10 +8,11 @@
     <legend >Issue A Refund</legend>
     <div class="row">
       <div class="col-lg-12 text-center">
-        <div  ng-controller="RefundTypeCtrl">
+        <div>
           <div class="btn-group">
-            <button type="button" class="btn btn-primary" ng-model="radioModel" btn-radio="'Full'">Full Refund</button>
-            <button type="button" class="btn btn-primary" ng-model="radioModel" btn-radio="'Partial'">Partial Refund</button>
+            <button type="button" class="btn btn-primary" ng-model="vm.refundType" btn-radio="'order'">Order Refund</button>
+            <button type="button" class="btn btn-primary" ng-model="vm.refundType" btn-radio="'reg'">Registration Refund</button>
+            <button type="button" class="btn btn-primary" ng-model="vm.refundType" btn-radio="'Partial'">Partial Refund</button>
           </div>
         </div>
       </div>
@@ -25,7 +26,7 @@
     <br>
     <div class="row">
       <div class="col-sm-8 col-offset-sm-4">
-        <div class="form-group">
+        <div class="form-group" ng-show="vm.refundType === 'Partial'">
           <label for="RefundAmount" class="col-lg-6 control-label">Refund Amount:</label>
           <div class="col-lg-6">
             <div class="input-group"> <span class="input-group-addon">$</span>
@@ -38,7 +39,7 @@
   </form>
   <div class="row">
     <div class="col-lg-12 clearfix">
-      <button class="btn btn-success pull-right"><em class="glyphicon glyphicon-remove"></em>&nbsp;Issue Refund</button>
+      <button class="btn btn-danger pull-right"><em class="fa fa-warning"></em>&nbsp;Issue Refund</button>
     </div>
   </div>
 </section>

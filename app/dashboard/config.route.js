@@ -7,7 +7,7 @@
     app.constant('routes', getRoutes());
 
     // Configure the routes and route resolvers
-    app.config(['$routeProvider', 'routes', "reg.routes", routeConfigurator]);
+    app.config(['$routeProvider', 'routes', 'reg.routes', routeConfigurator]);
     function routeConfigurator($routeProvider, routes, regRoutes) {
 
         routes.forEach(function (r) {
@@ -284,7 +284,7 @@
                     authorized: ["user"]
                 }
             }, {
-                url: '/setrefund',
+                url: '/setrefund/:regId',
                 config: {
                     title: 'Issue A Refund',
                     templateUrl: 'app/dashboard/admin/setrefund.html',
