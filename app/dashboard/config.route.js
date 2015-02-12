@@ -403,10 +403,17 @@
                     authorized: ["money", "admin", "super-user"]
                 }
             }, {
-                url: '/coupons/:eventureId',
+                url: '/couponanalytics',
                 config: {
                     title: 'Coupons',
                     templateUrl: 'app/dashboard/analytic/coupon.html',
+                    authorized: ["money", "admin", "super-user"]
+                }
+            }, {
+                url: '/coupondetail/:couponId',
+                config: {
+                    title: 'Coupon Detail',
+                    templateUrl: 'app/dashboard/analytic/coupondetail.html',
                     authorized: ["money", "admin", "super-user"]
                 }
             }, {

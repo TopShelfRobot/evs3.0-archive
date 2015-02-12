@@ -95,9 +95,5 @@
 			};
 		}
 
-		function couponChart() {
-
-		}
-
 	}
 })();
