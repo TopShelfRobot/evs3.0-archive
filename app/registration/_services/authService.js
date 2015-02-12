@@ -2,8 +2,8 @@
 
 var testRoles = ["user", "admin", "super-user", "money"];
 
-angular.module('evReg').factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSettings', 'config',
-    function ($http, $q, localStorageService, ngAuthSettings, config) {
+angular.module('evReg').factory('authService', ['$http', '$q', 'UserAgent','localStorageService', 'ngAuthSettings', 'config',
+    function ($http, $q, userAgent, localStorageService, ngAuthSettings, config) {
 
     //var serviceBase = ngAuthSettings.apiServiceBaseUri;
     var serviceBase = config.apiPath;
@@ -93,7 +93,7 @@ angular.module('evReg').factory('authService', ['$http', '$q', 'localStorageServ
             _authentication.isAuth = true;
             _authentication.userName = loginData.userName;
             _authentication.useRefreshTokens = loginData.useRefreshTokens;
-			_authentication.roles = response.roles;
+            _authentication.roles = response.roles;
 
             deferred.resolve(response);
 

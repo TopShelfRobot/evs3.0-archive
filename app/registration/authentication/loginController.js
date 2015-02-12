@@ -5,7 +5,7 @@
 
     var controllerId = "loginController";
 
-    function controller($scope, $location, $routeParams, authService, datacontext, common, cart, ngAuthSettings) {
+    function controller($scope, $location, $routeParams, userAgent, authService, datacontext, common, cart, ngAuthSettings) {
 
         $scope.loginData = {
             userName: "",
@@ -55,6 +55,7 @@
                            }
                            else {
                                cart.houseId = data.id;
+                               userAgent.logAgentInfo(config.owner.ownerId, data.id, 'requestToken')  //log browner/ip
                                $location.path(cart.navUrl);
                                //this is wil's trying to pass in path
                                //if (typeof $scope.requestPath === 'undefined') {
@@ -107,5 +108,5 @@
             });
         }
     }
-    angular.module("evReg").controller(controllerId, ["$scope", "$location", "$routeParams", "authService", "datacontext", "common", "CartModel", "ngAuthSettings", controller]);
+    angular.module("evReg").controller(controllerId, ["$scope", "$location", "$routeParams", "UserAgent", "authService", "datacontext", "common", "CartModel", "ngAuthSettings", controller]);
 })();

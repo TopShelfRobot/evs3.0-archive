@@ -30,7 +30,8 @@
 				newPart.dateBirth = $scope.date.dateBirth;
 				datacontext.save()
 					.then(function(){
-						console.log("saved:", newPart);
+					    console.log("saved:", newPart);
+					    userAgent.logAgentInfo(config.owner.ownerId, newPart.id, 'new')  //log browner/ip
 						newPart.houseId = newPart.id;
 						return datacontext.save();
 					})
