@@ -5,7 +5,7 @@
 
     var controllerId = "loginController";
 
-    function controller($scope, $location, $routeParams, userAgent, authService, datacontext, common, cart, ngAuthSettings) {
+    function controller($scope, $location, $routeParams, userAgent, authService, datacontext, common, cart, config, ngAuthSettings) {
 
         $scope.loginData = {
             userName: "",
@@ -108,5 +108,5 @@
             });
         }
     }
-    angular.module("evReg").controller(controllerId, ["$scope", "$location", "$routeParams", "UserAgent", "authService", "datacontext", "common", "CartModel", "ngAuthSettings", controller]);
+    angular.module("evReg").controller(controllerId, ["$scope", "$location", "$routeParams", "UserAgent", "authService", "datacontext", "common", "CartModel", "config", "ngAuthSettings", controller]);
 })();

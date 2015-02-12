@@ -115,6 +115,9 @@
     <Content Include="app\registration\payment\confirmController.js" />
     <Content Include="app\registration\team\editteamController.js" />
     <Content Include="app\registration\authentication\forgotPasswordController.js" />
+    <Content Include="app\registration\_components\ng-role-auth.min.js" />
+    <Content Include="app\registration\_components\sb-date-select.js" />
+    <Content Include="app\registration\_layout\footerController.js" />
     <Content Include="app\registration\_layout\headerController.js" />
     <Content Include="app\registration\authentication\loginController.js" />
     <Content Include="app\registration\payment\orderReceiptController.js" />
@@ -131,6 +134,7 @@
     <Content Include="app\registration\_components\custom-questions.js" />
     <Content Include="app\registration\_components\custom-questions.part.html" />
     <Content Include="app\registration\_layout\TermsModalInstance.js" />
+    <Content Include="app\registration\_services\AgeService.js" />
     <Content Include="app\registration\_services\cartModel.js" />
     <Content Include="app\registration\_services\cartModel_old.js" />
     <Content Include="app\registration\_services\registrationEditModel.js" />
@@ -342,7 +346,8 @@
     <Content Include="bin\zh-Hant\Microsoft.Data.Edm.resources.dll" />
     <Content Include="bin\zh-Hant\Microsoft.Data.OData.resources.dll" />
     <Content Include="bin\zh-Hant\System.Spatial.resources.dll" />
-    <Content Include="Content\EmailTemplates\reset-password.html" />
+    <Content Include="Content\EmailTemplates\order-confirmation.min.html" />
+    <Content Include="Content\EmailTemplates\reset-password.min.html" />
     <Content Include="Content\images\back-favicon.png" />
     <Content Include="Content\images\crazyhosesstudioo5a_1.jpg" />
     <Content Include="Content\images\creditcards.png" />
