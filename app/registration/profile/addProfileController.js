@@ -1,9 +1,9 @@
 
 ;(function(){
-	
+
 	var controllerId = "AddUserProfile";
 
-	function Controller($scope, $location, $rootElement, config, datacontext, cart, authService, common){
+	function Controller($scope, $location, $rootElement, config, datacontext, cart, userAgent, authService, common){
 
 		$scope.participant = {};
 
@@ -52,5 +52,5 @@
 
 	}
 
-	angular.module("evReg").controller(controllerId, ["$scope", "$location", "$rootElement", "config", "datacontext", "CartModel", "authService", "common", Controller]);
+	angular.module("evReg").controller(controllerId, ["$scope", "$location", "$rootElement", "config", "datacontext", "CartModel", "UserAgent", "authService", "common", Controller]);
 })();
