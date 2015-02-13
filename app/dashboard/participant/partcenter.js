@@ -118,7 +118,7 @@
                     field: '',
                     title: '',
                     width:130,
-                    template: '<a href="\\#receipt/#=eventureOrderId#" class="btn btn-success btn-block"><em class="glyphicon glyphicon-tags"></em>&nbsp;&nbsp;Receipt</a>'
+                    template: '<a href="\\#orderreceipt/#=eventureOrderId#" class="btn btn-success btn-block"><em class="glyphicon glyphicon-tags"></em>&nbsp;&nbsp;Receipt</a>'
                 }, {
                    field: '',
                    title: '',
