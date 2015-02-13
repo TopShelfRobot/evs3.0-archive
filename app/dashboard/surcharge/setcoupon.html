@@ -12,7 +12,7 @@
           <div class="btn-group">
             <button type="button" class="btn btn-primary" ng-model="vm.coupon.couponType" btn-radio="'owner'">Inclusive</button>
             <button type="button" class="btn btn-primary" ng-model="vm.coupon.couponType" btn-radio="'event'">Event</button>
-            <button type="button" class="btn btn-primary" ng-model="vm.coupon.couponType" btn-radio="'listing'">Listing</button>
+            <button type="button" class="btn btn-primary" ng-model="vm.coupon.couponType" btn-radio="'list'">Listing</button>
           </div>
         <hr>
       </div>
@@ -29,7 +29,7 @@
           </div>
           <!-- /field -->
 
-          <div class="form-group" ng-show="vm.coupon.couponType === 'listing'">
+          <div class="form-group" ng-show="vm.coupon.couponType === 'list'">
             <label for="couponcode" class="col-lg-6 control-label">Event List:</label>
             <div class="col-lg-6">
               <select class="form-control" id="listdropdown" ng-model="vm.coupon.couponTypeLinkId" ng-options="l.id as l.name for l in vm.listings">
