@@ -2,9 +2,9 @@
     'use strict';
 
     var controllerId = 'sendemail';
-    angular.module('app').controller(controllerId, ['$scope', 'config', 'common', 'datacontext', sendemail]);
+    angular.module('app').controller(controllerId, ['$scope', '$http', 'config', 'common', 'datacontext', sendemail]);
 
-    function sendemail($scope, config, common, datacontext) {
+    function sendemail($scope, $http, config, common, datacontext) {
         var getLogFn = common.logger.getLogFn;
         var log = getLogFn(controllerId);
 
@@ -50,7 +50,26 @@
             });
         }
 
+        vm.sendMessage = function () {
 
+            console.log('soba farba soba goodba');
+
+               var source = {'message': 'cool messageeeeee',
+                    'subject': 'very important stuff',
+                };
+
+            $http.post(config.apiPath + "api/mail/SendMassMessage", source)
+				.success(function (result) {
+				    console.log(result);
+				   
+				}).error(function (data, status, headers, config) {
+				    alert(data);
+				})
+				.finally(function () {
+				    console.log('fin');
+				    //$scope.submitDisabled = false;
+				});
+        }
 
     }
 
