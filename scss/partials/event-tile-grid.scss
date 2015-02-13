@@ -77,13 +77,13 @@
     width: 140px;
   }
   figcaption {
-    height: 300px;
+    height: 320px;
     width: 100%;
     text-align: center;
     h4 {
       margin-top: 65%;
       white-space: normal;
-      height: 50px;
+      height: 40px;
       font-size: 16px;
     }
   }
@@ -99,8 +99,16 @@
       min-width: 200px;
       margin: 0;
     }
-    figcaption span.event-info {
-      width: 160px;
+  }
+  .event-tiles {
+    figcaption {
+      span.event-info {
+        width: 160px;
+      }
+      h4 {
+        margin-top: 45%;
+        white-space: normal;
+      }
     }
   }
 }
