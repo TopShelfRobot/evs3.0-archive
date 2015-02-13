@@ -31,12 +31,12 @@
 				datacontext.save()
 					.then(function(){
 					    console.log("saved:", newPart);
-					    userAgent.logAgentInfo(config.owner.ownerId, newPart.id, 'new')  //log browner/ip
 						newPart.houseId = newPart.id;
 						return datacontext.save();
 					})
 					.then(function(){
 						cart.houseId = newPart.houseId;
+						userAgent.logAgentInfo(config.owner.ownerId, newPart.id, 'new')  //log browner/ip
 						//config.owner.newId = true;  //whg no idea what bill was doing here. also on man reg. 44 : 19, 44 : 17
 						//$location.path('/eventure');
 						$location.path(cart.navUrl);
