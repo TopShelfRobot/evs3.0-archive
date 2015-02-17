@@ -1,11 +1,13 @@
 ;(function(){
-	
-	function Controller($location, datacontext, helpers, config){
+
+	function Controller($location, cartModel, datacontext, helpers, config){
 		var self = this;
-		
+
 		this.partEmail = "";
 		this.partName = "";
+
 		
+
 		this.search = function(){
 			self.selectedUser = null;
 			if(self.partEmail){
@@ -24,29 +26,29 @@
                 self.searchResults = [];
             }
 		};
-		
+
 		this.ageFromBirthday = helpers.ageFromBirthday;
-		
+
 		this.searchResults = [];
-		
+
 		this.selectedUser = null;
-		
+
 		this.selectUser = function(){
-			config.owner.houseId = self.selectedUser.houseId;
+			cartModel.houseId = self.selectedUser.houseId;
 			console.log(config);
             $location.path("/eventure/");
 		};
-		
+
 		this.createNewUser = function(){
 			$location.path("/user-profile/add");
 		};
-		
+
 		if(config.owner.newId && config.owner.houseId){
 			console.log(config);
 			config.owner.newId = false;
             $location.path("/eventure/");
 		}
 	}
-	
-	angular.module("app").controller("ManReg", ["$location", "datacontext", "Helpers", "config", Controller]);
+
+	angular.module('app').controller('ManReg', ['$location', 'CartModel', 'datacontext', 'Helpers', 'config', Controller]);
 })();

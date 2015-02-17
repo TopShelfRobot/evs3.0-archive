@@ -6,7 +6,7 @@
 
 	function controller($scope, $location, $routeParams, config, cart, datacontext, common, dt) {
 
-		//$scope.cart = cartModel;
+		$scope.cart = cart;
 
 		var promises = [];
 

@@ -9,6 +9,7 @@
 		var all = [];
 		var viewLength = 12;
 		var currentPage = 0;
+		$scope.cart = cart;
 		//alert('heryhr');
 	    //datacontext.getEventuresByOwnerId(config.owner.ownerId)
 
