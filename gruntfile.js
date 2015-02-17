@@ -41,6 +41,16 @@ module.exports = function (grunt) {
 				}
 			}
 		},
+		jshint: {
+			options: {
+				multistr: true,
+				eqnull: true,
+				ignores: "app/**/*.min.js"
+			},
+			source: [
+				"app/**/*.js"
+			]
+		},
 		watch: {
 			css: {
 				files: ['scss/*.scss', 'scss/partials/*.scss'],
@@ -55,6 +65,7 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks('grunt-contrib-sass');
 	grunt.loadNpmTasks('grunt-contrib-cssmin');
 	grunt.loadNpmTasks('grunt-contrib-watch');
+	grunt.loadNpmTasks('grunt-contrib-jshint');
 	// Default grunt tasks
-	grunt.registerTask('default', ['sass','cssmin']);
+	grunt.registerTask('default', ['sass','cssmin', "jshint"]);
 };
