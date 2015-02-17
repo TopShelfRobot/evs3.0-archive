@@ -81,7 +81,7 @@
 
 		promises.push(
 			(function () {
-				var partId = $location.search()["uid"];
+				var partId = $location.search().uid;
 				if (!partId) {
 					partId = cart.houseId;
 				}
@@ -113,7 +113,7 @@
 			    if ($scope.customQuestions[i].active) {
 			        //alert('what about here');
 			        answers.push(ans);
-			    };
+			    }
 			}
 			//alert(answers.length);
 			return answers;
@@ -129,7 +129,7 @@
 				toastr.options = {
 					'positionClass': 'toast-bottom-right'
 				};
-				toastr['error']('Please answer all questions and accept all terms.');
+				toastr.error('Please answer all questions and accept all terms.');
 			}
             ////cartModel.registrations.currentGroupId = $scope.groupId;
             ////alert($scope.groupId);

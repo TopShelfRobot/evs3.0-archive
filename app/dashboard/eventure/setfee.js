@@ -38,7 +38,8 @@
 					for(var i = 0; i < data.length; i++){
 						vm.opened.push(false);
 					}
-                    return vm.fees = data;
+					vm.fees = data;
+                    return vm.fees;
                 });
         }
 
@@ -46,7 +47,8 @@
             return datacontext.eventure.getGroupsByEventureListId(vm.listId)
                 .then(function(data) {
                     //applyFilter();
-                    return vm.groups = data;
+					vm.groups = data;
+                    return vm.groups;
                 });
         }
 
@@ -54,7 +56,8 @@
             return datacontext.eventure.getEventureListById(vm.listId)
                 .then(function(data) {
                     //applyFilter();
-                    return vm.listing = data;
+					vm.listing = data;
+                    return vm.listing;
                 });
         }
 		
@@ -106,7 +109,7 @@
 
 
 
-// ﻿define(['services/logger', 'services/datacontext', 'durandal/plugins/router', 'config'],
+// define(['services/logger', 'services/datacontext', 'durandal/plugins/router', 'config'],
 //
 //     function (logger, datacontext, router, config) {
 //

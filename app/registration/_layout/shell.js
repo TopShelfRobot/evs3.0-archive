@@ -39,7 +39,7 @@
 					datacontext.participant.getParticipantByEmailAddress(authService.authentication.userName, config.owner.ownerId)
 					.then(function (data) {
 					    cart.houseId = data.id;
-					    userAgent.logAgentInfo(config.owner.ownerId, data.id)
+					    userAgent.logAgentInfo(config.owner.ownerId, data.id);
 						self.progBar += 20;
 						return data;
 					})
@@ -60,7 +60,7 @@
 					var sheets = document.styleSheets; //get stylesheets as an array
 					var sheet = document.styleSheets[2]; //get first stylesheet
 
-					var sheet = (function () {
+					sheet = (function () {
 						// Create the <style> tag
 						var style = document.createElement("style");
 
@@ -140,7 +140,7 @@
 			toggleSpinner(on);
 		});
 
-	};
+	}
 
 	angular.module('evReg').controller(controllerId, ['$rootScope', '$timeout', '$http', 'common', 'config', 'authService', 'CartModel', 'datacontext', 'UserAgent', Controller]);
 })();

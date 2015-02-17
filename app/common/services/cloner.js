@@ -52,7 +52,7 @@
 					return $q.all(dlist);
 				});
 			return def;
-		}
+		};
 
 		this.cloneListItem = function(item, eventureId){
 			var copy = copyItem(item);
@@ -87,7 +87,7 @@
 			var def = datacontext.saveChanges([cloned])
 				.then(function(){
 					return cloned;
-				})
+				});
 			return def;
 		};
 
@@ -110,7 +110,7 @@
 			var def = datacontext.saveChanges([cloned])
 				.then(function(){
 					return cloned;
-				})
+				});
 			return def;
 		};
 	}

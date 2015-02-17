@@ -13,7 +13,8 @@
 		var promises = [
 	        datacontext.team.GetTeamInfoByRegistrationId($scope.registrationId)
 	            .then( function(data) {
-	                return $scope.receipt = data;
+					$scope.receipt = data;
+	                return $scope.receipt;
 	            })
 		];
         

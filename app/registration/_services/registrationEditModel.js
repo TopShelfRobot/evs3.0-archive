@@ -1,5 +1,4 @@
-;
-(function () {
+;(function () {
 
 	function Service($q, $http, datacontext, config) {
 		var self = this;
@@ -33,7 +32,7 @@
 					self.transferQuestions = qs;
 					self.transferAnswers = {};
 					for (var k = 0; k < self.transferQuestions.length; k++) {
-						self.transferAnswers[self.transferQuestions[k].id] = datacontext.question.createCustomAnswer(self.regId, self.transferQuestions[k].id)
+						self.transferAnswers[self.transferQuestions[k].id] = datacontext.question.createCustomAnswer(self.regId, self.transferQuestions[k].id);
 					}
 
 					// delete the previous answers
@@ -163,7 +162,7 @@
 						var defListing = datacontext.eventure.getEventureListById(reg.eventureListId)
 							.then(function (list) {
 								self.current = list;
-								return datacontext.eventure.getEventureListsByOwnerId(config.owner.ownerId)
+								return datacontext.eventure.getEventureListsByOwnerId(config.owner.ownerId);
 							})
 							.then(function (listings) {
 							    self.possibles = [];
@@ -190,9 +189,9 @@
 						var defParticipants = datacontext.participant.getParticipantsByRegistrationId(regId)
 							.then(function (pts) {
 							    console.log('boone parts mnext');
-							    console.log(pts)
+							    console.log(pts);
 
-							    self.participants = pts
+							    self.participants = pts;
 							    console.log(self.participants);
 
 							    console.log('how many: ' + self.participants.length);
@@ -230,7 +229,7 @@
 										}
 									}
 									if (!ans) {
-										ans = datacontext.question.createCustomAnswer(regId, self.customQuestions[k].id)
+										ans = datacontext.question.createCustomAnswer(regId, self.customQuestions[k].id);
 									}
 									self.customAnswers[self.customQuestions[k].id] = ans;
 								}

@@ -153,8 +153,8 @@
 			datacontext.save()
 			.then(function(){
 				console.log("saved");
-			})
-        }
+			});
+        };
 
     }
 })();

@@ -34,10 +34,12 @@
                 return datacontext.surcharge.getAddonById(vm.addonId)
                     .then(function(data) {
                         //applyFilter();
-                        return vm.addon = data;
+						vm.addon = data;
+                        return vm.addon;
                     });
             } else {
-                return vm.addon = datacontext.surcharge.createAddon();
+				vm.addon = datacontext.surcharge.createAddon();
+                return vm.addon;
             }
         }
 

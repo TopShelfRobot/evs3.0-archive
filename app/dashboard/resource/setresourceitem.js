@@ -35,10 +35,12 @@
 				return datacontext.resource.getResourceItemById(vm.itemId)
 					.then(function(data) {
 						//applyFilter();
-						return vm.item = data;
+						vm.item = data;
+						return vm.item;
 					});
 			} else {
-				return vm.item = datacontext.resource.createResourceItem(vm.resourceId);
+				vm.item = datacontext.resource.createResourceItem(vm.resourceId);
+				return vm.item;
 			}
 		}
 
@@ -46,7 +48,8 @@
             return datacontext.resource.getResourceItemCategoriesByOwnerId(vm.ownerId)
                 .then(function(data) {
                     //applyFilter();
-                    return vm.categories = data;
+					vm.categories = data;
+                    return vm.categories;
                 });
         }
 
@@ -54,7 +57,8 @@
             return datacontext.resource.getResourcesByOwnerId(vm.ownerId)
                 .then(function(data) {
                     //applyFilter();
-                    return vm.resources = data;
+					vm.resources = data;
+                    return vm.resources;
                 });
         }
 

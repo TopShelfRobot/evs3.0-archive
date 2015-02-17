@@ -52,4 +52,4 @@
     }
 
     angular.module("evReg").service("MemberCartModel", ["$http", "$routeParams", "config", Model]);
-})()
+})();

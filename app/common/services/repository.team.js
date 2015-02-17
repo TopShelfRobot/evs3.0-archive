@@ -60,7 +60,7 @@
             function querySucceeded(data) {
                 return data.results[0];
             }
-        };
+        }
 
         function GetTeamInfoByRegistrationId(id) {
             var self = this;
@@ -73,7 +73,7 @@
             function querySucceeded(data) {
                 return data.results[0];
             }
-        };
+        }
 		
 		function getTeamById(id){
 			
@@ -140,7 +140,7 @@
 		function getTeamPaymentsByTeamId(id){
 			var self = this;
 			
-			var query = entityQuery.from("TeamMemberPayments")
+			var query = entityQuery.from("TeamMemberPayments");
 				// .where("teamId", "==", Number(id));
 				
 			return self.manager.executeQuery(query)

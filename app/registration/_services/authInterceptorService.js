@@ -1,5 +1,5 @@
-﻿'use strict';
-angular.module('evReg').factory('authInterceptorService', ['$q', '$location', 'localStorageService', function ($q, $location, localStorageService) {
+﻿angular.module('evReg').factory('authInterceptorService', ['$q', '$location', 'localStorageService', function ($q, $location, localStorageService) {
+	'use strict';
 
     //angular.module('evReg').factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSettings',
     //function ($http, $q, localStorageService, ngAuthSettings) {
@@ -17,7 +17,7 @@ angular.module('evReg').factory('authInterceptorService', ['$q', '$location', 'l
         }
 
         return config;
-    }
+    };
 
     var _responseError = function (rejection) {
         if (rejection.status === 401) {
@@ -25,7 +25,7 @@ angular.module('evReg').factory('authInterceptorService', ['$q', '$location', 'l
             $location.path('/login/' + requestPath);
         }
         return $q.reject(rejection);
-    }
+    };
 
     authInterceptorServiceFactory.request = _request;
     authInterceptorServiceFactory.responseError = _responseError;

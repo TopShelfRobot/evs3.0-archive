@@ -18,7 +18,7 @@
         me.stockAnswerSet = stockAnswerSet;
         me.quantity = quantity;
         me.lineTotal = quantity * fee;
-    };
+    }
 
     function surcharge(chargeDesc, amount, chargeType, listId, partId, couponId, context) {
         var me = this;
@@ -39,7 +39,7 @@
         //    }
         //    return out;
         //};
-    };
+    }
 	
 	function Cart($http, $routeParams, datacontext, logger, config) {
 		
@@ -76,7 +76,7 @@
 		
 		var setCurrentEventure = function(eventure){
 			vm.currentEventure = eventure;
-            vm.currentEventureId = eventure.id
+            vm.currentEventureId = eventure.id;
 			vm.currentDisplayEvent = eventure.name;
 		};
 		
@@ -256,7 +256,7 @@
                 }
 
                 if (config.multItemDiscount) {
-                    if (regCount == 0)
+                    if (regCount === 0)
                         lowestFee = currentReg.fee;
                     if (currentReg.fee < lowestFee)
                         lowestFee = currentReg.fee;
@@ -268,7 +268,7 @@
             }
 
             if (config.multItemDiscount && regCount > 1) {
-                var discount = -.05 * regTotalAmount;
+                var discount = -0.05 * regTotalAmount;
                 surcharges.push(new surcharge('Multi-Item Discount', discount.toFixed(2), 'cartRule', 0, 0, 0));
             }
 
@@ -304,7 +304,8 @@
         };
 
         var removeRegistration = function (selectedItem) {
-            for (var i = 0; i < vm.registrations.length; i++) {
+			var i;
+            for (i = 0; i < vm.registrations.length; i++) {
                 var current = vm.registrations[i];
                 if (current === selectedItem) {
                     vm.registrations.splice(i, 1);
@@ -329,7 +330,7 @@
             }
 
             // remove them
-            for(var i = 0; i < removeList.length; i++){
+            for(i = 0; i < removeList.length; i++){
                 surcharges.splice(removeList[i], 1);
             }
 
@@ -337,7 +338,7 @@
 			//check for leftover sibling discounts.
 			//make a list of duplicate sibling discounts
             var sibDisc = {};
-            for(var i = 0; i < surcharges.length; i++){
+            for(i = 0; i < surcharges.length; i++){
                 if(surcharges[i].context && surcharges[i].context.isSiblingDiscount && surcharges[i].context.isSiblingDiscount){
                     addon = surcharges[i].context;
                     if(typeof sibDisc[addon.id] == "undefined"){
@@ -356,7 +357,7 @@
                 }
                 // make a list of the registrations that match the sibling discount addon
                 var regList = [];
-                for(var i = 0; i < vm.registrations.length; i++){
+                for(i = 0; i < vm.registrations.length; i++){
                     if(vm.registrations[i][listVar] == listId){
                         regList.push(vm.registrations[i]);
                     }
@@ -366,7 +367,7 @@
                 var removeCnt = 1 - (regList.length - sibDisc[id].length);
                 // if removeCnt is larger, remove some
                 while(removeCnt > 0){
-                    for(var i = 0; i < surcharges.length; i++){
+                    for(i = 0; i < surcharges.length; i++){
                         if(surcharges[i].context && surcharges[i].context.id && surcharges[i].context.id == id){
                             surcharges.splice(i, 1);
                             removeCnt--;
@@ -376,7 +377,7 @@
                 }
             }
 
-            if (vm.registrations.length == 0)
+            if (vm.registrations.length === 0)
                 vm.cartIsVisible = false;
         };
 

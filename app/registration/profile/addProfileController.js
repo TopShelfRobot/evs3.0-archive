@@ -23,7 +23,7 @@
 				// Submit as normal
 				var newPart = datacontext.participant.createProfile($scope.participant.email);
 
-				for(key in $scope.participant){
+				for(var key in $scope.participant){
 					newPart[key] = $scope.participant[key];
 				}
 				$scope.date.dateBirth = moment($scope.date.dateBirth).toISOString();
@@ -36,7 +36,7 @@
 					})
 					.then(function(){
 						cart.houseId = newPart.houseId;
-						userAgent.logAgentInfo(config.owner.ownerId, newPart.id, 'new')  //log browner/ip
+						userAgent.logAgentInfo(config.owner.ownerId, newPart.id, 'new');  //log browner/ip
 						//config.owner.newId = true;  //whg no idea what bill was doing here. also on man reg. 44 : 19, 44 : 17
 						//$location.path('/eventure');
 						$location.path(cart.navUrl);
@@ -45,7 +45,7 @@
 				toastr.options = {
 					'positionClass': 'toast-top-right'
 				};
-				toastr['error']('Please provide all requested information.');
+				toastr.error('Please provide all requested information.');
 			}
 
 		};

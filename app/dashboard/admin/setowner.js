@@ -29,7 +29,8 @@
             return datacontext.participant.getOwnerById(vm.ownerId)
                     .then(function(data) {
                         //applyFilter();
-                        return vm.owner = data;
+						vm.owner = data;
+                        return vm.owner;
                     });
         }
 
@@ -38,7 +39,7 @@
                 console.log('PRODUCTION');
                 //Not sure if you can use $location. Might have to use window.location
                 //$location('https://connect.stripe.com/oauth/authorize?response_type=code&scope=read_write&stripe_landing=login&client_id=ca_2JOTAhBu2gVayLgbZaYy8KQXBm2GveXD');
-                window.location.href = 'https://connect.stripe.com/oauth/authorize?response_type=code&scope=read_write&stripe_landing=login&client_id=ca_2JOTAhBu2gVayLgbZaYy8KQXBm2GveXD'
+                window.location.href = 'https://connect.stripe.com/oauth/authorize?response_type=code&scope=read_write&stripe_landing=login&client_id=ca_2JOTAhBu2gVayLgbZaYy8KQXBm2GveXD';
             } else {
                 // Do nothing!
                 console.log('false');
@@ -50,7 +51,7 @@
                 console.log('dev');
                 //Not sure if you can use $location. Might have to use window.location
                 //$location('https://connect.stripe.com/oauth/authorize?response_type=code&scope=read_write&stripe_landing=login&client_id=ca_2JOTjDvfxSx9tzuIN9f5ZCLELpfdgJdn');
-                window.location.href = 'https://connect.stripe.com/oauth/authorize?response_type=code&scope=read_write&stripe_landing=login&client_id=ca_2JOTjDvfxSx9tzuIN9f5ZCLELpfdgJdn'
+                window.location.href = 'https://connect.stripe.com/oauth/authorize?response_type=code&scope=read_write&stripe_landing=login&client_id=ca_2JOTjDvfxSx9tzuIN9f5ZCLELpfdgJdn';
             } else {
                 // Do nothing!
                 console.log('false');

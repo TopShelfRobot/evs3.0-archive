@@ -2,7 +2,7 @@
 
 	var controllerId = 'MemberPaymentController';
 
-	function Controller($scope, $routeParams, $q, $http, $location, datacontext, stripe, cartModel, common, config, common) {
+	function Controller($scope, $routeParams, $q, $http, $location, datacontext, stripe, cartModel, common, config) {
 		var controller = {};
 		$scope.allowZeroPayment = cartModel.allowZeroPayment;
 		$scope.waiverSigned = false;
@@ -102,7 +102,7 @@
 
 			alert($scope.participant.lastName);
 
-			var newPart = datacontext.participant.createParticipant($scope.participant.ownerId, $scope.participant.houseId, $scope.participant.email)
+			var newPart = datacontext.participant.createParticipant($scope.participant.ownerId, $scope.participant.houseId, $scope.participant.email);
 			$scope.participant = datacontext.participant.createProfile($scope.participant.email);
 			newPart.lastName = $scope.participant.lastName;
 			newPart.firstName = $scope.participant.lastName;
@@ -111,7 +111,7 @@
 			$scope.date.dateBirth = moment($scope.date.dateBirth).toISOString();
 			$scope.participant.dateBirth = $scope.date.dateBirth;
 			
-			datacontext.save()
+			datacontext.save();
 
 			alert('Thanks for registering');
 
@@ -143,5 +143,5 @@
 	}
 	
 	angular.module("evReg").controller(controllerId,
-		["$scope", "$routeParams", "$q", "$http", "$location", "datacontext", "StripeService", "MemberCartModel", "common", "config", "common", Controller]);
+		["$scope", "$routeParams", "$q", "$http", "$location", "datacontext", "StripeService", "MemberCartModel", "common", "config", Controller]);
 })();

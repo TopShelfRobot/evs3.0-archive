@@ -29,7 +29,8 @@
 		function getResourceItemCategories() {
 				return datacontext.resource.getResourceItemCategoriesByOwnerId(vm.ownerId)
                   .then(function(data) {
-                      return vm.categories = data;
+					  vm.categories = data;
+                      return vm.categories;
                   });
 		}
       

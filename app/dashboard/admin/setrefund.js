@@ -33,14 +33,16 @@
 			return datacontext.registration.getRegistrationById (vm.regId)
 				.then(function (reg) {
 					//applyFilter();
-					return vm.registration = reg;
+					vm.registration = reg;
+					return vm.registration;
 				});
 		}
 
     function getOrderByRegistrationId () {
       return datacontext.registration.getOrderByRegistrationId (vm.regId)
       .then(function (order) {
-        return vm.order = order;
+		  vm.order = order;
+			return vm.order;
       });
     }
 

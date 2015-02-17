@@ -30,8 +30,8 @@
                 function (event, current, previous, rejection) {
                     if (handleRouteChangeError) { return; }
                     handleRouteChangeError = true;
-                    var msg = 'Error routing: ' + (current && current.name)
-                        + '. ' + (rejection.msg || '');
+                    var msg = 'Error routing: ' + (current && current.name) + 
+						'. ' + (rejection.msg || '');
                     logger.logWarning(msg, current, serviceId, true);
                     $location.path('/');
                 });

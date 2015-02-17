@@ -26,7 +26,8 @@
 		function getListing() {
 			return datacontext.surcharge.getCouponTotalsByOwnerId(vm.ownerId)
 				.then(function (data) {
-						return vm.couponTotals = data;
+					vm.couponTotals = data;
+					return vm.couponTotals;
 				});
 		}
 

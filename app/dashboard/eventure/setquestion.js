@@ -74,7 +74,7 @@
 					console.error("save unsuccessful:", err);
 					return loadCustomQuestions();
 				});
-		}
+		};
 
 		function onDestroy() {
 		    $scope.$on('$destroy', function () {
@@ -89,7 +89,7 @@
 			}).catch(function(){
 				console.log("save failed");
 			});
-		}
+		};
 	}
 	
 	angular.module("app").controller("SetQuestion", ['$scope', '$routeParams', '$location', 'datacontext', Controller]);

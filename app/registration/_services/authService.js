@@ -1,9 +1,9 @@
-﻿'use strict';
-
-var testRoles = ["user", "admin", "super-user", "money"];
+﻿var testRoles = ["user", "admin", "super-user", "money"];
 
 angular.module('evReg').factory('authService', ['$http', '$q', 'UserAgent','localStorageService', 'ngAuthSettings', 'config',
     function ($http, $q, userAgent, localStorageService, ngAuthSettings, config) {
+		
+	'use strict';
 
     //var serviceBase = ngAuthSettings.apiServiceBaseUri;
     var serviceBase = config.apiPath;

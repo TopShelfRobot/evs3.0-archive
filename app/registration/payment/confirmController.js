@@ -85,7 +85,7 @@
 				.success(function (result) {
 					console.log(result);
 					//alert('suc');
-					if (result.Amount != 0) {
+					if (result.Amount !== 0) {
 						cart.removeCoupons();
 						console.log($scope.couponCode);
 						console.log(result.Amount);

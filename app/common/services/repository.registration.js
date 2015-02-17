@@ -80,7 +80,7 @@
 
 		function getAllRegistrations() {
 			 var self = this;
-			 var query = entityQuery.from('Registrations')
+			 var query = entityQuery.from('Registrations');
 
 			 return self.manager.executeQuery(query)
 				 .then(querySucceeded, self._queryFailed);

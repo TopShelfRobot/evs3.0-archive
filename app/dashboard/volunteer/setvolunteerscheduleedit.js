@@ -27,7 +27,8 @@
                     .then(function(data) {
                         //applyFilter();
                         console.log(data);
-                        return vm.volunteerschedule = data;
+						vm.volunteerschedule = data;
+                        return vm.volunteerschedule;
                     });
         }
 

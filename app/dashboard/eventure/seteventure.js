@@ -32,10 +32,12 @@
 				return datacontext.eventure.getEventureById(vm.eventureId)
 					.then(function (data) {
 						//applyFilter();
-						return vm.eventure = data;
+						vm.eventure = data;
+						return vm.eventure;
 					});
 			} else {
-				return vm.eventure = datacontext.eventure.createEventure();
+				vm.eventure = datacontext.eventure.createEventure();
+				return vm.eventure;
 			}
 		}
 

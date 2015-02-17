@@ -30,10 +30,12 @@
                 return datacontext.resource.getResourceById(vm.resourceId)
                     .then(function(data) {
                         //applyFilter();
-                        return vm.resource = data;
+						vm.resource = data;
+                        return vm.resource;
                     });
             } else {
-                return vm.resource = datacontext.resource.createResource();
+                vm.resource = datacontext.resource.createResource();
+				return vm.resource;
             }
         }
 

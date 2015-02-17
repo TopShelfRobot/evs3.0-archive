@@ -37,20 +37,23 @@
         function getListing() {
           return datacontext.eventure.getEventureListById(vm.listingId)
             .then(function (data) {
-                return vm.listing = data;
+				vm.listing = data;
+                return vm.listing;
             });
         }
 
         function Capacity() {
           return datacontext.analytic.getCapacityByEventureListId(vm.listingId)
             .then(function (data) {
-              return vm.capacity = data;
+				vm.capacity = data;
+				return vm.capacity;
             });
         }
         function FeeSchedule() {
           return datacontext.surcharge.getFeeSchedulesByEventureListId(vm.listingId)
             .then(function (data) {
-              return vm.fees = data;
+				vm.fees = data;
+				return vm.fees;
             });
         }
 
@@ -148,7 +151,7 @@
                 template: "#= series.name #: #= value #"
             }
           };
-        }
+        };
 
         function ParticipantGrid() {
 
@@ -221,10 +224,7 @@
             .catch(function(err){
               console.log("err:", err);
             });
-        }
-
-
-
+        };
     }
 
 })();

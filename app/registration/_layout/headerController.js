@@ -12,7 +12,7 @@
         $scope.logOut = function () {
             authService.logOut();
             $location.path('/eventure');
-        }
+        };
 
         $scope.authentication = authService.authentication;
 

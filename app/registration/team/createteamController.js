@@ -11,7 +11,7 @@
 
 		cartModel.eventureId = $routeParams.eventureId;
 		cartModel.eventureListId = $routeParams.listId;
-		cartModel.participantId = $location.search()['uid'];
+		cartModel.participantId = $location.search().uid;
 
         $scope.team = {};
         $scope.team.teamName = '';

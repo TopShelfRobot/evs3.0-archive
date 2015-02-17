@@ -50,7 +50,7 @@
 					var sheets = document.styleSheets; //get stylesheets as an array
 					var sheet = document.styleSheets[2]; //get first stylesheet
 
-					var sheet = (function () {
+					sheet = (function () {
 						// Create the <style> tag
 						var style = document.createElement("style");
 

@@ -45,7 +45,10 @@ module.exports = function (grunt) {
 			options: {
 				multistr: true,
 				eqnull: true,
-				ignores: "app/**/*.min.js"
+				ignores: "app/**/*.min.js",
+				force: true,
+				validthis: true,
+				newcap: false,
 			},
 			source: [
 				"app/**/*.js"
@@ -59,6 +62,10 @@ module.exports = function (grunt) {
 					spawn: false,
 				},
 			},
+			jshint: {
+				files: ['app/**/*.js'],
+				tasks: ["jshint"],
+			},
 		}
 	});
 	// Individual tasks
@@ -67,5 +74,6 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.loadNpmTasks('grunt-contrib-jshint');
 	// Default grunt tasks
-	grunt.registerTask('default', ['sass','cssmin', "jshint"]);
+	grunt.registerTask('build', ['sass','cssmin', "jshint"]);
+	grunt.registerTask("default", ["build", "watch"])
 };
