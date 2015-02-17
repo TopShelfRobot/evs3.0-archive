@@ -1,4 +1,13 @@
 <div ng-controller="QuestionsController">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="shopping-cart-control">
+          <a class="btn btn-warning" href="#/shoppingcart">View Cart&nbsp;<span class="badge">{{cart.registrations.length}}</span></a>
+      </div>
+      <div class="clearfix"></div>
+    </div>
+  </div>
+  <br>
     <div class="row">
         <div class="col-lg-12 text-center">
             <h1>{{ eventureList.displayName }}</h1>
@@ -63,33 +72,32 @@
         <div class="col-sm-6">
             <div class="form-group" ng-if="groups.length > 0">
                 <label class="col-sm-3 control-label">{{cart.regSettings.groupName}}:</label>
-					<div class="col-sm-9 ">
-						<select class="form-control " ng-model="$parent.groupId " ng-options="g.id as g.name for g in groups " ng-required="eventureList.isGroupRequired ">
-							<option value=" ">Please Select Your {{cart.regSettings.groupName}}</option>
-						</select>
-					</div>
-				</div>
-				<!-- This is the original waiver stuff. -->
-				<textarea class="form-control " rows="8 " name="Waiver " ng-model="eventureList.waiverText " disabled></textarea>
-				<br>
-				<div class="form-group ">
-					<label for="WaiverAgree " class="col-xs-4 control-label ">I Agree To The Waiver:</label>
-					<div class="col-xs-8 ">
-						<div class="btn-group ">
-							<button type="button " class="btn btn-default " ng-model="isWaiverChecked " btn-radio="true ">Agree</button>
-							<button type="button " class="btn btn-default " ng-model="isWaiverChecked " btn-radio="false ">Disagree</button>
-						</div>
-					</div>
-				</div>
-			</div>
-       <!-- </div>-->
+                <div class="col-sm-9 ">
+                    <select class="form-control " ng-model="$parent.groupId " ng-options="g.id as g.name for g in groups " ng-required="eventureList.isGroupRequired ">
+                        <option value=" ">Please Select Your {{cart.regSettings.groupName}}</option>
+                    </select>
+                </div>
+            </div>
+            <!-- This is the original waiver stuff. -->
+            <textarea class="form-control " rows="8 " name="Waiver " ng-model="eventureList.waiverText " disabled></textarea>
+            <br>
+            <div class="form-group ">
+                <label for="WaiverAgree " class="col-xs-4 control-label ">I Agree To The Waiver:</label>
+                <div class="col-xs-8 ">
+                    <div class="btn-group ">
+                        <button type="button " class="btn btn-default " ng-model="isWaiverChecked " btn-radio="true ">Agree</button>
+                        <button type="button " class="btn btn-default " ng-model="isWaiverChecked " btn-radio="false ">Disagree</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- </div>-->
 
         <div class="row ">
             <div class="col-lg-12 ">
                 <!--ng-disabled="!questionsForm.$valid || notAllowedToContinue() "   -->
-                <button class="btn btn-success pull-right "
-                        ng-disabled="!isWaiverChecked "
-                        ng-click="next() ">Continue&nbsp;<i class="fa fa-arrow-circle-o-right"></i></button>
+                <button class="btn btn-success pull-right " ng-disabled="!isWaiverChecked " ng-click="next() ">Continue&nbsp;<i class="fa fa-arrow-circle-o-right"></i>
+                </button>
             </div>
         </div>
 

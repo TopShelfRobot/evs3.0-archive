@@ -1,5 +1,14 @@
   <div id="content" ng-controller="EventureController">
     <div class="row">
+      <div class="col-lg-12">
+        <div class="shopping-cart-control">
+            <a class="btn btn-warning" href="#/shoppingcart">View Cart&nbsp;<span class="badge">{{cart.registrations.length}}</span></a>
+        </div>
+        <div class="clearfix"></div>
+      </div>
+    </div>
+    <br>
+    <div class="row">
       <div class="col-lg-12 text-center">
         <h3>Please select the {{eventureName}} in which you would like to participate.</h3>
         <br>

@@ -30,7 +30,7 @@
 		}
 
 		function getRegistrationById () {
-			return datacontext.registration.getRegistrationById (vm.regId)
+			return datacontext.registration.getRegistrationById(vm.regId)
 				.then(function (reg) {
 					//applyFilter();
 					return vm.registration = reg;

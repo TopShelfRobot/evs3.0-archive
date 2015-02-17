@@ -15,14 +15,14 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="reg-navbar">
             <ul class="nav navbar-nav navbar-right">
-                <li ng-if="cart.registrations.length > 0">
+                <!-- <li ng-if="cart.registrations.length > 0">
                     <a class="hidden-xs hidden-sm visible-md visible-lg" ns-popover ns-popover-template="/app/registration/_layout/cart.part.html" ns-popover-trigger="mouseenter" ns-popover-theme="ns-popover-tooltip-theme" ns-popover-placement="bottom" ns-popover-hide-on-click="false"
                     ns-popover-timeout="0" ng-hide="!authentication.isAuth">
                         <i class="glyphicon glyphicon-shopping-cart"></i> &nbsp;
                         <span class="badge">{{cart.registrations.length}}</span>
                     </a>
                     <a class="visible-xs visible-sm hidden-md hidden-lg" href="#/shoppingcart">View Shopping Cart&nbsp;<span class="badge">{{cart.registrations.length}}</span></a>
-                </li>
+                </li> -->
                 <li ng-hide="!authentication.isAuth">
                     <a href="#/user-profile/{{cart.houseId}}">User Profile</a>
                 </li>
