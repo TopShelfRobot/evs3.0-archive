@@ -36,8 +36,8 @@ module.exports = function (grunt) {
 					'Content/css/reg-style.css': ['scss/rawcss/framework.css',
                         'scss/rawcss/registration.css'],
 					'Content/css/dash-style.css': ['scss/rawcss/framework.css',
-                        'scss/rawcss/dashboard.css',
-												'scss/rawcss/registration.css']
+												'scss/rawcss/registration.css',
+                        'scss/rawcss/dashboard.css']
 				}
 			}
 		},
