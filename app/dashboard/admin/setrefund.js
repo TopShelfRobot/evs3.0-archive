@@ -22,7 +22,6 @@
 			amount: vm.order.amount,
 			eventureOrderId: $routeParams.orderId,
 			description: 'order',
-			dateCreated: new Date(),
 			registrationId: $routeParams.regId
 		}
 
