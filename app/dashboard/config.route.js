@@ -284,7 +284,7 @@
                     authorized: ["user"]
                 }
             }, {
-                url: '/setrefund/:regId',
+                url: '/setrefund/:regId/:orderId',
                 config: {
                     title: 'Issue A Refund',
                     templateUrl: 'app/dashboard/admin/setrefund.html',

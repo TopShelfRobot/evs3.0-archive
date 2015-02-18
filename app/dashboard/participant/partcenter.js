@@ -128,7 +128,7 @@
                     field: '',
                     title: '',
                     width:130,
-                    template: '<a href="\\#setrefund/#=id#" class="btn btn-danger btn-block"><em class="fa fa-warning"></em>&nbsp;&nbsp;Refund</a>'
+                    template: '<a href="\\#setrefund/#=id#/#=eventureOrderId#" class="btn btn-danger btn-block"><em class="fa fa-warning"></em>&nbsp;&nbsp;Refund</a>'
                 }
                 ]
             };
