@@ -71,7 +71,6 @@
 			console.log(vm.source);
 			console.log(vm.source.amount);
 
-
 			$http.post(config.apiPath + 'api/transaction/refund', vm.source)
 				.success(function (result) {
 					console.log('Success', result);
