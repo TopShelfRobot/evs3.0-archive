@@ -63,6 +63,7 @@
 					break;
 				case 'partial':
 					vm.source.amount = 0;
+					break;
 			}
 		});
 
