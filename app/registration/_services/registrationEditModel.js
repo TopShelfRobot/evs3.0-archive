@@ -219,21 +219,21 @@
 							})
 							.then(function (list) {
 								console.log("ans:", list);
-								self.customAnswers = {};
-								var ans = null;
-								for (var k = 0; k < self.customQuestions.length; k++) {
-									ans = null;
-									for (var j = 0; j < list.length; j++) {
-										if (list[j].questionId == self.customQuestions[k].id) {
-											ans = list[j];
-											break;
-										}
-									}
-									if (!ans) {
-										ans = datacontext.question.createCustomAnswer(regId, self.customQuestions[k].id)
-									}
-									self.customAnswers[self.customQuestions[k].id] = ans;
-								}
+								self.customAnswers = list;
+								// var ans = null;
+								// for (var k = 0; k < self.customQuestions.length; k++) {
+								// 	ans = null;
+								// 	for (var j = 0; j < list.length; j++) {
+								// 		if (list[j].questionId == self.customQuestions[k].id) {
+								// 			ans = list[j];
+								// 			break;
+								// 		}
+								// 	}
+								// 	if (!ans) {
+								// 		ans = datacontext.question.createCustomAnswer(regId, self.customQuestions[k].id)
+								// 	}
+								// 	self.customAnswers[self.customQuestions[k].id] = ans;
+								// }
 								return self.customAnswers;
 							});
 

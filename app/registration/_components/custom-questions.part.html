@@ -1,5 +1,5 @@
 <!-- Custom Questions -->
-<div ng-repeat="(key, question) in questions | orderBy:'order'">
+<div ng-repeat="(key, question) in combined | orderBy:'order'">
 	<div class="row" ng-switch on="question.questionType" ng-if="question.active">
         <div class="form-group" 
 				ng-switch-when="dropdown"
@@ -7,8 +7,9 @@
             <label class="col-6 col-sm-6 col-lg-6 control-label" >{{question.questionText}}</label>
             <div class="col-6 col-sm-6 col-lg-6">
                 <select class="form-control" 
-						ng-model="answers[question.id].answerText" 
-						ng-options="o for o in question.options.split(',')" 
+						ng-model="question.answer" 
+						ng-change="onChange(question)"
+						ng-options="o for o in question.options" 
 						ng-required="question.isRequired">
                 	<option value="">-- choose --</option>
                 </select>
@@ -20,11 +21,12 @@
 				ng-if"question.active">
             <label class="col-6 col-sm-6 col-lg-6 control-label" >{{question.questionText}}</label>
             <div class="col-6 col-sm-6 col-lg-6">
-                <div ng-repeat="o in question.options.split(',')">
+                <div ng-repeat="o in question.options">
                     <label class="radio-inline">
 						<input type="radio" 
 							name="raiod-{{question.id}}"
-							ng-model="answers[question.id].answerText"
+							ng-model="question.answer"
+							ng-change="onChange(question)"
 							ng-value="o"
 							ng-required="question.isRequired"/>
 						<span>{{o}}</span>
@@ -39,7 +41,8 @@
             <label class="col-6 col-sm-6 col-lg-6 control-label" >{{question.questionText}}</label>
             <div class="col-6 col-sm-6 col-lg-6">
                 <input type="text" class="form-control" 
-					ng-model="answers[question.id].answerText"
+					ng-model="question.answer"
+					ng-change="onChange(question)"
 					ng-required="question.isRequired">
 				</input>
              </div>
@@ -49,7 +52,8 @@
 				ng-switch-when="checkbox">
             <label>
                 <input type="checkbox" 
-					ng-model="answers[question.id].answerText" 
+					ng-model="question.answer" 
+					ng-change="onChange(question)"
 					ng-required="question.isRequired">
 				</input>{{question.questionText}}&nbsp;&nbsp;</label>
 		</div>
