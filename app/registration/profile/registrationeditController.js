@@ -12,9 +12,9 @@
 
 		this.saveAnswers = function(){
 			self.model.saveAnswers()
-			.then(function(){
-				console.log("done");
-			});
+				.then(function(){
+					console.log("done");
+				});
 		};
 
 		this.loadTransfer = function(){

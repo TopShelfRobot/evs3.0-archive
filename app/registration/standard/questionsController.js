@@ -26,21 +26,13 @@
 			datacontext.question.getCustomQuestionSetByEventureListId($routeParams.listId)
 				.then(function (results) {
 					//alert(results.length);
-					for (var i = 0; i < results.length; i++) {
-						results[i].answer = null;
-						if (results[i].options && results[i].options.length) {
-							results[i].qOptions = results[i].options.split(",");
-						}
-						if (results[i].questionOptions && results[i].questionOptions.length) {
-							results[i].qOptions = results[i].questionOptions;
-						}
-					}
 					$scope.customQuestions = results;
+					$scope.customAnswers = [];
+					for (var i = 0; i < results.length; i++) {
+						$scope.customAnswers.push({questionId: results[i].id, answerText: ""});
+					}
 					console.log("Custom Questions:", $scope.customQuestions);
 					return results;
-				})
-				.then(function (results) {
-					$scope.customAnswers = new Array(results.length);
 				})
 		);
 
@@ -53,6 +45,7 @@
 						alert('There are currently no spaces available');
 						router.navigateTo("#eventurelist/" + cartModel.currentEventureListId);
 					}
+					return data;
 				})
 		);
 
@@ -88,41 +81,17 @@
 				return datacontext.participant.getParticipantById(partId)
 					.then(function (result) {
 						$scope.participant = result;
+						return result;
 					});
 			})()
 		);
 
 		common.activateController(promises, controllerId);
 
-		//$scope.stockAnswerSet = {
-		//        shirtSize: "",
-		//        howHear: "",
-		//    };
-
-		var getCustomAnswers = function () {
-			var answers = [];
-			var ans;
-			//alert($scope.customAnswers.length);
-			//alert($scope.customQuestions.length);
-			for (var i = 0; i < $scope.customAnswers.length; i++) {
-				//alert('getting in herer');
-			    ans = {
-			        questionId: $scope.customQuestions[i].id,
-			        answer: $scope.customAnswers[i],
-			    };
-			    if ($scope.customQuestions[i].active) {
-			        //alert('what about here');
-			        answers.push(ans);
-			    };
-			}
-			//alert(answers.length);
-			return answers;
-		};
-
 		$scope.next = function () {
 			if ($scope.questionsForm.$valid) {
 				// Submit as normal
-				cartModel.addRegistration($scope.eventure, $scope.eventureList, $scope.participant, getCustomAnswers(), $scope.groupId, $scope.group2Id, $scope.quantity);
+				cartModel.addRegistration($scope.eventure, $scope.eventureList, $scope.participant, $scope.customAnswers, $scope.groupId, $scope.group2Id, $scope.quantity);
 				$location.$$search = {};
 				$location.path("/eventure");
 			} else {

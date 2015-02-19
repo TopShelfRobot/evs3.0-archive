@@ -31,15 +31,11 @@
 				.then(function (qs) {
 					console.log("qs:", qs);
 					self.transferQuestions = qs;
-					self.transferAnswers = {};
+					self.transferAnswers = [];
 					for (var k = 0; k < self.transferQuestions.length; k++) {
-						self.transferAnswers[self.transferQuestions[k].id] = datacontext.question.createCustomAnswer(self.regId, self.transferQuestions[k].id)
+						self.transferAnswers.push({questionId: self.transferQuestions[k].id, answerText: ""});
 					}
 
-					// delete the previous answers
-					for (var key in self.customAnswers) {
-						self.customAnswers[key].entityAspect.setDeleted();
-					}
 					return self.transferAnswers;
 				});
 		};
@@ -144,6 +140,19 @@
 					return $http.post(config.apiPath + "/api/Registrations/Deferral", source);
 				});
 		};
+		
+		this.transferAnswers = function(){
+			// delete the previous answers
+			for (var key in self.customAnswers) {
+				self.customAnswers[key].entityAspect.setDeleted();
+			}
+			for(var key in self.transferAnswers){
+				var ans = datacontext.question.createCustomAnswer(self.regId, self.transferAnswers[key].questionId);
+				ans.answerText = self.transferAnswers[key].answerText;
+				self.customAnswers.push(ans);
+			}
+			return self.saveAnswers();
+		};
 
 		this.saveAnswers = function () {
 			return datacontext.save();
@@ -213,26 +222,23 @@
 
 						var defQuestions = datacontext.question.getCustomQuestionSetByEventureListId(reg.eventureListId)
 							.then(function (qs) {
-								console.log("qs:", qs);
 								self.customQuestions = qs;
 								return datacontext.question.getCustomAnswerSetByRegistrationId(regId);
 							})
 							.then(function (list) {
-								console.log("ans:", list);
-								self.customAnswers = {};
-								var ans = null;
-								for (var k = 0; k < self.customQuestions.length; k++) {
-									ans = null;
-									for (var j = 0; j < list.length; j++) {
-										if (list[j].questionId == self.customQuestions[k].id) {
-											ans = list[j];
+								self.customAnswers = list;
+								// make sure we have a matched set
+								for(var i = 0; i < self.customQuestions.length; i++){
+									var found = false;
+									for(var j = 0; j < self.customAnswers.length; j++){
+										if(self.customAnswers[j].questionId == self.customQuestions[i].id){
+											found = true;
 											break;
 										}
 									}
-									if (!ans) {
-										ans = datacontext.question.createCustomAnswer(regId, self.customQuestions[k].id)
+									if(!found){
+										self.customAnswers.push(datacontext.question.createCustomAnswer(self.regId, self.customQuestions[i].id));
 									}
-									self.customAnswers[self.customQuestions[k].id] = ans;
 								}
 								return self.customAnswers;
 							});

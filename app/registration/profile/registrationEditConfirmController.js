@@ -36,7 +36,8 @@
 				def =  model.submitTransfer(token, total, type)
 					.then(function (result) {
 						nextUrl = "/receipt/" + result;
-						return model.saveAnswers();
+						return model.transferAnswers();
+						// return model.saveAnswers();
 	                });
 			}
 			
