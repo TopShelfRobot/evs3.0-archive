@@ -12,39 +12,53 @@
 			link: function(scope, el, attrs) {
 				scope.combined = [];
 				
-				function makeCombined(){
-					if(scope.questions && scope.answers){
-						for(var i = 0; i < scope.questions.length; i++){
+				function makeCombined(questions, answers){
+					var combined = [];
+					if(questions && answers){
+						for(var i = 0; i < questions.length; i++){
 							var item = {};
-							item.questionType = scope.questions[i].questionType;
-							item.active = scope.questions[i].active;
+							item.questionType = questions[i].questionType;
+							item.active = questions[i].active;
 							item.options = [];
-							if(scope.questions[i].options){
-								item.options = scope.questions[i].options.split(",");
+							if(questions[i].options){
+								item.options = questions[i].options.split(",");
 							}
-							item.questionText = scope.questions[i].questionText;
-							item.questionId = scope.questions[i].id;
-							item.order = scope.questions[i].order;
-							for(var j = 0; j < scope.answers.length; j++){
-								if(scope.answers[j].questionId == item.questionId){
-									item.answer = scope.answers[j].answerText;
+							item.questionText = questions[i].questionText;
+							item.questionId = questions[i].id;
+							item.order = questions[i].order;
+							item.foundAnswer = false;
+							for(var j = 0; j < answers.length; j++){
+								if(answers[j].questionId == item.questionId){
+									item.answer = answers[j].answerText;
+									item.foundAnswer = true;
 									break;
 								}
 							}
-							if(item.questionType == "checkbox"){
-								item.answer = item.answer.toLowerCase() == "true";
+							if(!item.foundAnswer){
+								console.error("There was no answer found for this question:", questions[i]);
 							}
-							scope.combined.push(item);
+							if(item.questionType == "checkbox"){
+								if(item.answer){
+									item.answer = item.answer.toLowerCase() == "true";
+								}else{
+									item.answer = false;
+								}
+								
+							}
+							combined.push(item);
 						}
 					}
+					return combined;
 				}
 				
 				scope.$watch("questions", function(n, o){
-					makeCombined();
+					console.log("questions:", scope.questions);
+					scope.combined = makeCombined(scope.questions, scope.answers);
 				});
 				
 				scope.$watch("answers", function(n, o){
-					makeCombined();
+					console.log("answers:", scope.answers);
+					scope.combined = makeCombined(scope.questions, scope.answers);
 				});
 				
 				scope.onChange = function(question){
@@ -58,9 +72,7 @@
 					}
 				};
 				
-				if(scope.questions && scope.answers){
-					makeCombined();
-				}
+				scope.combined = makeCombined(scope.questions, scope.answers);				
 			}
 		};
 		
