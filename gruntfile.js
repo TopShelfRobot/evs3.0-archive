@@ -41,6 +41,15 @@ module.exports = function (grunt) {
 				}
 			}
 		},
+		//Static Server
+		connect: {
+			server: {
+				options: {
+					port: 9000,
+					keepalive: true
+				}
+			}
+		},
 		watch: {
 			css: {
 				files: ['scss/*.scss', 'scss/partials/*.scss'],
@@ -55,6 +64,7 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks('grunt-contrib-sass');
 	grunt.loadNpmTasks('grunt-contrib-cssmin');
 	grunt.loadNpmTasks('grunt-contrib-watch');
-	// Default grunt tasks
-	grunt.registerTask('default', ['sass','cssmin']);
+	grunt.loadNpmTasks('grunt-contrib-connect')
+		// Default grunt tasks
+	grunt.registerTask('default', ['sass', 'cssmin']);
 };
