@@ -54,15 +54,12 @@
 				config: {
 					templateUrl: 'app/admin/dashboard.html'
 				}
-				},
-			{
+				}, {
 				url: '/admin',
 				config: {
 					templateUrl: 'app/admin/admin.html'
 				}
-				},
-            //{ url: '/reporting', config: { templateUrl: 'app/dashboard/reporting.html' } },
-			{
+				}, {
 				url: '/enterprise',
 				config: {
 					title: 'Enterprise Launchpad',
@@ -139,7 +136,7 @@
 						content: 'Resources'
 					}
 				}
-            },
+        },
 			{
 				url: '/reporting',
 				config: {
@@ -481,7 +478,14 @@
 					templateUrl: 'app/dashboard/analytic/manreg.html',
 					authorized: ["money", "admin", "super-user"]
 				}
-            }
+            }, {
+				url: '/employee',
+				config: {
+					title: 'Employee Management',
+					templateUrl: 'app/dashboard/admin/employee.html',
+					authorized: ['admin', 'super-user']
+				}
+						}
 			];
 	}
 })();
