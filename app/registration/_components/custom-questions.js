@@ -68,6 +68,7 @@
 							if(question.questionType == "checkbox"){
 								scope.answers[i].answerText = question.answer ? "True" : "False";
 							}
+							scope.answers[i].answer = question.answer;
 						}
 					}
 				};
