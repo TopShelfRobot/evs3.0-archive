@@ -29,9 +29,9 @@
 			this.getOwnerInfo = getOwnerInfo;
 			this.getParticipantsBySearchingEmail = getParticipantsBySearchingEmail;
 			this.getParticipantsBySearchingName = getParticipantsBySearchingName;
+			this.getParticipantsByRegistrationId = getParticipantsByRegistrationId;
 			this.getEmployeesBySearchingEmail = getEmployeesBySearchingEmail;
 			this.getEmployeesBySearchingName = getEmployeesBySearchingName;
-			this.getParticipantsByRegistrationId = getParticipantsByRegistrationId;
 			this.createUserAgent = createUserAgent;
 		}
 
@@ -259,7 +259,6 @@
 			var self = this;
 			var predicate = breeze.Predicate;
 			var p1 = new predicate("email", breeze.FilterQueryOp.Contains, str);
-			//var p2 = new predicate("ownerId", "==", config.owner.ownerId);
 			var p2 = new predicate("ownerId", "==", cart.ownerId);
 
 			var query = entityQuery.from('Employees')
@@ -282,38 +281,10 @@
 			if (check.length > 1) {
 				pName = pFirstName.and(new predicate("lastName", breeze.FilterQueryOp.Contains, check[1]));
 			}
-			//var pOwner = new predicate("ownerId", "==", config.owner.ownerId);
 			var pOwner = new predicate("ownerId", "==", cart.ownerId);
 
 			var query = entityQuery.from('Employees')
 				.where(pOwner.and(pName));
-
-			return self.manager.executeQuery(query)
-				.then(querySucceeded, self._queryFailed);
-
-			function querySucceeded(data) {
-				return data.results;
-			}
-		}
-
-		function getUserRolesByUserId(userId) {
-			var self = this;
-			var query = entityQuery.from('GetUserRolesByUserId')
-				.withParameters({
-					userId: userId
-				});
-
-			return self.manager.executeQuery(query)
-				.then(querySucceeded, self._queryFailed);
-
-			function querySucceeded(data) {
-				return data.results;
-			}
-		}
-
-		function getAllRoles() {
-			var self = this;
-			var query = entityQuery.from('GetAllRoles');
 
 			return self.manager.executeQuery(query)
 				.then(querySucceeded, self._queryFailed);
