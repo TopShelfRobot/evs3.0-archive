@@ -54,13 +54,13 @@ module.exports = function (grunt) {
 			options: {
 				multistr: true,
 				eqnull: true,
-				ignores: "app/**/*.min.js",
+				ignores: 'app/**/*.min.js',
 				force: true,
 				validthis: true,
 				newcap: false,
 			},
 			source: [
-				"app/**/*.js"
+				'app/**/*.js'
 			]
 		},
 		watch: {
@@ -84,5 +84,5 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks('grunt-contrib-jshint');
 	grunt.loadNpmTasks('grunt-contrib-connect');
 	// Default grunt tasks
-	grunt.registerTask('default', ['sass','cssmin']);
+	grunt.registerTask('default', ['sass', 'cssmin']);
 };

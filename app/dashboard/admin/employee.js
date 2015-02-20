@@ -1,5 +1,5 @@
-'use strict';
 (function () {
+	'use strict';
 
 	function Controller($location, datacontext, helpers, config) {
 		var vm = this;

@@ -23,7 +23,7 @@
 			eventureOrderId: $routeParams.orderId,
 			description: 'order',
 			registrationId: $routeParams.regId
-		}
+		};
 
 		activate();
 
@@ -39,7 +39,8 @@
 			return datacontext.registration.getRegistrationById(vm.regId)
 				.then(function (reg) {
 					//applyFilter();
-					return vm.registration = reg;
+					vm.registration = reg;
+					return vm.registration;
 				});
 		}
 
@@ -47,21 +48,22 @@
 			return datacontext.registration.getOrderById(vm.orderId)
 				.then(function (order) {
 					vm.source.amount = order.amount;
-					return vm.order = order;
+					vm.order = order;
+					return vm.order;
 				});
 		}
 
-	  $scope.$watch('vm.source.description', function(newValue, oldValue) {
+		$scope.$watch('vm.source.description', function (newValue, oldValue) {
 			switch (newValue) {
-				case 'order':
-					vm.source.amount = vm.order.amount;
-					break;
-				case 'reg':
-					vm.source.amount = vm.registration.totalAmount;
-					break;
-				case 'partial':
-					vm.source.amount = 0;
-					break;
+			case 'order':
+				vm.source.amount = vm.order.amount;
+				break;
+			case 'reg':
+				vm.source.amount = vm.registration.totalAmount;
+				break;
+			case 'partial':
+				vm.source.amount = 0;
+				break;
 			}
 		});
 
@@ -70,9 +72,9 @@
 			console.log(vm.source);
 			console.log(vm.source.amount);
 
-		    $http.post(config.apiPath + 'api/transaction/Refund', vm.source)
-			//$http.post(config.apiPath + "api/mail/SendMassMessage", vm.source)
-		    	.success(function (result) {
+			$http.post(config.apiPath + 'api/transaction/Refund', vm.source)
+				//$http.post(config.apiPath + "api/mail/SendMassMessage", vm.source)
+				.success(function (result) {
 					console.log('Success', result);
 					vm.refundErrors = '';
 					//$location.path('/partcenter/');

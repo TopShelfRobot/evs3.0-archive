@@ -1,5 +1,4 @@
-
-; (function () {
+(function () {
 
 	var controllerId = "QuestionsController";
 
@@ -24,29 +23,32 @@
 
 		promises.push(
 			datacontext.question.getCustomQuestionSetByEventureListId($routeParams.listId)
-				.then(function (results) {
-					//alert(results.length);
-					$scope.customQuestions = results;
-					$scope.customAnswers = [];
-					for (var i = 0; i < results.length; i++) {
-						$scope.customAnswers.push({questionId: results[i].id, answerText: ""});
-					}
-					console.log("Custom Questions:", $scope.customQuestions);
-					return results;
-				})
+			.then(function (results) {
+				//alert(results.length);
+				$scope.customQuestions = results;
+				$scope.customAnswers = [];
+				for (var i = 0; i < results.length; i++) {
+					$scope.customAnswers.push({
+						questionId: results[i].id,
+						answerText: ""
+					});
+				}
+				console.log("Custom Questions:", $scope.customQuestions);
+				return results;
+			})
 		);
 
 
 		promises.push(
 			datacontext.eventure.getGroupsActiveByEventureListId($routeParams.listId)
-				.then(function (data) {
-					$scope.groups = data;
-					if (config.isGroupRequired && groups().length < 1) {
-						alert('There are currently no spaces available');
-						router.navigateTo("#eventurelist/" + cartModel.currentEventureListId);
-					}
-					return data;
-				})
+			.then(function (data) {
+				$scope.groups = data;
+				if (config.isGroupRequired && groups().length < 1) {
+					alert('There are currently no spaces available');
+					router.navigateTo("#eventurelist/" + cartModel.currentEventureListId);
+				}
+				return data;
+			})
 		);
 
 		//promises.push(
@@ -58,18 +60,18 @@
 
 		promises.push(
 			datacontext.eventure.getEventureListById($routeParams.listId)
-				.then(function (data) {
-					$scope.eventureList = data;
-					return data;
-				})
+			.then(function (data) {
+				$scope.eventureList = data;
+				return data;
+			})
 		);
 
 		promises.push(
 			datacontext.eventure.getEventureById($routeParams.eventureId)
-				.then(function (data) {
-					$scope.eventure = data;
-					return data;
-				})
+			.then(function (data) {
+				$scope.eventure = data;
+				return data;
+			})
 		);
 
 		promises.push(
@@ -100,8 +102,8 @@
 				};
 				toastr['error']('Please answer all questions and accept all terms.');
 			}
-            ////cartModel.registrations.currentGroupId = $scope.groupId;
-            ////alert($scope.groupId);
+			////cartModel.registrations.currentGroupId = $scope.groupId;
+			////alert($scope.groupId);
 			////cartModel.currentStockAnswerSet = $scope.stockAnswerSet;
 			////cartModel.currentCustomAnswerSet = getCustomAnswers();
 			////cartModel.setCurrentParticipant($scope.participant);
