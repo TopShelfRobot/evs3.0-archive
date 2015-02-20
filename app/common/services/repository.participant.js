@@ -1,10 +1,9 @@
-﻿(function () {
+(function () {
 	'use strict';
 
 	var serviceId = 'repository.participant';
 
-	angular.module('common').factory(serviceId,
-		['breeze', 'repository.abstract', "config", "CartModel", repositoryParticipant]);
+	angular.module('common').factory(serviceId, ['breeze', 'repository.abstract', "config", "CartModel", repositoryParticipant]);
 
 	function repositoryParticipant(breeze, abstractRepository, config, cart) {
 		var entityName = 'participant';
@@ -30,6 +29,8 @@
 			this.getOwnerInfo = getOwnerInfo;
 			this.getParticipantsBySearchingEmail = getParticipantsBySearchingEmail;
 			this.getParticipantsBySearchingName = getParticipantsBySearchingName;
+			this.getEmployeesBySearchingEmail = getEmployeesBySearchingEmail;
+			this.getEmployeesBySearchingName = getEmployeesBySearchingName;
 			this.getParticipantsByRegistrationId = getParticipantsByRegistrationId;
 			this.createUserAgent = createUserAgent;
 		}
@@ -81,7 +82,7 @@
 		function getOwnerByGuid(guid) {
 			var self = this;
 			var query = entityQuery.from('Owners')
-			   .where('ownerGuid', '==', guid);
+				.where('ownerGuid', '==', guid);
 
 			return self.manager.executeQuery(query)
 				.then(querySucceeded, self._queryFailed);
@@ -113,7 +114,7 @@
 				.where('id', '==', partId);
 
 			return self.manager.executeQuery(query)
-			   .then(querySucceeded, self._queryFailed);
+				.then(querySucceeded, self._queryFailed);
 
 			function querySucceeded(data) {
 				return data.results[0];
@@ -123,15 +124,15 @@
 		function getParticipantsByRegistrationId(regId) {
 			var self = this;
 			var query = entityQuery.from('ParticipantsByRegistrationId')
-			.withParameters({
-				registrationId: regId
-			});
+				.withParameters({
+					registrationId: regId
+				});
 
 			return self.manager.executeQuery(query)
 				.then(querySucceeded, self._queryFailed);
 
 			function querySucceeded(data) {
-				return data.results;    //wil this was issue
+				return data.results; //wil this was issue
 			}
 		}
 
@@ -156,7 +157,7 @@
 			//alert('in the dc');
 			var self = this;
 			var pred = predicate.create("email", "==", partEmail)
-			  .and("ownerId", "==", ownerId);
+				.and("ownerId", "==", ownerId);
 
 			return entityQuery.from('Participants')
 				.where(pred)
@@ -165,7 +166,7 @@
 				.then(querySucceeded, self._queryFailed);
 
 			function querySucceeded(data) {
-			   return data.results[0];
+				return data.results[0];
 			}
 		}
 
@@ -177,7 +178,7 @@
 				});
 
 			return self.manager.executeQuery(query)
-			   .then(querySucceeded, self._queryFailed);
+				.then(querySucceeded, self._queryFailed);
 
 			function querySucceeded(data) {
 				return data.results;
@@ -225,23 +226,101 @@
 			}
 		}
 
-		function createProfile() {    //mjb removed email from here
+		function createProfile() { //mjb removed email from here
 			var self = this;
-			return self.manager.createEntity('Participant',
-				{ ownerId: cart.ownerId, country: "US", dateCreated: new Date() });
+			return self.manager.createEntity('Participant', {
+				ownerId: cart.ownerId,
+				country: "US",
+				dateCreated: new Date()
+			});
 		}
 
 		function createParticipant(ownerId, email, houseId) {
 			var self = this;
-			return self.manager.createEntity('Participant',
-				{ dateBirth: moment().format("MM/DD/YYYY"), ownerId: ownerId, email: email, houseId: houseId, country: "US" });
+			return self.manager.createEntity('Participant', {
+				dateBirth: moment().format("MM/DD/YYYY"),
+				ownerId: ownerId,
+				email: email,
+				houseId: houseId,
+				country: "US"
+			});
 		}
 
 		function createUserAgent(ownerId) {
-		    var self = this;
-		    return self.manager.createEntity('UserAgent',
-				{ dateCreated: new Date()});
+			var self = this;
+			return self.manager.createEntity('UserAgent', {
+				dateCreated: new Date()
+			});
 		}
 
+		/* Employee */
+
+		function getEmployeesBySearchingEmail(str) {
+			var self = this;
+			var predicate = breeze.Predicate;
+			var p1 = new predicate("email", breeze.FilterQueryOp.Contains, str);
+			//var p2 = new predicate("ownerId", "==", config.owner.ownerId);
+			var p2 = new predicate("ownerId", "==", cart.ownerId);
+
+			var query = entityQuery.from('Employees')
+				.where(p1.and(p2));
+
+			return self.manager.executeQuery(query)
+				.then(querySucceeded, self._queryFailed);
+
+			function querySucceeded(data) {
+				return data.results;
+			}
+		}
+
+		function getEmployeesBySearchingName(str) {
+			var self = this;
+			var predicate = breeze.Predicate;
+			var check = str.split(/\s/);
+			var pFirstName = new predicate("firstName", breeze.FilterQueryOp.Contains, check[0]);
+			var pName = pFirstName.or(new predicate("lastName", breeze.FilterQueryOp.Contains, check[0]));
+			if (check.length > 1) {
+				pName = pFirstName.and(new predicate("lastName", breeze.FilterQueryOp.Contains, check[1]));
+			}
+			//var pOwner = new predicate("ownerId", "==", config.owner.ownerId);
+			var pOwner = new predicate("ownerId", "==", cart.ownerId);
+
+			var query = entityQuery.from('Employees')
+				.where(pOwner.and(pName));
+
+			return self.manager.executeQuery(query)
+				.then(querySucceeded, self._queryFailed);
+
+			function querySucceeded(data) {
+				return data.results;
+			}
+		}
+
+		function getUserRolesByUserId(userId) {
+			var self = this;
+			var query = entityQuery.from('GetUserRolesByUserId')
+				.withParameters({
+					userId: userId
+				});
+
+			return self.manager.executeQuery(query)
+				.then(querySucceeded, self._queryFailed);
+
+			function querySucceeded(data) {
+				return data.results;
+			}
+		}
+
+		function getAllRoles() {
+			var self = this;
+			var query = entityQuery.from('GetAllRoles');
+
+			return self.manager.executeQuery(query)
+				.then(querySucceeded, self._queryFailed);
+
+			function querySucceeded(data) {
+				return data.results;
+			}
+		}
 	}
 })();
