@@ -42,10 +42,12 @@
 				return datacontext.resource.getPlanItemById(parseInt(vm.planItemId))
 					.then(function(data) {
 						//applyFilter();
-						return vm.planItem = data;
+						vm.planItem = data;
+						return vm.planItem;
 					});
 			} else {
-				return vm.planItem = datacontext.resource.createPlanItem(vm.eventureId);
+				vm.planItem = datacontext.resource.createPlanItem(vm.eventureId);
+				return vm.planItem;
 			}
 
 		}
@@ -54,7 +56,8 @@
 			return datacontext.resource.getResourcesByOwnerId(vm.ownerId)
 				.then(function(data) {
 					//applyFilter();
-					return vm.resources = data;
+					vm.resources = data;
+					return vm.resources;
 				});
 		}
 	  

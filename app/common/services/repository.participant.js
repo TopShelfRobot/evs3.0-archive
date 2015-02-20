@@ -64,7 +64,7 @@
 			function querySucceeded(data) {
 				return data.results[0];
 			}
-		};
+		}
 
 		function getAmountTypes() {
 			var self = this;
@@ -89,7 +89,7 @@
 			function querySucceeded(data) {
 				return data.results[0];
 			}
-		};
+		}
 
 		function getOwnerInfo(email, ownerId) {
 			var self = this;
@@ -105,7 +105,7 @@
 			function querySucceeded(data) {
 				return data.results[0];
 			}
-		};
+		}
 
 		function getParticipantById(partId) {
 			var self = this;
@@ -195,12 +195,12 @@
 				.where(p1.and(p2));
 
 			return self.manager.executeQuery(query)
-				.then(querySucceeded, self._queryFailed)
+				.then(querySucceeded, self._queryFailed);
 
 			function querySucceeded(data) {
 				return data.results;
 			}
-		};
+		}
 
 		function getParticipantsBySearchingName(str) {
 			var self = this;

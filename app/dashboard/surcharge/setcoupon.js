@@ -43,10 +43,12 @@
 				return datacontext.surcharge.getCouponById(vm.couponId)
 					.then(function(data) {
 						//applyFilter();
-						return vm.coupon = data;
+						vm.coupon = data;
+						return vm.coupon;
 					});
 			} else {
-				return vm.coupon = datacontext.surcharge.createCoupon();
+				vm.coupon = datacontext.surcharge.createCoupon();
+				return vm.coupon;
 			}
 		}
 
@@ -61,7 +63,8 @@
 			return datacontext.eventure.getEventuresByOwnerId(vm.ownerId)
 				.then(function(data) {
 					//applyFilter();
-					return vm.eventures = data;
+					vm.eventures = data;
+					return vm.eventures;
 				});
 		}
 
@@ -69,7 +72,8 @@
 			return datacontext.eventure.getEventureListsByOwnerId(vm.ownerId)
 				.then(function(data) {
 					//applyFilter();
-					return vm.listings = data;
+					vm.listings = data;
+					return vm.listings;
 				});
 		}
 

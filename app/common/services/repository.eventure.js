@@ -229,12 +229,12 @@
             function querySucceeded(data) {
                 return data.results;
             }
-        };
+        }
 
         function createGroup(eventureListId) {
             var self = this;
             return self.manager.createEntity('EventureGroup',
                 { eventureListId: eventureListId, capacity: 0, active: true });
-        };
+        }
     }
 })();

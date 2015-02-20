@@ -88,7 +88,8 @@
 		function Capacity() {
 		  return datacontext.analytic.getCapacityByEventureId(vm.eventureId)
 			.then(function (data) {
-			  return vm.capacity = data;
+				vm.capacity = data;
+			  return vm.capacity;
 			});
 		}
 
@@ -463,7 +464,7 @@
 				.catch(function(err){
 					console.log("err:", err);
 				});
-		}
+		};
 	}
 
 })();

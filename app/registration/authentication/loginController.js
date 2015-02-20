@@ -55,7 +55,7 @@
                            }
                            else {
                                cart.houseId = data.id;
-                               userAgent.logAgentInfo(config.owner.ownerId, data.id, 'requestToken')  //log browner/ip
+                               userAgent.logAgentInfo(config.owner.ownerId, data.id, 'requestToken');  //log browner/ip
                                $location.path(cart.navUrl);
                                //this is wil's trying to pass in path
                                //if (typeof $scope.requestPath === 'undefined') {
@@ -106,7 +106,7 @@
                  });
                 }
             });
-        }
+        };
     }
     angular.module("evReg").controller(controllerId, ["$scope", "$location", "$routeParams", "UserAgent", "authService", "datacontext", "common", "CartModel", "config", "ngAuthSettings", controller]);
 })();

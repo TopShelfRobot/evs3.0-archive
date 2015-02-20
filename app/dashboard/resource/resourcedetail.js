@@ -27,9 +27,10 @@
 			//    resourceId = parseInt(routeData.id);
 			return datacontext.resource.getResourceById(vm.resourceId)
 				.then(function (data) {
-					return vm.resource = data;
+					vm.resource = data;
+					return vm.resource;
 				});
-		};
+		}
 
 
 		vm.saveAndNav = function () {

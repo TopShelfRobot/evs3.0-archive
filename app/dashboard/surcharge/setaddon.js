@@ -34,10 +34,12 @@
                 return datacontext.surcharge.getAddonById(vm.addonId)
                     .then(function(data) {
                         //applyFilter();
-                        return vm.addon = data;
+						vm.addon = data;
+                        return vm.addon;
                     });
             } else {
-                return vm.addon = datacontext.surcharge.createAddon();
+				vm.addon = datacontext.surcharge.createAddon();
+                return vm.addon;
             }
         }
 
@@ -45,7 +47,8 @@
             return datacontext.eventure.getEventuresByOwnerId(vm.ownerId)
                 .then(function(data) {
                     //applyFilter();
-                    return vm.eventures = data;
+					vm.eventures = data;
+                    return vm.eventures;
                 });
         }
 
@@ -53,7 +56,8 @@
             return datacontext.eventure.getEventureListsByOwnerId(vm.ownerId)
                 .then(function(data) {
                     //applyFilter();
-                    return vm.listings = data;
+					vm.listings = data;
+                    return vm.listings;
                 });
         }
       

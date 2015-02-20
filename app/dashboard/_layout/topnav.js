@@ -16,7 +16,7 @@
             // $location.path('/login');
 			$window.location.href = "/dash.html#/login";
 			$window.location.reload();
-        }
+        };
 
         vm.authentication = authService.authentication;
 
@@ -43,5 +43,5 @@
             var menuName = route.config.title;
             return $route.current.title.substr(0, menuName.length) === menuName ? 'active' : '';
         }
-    };
+    }
 })();

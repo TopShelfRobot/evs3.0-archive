@@ -862,7 +862,7 @@
 			return Q.all([getEventures()]);   //Q wraps data call in promise  //, getCartItems()
 		};
 
-		var datacontext = {
+		var dc = {
 			//Eventure
 			//createEventure: createEventure,
 			//getEventureById: getEventureById,
@@ -958,7 +958,7 @@
 			saveChanges: saveChanges
 		};
 
-		return datacontext;
+		return dc;
 
 		//#region Internal methods
 

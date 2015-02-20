@@ -310,8 +310,7 @@
 						title: "Total Paid",
 						//width: "120px",
 						format: "{0:c}"
-				}
-				, {
+				}, {
 						field: "balance",
 						title: "Balance",
 						//width: "120px",

@@ -1,5 +1,4 @@
-;
-(function() {
+;(function() {
 
 	function Directive() {
 		return {
@@ -30,7 +29,7 @@
 					return view; //converted
 				});
 			}
-		}
+		};
 	}
 
 	angular.module("common").directive('dateInput', [Directive]);

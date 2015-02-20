@@ -55,7 +55,7 @@
 		};
 
 		$scope.prevPage = function () {
-			if (currentPage != 0) {
+			if (currentPage !== 0) {
 				currentPage--;
 				$scope.eventures = all.slice(currentPage * viewLength, (currentPage + 1) * viewLength);
 				$location.hash("top");

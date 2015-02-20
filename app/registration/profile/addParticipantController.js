@@ -53,10 +53,10 @@
 		promises.push(
 			datacontext.participant.getParticipantById(cart.houseId)
 				.then(function(owner){
-					for(key in owner){
-						if(key == "city"
-							|| key == "phoneMobile" || key == "state" || key == "street1"
-							|| key == "zip" || key == "email"){
+					for(var key in owner){
+						if(key == "city" ||  
+							key == "phoneMobile" || key == "state" || key == "street1" || 
+							key == "zip" || key == "email"){
 							$scope.participant[key] = owner[key];
 						}
 					}
@@ -75,7 +75,7 @@
 				var newPart = datacontext.participant.createParticipant(cart.ownerId, cart.houseId, $scope.participant.email);
 				$scope.date.dateBirth = moment($scope.date.dateBirth).toISOString();
 				$scope.participant.dateBirth = $scope.date.dateBirth;
-				for(key in $scope.participant){
+				for(var key in $scope.participant){
 					newPart[key] = $scope.participant[key];
 				}
 				datacontext.save()
@@ -87,7 +87,7 @@
 				toastr.options = {
 					'positionClass': 'toast-bottom-right'
 				};
-				toastr['error']('Please provide all requested information.');
+				toastr.error('Please provide all requested information.');
 			}
 		};
 

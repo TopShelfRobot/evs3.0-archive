@@ -31,11 +31,13 @@
 				return datacontext.volunteer.getVolunteerJobById(vm.jobId)
 				  .then(function(data) {
 						//applyFilter();
-						return vm.job = data;
+						vm.job = data;
+						return vm.job;
 					});
 		  }
 		  else {
-			  return vm.job = datacontext.volunteer.createVolunteerJob(vm.eventureId);
+			  vm.job = datacontext.volunteer.createVolunteerJob(vm.eventureId);
+			  return vm.job;
 		  }
 					
 		}
@@ -48,7 +50,8 @@
 						vm.opened.push(false);
 					}
 
-					return vm.shifts = data;
+					vm.shifts = data;
+					return vm.shifts;
 				});
 		  }
 		}

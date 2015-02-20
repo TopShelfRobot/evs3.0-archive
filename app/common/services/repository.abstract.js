@@ -38,7 +38,8 @@
             if (value === undefined) {
                 return this.isLoaded; // get
             }
-            return this.isLoaded = value; // set
+			this.isLoaded = value; // set
+            return this.isLoaded; // set
         }
 
         function _getAllLocal(resource, ordering, predicate) {

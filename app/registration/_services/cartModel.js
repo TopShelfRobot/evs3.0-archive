@@ -103,11 +103,11 @@
 
 		cart.processCartRules = function () {
 			//clear all rules
-			cart.surcharges = []
+			cart.surcharges = [];
 			var regCount = 0;
 			var regTotalAmount = 0;
-
-			for (var i = 0; i < cart.registrations.length; i++) {
+			var i, key;
+			for (i = 0; i < cart.registrations.length; i++) {
 				var currentReg = cart.registrations[i];
 				regTotalAmount = regTotalAmount + currentReg.fee;
 				regCount++;
@@ -139,10 +139,11 @@
 				cart.surcharges.push(new surcharge('Online Service Fee', feeAmount.toFixed(2), 'cartRule', 0, 0, 0));
 			}
 
+			var items = {};
+			var reg;
+			var discount;
 			if(cart.regSettings.isMultiParticipantDiscountCartRule){
-				var items = {}; // hash table with eventureListId and hash of count and cost
-				var reg;
-				for(var i = 0; i < cart.registrations.length; i++){
+				for(i = 0; i < cart.registrations.length; i++){
 					reg = cart.registrations[i];
 					if(typeof items[reg.eventureListId] === "undefined"){
 						items[reg.eventureListId] = {cnt: 0, cost: 0};
@@ -150,17 +151,17 @@
 					items[reg.eventureListId].cnt++;
 					items[reg.eventureListId].cost += reg.fee;
 				}
-				for(var key in items){
+				for(key in items){
 					if(items[key].cnt > 1){
 						// multiParticipantDiscountAmount: 0,
 						// multiParticipantDiscountAmountType: 0,
 						switch(cart.regSettings.multiParticipantDiscountAmountType){
 						case "Percent":  // precentage
-							var discount = -1 * items[key].cost * (cart.regSettings.multiParticipantDiscountAmount / 100);
+							discount = -1 * items[key].cost * (cart.regSettings.multiParticipantDiscountAmount / 100);
 							cart.surcharges.push(new surcharge("percentage based multi-participant discount", discount.toFixed(2), 'cartRule', key, 0, 0));
 							break;
 						case "Dollars":  // flat rate
-							var discount = -1 * cart.regSettings.multiParticipantDiscountAmount;
+							discount = -1 * cart.regSettings.multiParticipantDiscountAmount;
 							cart.surcharges.push(new surcharge("flat fee based multi-participant discount", discount.toFixed(2), 'cartRule', key, 0, 0));
 							break;
 						}
@@ -169,9 +170,7 @@
 			}
 
 			if(cart.regSettings.isMultiRegistrationDiscountCartRule){
-				var items = {}; // hash table with participantId and hash of count and cost.
-				var reg;
-				for(var i = 0; i < cart.registrations.length; i++){
+				for(i = 0; i < cart.registrations.length; i++){
 					reg = cart.registrations[i];
 					if(typeof items[reg.partId] === "undefined"){
 						items[reg.partId] = {cnt: 0, cost: 0};
@@ -179,17 +178,17 @@
 					items[reg.partId].cnt++;
 					items[reg.partId].cost += reg.fee;
 				}
-				for(var key in items){
+				for(key in items){
 					if(items[key].cnt > 1){
 						// multiRegistrationDiscountAmount: 0,
 						// multiRegistrationDiscountAmountType: 0,
 						switch(cart.regSettings.multiRegistrationDiscountAmountType){
 						case "Percent":  // precentage
-							var discount = -1 * items[key].cost * (cart.regSettings.multiRegistrationDiscountAmount / 100);
+							discount = -1 * items[key].cost * (cart.regSettings.multiRegistrationDiscountAmount / 100);
 							cart.surcharges.push(new surcharge("percentage based multi-registration discount", discount.toFixed(2), 'cartRule', key, 0, 0));
 							break;
 						case "Dollars":  // flat rate
-							var discount = -1 * cart.regSettings.multiRegistrationDiscountAmount;
+							discount = -1 * cart.regSettings.multiRegistrationDiscountAmount;
 							cart.surcharges.push(new surcharge("flat fee based multi-registration discount", discount.toFixed(2), 'cartRule', key, 0, 0));
 							break;
 						}
@@ -310,7 +309,7 @@
 			me.lineTotal = quantity * fee;
 			me.eventureListTypeId = eventureListTypeId;
 			me.isBundle = isBundle;
-		};
+		}
 
 		function surcharge(chargeDesc, amount, chargeType, listId, partId, couponId, context) {
 			var me = this;
@@ -320,8 +319,8 @@
 			me.listId = listId;
 			me.partId = partId;
 			me.couponId = couponId;
-		};
+		}
 
 		return cart;
 	}
-})()
+})();

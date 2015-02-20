@@ -37,10 +37,12 @@
                 return datacontext.resource.getExpenseById(vm.expenseId)
                     .then(function(data) {
                         //applyFilter();
-                        return vm.expense = data;
+						vm.expense = data;
+                        return vm.expense;
                     });
             } else {
-                return vm.expense = datacontext.resource.createExpense();
+                vm.expense = datacontext.resource.createExpense();
+				return vm.expense;
             }
         }
 
@@ -48,7 +50,8 @@
             return datacontext.resource.getResourceItemCategoriesByOwnerId(vm.ownerId)
                 .then(function(data) {
                     //applyFilter();
-                    return vm.categories = data;
+					vm.categories = data;
+                    return vm.categories;
                 });
         }
 
@@ -56,7 +59,8 @@
             return datacontext.resource.getResourceItemsByOwnerId(vm.ownerId)
                 .then(function(data) {
                     //applyFilter();
-                    return vm.items = data;
+					vm.items = data;
+                    return vm.items;
                 });
         }
       
@@ -85,7 +89,7 @@
     }
 })();
 
-// ﻿define(['services/logger', 'services/datacontext', 'config'],   //, 'viewmodels/shared/debug'
+// define(['services/logger', 'services/datacontext', 'config'],   //, 'viewmodels/shared/debug'
 //
 //     function (logger, datacontext, config) {
 //

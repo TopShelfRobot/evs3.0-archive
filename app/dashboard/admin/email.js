@@ -30,14 +30,16 @@
         function getEvents() {
             return datacontext.eventure.getEventuresByOwnerId(vm.ownerId)
                 .then(function (data) {
-                    return vm.eventures = data;
+					vm.eventures = data;
+                    return vm.eventures;
                 });
         }
 
         function getListings() {
             return datacontext.eventure.getEventureListsByOwnerId(vm.ownerId)
                 .then(function (data) {
-                    return vm.listings = data;
+					vm.listings = data;
+                    return vm.listings;
                 });
         }
 
@@ -69,7 +71,7 @@
 				    console.log('fin');
 				    //$scope.submitDisabled = false;
 				});
-        }
+        };
 
     }
 

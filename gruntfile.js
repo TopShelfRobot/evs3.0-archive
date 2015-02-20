@@ -19,25 +19,25 @@ module.exports = function (grunt) {
 			target: {
 				files: {
 					'scss/rawcss/framework.css': ['scss/rawcss/kendo.common.min.css',
-                        'scss/rawcss/kendo.common-material.core.min.css',
-                        'scss/rawcss/kendo.common-material.min.css',
-                        'scss/rawcss/kendo.material.min.css',
-                        'scss/rawcss/kendo.material.mobile.min.css',
-                        'scss/rawcss/kendo.mobile.material.min.css',
-                        'scss/rawcss/kendo.dataviz.min.css',
-                        'scss/rawcss/kendo.dataviz.default.min.css',
-                        'scss/rawcss/kendo.dataviz.material.min.css',
-                        'scss/rawcss/bootstrap.css',
-                        'scss/rawcss/breeze.directives.css',
-                        'scss/rawcss/toastr.css',
-                        'scss/rawcss/nsPopover.custom.css',
-                        'scss/rawcss/font-awesome.min.css',
-                        'scss/rawcss/social-buttons.css'],
+						'scss/rawcss/kendo.common-material.core.min.css',
+						'scss/rawcss/kendo.common-material.min.css',
+						'scss/rawcss/kendo.material.min.css',
+						'scss/rawcss/kendo.material.mobile.min.css',
+						'scss/rawcss/kendo.mobile.material.min.css',
+						'scss/rawcss/kendo.dataviz.min.css',
+						'scss/rawcss/kendo.dataviz.default.min.css',
+						'scss/rawcss/kendo.dataviz.material.min.css',
+						'scss/rawcss/bootstrap.css',
+						'scss/rawcss/breeze.directives.css',
+						'scss/rawcss/toastr.css',
+						'scss/rawcss/nsPopover.custom.css',
+						'scss/rawcss/font-awesome.min.css',
+						'scss/rawcss/social-buttons.css'],
 					'Content/css/reg-style.css': ['scss/rawcss/framework.css',
-                        'scss/rawcss/registration.css'],
+						'scss/rawcss/registration.css'],
 					'Content/css/dash-style.css': ['scss/rawcss/framework.css',
 												'scss/rawcss/registration.css',
-                        'scss/rawcss/dashboard.css']
+						'scss/rawcss/dashboard.css']
 				}
 			}
 		},
@@ -50,6 +50,19 @@ module.exports = function (grunt) {
 				}
 			}
 		},
+		jshint: {
+			options: {
+				multistr: true,
+				eqnull: true,
+				ignores: "app/**/*.min.js",
+				force: true,
+				validthis: true,
+				newcap: false,
+			},
+			source: [
+				"app/**/*.js"
+			]
+		},
 		watch: {
 			css: {
 				files: ['scss/*.scss', 'scss/partials/*.scss'],
@@ -58,13 +71,18 @@ module.exports = function (grunt) {
 					spawn: false,
 				},
 			},
+			jshint: {
+				files: ['app/**/*.js'],
+				tasks: ["jshint"],
+			},
 		}
 	});
 	// Individual tasks
 	grunt.loadNpmTasks('grunt-contrib-sass');
 	grunt.loadNpmTasks('grunt-contrib-cssmin');
 	grunt.loadNpmTasks('grunt-contrib-watch');
-	grunt.loadNpmTasks('grunt-contrib-connect')
-		// Default grunt tasks
-	grunt.registerTask('default', ['sass', 'cssmin']);
+	grunt.loadNpmTasks('grunt-contrib-jshint');
+	grunt.loadNpmTasks('grunt-contrib-connect');
+	// Default grunt tasks
+	grunt.registerTask('default', ['sass','cssmin']);
 };

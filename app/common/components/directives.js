@@ -184,7 +184,11 @@
                 });
 
                 function toggleIcon() {
-                    $win.scrollTop() > 300 ? element.slideDown(): element.slideUp();
+					if($win.scrollTop() > 300){
+						element.slideDown();
+					}else{
+						element.slideUp();
+					}
                 }
             }
         }
