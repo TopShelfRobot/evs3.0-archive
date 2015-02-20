@@ -10,9 +10,9 @@
       <div class="col-lg-12 text-center">
         <div>
           <div class="btn-group">
-            <button type="button" class="btn btn-primary" ng-model="vm.refundType" btn-radio="'order'">Order Refund</button>
-            <button type="button" class="btn btn-primary" ng-model="vm.refundType" btn-radio="'reg'">Registration Refund</button>
-            <button type="button" class="btn btn-primary" ng-model="vm.refundType" btn-radio="'Partial'">Partial Refund</button>
+            <button type="button" class="btn btn-primary" ng-model="vm.source.description" btn-radio="'order'">Order Refund</button>
+            <button type="button" class="btn btn-primary" ng-model="vm.source.description" btn-radio="'reg'">Registration Refund</button>
+            <button type="button" class="btn btn-primary" ng-model="vm.source.description" btn-radio="'partial'">Partial Refund</button>
           </div>
         </div>
       </div>
@@ -20,17 +20,18 @@
     <br>
     <div class="row">
       <div class="col-lg-12">
-        <h4 class="text-center primary">A refund of the amount { refund } will be issued to { participant.FirstName } { participant.LastName }.</h4>
+        <h4 class="text-center primary">A refund of the amount {{ vm.source.amount | currency }} will be issued to {{ vm.order.participant }}.</h4>
+        <h3 class="text-center danger">{{vm.refundErrors}}</h3>
       </div>
     </div>
     <br>
     <div class="row">
       <div class="col-sm-8 col-offset-sm-4">
-        <div class="form-group" ng-show="vm.refundType === 'Partial'">
+        <div class="form-group" ng-if="vm.source.description === 'partial'">
           <label for="RefundAmount" class="col-lg-6 control-label">Refund Amount:</label>
           <div class="col-lg-6">
             <div class="input-group"> <span class="input-group-addon">$</span>
-              <input type="number" class="form-control" name="RefundAmount" placeholder="0.00" />
+              <input type="number" class="form-control" name="RefundAmount" placeholder="0.00" ng-model="vm.source.amount" />
             </div>
           </div>
         </div>
@@ -38,8 +39,8 @@
     </div>
   </form>
   <div class="row">
-    <div class="col-lg-12 clearfix">
-      <button class="btn btn-danger pull-right"><em class="fa fa-warning"></em>&nbsp;Issue Refund</button>
+    <div class="col-lg-12">
+      <button class="btn btn-danger pull-right" ng-click="vm.refund()" ng-disabled="vm.refundDisabled"><em class="fa fa-warning"></em>&nbsp;Issue Refund</button>
     </div>
   </div>
 </section>

@@ -45,6 +45,11 @@
     <Content Include="app\common\services\helpers.js" />
     <Content Include="app\common\services\model.js" />
     <Content Include="app\common\services\userAgent.js" />
+    <Content Include="app\dashboard\admin\setrefund.js" />
+    <Content Include="app\dashboard\analytic\coupon.html" />
+    <Content Include="app\dashboard\analytic\coupon.js" />
+    <Content Include="app\dashboard\analytic\coupondetail.html" />
+    <Content Include="app\dashboard\analytic\coupondetail.js" />
     <Content Include="app\dashboard\analytic\demographics.html" />
     <Content Include="app\dashboard\analytic\demographics.js" />
     <Content Include="app\dashboard\admin\setowner.html" />
@@ -105,6 +110,8 @@
     <Content Include="app\dashboard\team\teamcenter.js" />
     <Content Include="app\dashboard\volunteer\volunteercenter.html" />
     <Content Include="app\dashboard\volunteer\volunteercenter.js" />
+    <Content Include="app\dashboard\_components\fileUpload\angular-file-upload-shim.min.js" />
+    <Content Include="app\dashboard\_components\fileUpload\angular-file-upload.min.js" />
     <Content Include="app\dashboard\_layout\shell.js" />
     <Content Include="app\registration\app.js" />
     <Content Include="app\registration\config.exceptionHandler.js" />

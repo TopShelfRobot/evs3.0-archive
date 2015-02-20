@@ -1,31 +1,29 @@
 <section data-ng-controller="teamcenter as vm">
-  <div class="row">
-    <div class="col-lg-12">
-      <h1>Registered Teams</h1>
-      <p class="text-muted">Manage each team and their registrations.</p>
-      <div id="partgrid" kendo-grid="vm.teamgrid" k-options="vm.teamGridOptions"></div>
-      <br>
-      <button class="btn btn-success" ng-click="vm.inviteTeams()"><i class="glyphicon glyphicon-send"></i>&nbsp;Send Team Invitations</button>
-    </div>
+	<div class="row">
+		<div class="col-lg-12">
+			<h1>Registered Teams</h1>
+			<p class="text-muted">Manage each team and their registrations.</p>
+			<div class="table-responsive">
+				<div id="partgrid" kendo-grid="vm.teamgrid" k-options="vm.teamGridOptions"></div>
+			</div>
+			<br>
+			<button class="btn btn-success" ng-click="vm.inviteTeams()"><i class="glyphicon glyphicon-send"></i>&nbsp;Send Team Invitations</button>
+		</div>
 
-    <!-- /4 -->
-  </div>
-  <!-- /row -->
+		<!-- /4 -->
+	</div>
+	<!-- /row -->
 </section>
 
 
 <script type="text/x-kendo-template" id="template">
-  <div kendo-grid="vm.detailgrid" k-options="vm.detailGridOptions(dataItem)"></div>
+	<div kendo-grid="vm.detailgrid" k-options="vm.detailGridOptions(dataItem)"></div>
 </script>
 
 <script type="text/x-kendo-template" id="paymenttemplate">
-    <div kendo-grid="vm.paymentgrid" k-options="vm.paymentDetailGridOptions(dataItem)"></div>
+	<div kendo-grid="vm.paymentgrid" k-options="vm.paymentDetailGridOptions(dataItem)"></div>
 </script>
 
 <script type="text/x-kendo-template" id="balanceTemplate">
-    #if(eventureListType === 4){#
-        N/A
-    #}else{#
-        #: '$' + balance.toFixed(2) #
-    #}#
+	#if(eventureListType === 4){# N/A #}else{# #: '$' + balance.toFixed(2) # #}#
 </script>

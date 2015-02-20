@@ -1,41 +1,41 @@
 <section ng-controller="couponAnalytics as vm">
-    <div class="row">
-        <div class="col-lg-12">
-            <a ng-href="#/enterpriseeventure/{{vm.eventureId}}" class="btn btn-info btn-sm">
-                <em class="glyphicon glyphicon-circle-arrow-left"></em>&nbsp;Back</a>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-lg-12">
-            <h1></h1>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-sm-8">
-            <!--//All Coupons Pie Chart-->
-            <div kendo-chart k-title="{ text: 'All Coupons', position: 'top' }" k-series-defaults="{ type: 'pie' }" k-series="[{
+	<div class="row">
+		<div class="col-lg-12">
+			<a ng-href="#/enterpriseeventure/{{vm.eventureId}}" class="btn btn-info btn-sm">
+				<em class="glyphicon glyphicon-circle-arrow-left"></em>&nbsp;Back</a>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-lg-12">
+			<h1></h1>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-sm-8">
+			<!--//All Coupons Pie Chart-->
+			<div kendo-chart k-title="{ text: 'All Coupons', position: 'top' }" k-series-defaults="{ type: 'pie' }" k-series="[{
                                 field: 'value',
                                 categoryField: 'key',
                                 padding: 0
                               }]" k-data-source="vm.couponUse"></div>
-        </div>
-        <div class="col-sm-4">
-            <!-- Total Numbers -->
-            <ul class="list-group">
-                <li class="list-group-item list-group-item-info">
-                    <h4 class="list-group-item-heading">Total Coupon Use</h4>
-                </li>
-                <li class="list-group-item">Total Coupons Used:&nbsp;{{vm.couponTotals.used || 0}}</li>
-                <li class="list-group-item"> {{vm.couponTotals.value || 0 | currency}}</li>
-            </ul>
+		</div>
+		<div class="col-sm-4">
+			<!-- Total Numbers -->
+			<ul class="list-group">
+				<li class="list-group-item list-group-item-info">
+					<h4 class="list-group-item-heading">Total Coupon Use</h4>
+				</li>
+				<li class="list-group-item">Total Coupons Used:&nbsp;{{vm.couponTotals.used || 0}}</li>
+				<li class="list-group-item"> {{vm.couponTotals.value || 0 | currency}}</li>
+			</ul>
 
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="table-responsive">
-                <div id="coupongrid" kendo-grid="vm.coupongrid" k-options="vm.couponGridOptions"></div>
-            </div>
-        </div>
-    </div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-lg-12">
+			<div class="table-responsive">
+				<div id="coupongrid" kendo-grid="vm.coupongrid" k-options="vm.couponGridOptions"></div>
+			</div>
+		</div>
+	</div>
 </section>
