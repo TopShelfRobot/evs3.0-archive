@@ -73,7 +73,8 @@
 
 		vm.updateUserRoles = function () {
 			console.log('selectedEmployee:', vm.selectedUser.email);
-			$http.get(config.remoteApiName + 'Account/GetUserRolesByUserId/' + vm.selectedUser.email)
+		    $http.get(config.remoteApiName + 'Account/GetUserRolesByUserId/' + vm.selectedUser.email + "/")
+		    //$http.get(config.remoteApiName + 'Account/GetUserRolesByUserId/')
 				.then(function (roles) {
 					console.table(roles);
 				});
