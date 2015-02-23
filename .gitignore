@@ -249,3 +249,5 @@ pip-log.txt
 Content/Images/*
 
 node_modules/*
+
+.jshintrc
