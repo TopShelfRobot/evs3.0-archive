@@ -1,37 +1,53 @@
 <ul class="nav">
-  <li class="text-center"><a data-toggle="offcanvas" class="hidden-md  hidden-lg text-center"><i class="glyphicon glyphicon-chevron-right"></i></a></li>
+	<li class="text-center"><a data-toggle="offcanvas" class="hidden-md  hidden-lg text-center"><i class="glyphicon glyphicon-chevron-right"></i></a>
+	</li>
 </ul>
 <ul class="nav visible-md visible-lg text-center" id="lg-menu">
-  <li class="sidebar-logo"><img class="sidebar-img" ng-src="content/images/{{vm.logo || 'logo.png'}}" /></li>
-  <li /></li>
-  <li><a href="#/seteventure"><i class="glyphicon glyphicon-th"></i><br>New Event</a></li>
-  <!-- <li><a href="#/setlist"><i class="glyphicon glyphicon-list-alt"></i><br>New Listing</a></li> -->
-  <li><a href="#/manreg"><i class="glyphicon glyphicon-user"></i><br>Manual Registration</a></li>
-  <li><a href="#/setcoupon"><i class="glyphicon glyphicon-tag"></i><br>New Coupon</a></li>
-  <!--<li><a href="#/setaddon"><i class="glyphicon glyphicon-shopping-cart"></i><br>New Addon</a></li>-->
-  <li><a href="#/setresource"><i class="glyphicon glyphicon-stats"></i><br>New Resource</a></li>
-  <li><a href="#/email"><i class="glyphicon glyphicon-send"></i><br>New Email</a></li>
+	<li class="sidebar-logo"><img class="sidebar-img" ng-src="content/images/{{vm.logo || 'logo.png'}}" />
+	</li>
+	<li /></li>
+	<li><a href="#/seteventure"><i class="glyphicon glyphicon-th"></i><br>New Event</a>
+	</li>
+	<!-- <li><a href="#/setlist"><i class="glyphicon glyphicon-list-alt"></i><br>New Listing</a></li> -->
+	<li><a href="#/manreg"><i class="glyphicon glyphicon-user"></i><br>Manual Registration</a>
+	</li>
+	<li><a href="#/setcoupon"><i class="glyphicon glyphicon-tag"></i><br>New Coupon</a>
+	</li>
+	<!--<li><a href="#/setaddon"><i class="glyphicon glyphicon-shopping-cart"></i><br>New Addon</a></li>-->
+	<li><a href="#/setresource"><i class="glyphicon glyphicon-stats"></i><br>New Resource</a>
+	</li>
+	<li><a href="#/email"><i class="glyphicon glyphicon-send"></i><br>New Email</a>
+	</li>
+	<li><a href="#/employee"><i class="fa fa-users"></i><br>Employee Management</a>
+	</li>
 </ul>
 <!-- tiny only nav-->
 <ul class="nav hidden-md hidden-lg" id="sm-menu">
-  <li ><a href="#/seteventure" class="text-center" tooltip="New Event" tooltip-placement="right"  tooltip-trigger="mouseenter" tooltip-append-to-body="true"><i class="glyphicon glyphicon-th"></i></a></li>
-  <!-- <li><a href="#/setlist" class="text-center" tooltip="New Listing" tooltip-placement="right"  tooltip-trigger="mouseenter" tooltip-append-to-body="true"><i class="glyphicon glyphicon-list-alt"></i></a></li> -->
-  <li><a href="#/manreg" class="text-center" tooltip="Manual Registration" tooltip-placement="right"  tooltip-trigger="mouseenter" tooltip-append-to-body="true"><i class="glyphicon glyphicon-user"></i></a></li>
-  <li><a href="#/setcoupon" class="text-center" tooltip="New Coupon" tooltip-placement="right"  tooltip-trigger="mouseenter" tooltip-append-to-body="true"><i class="glyphicon glyphicon-tag"></i></a></li>
-  <!--<li><a href="#/setaddon" class="text-center" tooltip="New Addon" tooltip-placement="right"  tooltip-trigger="mouseenter" tooltip-append-to-body="true"><i class="glyphicon glyphicon-shopping-cart"></i></a></li>-->
-  <li><a href="#/setresource" class="text-center" tooltip="New Resource" tooltip-placement="right"  tooltip-trigger="mouseenter" tooltip-append-to-body="true"><i class="glyphicon glyphicon-stats"></i></a></li>
-    <li><a href="#/email" class="text-center" tooltip="New Email" tooltip-placement="right"  tooltip-trigger="mouseenter" tooltip-append-to-body="true"><i class="glyphicon glyphicon-send"></i></a></li>
+	<li><a href="#/seteventure" class="text-center" tooltip="New Event" tooltip-placement="right" tooltip-trigger="mouseenter" tooltip-append-to-body="true"><i class="glyphicon glyphicon-th"></i></a>
+	</li>
+	<!-- <li><a href="#/setlist" class="text-center" tooltip="New Listing" tooltip-placement="right"  tooltip-trigger="mouseenter" tooltip-append-to-body="true"><i class="glyphicon glyphicon-list-alt"></i></a></li> -->
+	<li><a href="#/manreg" class="text-center" tooltip="Manual Registration" tooltip-placement="right" tooltip-trigger="mouseenter" tooltip-append-to-body="true"><i class="glyphicon glyphicon-user"></i></a>
+	</li>
+	<li><a href="#/setcoupon" class="text-center" tooltip="New Coupon" tooltip-placement="right" tooltip-trigger="mouseenter" tooltip-append-to-body="true"><i class="glyphicon glyphicon-tag"></i></a>
+	</li>
+	<!--<li><a href="#/setaddon" class="text-center" tooltip="New Addon" tooltip-placement="right"  tooltip-trigger="mouseenter" tooltip-append-to-body="true"><i class="glyphicon glyphicon-shopping-cart"></i></a></li>-->
+	<li><a href="#/setresource" class="text-center" tooltip="New Resource" tooltip-placement="right" tooltip-trigger="mouseenter" tooltip-append-to-body="true"><i class="glyphicon glyphicon-stats"></i></a>
+	</li>
+	<li><a href="#/email" class="text-center" tooltip="New Email" tooltip-placement="right" tooltip-trigger="mouseenter" tooltip-append-to-body="true"><i class="glyphicon glyphicon-send"></i></a>
+	</li>
+	<li><a href="#/employee" class="text-center" tooltip="Employee Management" tooltip-placement="right" tooltip-trigger="mouseenter" tooltip-append-to-body="true"><i class="fa fa-users"></i></a>
+	</li>
 </ul>
 
 <script>
-/* off-canvas sidebar toggle */
-$('[data-toggle=offcanvas]').click(function() {
-  	$(this).toggleClass('visible text-center');
-    $(this).find('i').toggleClass('glyphicon-chevron-right glyphicon-chevron-left');
-    $('.row-offcanvas').toggleClass('active');
-    $('#lg-menu').toggleClass('visible-md').toggleClass('visible-lg');
-    $('.sidebar-heading').toggleClass('visible').toggleClass('hidden');
-    $('#sm-menu').toggleClass('visible-sm').toggleClass('hidden-sm');
-    $('#btnShow').toggle();
-});
+	/* off-canvas sidebar toggle */
+	$('[data-toggle=offcanvas]').click(function () {
+		$(this).toggleClass('visible text-center');
+		$(this).find('i').toggleClass('glyphicon-chevron-right glyphicon-chevron-left');
+		$('.row-offcanvas').toggleClass('active');
+		$('#lg-menu').toggleClass('visible-md').toggleClass('visible-lg');
+		$('.sidebar-heading').toggleClass('visible').toggleClass('hidden');
+		$('#sm-menu').toggleClass('visible-sm').toggleClass('hidden-sm');
+		$('#btnShow').toggle();
+	});
 </script>

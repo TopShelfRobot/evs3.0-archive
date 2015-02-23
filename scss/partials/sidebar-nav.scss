@@ -51,7 +51,8 @@ html, body {
   width:90%;
   margin:5%;
 }
-#sidebar .nav > li > a > .glyphicon {
+#sidebar .nav > li > a > .glyphicon,
+#sidebar .nav > li > a > .fa {
   margin: 10px;
   font-size: 2em;
   color: $dark-gray;
