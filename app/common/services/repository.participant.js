@@ -3,7 +3,7 @@
 
 	var serviceId = 'repository.participant';
 
-	angular.module('common').factory(serviceId, ['breeze', 'repository.abstract', "config", "CartModel", repositoryParticipant]);
+	angular.module('common').factory(serviceId, ['breeze', 'repository.abstract', 'config', 'CartModel', repositoryParticipant]);
 
 	function repositoryParticipant(breeze, abstractRepository, config, cart) {
 		var entityName = 'participant';
@@ -156,8 +156,8 @@
 		function getParticipantByEmailAddress(partEmail, ownerId) {
 			//alert('in the dc');
 			var self = this;
-			var pred = predicate.create("email", "==", partEmail)
-				.and("ownerId", "==", ownerId);
+			var pred = predicate.create('email', '==', partEmail)
+				.and('ownerId', '==', ownerId);
 
 			return entityQuery.from('Participants')
 				.where(pred)
@@ -188,9 +188,9 @@
 		function getParticipantsBySearchingEmail(str) {
 			var self = this;
 			var predicate = breeze.Predicate;
-			var p1 = new predicate("email", breeze.FilterQueryOp.Contains, str);
+			var p1 = new predicate('email', breeze.FilterQueryOp.Contains, str);
 			//var p2 = new predicate("ownerId", "==", config.owner.ownerId);
-			var p2 = new predicate("ownerId", "==", cart.ownerId);
+			var p2 = new predicate('ownerId', '==', cart.ownerId);
 
 			var query = entityQuery.from('Participants')
 				.where(p1.and(p2));
@@ -207,13 +207,13 @@
 			var self = this;
 			var predicate = breeze.Predicate;
 			var check = str.split(/\s/);
-			var pFirstName = new predicate("firstName", breeze.FilterQueryOp.Contains, check[0]);
-			var pName = pFirstName.or(new predicate("lastName", breeze.FilterQueryOp.Contains, check[0]));
+			var pFirstName = new predicate('firstName', breeze.FilterQueryOp.Contains, check[0]);
+			var pName = pFirstName.or(new predicate('lastName', breeze.FilterQueryOp.Contains, check[0]));
 			if (check.length > 1) {
-				pName = pFirstName.and(new predicate("lastName", breeze.FilterQueryOp.Contains, check[1]));
+				pName = pFirstName.and(new predicate('lastName', breeze.FilterQueryOp.Contains, check[1]));
 			}
 			//var pOwner = new predicate("ownerId", "==", config.owner.ownerId);
-			var pOwner = new predicate("ownerId", "==", cart.ownerId);
+			var pOwner = new predicate('ownerId', '==', cart.ownerId);
 
 			var query = entityQuery.from('Participants')
 				.where(pOwner.and(pName));
@@ -230,7 +230,7 @@
 			var self = this;
 			return self.manager.createEntity('Participant', {
 				ownerId: cart.ownerId,
-				country: "US",
+				country: 'US',
 				dateCreated: new Date()
 			});
 		}
@@ -238,11 +238,11 @@
 		function createParticipant(ownerId, email, houseId) {
 			var self = this;
 			return self.manager.createEntity('Participant', {
-				dateBirth: moment().format("MM/DD/YYYY"),
+				dateBirth: moment().format('MM/DD/YYYY'),
 				ownerId: ownerId,
 				email: email,
 				houseId: houseId,
-				country: "US"
+				country: 'US'
 			});
 		}
 
@@ -258,8 +258,8 @@
 		function getEmployeesBySearchingEmail(str) {
 			var self = this;
 			var predicate = breeze.Predicate;
-			var p1 = new predicate("email", breeze.FilterQueryOp.Contains, str);
-			var p2 = new predicate("ownerId", "==", cart.ownerId);
+			var p1 = new predicate('email', breeze.FilterQueryOp.Contains, str);
+			var p2 = new predicate('ownerId', '==', cart.ownerId);
 
 			var query = entityQuery.from('Employees')
 				.where(p1.and(p2));
@@ -276,12 +276,12 @@
 			var self = this;
 			var predicate = breeze.Predicate;
 			var check = str.split(/\s/);
-			var pFirstName = new predicate("firstName", breeze.FilterQueryOp.Contains, check[0]);
-			var pName = pFirstName.or(new predicate("lastName", breeze.FilterQueryOp.Contains, check[0]));
+			var pFirstName = new predicate('firstName', breeze.FilterQueryOp.Contains, check[0]);
+			var pName = pFirstName.or(new predicate('lastName', breeze.FilterQueryOp.Contains, check[0]));
 			if (check.length > 1) {
-				pName = pFirstName.and(new predicate("lastName", breeze.FilterQueryOp.Contains, check[1]));
+				pName = pFirstName.and(new predicate('lastName', breeze.FilterQueryOp.Contains, check[1]));
 			}
-			var pOwner = new predicate("ownerId", "==", cart.ownerId);
+			var pOwner = new predicate('ownerId', '==', cart.ownerId);
 
 			var query = entityQuery.from('Employees')
 				.where(pOwner.and(pName));
