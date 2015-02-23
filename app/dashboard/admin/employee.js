@@ -46,7 +46,6 @@
 		function getAllRoles() {
 			$http.get(config.remoteApiName + 'Account/GetAllRoles').
 			success(function (data) {
-				console.table(data);
 				multiSelect(data);
 			}).
 			error(function (data, status, headers, config) {
@@ -54,19 +53,6 @@
 				// or server returns response with an error status.
 			});
 		}
-
-		$scope.$watch('vm.selectedUser.id', function (newValue, oldValue) {
-			function getUserRolesByUserId(newValue) {
-				$http.get(config.remoteApiName + 'Account/GetUserRolesByUserId' + newValue).
-				success(function (data) {
-					//Select Assigned Roles
-				}).
-				error(function (data, status, headers, config) {
-					// called asynchronously if an error occurs
-					// or server returns response with an error status.
-				});
-			}
-		});
 
 		function multiSelect(roles) {
 			for (var i = 0; i < roles.length; i++) {
@@ -77,7 +63,7 @@
 			}
 		}
 
-		vm.selectedroles = [];
+		vm.selectedRoles = [];
 
 		vm.roleOptions = {
 			placeholder: 'Select roles...',
@@ -85,8 +71,34 @@
 			dataValueField: 'id',
 		};
 
+		vm.updateUserRoles = function () {
+			console.log('selectedEmployee:', vm.selectedUser.email);
+			$http.get(config.remoteApiName + 'Account/GetUserRolesByUserId/' + vm.selectedUser.email)
+				.then(function (roles) {
+					console.table(roles);
+				});
+			//					if (typeof(roles) === undefined) {
+			//						//Create Roles
+			//						console.log('have to create a new role set');
+			//					} else {
+			//						//Return Roles
+			//						console.table(roles);
+			//						vm.selectedRoles = roles;
+			//						return vm.selectedRoles;
+			//					}
+			//	});
+		};
+
+		vm.updateAssignedRoles = function () {
+			datacontext.save();
+		};
+
 		vm.createNewUser = function () {
 			$location.path('/employee-profile/add'); //TODO whg Should probably be a separate page for employee add
+		};
+
+		vm.saveChanges = function () {
+			datacontext.save();
 		};
 
 	}

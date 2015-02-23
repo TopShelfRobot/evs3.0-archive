@@ -40,7 +40,7 @@
 		<div class="row" ng-hide="vm.searchResults.length === 0">
 			<div class="col-xs-6 col-xs-offset-3">
 				<label>Select an Employee</label>
-				<select class="form-control" ng-model="vm.selectedUser" ng-options="(result.firstName + ' ' + result.lastName) for result in vm.searchResults">
+				<select class="form-control" ng-model="vm.selectedUser" ng-options="(result.firstName + ' ' + result.lastName) for result in vm.searchResults" ng-change="vm.updateUserRoles()">
 					<option value="">-- Choose Employee --</option>
 				</select>
 			</div>
@@ -79,7 +79,7 @@
 					<div class="form-group">
 						<label class="control-label col-lg-4">Role</label>
 						<div class="col-8 col-sm-8 col-md-8 col-lg-8">
-							<select id="userRole" kendo-multi-select="vm.multiSelect" k-options="vm.roleOptions" ng-model="vm.selectedRoles">
+							<select id="userRole" kendo-multi-select="vm.multiSelect" k-options="vm.roleOptions" ng-model="vm.selectedRoles" ng-change="vm.updateAssignedRoles()">
 							</select>
 						</div>
 					</div>
@@ -97,7 +97,7 @@
 					<em class="glyphicon glyphicon-plus-sign"></em>&nbsp;Add New Employee</button>
 			</div>
 			<div class="col-lg-2 col-lg-offset-8" ng-show="vm.selectedUser">
-				<button class="btn btn-success btn-block" ng-click="vm.selectUser()">
+				<button class="btn btn-success btn-block" ng-click="vm.saveChanges()">
 					<em class="glyphicon glyphicon-floppy-disk"></em>&nbsp;Save Changes</button>
 			</div>
 		</div>
