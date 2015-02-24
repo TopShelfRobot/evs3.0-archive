@@ -46,6 +46,7 @@
 		function getAllRoles() {
 			$http.get(config.remoteApiName + 'Account/GetAllRoles').
 			success(function (data) {
+			    console.log(data);
 				multiSelect(data);
 			}).
 			error(function (data, status, headers, config) {
@@ -58,7 +59,7 @@
 			for (var i = 0; i < roles.length; i++) {
 				vm.multiSelect.dataSource.add({
 					name: roles[i].name,
-					id: roles[i].id
+					roleId: roles[i].roleId
 				});
 			}
 		}
@@ -68,7 +69,7 @@
 		vm.roleOptions = {
 			placeholder: 'Select roles...',
 			dataTextField: 'name',
-			dataValueField: 'id',
+			dataValueField: 'roleId',
 		};
 
 		vm.updateUserRoles = function () {
@@ -76,7 +77,11 @@
 		    $http.get(config.remoteApiName + 'Account/GetUserRolesByUserId/' + vm.selectedUser.email + "/")
 		    //$http.get(config.remoteApiName + 'Account/GetUserRolesByUserId/')
 				.then(function (roles) {
-					console.table(roles);
+				    //console.table(roles);
+				    //console.log(roles.data);
+				    vm.selectedRoles = roles.data;
+				    console.log(vm.selectedRoles);
+				    return vm.selectedRoles;
 				});
 			//					if (typeof(roles) === undefined) {
 			//						//Create Roles
@@ -84,22 +89,31 @@
 			//					} else {
 			//						//Return Roles
 			//						console.table(roles);
-			//						vm.selectedRoles = roles;
-			//						return vm.selectedRoles;
+									//vm.selectedRoles = roles;
+									//return vm.selectedRoles;
 			//					}
 			//	});
 		};
 
-		vm.updateAssignedRoles = function () {
-			datacontext.save();
-		};
+		//vm.updateAssignedRoles = function () {
+		//    alert('yo yo yo');
+		//	datacontext.save();
+		//};
 
 		vm.createNewUser = function () {
 			$location.path('/employee-profile/add'); //TODO whg Should probably be a separate page for employee add
 		};
 
 		vm.saveChanges = function () {
-			datacontext.save();
+		    //alert('calling this stuff0');
+		    //$http.get(config.remoteApiName + 'Account/GetUserRolesByUserId/' + vm.selectedUser.email + "/")
+		    var source = {       
+		        'roleId': '1',
+		        'name': 'fake'
+		    };
+		    console.log(source);
+		    $http.post(config.apiPath + "api/Account/PutRoles", source)
+			//datacontext.save();
 		};
 
 	}

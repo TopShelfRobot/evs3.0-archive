@@ -50,6 +50,5 @@
 			$location.path('/eventure/');
 		}
 	}
-
 	angular.module('app').controller('ManReg', ['$location', 'CartModel', 'datacontext', 'Helpers', 'config', Controller]);
 })();
