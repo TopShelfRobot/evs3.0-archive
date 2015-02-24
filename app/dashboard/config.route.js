@@ -485,7 +485,15 @@
 					templateUrl: 'app/dashboard/admin/employee.html',
 					authorized: ['admin', 'super-user']
 				}
+						}, {
+				url: '/add-employee',
+				config: {
+					title: 'Add An Employee',
+					templateUrl: 'app/dashboard/admin/add-employee.html',
+					authorized: ['admin', 'super-user']
+
+				}
 						}
-			];
+					];
 	}
 })();
