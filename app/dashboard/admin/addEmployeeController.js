@@ -104,7 +104,7 @@
 					vm.message = 'Failed to register user due to:' + errors.join(' ');
 				}).then(function () {
 				if (vm.savedSuccessfully === true) {
-					vm.employee.emailAddress = vm.registration.userId; /* Set employee email address === successful userId */
+					vm.employee.emailAddress = vm.registration.userName; /* Set employee email address === successful userId */
 					$http.post(config.remoteApiName + 'Account/SaveUserRolesByUserId/' + vm.registration.userId, vm.selectedRoles).
 					success(function () {
 						return datacontext.save(vm.employee)
