@@ -32,6 +32,7 @@
 			this.getParticipantsByRegistrationId = getParticipantsByRegistrationId;
 			this.getEmployeesBySearchingEmail = getEmployeesBySearchingEmail;
 			this.getEmployeesBySearchingName = getEmployeesBySearchingName;
+			this.createEmployeeProfile = createEmployeeProfile;
 			this.createUserAgent = createUserAgent;
 		}
 
@@ -293,5 +294,14 @@
 				return data.results;
 			}
 		}
+
+		function createEmployeeProfile() {
+			var self = this;
+			return self.manager.createEntity('Employee', {
+				ownerId: cart.ownerId,
+				dateCreated: new Date()
+			});
+		}
+
 	}
 })();
