@@ -35,7 +35,7 @@
 
 		activate();
 
-		var promises = [];
+		var promises = [CreateEmployee()];
 
 		function activate() {
 			common.activateController(promises, controllerId)
@@ -45,7 +45,7 @@
 		}
 
 		function CreateEmployee() {
-			vm.employee = datacontext.participant.createEmployee();
+			vm.employee = datacontext.participant.createEmployeeProfile();
 			return vm.employee;
 		}
 
@@ -79,7 +79,16 @@
 		};
 
 		vm.saveAndNav = function () {
-			//TODO whg authService.saveRegistration currently logs you out before proceeding. This throws you into an infinite loop.
+			/* TODO whg authService.saveRegistration currently logs you out before proceeding. This throws you into an infinite loop.
+							Will probably need to write a new authService.saveRegistration for this.
+
+				 TODO Error handling
+
+			 Process below is as follows:
+			1) Creates the ASP User Account
+			2) If vm.savedSuccessfully === true then it does an $http post to save the user roles by user id (vm.registration.userId)
+			3) If that is successful it will then save the employee.
+			*/
 
 			authService.saveRegistration(vm.registration).then(function (response) {
 					vm.savedSuccessfully = true;
@@ -95,16 +104,23 @@
 					vm.message = 'Failed to register user due to:' + errors.join(' ');
 				}).then(function () {
 				if (vm.savedSuccessfully === true) {
-					//TODO whg $http post for roles
+					vm.employee.emailAddress = vm.registration.userId; /* Set employee email address === successful userId */
+					$http.post(config.remoteApiName + 'Account/SaveUserRolesByUserId/' + vm.registration.userId, vm.selectedRoles).
+					success(function () {
+						return datacontext.save(vm.employee)
+							.then(complete);
+
+						function complete() {
+							$location.path('/employee');
+						}
+
+					}).
+					error(function (data, status, headers, config) {
+						// called asynchronously if an error occurs
+						// or server returns response with an error status.
+					});
 				}
 			});
-
-			return datacontext.save()
-				.then(complete);
-
-			function complete() {
-				$location.path('/employee');
-			}
 		};
 
 	}
