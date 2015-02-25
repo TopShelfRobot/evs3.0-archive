@@ -101,7 +101,7 @@
     //};
 
     vm.createNewUser = function () {
-      $location.path('/employee-profile/add'); //TODO whg Should probably be a separate page for employee add
+      $location.path('/add-employee');
     };
 
     vm.saveChanges = function () {
