@@ -107,6 +107,19 @@
 				return data.results[0];
 			}
 		}
+		
+		function getByEventureId(eventureId) {
+			var self = this;
+			var query = entityQuery.from('Participants')
+				.where('eventureId', '==', partId);
+
+			return self.manager.executeQuery(query)
+				.then(querySucceeded, self._queryFailed);
+
+			function querySucceeded(data) {
+				return data.results[0];
+			}
+		}
 
 		function getParticipantById(partId) {
 			var self = this;

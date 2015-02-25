@@ -49,6 +49,19 @@
                 return data.results;
             }
         }
+		
+		function getByOwnerId(ownerId){
+            var self = this;
+            var query = entityQuery.from('Volunteer')
+                .where('ownerId', '==', ownerId)
+
+            return self.manager.executeQuery(query)
+                .then(querySucceeded, self._queryFailed);
+
+            function querySucceeded(data) {
+                return data.results;
+            }
+		}
 
         function getVolunteerEventuresByOwnerId(ownerId) {
             var self = this;
