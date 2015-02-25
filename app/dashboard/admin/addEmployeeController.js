@@ -30,7 +30,17 @@
       dataValueField: 'roleId',
     };
 
+    vm.userRoles = {
+      userName: '',
+      roles: [{
+        name: '',
+        roleid: 0
+      }]
+    };
+
+
     vm.selectedRoles = [];
+
 
 
     activate();
@@ -105,8 +115,14 @@
           vm.message = 'Failed to register user due to: ' + errors.join(' ');
         }).then(function () {
         if (vm.savedSuccessfully === true) {
+
+          vm.userRoles = {
+            userName: vm.registration.userName,
+            roles: vm.selectedRoles
+          }
+
           vm.employee.emailAddress = vm.registration.userName; /* Set employee email address if registration === successful */
-          $http.post(config.remoteApiName + 'Account/SaveUserRolesByUserId/' + vm.registration.userName, vm.selectedRoles). /*TODO This call does not exsist */
+          $http.post(config.remoteApiName + 'Account/PutRoles/', vm.userRoles).
           success(function () {
             return datacontext.save(vm.employee)
               .then(complete);
