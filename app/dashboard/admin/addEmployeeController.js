@@ -119,7 +119,7 @@
           vm.userRoles = {
             userName: vm.registration.userName,
             roles: vm.selectedRoles
-          }
+          };
 
           vm.employee.emailAddress = vm.registration.userName; /* Set employee email address if registration === successful */
           $http.post(config.remoteApiName + 'Account/PutRoles/', vm.userRoles).
