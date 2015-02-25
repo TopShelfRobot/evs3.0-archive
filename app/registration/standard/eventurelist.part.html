@@ -52,28 +52,29 @@
         </div>
       </div>
       <hr>
+<!--
       <div class="panel panel-default" ng-hide="true">
-        <div class="panel-heading">
-          <h3 class="panel-title">Participants</h3>
+  <div class="panel-heading">
+    <h3 class="panel-title">Participants</h3>
+  </div>
+  <div class="panel-body">
+    <p class="text-muted">Choose or add a new participant to your account.</p>
+    <ul class="participant-list">
+      <li class="participant">
+        <div class="radio">
+          <label>
+            <div ng-repeat="part in participants">
+              <input type="radio" name="participant" ng-value="part" ng-model="$parent.selectedParticipant"> {{part.firstName}} {{part.lastName}}
+            </div>
+          </label>
         </div>
-        <div class="panel-body">
-          <p class="text-muted">Choose or add a new participant to your account.</p>
-          <ul class="participant-list">
-            <li class="participant">
-              <div class="radio">
-                <label>
-                  <div ng-repeat="part in participants">
-					  <input type="radio" name="participant" ng-value="part" ng-model="$parent.selectedParticipant">
-						{{part.firstName}} {{part.lastName}}
-					</div>
-                </label>
-              </div>
-            </li>
-          </ul>
-          <hr>
-          <a class="btn btn-primary btn-block" href="#/participant/add">{{buttonText}}</a>
-        </div>
-      </div>
+      </li>
+    </ul>
+    <hr>
+    <a class="btn btn-primary btn-block" href="#/participant/add">{{buttonText}}</a>
+  </div>
+</div>
+-->
       <button ng-click="register(eventure, selection, selectedParticipant)" class="btn btn-warning btn-block visible-xs">Register</button>
     </div>
   </div>
