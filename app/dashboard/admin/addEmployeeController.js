@@ -90,7 +90,7 @@
 
       authService.saveRegistration(vm.registration, false).then(function (response) {
           vm.savedSuccessfully = true;
-          vm.message = 'User has been registered successfully, you will be redirected in 2 seconds.';
+          vm.message = 'Employee has been created successfully, you will be redirected.';
         },
         function (response) {
           var errors = [];
@@ -102,7 +102,7 @@
               }
             }
           }
-          vm.message = 'Failed to register user due to:' + errors.join(' ');
+          vm.message = 'Failed to register user due to: ' + errors.join(' ');
         }).then(function () {
         if (vm.savedSuccessfully === true) {
           vm.employee.emailAddress = vm.registration.userName; /* Set employee email address if registration === successful */

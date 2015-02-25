@@ -1,46 +1,50 @@
 <form class="form-horizontal" name="formHolder.employeeForm">
-	<div class="row">
-		<div class="col-sm-6">
-			<div class="form-group">
-				<label for="FirstName" class="col-lg-5 control-label">First Name</label>
-				<div class="col-lg-7">
-					<input type="text" name="FirstName" class="form-control" ng-model="vm.employee.firstName" required>
-				</div>
-			</div>
-			<div class="form-group">
-				<label for="LastName" class="col-lg-5 control-label">Last Name</label>
-				<div class="col-lg-7">
-					<input type="text" class="form-control" name="LastName" ng-model="vm.employee.lastName" required>
-				</div>
-			</div>
-			<div class="form-group">
-				<label for="Role" class="col-lg-5 control-label">Role</label>
-				<div class="col-lg-7">
-					<select id="userRole" kendo-multi-select="vm.multiSelect" k-options="vm.roleOptions" k-ng-model="vm.selectedRoles">
-					</select>
-				</div>
-			</div>
-		</div>
-		<div class="col-sm-6">
-			<div class="form-group">
-				<label for="EmailAddress" class="col-lg-5 control-label">Email Address</label>
-				<div class="col-lg-7">
-					<input type="text" class="form-control" id="EmailAddress" name="EmailAddress" ng-model="vm.registration.userName" required>
-				</div>
-			</div>
-			<div class="form-group">
-				<label for="Password" class="col-lg-5 control-label">Password</label>
-				<div class="col-lg-7">
-					<input type="text" class="form-control" id="EmailAddress" name="EmailAddress" ng-model="vm.registration.password" required>
-				</div>
-			</div>
-			<div class="form-group">
-				<label for="Password" class="col-lg-5 control-label">Confirm Password</label>
-				<div class="col-lg-7">
-					<input type="text" class="form-control" id="EmailAddress" name="EmailAddress" ng-model="vm.registration.confirmPassword" required>
-				</div>
-			</div>
-			<div class="alert alert-primary" ng-if="vm.message">{{vm.message}}</div>
-		</div>
-	</div>
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="form-group">
+        <label for="FirstName" class="col-lg-5 control-label">First Name</label>
+        <div class="col-lg-7">
+          <input type="text" name="FirstName" class="form-control" ng-model="vm.employee.firstName" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="LastName" class="col-lg-5 control-label">Last Name</label>
+        <div class="col-lg-7">
+          <input type="text" class="form-control" name="LastName" ng-model="vm.employee.lastName" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="Role" class="col-lg-5 control-label">Role</label>
+        <div class="col-lg-7">
+          <select id="userRole" kendo-multi-select="vm.multiSelect" k-options="vm.roleOptions" k-ng-model="vm.selectedRoles">
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6">
+      <div class="form-group">
+        <label for="EmailAddress" class="col-lg-5 control-label">Email Address</label>
+        <div class="col-lg-7">
+          <input type="text" class="form-control" id="EmailAddress" name="EmailAddress" ng-model="vm.registration.userName" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="Password" class="col-lg-5 control-label">Password</label>
+        <div class="col-lg-7">
+          <input type="password" class="form-control" id="EmailAddress" name="EmailAddress" ng-model="vm.registration.password" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="Password" class="col-lg-5 control-label">Confirm Password</label>
+        <div class="col-lg-7">
+          <input type="password" class="form-control" id="EmailAddress" name="EmailAddress" ng-model="vm.registration.confirmPassword" required>
+        </div>
+      </div>
+      <div ng-class="(vm.savedSuccessfully) ? 'alert alert-success' : 'alert alert-danger'" role="alert" ng-if="vm.message">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span>
+        </button>
+        {{vm.message}}
+      </div>
+    </div>
+  </div>
 </form>
