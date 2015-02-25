@@ -1,5 +1,4 @@
-;
-(function () {
+;(function () {
 
 	function Controller($location, cartModel, datacontext, helpers, config) {
 		var self = this;
