@@ -12,8 +12,6 @@
     cart.waiverSigned = false;
     cart.teamName = '';
     cart.teamMembers = [];
-    cart.division = '';
-    cart.timeFinish = '';
     cart.teamId = '';
     cart.currentlyPaid = 0;
     cart.allowZeroPayment = false;
