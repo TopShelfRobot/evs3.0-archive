@@ -120,7 +120,7 @@
   //            format: "{0:c}",
   //            width: 110
   //    },
-                  {
+          {
             field: "quantity",
             title: "Qty",
             width: 77
@@ -569,6 +569,9 @@
         sortable: true,
         pageable: true,
         filterable: true,
+        dataBound: function () {
+          this.expandRow(this.tbody.find("tr.k-master-row").first());
+        },
         detailTemplate: kendo.template($("#coachtemplate").html()),
         columns: [{
             field: "name",
@@ -637,11 +640,11 @@
           sortable: true,
           pageable: true,
           columns: [{
-            field: "name",
-            title: "Name"
+              field: "name",
+              title: "Name"
      }, {
-            field: "email",
-            title: "Email"
+              field: "email",
+              title: "Email"
      },
 //                    {
     //            field: "amount",
@@ -649,20 +652,20 @@
     //            width: 100,
     //            format: "{0:c}"
     //     },
-                    {
-            field: '',
-            title: '',
-            template: '<button ng-click="resend()" class="btn btn-success btn-block">Resend Invitation</button>',
-            width: 170
+            {
+              field: '',
+              title: '',
+              template: '<button ng-click="resend()" class="btn btn-success btn-block">Resend Invitation</button>',
+              width: 170
      }, {
-            field: '',
-            title: '',
-            template: '<button ng-click="remove()" class="btn btn-danger btn-block">Remove</button>',
-            width: 100
+              field: '',
+              title: '',
+              template: '<button ng-click="remove()" class="btn btn-danger btn-block">Remove</button>',
+              width: 100
      }, {
-            title: "",
-            width: "120px",
-            template: kendo.template($("#teamMemberTemplate").html())
+              title: "",
+              width: "120px",
+              template: kendo.template($("#teamMemberTemplate").html())
      }]
         };
       };
