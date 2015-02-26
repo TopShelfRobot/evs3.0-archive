@@ -113,12 +113,14 @@
         columns: [{
             field: "displayName",
             title: "Listing"
-    }, {
-            field: "totalAmount",
-            title: "Amount",
-            format: "{0:c}",
-            width: 110
-    }, {
+    },
+//                  {
+  //            field: "totalAmount",
+  //            title: "Amount",
+  //            format: "{0:c}",
+  //            width: 110
+  //    },
+                  {
             field: "quantity",
             title: "Qty",
             width: 77
@@ -640,12 +642,14 @@
      }, {
             field: "email",
             title: "Email"
-     }, {
-            field: "amount",
-            title: "Paid",
-            width: 100,
-            format: "{0:c}"
-     }, {
+     },
+//                    {
+    //            field: "amount",
+    //            title: "Paid",
+    //            width: 100,
+    //            format: "{0:c}"
+    //     },
+                    {
             field: '',
             title: '',
             template: '<button ng-click="resend()" class="btn btn-success btn-block">Resend Invitation</button>',
