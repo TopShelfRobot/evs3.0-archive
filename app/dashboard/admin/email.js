@@ -65,6 +65,23 @@
 			
 			return $q.when(out);
 		}
+		
+		function participantsFromRegistrations(list){
+			var parts = [];
+			list.map(function(item){
+				parts.push(item.participant);
+			});
+			console.log("parts:", parts);
+			return $q.when(parts);
+		}
+		
+		function emailFromString(string){
+			var out = [];
+			if(string && string.length && string.length > 0){
+				out = string.replace(/\s/g, "").split(",");
+			}
+			return out;
+		}
 				
         self.sendMessage = function () {
 
@@ -72,39 +89,18 @@
 			switch(self.emailType){
 			case "eventure":
 				getParts = datacontext.registration.getByEventureIdWithParticipants(self.eventure)
-					.then(function(list){
-						var parts = [];
-						list.map(function(item){
-							parts.push(item.participant);
-						});
-						console.log("parts:", parts);
-						return parts;
-					});
+					.then(participantsFromRegistrations);
 				break;
 			case "listing":
 				getParts = datacontext.registration.getByListingIdWithParticipants(self.listing)
-					.then(function(list){
-						var parts = [];
-						list.map(function(item){
-							parts.push(item.participant);
-						});
-						console.log("parts:", parts);
-						return parts;
-					});
+					.then(participantsFromRegistrations);
 				break;
 			case "volunteer":
 				getParts = datacontext.volunteer.getAllWithParticipants();
 				break;
 			case "all":
 				getParts = datacontext.registration.getAllWithParticipants()
-					.then(function(list){
-						var parts = [];
-						list.map(function(item){
-							parts.push(item.participant);
-						});
-						console.log("parts:", parts);
-						return parts;
-					});
+					.then(participantsFromRegistrations);
 				break;
 			}
 			
@@ -121,20 +117,23 @@
 					var source = {
 						ownerId: config.owner.ownerId,
 						email: emails,
-						subject : self.bcc,
+						subject : self.subject,
+						body : self.body,
+						bcc : emailFromString(self.bcc),
+						cc: emailFromString(self.cc),
 					};
 					console.log("sending email:", source);
 					return source;
 				})
-				// .then(function(source){
-// 	            	return $http.post(config.apiPath + "api/mail/SendMassMessage", source)
-// 				})
-// 				.then(function(reply){
-// 					console.log(reply.data);
-// 				})
-// 				.catch(function(data){
-// 					alert(data);
-// 				});
+				.then(function(source){
+	            	return $http.post(config.apiPath + "api/mail/SendMassMessage", source)
+				})
+				.then(function(reply){
+					console.log(reply.data);
+				})
+				.catch(function(data){
+					console.error(data);
+				});
         };
     }
 	
