@@ -1,7 +1,7 @@
 (function () {
     var controllerId = 'sendemail';
 
-    function Controller($scope, $http, config, common, datacontext) {
+    function Controller($scope, $http, $q, config, common, datacontext) {
         var getLogFn = common.logger.getLogFn;
         var log = getLogFn(controllerId);
 
@@ -49,50 +49,95 @@
                 datacontext.cancel();
             });
         }
+		
+		function dedup(array){
+			
+			var hash = {};
+			var out = [];
+			
+			for(var i = 0; i < array.length; i++){
+				if(typeof hash[array[i]] == "undefined"){
+					out.push(array[i]);
+					hash[array[i]] = 0;
+				}
+				hash[array[i]]++;
+			}
+			
+			return $q.when(out);
+		}
 				
         self.sendMessage = function () {
 
 			var getParts;
 			switch(self.emailType){
-			case "event":
-				getParts = datacontext.participant.getByEventureId(self.eventure);
+			case "eventure":
+				getParts = datacontext.registration.getByEventureIdWithParticipants(self.eventure)
+					.then(function(list){
+						var parts = [];
+						list.map(function(item){
+							parts.push(item.participant);
+						});
+						console.log("parts:", parts);
+						return parts;
+					});
 				break;
 			case "listing":
-				getParts = datacontext.participant.getByEventureListId(self.listing);
+				getParts = datacontext.registration.getByListingIdWithParticipants(self.listing)
+					.then(function(list){
+						var parts = [];
+						list.map(function(item){
+							parts.push(item.participant);
+						});
+						console.log("parts:", parts);
+						return parts;
+					});
 				break;
 			case "volunteer":
-				getParts = datacontext.volunteer.getByOwnerId(config.owner.id);
+				getParts = datacontext.volunteer.getAllWithParticipants();
 				break;
 			case "all":
-				getParts = getParticipantsAll();
+				getParts = datacontext.registration.getAllWithParticipants()
+					.then(function(list){
+						var parts = [];
+						list.map(function(item){
+							parts.push(item.participant);
+						});
+						console.log("parts:", parts);
+						return parts;
+					});
 				break;
 			}
 			
-			console.log("sending email:", source);
 			getParts
 				.then(function(list){
+					var emails = [];
+					list.map(function(item){
+						emails.push(item.email);
+					});
+					return emails;
+				})
+				.then(dedup)
+				.then(function(emails){
 					var source = {
-						ownerId: config.owner.id,
-						email: [],
+						ownerId: config.owner.ownerId,
+						email: emails,
 						subject : self.bcc,
 					};
-					for(var i = 0; i < list.length; i++){
-						source.email.push(list.email);
-					}
+					console.log("sending email:", source);
 					return source;
 				})
-				.then(function(source){
-	            	return $http.post(config.apiPath + "api/mail/SendMassMessage", source)
-				})
-				.then(function(reply){
-					console.log(reply.data);
-				})
-				.catch(function(data){
-					alert(data);
-				});
+				// .then(function(source){
+// 	            	return $http.post(config.apiPath + "api/mail/SendMassMessage", source)
+// 				})
+// 				.then(function(reply){
+// 					console.log(reply.data);
+// 				})
+// 				.catch(function(data){
+// 					alert(data);
+// 				});
         };
     }
 	
-	angular.module('app').controller(controllerId, ['$scope', '$http', 'config', 'common', 'datacontext', Controller]);
+	angular.module('app').controller(controllerId, ['$scope', '$http', "$q", 'config', 'common', 'datacontext', Controller]);
 
 })();

@@ -19,6 +19,10 @@
 			this.manager = mgr;
 			// Exposed data access functions
 			this.getAll = getAll;
+			this.getAllWithParticipants = getAllWithParticipants;
+			this.getByEventureIdWithParticipants = getByEventureIdWithParticipants;
+			this.getByListingIdWithParticipants = getByListingIdWithParticipants;
+			
 			this.getAllRegistrations = getAllRegistrations;
 
 			this.getOrderById = getOrderById;
@@ -42,8 +46,49 @@
 
 		function getAll() {
 			var self = this;
-			return entityQuery.from('ZZZ')
+			return entityQuery.from('Registrations')
 				.using(self.manager).execute()
+				.then(querySucceeded, self._queryFailed);
+
+			function querySucceeded(data) {
+				return data.results;
+			}
+		}
+		
+		function getAllWithParticipants(){
+			var self = this;
+			var query = entityQuery.from('Registrations')
+				.expand('Participant');
+
+			return self.manager.executeQuery(query)
+				.then(querySucceeded, self._queryFailed);
+
+			function querySucceeded(data) {
+				return data.results;
+			}
+		}
+		
+		function getByEventureIdWithParticipants(eventureId){
+			var self = this;
+			var query = entityQuery.from('Registrations')
+				.where("eventureList.eventureId", "==", eventureId)
+				.expand('Participant');
+
+			return self.manager.executeQuery(query)
+				.then(querySucceeded, self._queryFailed);
+
+			function querySucceeded(data) {
+				return data.results;
+			}
+		}
+		
+		function getByListingIdWithParticipants(eventureListId){
+			var self = this;
+			var query = entityQuery.from('Registrations')
+				.where("eventureListId", "==", eventureListId)
+				.expand('Participant');
+
+			return self.manager.executeQuery(query)
 				.then(querySucceeded, self._queryFailed);
 
 			function querySucceeded(data) {
