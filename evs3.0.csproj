@@ -106,6 +106,8 @@
     <Content Include="app\registration\config.exceptionHandler.js" />
     <Content Include="app\registration\config.js" />
     <Content Include="app\registration\config.route.js" />
+    <Content Include="app\registration\payment\teamReceipt.part.html" />
+    <Content Include="app\registration\payment\teamReceiptController.js" />
     <Content Include="app\registration\profile\addParticipantController.js" />
     <Content Include="app\registration\profile\addProfileController.js" />
     <Content Include="app\registration\payment\confirmController.js" />

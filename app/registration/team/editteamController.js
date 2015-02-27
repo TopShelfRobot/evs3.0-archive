@@ -48,7 +48,7 @@
     };
 
     $scope.editTeam = function () {
-      team.name = $scope.team.teamName;
+      team.name = $scope.team.name;
       for (var i = 0; i < $scope.players.length; i++) {
         if (typeof $scope.players[i].id == "undefined") {
           if ($scope.players[i].name && $scope.players[i].email) {

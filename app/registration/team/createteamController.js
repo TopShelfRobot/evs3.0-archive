@@ -14,7 +14,7 @@
     cartModel.participantId = $location.search()["uid"];
 
     $scope.team = {};
-    $scope.team.teamName = "";
+    $scope.team.name = "";
     $scope.players = [{
       name: "",
       email: "",
@@ -37,7 +37,7 @@
 
       cartModel.division = $scope.team.division;
       cartModel.timeFinish = $scope.team.timeFinish;
-      cartModel.teamName = $scope.team.teamName || "";
+      cartModel.teamName = $scope.team.name || "";
       if (cartModel.teamName.length < minNameLength) {
         // make name red
         valid = false;

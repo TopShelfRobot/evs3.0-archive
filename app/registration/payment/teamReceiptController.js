@@ -4,21 +4,21 @@
 
     function Controller($scope, $window, $routeParams, config, datacontext, common) {
 
-      $scope.receipt = {};
+        $scope.receipt = {};
 
-      $scope.title = "Registration Complete";
-      $scope.registrationId = $routeParams.registrationId;
+        $scope.title = "Registration Complete";
+        $scope.registrationId = $routeParams.registrationId;
 
-      var promises = [
-         datacontext.team.GetTeamInfoByRegistrationId($scope.registrationId)
-             .then(function (data) {
-          return $scope.receipt = data;
-        })
-  ];
+        var promises = [
+           datacontext.team.GetTeamInfoByRegistrationId($scope.registrationId)
+               .then(function (data) {
+                   return $scope.receipt = data;
+               })
+        ];
 
-      common.activateController(promises, controllerId);
+        common.activateController(promises, controllerId);
 
-
+    }
       angular.module('evReg').controller(controllerId, ['$scope', '$window',
                 '$routeParams', 'config', 'datacontext', 'common', Controller]);
-    })(
+    })();
