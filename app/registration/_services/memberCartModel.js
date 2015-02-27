@@ -11,7 +11,7 @@
         model.waiverSigned = false;
         model.allowZeroPayment = true;
 
-        model.order = function (userPaying,partId) {
+        model.order = function (userPaying, partId) {
             var order = {
                 orderAmount: Number(userPaying),
                 teamId: model.teamId,

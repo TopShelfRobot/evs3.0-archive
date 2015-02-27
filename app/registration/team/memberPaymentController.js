@@ -144,13 +144,14 @@
 		function getTeamInfo() {
 			return $q.all([datacontext.team.getTeamMemberPaymentInfoByTeamMemberGuid($scope.teamMemberGuid),
 				datacontext.team.getNotPaidTeamMemberCountByTeamGuid($scope.teamGuid),
-				datacontext.team.getTeamMemberPaymentSumByTeamGuid($scope.teamGuid)])
+				datacontext.team.getTeamMemberPaymentSumByTeamGuid($scope.teamGuid),
+			    datacontext.participant.createProfile()])
 				.then(function (data) {
 					if (data) {
 						var payment = data[0];
 						var count = data[1];
 						var sum = data[2];
-						// $scope.participant = data[3];
+						$scope.participant = data[3];
 						cartModel.teamMemberId = payment.teamMemberId;
 						cartModel.teamId = payment.teamId;
 						$scope.teamName = payment.name;
@@ -215,25 +216,39 @@
 		};
 
 		$scope.checkout = function () {
-			var cartOrder = cartModel.order($scope.userPaying);
-			cartOrder.participantId = cartRegSettings.houseId;
 
-			alert('User elected to not pay: ' + cartOrder.orderAmount);
+		    
+			//cartOrder.participantId = $scope.participant.id;
+
+			//alert('User elected to not pay: ' + cartOrder.orderAmount);
 			$.blockUI({
 				message: 'Processing order...'
 			});
-			// cartOrder.stripeToken = res.id;
-			$http.post(config.apiPath + "api/payment/PostTeam", cartOrder)
-			.success(function (result) {
-				console.log("result: " + result);
-				$location.path("/receipt/" + result);
-			})
-			.error(function (err) {
-				console.error("ERROR:", err.toString());
-			})
-			.finally(function () {
-				$.unblockUI();
+			$scope.participant.email = "testboone@test.com";  //TODO email required not comgin across
+			datacontext.save().then(function () {
+			    cartOrder.participantId = $scope.participant.id;
+			    console.table(cartOrder);
+			    $http.post(config.apiPath + "api/payment/PostTeamPayment", cartOrder)
+                .success(function (result) {
+                    $scope.participant.houseId = $scope.participant.id;
+                    datacontext.save();
+                    console.log("result: " + result);
+                    $location.path("/receipt/" + result);
+                })
+                .error(function (err) {
+                    console.error("ERROR:", err.toString());
+                })
+                .finally(function () {
+                    $.unblockUI();
+                });
+
 			});
+
+			var cartOrder = cartModel.order($scope.userPaying, $scope.participant.id);
+
+
+
+		    
 
 			//alert('Thanks for registering');
 
