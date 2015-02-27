@@ -116,6 +116,12 @@
           templateUrl: 'app/registration/payment/confirm.part.html'
         }
    }, {
+        url: '/team-receipt/:registrationId',
+        config: {
+          title: 'Receipt',
+          templateUrl: 'app/registration/payment/teamReceipt.part.html'
+        }
+   }, {
         url: '/member-receipt/:teamGuid',
         config: {
           title: 'Receipt',
