@@ -127,9 +127,9 @@
                 <input type="checkbox" data-bind="checked: isTerms" ng-model="$parent.waiverSigned"> I have read and agree to the Terms and Conditions.
             </label>
 
-            <button type="button" class="btn btn-warning btn-block pull-right hidden-xs hidden-sm" ng-disabled="($parent.userPaying == 0 && !$parent.fullPaymentRequired)" ng-click="open()">{{regSettings.confirmButtonText}}
+            <button type="button" class="btn btn-warning btn-block pull-right hidden-xs hidden-sm" ng-disabled="($parent.userPaying == 0 && !$parent.fullPaymentRequired)" ng-click="open()">Join Team
             </button>
-            <button type="button" class="btn btn-warning btn-block pull-right hidden-md hidden-lg" ng-disabled="(!$parent.waiverSigned) || ($parent.userPaying == 0 && !$parent.fullPaymentRequired) || ($parent.submitDisabled)" ng-click="checkout()">{{regSettings.confirmButtonText}}
+            <button type="button" class="btn btn-warning btn-block pull-right hidden-md hidden-lg" ng-disabled="(!$parent.waiverSigned) || ($parent.userPaying == 0 && !$parent.fullPaymentRequired) || ($parent.submitDisabled)" ng-click="checkout()">Join Team
             </button>
         </div>
     </div>

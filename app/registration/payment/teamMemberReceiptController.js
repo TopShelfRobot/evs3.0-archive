@@ -8,21 +8,17 @@
 
     $scope.title = 'Registration Complete';
     $scope.teamGuid = $routeParams.teamGuid;
-
-    var promises = [getTeamInfo()];
+    
+    var promises = [datacontext.team.getTeamByGuid($scope.teamGuid)
+        .then(function (data) {
+            console.log('made it here maaaaaaan222222');
+            $scope.receipt = data;
+            console.log($scope.receipt);
+            console.log('returnikng');
+            return $scope.receipt;
+        })];
 
     common.activateController(promises, controllerId);
-
-
-    function getTeamInfo() {
-      datacontext.team.GetTeamByGuid($scope.teamGuid)
-        .then(function (data) {
-          $scope.receipt = data;
-          console.log($scope.receipt);
-          return $scope.receipt;
-        });
-    }
-
   }
 
   angular.module('evReg').controller(controllerId, ['$scope', '$window',

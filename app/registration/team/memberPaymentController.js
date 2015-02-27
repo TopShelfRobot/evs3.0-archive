@@ -296,6 +296,7 @@
             cartModel.teamId = payment.teamId;
             $scope.teamName = payment.name;
             $scope.listName = payment.listName;
+            $scope.participant.email = payment.email;
             console.log('listingType: ', payment.eventureListType);
             switch (payment.eventureListType) {
             case "TeamSponsored": //team sponsor
@@ -362,7 +363,7 @@
       $.blockUI({
         message: 'Processing order...'
       });
-      $scope.participant.email = "testboone@test.com"; //TODO email required not comgin across
+      
       datacontext.save().then(function () {
         cartOrder.participantId = $scope.participant.id;
         console.table(cartOrder);

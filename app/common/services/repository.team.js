@@ -96,15 +96,19 @@
 
     function getTeamByGuid(guid) {
 
+        console.log('in the dccccc');
+
       var self = this;
 
       var query = entityQuery.from("Teams")
-        .where('guid', '==', guid);
+        .where('teamGuid', '==', guid);
 
+      console.log('calling quesrty');
       return self.manager.executeQuery(query)
         .then(querySucceeded, self.queryFailed);
 
       function querySucceeded(data) {
+          console.log('getting some data');
         return data.results[0];
       }
     }
