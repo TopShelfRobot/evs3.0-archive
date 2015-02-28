@@ -45,6 +45,8 @@
     <Content Include="app\common\services\helpers.js" />
     <Content Include="app\common\services\model.js" />
     <Content Include="app\common\services\userAgent.js" />
+    <Content Include="app\dashboard\admin\employee.html" />
+    <Content Include="app\dashboard\admin\employee.js" />
     <Content Include="app\dashboard\admin\setrefund.js" />
     <Content Include="app\dashboard\analytic\coupon.html" />
     <Content Include="app\dashboard\analytic\coupon.js" />
