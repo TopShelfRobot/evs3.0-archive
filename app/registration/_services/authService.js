@@ -1,4 +1,4 @@
-var testRoles = ['user', 'admin', 'super-user', 'money'];
+//var testRoles = ['user', 'admin', 'super-user', 'money'];
 
 angular.module('evReg').factory('authService', ['$http', '$q', 'UserAgent', 'localStorageService', 'ngAuthSettings', 'config',
     function ($http, $q, userAgent, localStorageService, ngAuthSettings, config) {
@@ -56,57 +56,57 @@ angular.module('evReg').factory('authService', ['$http', '$q', 'UserAgent', 'loc
 
 
     var _login = function (loginData) {
-
+      var roles;
+      var deferred = $q.defer();
       var data = 'grant_type=password&username=' + loginData.userName + '&password=' + loginData.password;
 
       if (loginData.useRefreshTokens) {
         data = data + '&client_id=' + ngAuthSettings.clientId;
       }
 
-      var deferred = $q.defer();
+      $http.get(config.remoteApiName + 'Account/GetUserRolesByUserIdInArray/' +
+          loginData.userName + '/')
+        .then(function (returnedRoles) {
+          roles = returnedRoles.data;
 
-      $http.post(serviceBase + 'token', data, {
-          headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
-          }
-        })
-        .success(function (response) {
+          $http.post(serviceBase + 'token', data, {
+              headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+              }
+            })
+            .success(function (response) {
+              if (loginData.useRefreshTokens) {
+                localStorageService.set('authorizationData', {
+                  token: response.access_token,
+                  userName: loginData.userName,
+                  refreshToken: response.refresh_token,
+                  useRefreshTokens: true,
+                  roles: roles
+                });
+              } else {
+                localStorageService.set('authorizationData', {
+                  token: response.access_token,
+                  userName: loginData.userName,
+                  refreshToken: '',
+                  useRefreshTokens: false,
+                  roles: roles
+                });
+              }
+              //alert('authed!!');
+              //need to do something here incase of token login ?????  //mjb  think we are good here
+              //nfig.owner.authEmail =
+              _authentication.isAuth = true;
+              _authentication.userName = loginData.userName;
+              _authentication.useRefreshTokens = loginData.useRefreshTokens;
+              _authentication.roles = roles;
 
-          //TODO: remove this
-          response.roles = testRoles;
+              deferred.resolve(response);
 
-          if (loginData.useRefreshTokens) {
-            localStorageService.set('authorizationData', {
-              token: response.access_token,
-              userName: loginData.userName,
-              refreshToken: response.refresh_token,
-              useRefreshTokens: true,
-              roles: response.roles
+            }).error(function (err, status) {
+              _logOut();
+              deferred.reject(err);
             });
-          } else {
-            localStorageService.set('authorizationData', {
-              token: response.access_token,
-              userName: loginData.userName,
-              refreshToken: '',
-              useRefreshTokens: false,
-              roles: response.roles
-            });
-          }
-          //alert('authed!!');
-          //need to do something here incase of token login ?????  //mjb  think we are good here
-          //nfig.owner.authEmail =
-          _authentication.isAuth = true;
-          _authentication.userName = loginData.userName;
-          _authentication.useRefreshTokens = loginData.useRefreshTokens;
-          _authentication.roles = response.roles;
-
-          deferred.resolve(response);
-
-        }).error(function (err, status) {
-          _logOut();
-          deferred.reject(err);
         });
-
       return deferred.promise;
 
     };
