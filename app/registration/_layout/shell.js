@@ -1,147 +1,152 @@
-﻿(function () {
-	'use strict';
+(function () {
+  'use strict';
 
-	var controllerId = 'shell';
+  var controllerId = 'shell';
 
-	function Controller($rootScope, $timeout, $http, common, config, authService, cart, datacontext, userAgent) {
-		var self = this;
-		var logSuccess = common.logger.getLogFn(controllerId, 'success!!!');
-		var events = config.events;
+  function Controller($rootScope, $timeout, $http, common, config, authService, cart, datacontext, userAgent) {
+    var self = this;
+    var logSuccess = common.logger.getLogFn(controllerId, 'success!!!');
+    var events = config.events;
 
-		this.busyMessage = 'Please wait ...';
-		this.isBusy = true;
-		this.showSplash = true;
-		this.progBar = 22;
-		this.spinnerOptions = {
-			radius: 40,
-			lines: 7,
-			length: 20,
-			width: 15,
-			speed: 1.7,
-			corners: 1.0,
-			trail: 100,
-			color: cart.regSettings.mainColor
-		};
-		this.resolved = false;
+    this.busyMessage = 'Please wait ...';
+    this.isBusy = true;
+    this.showSplash = true;
+    this.progBar = 22;
+    this.spinnerOptions = {
+      radius: 40,
+      lines: 7,
+      length: 20,
+      width: 15,
+      speed: 1.7,
+      corners: 1.0,
+      trail: 100,
+      color: cart.regSettings.mainColor
+    };
+    this.resolved = false;
 
-		function activate() {
+    function activate() {
 
-			self.showSplash = true;
-			self.progBar = 30;
+      self.showSplash = true;
+      self.progBar = 30;
 
-			//alert(userAgent.logAgentInfo(32));
+      //alert(userAgent.logAgentInfo(32));
 
 
-			var promises = [];
+      var promises = [];
 
-			if (authService.authentication.userName) {
-				promises.push(
-					datacontext.participant.getParticipantByEmailAddress(authService.authentication.userName, config.owner.ownerId)
-					.then(function (data) {
-					    cart.houseId = data.id;
-					    userAgent.logAgentInfo(config.owner.ownerId, data.id);
-						self.progBar += 20;
-						return data;
-					})
-				);
-			}
+      if (authService.authentication.userName) {
+        promises.push(
+          datacontext.participant.getParticipantByEmailAddress(authService.authentication.userName, config.owner.ownerId)
+          .then(function (data) {
+            if (typeof data !== 'undefined') {
+              cart.houseId = data.id;
+              userAgent.logAgentInfo(config.owner.ownerId, data.id);
+              self.progBar += 20;
+              return data;
+            } else {
+              authService.logOut();
+            }
 
-			console.log('shell getting owner settings');
+          })
+        );
+      }
 
-			promises.push(
-				datacontext.owner.setOwnerSettings(config.owner.ownerId)
-				.then(function (data) {
-					self.progBar += 20;
+      console.log('shell getting owner settings');
 
-					self.logo = cart.regSettings.logoImageName;
+      promises.push(
+        datacontext.owner.setOwnerSettings(config.owner.ownerId)
+        .then(function (data) {
+          self.progBar += 20;
 
-					//Dynamic CSS
+          self.logo = cart.regSettings.logoImageName;
 
-					var sheets = document.styleSheets; //get stylesheets as an array
-					var sheet = document.styleSheets[2]; //get first stylesheet
+          //Dynamic CSS
 
-					sheet = (function () {
-						// Create the <style> tag
-						var style = document.createElement("style");
+          var sheets = document.styleSheets; //get stylesheets as an array
+          var sheet = document.styleSheets[2]; //get first stylesheet
 
-						// WebKit hack :(
-						style.appendChild(document.createTextNode(""));
+          sheet = (function () {
+            // Create the <style> tag
+            var style = document.createElement("style");
 
-						// Add the <style> element to the page
-						document.head.appendChild(style);
+            // WebKit hack :(
+            style.appendChild(document.createTextNode(""));
 
-						return style.sheet;
-					})();
+            // Add the <style> element to the page
+            document.head.appendChild(style);
 
-					function addCSSRule(sheet, selector, rules, index) {
-						if ("insertRule" in sheet) {
-							sheet.insertRule(selector + "{" + rules + "}", index);
-						} else if ("addRule" in sheet) {
-							sheet.addRule(selector, rules, index);
-						}
-					}
+            return style.sheet;
+          })();
 
-					var mainColor = cart.regSettings.mainColor;
-					var hoverColor = cart.regSettings.hoverColor;
-					var highlightColor = cart.regSettings.highlightColor;
-					var navTextColor = cart.regSettings.navTextColor;
+          function addCSSRule(sheet, selector, rules, index) {
+            if ("insertRule" in sheet) {
+              sheet.insertRule(selector + "{" + rules + "}", index);
+            } else if ("addRule" in sheet) {
+              sheet.addRule(selector, rules, index);
+            }
+          }
 
-					// Apply Colors
-					addCSSRule(sheet, '.navbar-inverse', 'background-color:' + mainColor);
-					addCSSRule(sheet, '.navbar-inverse', 'border-color:' + hoverColor);
-					addCSSRule(sheet, '.navbar-inverse .navbar-nav>li>a:hover', 'background-color:' + hoverColor);
-					addCSSRule(sheet, '.navbar-inverse .navbar-toggle .icon-bar', 'background-color:' + highlightColor);
-					addCSSRule(sheet, '#cart-list > .table > tbody > tr > td > button.close.remove-item', 'color:' + highlightColor + '!imporant');
-					addCSSRule(sheet, '.navbar-inverse .navbar-nav > li > a:hover', 'color:' + highlightColor);
-					addCSSRule(sheet, '.badge', 'background-color:' + highlightColor);
-					addCSSRule(sheet, '.grid figcaption', 'border-top-color:' + mainColor);
-					addCSSRule(sheet, '.grid figcaption h4', 'color:' + hoverColor);
-					addCSSRule(sheet, '.list-tile', 'border-top-color:' + mainColor);
-					addCSSRule(sheet, '.list-desc-box h4', 'color:' + hoverColor);
-					addCSSRule(sheet, '.navbar-inverse .navbar-nav > li > a', 'color:' + navTextColor);
-					addCSSRule(sheet, '.navbar-inverse .navbar-brand', 'color:' + navTextColor);
-					addCSSRule(sheet, '.navbar-inverse .navbar-brand:hover', 'color:' + highlightColor);
-					addCSSRule(sheet, '#sidebar', 'border-right-color:' + mainColor);
-					addCSSRule(sheet, '#sidebar .nav li > a:hover', 'border-left-color:' + highlightColor);
-					addCSSRule(sheet, '.menu-collapse:hover', 'color:' + highlightColor);
-					addCSSRule(sheet, '.badge', 'color:' + mainColor);
+          var mainColor = cart.regSettings.mainColor;
+          var hoverColor = cart.regSettings.hoverColor;
+          var highlightColor = cart.regSettings.highlightColor;
+          var navTextColor = cart.regSettings.navTextColor;
 
-					//Dynamic CSS ends
+          // Apply Colors
+          addCSSRule(sheet, '.navbar-inverse', 'background-color:' + mainColor);
+          addCSSRule(sheet, '.navbar-inverse', 'border-color:' + hoverColor);
+          addCSSRule(sheet, '.navbar-inverse .navbar-nav>li>a:hover', 'background-color:' + hoverColor);
+          addCSSRule(sheet, '.navbar-inverse .navbar-toggle .icon-bar', 'background-color:' + highlightColor);
+          addCSSRule(sheet, '#cart-list > .table > tbody > tr > td > button.close.remove-item', 'color:' + highlightColor + '!imporant');
+          addCSSRule(sheet, '.navbar-inverse .navbar-nav > li > a:hover', 'color:' + highlightColor);
+          addCSSRule(sheet, '.badge', 'background-color:' + highlightColor);
+          addCSSRule(sheet, '.grid figcaption', 'border-top-color:' + mainColor);
+          addCSSRule(sheet, '.grid figcaption h4', 'color:' + hoverColor);
+          addCSSRule(sheet, '.list-tile', 'border-top-color:' + mainColor);
+          addCSSRule(sheet, '.list-desc-box h4', 'color:' + hoverColor);
+          addCSSRule(sheet, '.navbar-inverse .navbar-nav > li > a', 'color:' + navTextColor);
+          addCSSRule(sheet, '.navbar-inverse .navbar-brand', 'color:' + navTextColor);
+          addCSSRule(sheet, '.navbar-inverse .navbar-brand:hover', 'color:' + highlightColor);
+          addCSSRule(sheet, '#sidebar', 'border-right-color:' + mainColor);
+          addCSSRule(sheet, '#sidebar .nav li > a:hover', 'border-left-color:' + highlightColor);
+          addCSSRule(sheet, '.menu-collapse:hover', 'color:' + highlightColor);
+          addCSSRule(sheet, '.badge', 'color:' + mainColor);
 
-					return data;
-				})
-			);
+          //Dynamic CSS ends
 
-			common.activateController(promises, controllerId)
-				.then(function () {
-					self.progBar = 90;
-					self.resolved = true;
-					$timeout(function () {
-						self.showSplash = false;
-					}, 300);
-				});
-		}
+          return data;
+        })
+      );
 
-		function toggleSpinner(on) {
-			self.isBusy = on;
-		}
+      common.activateController(promises, controllerId)
+        .then(function () {
+          self.progBar = 90;
+          self.resolved = true;
+          $timeout(function () {
+            self.showSplash = false;
+          }, 300);
+        });
+    }
 
-		activate();
-		toggleSpinner(true);
+    function toggleSpinner(on) {
+      self.isBusy = on;
+    }
 
-		$rootScope.$on('$routeChangeStart', function (event, next, last) {
-			// toggleSpinner(true);
-		});
+    activate();
+    toggleSpinner(true);
 
-		$rootScope.$on(events.controllerActivateSuccess, function (data) {
-			toggleSpinner(false);
-		});
+    $rootScope.$on('$routeChangeStart', function (event, next, last) {
+      // toggleSpinner(true);
+    });
 
-		$rootScope.$on(events.spinnerToggle, function (scope, on) {
-			toggleSpinner(on);
-		});
+    $rootScope.$on(events.controllerActivateSuccess, function (data) {
+      toggleSpinner(false);
+    });
 
-	}
+    $rootScope.$on(events.spinnerToggle, function (scope, on) {
+      toggleSpinner(on);
+    });
 
-	angular.module('evReg').controller(controllerId, ['$rootScope', '$timeout', '$http', 'common', 'config', 'authService', 'CartModel', 'datacontext', 'UserAgent', Controller]);
+  }
+
+  angular.module('evReg').controller(controllerId, ['$rootScope', '$timeout', '$http', 'common', 'config', 'authService', 'CartModel', 'datacontext', 'UserAgent', Controller]);
 })();
