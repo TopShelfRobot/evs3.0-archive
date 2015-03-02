@@ -24,25 +24,6 @@
       confirmPassword: ''
     };
 
-    vm.roleOptions = {
-      placeholder: 'Select roles...',
-      dataTextField: 'name',
-      dataValueField: 'roleId',
-    };
-
-    vm.userRoles = {
-      userName: '',
-      roles: [{
-        name: '',
-        roleid: 0
-      }]
-    };
-
-
-    vm.selectedRoles = [];
-
-
-
     activate();
 
     var promises = [CreateEmployee()];
@@ -60,24 +41,32 @@
     }
 
     function getAllRoles() {
-      $http.get(config.remoteApiName + 'Account/GetAllRoles/').
-      success(function (roles) {
-        multiSelect(roles);
+      $http.get(config.remoteApiName + 'Account/GetAllRoles').
+      success(function (data) {
+        populateMultiSelect(data);
       }).
       error(function (data, status, headers, config) {
         // called asynchronously if an error occurs
-        // or server returns response with an error status.
       });
     }
 
-    function multiSelect(roles) {
+    function populateMultiSelect(roles) {
       for (var i = 0; i < roles.length; i++) {
+        console.log(roles[i]);
         vm.multiSelect.dataSource.add({
-          name: roles[i].name,
-          id: roles[i].id
+          name: roles[i] //,
+            //roleId: roles[i].roleId
         });
       }
     }
+
+    vm.selectedRoles = [];
+
+    vm.roleOptions = {
+      placeholder: 'Select roles...',
+      dataTextField: 'name',
+      dataValueField: 'name',
+    };
 
     vm.cancel = function () {
       return datacontext.cancel()
@@ -115,14 +104,14 @@
           vm.message = 'Failed to register user due to: ' + errors.join(' ');
         }).then(function () {
         if (vm.savedSuccessfully === true) {
-
-          vm.userRoles = {
-            userName: vm.registration.userName,
-            roles: vm.selectedRoles
+          vm.employee.email = vm.registration.userName; /* Set employee email address if registration === successful */
+          var source = {
+            'userName': vm.employee.email,
+            'roles': vm.selectedRoles
           };
+          console.log(source);
 
-          vm.employee.emailAddress = vm.registration.userName; /* Set employee email address if registration === successful */
-          $http.post(config.remoteApiName + 'Account/PutRoles/', vm.userRoles).
+          $http.post(config.apiPath + 'api/Account/PutRoles', source).
           success(function () {
             return datacontext.save(vm.employee)
               .then(complete);
