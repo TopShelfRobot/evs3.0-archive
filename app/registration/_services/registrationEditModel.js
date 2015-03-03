@@ -110,7 +110,7 @@
 						'paymentType': paymentType,
 						'type': type
 					};
-					return $http.post(config.apiPath + "/api/Registrations/Transfer", source);
+					return $http.post(config.apiPath + "api/Registrations/Transfer", source);
 				});
 		};
 
