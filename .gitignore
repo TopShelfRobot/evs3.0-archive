@@ -247,3 +247,5 @@ pip-log.txt
 .sass-cache/*
 
 Content/Images/*
+
+node_modules/*

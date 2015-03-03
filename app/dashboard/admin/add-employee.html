@@ -1,0 +1,15 @@
+<div ng-controller="addEmployee as vm">
+	<div class="row">
+		<div class="col-lg-12">
+			<h1>{{vm.title}}</h1>
+			<hr>
+		</div>
+	</div>
+	<ng-include src="'/app/dashboard/admin/employeeForm.html'"></ng-include>
+	<div class="row">
+		<div class="col-lg-12">
+			<button class="btn btn-success pull-right hidden-xs hidden-sm" ng-click="vm.saveAndNav()"><i class="glyphicon glyphicon-save"></i>&nbsp;{{vm.buttonText || 'Save Changes'}}</button>
+			<button class="btn btn-success btn-block hidden-md hidden-lg" ng-click="vm.saveAndNav()"><i class="glyphicon glyphicon-save"></i>&nbsp;{{vm.buttonText || 'Save Changes'}}</button>
+		</div>
+	</div>
+</div>

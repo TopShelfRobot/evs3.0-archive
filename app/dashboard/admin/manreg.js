@@ -1,10 +1,14 @@
+<<<<<<< HEAD
+(function () {
+=======
 ;(function () {
+>>>>>>> development
 
 	function Controller($location, cartModel, datacontext, helpers, config) {
 		var self = this;
 
-		this.partEmail = "";
-		this.partName = "";
+		this.partEmail = '';
+		this.partName = '';
 
 
 
@@ -36,7 +40,7 @@
 		this.selectUser = function () {
 			cartModel.houseId = self.selectedUser.houseId;
 			console.log(config);
-			$location.path("/eventure/");
+			$location.path('/eventure/');
 		};
 
 		this.createNewUser = function () {
@@ -47,9 +51,8 @@
 		if (config.owner.newId && config.owner.houseId) {
 			console.log(config);
 			config.owner.newId = false;
-			$location.path("/eventure/");
+			$location.path('/eventure/');
 		}
 	}
-
 	angular.module('app').controller('ManReg', ['$location', 'CartModel', 'datacontext', 'Helpers', 'config', Controller]);
 })();
