@@ -110,7 +110,7 @@
 						'paymentType': paymentType,
 						'type': type
 					};
-					return $http.post(config.apiPath + "api/Registrations/Transfer", source);
+					return $http.post(config.apiPath + "api/transaction/transfer", source);
 				});
 		};
 
@@ -145,10 +145,11 @@
 
 		this.transferAnswers = function () {
 			// delete the previous answers
-			for (var key in self.customAnswers) {
+			var key;
+			for (key in self.customAnswers) {
 				self.customAnswers[key].entityAspect.setDeleted();
 			}
-			for (var key in self.transferAnswers) {
+			for (key in self.transferAnswers) {
 				var ans = datacontext.question.createCustomAnswer(self.regId, self.transferAnswers[key].questionId);
 				ans.answerText = self.transferAnswers[key].answerText;
 				self.customAnswers.push(ans);

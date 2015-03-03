@@ -76,7 +76,7 @@
 
 		promises.push(
 			(function () {
-				var partId = $location.search()["uid"];
+				var partId = $location.search().uid;
 				if (!partId) {
 					partId = cart.houseId;
 				}
@@ -100,7 +100,7 @@
 				toastr.options = {
 					'positionClass': 'toast-bottom-right'
 				};
-				toastr['error']('Please answer all questions and accept all terms.');
+				toastr.error('Please answer all questions and accept all terms.');
 			}
 			////cartModel.registrations.currentGroupId = $scope.groupId;
 			////alert($scope.groupId);

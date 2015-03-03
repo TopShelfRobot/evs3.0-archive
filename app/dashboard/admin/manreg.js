@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 (function () {
+=======
+;(function () {
+>>>>>>> development
 
 	function Controller($location, cartModel, datacontext, helpers, config) {
 		var self = this;
