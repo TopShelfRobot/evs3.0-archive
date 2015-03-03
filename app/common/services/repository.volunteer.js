@@ -54,7 +54,7 @@
 		function getAllWithParticipants(){
             var self = this;
             var query = entityQuery.from('Volunteers')
-				// .expand('Participants');
+							.expand('participant');
                 // .where('ownerId', '==', ownerId)
 
             return self.manager.executeQuery(query)

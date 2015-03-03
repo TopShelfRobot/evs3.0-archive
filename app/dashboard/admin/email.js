@@ -96,7 +96,8 @@
 					.then(participantsFromRegistrations);
 				break;
 			case "volunteer":
-				getParts = datacontext.volunteer.getAllWithParticipants();
+				getParts = datacontext.volunteer.getAllWithParticipants()
+					.then(participantsFromRegistrations);
 				break;
 			case "all":
 				getParts = datacontext.registration.getAllWithParticipants()
