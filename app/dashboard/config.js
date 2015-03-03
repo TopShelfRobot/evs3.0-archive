@@ -9,11 +9,7 @@
 
   var apiPath = '';
   //apiPath = 'http://localhost:49822/';
-<<<<<<< HEAD
   // apiPath = 'http://dev30.eventuresports.info/';
-=======
-  apiPath = 'http://dev30.eventuresports.info/';
->>>>>>> development
 
   var remoteServiceName = apiPath + 'bdc/dashboard/';
   var remoteApiName = apiPath + 'api/';
