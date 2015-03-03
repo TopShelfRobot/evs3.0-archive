@@ -1,0 +1,18 @@
+<section data-ng-controller="orderCenter as vm">
+  <div class="row">
+    <div class="col-lg-12">
+      <h1>Your Orders</h1>
+      <p class="text-muted">View all of your orders and their registrations.</p>
+      <div class="table-responsive">
+        <div kendo-grid="vm.ordergrid" k-options="vm.orderGridOptions" id="ordergrid"></div>
+      </div>
+      <br>
+    </div>
+    <!-- /4 -->
+  </div>
+  <!-- /row -->
+</section>
+
+<script type="text/x-kendo-template" id="template">
+  <div kendo-grid="vm.detailgrid" k-options="vm.orderDetailGridOptions(dataItem)"></div>
+</script>
