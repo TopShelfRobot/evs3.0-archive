@@ -9,7 +9,7 @@
 
   var apiPath = '';
   //apiPath = 'http://localhost:49822/';
-  // apiPath = 'http://dev30.eventuresports.info/';
+  apiPath = 'http://dev30.eventuresports.info/';
 
   var remoteServiceName = apiPath + 'bdc/dashboard/';
   var remoteApiName = apiPath + 'api/';
@@ -36,7 +36,7 @@
     appErrorPrefix: '[evs Error] ', //Configure the exceptionHandler decorator
     docTitle: 'eventure sports: ',
     events: events,
-    apiPath : apiPath,
+    apiPath: apiPath,
     remoteServiceName: remoteServiceName,
     imageSettings: imageSettings,
     version: '3.0.0',
