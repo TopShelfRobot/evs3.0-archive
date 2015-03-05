@@ -31,7 +31,7 @@
         'text': 'Inactive'
           }];
 
-      var orderApi = config.remoteApiName + 'widget/GetAllOrdersByOwnerId/' + vm.ownerId;
+      var orderApi = config.remoteApiName + 'widget/GetOrdersByOwnerId/' + vm.ownerId;
 
       vm.orderGridOptions = {
         toolbar: ['excel'],
@@ -48,7 +48,7 @@
           schema: {
             model: {
               fields: {
-                orderDate: {
+                dateCreated: {
                   type: 'date'
                 }
               }
@@ -65,16 +65,14 @@
         },
         detailTemplate: kendo.template($('#template').html()),
         columns: [{
-          field: 'name',
-          title: 'Event',
-          template: '<a href="\\\#eventuredetail/#=id#">#=name#</a>',
-          width: '500px',
+          title: 'Participant',
+          template: '#=house.firstName# #=house.lastName#'
            }, {
-          field: 'displayDate',
+          field: 'dateCreated',
           title: 'Date',
            }, {
-          title: '',
-          template: '<a class="btn btn-default btn-block" href="\\\#seteventure/#=id#"><em class="glyphicon glyphicon-edit"></em>&nbsp;Edit</a>'
+          field: 'amount',
+          title: 'Amount',
            }]
       };
 
@@ -91,7 +89,7 @@
             schema: {
               model: {
                 fields: {
-                  registrationDate: {
+                  dateCreated: {
                     type: 'date'
                   }
                 }
@@ -105,7 +103,7 @@
           sortable: true,
           pageable: true,
           columns: [{
-            field: 'displayName',
+            field: 'eventureList.displayName',
             title: 'Listing'
             }, {
             field: 'totalAmount',
@@ -123,8 +121,8 @@
             format: '{0:MM/dd/yyyy}',
             width: 180
             }, {
-            field: 'active',
-            values: status
+            field: 'type',
+            title: 'Type'
             }, {
             field: '',
             title: '',
