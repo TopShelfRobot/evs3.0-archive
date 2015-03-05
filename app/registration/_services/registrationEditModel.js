@@ -24,6 +24,7 @@
 		this.totalPrice = 0;
 		this.surcharges = [];
 		this.regId = null;
+		this.houseId = 0;
 
 		this.getNewQuestions = function () {
 			return datacontext.question.getCustomQuestionSetByEventureListId(self.transferListing.id)
@@ -108,8 +109,10 @@
 						'amount': total,
 						'transferNewListName': self.transferListing.name,
 						'paymentType': paymentType,
-						'type': type
+						'type': type,
+                        'houseId': self.houseId
 					};
+					alert('im getiin reaydf');
 					return $http.post(config.apiPath + "api/transaction/transfer", source);
 				});
 		};
@@ -202,16 +205,19 @@
 						var defParticipants = datacontext.participant.getParticipantsByRegistrationId(regId)
 							.then(function (pts) {
 								console.log('boone parts mnext');
-								console.log(pts);
+								//console.log(pts);
 
 								self.participants = pts;
 								console.log(self.participants);
 
-								console.log('how many: ' + self.participants.length);
-								for (var mike in self.participants) {
-									console.log('hello');
-									//console.log(self.participants.id);
-								}
+								this.houseId = pts[0].houseId;    //this is ugly but all assoc. parts will have the same houseId
+								//console.log(pts.houseId);
+								console.log(this.houseId);
+								//console.log('how many: ' + self.participants.length);
+								//for (var mike in self.participants) {
+								//	console.log('hello');
+								//	//console.log(self.participants.id);
+								//}
 
 								//for (var mike in pts) {
 								//    console.log(pts[mike].lastName);
@@ -256,7 +262,5 @@
 			return dd;
 		};
 	}
-
-
 	angular.module("evReg").service("RegistrationEditModel", ["$q", "$http", "datacontext", "config", Service]);
 })();
