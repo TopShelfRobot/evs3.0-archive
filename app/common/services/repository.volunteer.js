@@ -19,6 +19,7 @@
             this.manager = mgr;
             // Exposed data access functions
             this.getAll = getAll;
+			this.getAllWithParticipants = getAllWithParticipants;
             this.getVolunteerEventuresByOwnerId = getVolunteerEventuresByOwnerId;
             this.createVolunteerJob = createVolunteerJob;
             this.createVolunteerShift = createVolunteerShift;
@@ -50,10 +51,11 @@
             }
         }
 		
-		function getByOwnerId(ownerId){
+		function getAllWithParticipants(){
             var self = this;
-            var query = entityQuery.from('Volunteer')
-				.where('ownerId', '==', ownerId);
+            var query = entityQuery.from('Volunteers')
+							.expand('participant');
+                // .where('ownerId', '==', ownerId)
 
             return self.manager.executeQuery(query)
                 .then(querySucceeded, self._queryFailed);
