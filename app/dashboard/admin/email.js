@@ -10,9 +10,7 @@
         self.ownerId = config.owner.ownerId;
         self.emailType = 'eventure';
 		self.eventures = [];
-		self.eventures;
 		self.listings = [];
-		self.listing;
 		self.delivery = "email";
 
         function getEvents() {
@@ -82,7 +80,7 @@
 					return source;
 				})
 				.then(function(source){
-	            	return $http.post(config.apiPath + "api/mail/SendMassMessage", source)
+	            	return $http.post(config.apiPath + "api/mail/SendMassMessage", source);
 				})
 				.then(function(reply){
 					console.log(reply.data);

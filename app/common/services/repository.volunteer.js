@@ -53,7 +53,7 @@
 		function getByOwnerId(ownerId){
             var self = this;
             var query = entityQuery.from('Volunteer')
-                .where('ownerId', '==', ownerId)
+				.where('ownerId', '==', ownerId);
 
             return self.manager.executeQuery(query)
                 .then(querySucceeded, self._queryFailed);
