@@ -5,40 +5,48 @@
 @import "partials/kendo-overrides";
 @import "partials/report-icons";
 @import "partials/default-colors";
-
 /******************************
  Context Colors
 *******************************/
 
-.danger {  color:$danger;  }
+.danger {
+  color: $danger;
+}
 
-.warning {  color:$warning;  }
+.warning {
+  color: $warning;
+}
 
-.success {  color:$success;  }
+.success {
+  color: $success;
+}
 
-.info {  color:$info;  }
+.info {
+  color: $info;
+}
 
-.primary {  color:$primary;  }
-
-
+.primary {
+  color: $primary;
+}
 /******************************
  Table Fix Styles
 *******************************/
-@media (max-width:768px) {
+
+@media (max-width: 768px) {
   .table-responsive .input-group {
-    width:200px;
+    width: 200px;
   }
   .table-responsive input {
-    width:200px;
+    width: 200px;
   }
   .table-responsive .btn-group {
-    width:100px;
+    width: 100px;
   }
 }
-
 /******************************
 Email Console
 *******************************/
+
 .console-panel {
   background-color: #f9f9f9;
   border: 1px solid #e5e5e5;
@@ -49,10 +57,11 @@ Email Console
     margin-bottom: 10px;
   }
 }
+
 .console {
   background-color: transparent;
   color: #333;
-  font: 12px Consolas, Monaco, "Bitstream Vera Sans Mono", "Courier New", Courier, monospace;
+  font: 12px 'Source Code Pro', 'Bitstream Vera Sans Mono', 'Courier New', Courier, monospace;
   font-weight: bold;
   margin: 0;
   overflow-x: hidden;
@@ -61,13 +70,11 @@ Email Console
   min-width: 300px;
   border: 1px solid rgba(20, 53, 80, 0.3);
   background-color: #ffffff;
-   p {
+  div {
     padding: 5px;
-    border-bottom: 1px solid #e5e5e5;
-    border-top: 1px solid #e5e5e5;
-   }
-  p:nth-child(even) {
-      background-color: #e5e5e5 !important;
-      }
+    border-bottom: 1px solid #E1F5FE;
+  }
+  div:nth-child(even) {
+    background-color: #B3E5FC!important;
+  }
 }
-

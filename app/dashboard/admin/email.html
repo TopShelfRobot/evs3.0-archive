@@ -67,27 +67,27 @@
             <input type="text" class="form-control" ng-model="email.subject" required>
           </div>
         </div>
-        <!-- /field -->
-        <textarea kendo-editor ng-model="email.body" required></textarea>
       </div>
     </div>
     <br>
-    <div class="row">
-      <div class="col-lg-12">
-        <button class="btn btn-success pull-right hidden-xs" ng-disabled="!emailSubmittal.$valid" ng-click="email.sendMessage()"><i class="glyphicon glyphicon-send"></i>&nbsp;Send Email</button>
-        <button class="btn btn-success btn-block hidden-sm hidden-lg"><i class="glyphicon glyphicon-send"></i>&nbsp;Send Email</button>
-      </div>
+  </form>
+  <div class="row">
+    <div class="col-lg-12">
+      <textarea kendo-editor ng-model="email.body" required></textarea>
+      <br>
+      <button class="btn btn-success pull-right hidden-xs" ng-disabled="!emailSubmittal.$valid" ng-click="email.sendMessage()"><i class="glyphicon glyphicon-send"></i>&nbsp;Send Email</button>
+      <button class="btn btn-success btn-block hidden-sm hidden-lg"><i class="glyphicon glyphicon-send"></i>&nbsp;Send Email</button>
     </div>
-    <br>
-    <div class="row" ng-if="email.response">
-      <div class="col-lg-12">
-        <div class="console-panel">
-          <h6 class="delivery-log-heading">Mail Delivery Log</h6>
-          <div class="console">
-            <p ng-repeat="r in email.response">{{r}}</p>
-          </div>
+  </div>
+  <br>
+  <div class="row" ng-if="email.response">
+    <div class="col-lg-12">
+      <div class="console-panel">
+        <h6 class="delivery-log-heading">Mail Delivery Log</h6>
+        <div class="console">
+          <div ng-repeat="r in email.response">{{r}}</div>
         </div>
       </div>
     </div>
-  </form>
+  </div>
 </section>
