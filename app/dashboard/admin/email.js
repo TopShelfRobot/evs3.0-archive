@@ -1,52 +1,52 @@
 (function () {
-    var controllerId = 'sendemail';
+	var controllerId = 'sendemail';
 
-    function Controller($scope, $http, $q, config, common, datacontext) {
-        var getLogFn = common.logger.getLogFn;
-        var log = getLogFn(controllerId);
+	function Controller($scope, $http, $q, config, common, datacontext) {
+		var getLogFn = common.logger.getLogFn;
+		var log = getLogFn(controllerId);
 
-        var self = this;
-        self.title = 'Listing Detail';
-        self.ownerId = config.owner.ownerId;
-        self.emailType = 'eventure';
+		var self = this;
+		self.title = 'Listing Detail';
+		self.ownerId = config.owner.ownerId;
+		self.emailType = 'eventure';
 		self.eventures = [];
 		self.listings = [];
 		self.delivery = "email";
 
-        function getEvents() {
-            return datacontext.eventure.getEventuresByOwnerId(self.ownerId)
-                .then(function (data) {
+		function getEvents() {
+			return datacontext.eventure.getEventuresByOwnerId(self.ownerId)
+				.then(function (data) {
 					self.eventures = data;
-                    return self.eventures;
-                });
-        }
+					return self.eventures;
+				});
+		}
 
-        function getListings() {
-            return datacontext.eventure.getEventureListsByOwnerId(self.ownerId)
-                .then(function (data) {
+		function getListings() {
+			return datacontext.eventure.getEventureListsByOwnerId(self.ownerId)
+				.then(function (data) {
 					self.listings = data;
-                    return self.listings;
-                });
-        }
+					return self.listings;
+				});
+		}
 		
-        function activate() {
-            onDestroy();
-            var promises = [getEvents(), getListings()];
+		function activate() {
+			onDestroy();
+			var promises = [getEvents(), getListings()];
 
-            common.activateController(promises, controllerId)
-                .then(function () {
-                    console.log("eventures:", self.eventures);
+			common.activateController(promises, controllerId)
+				.then(function () {
+					console.log("eventures:", self.eventures);
 					console.log("listings:", self.listings);
-                });
-        }
+				});
+		}
 		
 		activate();
 
-        function onDestroy() {
-            $scope.$on('$destroy', function () {
-                datacontext.cancel();
-            });
-        }
+		function onDestroy() {
+			$scope.$on('$destroy', function () {
+				datacontext.cancel();
+			});
+		}
 		
 		function dedup(array){
 			
@@ -81,7 +81,7 @@
 			return out;
 		}
 				
-        self.sendMessage = function () {
+		self.sendMessage = function () {
 
 			var getParts;
 			switch(self.emailType){
@@ -124,17 +124,19 @@
 					console.log("sending email:", source);
 					return source;
 				})
-				.then(function(source){
-	            	return $http.post(config.apiPath + "api/mail/SendMassMessage", source);
+				.then(function (source) {
+					console.log('calling api');
+					console.log(source);
+					return $http.post(config.apiPath + "api/mail/SendMassMessage", source);
 				})
-				.then(function(reply){
+				.then(function (reply) {
 					console.log(reply.data);
 				})
 				.catch(function(data){
 					console.error(data);
 				});
-        };
-    }
+		};
+	}
 	
 	angular.module('app').controller(controllerId, ['$scope', '$http', "$q", 'config', 'common', 'datacontext', Controller]);
 
