@@ -131,7 +131,7 @@
         })
         .then(function (reply) {
           console.log(reply.data);
-          reply.data = reply.data.slice(0, -4);
+          reply.data = reply.data.slice(0, -3);
           self.response = reply.data.replace(/\s/g, '').split('||');
 
           console.log(self.response);
