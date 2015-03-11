@@ -11,7 +11,7 @@
 		// Custom modules
 		'common', // common functions, logger, spinner
 		'common.bootstrap', // bootstrap dialog wrapper functions
-		'LocalStorageModule',evsDev30
+		'LocalStorageModule',
 
 		// 3rd Party Modules
 		'breeze.angular', // configures breeze for an angular app
