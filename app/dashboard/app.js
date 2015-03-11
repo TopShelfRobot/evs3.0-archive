@@ -11,7 +11,7 @@
 		// Custom modules
 		'common', // common functions, logger, spinner
 		'common.bootstrap', // bootstrap dialog wrapper functions
-		'LocalStorageModule',
+		'LocalStorageModule',evsDev30
 
 		// 3rd Party Modules
 		'breeze.angular', // configures breeze for an angular app
@@ -39,7 +39,7 @@
 
 	app.constant('ngAuthSettings', {
 		//apiServiceBaseUri: serviceBase,
-		clientId: 'ngAuthApp'
+	    clientId: 'evsDev30'
 	});
 
 	app.config(function ($httpProvider) {

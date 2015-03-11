@@ -1,7 +1,7 @@
 //var testRoles = ['user', 'admin', 'super-user', 'money'];
 
-angular.module('evReg').factory('authService', ['$http', '$q', 'UserAgent', 'localStorageService', 'ngAuthSettings', 'config',
-    function ($http, $q, userAgent, localStorageService, ngAuthSettings, config) {
+angular.module('evReg').factory('authService', ['$http', '$q', 'UserAgent', 'localStorageService', 'ngAuthSettings', 'CartModel', 'config',
+    function ($http, $q, userAgent, localStorageService, ngAuthSettings, cart, config) {
 
         'use strict';
 
@@ -181,9 +181,9 @@ angular.module('evReg').factory('authService', ['$http', '$q', 'UserAgent', 'loc
             var deferred = $q.defer();
             var roles;
 
-            $http.get(config.remoteApiName + 'Account/GetUserRolesByUserIdInArray/' + loginData.userName + '/')
-                .then(function (returnedRoles) {
-                    roles = returnedRoles.data;
+            //$http.get(config.remoteApiName + 'Account/GetUserRolesByUserIdInArray/' + externalData.userName + '/')
+            //    .then(function (returnedRoles) {
+            //        roles = returnedRoles.data;
 
                     $http.get(serviceBase + 'api/account/ObtainLocalAccessToken', {
                         params: {
@@ -214,9 +214,34 @@ angular.module('evReg').factory('authService', ['$http', '$q', 'UserAgent', 'loc
                         _logOut();
                         deferred.reject(err);
                     });
-                });
+                //});
             return deferred.promise;
 
+        };
+
+        var _startTimer = function (regObject) {
+            var returnMessage;
+            var timer = $timeout(function () {
+                $timeout.cancel(timer);
+                //authService.login($scope.registration).then(function () {
+                _login(regObject).then(function () {
+                    //$scope.authentication = authService.authentication;
+
+                    datacontext.participant.getParticipantByEmailAddress(_authentication.userName, cart.ownerId)
+                      .then(function (data) {
+                          if (data === null || typeof data === 'undefined') {
+                              $location.path('/new-user/add');
+                          } else {
+                              cart.houseId = data.id;
+                              $location.path(cart.navUrl);
+                          }
+                      });
+                },
+                  function (err) {
+                      returnMessage = err.error_description;
+                  });
+            }, 2000);
+            return returnMessage;
         };
 
         var _registerExternal = function (registerExternalData) {
@@ -224,11 +249,13 @@ angular.module('evReg').factory('authService', ['$http', '$q', 'UserAgent', 'loc
             var deferred = $q.defer();
             var roles;
 
-            $http.get(config.remoteApiName + 'Account/GetUserRolesByUserIdInArray/' + loginData.userName + '/')
-                .then(function (returnedRoles) {
-                    roles = returnedRoles.data;
+            //$http.get(config.remoteApiName + 'Account/GetUserRolesByUserIdInArray/' + registerExternalData.userName + '/')
+            //    .then(function (returnedRoles) {
+            //        roles = returnedRoles.data;
 
-                    $http.post(serviceBase + 'api/account/registerexternal', registerExternalData).success(function (response) {
+            console.table(registerExternalData);
+
+            $http.post(serviceBase + 'api/account/RegisterExternal', registerExternalData).success(function (response) {
 
                         //TODO: remove this
                         //response.roles = testRoles;
@@ -252,7 +279,7 @@ angular.module('evReg').factory('authService', ['$http', '$q', 'UserAgent', 'loc
                         _logOut();
                         deferred.reject(err);
                     });
-                });
+                //});
             return deferred.promise;
 
         };
@@ -263,7 +290,7 @@ angular.module('evReg').factory('authService', ['$http', '$q', 'UserAgent', 'loc
         authServiceFactory.fillAuthData = _fillAuthData;
         authServiceFactory.authentication = _authentication;
         authServiceFactory.refreshToken = _refreshToken;
-
+        authServiceFactory.startTimer = _startTimer;
         authServiceFactory.obtainAccessToken = _obtainAccessToken;
         authServiceFactory.externalAuthData = _externalAuthData;
         authServiceFactory.registerExternal = _registerExternal;
