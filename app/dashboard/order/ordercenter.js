@@ -54,6 +54,10 @@
               }
             }
           },
+          sort: {
+            field: "id",
+            dir: "desc"
+          },
           pageSize: 10,
           serverPaging: false,
           serverSorting: false
@@ -65,14 +69,25 @@
         },
         detailTemplate: kendo.template($('#template').html()),
         columns: [{
+          field: 'id',
+          title: 'Order Id',
+          width: 220
+          }, {
           title: 'Participant',
-          template: '#=house.firstName# #=house.lastName#'
+          field: 'lastName',
+          template: '#=firstName# #=lastName#',
+          width: 350,
            }, {
           field: 'dateCreated',
           title: 'Date',
+          format: '{0:MM/dd/yyyy}',
+          width: 300
            }, {
           field: 'amount',
           title: 'Amount',
+          format: '{0:c}',
+          filterable: false,
+          width: 120
            }]
       };
 
@@ -113,16 +128,16 @@
             }, {
             field: 'quantity',
             title: 'Qty',
-            width: 55
+            width: 75
             }, {
             field: 'dateCreated',
             title: 'Registration Date',
             type: 'date',
             format: '{0:MM/dd/yyyy}',
-            width: 180
             }, {
             field: 'type',
-            title: 'Type'
+            title: 'Type',
+            width: 150
             }, {
             field: '',
             title: '',
