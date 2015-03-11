@@ -39,7 +39,7 @@
 
 	app.constant('ngAuthSettings', {
 		//apiServiceBaseUri: serviceBase,
-		clientId: 'ngAuthApp'
+	    clientId: 'evsDev30'
 	});
 
 	app.config(function ($httpProvider) {

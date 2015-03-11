@@ -24,7 +24,7 @@
 	]);
 
 	app.constant('ngAuthSettings', {
-		clientId: 'ngAuthApp'
+	    clientId: 'evsDev30'
 	});
 
 	app.config(function ($httpProvider) {

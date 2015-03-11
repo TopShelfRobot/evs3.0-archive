@@ -41,12 +41,16 @@
   </PropertyGroup>
   <ItemGroup>
     <Content Include=".gitignore" />
+    <Content Include="authComplete.html" />
     <Content Include="app\common\services\cloner.js" />
     <Content Include="app\common\services\helpers.js" />
     <Content Include="app\common\services\model.js" />
     <Content Include="app\common\services\userAgent.js" />
+    <Content Include="app\dashboard\admin\add-employee.html" />
+    <Content Include="app\dashboard\admin\addEmployeeController.js" />
     <Content Include="app\dashboard\admin\employee.html" />
     <Content Include="app\dashboard\admin\employee.js" />
+    <Content Include="app\dashboard\admin\employeeForm.html" />
     <Content Include="app\dashboard\admin\setrefund.js" />
     <Content Include="app\dashboard\analytic\coupon.html" />
     <Content Include="app\dashboard\analytic\coupon.js" />
@@ -76,6 +80,8 @@
     <Content Include="app\common\services\repository.owner.js" />
     <Content Include="app\common\services\routemediator.js" />
     <Content Include="app\dashboard\config.js" />
+    <Content Include="app\dashboard\order\ordercenter.html" />
+    <Content Include="app\dashboard\order\ordercenter.js" />
     <Content Include="app\dashboard\surcharge\discounts.html" />
     <Content Include="app\dashboard\surcharge\discounts.js" />
     <Content Include="app\dashboard\eventure\elistcenter.js" />
@@ -380,6 +386,7 @@
     <Content Include="Content\js\angular.min.js.map" />
     <Content Include="Content\js\angulartics-ga.js" />
     <Content Include="Content\js\angulartics.js" />
+    <Content Include="Content\js\authComplete.js" />
     <Content Include="Content\js\bootstrap.min.js" />
     <Content Include="Content\js\breeze.angular.js" />
     <Content Include="Content\js\breeze.debug.js" />
