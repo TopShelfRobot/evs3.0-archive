@@ -65,7 +65,7 @@ Default color theme
 Sidebar Nav
 *************************************/
 #sidebar {
-  border-right: 1px solid $primary;
+  border-right: 1px solid darken($neutral-light,20);
   background-color: $neutral-light;
   color: $neutral-dark;
 
