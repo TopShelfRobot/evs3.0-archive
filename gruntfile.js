@@ -84,5 +84,6 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks('grunt-contrib-jshint');
 	grunt.loadNpmTasks('grunt-contrib-connect');
 	// Default grunt tasks
-	grunt.registerTask('default', ['sass', 'cssmin']);
+	grunt.registerTask('build', ['sass', 'cssmin', "jshint"]);
+	grunt.registerTask('default', ["build", "watch"]);
 };
