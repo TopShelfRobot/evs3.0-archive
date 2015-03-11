@@ -1,90 +1,83 @@
 <div>
- <div class="row">
-	 
-   <div ng-if="opts.showSelector" class="col-3 col-sm-3 col-lg-3 well">
-     <form class="form-horizontal">
-       <legend>Payment Type</legend>
-       <div class="radio">
-         <label>
-           <input type="radio" name="optionsPayment" ng-model="$parent.paymentEnabled" value="credit">
-					 Credit Card
-				 </label>
-       </div>
-       <div class="radio">
-         <label>
-           <input type="radio" name="optionsPayment" ng-model="$parent.paymentEnabled" value="cash">
-					 Cash
-				 </label>
-       </div>
-       <div class="radio">
-         <label>
-           <input type="radio" name="optionsPayment" ng-model="$parent.paymentEnabled" value="check">
-					 Check
-				 </label>
-       </div>
-       <div class="radio">
-         <label>
-           <input type="radio" name="optionsPayment" ng-model="$parent.paymentEnabled" value="scholarship">
-					 Scholarship
-				 </label>
-       </div>
-     </form>
-   </div>
+  <br>
+  <div class="row">
+    <div ng-if="opts.showSelector" class="col-sm-3 col-lg-2">
+      <form class="form-horizontal">
+        <legend>Payment Type</legend>
+        <div class="radio">
+          <label>
+            <input type="radio" name="optionsPayment" ng-model="$parent.paymentEnabled" value="credit"> Credit Card
+          </label>
+        </div>
+        <div class="radio">
+          <label>
+            <input type="radio" name="optionsPayment" ng-model="$parent.paymentEnabled" value="cash"> Cash
+          </label>
+        </div>
+        <div class="radio">
+          <label>
+            <input type="radio" name="optionsPayment" ng-model="$parent.paymentEnabled" value="check"> Check
+          </label>
+        </div>
+        <div class="radio">
+          <label>
+            <input type="radio" name="optionsPayment" ng-model="$parent.paymentEnabled" value="scholarship"> Scholarship
+          </label>
+        </div>
+      </form>
+      <br>
+    </div>
+    <div ng-class="opts.showSelector ? 'col-sm-9 col-lg-10' : 'col-xs-12 text-center'">
+      <form ng-if="opts.showSelector" class="form-horizontal">
+        <div class="form-group">
+          <label class="col-lg-3 control-label">Payment Adjustment</label>
+          <div class="col-lg-9">
+            <input type="text" size="20" autocomplete="off" class="form-control" ng-model="paymentAdjustment" ng-change="paymentChange()">
+            <br />
+          </div>
+          <label class="col-lg-3 control-label">Payment Amount</label>
+          <div class="col-lg-9">
+            <span type="text" size="20" class="form-control" disabled> {{ paymentAmmount | currency }}</span>
+            <br />
+          </div>
+          <label class="col-lg-3 control-label">Notes</label>
+          <div class="col-lg-9">
+            <textarea type="text" size="20" rows="3" autocomplete="off" class="form-control" ng-model="otherPaymentNotes"></textarea>
+            <br />
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="col-sm-12 text-center">
 
-   <div ng-class="opts.showSelector ? 'col-9 col-sm-9 col-lg-9' : 'col-sm-12 text-center'">
-     <form ng-if="opts.showSelector" class="form-horizontal">
-       <div class="form-group">
-         <label class="col-lg-3 control-label">Payment Adjustment</label>
-         <div class="col-lg-9">
-           <input type="text" size="20" autocomplete="off" class="form-control" ng-model="paymentAdjustment" ng-change="paymentChange()"><br />
-         </div>
-         <hr>
-         <label class="col-lg-3 control-label">Payment Amount</label>
-         <div class="col-lg-9">
-           <span type="text" size="20" class="form-control" disabled> {{ paymentAmmount | currency }}</span><br />
-         </div>
-         <hr>
-         <label class="col-lg-3 control-label">Notes</label>
-         <div class="col-lg-9">
-           <textarea type="text" size="20" rows="3" autocomplete="off" class="form-control" ng-model="otherPaymentNotes"></textarea><br />
-         </div>
-       </div>
-			</form>
-		</div>
-		<div class="col-sm-12 text-center">
-
-			<form>
-				<div class="row" ng-if="paymentEnabled == 'credit'">
-			    <div class="col-sm-12 text-center">
-		        <h3>Payment Information</h3>
-		        <p class="text-muted">We accept all major credit and debit cards</p>
-		        <img src="/Content/images/creditcards.png" />
-		        <hr>
-		        <p class="text-muted">Your card will be charged for the amount of <strong>{{ paymentAmmount | currency }}</strong>.</p>
-						<label class="checkbox" ng-show="opts.allowZeroPayment">
-	            <input type="checkbox" ng-model="$parent.fullPaymentUnderstanding">
-	            I am paying an amount of $0.00 and understand my team is still responsible for the full amount.
-		        </label>
-						<p class="has-error">{{error}}</p>
-			    </div>
-				</div>
-				<div class="row">
-			    <div class="col-xs-8 col-xs-offset-2 col-sm-6 col-sm-offset-3">
-            <label class="checkbox agreement">
-                <input type="checkbox" ng-model="waiverSigned">
-                <a ng-href="#/terms" target="_blank">I accept the Terms and Conditions and the Refund Policy</a>
+      <form>
+        <div class="row" ng-if="paymentEnabled == 'credit'">
+          <div class="col-sm-12 text-center">
+            <h3>Payment Information</h3>
+            <p class="text-muted">We accept all major credit and debit cards</p>
+            <img src="/Content/images/creditcards.png" />
+            <hr>
+            <p class="text-muted">Your card will be charged for the amount of <strong>{{ paymentAmmount | currency }}</strong>.</p>
+            <label class="checkbox" ng-show="opts.allowZeroPayment">
+              <input type="checkbox" ng-model="$parent.fullPaymentUnderstanding"> I am paying an amount of $0.00 and understand my team is still responsible for the full amount.
             </label>
-		        <button type="button"
-                class="btn btn-success btn-block pull-right"
-                ng-disabled="(!waiverSigned) || (paymentAmmount == 0 && !fullPaymentUnderstanding) || (submitDisabled)"
-                ng-click="checkout()">
-							{{opts.buttonText || 'Complete'}}
-		        </button>
-			    </div>
-				</div>
-			</form>
-		</div>
-	</div>
+            <p class="has-error">{{error}}</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-8 col-xs-offset-2 col-sm-6 col-sm-offset-3">
+            <label class="checkbox agreement">
+              <input type="checkbox" ng-model="waiverSigned">
+              <a ng-href="#/terms" target="_blank">I accept the Terms and Conditions and the Refund Policy</a>
+            </label>
+            <button type="button" class="btn btn-success btn-block pull-right" ng-disabled="(!waiverSigned) || (paymentAmmount == 0 && !fullPaymentUnderstanding) || (submitDisabled)" ng-click="checkout()">
+              {{opts.buttonText || 'Complete'}}
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
 </div>
 
 <!-- <div class="row">
