@@ -54,7 +54,7 @@
     }
 
     vm.upload = function (file) {
-      vm.eventure.imageFileName = file[0].name;
+      vm.addon.imagePath = file[0].name;
       file.upload = $upload.upload({
         url: config.remoteApiName + 'image',
         method: 'POST',
