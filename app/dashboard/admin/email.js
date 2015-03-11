@@ -12,6 +12,7 @@
     self.eventures = [];
     self.listings = [];
     self.delivery = 'email';
+    self.isBodyVisible = true;
 
     function getEvents() {
       return datacontext.eventure.getEventuresByOwnerId(self.ownerId)
@@ -81,6 +82,10 @@
       return out;
     }
 
+    self.showBody = function () {
+      self.isBodyVisible = true;
+    };
+
     self.sendMessage = function () {
 
       var getParts;
@@ -130,6 +135,7 @@
           return $http.post(config.apiPath + 'api/mail/SendMassMessage', source);
         })
         .then(function (reply) {
+          self.isBodyVisible = false;
           console.log(reply.data);
           reply.data = reply.data.slice(0, -3);
           self.response = reply.data.replace(/\s/g, '').split('||');

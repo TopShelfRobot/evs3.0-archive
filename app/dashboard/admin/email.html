@@ -71,12 +71,12 @@
     </div>
     <br>
   </form>
-  <div class="row">
+  <div class="row" ng-if="email.isBodyVisible">
     <div class="col-lg-12">
       <textarea kendo-editor ng-model="email.body" required></textarea>
       <br>
-      <button class="btn btn-success pull-right hidden-xs" ng-disabled="!emailSubmittal.$valid" ng-click="email.sendMessage()"><i class="glyphicon glyphicon-send"></i>&nbsp;Send Email</button>
-      <button class="btn btn-success btn-block hidden-sm hidden-lg"><i class="glyphicon glyphicon-send"></i>&nbsp;Send Email</button>
+      <button class="btn btn-success pull-right hidden-xs hidden-sm" ng-disabled="!emailSubmittal.$valid" ng-click="email.sendMessage()"><i class="glyphicon glyphicon-send"></i>&nbsp;Send Email</button>
+      <button class="btn btn-success btn-block hidden-md hidden-lg" ng-disabled="!emailSubmittal.$valid" ng-click="email.sendMessage()"><i class="glyphicon glyphicon-send"></i>&nbsp;Send Email</button>
     </div>
   </div>
   <br>
@@ -88,6 +88,9 @@
           <div ng-repeat="r in email.response">{{r}}</div>
         </div>
       </div>
+      <br>
+      <button class="btn btn-success pull-right hidden-xs hidden-sm" ng-click="email.showBody()"><i class="glyphicon glyphicon-send"></i>&nbsp;View Message</button>
+      <button class="btn btn-success btn-block hidden-md hidden-lg" ng-click="email.showBody()"><i class="glyphicon glyphicon-send"></i>&nbsp;View Message</button>
     </div>
   </div>
 </section>

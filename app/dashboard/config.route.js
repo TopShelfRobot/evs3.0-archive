@@ -16,7 +16,7 @@
       setRoute(r.url, r.config);
     });
     $routeProvider.otherwise({
-      redirectTo: '/login'
+      redirectTo: '/eventurecenter'
     });
 
     function setRoute(url, definition) {
