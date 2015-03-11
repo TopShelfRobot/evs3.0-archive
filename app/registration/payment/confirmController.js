@@ -16,9 +16,14 @@
 		$scope.eventureName = cart.regSettings.eventureName;
 		$scope.listName = cart.regSettings.listName;
 
-		$scope.confirmButtonText = cart.regSettings.confirmButtonText;
 		$scope.termsText = cart.regSettings.termsText;
 		$scope.refundsText = cart.regSettings.refundsText;
+		
+		$scope.paymentOptions = {
+			showSelector : true,
+			allowZeroPayment : false,
+			buttonText : cart.regSettings.confirmButtonText,
+		};
 
 		// initialize it
 		$scope.submitDisabled = true;
