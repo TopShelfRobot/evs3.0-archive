@@ -49,11 +49,11 @@
                   }
                 });
             }
-          });
-      },
-      function (err) {
-        $scope.message = err.error_description;
-      };
+          })
+					.catch(function (err) {
+		        $scope.message = err.error_description;
+		      });
+    };
 
     $scope.authExternalProvider = function (provider) {
       var redirectUri = location.protocol + '//' + location.host + '/authcomplete.html';
