@@ -130,21 +130,29 @@
           return source;
         })
         .then(function (source) {
-          console.log('calling api');
-          console.log(source);
-          return $http.post(config.apiPath + 'api/mail/SendMassMessage', source);
-        })
-        .then(function (reply) {
-          self.isBodyVisible = false;
-          console.log(reply.data);
-          reply.data = reply.data.slice(0, -3);
-          self.response = reply.data.replace(/\s/g, '').split('||');
+          var sendEmails = confirm('You are about to send ' + source.email.length + 'emails. Are you sure you wish to continue?');
+          if (sendEmails) {
+            //Send Email
+            console.log('calling api');
+            console.log(source);
+            return $http.post(config.apiPath + 'api/mail/SendMassMessage', source)
+              .then(function (reply) {
+                self.isBodyVisible = false;
+                console.log(reply.data);
+                reply.data = reply.data.slice(0, -3);
+                self.response = reply.data.replace(/\s/g, '').split('||');
 
-          console.log(self.response);
-        })
-        .catch(function (data) {
-          console.error(data);
+                console.log(self.response);
+              })
+              .catch(function (data) {
+                console.error(data);
+              });
+          } else {
+            //Do Nothing
+            alert('You have canceled the email delivery.');
+          }
         });
+
     };
   }
 
