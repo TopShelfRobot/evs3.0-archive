@@ -35,6 +35,10 @@
 					scope.paymentChange();
 				});
 				
+				scope.$watch("error", function(newOne, oldOne){
+					console.log("new, old", newOne, oldOne);
+				});
+				
 				scope.checkout = function(){
 					var opts = {
 						amount : scope.paymentAmmount,

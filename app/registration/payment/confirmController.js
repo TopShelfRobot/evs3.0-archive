@@ -18,6 +18,8 @@
 		$scope.termsText = cart.regSettings.termsText;
 		$scope.refundsText = cart.regSettings.refundsText;
 		
+		$scope.stripeError = "";
+		
 		// initialize it
 		$scope.paymentOptions = {
 			showSelector : config.owner.isAdmin,
@@ -129,43 +131,46 @@
 				order.notes = opts.notes;
 			}
 			
-			var def;
+			var def = $q.when(order);
 			switch(opts.type){
 			case "credit":
 				if (order.orderAmount > 0) {
-					def = stripe.checkout(order.orderAmmount)
+					def = stripe.checkout(order.orderAmount)
 						.then(function (res) {
-							console.log(res);
-							$.blockUI({
-								message: 'Processing order...'
-							});
 							order.stripeToken = res.id;
-							return $http.post(config.apiPath + "api/order/Post", order);
-						}); //mjb
-					
-				} else {
-					$.blockUI({
-						message: 'Processing order...'
-					});
-					def = $http.post(config.apiPath + "api/order/PostZero", order); //mjb
-				}
+							return order;
+						}); 
+				} 
 				break;
 			default:
-				$.blockUI({
-					message: 'Processing order...'
-				});
-				def = $http.post(config.apiPath + "api/order/PostOther", order); 
+				// nothing special to do.  
 				break;
 			}
 			
-			def.then(function (reply) {
+			if(order.orderAmount > 0){
+				def = def.then(function(){
+					$.blockUI({
+						message: 'Processing order...'
+					});
+					return $http.post(config.apiPath + "api/order/Post", order);
+				});
+			}else{
+				def = def.then(function(){
+					$.blockUI({
+						message: 'Processing order...'
+					});
+					return $http.post(config.apiPath + "api/order/PostZero", order); //mjb
+				});
+			}
+			
+			def = def.then(function (reply) {
 					var result = reply.data;
 					cart.emptyCart();
 					$location.path("/orderreceipt/" + result);
 				})
-				.catch(function (err) {
-					console.log("ERROR:", err.toString());
-					$scope.stripeError = 'ERROR: ' + err.toString();
+				.catch(function (reply) {
+					console.log("ERROR:", reply.data.toString());
+					$scope.stripeError = 'ERROR: ' + reply.data.toString();
 				})
 				.finally(function () {
 					$.unblockUI();
@@ -173,7 +178,7 @@
 				
 			return def;
 		};
-
+		
 		$scope.isConfirm = function () {
 			return $scope.isTerms && $scope.isRefund;
 		};
