@@ -26,13 +26,24 @@
 			templateUrl : "/app/registration/_components/payment-options.part.html",
 			link: function(scope, el, attrs) {
 				scope.paymentEnabled = "credit";
-				scope.paymentAmmount = scope.price || 0;
+				
 				scope.paymentChange = function(){
-					
+					scope.paymentAmmount = (scope.price || 0) - (Number(scope.paymentAdjustment) || 0);
 				};
 				
+				scope.$watch("price", function(newOne, oldOne){
+					scope.paymentChange();
+				});
+				
 				scope.checkout = function(){
+					var opts = {
+						amount : scope.paymentAmmount,
+						type : scope.paymentEnabled,
+						waiverSigned : scope.waiverSigned,
+						notes: scope.otherPaymentNotes,
+					};
 					
+					return scope.submit(opts);
 				};
 			}
 		};

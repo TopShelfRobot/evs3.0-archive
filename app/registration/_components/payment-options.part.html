@@ -24,6 +24,11 @@
             <input type="radio" name="optionsPayment" ng-model="$parent.paymentEnabled" value="scholarship"> Scholarship
           </label>
         </div>
+        <div class="radio">
+          <label>
+            <input type="radio" name="optionsPayment" ng-model="$parent.paymentEnabled" value="giftcard"> Gift Card
+          </label>
+        </div>
       </form>
       <br>
     </div>
@@ -32,7 +37,7 @@
         <div class="form-group">
           <label class="col-lg-3 control-label">Payment Adjustment</label>
           <div class="col-lg-9">
-            <input type="text" size="20" autocomplete="off" class="form-control" ng-model="paymentAdjustment" ng-change="paymentChange()">
+            <input type="text" size="20" autocomplete="off" class="form-control" ng-model="$parent.paymentAdjustment" ng-change="paymentChange()">
             <br />
           </div>
           <label class="col-lg-3 control-label">Payment Amount</label>
@@ -42,7 +47,7 @@
           </div>
           <label class="col-lg-3 control-label">Notes</label>
           <div class="col-lg-9">
-            <textarea type="text" size="20" rows="3" autocomplete="off" class="form-control" ng-model="otherPaymentNotes"></textarea>
+            <textarea type="text" size="20" rows="3" autocomplete="off" class="form-control" ng-model="$parent.otherPaymentNotes"></textarea>
             <br />
           </div>
         </div>
@@ -70,7 +75,7 @@
               <input type="checkbox" ng-model="waiverSigned">
               <a ng-href="#/terms" target="_blank">I accept the Terms and Conditions and the Refund Policy</a>
             </label>
-            <button type="button" class="btn btn-success btn-block pull-right" ng-disabled="(!waiverSigned) || (paymentAmmount == 0 && !fullPaymentUnderstanding) || (submitDisabled)" ng-click="checkout()">
+            <button type="button" class="btn btn-success btn-block pull-right" ng-disabled="(!waiverSigned) || (paymentAmmount == 0 && !fullPaymentUnderstanding) || (opts.submitDisabled)" ng-click="checkout()">
               {{opts.buttonText || 'Complete'}}
             </button>
           </div>
