@@ -367,13 +367,6 @@
           authorized: ['user', 'super-user']
         }
             }, {
-        url: '/setbundle/:bundleId',
-        config: {
-          title: 'Edit A Bundle',
-          templateUrl: 'app/dashboard/surcharge/setbundle.html',
-          authorized: ['user', 'super-user']
-        }
-            }, {
         url: '/yearsummary/:eventureId',
         config: {
           title: 'Year Summary',
