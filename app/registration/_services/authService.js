@@ -1,7 +1,7 @@
 //var testRoles = ['user', 'admin', 'super-user', 'money'];
 
-angular.module('evReg').factory('authService', ['$http', '$q', 'UserAgent', 'localStorageService', 'ngAuthSettings', 'CartModel', 'config',
-    function ($http, $q, userAgent, localStorageService, ngAuthSettings, cart, config) {
+angular.module('evReg').factory('authService', ['$http', '$q', "$timeout", 'UserAgent', 'localStorageService', 'ngAuthSettings', 'CartModel', 'config',
+    function ($http, $q, $timeout, userAgent, localStorageService, ngAuthSettings, cart, config) {
 
         'use strict';
 
