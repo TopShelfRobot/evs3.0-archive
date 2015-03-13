@@ -69,11 +69,11 @@
                     <ul class="participant-list">
                         <li class="participant">
                             <div class="radio">
-                                <label>
-                                    <div ng-repeat="part in participants">
-                                        <input type="radio" name="participant" ng-value="part" ng-model="$parent.selectedParticipant"> {{part.firstName}} {{part.lastName}}
-                                    </div>
-                                </label>
+                                <div ng-repeat="part in participants">
+																		<label for="participant-{{part.id}}">
+		                                    <input type="radio" name="participant" ng-value="part" ng-model="$parent.selectedParticipant" /> {{part.firstName}} {{part.lastName}}
+																		</label>
+                                </div>
                             </div>
                         </li>
                     </ul>
