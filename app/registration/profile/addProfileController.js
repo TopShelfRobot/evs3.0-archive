@@ -16,6 +16,8 @@
 		$scope.participant.email = authService.authentication.userName;
 
 		$scope.formHolder = {};
+		
+		$scope.isAdmin = config.owner.isAdmin;
 
 		$scope.submit = function(){
 

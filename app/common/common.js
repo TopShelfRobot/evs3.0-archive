@@ -49,11 +49,15 @@
 		function activateController(promises, controllerId) {
 			$broadcast(commonConfig.config.spinnerToggleEvent, true);
 			
-			return $q.all(promises).then(function (eventArgs) {
-				var data = { controllerId: controllerId };
-				$broadcast(commonConfig.config.controllerActivateSuccessEvent, data);
-				//logger.log('contl activated success: ' + controllerId);
-			});
+			return $q.all(promises)
+				.catch(function(err){
+					console.error("ERROR:", err);
+				})
+				.finally(function (eventArgs) {
+					var data = { controllerId: controllerId };
+					$broadcast(commonConfig.config.controllerActivateSuccessEvent, data);
+					//logger.log('contl activated success: ' + controllerId);
+				});
 		}
 
 		function $broadcast() {

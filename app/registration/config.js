@@ -8,7 +8,7 @@
 
   var apiPath = '';
   //apiPath = 'http://localhost:49822/';
-  //apiPath = 'http://dev30.eventuresports.info/';
+  apiPath = 'http://dev30.eventuresports.info/';
 
   var remoteServiceName = apiPath + 'bdc/registration/';
   var remoteApiName = apiPath + 'api/';
@@ -35,7 +35,7 @@
     owner: {
       ownerId: 1,
       authEmail: '',
-      isAdmin: true,
+      isAdmin: false,
       mr_houseId: 0
     }
   };
