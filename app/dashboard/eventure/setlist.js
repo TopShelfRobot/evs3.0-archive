@@ -149,6 +149,15 @@
     };
 
     vm.saveAndNav = function () {
+      
+      while(vm.list.evenutreListBundles && vm.list.evenutreListBundles.length > 0){
+        vm.list.evenutreListBundles.pop();
+      }
+      if(vm.list.isBundle){
+        vm.selectedLists.forEach(function(item){
+          vm.list.evenutreListBundles.push({eventureListId: vm.listId, childEventureListId: item});
+        });
+      }
 
       return datacontext.save(vm.list)
         .then(complete);
