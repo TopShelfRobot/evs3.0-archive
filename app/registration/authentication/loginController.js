@@ -92,7 +92,7 @@
                     .then(function (response) {
                         //console.log('hererererererer');
                         //console.table(response);
-                        authService.startTimer();
+                        authService.startTimer(authService.externalAuthData);
                     });
                 } else {
                     //Obtain access token and redirect to orders
