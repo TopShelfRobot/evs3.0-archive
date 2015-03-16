@@ -56,7 +56,7 @@
     }
 
     function getEventureListsByEventureId() {
-      return datacontext.eventure.getEventureListsByEventureId(vm.list.eventureId)
+      return datacontext.eventure.getEventureListsByOwnerId(vm.ownerId)
         .then(function (data) {
           multiSelect(data);
         });

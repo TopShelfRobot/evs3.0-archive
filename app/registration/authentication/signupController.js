@@ -32,7 +32,7 @@
 
                 $scope.savedSuccessfully = true;
                 $scope.message = "User has been registered successfully, you will be redirected in 2 seconds.";
-                $scope.message = authService.startTimer();
+                $scope.message = authService.startTimer($scope.registration);
             },
               function (response) {
                   var errors = [];

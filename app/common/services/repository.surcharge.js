@@ -91,7 +91,7 @@
     function createAddon(eventureId) {
       var self = this;
       return self.manager.createEntity('Addon', {
-        addonType: 'event',
+        addonType: 'owner',
         ownerId: config.owner.ownerId,
         dateCreated: new Date(),
         eventureId: eventureId
