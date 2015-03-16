@@ -93,6 +93,11 @@
                         //console.log('hererererererer');
                         //console.table(response);
                         authService.startTimer(authService.externalAuthData);
+                    }).err(function (err) {
+                        console.log('trying to defer error');
+                        console.log(err);
+                        //console.table(response);
+                        authService.startTimer(authService.externalAuthData);
                     });
                 } else {
                     //Obtain access token and redirect to orders
