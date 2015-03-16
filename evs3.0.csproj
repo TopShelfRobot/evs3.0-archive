@@ -41,7 +41,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Content Include=".gitignore" />
-    <Content Include="app\registration\authentication\authComplete.html" />
     <Content Include="app\common\services\cloner.js" />
     <Content Include="app\common\services\helpers.js" />
     <Content Include="app\common\services\model.js" />
@@ -122,6 +121,8 @@
     <Content Include="app\dashboard\_components\fileUpload\angular-file-upload.min.js" />
     <Content Include="app\dashboard\_layout\shell.js" />
     <Content Include="app\registration\app.js" />
+    <Content Include="app\registration\authentication\authComplete.html" />
+    <Content Include="app\registration\authentication\authComplete.js" />
     <Content Include="app\registration\config.exceptionHandler.js" />
     <Content Include="app\registration\config.js" />
     <Content Include="app\registration\config.route.js" />
@@ -406,7 +407,6 @@
     <Content Include="Content\js\angular.min.js.map" />
     <Content Include="Content\js\angulartics-ga.js" />
     <Content Include="Content\js\angulartics.js" />
-    <Content Include="app\registration\authentication\authComplete.js" />
     <Content Include="Content\js\bootstrap.min.js" />
     <Content Include="Content\js\breeze.angular.js" />
     <Content Include="Content\js\breeze.debug.js" />
