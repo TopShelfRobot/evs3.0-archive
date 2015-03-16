@@ -89,11 +89,11 @@
                     console.log(authService.externalAuthData);
 
                     authService.registerExternal(authService.externalAuthData)
-                    .then(function (response) {
+                    .success(function (response) {
                         //console.log('hererererererer');
                         //console.table(response);
                         authService.startTimer(authService.externalAuthData);
-                    }).err(function (err) {
+                    }).error(function (err) {
                         console.log('trying to defer error');
                         console.log(err);
                         //console.table(response);
