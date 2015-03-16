@@ -277,7 +277,8 @@ angular.module('evReg').factory('authService', ['$http', '$q', "$timeout", "$loc
 
                         deferred.resolve(response);
 
-                    }).error(function (err, status) {
+            }).error(function (err, status) {
+                console.log(err);
                         _logOut();
                         deferred.reject(err);
                     });
