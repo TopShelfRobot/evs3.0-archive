@@ -48,6 +48,7 @@
     function getAddonsByEventureId(eventureId) {
       var self = this;
       var pred = predicate.create("eventureId", "==", eventureId)
+				.and("addonType", "==", "eventure")
         .and("active", "==", true);
 
       return entityQuery.from('Addons')
@@ -63,6 +64,7 @@
     function getAddonsByOwnerId(ownerId) {
       var self = this;
       var pred = predicate.create("ownerId", "==", ownerId)
+				.and("addonType", "==", "inclusive")
         .and("active", "==", true);
 
       return entityQuery.from('Addons')
