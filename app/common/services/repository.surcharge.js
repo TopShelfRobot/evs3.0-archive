@@ -69,7 +69,8 @@
 
       return entityQuery.from('Addons')
         .where(pred)
-        .using(self.manager).execute()
+        .using(self.manager)
+				.execute()
         .then(querySucceeded, self._queryFailed);
 
       function querySucceeded(data) {
