@@ -56,7 +56,7 @@
           };
 
         $scope.authExternalProvider = function (provider) {
-            var redirectUri = location.protocol + '//' + location.host + '/authcomplete.html';
+            var redirectUri = location.protocol + '//' + location.host + '/app/registration/authentication/authcomplete.html';
             //var redirectUri = location.protocol + '//' + location.host + cart.navUrl;
 
             //alert(redirectUri);

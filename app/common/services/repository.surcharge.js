@@ -93,6 +93,7 @@
       return self.manager.createEntity('Addon', {
         addonType: 'event',
         ownerId: config.owner.ownerId,
+        dateCreated: new Date(),
         eventureId: eventureId
       });
     }
