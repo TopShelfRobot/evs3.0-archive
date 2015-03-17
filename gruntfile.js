@@ -55,46 +55,40 @@ module.exports = function (grunt) {
 			},
 			dist: {
 				src: [
-					'Content/js/jquery-2.1.3.min.js',
-					'Content/js/angular.min.js ',
-					'Content/js/angular-animate.min.js ',
-					'Content/js/angular-route.min.js',
-					'Content/js/angular-sanitize.min.js',
-					'Content/js/angular-resource.min.js',
-					'Content/js/kendo.all.min.js',
-					'Content/js/bootstrap.min.js',
-					'Content/js/breeze.debug.js',
-					'Content/js/breeze.angular.js',
-					'Content/js/breeze.directives.js',
-					'Content/js/breeze.saveErrorExtensions.js',
-					'Content/js/jszip.min.js',
-					'Content/js/jquery.validate.js',
-					'Content/js/toastr.js',
-					'Content/js/moment.js',
-					'Content/js/spin.js',
-					'Content/js/nsPopover.js',
-					'Content/js/stripe.js',
-					'Content/js/ngMask.js',
-					'Content/js/angular-local-storage.min.js',
-					'Content/js/ui-bootstrap-custom-0.12.1.min.js',
-					'Content/js/ui-bootstrap-custom-tpls-0.12.1.min.js',
-					'Content/js/angular-moment.js',
-					'Content/js/angulartics.js',
-					'Content/js/angulartics-ga.js',
-					'Content/js/ng-role-auth.js'],
-				dest: 'Scripts/not_in_use/concat.js',
+					'Scripts/js/angular-animate.js ',
+					'Scripts/js/angular-route.js',
+					'Scripts/js/angular-sanitize.js',
+					'Scripts/js/angular-resource.js',
+					'Scripts/js/breeze.debug.js',
+					'Scripts/js/breeze.angular.js',
+					'Scripts/js/breeze.directives.js',
+					'Scripts/js/breeze.saveErrorExtensions.js',
+					'Scripts/js/jszip.js',
+					'Scripts/js/jquery.validate.js',
+					'Scripts/js/toastr.js',
+					'Scripts/js/moment.js',
+					'Scripts/js/spin.js',
+					'Scripts/js/stripe.js',
+					'Scripts/js/ngMask.js',
+					'Scripts/js/nsPopover.js',
+					'Scripts/js/angular-local-storage.js',
+					'Scripts/js/angular-moment.js',
+					'Scripts/js/angulartics.js',
+					'Scripts/js/angulartics-ga.js',
+					'Scripts/js/ng-role-auth.js'],
+				dest: 'Scripts/concat.js',
 			},
 		},
 		uglify: {
 			options: {
 				mangle: {
-					except: ['jQuery', 'Backbone']
+					except: ['jQuery', 'Angular']
 				},
 				report: 'min'
 			},
 			my_target: {
 				files: {
-					'Content/built.min.js': ['Scripts/not_in_use/concat.js']
+					'Content/js/built.min.js': ['Scripts/concat.js']
 				}
 			}
 		},
@@ -173,6 +167,14 @@ module.exports = function (grunt) {
 				options: {
 					spawn: false,
 				},
+			},
+			concat: {
+				files: ['Scripts/js/*.js'],
+				tasks: ['concat']
+			},
+			uglify: {
+				files: ['Scripts/concat.js'],
+				tasks: ['concat']
 			},
 			jshint: {
 				files: ['app/**/*.js'],
