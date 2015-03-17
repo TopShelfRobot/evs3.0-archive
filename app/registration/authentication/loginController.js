@@ -115,13 +115,6 @@
 			});
 		}
 
-
-
-
-
-
-
-
 		$scope.authCompletedCB = function (fragment) {
 			//console.log('hello woerld');
 			//alert('hello woerld');
