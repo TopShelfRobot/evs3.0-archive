@@ -91,16 +91,10 @@
 						}, function (email, provider) {
 							console.log(email);
 							console.log(provider);
-
 							//post to api for hasRegistered flag
-							var accountSource = {
-								'provider': provider,
-								'email': email
-							};
-
-							$http.post(config.apiPath + 'api/account/GetLocalAccount', accountSource)
+							$http.post(config.apiPath + 'api/account/GetLocalAccount', email)
 								.success(function (result) {
-									$scope.authCompleteCB(result);
+									$scope.authCompleteCB(provider, email, response.authResponse.accessToken);
 								}).error(function (err) {
 									//alert('err');
 									$scope.message = err.error_description;
@@ -111,7 +105,7 @@
 			});
 		}
 
-		$scope.authCompletedCB = function (fragment) {
+		$scope.authCompletedCB = function (provider, email, accessToken) {
 			//console.log('hello woerld');
 			//alert('hello woerld');
 			$scope.$apply(function () {
@@ -123,9 +117,9 @@
 					//alert('fragmetn');
 
 					authService.externalAuthData = {
-						provider: fragment.provider,
-						userName: fragment.username,
-						externalAccessToken: fragment.external_access_token
+						provider: provider,
+						userName: username,
+						externalAccessToken: accessToken
 					};
 					console.log(authService.externalAuthData);
 
@@ -143,8 +137,8 @@
 				} else {
 					//Obtain access token and redirect to orders
 					var externalData = {
-						provider: fragment.provider,
-						externalAccessToken: fragment.external_access_token
+						provider: provider,
+						externalAccessToken: accessToken
 					};
 					authService.obtainAccessToken(externalData).then(function (response) {
 
