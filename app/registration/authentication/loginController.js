@@ -78,14 +78,48 @@
 		};
 
 
-		$scope.login = function () {
-			// From now on you can use the Facebook service just as Facebook api says
-			FB.login(function (response) {
-				console.log(response);
-				console.table(response);
-				// Do something with response.
+
+
+
+		$scope.facebookLogin = function (provider) {
+
+			FB.getLoginStatus(function (response) {
+				if (response.status === 'connected') {
+					console.log('Logged in.');
+				} else {
+					FB.login(function (response) {
+						console.log(response);
+					}).then(function (provider) {
+						FB.api('/me', {
+							fields: 'email'
+						}, function (email, provider) {
+							console.log(email);
+							console.log(provider);
+
+							//post to api for hasRegistered flag
+							var accountSource = {
+								'provider': provider,
+								'email': email
+							};
+
+							$http.post(config.apiPath + 'api/account/GetLocalAccount', accountSource)
+								.success(function (result) {
+									$scope.authCompleteCB(result);
+								}).error(function (err) {
+									//alert('err');
+									$scope.message = err.error_description;
+								});
+						});
+					});
+				}
 			});
-		};
+		}
+
+
+
+
+
+
 
 
 		$scope.authCompletedCB = function (fragment) {
@@ -134,5 +168,6 @@
 			});
 		};
 	}
+
 	angular.module('evReg').controller(controllerId, ['$scope', '$location', '$routeParams', 'UserAgent', 'authService', 'datacontext', 'common', 'CartModel', 'config', 'ngAuthSettings', controller]);
 })();
