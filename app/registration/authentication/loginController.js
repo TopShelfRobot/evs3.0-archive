@@ -4,7 +4,7 @@
 
 	var controllerId = 'loginController';
 
-	function controller($scope, $location, $routeParams, userAgent, authService, datacontext, common, cart, config, ngAuthSettings) {
+	function controller($scope, $http, $location, $routeParams, userAgent, authService, datacontext, common, cart, config, ngAuthSettings) {
 
 		$scope.loginData = {
 			userName: '',
@@ -88,38 +88,39 @@
 					}).then(function (provider) {
 						FB.api('/me', {
 							fields: 'email'
-						}, function (email, provider) {
+						}, function (email, provider, response) {
 							console.log(email);
 							console.log(provider);
+							console.log(response);
 							//post to api for hasRegistered flag
 							$http.post(config.apiPath + 'api/account/GetLocalAccount', email)
 								.success(function (result) {
-									$scope.authCompleteCB(provider, email, response.authResponse.accessToken);
+									var externalAuthData = {
+										provider: provider,
+										email: email,
+										accessToken: response.authResponse.accessToken,
+										hasLocalAccount: result
+									};
+									$scope.authCompleteCB(externalAuthData);
 								}).error(function (err) {
-									//alert('err');
 									$scope.message = err.error_description;
 								});
 						});
 					});
 				}
 			});
-		}
+		};
 
-		$scope.authCompletedCB = function (provider, email, accessToken) {
-			//console.log('hello woerld');
-			//alert('hello woerld');
+		$scope.authCompletedCB = function (externalAuthData) {
+			console.log('External', externalAuthData);
 			$scope.$apply(function () {
-				if (fragment.haslocalaccount == 'False') {
+				if (externalAuthData.hasLocalAccount == 'False') {
 					authService.logOut();
 
-					//console.log('hello woerld farge');
-					//console.table(fragment);
-					//alert('fragmetn');
-
 					authService.externalAuthData = {
-						provider: provider,
-						userName: username,
-						externalAccessToken: accessToken
+						provider: externalAuthData.provider,
+						userName: externalAuthData.email,
+						externalAccessToken: externalAuthData.accessToken
 					};
 					console.log(authService.externalAuthData);
 
@@ -137,8 +138,8 @@
 				} else {
 					//Obtain access token and redirect to orders
 					var externalData = {
-						provider: provider,
-						externalAccessToken: accessToken
+						provider: externalAuthData.provider,
+						externalAccessToken: externalAuthData.accessToken
 					};
 					authService.obtainAccessToken(externalData).then(function (response) {
 
@@ -152,5 +153,5 @@
 		};
 	}
 
-	angular.module('evReg').controller(controllerId, ['$scope', '$location', '$routeParams', 'UserAgent', 'authService', 'datacontext', 'common', 'CartModel', 'config', 'ngAuthSettings', controller]);
+	angular.module('evReg').controller(controllerId, ['$scope', '$http', '$location', '$routeParams', 'UserAgent', 'authService', 'datacontext', 'common', 'CartModel', 'config', 'ngAuthSettings', controller]);
 })();
