@@ -77,10 +77,6 @@
 
 		};
 
-
-
-
-
 		$scope.facebookLogin = function (provider) {
 
 			FB.getLoginStatus(function (response) {
