@@ -36,6 +36,8 @@
             this.getGroupsByEventureListId = getGroupsByEventureListId;
             this.getGroupsActiveByEventureListId = getGroupsActiveByEventureListId;
             this.createGroup = createGroup;
+            
+            this.createBundleItem = createBundleItem;
         }
 
         // Allow this repo to have access to the Abstract Repo's functions,
@@ -235,6 +237,11 @@
             var self = this;
             return self.manager.createEntity('EventureGroup',
                 { eventureListId: eventureListId, capacity: 0, active: true });
+        }
+        
+        function createBundleItem(){
+            var self = this;
+            return self.manager.createEntity('EventureListBundle');
         }
     }
 })();

@@ -44,6 +44,9 @@
         return datacontext.eventure.getEventureListById(vm.listId)
           .then(function (data) {
             vm.list = data;
+            // vm.list.eventureListBundles.forEach(function(item){
+//               mv.selectedLists.push(item);
+//             });
             getEventureListsByEventureId(vm.list.eventureId);
             return vm.list;
           });
@@ -155,7 +158,10 @@
       }
       if(vm.list.isBundle){
         vm.selectedLists.forEach(function(item){
-          vm.list.evenutreListBundles.push({eventureListId: vm.listId, childEventureListId: item});
+          var b = datacontext.eventure.createBundleItem();
+          b.eventureListId = vm.listId;
+          b.childEventureListId = item;
+          vm.list.evenutreListBundles.push(b);
         });
       }
 
