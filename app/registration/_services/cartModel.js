@@ -22,6 +22,7 @@
     cart.teamMemberId = null;
     cart.registrations = [];
     cart.surcharges = [];
+    cart.addons = [];
 
     cart.regSettings = {
       isGroupRequired: false, //this comes from list
@@ -101,6 +102,34 @@
 
     cart.addSurcharge = function (desc, amount, chargeType, listid, partid, couponId) {
       cart.surcharges.push(new surcharge(desc, amount, chargeType, listid, partid, couponId));
+    };
+    
+    cart.addAddon = function(addonId, amount, quantity){
+      function updateQuantity(item){
+        var found = false;
+        if(item.addonId == addonId){
+          item.quantity += Number(quantity);
+          found = true;
+        }
+        return found;
+      }
+      
+      if(!cart.addons.some(updateQuantity)){
+        cart.addons.push({addonId: addonId, amount: amount, quantity: Number(quantity)});
+      }
+    };
+    
+    cart.removeAddon = function(addonId){
+      
+      function removeMatching(item, index, array){
+        var found = false;
+        if(item.addonId == addonId){
+          array.splice(index, 1);
+          found = true;
+        }
+        return found;
+      }
+      return self.addons.some(removeMatching);
     };
 
     cart.processCartRules = function () {

@@ -53,49 +53,49 @@
 			})
 		);
     
-    $scope.addons.push({
-      "id":2,
-      "name":"Best Dad Coffee Cup",
-      "active":true,
-      "amount":13.00,
-      "addonType":"owner",
-      "addonDesc":"This is a best dad coffee cup",
-      "eventureId":null,
-      "ownerId":1,
-      "imagePath":"download.jpeg",
-      "dateCreated":"1900-01-01T05:00:00.000",
-      "eventure":null,
-      quantity: 0
-    });
-    
-    // promises.push(
-    //   datacontext.surcharge.getAddonsByEventureId($routeParams.eventureId)
-    //     .then(function(data){
-    //       data.forEach(function(item){
-    //         item.quantity = 0;
-    //         $scope.addons.push(item);
-    //       });
-    //       return $scope.addons;
-    //     })
-    // );
-    //
-    // promises.push(
-    //   datacontext.surcharge.getAddonsByOwnerId(config.owner.ownerId)
-    //     .then(function(data){
-    //       data.forEach(function(item){
-    //         item.quantity = 0;
-    //         $scope.addons.push(item);
-    //       });
-    //       return $scope.addons;
-    //     })
-    // );
+    // $scope.addons.push({
+//       "id":2,
+//       "name":"Best Dad Coffee Cup",
+//       "active":true,
+//       "amount":13.00,
+//       "addonType":"owner",
+//       "addonDesc":"This is a best dad coffee cup",
+//       "eventureId":null,
+//       "ownerId":1,
+//       "imagePath":"download.jpeg",
+//       "dateCreated":"1900-01-01T05:00:00.000",
+//       "eventure":null,
+//       quantity: 0
+//     });
+//
+    promises.push(
+      datacontext.surcharge.getAddonsByEventureId($routeParams.eventureId)
+        .then(function(data){
+          data.forEach(function(item){
+            item.quantity = 0;
+            $scope.addons.push(item);
+          });
+          return $scope.addons;
+        })
+    );
 
-		//promises.push(
-		//    datacontext.question.getStockQuestionSetByEventureListId($routeParams.listId)
-		//		.then(function(data){
-		//			return data;
-		//		})
-		//);
+    promises.push(
+      datacontext.surcharge.getAddonsByOwnerId(config.owner.ownerId)
+        .then(function(data){
+          data.forEach(function(item){
+            item.quantity = 0;
+            $scope.addons.push(item);
+          });
+          return $scope.addons;
+        })
+    );
+
+    // promises.push(
+ //       datacontext.question.getStockQuestionSetByEventureListId($routeParams.listId)
+ //        .then(function(data){
+ //          return data;
+ //        })
+ //    );
 
 		promises.push(
 			datacontext.eventure.getEventureListById($routeParams.listId)
@@ -133,6 +133,11 @@
 			if ($scope.questionsForm.$valid) {
 				// Submit as normal
 				cartModel.addRegistration($scope.eventure, $scope.eventureList, $scope.participant, $scope.customAnswers, $scope.groupId, $scope.group2Id, $scope.quantity);
+        $scope.addons.forEach(function(item){
+          if(item.quantity > 0){
+            cartModel.addAddon(item.id, item.amount, item.quantity);
+          }
+        });
 				$location.$$search = {};
 				$location.path("/eventure");
 			} else {
