@@ -212,7 +212,11 @@
 				<div class="form-group" ng-show="vm.list.isBundle === true">
 					<label for="bundlelist" class="col-lg-6 control-label">Bundled Lists:</label>
 					<div class="col-lg-6">
-						<select id="bundlelist" kendo-multi-select="vm.multiSelect" k-options="vm.bundledListOptions" ng-model="vm.selectedLists">
+						<select id="bundlelist" kendo-multi-select 
+              k-data-source="vm.bundledListItems" 
+              k-options="vm.bundledListOptions" 
+              k-ng-model="vm.selectedLists"
+              k-ng-delay="vm.bundledListReady">
 						</select>
 					</div>
 				</div>

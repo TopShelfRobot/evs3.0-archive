@@ -17,6 +17,16 @@
 
     vm.list = {};
     vm.listTypes = [];
+    
+    vm.selectedLists = [];
+    vm.bundledListItems = new kendo.data.ObservableArray([]);
+    vm.bundledListOptions = {
+      placeholder: 'Select listing...',
+      dataTextField: 'name',
+      dataValueField: 'id',
+      valuePrimitive: true,
+      autoBind: false,
+    };
 
     activate();
 
@@ -44,44 +54,40 @@
         return datacontext.eventure.getEventureListById(vm.listId)
           .then(function (data) {
             vm.list = data;
-            // vm.list.eventureListBundles.forEach(function(item){
-//               mv.selectedLists.push(item);
-//             });
-            getEventureListsByEventureId(vm.list.eventureId);
-            return vm.list;
+            vm.list.eventureListBundles.forEach(function(item){
+              vm.selectedLists.push(item.childEventureListId);
+            });
+            return getEventureListsByEventureId(vm.list.eventureId);
           });
       } else {
         vm.list = datacontext.eventure.createEventureList();
         vm.list.eventureId = vm.eventureId;
-        getEventureListsByEventureId(vm.list.eventureId);
-        return vm.list;
+        return getEventureListsByEventureId(vm.list.eventureId);
       }
     }
 
     function getEventureListsByEventureId() {
       return datacontext.eventure.getEventureListsByOwnerId(vm.ownerId)
         .then(function (data) {
-          multiSelect(data);
+          return multiSelect(data);
         });
     }
 
     function multiSelect(listings) {
-      // vm.multiSelect.value(listings);
       for (var i = 0; i < listings.length; i++) {
-        vm.multiSelect.dataSource.add({
+        vm.bundledListItems.push({
           name: listings[i].name,
           id: listings[i].id
         });
       }
+      return initializeMultiSelect();
     }
-
-    vm.selectedLists = [];
-    vm.bundledListOptions = {
-      placeholder: 'Select listing...',
-      dataTextField: 'name',
-      dataValueField: 'id'
-    };
-
+    
+    function initializeMultiSelect(){
+      vm.bundledListReady = true;
+      return null;
+    }
+    
     vm.today = function () {
       vm.list.dateEventureList = new Date();
       vm.list.dateBeginReg = new Date();
@@ -153,19 +159,21 @@
 
     vm.saveAndNav = function () {
       
-      while(vm.list.evenutreListBundles && vm.list.evenutreListBundles.length > 0){
-        vm.list.evenutreListBundles.pop();
+      while(vm.list.eventureListBundles && vm.list.eventureListBundles.length > 0){
+        var toDelete = vm.list.eventureListBundles.pop();
+        toDelete.entityAspect.setDeleted();
       }
       if(vm.list.isBundle){
         vm.selectedLists.forEach(function(item){
           var b = datacontext.eventure.createBundleItem();
-          b.eventureListId = vm.listId;
+          // b.eventureListId = vm.listId;
           b.childEventureListId = item;
-          vm.list.evenutreListBundles.push(b);
+          vm.list.eventureListBundles.push(b);
         });
       }
 
-      return datacontext.save(vm.list)
+      return datacontext
+        .save()
         .then(complete);
 
       function complete() {

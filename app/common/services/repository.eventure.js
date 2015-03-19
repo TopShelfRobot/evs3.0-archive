@@ -38,6 +38,7 @@
             this.createGroup = createGroup;
             
             this.createBundleItem = createBundleItem;
+            this.getBundleItemsByEventureListId = getBundleItemsByEventureListId;
         }
 
         // Allow this repo to have access to the Abstract Repo's functions,
@@ -242,6 +243,19 @@
         function createBundleItem(){
             var self = this;
             return self.manager.createEntity('EventureListBundle');
+        }
+        
+        function getBundleItemsByEventureListId(eventureListId){
+          var self = this;
+          var query = entityQuery.from('EventureListBundle')
+               .withParameters({ eventureListId: eventureListId });
+
+          return self.manager.executeQuery(query)
+              .then(querySucceeded, self._queryFailed);
+
+          function querySucceeded(data) {
+              return data.results;
+          }
         }
     }
 })();
