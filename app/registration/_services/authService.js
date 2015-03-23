@@ -3,303 +3,341 @@
 angular.module('evReg').factory('authService', ['$http', '$q', "$timeout", "$location", 'UserAgent', 'localStorageService', 'ngAuthSettings', "datacontext", 'CartModel', 'config',
     function ($http, $q, $timeout, $location, userAgent, localStorageService, ngAuthSettings, datacontext, cart, config) {
 
-        'use strict';
+		'use strict';
 
-        //var serviceBase = ngAuthSettings.apiServiceBaseUri;
-        var serviceBase = config.apiPath;
-        var authServiceFactory = {};
+		//var serviceBase = ngAuthSettings.apiServiceBaseUri;
+		var serviceBase = config.apiPath;
+		var authServiceFactory = {};
 
-        var _authentication = {
-            isAuth: false,
-            userName: '',
-            useRefreshTokens: false,
-            roles: []
-        };
+		var _authentication = {
+			isAuth: false,
+			userName: '',
+			useRefreshTokens: false,
+			roles: []
+		};
 
-        var _externalAuthData = {
-            provider: '',
-            userName: '',
-            externalAccessToken: ''
-        };
+		var _externalAuthData = {
+			provider: '',
+			userName: '',
+			externalAccessToken: ''
+		};
 
-        var _saveRegistration = function (registration, logout) {
-            if (logout) {
-                _logOut();
-            }
-            return $http.post(serviceBase + 'api/account/register', registration)
-                .then(function (response) {
-                    return response;
-                });
-        };
+		var _saveRegistration = function (registration, logout) {
+			if (logout) {
+				_logOut();
+			}
+			return $http.post(serviceBase + 'api/account/register', registration)
+				.then(function (response) {
+					return response;
+				});
+		};
 
-        var _forgotPassword = function (registration) {
-            _logOut();
+		var _forgotPassword = function (registration) {
+			_logOut();
 
-            return $http.post(serviceBase + 'api/account/ForgotPassword', registration)
-                .then(function (response) { //, registration
-                    return response;
-                });
-        };
+			return $http.post(serviceBase + 'api/account/ForgotPassword', registration)
+				.then(function (response) { //, registration
+					return response;
+				});
+		};
 
-        var _resetPassword = function (registration) {
-            //_logOut();
-            return $http.post(serviceBase + 'api/account/ResetPassword', registration)
-                .then(function (response) { //
-                    return response;
-                });
-        };
+		var _resetPassword = function (registration) {
+			//_logOut();
+			return $http.post(serviceBase + 'api/account/ResetPassword', registration)
+				.then(function (response) { //
+					return response;
+				});
+		};
 
-        var _login = function (loginData) {
-            var roles;
-            var deferred = $q.defer();
-            var data = 'grant_type=password&username=' + loginData.userName + '&password=' + loginData.password;
+		var _login = function (loginData) {
+			var requestPath = window.location.pathname;
+			var roles;
+			var deferred = $q.defer();
+			var data = 'grant_type=password&username=' + loginData.userName + '&password=' + loginData.password;
 
-            if (loginData.useRefreshTokens) {
-                data = data + '&client_id=' + ngAuthSettings.clientId;
-            }
+			if (loginData.useRefreshTokens) {
+				data = data + '&client_id=' + ngAuthSettings.clientId;
+			}
 
-            $http.get(config.remoteApiName + 'Account/GetUserRolesByUserIdInArray/' + loginData.userName + '/')
-              .then(function (returnedRoles) {
-                  roles = returnedRoles.data;
+			if (requestPath === '/dash.html') {
+				//Get Roles
+				$http.get(config.remoteApiName + 'Account/GetUserRolesByUserIdInArray/' + loginData.userName + '/')
+					.then(function (returnedRoles) {
+						roles = returnedRoles.data;
 
-                  $http.post(serviceBase + 'token', data, {
-                      headers: {
-                          'Content-Type': 'application/x-www-form-urlencoded'
-                      }
-                  }).success(function (response) {
-                      if (loginData.useRefreshTokens) {
-                          localStorageService.set('authorizationData', {
-                              token: response.access_token,
-                              userName: loginData.userName,
-                              refreshToken: response.refresh_token,
-                              useRefreshTokens: true,
-                              roles: roles
-                          });
-                      } else {
-                          localStorageService.set('authorizationData', {
-                              token: response.access_token,
-                              userName: loginData.userName,
-                              refreshToken: '',
-                              useRefreshTokens: false,
-                              roles: roles
-                          });
-                      }
-                      //alert('authed!!');
-                      //need to do something here incase of token login ?????  //mjb  think we are good here
-                      //nfig.owner.authEmail =
-                      _authentication.isAuth = true;
-                      _authentication.userName = loginData.userName;
-                      _authentication.useRefreshTokens = loginData.useRefreshTokens;
-                      _authentication.roles = roles;
+						$http.post(serviceBase + 'token', data, {
+							headers: {
+								'Content-Type': 'application/x-www-form-urlencoded'
+							}
+						}).success(function (response) {
+							if (loginData.useRefreshTokens) {
+								localStorageService.set('authorizationData', {
+									token: response.access_token,
+									userName: loginData.userName,
+									refreshToken: response.refresh_token,
+									useRefreshTokens: true,
+									roles: roles
+								});
+							} else {
+								localStorageService.set('authorizationData', {
+									token: response.access_token,
+									userName: loginData.userName,
+									refreshToken: '',
+									useRefreshTokens: false,
+									roles: roles
+								});
+							}
+							//alert('authed!!');
+							//need to do something here incase of token login ?????  //mjb  think we are good here
+							//nfig.owner.authEmail =
+							_authentication.isAuth = true;
+							_authentication.userName = loginData.userName;
+							_authentication.useRefreshTokens = loginData.useRefreshTokens;
+							_authentication.roles = roles;
 
-                      deferred.resolve(response);
+							deferred.resolve(response);
 
-                  }).error(function (err, status) {
-                      _logOut();
-                      deferred.reject(err);
-                  });
-              });
-            return deferred.promise;
+						}).error(function (err, status) {
+							_logOut();
+							deferred.reject(err);
+						});
+					});
+			} else {
+				//Don't get roles
+				$http.post(serviceBase + 'token', data, {
+					headers: {
+						'Content-Type': 'application/x-www-form-urlencoded'
+					}
+				}).success(function (response) {
+					if (loginData.useRefreshTokens) {
+						localStorageService.set('authorizationData', {
+							token: response.access_token,
+							userName: loginData.userName,
+							refreshToken: response.refresh_token,
+							useRefreshTokens: true
+						});
+					} else {
+						localStorageService.set('authorizationData', {
+							token: response.access_token,
+							userName: loginData.userName,
+							refreshToken: '',
+							useRefreshTokens: false
+						});
+					}
 
-        };
+					_authentication.isAuth = true;
+					_authentication.userName = loginData.userName;
+					_authentication.useRefreshTokens = loginData.useRefreshTokens;
 
-        var _logOut = function () {
+					deferred.resolve(response);
 
-            localStorageService.remove('authorizationData');
+				}).error(function (err, status) {
+					_logOut();
+					deferred.reject(err);
+				});
+			}
 
-            //alert('unauthed');
+			return deferred.promise;
 
-            _authentication.isAuth = false;
-            _authentication.userName = '';
-            _authentication.useRefreshTokens = false;
-            _authentication.roles = [];
+		};
 
-        };
+		var _logOut = function () {
 
-        var _fillAuthData = function () {
+			localStorageService.remove('authorizationData');
 
-            var authData = localStorageService.get('authorizationData');
-            if (authData) {
-                _authentication.isAuth = true;
-                _authentication.userName = authData.userName;
-                _authentication.useRefreshTokens = authData.useRefreshTokens;
-                _authentication.roles = authData.roles;
-            }
+			//alert('unauthed');
 
-        };
+			_authentication.isAuth = false;
+			_authentication.userName = '';
+			_authentication.useRefreshTokens = false;
+			_authentication.roles = [];
 
-        var _refreshToken = function () {
-            var deferred = $q.defer();
-            var roles;
+		};
 
-            var authData = localStorageService.get('authorizationData');
+		var _fillAuthData = function () {
 
-            if (authData) {
+			var authData = localStorageService.get('authorizationData');
+			if (authData) {
+				_authentication.isAuth = true;
+				_authentication.userName = authData.userName;
+				_authentication.useRefreshTokens = authData.useRefreshTokens;
+				_authentication.roles = authData.roles;
+			}
 
-                if (authData.useRefreshTokens) {
+		};
 
-                    var data = 'grant_type=refresh_token&refresh_token=' + authData.refreshToken + '&client_id=' + ngAuthSettings.clientId;
+		var _refreshToken = function () {
+			var deferred = $q.defer();
+			var roles;
 
-                    localStorageService.remove('authorizationData');
+			var authData = localStorageService.get('authorizationData');
 
-                    $http.get(config.remoteApiName + 'Account/GetUserRolesByUserIdInArray/' + loginData.userName + '/')
-                 .then(function (returnedRoles) {
-                     roles = returnedRoles.data;
+			if (authData) {
 
-                     $http.post(serviceBase + 'token', data, {
-                         headers: {
-                             'Content-Type': 'application/x-www-form-urlencoded'
-                         }
-                     }).success(function (response) {
+				if (authData.useRefreshTokens) {
 
-                         //TODO: remove this
-                         //response.roles = testRoles;
+					var data = 'grant_type=refresh_token&refresh_token=' + authData.refreshToken + '&client_id=' + ngAuthSettings.clientId;
 
-                         localStorageService.set('authorizationData', {
-                             token: response.access_token,
-                             userName: response.userName,
-                             refreshToken: response.refresh_token,
-                             useRefreshTokens: true,
-                             roles: roles,
-                         });
+					localStorageService.remove('authorizationData');
 
-                         deferred.resolve(response);
+					$http.get(config.remoteApiName + 'Account/GetUserRolesByUserIdInArray/' + loginData.userName + '/')
+						.then(function (returnedRoles) {
+							roles = returnedRoles.data;
 
-                     }).error(function (err, status) {
-                         _logOut();
-                         deferred.reject(err);
-                     });
-                 });
-                }
-            }
+							$http.post(serviceBase + 'token', data, {
+								headers: {
+									'Content-Type': 'application/x-www-form-urlencoded'
+								}
+							}).success(function (response) {
 
-            return deferred.promise;
-        };
+								//TODO: remove this
+								//response.roles = testRoles;
 
-        var _obtainAccessToken = function (externalData) {
+								localStorageService.set('authorizationData', {
+									token: response.access_token,
+									userName: response.userName,
+									refreshToken: response.refresh_token,
+									useRefreshTokens: true,
+									roles: roles,
+								});
 
-            var deferred = $q.defer();
-            var roles;
+								deferred.resolve(response);
 
-            //$http.get(config.remoteApiName + 'Account/GetUserRolesByUserIdInArray/' + externalData.userName + '/')
-            //    .then(function (returnedRoles) {
-            //        roles = returnedRoles.data;
+							}).error(function (err, status) {
+								_logOut();
+								deferred.reject(err);
+							});
+						});
+				}
+			}
 
-                    $http.get(serviceBase + 'api/account/ObtainLocalAccessToken', {
-                        params: {
-                            provider: externalData.provider,
-                            externalAccessToken: externalData.externalAccessToken
-                        }
-                    }).success(function (response) {
+			return deferred.promise;
+		};
 
-                        //TODO: remove this
-                        //response.roles = testRoles;
+		var _obtainAccessToken = function (externalData) {
 
-                        localStorageService.set('authorizationData', {
-                            token: response.access_token,
-                            userName: response.userName,
-                            refreshToken: '',
-                            useRefreshTokens: false,
-                            roles:roles
-                        });
+			var deferred = $q.defer();
+			var roles;
 
-                        _authentication.isAuth = true;
-                        _authentication.userName = response.userName;
-                        _authentication.useRefreshTokens = false;
-                        _authentication.roles = roles;
+			//$http.get(config.remoteApiName + 'Account/GetUserRolesByUserIdInArray/' + externalData.userName + '/')
+			//    .then(function (returnedRoles) {
+			//        roles = returnedRoles.data;
 
-                        deferred.resolve(response);
+			$http.get(serviceBase + 'api/account/ObtainLocalAccessToken', {
+				params: {
+					provider: externalData.provider,
+					externalAccessToken: externalData.externalAccessToken
+				}
+			}).success(function (response) {
 
-                    }).error(function (err, status) {
-                        _logOut();
-                        deferred.reject(err);
-                    });
-                //});
-            return deferred.promise;
+				//TODO: remove this
+				//response.roles = testRoles;
 
-        };
+				localStorageService.set('authorizationData', {
+					token: response.access_token,
+					userName: response.userName,
+					refreshToken: '',
+					useRefreshTokens: false,
+					roles: roles
+				});
 
-        var _startTimer = function (regObject) {
-            var returnMessage;
-            var timer = $timeout(function () {
-                $timeout.cancel(timer);
-                //authService.login($scope.registration).then(function () {
-                _login(regObject).then(function () {
-                    //$scope.authentication = authService.authentication;
+				_authentication.isAuth = true;
+				_authentication.userName = response.userName;
+				_authentication.useRefreshTokens = false;
+				_authentication.roles = roles;
 
-                    datacontext.participant.getParticipantByEmailAddress(_authentication.userName, cart.ownerId)
-                      .then(function (data) {
-                          console.log('after part call');
-                          console.table(data);
-                          if (data === null || typeof data === 'undefined') {
-                              $location.path('/new-user/add');
-                          } else {
-                              cart.houseId = data.id;
-                              $location.path(cart.navUrl);
-                          }
-                      });
-                },
-                  function (err) {
-                      returnMessage = err.error_description;
-                  });
-            }, 2000);
-            return returnMessage;
-        };
+				deferred.resolve(response);
 
-        var _registerExternal = function (registerExternalData) {
+			}).error(function (err, status) {
+				_logOut();
+				deferred.reject(err);
+			});
+			//});
+			return deferred.promise;
 
-            var deferred = $q.defer();
-            var roles;
+		};
 
-            //$http.get(config.remoteApiName + 'Account/GetUserRolesByUserIdInArray/' + registerExternalData.userName + '/')
-            //    .then(function (returnedRoles) {
-            //        roles = returnedRoles.data;
+		var _startTimer = function (regObject) {
+			var returnMessage;
+			var timer = $timeout(function () {
+				$timeout.cancel(timer);
+				//authService.login($scope.registration).then(function () {
+				_login(regObject).then(function () {
+						//$scope.authentication = authService.authentication;
 
-            console.table(registerExternalData);
+						datacontext.participant.getParticipantByEmailAddress(_authentication.userName, cart.ownerId)
+							.then(function (data) {
+								console.log('after part call');
+								console.table(data);
+								if (data === null || typeof data === 'undefined') {
+									$location.path('/new-user/add');
+								} else {
+									cart.houseId = data.id;
+									$location.path(cart.navUrl);
+								}
+							});
+					},
+					function (err) {
+						returnMessage = err.error_description;
+					});
+			}, 2000);
+			return returnMessage;
+		};
 
-            $http.post(serviceBase + 'api/account/RegisterExternal', registerExternalData).success(function (response) {
+		var _registerExternal = function (registerExternalData) {
 
-                        //TODO: remove this
-                        //response.roles = testRoles;
+			var deferred = $q.defer();
+			var roles;
 
-                        localStorageService.set('authorizationData', {
-                            token: response.access_token,
-                            userName: response.userName,
-                            refreshToken: '',
-                            useRefreshTokens: false,
-                            roles: roles
-                        });
+			//$http.get(config.remoteApiName + 'Account/GetUserRolesByUserIdInArray/' + registerExternalData.userName + '/')
+			//    .then(function (returnedRoles) {
+			//        roles = returnedRoles.data;
 
-                        _authentication.isAuth = true;
-                        _authentication.userName = response.userName;
-                        _authentication.useRefreshTokens = false;
-                        _authentication.roles = roles;
+			console.table(registerExternalData);
 
-                        deferred.resolve(response);
+			$http.post(serviceBase + 'api/account/RegisterExternal', registerExternalData).success(function (response) {
 
-            }).error(function (err, status) {
-                console.log(err);
-                        _logOut();
-                        deferred.reject(err);
-                    });
-                //});
-            return deferred.promise;
+				//TODO: remove this
+				//response.roles = testRoles;
 
-        };
+				localStorageService.set('authorizationData', {
+					token: response.access_token,
+					userName: response.userName,
+					refreshToken: '',
+					useRefreshTokens: false,
+					roles: roles
+				});
 
-        authServiceFactory.saveRegistration = _saveRegistration;
-        authServiceFactory.login = _login;
-        authServiceFactory.logOut = _logOut;
-        authServiceFactory.fillAuthData = _fillAuthData;
-        authServiceFactory.authentication = _authentication;
-        authServiceFactory.refreshToken = _refreshToken;
-        authServiceFactory.startTimer = _startTimer;
-        authServiceFactory.obtainAccessToken = _obtainAccessToken;
-        authServiceFactory.externalAuthData = _externalAuthData;
-        authServiceFactory.registerExternal = _registerExternal;
+				_authentication.isAuth = true;
+				_authentication.userName = response.userName;
+				_authentication.useRefreshTokens = false;
+				_authentication.roles = roles;
 
-        authServiceFactory.forgotPassword = _forgotPassword;
-        authServiceFactory.resetPassword = _resetPassword;
+				deferred.resolve(response);
 
-        return authServiceFactory;
+			}).error(function (err, status) {
+				console.log(err);
+				_logOut();
+				deferred.reject(err);
+			});
+			//});
+			return deferred.promise;
+
+		};
+
+		authServiceFactory.saveRegistration = _saveRegistration;
+		authServiceFactory.login = _login;
+		authServiceFactory.logOut = _logOut;
+		authServiceFactory.fillAuthData = _fillAuthData;
+		authServiceFactory.authentication = _authentication;
+		authServiceFactory.refreshToken = _refreshToken;
+		authServiceFactory.startTimer = _startTimer;
+		authServiceFactory.obtainAccessToken = _obtainAccessToken;
+		authServiceFactory.externalAuthData = _externalAuthData;
+		authServiceFactory.registerExternal = _registerExternal;
+
+		authServiceFactory.forgotPassword = _forgotPassword;
+		authServiceFactory.resetPassword = _resetPassword;
+
+		return authServiceFactory;
     }]);
