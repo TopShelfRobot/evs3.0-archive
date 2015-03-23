@@ -19,6 +19,7 @@
     vm.listTypes = [];
     
     vm.selectedLists = [];
+    var eventureListBundles = [];
     vm.bundledListItems = new kendo.data.ObservableArray([]);
     vm.bundledListOptions = {
       placeholder: 'Select listing...',
@@ -54,22 +55,42 @@
         return datacontext.eventure.getEventureListById(vm.listId)
           .then(function (data) {
             vm.list = data;
-            vm.list.eventureListBundles.forEach(function(item){
-              vm.selectedLists.push(item.childEventureListId);
-            });
-            return getEventureListsByEventureId(vm.list.eventureId);
+            console.log("eventure list:", data);
+            // vm.list.eventureListBundles.forEach(function(item){
+            //   vm.selectedLists.push(item.childEventureListId);
+            // });
+            // return getPossibleBundleLists();
+            return getBundle();
           });
       } else {
         vm.list = datacontext.eventure.createEventureList();
         vm.list.eventureId = vm.eventureId;
-        return getEventureListsByEventureId(vm.list.eventureId);
+        return getPossibleBundleLists();
       }
     }
+    
+    function getBundle(){
+      return datacontext.eventure.getBundleItemsByEventureListId(vm.listId)
+        .then(function(list){
+          console.log("bunlded lists:", list);
+          eventureListBundles = list;
+          eventureListBundles.forEach(function(item){
+            vm.selectedLists.push(item.childEventureListId);
+          });
+          return getPossibleBundleLists();
+        });
+    }
 
-    function getEventureListsByEventureId() {
+    function getPossibleBundleLists() {
       return datacontext.eventure.getEventureListsByOwnerId(vm.ownerId)
         .then(function (data) {
-          return multiSelect(data);
+          var multiData = [];
+          data.forEach(function(item, index){
+            if(item.id != vm.listId){
+              multiData.push(item);
+            }
+          });
+          return multiSelect(multiData);
         });
     }
 
@@ -156,20 +177,49 @@
         // xhr.upload.addEventListener('abort', function(){console.log('abort complete')}, false);
       });
     };
-
+    
     vm.saveAndNav = function () {
       
-      while(vm.list.eventureListBundles && vm.list.eventureListBundles.length > 0){
-        var toDelete = vm.list.eventureListBundles.pop();
-        toDelete.entityAspect.setDeleted();
-      }
       if(vm.list.isBundle){
-        vm.selectedLists.forEach(function(item){
-          var b = datacontext.eventure.createBundleItem();
-          // b.eventureListId = vm.listId;
-          b.childEventureListId = item;
-          vm.list.eventureListBundles.push(b);
+        var removes = [];
+        var adds = [];
+        // find removes
+        eventureListBundles.forEach(function(item, index){
+          if(vm.selectedLists.indexOf(item.childEventureListId) == -1){
+            removes.unshift(index);
+          }
         });
+        
+        // find adds
+        vm.selectedLists.forEach(function(item){
+          var found = false;
+          for(var i = 0; i < eventureListBundles.length; i++){
+            found |= eventureListBundles[i].childEventureListId == item;
+          }
+          if(!found){
+            adds.push(item);
+          }
+        });
+        console.log("removes, adds:", removes, adds);
+        
+        // remove items
+        removes.forEach(function(index){
+          var toDelete = eventureListBundles.splice(index, 1);
+          toDelete[0].entityAspect.setDeleted();
+        });
+        
+        // add items
+        adds.forEach(function(item){
+          var b = datacontext.eventure.createBundleItem();
+          b.eventureListId = vm.listId;
+          b.childEventureListId = item;
+        });
+
+      }else{
+        while(eventureListBundles && eventureListBundles.length > 0){
+          var toDelete = eventureListBundles.pop();
+          toDelete.entityAspect.setDeleted();
+        }
       }
 
       return datacontext

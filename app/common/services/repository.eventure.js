@@ -247,8 +247,8 @@
         
         function getBundleItemsByEventureListId(eventureListId){
           var self = this;
-          var query = entityQuery.from('EventureListBundle')
-               .withParameters({ eventureListId: eventureListId });
+          var query = entityQuery.from('EventureListBundles')
+               .where("eventureListId", "==", eventureListId);
 
           return self.manager.executeQuery(query)
               .then(querySucceeded, self._queryFailed);
