@@ -77,7 +77,8 @@
         teamId: cart.teamId,
         teamMemberId: cart.teamMemberId,
         regs: cart.registrations,
-        charges: cart.surcharges
+        charges: cart.surcharges,
+        addons: cart.addons,
       };
       return order;
     };
