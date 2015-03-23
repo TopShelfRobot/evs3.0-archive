@@ -12,6 +12,10 @@
 			self.model.removeRegistration(reg);
 			self.model.processCartRules();
 		};
+    
+    this.removeAddon = function(addon){
+      self.model.removeAddon(addon);
+    };
 		
 		this.checkout = function(){
 			console.log("checking out");

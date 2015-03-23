@@ -104,10 +104,10 @@
       cart.surcharges.push(new surcharge(desc, amount, chargeType, listid, partid, couponId));
     };
     
-    cart.addAddon = function(addonId, amount, quantity){
+    cart.addAddon = function(addon, quantity){
       function updateQuantity(item){
         var found = false;
-        if(item.addonId == addonId){
+        if(item.addonId == addon.id){
           item.quantity += Number(quantity);
           found = true;
         }
@@ -115,21 +115,21 @@
       }
       
       if(!cart.addons.some(updateQuantity)){
-        cart.addons.push({addonId: addonId, amount: amount, quantity: Number(quantity)});
+        cart.addons.push({addonId: addon.id, addonName: addon.name, amount: addon.amount, quantity: Number(quantity)});
       }
     };
     
-    cart.removeAddon = function(addonId){
+    cart.removeAddon = function(addon){
       
       function removeMatching(item, index, array){
         var found = false;
-        if(item.addonId == addonId){
+        if(item == addon){
           array.splice(index, 1);
           found = true;
         }
         return found;
       }
-      return self.addons.some(removeMatching);
+      return cart.addons.some(removeMatching);
     };
 
     cart.processCartRules = function () {

@@ -135,7 +135,7 @@
 				cartModel.addRegistration($scope.eventure, $scope.eventureList, $scope.participant, $scope.customAnswers, $scope.groupId, $scope.group2Id, $scope.quantity);
         $scope.addons.forEach(function(item){
           if(item.quantity > 0){
-            cartModel.addAddon(item.id, item.amount, item.quantity);
+            cartModel.addAddon(item, item.quantity);
           }
         });
 				$location.$$search = {};
