@@ -229,6 +229,8 @@ angular.module('evReg').factory('authService', ['$http', '$q', "$timeout", "$loc
 
                     datacontext.participant.getParticipantByEmailAddress(_authentication.userName, cart.ownerId)
                       .then(function (data) {
+                          console.log('after part call');
+                          console.table(data);
                           if (data === null || typeof data === 'undefined') {
                               $location.path('/new-user/add');
                           } else {
@@ -275,7 +277,8 @@ angular.module('evReg').factory('authService', ['$http', '$q', "$timeout", "$loc
 
                         deferred.resolve(response);
 
-                    }).error(function (err, status) {
+            }).error(function (err, status) {
+                console.log(err);
                         _logOut();
                         deferred.reject(err);
                     });

@@ -8,7 +8,7 @@
 
   var apiPath = '';
   //apiPath = 'http://localhost:49822/';
-  apiPath = 'http://dev30.eventuresports.info/';
+ apiPath = 'http://dev30.eventuresports.info/';
 
   var remoteServiceName = apiPath + 'bdc/registration/';
   var remoteApiName = apiPath + 'api/';
@@ -48,6 +48,33 @@
       $logProvider.debugEnabled(true);
     }
   }]);
+	
+	// Configure the routes and route resolvers
+	app.config(['$routeProvider', 'reg.routes', function ($routeProvider, routes) {
+		routes.forEach(function (r) {
+			// $routeProvider.when(r.url, r.config);
+			setRoute(r.url, r.config);
+		});
+		$routeProvider.otherwise({ redirectTo: '/eventure' });
+
+
+		function setRoute(url, definition) {
+			// Sets resolvers for all of the routes
+			// by extending any existing resolvers (or creating a new one).
+			definition.resolve = angular.extend(definition.resolve || {}, {
+				prime: prime
+			});
+			
+			$routeProvider.when(url, definition);
+			return $routeProvider;
+		}
+	}]);
+
+	prime.$inject = ['datacontext'];
+
+	function prime(dc) {
+		return dc.prime();
+	}
 
   //#region Configure the common services via commonConfig
   app.config(['commonConfigProvider', "$httpProvider", function (cfg, $httpProvider) {
