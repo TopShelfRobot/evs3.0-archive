@@ -15,6 +15,7 @@
     
     this.removeAddon = function(addon){
       self.model.removeAddon(addon);
+      self.model.processCartRules();
     };
 		
 		this.checkout = function(){

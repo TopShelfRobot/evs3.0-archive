@@ -278,6 +278,11 @@
       for (; i < reglength; i++) {
         price += parseFloat(me.registrations[i].fee) * parseFloat(me.registrations[i].quantity);
       }
+      
+      i = 0;
+      for(; i < cart.addons.length; i++){
+        price += parseFloat(cart.addons[i].amount) * parseFloat(cart.addons[i].quantity);
+      }
 
       return price;
     };

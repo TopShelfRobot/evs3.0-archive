@@ -42,8 +42,8 @@
                         <thead>
                             <tr>
                                 <th class="col-lg-5">Name</th>
-                                <th class="col-lg-3">Quantity</th>
-                                <th class="col-lg-2">Price</th>
+                                <th class="col-lg-3">Price</th>
+                                <th class="col-lg-2">Quantity</th>
                                 <th class="col-lg-1">Subtotal</th>
                                 <th class="col-lg-1" />
                             </tr>
@@ -55,10 +55,10 @@
                                     <span class="product-name">{{addon.addonName}}</span>
                                 </td>
                                 <td>
-                                    <span class="product-name">{{addon.quantity}}</span>
+                                    <span class="product-name">{{addon.amount | currency}}</span>
                                 </td>
                                 <td>
-                                    <span class="product-name">{{addon.amount | currency}}</span>
+                                    <span class="product-name">{{addon.quantity}}</span>
                                 </td>
                                 <td>
                                     <span class="product-name">{{addon.amount * addon.quantity | currency}}</span>
