@@ -4,7 +4,7 @@
 
 	var controllerId = 'loginController';
 
-	function controller($scope, $http, $location, $routeParams, userAgent, authService, datacontext, common, cart, config, ngAuthSettings) {
+	function controller($scope, $http, $location, $routeParams, $q, userAgent, authService, datacontext, common, cart, config, ngAuthSettings) {
 
 		$scope.loginData = {
 			userName: '',
@@ -20,8 +20,6 @@
 		if (requestPath === '/dash.html') {
 			$scope.isDash = true;
 		}
-
-		//$scope.loginData.useRefreshTokens = true;
 
 		$scope.message = '';
 
@@ -56,15 +54,10 @@
 			};
 
 		$scope.authExternalProvider = function (provider) {
-			var redirectUri = location.protocol + '//' + location.host +
-				'/app/registration/authentication/authcomplete.html';
-			//var redirectUri = location.protocol + '//' + location.host + cart.navUrl;
-
-			//alert(redirectUri);
-			console.log('logging innnnnnnnnnnnnnnnnnnnnnnn');
-			console.log(redirectUri);
-			console.log(provider);
-			console.log(ngAuthSettings.clientId);
+			var redirectUri = location.protocol + '//' + location.host + '/app/registration/authentication/authcomplete.html';
+			//console.log(redirectUri);
+			//console.log(provider);
+			//console.log(ngAuthSettings.clientId);
 
 			var externalProviderUrl = config.apiPath +
 				'api/Account/ExternalLogin?provider=' + provider +
@@ -72,49 +65,83 @@
 				'&redirect_uri=' + redirectUri;
 
 			window.$windowScope = $scope;
-
 			var oauthWindow = window.open(externalProviderUrl, 'Authenticate Account', 'location=0,status=0,width=600,height=750');
-
 		};
 
 		$scope.facebookLogin = function (provider) {
+		    //console.log(provider);
 
-			FB.getLoginStatus(function (response) {
-				if (response.status === 'connected') {
-					console.log('Logged in.');
-				} else {
-					FB.login(function (response) {
-						console.log(response);
-					}).then(function (provider) {
-						FB.api('/me', {
-							fields: 'email'
-						}, function (email, provider, response) {
-							console.log(email);
-							console.log(provider);
-							console.log(response);
-							//post to api for hasRegistered flag
-							$http.post(config.apiPath + 'api/account/GetLocalAccount', email)
-								.success(function (result) {
-									var externalAuthData = {
-										provider: provider,
-										email: email,
-										accessToken: response.authResponse.accessToken,
-										hasLocalAccount: result
-									};
-									$scope.authCompleteCB(externalAuthData);
-								}).error(function (err) {
-									$scope.message = err.error_description;
-								});
-						});
-					});
-				}
-			});
+		    //var deferred = $q.defer();
+
+		    FB.getLoginStatus(function (response) {
+		        if (response.status === 'connected') {
+		            console.log('Logged in.');
+		        } else {
+		            FB.login(function (response) {
+		                console.log('a');
+		                console.log(response);
+		                FB.api('/me', {
+		                    fields: 'email'
+		                }, function (graphApi) {
+		                    //console.log('b');
+		                    //console.log(graphApi);
+		                    //console.log(provider);
+		                    //console.log(response);
+
+		                    //$http.get(config.apiPath + 'api/Account/GetLocalAccount/' + graphApi.email + '/')
+                            //  .then(function (result) {
+
+                                  //console.log(result);
+                                  var externalAuthData = {
+                                      provider: 'Facebook',
+                                      email: graphApi.email,
+                                      accessToken: response.authResponse.accessToken,
+                                      hasLocalAccount: false   //result.data.exists
+                                  };
+                                  console.log(externalAuthData);
+		                    //deferred.resolve(result);
+                                  $scope.authCompletedCB(externalAuthData);
+
+                              //});
+		                });
+		                //return deferred.promise;
+		            })
+                    //    .then(function () {
+		               
+		            //});
+		        }
+		    });
+            //    .then(function () {
+		    //    $scope.authCompletedCB(externalAuthData);
+		    //});
+                //.then(function (provider) {
+			    //FB.api('/me', {
+			    //    fields: 'email'
+			    //}, function (email, provider, response) {
+			    //    console.log(email);
+			    //    console.log(provider);
+			    //    console.log(response);
+			    //    //post to api for hasRegistered flag
+			    //    $http.post(config.apiPath + 'api/account/GetLocalAccount', email)
+                //        .success(function (result) {
+                //            var externalAuthData = {
+                //                provider: provider,
+                //                email: email,
+                //                accessToken: response.authResponse.accessToken,
+                //                hasLocalAccount: result
+                //            };
+                //            $scope.authCompleteCB(externalAuthData);
+                //        }).error(function (err) {
+                //            $scope.message = err.error_description;
+                //        });
+			    //});
+			//});
 		};
 
 		$scope.authCompletedCB = function (externalAuthData) {
 			console.log('External', externalAuthData);
 			$scope.$apply(function () {
-				if (externalAuthData.hasLocalAccount == 'False') {
+				if (externalAuthData.hasLocalAccount === false) {
 					authService.logOut();
 
 					authService.externalAuthData = {
@@ -127,7 +154,7 @@
 					authService.registerExternal(authService.externalAuthData)
 						.success(function (response) {
 							//console.log('hererererererer');
-							//console.table(response);
+							console.table(response);
 							authService.startTimer(authService.externalAuthData);
 						}).error(function (err) {
 							console.log('trying to defer error');
@@ -142,7 +169,6 @@
 						externalAccessToken: externalAuthData.accessToken
 					};
 					authService.obtainAccessToken(externalData).then(function (response) {
-
 							$location.path('/orders');
 						},
 						function (err) {
@@ -153,5 +179,5 @@
 		};
 	}
 
-	angular.module('evReg').controller(controllerId, ['$scope', '$http', '$location', '$routeParams', 'UserAgent', 'authService', 'datacontext', 'common', 'CartModel', 'config', 'ngAuthSettings', controller]);
+	angular.module('evReg').controller(controllerId, ['$scope', '$http', '$location', '$routeParams', '$q', 'UserAgent', 'authService', 'datacontext', 'common', 'CartModel', 'config', 'ngAuthSettings', controller]);
 })();
