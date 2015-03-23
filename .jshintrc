@@ -60,6 +60,7 @@
 		"$": false,
 		"toastr": false,
 		"moment": false,
-		"kendo": false
+		"kendo": false,
+        "FB": false
 	}
 }
