@@ -292,7 +292,7 @@ angular.module('evReg').factory('authService', ['$http', '$q', "$timeout", "$loc
 			//$http.get(config.remoteApiName + 'Account/GetUserRolesByUserIdInArray/' + registerExternalData.userName + '/')
 			//    .then(function (returnedRoles) {
 			//        roles = returnedRoles.data;
-			console.log('booononoee');
+			//console.log('booononoee');
 			console.table(registerExternalData);
 
 		    $http.post(serviceBase + 'api/account/RegisterExternal', registerExternalData)

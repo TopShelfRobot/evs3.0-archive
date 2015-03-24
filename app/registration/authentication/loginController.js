@@ -1,7 +1,5 @@
 (function () {
-
 	'use strict';
-
 	var controllerId = 'loginController';
 
 	function controller($scope, $http, $location, $routeParams, $q, userAgent, authService, datacontext, common, cart, config, ngAuthSettings) {
@@ -66,28 +64,10 @@
 			var oauthWindow = window.open(externalProviderUrl, 'Authenticate Account', 'location=0,status=0,width=600,height=750');
 		};
 
-		
-		$scope.facebookLogin = function () {
-			FB.getLoginStatus(function (response) {
-				if (response.status === 'connected') {
-					console.log('Logged in.');
-				} else {
-					FB.login(function (response) {
-						// handle the response
-						console.log(response);
-					}, {
-						scope: 'email'
-					});
-				}
-			});
-		};
-
 		$scope.authCompletedCB = function (externalAuthData) {
-
-		    //console.log('External!!!!', externalAuthData);
-		    //console.log('externalAuthData.hasLocalAccount!!!', externalAuthData.hasLocalAccount);
+			//console.log(externalAuthData);
 			$scope.$apply(function () {
-			    if (externalAuthData.haslocalaccount == 'False') {
+				if (externalAuthData.haslocalaccount == 'False') {
 					authService.logOut();
 
 					authService.externalAuthData = {
@@ -95,12 +75,11 @@
 						userName: externalAuthData.username,
 						externalAccessToken: externalAuthData.external_access_token
 					};
-					console.log('authService.externalAuthData', authService.externalAuthData);
+					//console.log('authService.externalAuthData', authService.externalAuthData);
 
 					authService.registerExternal(authService.externalAuthData)
 						.success(function (response) {
-							//console.log('hererererererer');
-							console.table(response);
+							//console.table(response);
 							authService.startTimer(authService.externalAuthData);
 						}).error(function (err) {
 							console.log('trying to defer error');
@@ -109,17 +88,14 @@
 							authService.startTimer(authService.externalAuthData);
 						});
 				} else {
-				    //Obtain access token and redirect to orders
-				    console.log('whyyyyyyyyy!');
-				    console.log(externalAuthData.hasLocalAccount);
-
+					//Obtain access token and redirect
 					var externalData = {
-					    provider: externalAuthData.provider,
-					    userName: externalAuthData.username,
-					    externalAccessToken: externalAuthData.external_access_token
+						provider: externalAuthData.provider,
+						userName: externalAuthData.username,
+						externalAccessToken: externalAuthData.external_access_token
 					};
 					authService.obtainAccessToken(externalData).then(function (response) {
-							$location.path('/orders');
+							$location.path(cart.navUrl);
 						},
 						function (err) {
 							$scope.message = err.error_description;
@@ -128,9 +104,25 @@
 			});
 		};
 	}
-
 	angular.module('evReg').controller(controllerId, ['$scope', '$http', '$location', '$routeParams', '$q', 'UserAgent', 'authService', 'datacontext', 'common', 'CartModel', 'config', 'ngAuthSettings', controller]);
 })();
+
+
+//$scope.facebookLogin = function () {
+	//	FB.getLoginStatus(function (response) {
+	//		if (response.status === 'connected') {
+	//			console.log('Logged in.');
+	//		} else {
+	//			FB.login(function (response) {
+	//				// handle the response
+	//				console.log(response);
+	//			}, {
+	//				scope: 'email'
+	//			});
+	//		}
+	//	});
+	//};
+
 
 
 
