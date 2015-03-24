@@ -22,6 +22,7 @@
     cart.teamMemberId = null;
     cart.registrations = [];
     cart.surcharges = [];
+    cart.addons = [];
 
     cart.regSettings = {
       isGroupRequired: false, //this comes from list
@@ -76,7 +77,8 @@
         teamId: cart.teamId,
         teamMemberId: cart.teamMemberId,
         regs: cart.registrations,
-        charges: cart.surcharges
+        charges: cart.surcharges,
+        addons: cart.addons,
       };
       return order;
     };
@@ -101,6 +103,34 @@
 
     cart.addSurcharge = function (desc, amount, chargeType, listid, partid, couponId) {
       cart.surcharges.push(new surcharge(desc, amount, chargeType, listid, partid, couponId));
+    };
+    
+    cart.addAddon = function(addon, quantity){
+      function updateQuantity(item){
+        var found = false;
+        if(item.addonId == addon.id){
+          item.quantity += Number(quantity);
+          found = true;
+        }
+        return found;
+      }
+      
+      if(!cart.addons.some(updateQuantity)){
+        cart.addons.push({addonId: addon.id, addonName: addon.name, amount: addon.amount, quantity: Number(quantity)});
+      }
+    };
+    
+    cart.removeAddon = function(addon){
+      
+      function removeMatching(item, index, array){
+        var found = false;
+        if(item == addon){
+          array.splice(index, 1);
+          found = true;
+        }
+        return found;
+      }
+      return cart.addons.some(removeMatching);
     };
 
     cart.processCartRules = function () {
@@ -248,6 +278,11 @@
       i = 0;
       for (; i < reglength; i++) {
         price += parseFloat(me.registrations[i].fee) * parseFloat(me.registrations[i].quantity);
+      }
+      
+      i = 0;
+      for(; i < cart.addons.length; i++){
+        price += parseFloat(cart.addons[i].amount) * parseFloat(cart.addons[i].quantity);
       }
 
       return price;

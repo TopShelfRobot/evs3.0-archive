@@ -37,6 +37,41 @@
                 </div>
                 <br>
                 <br>
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th class="col-lg-5">Name</th>
+                                <th class="col-lg-3">Price</th>
+                                <th class="col-lg-2">Quantity</th>
+                                <th class="col-lg-1">Subtotal</th>
+                                <th class="col-lg-1" />
+                            </tr>
+                        </thead>
+                        <tbody data-role="listview" data-template="large-cart-item">
+
+                            <tr ng-repeat='addon in cart.model.addons'>
+                                <td>
+                                    <span class="product-name">{{addon.addonName}}</span>
+                                </td>
+                                <td>
+                                    <span class="product-name">{{addon.amount | currency}}</span>
+                                </td>
+                                <td>
+                                    <span class="product-name">{{addon.quantity}}</span>
+                                </td>
+                                <td>
+                                    <span class="product-name">{{addon.amount * addon.quantity | currency}}</span>
+                                </td>
+                                <td>
+                                    <button type="button" class="close remove-item" ng-click="cart.removeAddon(addon)">&times;</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <br>
+                <br>
                 <small>Do you have a gift card or promotional code? We'll ask you to enter your code when it's time to pay.
                     <br>
                     <hr>
