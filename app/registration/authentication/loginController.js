@@ -55,62 +55,60 @@
 
 		$scope.authExternalProvider = function (provider) {
 			var redirectUri = location.protocol + '//' + location.host + '/app/registration/authentication/authcomplete.html';
-			//console.log(redirectUri);
-			//console.log(provider);
-			//console.log(ngAuthSettings.clientId);
 
 			var externalProviderUrl = config.apiPath +
 				'api/Account/ExternalLogin?provider=' + provider +
 				'&response_type=token&client_id=' + ngAuthSettings.clientId +
-				'&redirect_uri=' + redirectUri;
+				'&redirect_uri=' + redirectUri +
+				'&scope=email';
 
 			window.$windowScope = $scope;
 			var oauthWindow = window.open(externalProviderUrl, 'Authenticate Account', 'location=0,status=0,width=600,height=750');
 		};
 
-		$scope.facebookLogin = function (provider) {
-		    //console.log(provider);
+		//$scope.facebookLogin = function (provider) {
+		//    //console.log(provider);
 
-		    //var deferred = $q.defer();
+		//    //var deferred = $q.defer();
 
-		    FB.getLoginStatus(function (response) {
-		        if (response.status === 'connected') {
-		            console.log('Logged in.');
-		        } else {
-		            FB.login(function (response) {
-		                console.log('a');
-		                console.log(response);
-		                FB.api('/me', {
-		                    fields: 'email'
-		                }, function (graphApi) {
-		                    //console.log('b');
-		                    //console.log(graphApi);
-		                    //console.log(provider);
-		                    //console.log(response);
+		//    FB.getLoginStatus(function (response) {
+		//        if (response.status === 'connected') {
+		//            console.log('Logged in.');
+		//        } else {
+		//            FB.login(function (response) {
+		//                console.log('a');
+		//                console.log(response);
+		//                FB.api('/me', {
+		//                    fields: 'email'
+		//                }, function (graphApi) {
+		//                    //console.log('b');
+		//                    //console.log(graphApi);
+		//                    //console.log(provider);
+		//                    //console.log(response);
 
-		                    //$http.get(config.apiPath + 'api/Account/GetLocalAccount/' + graphApi.email + '/')
-		                    //  .then(function (result) {
+		//                    //$http.get(config.apiPath + 'api/Account/GetLocalAccount/' + graphApi.email + '/')
+		//                    //  .then(function (result) {
 
-		                    //console.log(result);
-		                    var externalAuthData = {
-		                        provider: 'Facebook',
-		                        email: graphApi.email,
-		                        accessToken: response.authResponse.accessToken,
-		                        hasLocalAccount: false   //result.data.exists
-		                    };
-		                    console.log(externalAuthData);
-		                    //deferred.resolve(result);
-		                    $scope.authCompletedCB(externalAuthData);
+		//                    //console.log(result);
+		//                    var externalAuthData = {
+		//                        provider: 'Facebook',
+		//                        email: graphApi.email,
+		//                        accessToken: response.authResponse.accessToken,
+		//                        hasLocalAccount: false   //result.data.exists
+		//                    };
+		//                    console.log(externalAuthData);
+		//                    //deferred.resolve(result);
+		//                    $scope.authCompletedCB(externalAuthData);
 
-		                    //});
-		                });
-		                //return deferred.promise;
-		            });
-                    //    .then(function () {
+		//                    //});
+		//                });
+		//                //return deferred.promise;
+		//            });
+        //            //    .then(function () {
 		               
-		            //});
-		        }
-		    });
+		//            //});
+		//        }
+		//    });
             //    .then(function () {
 		    //    $scope.authCompletedCB(externalAuthData);
 		    //});
@@ -135,7 +133,20 @@
                 //            $scope.message = err.error_description;
                 //        });
 			    //});
-			//});
+	    //});
+		$scope.facebookLogin = function () {
+			FB.getLoginStatus(function (response) {
+				if (response.status === 'connected') {
+					console.log('Logged in.');
+				} else {
+					FB.login(function (response) {
+						// handle the response
+						console.log(response);
+					}, {
+						scope: 'email'
+					});
+				}
+			});
 		};
 
 		$scope.authCompletedCB = function (externalAuthData) {

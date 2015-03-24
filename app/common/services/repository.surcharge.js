@@ -48,6 +48,7 @@
     function getAddonsByEventureId(eventureId) {
       var self = this;
       var pred = predicate.create("eventureId", "==", eventureId)
+				.and("addonType", "startsWith", "event")
         .and("active", "==", true);
 
       return entityQuery.from('Addons')
@@ -63,11 +64,13 @@
     function getAddonsByOwnerId(ownerId) {
       var self = this;
       var pred = predicate.create("ownerId", "==", ownerId)
+				.and("addonType", "startsWith", "owner")
         .and("active", "==", true);
 
       return entityQuery.from('Addons')
         .where(pred)
-        .using(self.manager).execute()
+        .using(self.manager)
+				.execute()
         .then(querySucceeded, self._queryFailed);
 
       function querySucceeded(data) {
