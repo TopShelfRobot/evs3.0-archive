@@ -89,23 +89,23 @@
 		                    //console.log(response);
 
 		                    //$http.get(config.apiPath + 'api/Account/GetLocalAccount/' + graphApi.email + '/')
-                            //  .then(function (result) {
+		                    //  .then(function (result) {
 
-                                  //console.log(result);
-                                  var externalAuthData = {
-                                      provider: 'Facebook',
-                                      email: graphApi.email,
-                                      accessToken: response.authResponse.accessToken,
-                                      hasLocalAccount: false   //result.data.exists
-                                  };
-                                  console.log(externalAuthData);
+		                    //console.log(result);
+		                    var externalAuthData = {
+		                        provider: 'Facebook',
+		                        email: graphApi.email,
+		                        accessToken: response.authResponse.accessToken,
+		                        hasLocalAccount: false   //result.data.exists
+		                    };
+		                    console.log(externalAuthData);
 		                    //deferred.resolve(result);
-                                  $scope.authCompletedCB(externalAuthData);
+		                    $scope.authCompletedCB(externalAuthData);
 
-                              //});
+		                    //});
 		                });
 		                //return deferred.promise;
-		            })
+		            });
                     //    .then(function () {
 		               
 		            //});
