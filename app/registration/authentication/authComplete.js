@@ -2,7 +2,7 @@
 window.common = (function () {
     var common = {};
 
-    //alert('hello worlddddddddddddddddddddddddd!');
+   console.log('hello worlddddddddddddddddddddddddd!');
 
     common.getFragment = function getFragment() {
         if (window.location.hash.indexOf("#") === 0) {

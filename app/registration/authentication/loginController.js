@@ -66,6 +66,7 @@
 			var oauthWindow = window.open(externalProviderUrl, 'Authenticate Account', 'location=0,status=0,width=600,height=750');
 		};
 
+		
 		$scope.facebookLogin = function () {
 			FB.getLoginStatus(function (response) {
 				if (response.status === 'connected') {
@@ -82,17 +83,19 @@
 		};
 
 		$scope.authCompletedCB = function (externalAuthData) {
-			console.log('External', externalAuthData);
+
+		    //console.log('External!!!!', externalAuthData);
+		    //console.log('externalAuthData.hasLocalAccount!!!', externalAuthData.hasLocalAccount);
 			$scope.$apply(function () {
-				if (externalAuthData.hasLocalAccount === false) {
+			    if (externalAuthData.haslocalaccount == 'False') {
 					authService.logOut();
 
 					authService.externalAuthData = {
 						provider: externalAuthData.provider,
-						userName: externalAuthData.email,
-						externalAccessToken: externalAuthData.accessToken
+						userName: externalAuthData.username,
+						externalAccessToken: externalAuthData.external_access_token
 					};
-					console.log(authService.externalAuthData);
+					console.log('authService.externalAuthData', authService.externalAuthData);
 
 					authService.registerExternal(authService.externalAuthData)
 						.success(function (response) {
@@ -106,10 +109,14 @@
 							authService.startTimer(authService.externalAuthData);
 						});
 				} else {
-					//Obtain access token and redirect to orders
+				    //Obtain access token and redirect to orders
+				    console.log('whyyyyyyyyy!');
+				    console.log(externalAuthData.hasLocalAccount);
+
 					var externalData = {
-						provider: externalAuthData.provider,
-						externalAccessToken: externalAuthData.accessToken
+					    provider: externalAuthData.provider,
+					    userName: externalAuthData.username,
+					    externalAccessToken: externalAuthData.external_access_token
 					};
 					authService.obtainAccessToken(externalData).then(function (response) {
 							$location.path('/orders');
@@ -124,3 +131,74 @@
 
 	angular.module('evReg').controller(controllerId, ['$scope', '$http', '$location', '$routeParams', '$q', 'UserAgent', 'authService', 'datacontext', 'common', 'CartModel', 'config', 'ngAuthSettings', controller]);
 })();
+
+
+
+//$scope.facebookLogin = function (provider) {
+//    //console.log(provider);
+
+//    //var deferred = $q.defer();
+
+//    FB.getLoginStatus(function (response) {
+//        if (response.status === 'connected') {
+//            console.log('Logged in.');
+//        } else {
+//            FB.login(function (response) {
+//                console.log('a');
+//                console.log(response);
+//                FB.api('/me', {
+//                    fields: 'email'
+//                }, function (graphApi) {
+//                    //console.log('b');
+//                    //console.log(graphApi);
+//                    //console.log(provider);
+//                    //console.log(response);
+
+//                    //$http.get(config.apiPath + 'api/Account/GetLocalAccount/' + graphApi.email + '/')
+//                    //  .then(function (result) {
+
+//                    //console.log(result);
+//                    var externalAuthData = {
+//                        provider: 'Facebook',
+//                        email: graphApi.email,
+//                        accessToken: response.authResponse.accessToken,
+//                        hasLocalAccount: false   //result.data.exists
+//                    };
+//                    console.log(externalAuthData);
+//                    //deferred.resolve(result);
+//                    $scope.authCompletedCB(externalAuthData);
+
+//                    //});
+//                });
+//                //return deferred.promise;
+//            });
+//            //    .then(function () {
+
+//            //});
+//        }
+//    });
+//    .then(function () {
+//    $scope.authCompletedCB(externalAuthData);
+//});
+//.then(function (provider) {
+//FB.api('/me', {
+//    fields: 'email'
+//}, function (email, provider, response) {
+//    console.log(email);
+//    console.log(provider);
+//    console.log(response);
+//    //post to api for hasRegistered flag
+//    $http.post(config.apiPath + 'api/account/GetLocalAccount', email)
+//        .success(function (result) {
+//            var externalAuthData = {
+//                provider: provider,
+//                email: email,
+//                accessToken: response.authResponse.accessToken,
+//                hasLocalAccount: result
+//            };
+//            $scope.authCompleteCB(externalAuthData);
+//        }).error(function (err) {
+//            $scope.message = err.error_description;
+//        });
+//});
+//});
