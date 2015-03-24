@@ -16,7 +16,7 @@
         </div>
     </div>
     <br>
-    <form class="form-horizontal" name="questionsForm">
+    <form class="form-horizontal" name="questionsForm" novalidate>
 
         <div class="col-sm-6">
     			<custom-questions questions="customQuestions" answers="customAnswers"></custom-questions>
@@ -62,7 +62,11 @@
                       <figcaption>
                         <h4>{{addon.name}} : {{addon.amount | currency}}</h4>
                         <span class="event-info">{{addon.addonDesc}}</span><br>
-                        <input type="number" ng-model="addon.quantity" />
+                        <input type="number" 
+                          ng-model="addon.quantity" 
+                          min="0"
+                          max="10"
+                        />
                       </figcaption>
                     </figure>
                 </li>
