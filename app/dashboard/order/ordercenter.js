@@ -55,8 +55,8 @@
 						}
 					},
 					sort: {
-						field: "id",
-						dir: "desc"
+						field: 'id',
+						dir: 'desc'
 					},
 					pageSize: 10,
 					serverPaging: false,
