@@ -1,7 +1,7 @@
 //var testRoles = ['user', 'admin', 'super-user', 'money'];
 
 angular.module('evReg').factory('authService', ['$http', '$q', "$timeout", "$location", 'UserAgent', 'localStorageService', 'ngAuthSettings', "datacontext", 'CartModel', 'config',
-    function ($http, $q, $timeout, $location, userAgent, localStorageService, ngAuthSettings, datacontext, cart, config) {
+	function ($http, $q, $timeout, $location, userAgent, localStorageService, ngAuthSettings, datacontext, cart, config) {
 
 		'use strict';
 
@@ -295,8 +295,8 @@ angular.module('evReg').factory('authService', ['$http', '$q', "$timeout", "$loc
 			//console.log('booononoee');
 			console.table(registerExternalData);
 
-		    $http.post(serviceBase + 'api/account/RegisterExternal', registerExternalData)
-                .success(function (response) {
+			$http.post(serviceBase + 'api/account/RegisterExternal', registerExternalData)
+				.success(function (response) {
 
 				//TODO: remove this
 				//response.roles = testRoles;
@@ -341,4 +341,4 @@ angular.module('evReg').factory('authService', ['$http', '$q', "$timeout", "$loc
 		authServiceFactory.resetPassword = _resetPassword;
 
 		return authServiceFactory;
-    }]);
+	}]);
