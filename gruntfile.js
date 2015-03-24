@@ -35,19 +35,30 @@ module.exports = function (grunt) {
 					'Content/css/reg-style.css': ['scss/rawcss/framework.css',
       'scss/rawcss/registration.css'],
 					'Content/css/dash-style.css': ['scss/rawcss/framework.css',
-            'scss/rawcss/registration.css',
       'scss/rawcss/dashboard.css']
 				}
 			}
 		},
-		//Static Server
-		connect: {
-			server: {
+		watch: {
+			css: {
+				files: ['scss/*.scss', 'scss/partials/*.scss'],
+				tasks: ['sass', 'cssmin'],
 				options: {
-					port: 9000,
-					keepalive: true
-				}
-			}
+					spawn: false,
+				},
+			},
+			concat: {
+				files: ['Scripts/js/*.js'],
+				tasks: ['concat']
+			},
+			uglify: {
+				files: ['Scripts/concat.js'],
+				tasks: ['concat']
+			},
+			jshint: {
+				files: ['app/**/*.js'],
+				tasks: ['jshint'],
+			},
 		},
 		concat: {
 			options: {
@@ -76,7 +87,7 @@ module.exports = function (grunt) {
 					'Scripts/js/angulartics.js',
 					'Scripts/js/angulartics-ga.js',
 					'Scripts/js/ng-role-auth.js'],
-				dest: 'Scripts/concat.js',
+				dest: 'Scripts/concat.js'
 			},
 		},
 		uglify: {
@@ -104,34 +115,12 @@ module.exports = function (grunt) {
 			},
 			source: ['app/**/*.js']
 		},
-		watch: {
-			css: {
-				files: ['scss/*.scss', 'scss/partials/*.scss'],
-				tasks: ['sass', 'cssmin'],
-				options: {
-					spawn: false,
-				},
-			},
-			concat: {
-				files: ['Scripts/js/*.js'],
-				tasks: ['concat']
-			},
-			uglify: {
-				files: ['Scripts/concat.js'],
-				tasks: ['concat']
-			},
-			jshint: {
-				files: ['app/**/*.js'],
-				tasks: ['jshint'],
-			},
-		}
 	});
 	// Individual tasks
 	grunt.loadNpmTasks('grunt-contrib-sass');
 	grunt.loadNpmTasks('grunt-contrib-cssmin');
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.loadNpmTasks('grunt-contrib-jshint');
-	grunt.loadNpmTasks('grunt-contrib-connect');
 	grunt.loadNpmTasks('grunt-contrib-concat');
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 	// Default grunt tasks
