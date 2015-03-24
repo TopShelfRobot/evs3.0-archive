@@ -59,7 +59,6 @@
 		};
 	}]);
 
-
 	//app.run(['$route', '$rootScope', '$q', 'routemediator',
 	//function ($route, $rootScope, $q, routemediator) {
 	//    // Include $route to kick start the router.
