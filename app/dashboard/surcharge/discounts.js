@@ -199,9 +199,8 @@
 					sortable: true,
 					pageable: true,
 					columns: [{
-						field: 'lastName',
-						title: 'Participant',
-						template: '#=firstName# #=lastName#'
+						field: 'participant',
+						title: 'Participant'
                  }, {
 						field: 'eventureName',
 						title: 'Eventure'
