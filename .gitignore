@@ -251,3 +251,7 @@ Content/Images/*
 node_modules/*
 
 bower_components/*
+
+Content/*
+
+Scripts/*
