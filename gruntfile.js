@@ -112,7 +112,7 @@ module.exports = function (grunt) {
 				files: ['app/**/*.js'],
 				tasks: ['jshint'],
 			}
-		},
+		}
 	});
 	// Individual tasks
 	grunt.loadNpmTasks('grunt-contrib-sass');
