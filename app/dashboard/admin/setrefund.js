@@ -18,10 +18,13 @@
 		vm.ownerId = config.owner.ownerId;
 		vm.owner = {};
 
+		vm.success = false;
+		vm.error = false;
+
 		vm.source = {
 			amount: vm.order.amount,
 			eventureOrderId: $routeParams.orderId,
-			description: 'order',
+			refundType: 'order',
 			registrationId: $routeParams.regId
 		};
 
@@ -57,12 +60,15 @@
 			switch (newValue) {
 			case 'order':
 				vm.source.amount = vm.order.amount;
+				vm.source.refundType = 'order';
 				break;
 			case 'reg':
 				vm.source.amount = vm.registration.totalAmount;
+				vm.source.refundType = 'registration';
 				break;
 			case 'partial':
 				vm.source.amount = 0;
+				vm.source.refundType = 'partial';
 				break;
 			}
 		});
@@ -76,12 +82,19 @@
 				//$http.post(config.apiPath + "api/mail/SendMassMessage", vm.source)
 				.success(function (result) {
 					console.log('Success', result);
-					vm.refundErrors = '';
+					vm.success = true;
+					vm.error = false;
+					vm.status = result;
+					//TODO Should change status to refunded.
+					//This will let us lockdown multiple refunds on the same registration
+
 					//$location.path('/partcenter/');
 				})
-				.error(function (data, status, headers, config) {
+				.error(function (result) {
 					//alert('err');
-					vm.refundErrors = "There was an error processing this refund(E1)";
+					vm.success = false;
+					vm.error = true;
+					vm.status = 'There was an error processing this refund: ' + result;
 				})
 				.finally(function () {
 					//alert('fin');
