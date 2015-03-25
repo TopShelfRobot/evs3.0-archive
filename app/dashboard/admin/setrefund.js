@@ -56,7 +56,7 @@
 				});
 		}
 
-		$scope.$watch('vm.source.description', function (newValue, oldValue) {
+		$scope.$watch('vm.source.refundType', function (newValue, oldValue) {
 			switch (newValue) {
 			case 'order':
 				vm.source.amount = vm.order.amount;

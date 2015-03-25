@@ -135,11 +135,11 @@
 						title: 'Registration Date',
 						type: 'date',
 						format: '{0:MM/dd/yyyy}',
-						width: 80
-						}, {
-						field: 'type',
-						title: 'Type',
 						width: 150
+						}, {
+						field: 'status',
+						title: 'Status',
+						width: 80
 						}, {
 						field: '',
 						title: '',
