@@ -1,7 +1,6 @@
 module.exports = function (grunt) {
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
-		// Sass config.
 		sass: {
 			dist: {
 				options: {
@@ -13,7 +12,6 @@ module.exports = function (grunt) {
 				}
 			}
 		},
-		//CSS Min config
 		cssmin: {
 			target: {
 				files: {
@@ -38,27 +36,6 @@ module.exports = function (grunt) {
       'scss/rawcss/dashboard.css']
 				}
 			}
-		},
-		watch: {
-			css: {
-				files: ['scss/*.scss', 'scss/partials/*.scss'],
-				tasks: ['sass', 'cssmin'],
-				options: {
-					spawn: false,
-				},
-			},
-			concat: {
-				files: ['Scripts/js/*.js'],
-				tasks: ['concat']
-			},
-			uglify: {
-				files: ['Scripts/concat.js'],
-				tasks: ['concat']
-			},
-			jshint: {
-				files: ['app/**/*.js'],
-				tasks: ['jshint'],
-			},
 		},
 		concat: {
 			options: {
@@ -115,14 +92,36 @@ module.exports = function (grunt) {
 			},
 			source: ['app/**/*.js']
 		},
+		watch: {
+			css: {
+				files: ['scss/*.scss', 'scss/partials/*.scss'],
+				tasks: ['sass', 'cssmin'],
+				options: {
+					spawn: false,
+				},
+			},
+			concat: {
+				files: ['Scripts/js/*.js'],
+				tasks: ['concat']
+			},
+			uglify: {
+				files: ['Scripts/concat.js'],
+				tasks: ['concat']
+			},
+			jshint: {
+				files: ['app/**/*.js'],
+				tasks: ['jshint'],
+			}
+		},
 	});
 	// Individual tasks
 	grunt.loadNpmTasks('grunt-contrib-sass');
 	grunt.loadNpmTasks('grunt-contrib-cssmin');
-	grunt.loadNpmTasks('grunt-contrib-watch');
-	grunt.loadNpmTasks('grunt-contrib-jshint');
 	grunt.loadNpmTasks('grunt-contrib-concat');
+	grunt.loadNpmTasks('grunt-contrib-jshint');
 	grunt.loadNpmTasks('grunt-contrib-uglify');
+	//Watch task
+	grunt.loadNpmTasks('grunt-contrib-watch');
 	// Default grunt tasks
 	grunt.registerTask('default', ['jshint', 'sass', 'cssmin', 'concat', 'uglify']);
 };
