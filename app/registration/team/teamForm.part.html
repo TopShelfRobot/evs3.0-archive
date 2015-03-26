@@ -1,66 +1,66 @@
 <div class="container" id="content">
-    <div class="row">
-      <div class="col-lg-12 text-center">
-        <img class="logo" src="content/images/logo.png">
-        <h3>Let's build your team.</h3>
-        <hr>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-lg-6 col-lg-offset-3">
-        <h4>Team Name</h4>
-        <input type="text" class="form-control" name="TeamName" id="TeamName" placeholder="Choose a name for your team." ng-model="team.name">
-        <h4>Division</h4>
-        <select class="form-control" name="Division" ng-model="team.division">
-          <option value="">Please Select A Division</option>
-          <option>Open Male</option>
-          <option>Open Female (Must Be All Female</option>
-          <option>Open Mixed (Must Have At Least 4 Females)</option>
-          <option>Male Masters (40 Years and Older)</option>
-          <option>Female Masters (40 Years and Older)</option>
-          <option>Mixed Masters (40 Years and Older)</option>
-          <option>Ultra (6 Runners, No More No Less)</option>
-          <option>Corporate</option>
-        </select>
-        <h4>Estimated Time Of Finish</h4>
-        <input type="text" class="form-control" name="TimeFinish" mask="99:99" placeholder="HH:MM" restrict="reject" ng-model="team.timeFinish">
-      </div>
-    </div>
-    <br>
-    <div class="row">
-      <form class="form-horizontal">
-        <div class="col-lg-12">
-          <legend>Invite Team Members</legend>
-          <table class="table table-striped">
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Email Address</th>
-                <th />
-              </tr>
-            </thead>
-            <tbody>
-              <tr ng-repeat="player in players">
-                <td>
-                  <input ng-model="player.name" type="text" class="form-control" placeholder="Enter the full name of the person you would like to invite." />
-                </td>
-                <td>
-                  <input ng-model="player.email" type="email" class="form-control" placeholder="Enter a valid email address for the person you would like to invite." />
-                </td>
-                <td>
-                  <input type="hidden" class="form-control" />
-                </td>
-              </tr>
-            </tbody>
-          </table>
-          <button class="btn btn-primary hidden-xs hidden-sm" ng-click="addPlayer(addName, addEmail)">Invite New Member</button>
-        </div>
-      </form>
-    </div>
-    <div class="row">
-      <div class="col-xs-12">
-        <button class="btn btn-block btn-primary hidden-lg" ng-click="addPlayer(addName, addEmail)">Invite New Member</button>
-      </div>
-    </div>
-  </div>
-  <br>
+	<div class="row">
+		<div class="col-lg-12 text-center">
+			<img class="logo" src="content/images/logo.png">
+			<h3>Let's build your team.</h3>
+			<hr>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-lg-6 col-lg-offset-3">
+			<h4>Team Name</h4>
+			<input type="text" class="form-control" name="TeamName" id="TeamName" placeholder="Choose a name for your team." ng-model="team.name">
+			<h4>Division</h4>
+			<select class="form-control" name="Division" ng-model="team.division">
+				<option value="">Please Select A Division</option>
+				<option>Open Male</option>
+				<option>Open Female (Must Be All Female</option>
+				<option>Open Mixed (Must Have At Least 4 Females)</option>
+				<option>Male Masters (40 Years and Older)</option>
+				<option>Female Masters (40 Years and Older)</option>
+				<option>Mixed Masters (40 Years and Older)</option>
+				<option>Ultra (6 Runners, No More No Less)</option>
+				<option>Corporate</option>
+			</select>
+			<h4>Estimated Time Of Finish</h4>
+			<input type="text" class="form-control" name="TimeFinish" mask="99:99:99" placeholder="HH:MM:SS" restrict="reject" ng-model="team.timeFinish">
+		</div>
+	</div>
+	<br>
+	<div class="row">
+		<form class="form-horizontal">
+			<div class="col-lg-12">
+				<legend>Invite Team Members</legend>
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th>Name</th>
+							<th>Email Address</th>
+							<th />
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="player in players">
+							<td>
+								<input ng-model="player.name" type="text" class="form-control" placeholder="Enter the full name of the person you would like to invite." />
+							</td>
+							<td>
+								<input ng-model="player.email" type="email" class="form-control" placeholder="Enter a valid email address for the person you would like to invite." />
+							</td>
+							<td>
+								<input type="hidden" class="form-control" />
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<button class="btn btn-primary hidden-xs hidden-sm" ng-click="addPlayer(addName, addEmail)">Invite New Member</button>
+			</div>
+		</form>
+	</div>
+	<div class="row">
+		<div class="col-xs-12">
+			<button class="btn btn-block btn-primary hidden-lg" ng-click="addPlayer(addName, addEmail)">Invite New Member</button>
+		</div>
+	</div>
+</div>
+<br>
