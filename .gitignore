@@ -246,3 +246,9 @@ pip-log.txt
 .idea/jsLinters/jshint.xml
 
 .sass-cache/*
+
+bower_components/*
+
+node_modules/*
+
+Content/images/*
