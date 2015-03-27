@@ -44,7 +44,7 @@
 					<div class="form-group">
 						<label for="emergencyPhone" class="col-lg-5 control-label">Emergency Phone</label>
 						<div class="col-lg-7">
-							<input type="text" class="form-control" id="emergencyPhone" name="emergencyPhone" ng-model="participant.emergencyPhone" required>
+							<input type="text" class="form-control" id="emergencyPhone" mask="(999) 999-9999" name="emergencyPhone" ng-model="participant.emergencyPhone" required>
 						</div>
 					</div>
 				</div>
@@ -72,7 +72,7 @@
 					<div class="form-group">
 						<label for="ZipCode" class="col-lg-5 control-label">Postal Code</label>
 						<div class="col-lg-7">
-							<input type="text" class="form-control" id="ZipCode" name="ZipCode" ng-model="participant.zip" required>
+							<input type="text" class="form-control" id="ZipCode" name="ZipCode" mask="99999" ng-model="participant.zip" required>
 						</div>
 					</div>
 
