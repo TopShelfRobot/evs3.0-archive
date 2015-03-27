@@ -294,6 +294,7 @@
 						$scope.teamName = payment.name;
 						$scope.listName = payment.listName;
 						$scope.participant.email = payment.email;
+						console.log('Payment', payment);
 						console.log('listingType: ', payment.eventureListType);
 						switch (payment.eventureListType) {
 						case 'TeamSponsored': //team sponsor

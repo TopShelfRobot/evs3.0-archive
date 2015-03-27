@@ -52,6 +52,7 @@
 			<h3>You been invited to join team:&nbsp;<strong>{{ teamName }}</strong>&nbsp;for The Bourbon Chase.</h3>
 			<p><strong>As a Team Participant, you understand that you and all team members (including drivers) are required to read and follow The Bourbon Chase Guidebook.</strong>
 			</p>
+			<hr>
 			<ng-include src="'/app/registration/profile/participantForm.part.html'"></ng-include>
 		</div>
 	</div>
@@ -77,7 +78,12 @@
 			<button type="button" class="btn btn-warning btn-block pull-right hidden-xs hidden-sm" ng-disabled="($parent.userPaying == 0 && !$parent.fullPaymentRequired)" ng-click="open()">Join Team
 			</button>
 -->
+			<!--
 			<button type="button" class="btn btn-warning btn-block pull-right" ng-disabled="(!$parent.waiverSigned) || ($parent.userPaying == 0 && !$parent.fullPaymentRequired) || ($parent.submitDisabled)" ng-click="checkout()">Join Team
+			</button>
+-->
+
+			<button type="button" class="btn btn-warning btn-block pull-right" ng-click="checkout()">Join Team
 			</button>
 		</div>
 	</div>
