@@ -66,11 +66,6 @@
 
 	<div class="row">
 		<div class="col-sm-6 col-sm-offset-3">
-			<div class="ihidden-md hidden-lg">
-				<hr>
-				<p>remove check box but keep terms and conditions, refund policy, etc. (can we put this under the button)
-				</p>
-			</div>
 			<br>
 			<!--
 			<label class="checkbox agreement hidden-md hidden-lg">
@@ -84,6 +79,17 @@
 -->
 			<button type="button" class="btn btn-warning btn-block pull-right" ng-disabled="(!$parent.waiverSigned) || ($parent.userPaying == 0 && !$parent.fullPaymentRequired) || ($parent.submitDisabled)" ng-click="checkout()">Join Team
 			</button>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-lg-12">
+			<br>
+			<br>
+			<h3>Terms and Conditions</h3>
+			<p>{{regSettings.termsText}}</p>
+			<hr>
+			<h3>Refund Policy</h3>
+			<p>{{regSettings.refundsText}}</p>
 		</div>
 	</div>
 

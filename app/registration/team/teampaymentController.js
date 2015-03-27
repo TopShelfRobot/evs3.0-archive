@@ -4,6 +4,7 @@
 
 	function controller($scope, $location, $http, $modal,
 		datacontext, cartModel, cartRegSettings, config, stripe, common) {
+		$scope.regSettings = cartRegSettings.regSettings;
 		$scope.teamName = cartModel.teamName;
 		$scope.waiverSigned = false;
 		$scope.isSuggestPayVisible = false;
@@ -60,7 +61,7 @@
 
 		$scope.errorMessage = "";
 
-//		$scope.open = function () {
+		//		$scope.open = function () {
 		//			var modalInstance = $modal.open({
 		//				templateUrl: 'termsAndConditions.html',
 		//				size: 'lg',
