@@ -28,7 +28,6 @@
 
 			//alert('yo yoy yo');
 			authService.saveRegistration($scope.registration, true).then(function (response) {
-
 					$scope.savedSuccessfully = true;
 					$scope.message = "User has been registered successfully, you will be redirected in 2 seconds.";
 					$scope.message = authService.startTimer($scope.registration);
@@ -41,6 +40,9 @@
 						}
 					}
 					$scope.message = "Failed to register user due to:" + errors.join(' ');
+					console.log('failed to reg');
+				    //console.log("Failed to register user due to:" + errors.join(' '););
+				    //TODO:  wil put in generic login failed here!!
 				});
 		};
 	}

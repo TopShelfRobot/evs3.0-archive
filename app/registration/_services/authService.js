@@ -6,7 +6,7 @@ angular.module('evReg').factory('authService', ['$http', '$q', "$timeout", "$loc
 		'use strict';
 
 		//var serviceBase = ngAuthSettings.apiServiceBaseUri;
-		var serviceBase = config.apiPath;
+		//var serviceBase = config.apiPath;
 		var authServiceFactory = {};
 
 		var _authentication = {
@@ -26,7 +26,7 @@ angular.module('evReg').factory('authService', ['$http', '$q', "$timeout", "$loc
 			if (logout) {
 				_logOut();
 			}
-			return $http.post(serviceBase + 'api/account/register', registration)
+			return $http.post(config.apiPath + 'api/account/register', registration)
 				.then(function (response) {
 					return response;
 				});
@@ -35,7 +35,7 @@ angular.module('evReg').factory('authService', ['$http', '$q', "$timeout", "$loc
 		var _forgotPassword = function (registration) {
 			_logOut();
 
-			return $http.post(serviceBase + 'api/account/ForgotPassword', registration)
+			return $http.post(config.apiPath + 'api/account/ForgotPassword', registration)
 				.then(function (response) { //, registration
 					return response;
 				});
@@ -43,7 +43,7 @@ angular.module('evReg').factory('authService', ['$http', '$q', "$timeout", "$loc
 
 		var _resetPassword = function (registration) {
 			//_logOut();
-			return $http.post(serviceBase + 'api/account/ResetPassword', registration)
+		    return $http.post(config.apiPath + 'api/account/ResetPassword', registration)
 				.then(function (response) { //
 					return response;
 				});
@@ -65,7 +65,7 @@ angular.module('evReg').factory('authService', ['$http', '$q', "$timeout", "$loc
 					.then(function (returnedRoles) {
 						roles = returnedRoles.data;
 
-						$http.post(serviceBase + 'token', data, {
+					    $http.post(config.apiPath + 'token', data, {
 							headers: {
 								'Content-Type': 'application/x-www-form-urlencoded'
 							}
@@ -103,20 +103,22 @@ angular.module('evReg').factory('authService', ['$http', '$q', "$timeout", "$loc
 						});
 					});
 			} else {
-				//Don't get roles
-				$http.post(serviceBase + 'token', data, {
+			    //console.log(data);
+			    $http.post(config.apiPath + 'token', data, {
 					headers: {
 						'Content-Type': 'application/x-www-form-urlencoded'
 					}
 				}).success(function (response) {
-					if (loginData.useRefreshTokens) {
+				    if (loginData.useRefreshTokens) {
+				        //console.log('token success:  useRefreshTokens');
 						localStorageService.set('authorizationData', {
 							token: response.access_token,
 							userName: loginData.userName,
 							refreshToken: response.refresh_token,
 							useRefreshTokens: true
 						});
-					} else {
+				    } else {
+				        //console.log('token success:  ELSE useRefreshTokens');
 						localStorageService.set('authorizationData', {
 							token: response.access_token,
 							userName: loginData.userName,
@@ -132,6 +134,8 @@ angular.module('evReg').factory('authService', ['$http', '$q', "$timeout", "$loc
 					deferred.resolve(response);
 
 				}).error(function (err, status) {
+				    //console.log('bad password');
+                    //TODO:  wil put in generic login failed here!!
 					_logOut();
 					deferred.reject(err);
 				});
@@ -184,7 +188,7 @@ angular.module('evReg').factory('authService', ['$http', '$q', "$timeout", "$loc
 						.then(function (returnedRoles) {
 							roles = returnedRoles.data;
 
-							$http.post(serviceBase + 'token', data, {
+						    $http.post(config.apiPath + 'token', data, {
 								headers: {
 									'Content-Type': 'application/x-www-form-urlencoded'
 								}
@@ -223,7 +227,7 @@ angular.module('evReg').factory('authService', ['$http', '$q', "$timeout", "$loc
 			//    .then(function (returnedRoles) {
 			//        roles = returnedRoles.data;
 
-			$http.get(serviceBase + 'api/account/ObtainLocalAccessToken', {
+		    $http.get(config.apiPath + 'api/account/ObtainLocalAccessToken', {
 				params: {
 					provider: externalData.provider,
 					externalAccessToken: externalData.externalAccessToken
@@ -267,8 +271,8 @@ angular.module('evReg').factory('authService', ['$http', '$q', "$timeout", "$loc
 
 						datacontext.participant.getParticipantByEmailAddress(_authentication.userName, cart.ownerId)
 							.then(function (data) {
-								console.log('after part call');
-								console.table(data);
+								//console.log('after part call');
+								//console.table(data);
 								if (data === null || typeof data === 'undefined') {
 									$location.path('/new-user/add');
 								} else {
@@ -293,9 +297,9 @@ angular.module('evReg').factory('authService', ['$http', '$q', "$timeout", "$loc
 			//    .then(function (returnedRoles) {
 			//        roles = returnedRoles.data;
 			//console.log('booononoee');
-			console.table(registerExternalData);
+			//console.table(registerExternalData);
 
-			$http.post(serviceBase + 'api/account/RegisterExternal', registerExternalData)
+		    $http.post(config.apiPath + 'api/account/RegisterExternal', registerExternalData)
 				.success(function (response) {
 
 				//TODO: remove this
@@ -317,7 +321,7 @@ angular.module('evReg').factory('authService', ['$http', '$q', "$timeout", "$loc
 				deferred.resolve(response);
 
 			}).error(function (err, status) {
-				console.log(err);
+				//console.log(err);
 				_logOut();
 				deferred.reject(err);
 			});
