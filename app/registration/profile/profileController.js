@@ -552,6 +552,16 @@
 
 		function Coach() {
 
+			$scope.remove = function (participantId) {
+				alert('Removing: ' + participantId);
+				//TODO make it remove the participant from the team
+				$scope.coachGridOptions.dataSource.read();
+			};
+
+			//	$scope.resend = function (participantId) {
+			//		alert('Resending: ' + participantId);
+			//	};
+
 			$scope.checkout = function (balance, id) {
 
 				var order = {
@@ -582,12 +592,10 @@
 					});
 			};
 
-
-
 			var coachapi = config.remoteApiName + 'widget/GetTeamRegistrationsByCoachId/' + $scope.participantId;
 
 			$scope.coachGridOptions = {
-				dataSource: {
+				dataSource: new kendo.data.DataSource({
 					type: "json",
 					transport: {
 						read: coachapi
@@ -595,7 +603,7 @@
 					pageSize: 10,
 					serverPaging: false,
 					serverSorting: false
-				},
+				}),
 				sortable: true,
 				pageable: true,
 				filterable: true,
@@ -634,16 +642,6 @@
 			$scope.coachDetailGridOptions = function (e) {
 
 				var coachdetailapi = config.remoteApiName + 'widget/GetTeamMembersByTeamId/' + e.id;
-
-				$scope.remove = function (participantId) {
-					alert('Removing: ' + participantId);
-					$scope.coachgrid.refresh();
-				};
-
-				$scope.resend = function () {
-					alert('Resending: ' + e.Id);
-				};
-
 				return {
 					dataSource: {
 						type: "json",
