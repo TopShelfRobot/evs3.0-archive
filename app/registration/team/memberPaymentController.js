@@ -3,7 +3,7 @@
 	var controllerId = 'MemberPaymentController';
 
 	function Controller($scope, $routeParams, $q, $http, $location, $modal,
-		datacontext, stripe, cartModel, cartRegSettings, authService, config, common) {
+		datacontext, stripe, cartModel, cartRegSettings, authService, config, common, dt) {
 
 		var controller = {};
 		$scope.allowZeroPayment = cartModel.allowZeroPayment;
@@ -293,6 +293,8 @@
 						cartModel.teamId = payment.teamId;
 						$scope.teamName = payment.name;
 						$scope.listName = payment.listName;
+						$scope.minAge = payment.minAge;
+						$scope.maxAge = payment.maxAge;
 						$scope.participant.email = payment.email;
 						console.log('Payment', payment);
 						console.log('listingType: ', payment.eventureListType);
@@ -356,35 +358,47 @@
 		};
 
 		$scope.checkout = function () {
-			//cartOrder.participantId = $scope.participant.id;
-			//alert('User elected to not pay: ' + cartOrder.orderAmount);
-			$.blockUI({
-				message: 'Processing...'
-			});
 
-			datacontext.save().then(function () {
-				//For Lottery $scope.userPaying = 0 set in switch statement
-				var cartOrder = cartModel.order($scope.userPaying, $scope.participant.id);
-				cartOrder.participantId = $scope.participant.id;
-				console.table(cartOrder);
 
-				$http.post(config.apiPath + 'api/payment/PostTeamPayment', cartOrder)
-					.success(function (result) {
-						$scope.participant.houseId = $scope.participant.id;
-						$scope.date.dateBirth = moment($scope.date.dateBirth).toISOString();
-						$scope.participant.dateBirth = $scope.date.dateBirth;
-						datacontext.save();
-						console.log('result: ' + result);
-						$location.path('/member-receipt/' + $scope.teamGuid);
-					})
-					.error(function (err) {
-						console.error('ERROR:', err.toString());
-					})
-					.finally(function () {
-						$.unblockUI();
-					});
 
-			});
+			$scope.age = dt.age($scope.participant.dateBirth);
+			if (($scope.minAge && $scope.age < $scope.minAge) ||
+				($scope.maxAge && $scope.age > $scope.maxAge)) {
+				alert("You do not meet the age restrictions for this event. You must be between " + $scope.minAge + " and " + $scope.maxAge);
+			} else {
+				//cartOrder.participantId = $scope.participant.id;
+				//alert('User elected to not pay: ' + cartOrder.orderAmount);
+				$.blockUI({
+					message: 'Processing...'
+				});
+
+				datacontext.save().then(function () {
+					//For Lottery $scope.userPaying = 0 set in switch statement
+					var cartOrder = cartModel.order($scope.userPaying, $scope.participant.id);
+					cartOrder.participantId = $scope.participant.id;
+					console.table(cartOrder);
+
+					$http.post(config.apiPath + 'api/payment/PostTeamPayment', cartOrder)
+						.success(function (result) {
+							$scope.participant.houseId = $scope.participant.id;
+							$scope.date.dateBirth = moment($scope.date.dateBirth).toISOString();
+							$scope.participant.dateBirth = $scope.date.dateBirth;
+							datacontext.save();
+							console.log('result: ' + result);
+							$location.path('/member-receipt/' + $scope.teamGuid);
+						})
+						.error(function (err) {
+							console.error('ERROR:', err.toString());
+						})
+						.finally(function () {
+							$.unblockUI();
+						});
+
+				});
+			}
+
+
+
 
 
 
@@ -419,5 +433,5 @@
 
 	angular.module('evReg').controller(controllerId, ['$scope', '$routeParams', '$q', '$http', '$location', '$modal',
     'datacontext', 'StripeService', 'MemberCartModel', 'CartModel', 'authService',
-    'config', 'common', Controller]);
+    'config', 'common', 'AgeService', Controller]);
 })();
