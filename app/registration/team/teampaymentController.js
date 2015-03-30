@@ -92,7 +92,7 @@
 						$http.post(config.apiPath + "api/payment/PostTeam", cartOrder)
 							.success(function (result) {
 								console.log("result: " + result);
-								$location.path("/receipt/" + result);
+								$location.path("/team-receipt/" + result);
 							})
 							.error(function (err) {
 								console.error("ERROR:", err.toString());

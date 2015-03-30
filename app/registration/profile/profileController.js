@@ -2,7 +2,7 @@
 
 	var controllerId = "UserProfile";
 
-	function Controller($scope, $routeParams, $location, $http, config, datacontext, common, cart) {
+	function Controller($scope, $routeParams, $location, $http, config, datacontext, common, cart, stripe) {
 
 		$scope.participant = {};
 
@@ -551,6 +551,35 @@
 		}
 
 		function Coach() {
+
+			$scope.checkout = function (balance, id) {
+
+				console.log('team balance', balance);
+				console.log('team id', id);
+
+				stripe.checkout(balance)
+					.then(function (res) {
+						console.log(res);
+						$.blockUI({
+							message: 'Processing order...'
+						});
+						cartOrder.stripeToken = res.id;
+						$http.post(config.apiPath + "api/payment/PostTeam", cartOrder)
+							.success(function (result) {
+								console.log("result: " + result);
+								$location.path("/team-receipt/" + result);
+							})
+							.error(function (err) {
+								console.error("ERROR:", err.toString());
+							})
+							.finally(function () {
+								$.unblockUI();
+							});
+					});
+			};
+
+
+
 			var coachapi = config.remoteApiName + 'widget/GetTeamRegistrationsByCoachId/' + $scope.participantId;
 
 			$scope.coachGridOptions = {
@@ -571,49 +600,31 @@
 				},
 				detailTemplate: kendo.template($("#coachtemplate").html()),
 				columns: [{
-						field: "name",
-						title: "Team Name",
-						width: "200px"
-    },
-//									{
-//						field: "eventName",
-//						title: "Eventure",
-//    }
-    //, {
-    //	field: "listName",
-    //	title: "Listing",
-    //	width:150
-    //}
-    , {
-						field: "division",
-						title: "Division",
-						width: 150
+					field: "name",
+					title: "Team Name",
+					width: 200
     }, {
-						field: "timeFinish",
-						title: "Est. Time",
-						width: 150
-    },
-    //, {
-    //	field: "amount",
-    //	title: "Total Paid",
-    //	//width: "120px",
-    //	format: "{0:c}"
-    //}
-					{
-						field: "balance",
-						title: "Balance",
-						//width: "120px",
-						format: "{0:c}"
+					field: "division",
+					title: "Division",
+					width: 150
     }, {
-						title: "",
-						width: "120px",
-						template: '<a class="btn btn-default btn-block" href="\\\#/editteam/#=id#"><em class="glyphicon glyphicon-edit"></em>&nbsp;Edit</a>'
+					field: "timeFinish",
+					title: "Est. Time",
+					width: 120
     }, {
-						title: "",
-						width: "120px",
-						template: '<a class="btn btn-info btn-block" href="\\\#/editteam/#=id#"><em class="glyphicon glyphicon-edit"></em>&nbsp;Pay Balance</a>' //TODO write function
-    }
-								 ]
+					field: "balance",
+					title: "Balance",
+					format: "{0:c}",
+					width: 100
+    }, {
+					title: "",
+					width: 120,
+					template: '<a class="btn btn-default btn-block" href="\\\#/editteam/#=id#"><em class="glyphicon glyphicon-edit"></em>&nbsp;Edit</a>'
+    }, {
+					title: "",
+					width: 140,
+					template: '<button class="btn btn-info btn-block" ng-click="checkout(#=balance#, #=id#)">Pay Balance</button>'
+    }]
 			};
 
 			$scope.coachDetailGridOptions = function (e) {
@@ -643,35 +654,38 @@
 					sortable: true,
 					pageable: true,
 					columns: [{
-						field: "teamName",
-						title: "Team Name"
+							field: "teamName",
+							title: "Team Name"
      }, {
-						field: "name",
-						title: "Name"
+							field: "name",
+							title: "Name"
      }, {
-						field: "role",
-						title: "Role"
+							field: "role",
+							title: "Role"
 		 }, {
-						field: "phone",
-						title: "Phone"
+							field: "phone",
+							title: "Phone"
      }, {
-						field: "email",
-						title: "Email"
+							field: "email",
+							title: "Email"
      }, {
-						field: "emergencyContact",
-						title: "Emergency Contact"
+							field: "emergencyContact",
+							title: "Emergency Contact"
      }, {
-						field: "emergencyPhone",
-						title: "Emergency Phone"
-     }, {
-						title: "",
-						width: "120px",
-						template: kendo.template($("#teamMemberTemplate").html())
-     }]
+							field: "emergencyPhone",
+							title: "Emergency Phone"
+     }
+//										, {
+		//						title: "",
+		//						width: "120px",
+		//						template: kendo.template($("#teamMemberTemplate").html())
+		//     }
+									 ]
 				};
 			};
 		}
+
 	}
 
-	angular.module("evReg").controller(controllerId, ["$scope", "$routeParams", "$location", "$http", "config", "datacontext", "common", "CartModel", Controller]);
+	angular.module("evReg").controller(controllerId, ["$scope", "$routeParams", "$location", "$http", "config", "datacontext", "common", "CartModel", "StripeService", Controller]);
 })();
