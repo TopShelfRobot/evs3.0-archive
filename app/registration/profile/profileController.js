@@ -557,7 +557,8 @@
 				var order = {
 					amount: balance,
 					teamId: id,
-					participantId: $scope.participantId
+					participantId: $scope.participantId,
+					stripeToken: ''
 				}
 
 				stripe.checkout(balance)
@@ -566,7 +567,7 @@
 						$.blockUI({
 							message: 'Processing order...'
 						});
-						//cartOrder.stripeToken = res.id;
+						order.stripeToken = res.id;
 						$http.post(config.apiPath + "api/payment/PostTeamBalance", order)
 							.success(function (result) {
 								console.log("result: " + result);
