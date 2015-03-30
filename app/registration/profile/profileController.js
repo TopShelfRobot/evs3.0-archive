@@ -583,8 +583,7 @@
 						order.stripeToken = res.id;
 						$http.post(config.apiPath + "api/payment/PostTeamBalance", order)
 							.success(function (result) {
-								console.log("result: " + result);
-								$location.path("/team-receipt/" + result);
+								$scope.coachGridOptions.dataSource.read();
 							})
 							.error(function (err) {
 								console.error("ERROR:", err.toString());
