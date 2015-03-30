@@ -660,10 +660,10 @@
 							field: "name",
 							title: "Name"
      }, {
-							field: "role",
+							field: "position",
 							title: "Role"
 		 }, {
-							field: "phone",
+							field: "phoneMobile",
 							title: "Phone"
      }, {
 							field: "email",
