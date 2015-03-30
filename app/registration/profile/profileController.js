@@ -12,6 +12,8 @@
 
 		$scope.partButton = cart.regSettings.partButtonText;
 
+		$scope.ownerId = config.owner.ownerId;
+
 		$scope.social = {
 			twitter: true,
 			facebook: true,
@@ -568,7 +570,8 @@
 					amount: balance,
 					teamId: id,
 					participantId: $scope.participantId,
-					stripeToken: ''
+					stripeToken: '',
+					ownerId: $scope.ownerId
 				}
 
 				stripe.checkout(balance)
