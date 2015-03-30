@@ -552,8 +552,8 @@
 
 		function Coach() {
 
-			$scope.remove = function (participantId) {
-				alert('Removing: ' + participantId);
+			$scope.remove = function (memberId, teamId) {
+				alert('Removing: teamMemberId ' + memberId + ' from teamId: ' + teamId);
 				//TODO make it remove the participant from the team
 				$scope.coachGridOptions.dataSource.read();
 			};
@@ -690,7 +690,7 @@
 		}, {
 						title: "",
 						width: 110,
-						template: '<button class="btn btn-danger btn-block" ng-click="remove(#=participantId#)">Remove</button>'
+						template: '<button class="btn btn-danger btn-block" ng-click="remove(#=id#, #=teamId#)">Remove</button>'
 		}]
 				};
 			};
