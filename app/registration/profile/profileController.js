@@ -554,8 +554,11 @@
 
 			$scope.checkout = function (balance, id) {
 
-				console.log('team balance', balance);
-				console.log('team id', id);
+				var order = {
+					amount: balance,
+					teamId: id,
+					participantId: $scope.participantId
+				}
 
 				stripe.checkout(balance)
 					.then(function (res) {
@@ -564,7 +567,7 @@
 							message: 'Processing order...'
 						});
 						cartOrder.stripeToken = res.id;
-						$http.post(config.apiPath + "api/payment/PostTeam", cartOrder)
+						$http.post(config.apiPath + "api/payment/PostTeamBalance", order)
 							.success(function (result) {
 								console.log("result: " + result);
 								$location.path("/team-receipt/" + result);
@@ -654,33 +657,38 @@
 					sortable: true,
 					pageable: true,
 					columns: [{
-							field: "teamName",
-							title: "Team Name"
+						field: "teamName",
+						title: "Team Name",
+						width: 200
      }, {
-							field: "name",
-							title: "Name"
+						field: "name",
+						title: "Name",
+						width: 200
      }, {
-							field: "position",
-							title: "Role"
+						field: "position",
+						title: "Role",
+						width: 130
 		 }, {
-							field: "phoneMobile",
-							title: "Phone"
+						field: "phoneMobile",
+						title: "Phone",
+						width: 140
      }, {
-							field: "email",
-							title: "Email"
+						field: "email",
+						title: "Email",
+						width: 210
      }, {
-							field: "emergencyContact",
-							title: "Emergency Contact"
+						field: "emergencyContact",
+						title: "Emergency Contact",
+						width: 180
      }, {
-							field: "emergencyPhone",
-							title: "Emergency Phone"
-     }
-//										, {
-		//						title: "",
-		//						width: "120px",
-		//						template: kendo.template($("#teamMemberTemplate").html())
-		//     }
-									 ]
+						field: "emergencyPhone",
+						title: "Emergency Phone",
+						width: 140
+     }, {
+						title: "Status",
+						width: 120,
+						template: kendo.template($("#teamMemberTemplate").html())
+		}]
 				};
 			};
 		}
