@@ -566,7 +566,7 @@
 						$.blockUI({
 							message: 'Processing order...'
 						});
-						cartOrder.stripeToken = res.id;
+						//cartOrder.stripeToken = res.id;
 						$http.post(config.apiPath + "api/payment/PostTeamBalance", order)
 							.success(function (result) {
 								console.log("result: " + result);
@@ -634,9 +634,9 @@
 
 				var coachdetailapi = config.remoteApiName + 'widget/GetTeamMembersByTeamId/' + e.id;
 
-				$scope.remove = function () {
-					alert('Removing: ' + e.Id);
-					$scope.vm.coachgrid.refresh();
+				$scope.remove = function (participantId) {
+					alert('Removing: ' + participantId);
+					$scope.coachgrid.refresh();
 				};
 
 				$scope.resend = function () {
@@ -688,6 +688,10 @@
 						title: "Status",
 						width: 120,
 						template: kendo.template($("#teamMemberTemplate").html())
+		}, {
+						title: "",
+						width: 110,
+						template: '<button class="btn btn-danger btn-block" ng-click="remove(#=participantId#)">Remove</button>'
 		}]
 				};
 			};
