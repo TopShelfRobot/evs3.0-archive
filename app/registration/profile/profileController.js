@@ -26,6 +26,9 @@
 
 		$scope.positions = [
 			{
+				name: 'Captain'
+			},
+			{
 				name: 'Driver Only'
 			},
 			{
@@ -68,7 +71,7 @@
 		var promises = [getParticipant(), Registrations(), Participants(), Team(), Coach()];
 
 		common.activateController(promises, controllerId)
-			.then(function () { });
+			.then(function () {});
 
 		function getParticipant() {
 			return datacontext.participant.getParticipantById($scope.participantId)
@@ -110,8 +113,8 @@
 				pageable: true,
 				filterable: true,
 				columns: [{
-					field: "displayName",
-					title: "Listing"
+						field: "displayName",
+						title: "Listing"
 				},
 //                  {
   //            field: "totalAmount",
@@ -455,33 +458,33 @@
 					sortable: true,
 					pageable: true,
 					columns: [{
-						field: "displayName",
-						title: "Listing",
-						width: 300
+							field: "displayName",
+							title: "Listing",
+							width: 300
 					}, {
-						field: "totalAmount",
-						title: "Amount",
-						format: "{0:c}",
-						width: 100
+							field: "totalAmount",
+							title: "Amount",
+							format: "{0:c}",
+							width: 100
 					}, {
-						field: "quantity",
-						title: "Qty",
-						width: 67
+							field: "quantity",
+							title: "Qty",
+							width: 67
 					}, {
-						field: "dateCreated",
-						title: "Registration Date",
-						type: "date",
-						format: "{0:MM/dd/yyyy}",
-						width: 170
+							field: "dateCreated",
+							title: "Registration Date",
+							type: "date",
+							format: "{0:MM/dd/yyyy}",
+							width: 170
 					}, {
-						field: '',
-						title: '',
-						template: '<a href="\\\#viewreceipt/#=eventureOrderId#" class="btn btn-success btn-block"><em class="glyphicon glyphicon-tags"></em>&nbsp;Receipt</a>',
-						width: 110
+							field: '',
+							title: '',
+							template: '<a href="\\\#viewreceipt/#=eventureOrderId#" class="btn btn-success btn-block"><em class="glyphicon glyphicon-tags"></em>&nbsp;Receipt</a>',
+							width: 110
 					}, {
-						field: '',
-						title: '',
-						template: '<a href="\\\#registration/#=id#" class="btn btn-default btn-block"><em class="glyphicon glyphicon-edit"></em>&nbsp;Edit</a>'
+							field: '',
+							title: '',
+							template: '<a href="\\\#registration/#=id#" class="btn btn-default btn-block"><em class="glyphicon glyphicon-edit"></em>&nbsp;Edit</a>'
 					}
 					]
 				};
@@ -645,12 +648,12 @@
 
 				var coachdetailapi = config.remoteApiName + 'widget/GetTeamMembersByTeamId/' + e.id;
 				return {
-				    toolbar: ['excel'],
-				    excel: {
-				        fileName: 'TeamRoster_BC2015.xlsx',
-				        filterable: true,
-				        allPages: true
-				    },
+					toolbar: ['excel'],
+					excel: {
+						fileName: 'TeamRoster_BC2015.xlsx',
+						filterable: true,
+						allPages: true
+					},
 					dataSource: {
 						type: "json",
 						transport: {
@@ -665,13 +668,13 @@
 					pageable: true,
 					columns: [{
 
-						title: "Status",
-						width: 120,
-						template: kendo.template($("#teamMemberTemplate").html())
+							title: "Status",
+							width: 120,
+							template: kendo.template($("#teamMemberTemplate").html())
 					}, {
-						title: "",
-						width: 110,
-						template: '<button class="btn btn-danger btn-block" ng-click="remove(#=id#, #=teamId#)">Remove</button>'
+							title: "",
+							width: 110,
+							template: '<button class="btn btn-danger btn-block" ng-click="remove(#=id#, #=teamId#)">Remove</button>'
 					},
 						{
 							field: "teamName",

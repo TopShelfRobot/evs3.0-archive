@@ -52,6 +52,8 @@
 			<h3>You been invited to join team:&nbsp;<strong>{{ teamName }}</strong>&nbsp;for The Bourbon Chase.</h3>
 			<p><strong>As a Team Participant, you understand that you and all team members (including drivers) are required to read and follow The Bourbon Chase Guidebook.</strong>
 			</p>
+			<p><strong>All participants must be at least 21 years of age on race day and all teams must be capable of covering the course in under 35 hours.</strong>
+			</p>
 			<hr>
 			<ng-include src="'/app/registration/profile/participantForm.part.html'"></ng-include>
 		</div>
@@ -83,7 +85,7 @@
 			</button>
 -->
 
-			<button type="button" class="btn btn-warning btn-block pull-right" ng-click="checkout()">Join Team
+			<button type="button" class="btn btn-warning btn-block pull-right" ng-click="open()">Join Team
 			</button>
 		</div>
 	</div>
@@ -97,8 +99,7 @@
 
 </div>
 
-<!--
-<script type="text/ng-template" id="termsAndConditions.html">
+<script type="text/ng-template" id="termsModalInstance.html">
 	<div class="modal-header">
 		<h3 class="modal-title">Terms and Conditions</h3>
 	</div>
@@ -137,4 +138,3 @@
 		<button class="btn btn-warning" ng-click="ok()">I Accept The Terms & Conditions</button>
 	</div>
 </script>
--->

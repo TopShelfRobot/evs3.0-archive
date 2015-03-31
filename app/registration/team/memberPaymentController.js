@@ -346,60 +346,54 @@
 
 		$scope.open = function () {
 			var modalInstance = $modal.open({
-				templateUrl: 'termsAndConditions.html',
+				templateUrl: 'termsModalInstance.html',
 				size: 'lg',
 				backdrop: 'static',
 				controller: 'TermsModalInstance'
 			});
 
-			modalInstance.result.then(function () {
-				$scope.checkout();
-			});
+			$scope.age = dt.age($scope.date.dateBirth);
+			console.log('age', $scope.age);
+			if ($scope.age < $scope.minAge) {
+				alert("You do not meet the age restrictions for this event. You must be between " + $scope.minAge + " and " + $scope.maxAge);
+			} else {
+				modalInstance.result.then(function () {
+					$scope.checkout();
+				});
+			}
 		};
 
 		$scope.checkout = function () {
 
+			//cartOrder.participantId = $scope.participant.id;
+			//alert('User elected to not pay: ' + cartOrder.orderAmount);
+			$.blockUI({
+				message: 'Processing...'
+			});
 
+			datacontext.save().then(function () {
+				//For Lottery $scope.userPaying = 0 set in switch statement
+				var cartOrder = cartModel.order($scope.userPaying, $scope.participant.id);
+				cartOrder.participantId = $scope.participant.id;
+				console.table(cartOrder);
 
-			$scope.age = dt.age($scope.participant.dateBirth);
-			if (($scope.minAge && $scope.age < $scope.minAge) ||
-				($scope.maxAge && $scope.age > $scope.maxAge)) {
-				alert("You do not meet the age restrictions for this event. You must be between " + $scope.minAge + " and " + $scope.maxAge);
-			} else {
-				//cartOrder.participantId = $scope.participant.id;
-				//alert('User elected to not pay: ' + cartOrder.orderAmount);
-				$.blockUI({
-					message: 'Processing...'
-				});
+				$http.post(config.apiPath + 'api/payment/PostTeamPayment', cartOrder)
+					.success(function (result) {
+						$scope.participant.houseId = $scope.participant.id;
+						$scope.date.dateBirth = moment($scope.date.dateBirth).toISOString();
+						$scope.participant.dateBirth = $scope.date.dateBirth;
+						datacontext.save();
+						console.log('result: ' + result);
+						$location.path('/member-receipt/' + $scope.teamGuid);
+					})
+					.error(function (err) {
+						console.error('ERROR:', err.toString());
+					})
+					.finally(function () {
+						$.unblockUI();
+					});
 
-				datacontext.save().then(function () {
-					//For Lottery $scope.userPaying = 0 set in switch statement
-					var cartOrder = cartModel.order($scope.userPaying, $scope.participant.id);
-					cartOrder.participantId = $scope.participant.id;
-					console.table(cartOrder);
-
-					$http.post(config.apiPath + 'api/payment/PostTeamPayment', cartOrder)
-						.success(function (result) {
-							$scope.participant.houseId = $scope.participant.id;
-							$scope.date.dateBirth = moment($scope.date.dateBirth).toISOString();
-							$scope.participant.dateBirth = $scope.date.dateBirth;
-							datacontext.save();
-							console.log('result: ' + result);
-							$location.path('/member-receipt/' + $scope.teamGuid);
-						})
-						.error(function (err) {
-							console.error('ERROR:', err.toString());
-						})
-						.finally(function () {
-							$.unblockUI();
-						});
-
-				});
-			}
-
-
-
-
+			});
 
 
 			//alert('Thanks for registering');
