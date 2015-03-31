@@ -645,11 +645,11 @@
 
 				var coachdetailapi = config.remoteApiName + 'widget/GetTeamMembersByTeamId/' + e.id;
 				return {
-				    toolbar: ["excel"],
+				    toolbar: ['excel'],
 				    excel: {
-				        fileName: "Kendo UI Grid Export.xlsx",
-				        proxyURL: "http://demos.telerik.com/kendo-ui/service/export",
-				        filterable: true
+				        fileName: 'AllCoupons.xlsx',
+				        filterable: true,
+				        allPages: true
 				    },
 					dataSource: {
 						type: "json",
