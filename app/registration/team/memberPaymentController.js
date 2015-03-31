@@ -345,18 +345,19 @@
 		$scope.format = $scope.formats[0];
 
 		$scope.open = function () {
-			var modalInstance = $modal.open({
-				templateUrl: 'termsModalInstance.html',
-				size: 'lg',
-				backdrop: 'static',
-				controller: 'TermsModalInstance'
-			});
-
 			$scope.age = dt.age($scope.date.dateBirth);
 			console.log('age', $scope.age);
+			console.log($scope.age < $scope.minAge);
+			console.log($scope.minAge);
 			if ($scope.age < $scope.minAge) {
 				alert("You do not meet the age restrictions for this event. You must be between " + $scope.minAge + " and " + $scope.maxAge);
 			} else {
+				var modalInstance = $modal.open({
+					templateUrl: 'termsModalInstance.html',
+					size: 'lg',
+					backdrop: 'static',
+					controller: 'TermsModalInstance'
+				});
 				modalInstance.result.then(function () {
 					$scope.checkout();
 				});
