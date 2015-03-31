@@ -647,7 +647,7 @@
 				return {
 				    toolbar: ['excel'],
 				    excel: {
-				        fileName: 'AllCoupons.xlsx',
+				        fileName: 'TeamRoster_BC2015.xlsx',
 				        filterable: true,
 				        allPages: true
 				    },
