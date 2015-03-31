@@ -27,48 +27,48 @@
 		$scope.positions = [
 			{
 				name: 'Driver Only'
-   },
+			},
 			{
 				name: 'Runner'
-   }
-  ];
+			}
+		];
 
 		$scope.sizes = [
 			{
 				size: 'XS'
-   },
+			},
 			{
 				size: 'S'
-   },
+			},
 			{
 				size: 'M'
-   },
+			},
 			{
 				size: 'L'
-   },
+			},
 			{
 				size: 'XL'
-   },
+			},
 			{
 				size: 'XXL'
-   }
-  ];
+			}
+		];
 
 		$scope.genders = [
 			{
 				value: 'M',
 				name: 'Male'
-   },
+			},
 			{
 				value: 'F',
 				name: 'Female'
-   }
-  ];
+			}
+		];
 
 		var promises = [getParticipant(), Registrations(), Participants(), Team(), Coach()];
 
 		common.activateController(promises, controllerId)
-			.then(function () {});
+			.then(function () { });
 
 		function getParticipant() {
 			return datacontext.participant.getParticipantById($scope.participantId)
@@ -110,9 +110,9 @@
 				pageable: true,
 				filterable: true,
 				columns: [{
-						field: "displayName",
-						title: "Listing"
-    },
+					field: "displayName",
+					title: "Listing"
+				},
 //                  {
   //            field: "totalAmount",
   //            title: "Amount",
@@ -123,28 +123,28 @@
 						field: "quantity",
 						title: "Qty",
 						width: 77
-    }, {
+					}, {
 						field: "dateCreated",
 						title: "Registration Date",
 						type: "date",
 						format: "{0:MM/dd/yyyy}",
 						width: 188
-    }, {
+					}, {
 						field: '',
 						title: '',
 						template: '<a href="\\\#orderreceipt/#=eventureOrderId#" class="btn btn-success btn-block"><em class="glyphicon glyphicon-tags"></em>&nbsp;Receipt</a>',
 						width: 150
-    }, {
+					}, {
 						field: '',
 						title: '',
 						template: '<button ng-click="resendReceipt(#=eventureOrderId#)" class="btn btn-success btn-block">Resend Receipt</button>',
-    }
-    //	, {
-    //	field: '',
-    //	title: '',
-    //	template: '<a href="\\\#registration/#=id#" class="btn btn-default btn-block"><em class="glyphicon glyphicon-edit"></em>&nbsp;Edit</a>'
-    //}
-    ]
+					}
+	//	, {
+	//	field: '',
+	//	title: '',
+	//	template: '<a href="\\\#registration/#=id#" class="btn btn-default btn-block"><em class="glyphicon glyphicon-edit"></em>&nbsp;Edit</a>'
+	//}
+				]
 			};
 		}
 
@@ -168,215 +168,215 @@
 		$scope.stateProvince = [
 			{
 				name: 'AK'
-      },
+			},
 			{
 				name: 'AL'
-      },
+			},
 			{
 				name: 'AR'
-      },
+			},
 			{
 				name: 'AZ'
-      },
+			},
 			{
 				name: 'CA'
-      },
+			},
 			{
 				name: 'CO'
-      },
+			},
 			{
 				name: 'CT'
-      },
+			},
 			{
 				name: 'DC'
-      },
+			},
 			{
 				name: 'DE'
-      },
+			},
 			{
 				name: 'FL'
-      },
+			},
 			{
 				name: 'GA'
-      },
+			},
 			{
 				name: 'HI'
-      },
+			},
 			{
 				name: 'IA'
-      },
+			},
 			{
 				name: 'ID'
-      },
+			},
 			{
 				name: 'IL'
-      },
+			},
 			{
 				name: 'IN'
-      },
+			},
 			{
 				name: 'KS'
-      },
+			},
 			{
 				name: 'KY'
-      },
+			},
 			{
 				name: 'LA'
-      },
+			},
 			{
 				name: 'MA'
-      },
+			},
 			{
 				name: 'MD'
-      },
+			},
 			{
 				name: 'ME'
-      },
+			},
 			{
 				name: 'MI'
-      },
+			},
 			{
 				name: 'MN'
-      },
+			},
 			{
 				name: 'MO'
-      },
+			},
 			{
 				name: 'MS'
-      },
+			},
 			{
 				name: 'MT'
-      },
+			},
 			{
 				name: 'NC'
-      },
+			},
 			{
 				name: 'ND'
-      },
+			},
 			{
 				name: 'NE'
-      },
+			},
 			{
 				name: 'NH'
-      },
+			},
 			{
 				name: 'NJ'
-      },
+			},
 			{
 				name: 'NM'
-      },
+			},
 			{
 				name: 'NV'
-      },
+			},
 			{
 				name: 'NY'
-      },
+			},
 			{
 				name: 'OH'
-      },
+			},
 			{
 				name: 'OK'
-      },
+			},
 			{
 				name: 'OR'
-      },
+			},
 			{
 				name: 'PA'
-      },
+			},
 			{
 				name: 'RI'
-      },
+			},
 			{
 				name: 'SC'
-      },
+			},
 			{
 				name: 'SD'
-      },
+			},
 			{
 				name: 'TN'
-      },
+			},
 			{
 				name: 'TX'
-      },
+			},
 			{
 				name: 'UT'
-      },
+			},
 			{
 				name: 'VA'
-      },
+			},
 			{
 				name: 'VT'
-      },
+			},
 			{
 				name: 'WA'
-      },
+			},
 			{
 				name: 'WI'
-      },
+			},
 			{
 				name: 'WV'
-      },
+			},
 			{
 				name: 'WY'
-      },
+			},
 			{
 				name: 'AS'
-      },
+			},
 			{
 				name: 'GU'
-      },
+			},
 			{
 				name: 'MP'
-      },
+			},
 			{
 				name: 'PR'
-      },
+			},
 			{
 				name: 'VI'
-      },
+			},
 			{
 				name: 'CZ'
-      },
+			},
 			{
 				name: 'AB'
-      },
+			},
 			{
 				name: 'BC'
-      },
+			},
 			{
 				name: 'MB'
-      },
+			},
 			{
 				name: 'NB'
-      },
+			},
 			{
 				name: 'NL'
-      },
+			},
 			{
 				name: 'NT'
-      },
+			},
 			{
 				name: 'NS'
-      },
+			},
 			{
 				name: 'NU'
-      },
+			},
 			{
 				name: 'ON'
-      },
+			},
 			{
 				name: 'PE'
-      },
+			},
 			{
 				name: 'QC'
-      },
+			},
 			{
 				name: 'SK'
-      },
+			},
 			{
 				name: 'YT'
-      }
-  ];
+			}
+		];
 
 		//$scope.today = function () {
 		//	$scope.participant.dateBirth = new Date();
@@ -422,19 +422,19 @@
 					field: "firstName",
 					title: "First Name",
 					width: "200px"
-    }, {
+				}, {
 					field: "lastName",
 					title: "Last Name",
 					width: "200px"
-    }, {
+				}, {
 					field: "email",
 					title: "Email Address",
 					width: "220px"
-    }, {
+				}, {
 					title: "",
 					width: "120px",
 					template: '<a class="btn btn-default btn-block" href="\\\#participant/#=id#"><em class="glyphicon glyphicon-edit"></em>&nbsp;Edit</a>'
-    }]
+				}]
 			};
 
 			$scope.partDetailGridOptions = function (e) {
@@ -455,35 +455,35 @@
 					sortable: true,
 					pageable: true,
 					columns: [{
-							field: "displayName",
-							title: "Listing",
-							width: 300
-     }, {
-							field: "totalAmount",
-							title: "Amount",
-							format: "{0:c}",
-							width: 100
-     }, {
-							field: "quantity",
-							title: "Qty",
-							width: 67
-     }, {
-							field: "dateCreated",
-							title: "Registration Date",
-							type: "date",
-							format: "{0:MM/dd/yyyy}",
-							width: 170
-     }, {
-							field: '',
-							title: '',
-							template: '<a href="\\\#viewreceipt/#=eventureOrderId#" class="btn btn-success btn-block"><em class="glyphicon glyphicon-tags"></em>&nbsp;Receipt</a>',
-							width: 110
-     }, {
-							field: '',
-							title: '',
-							template: '<a href="\\\#registration/#=id#" class="btn btn-default btn-block"><em class="glyphicon glyphicon-edit"></em>&nbsp;Edit</a>'
-     }
-     ]
+						field: "displayName",
+						title: "Listing",
+						width: 300
+					}, {
+						field: "totalAmount",
+						title: "Amount",
+						format: "{0:c}",
+						width: 100
+					}, {
+						field: "quantity",
+						title: "Qty",
+						width: 67
+					}, {
+						field: "dateCreated",
+						title: "Registration Date",
+						type: "date",
+						format: "{0:MM/dd/yyyy}",
+						width: 170
+					}, {
+						field: '',
+						title: '',
+						template: '<a href="\\\#viewreceipt/#=eventureOrderId#" class="btn btn-success btn-block"><em class="glyphicon glyphicon-tags"></em>&nbsp;Receipt</a>',
+						width: 110
+					}, {
+						field: '',
+						title: '',
+						template: '<a href="\\\#registration/#=id#" class="btn btn-default btn-block"><em class="glyphicon glyphicon-edit"></em>&nbsp;Edit</a>'
+					}
+					]
 				};
 			};
 		}
@@ -509,19 +509,19 @@
 					field: "name",
 					title: "Team Name",
 					width: "200px"
-    }, {
+				}, {
 					field: "eventName",
 					title: "Eventure",
 					width: "200px"
-    }, {
+				}, {
 					field: "listName",
 					title: "Listing",
 					width: "220px"
-    }, {
+				}, {
 					field: "coachName",
 					title: "Coach",
 					width: "120px"
-    }]
+				}]
 			};
 
 			$scope.teamDetailGridOptions = function (e) {
@@ -544,10 +544,10 @@
 					columns: [{
 						field: "name",
 						title: "Name"
-     }, {
+					}, {
 						field: "email",
 						title: "Email"
-     }]
+					}]
 				};
 			};
 		}
@@ -617,34 +617,40 @@
 					field: "name",
 					title: "Team Name",
 					width: 200
-    }, {
+				}, {
 					field: "division",
 					title: "Division",
 					width: 150
-    }, {
+				}, {
 					field: "timeFinish",
 					title: "Est. Time",
 					width: 120
-    }, {
+				}, {
 					field: "balance",
 					title: "Balance",
 					format: "{0:c}",
 					width: 100
-    }, {
+				}, {
 					title: "",
 					width: 120,
 					template: '<a class="btn btn-default btn-block" href="\\\#/editteam/#=id#"><em class="glyphicon glyphicon-edit"></em>&nbsp;Edit</a>'
-    }, {
+				}, {
 					title: "",
 					width: 140,
 					template: '<button class="btn btn-info btn-block" ng-click="checkout(#=balance#, #=id#)">Pay Balance</button>'
-    }]
+				}]
 			};
 
 			$scope.coachDetailGridOptions = function (e) {
 
 				var coachdetailapi = config.remoteApiName + 'widget/GetTeamMembersByTeamId/' + e.id;
 				return {
+				    toolbar: ["excel"],
+				    excel: {
+				        fileName: "Kendo UI Grid Export.xlsx",
+				        proxyURL: "http://demos.telerik.com/kendo-ui/service/export",
+				        filterable: true
+				    },
 					dataSource: {
 						type: "json",
 						transport: {
@@ -658,42 +664,44 @@
 					sortable: true,
 					pageable: true,
 					columns: [{
-						field: "teamName",
-						title: "Team Name",
-						width: 200
-     }, {
-						field: "name",
-						title: "Name",
-						width: 200
-     }, {
-						field: "position",
-						title: "Role",
-						width: 130
-		 }, {
-						field: "phoneMobile",
-						title: "Phone",
-						width: 140
-     }, {
-						field: "email",
-						title: "Email",
-						width: 210
-     }, {
-						field: "emergencyContact",
-						title: "Emergency Contact",
-						width: 180
-     }, {
-						field: "emergencyPhone",
-						title: "Emergency Phone",
-						width: 140
-     }, {
+
 						title: "Status",
 						width: 120,
 						template: kendo.template($("#teamMemberTemplate").html())
-		}, {
+					}, {
 						title: "",
 						width: 110,
 						template: '<button class="btn btn-danger btn-block" ng-click="remove(#=id#, #=teamId#)">Remove</button>'
-		}]
+					},
+						{
+							field: "teamName",
+							title: "Team Name",
+							width: 200
+						}, {
+							field: "name",
+							title: "Name",
+							width: 200
+						}, {
+							field: "position",
+							title: "Role",
+							width: 130
+						}, {
+							field: "phoneMobile",
+							title: "Phone",
+							width: 140
+						}, {
+							field: "email",
+							title: "Email",
+							width: 210
+						}, {
+							field: "emergencyContact",
+							title: "Emergency Contact",
+							width: 180
+						}, {
+							field: "emergencyPhone",
+							title: "Emergency Phone",
+							width: 140
+						}]
 				};
 			};
 		}
