@@ -129,6 +129,7 @@
     <Content Include="app\registration\_components\custom-questions.js" />
     <Content Include="app\registration\_components\custom-questions.part.html" />
     <Content Include="app\registration\_layout\TermsModalInstance.js" />
+    <Content Include="app\registration\_services\AgeService.js" />
     <Content Include="app\registration\_services\cartModel.js" />
     <Content Include="app\registration\_services\cartModel_old.js" />
     <Content Include="app\registration\_services\registrationEditModel.js" />

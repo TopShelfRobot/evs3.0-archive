@@ -350,7 +350,8 @@
 			console.log($scope.age < $scope.minAge);
 			console.log($scope.minAge);
 			if ($scope.age < $scope.minAge) {
-				alert("You do not meet the age restrictions for this event. You must be between " + $scope.minAge + " and " + $scope.maxAge);
+			    //alert("You do not meet the age restrictions for this event. You must be between " + $scope.minAge + " and " + $scope.maxAge);
+			    alert("You do not meet the age restrictions for this event. You must at least " + $scope.minAge + " to participate. ");
 			} else {
 				var modalInstance = $modal.open({
 					templateUrl: 'termsModalInstance.html',
