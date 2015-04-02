@@ -4,12 +4,18 @@
 
         var exports = {};
 
-        exports.age = function getAge(dateString) {
-            var today = new Date();
-            var birthDate = new Date(dateString);
-            var age = today.getFullYear() - birthDate.getFullYear();
-            var m = today.getMonth() - birthDate.getMonth();
-            if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+        exports.age = function getAge(birthDateString, ageOnDateString) {
+            var ageOnDate;
+            if (ageOnDateString === undefined) {
+                ageOnDate = new Date();
+            }
+            else {
+                ageOnDate = new Date(ageOnDateString);
+            }
+            var birthDate = new Date(birthDateString);
+            var age = ageOnDate.getFullYear() - birthDate.getFullYear();
+            var m = ageOnDate.getMonth() - birthDate.getMonth();
+            if (m < 0 || (m === 0 && ageOnDate.getDate() < birthDate.getDate())) {
                 age--;
             }
             return age;

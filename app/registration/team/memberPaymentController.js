@@ -302,6 +302,7 @@
 						cartModel.teamId = payment.teamId;
 						$scope.teamName = payment.name;
 						$scope.listName = payment.listName;
+						$scope.dateEventureList = payment.dateEventureList;
 						$scope.minAge = payment.minAge;
 						$scope.maxAge = payment.maxAge;
 						$scope.participant.email = payment.email;
@@ -356,13 +357,14 @@
 		$scope.open = function () {
 			if($scope.formHolder.participantForm.$invalid) {
 				toastr.error('Please verify that you have completed all required information.')
-			} else {
-				$scope.age = dt.age($scope.date.dateBirth);
-				console.log('age', $scope.age);
-				console.log($scope.age < $scope.minAge);
-				console.log($scope.minAge);
-				if ($scope.age < $scope.minAge) {
-					alert("You do not meet the age restrictions for this event. You must be between " + $scope.minAge + " and " + $scope.maxAge);
+		} else {
+		    $scope.age = dt.age($scope.date.dateBirth, $scope.dateEventureList);
+			console.log('age', $scope.age);
+			console.log($scope.age < $scope.minAge);
+			console.log($scope.minAge);
+			if ($scope.age < $scope.minAge) {
+			    //alert("You do not meet the age restrictions for this event. You must be between " + $scope.minAge + " and " + $scope.maxAge);
+			    alert("You do not meet the age restrictions for this event. You must at least " + $scope.minAge + " to participate. ");
 				} else {
 					var modalInstance = $modal.open({
 						templateUrl: 'termsModalInstance.html',
@@ -374,6 +376,7 @@
 						$scope.checkout();
 					});
 				}
+
 			}
 
 		};
