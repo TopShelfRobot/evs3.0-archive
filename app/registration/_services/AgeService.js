@@ -10,7 +10,7 @@
                 ageOnDate = new Date();
             }
             else {
-                ageOnDate = newDate(ageOnDateString);
+                ageOnDate = new Date(ageOnDateString);
             }
             var birthDate = new Date(birthDateString);
             var age = ageOnDate.getFullYear() - birthDate.getFullYear();
