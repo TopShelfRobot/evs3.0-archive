@@ -293,6 +293,7 @@
 						cartModel.teamId = payment.teamId;
 						$scope.teamName = payment.name;
 						$scope.listName = payment.listName;
+						$scope.dateEventureList = payment.dateEventureList;
 						$scope.minAge = payment.minAge;
 						$scope.maxAge = payment.maxAge;
 						$scope.participant.email = payment.email;
@@ -345,7 +346,7 @@
 		$scope.format = $scope.formats[0];
 
 		$scope.open = function () {
-			$scope.age = dt.age($scope.date.dateBirth);
+		    $scope.age = dt.age($scope.date.dateBirth, $scope.dateEventureList);
 			console.log('age', $scope.age);
 			console.log($scope.age < $scope.minAge);
 			console.log($scope.minAge);
