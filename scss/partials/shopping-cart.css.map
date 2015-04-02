@@ -1,7 +1,0 @@
-{
-"version": 3,
-"mappings": ";;;AAGA,0BAA2B;EACzB,IAAI,EAAC,iBAAiB;EACtB,SAAS,EAAC,gBAAgB;EAC1B,SAAS,EAAC,gBAAgB;;AAG5B,wBAAyB;EACvB,IAAI,EAAC,cAAc;;AAGrB,qCAAqC;EACnC,SAAS,EAAC,eAAe;;AAG3B,gEAAgE;EAC9D,SAAS,EAAC,eAAe;EACzB,WAAW,EAAC,eAAe;EAC3B,OAAO,EAAC,aAAa",
-"sources": ["shopping-cart.scss"],
-"names": [],
-"file": "shopping-cart.css"
-}
