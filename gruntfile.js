@@ -93,7 +93,7 @@ module.exports = function (grunt) {
 		},
 		watch: {
 			css: {
-				files: ['scss/*.scss', 'scss/partials/*.scss'],
+				files: ['scss/partials/**/*.scss'],
 				tasks: ['sass', 'cssmin'],
 				options: {
 					spawn: false,
