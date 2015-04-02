@@ -140,7 +140,7 @@
 					}, {
 						field: '',
 						title: '',
-						template: '<button ng-click="resendReceipt(#=eventureOrderId#)" class="btn btn-success btn-block">Resend Receipt</button>',
+						template: '<button ng-click="Receipt(#=eventureOrderId#)" class="btn btn-success btn-block"> Receipt</button>',
 					}
 	//	, {
 	//	field: '',
@@ -555,17 +555,31 @@
 			};
 		}
 
+
+
 		function Coach() {
 
-			$scope.remove = function (memberId, teamId) {
-				alert('Removing: teamMemberId ' + memberId + ' from teamId: ' + teamId);
-				//TODO make it remove the participant from the team
-				$scope.coachGridOptions.dataSource.read();
+			$scope.remove = function (teamMemberId, teamId) {
+				var source = {
+					teamId: teamId,
+					teamMemberId: teamMemberId
+				};
+
+				$http.post(config.apiPath + 'api/transaction/TeamRemove', source).then(function () {
+					$scope.coachGridOptions.dataSource.read();
+				});
+
 			};
 
-			//	$scope.resend = function (participantId) {
-			//		alert('Resending: ' + participantId);
-			//	};
+			$scope.resendInvitation = function (teamMemberId) {
+				var source = {
+					teamMemberId: teamMemberId
+				};
+				http.post(config.apiPath + 'api/mail/ResendTeamInvitation', source).then(function() {
+					toastr.success('The invitation has been resent!');
+				})
+
+			};
 
 			$scope.checkout = function (balance, id) {
 
@@ -667,9 +681,8 @@
 					sortable: true,
 					pageable: true,
 					columns: [{
-
 							title: "Status",
-							width: 120,
+							width: 160,
 							template: kendo.template($("#teamMemberTemplate").html())
 					}, {
 							title: "",
