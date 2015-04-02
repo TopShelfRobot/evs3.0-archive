@@ -35,9 +35,7 @@ $light-gray:        #eeeeee;
 /***********************************
 Default color theme
 ************************************/
-#main {
-  background-color: $neutral;
-}
+#main { background-color: $neutral; }
 /************************************
  Header Bar
  General
@@ -50,30 +48,21 @@ Default color theme
   background-color: $dark;
   border-bottom:2px inset $dark;
 }
-.navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form {
-  border-color: $dark;
-}
-.navbar-inverse .navbar-nav > li > a {
-  color: $neutral;
-}
-.navbar-inverse .navbar-brand {
-  color: $neutral;
-}
-.navbar-inverse .navbar-toggle .icon-bar {
-  background-color: $highlight;
-}
-#cart-list > .table > tbody > tr > td > button.close.remove-item{
-  color: $highlight !important;
-}
-.navbar-inverse .navbar-nav > li > a:hover {
-  color: $highlight;
-}
-.badge {
-  background-color: $contrast;
-}
-.street-team {
-  color: $primary;
-}
+.navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form { border-color: $dark; }
+
+.navbar-inverse .navbar-nav > li > a { color: $neutral; }
+
+.navbar-inverse .navbar-brand { color: $neutral; }
+
+.navbar-inverse .navbar-toggle .icon-bar { background-color: $highlight; }
+
+.navbar-inverse .navbar-nav > li > a:hover { color: $highlight; }
+
+#cart-list > .table > tbody > tr > td > button.close.remove-item { color: $highlight !important; }
+
+.badge { background-color: $contrast; }
+
+.street-team { color: $primary; }
 
 /************************************
 Sidebar Nav
@@ -83,9 +72,7 @@ Sidebar Nav
   background-color: $neutral-light;
   color: $neutral-dark;
 
-  a {
-    color: $neutral-dark;
-  }
+  a { color: $neutral-dark; }
 }
 
 #sidebar .nav li>a:hover {
@@ -96,21 +83,19 @@ Sidebar Nav
 /************************************
  Event Tile
 *************************************/
-.grid figcaption {
-  border-top: 4px solid $primary;
+.event-tile {
 
-  h4 {
-    color: $primary;
-  }
+  h4 { color: $primary; }
+
+  .event-info { color: $primary; }
 }
 
 /************************************
  Listing Tile
 *************************************/
 .list-tile {
+
   border-top: 4px solid $primary;
 
-  h4 {
-    color: $primary;
-  }
+  h4 { color: $primary; }
 }
