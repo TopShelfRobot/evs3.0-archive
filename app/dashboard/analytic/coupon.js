@@ -74,7 +74,7 @@
 				sortable: true,
 				pageable: true,
 				filterable: {
-					mode: 'row'
+					mode: 'row-fluid'
 				},
 				columns: [{
 					title: 'Coupon',

@@ -1,0 +1,37 @@
+//******************************************************************************
+//**********Report Icon Grid
+//******************************************************************************
+.report-icons {
+  overflow: hidden;
+  & > .report-icons-list {
+    padding-left: 0;
+    list-style: none;
+    & > li {
+      float: left;
+      width: 25%;
+      margin: 0 0 20px;
+      & > img.report-icon {
+        display: inline-block;
+      }
+      & > h4.report-title {
+        margin-top: 10px;
+        font-weight: bold;
+      }
+    }
+  }
+}
+
+//******************************************************************************
+//**********Media Query
+//******************************************************************************
+@media (max-width:768px) {
+  .report-icons > .report-icons-list > li {
+    float: none;
+    width: 100% !important;
+  }
+}
+@media (max-width:998px) {
+  .report-icons > .report-icons-list > li {
+    width: 50%;
+  }
+}

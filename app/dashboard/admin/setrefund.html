@@ -1,12 +1,12 @@
 <section ng-controller="SetRefundController as vm">
-	<div class="row">
+	<div class="row-fluid">
 		<div class="col-lg-12">
 			<button ng-click="vm.cancel()" class="btn btn-danger btn-xs pull-right"><i class="glyphicon glyphicon-ban-circle"></i>&nbsp;Cancel</button>
 		</div>
 	</div>
 	<form>
 		<legend>Issue A Refund</legend>
-		<div class="row">
+		<div class="row-fluid">
 			<div class="col-lg-12 text-center">
 				<div>
 					<div class="btn-group">
@@ -18,7 +18,7 @@
 			</div>
 		</div>
 		<br>
-		<div class="row">
+		<div class="row-fluid">
 			<div class="col-lg-12">
 				<div class="alert" ng-class="{'alert-success': vm.success, 'alert-danger': vm.error}" ng-if="vm.success || vm.error" role="alert">
 					<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span>
@@ -29,7 +29,7 @@
 			</div>
 		</div>
 		<br>
-		<div class="row">
+		<div class="row-fluid">
 			<div class="col-sm-4 col-sm-offset-4">
 				<div class="form-group" ng-if="vm.source.refundType === 'partial'">
 					<label for="RefundAmount" class="control-label">Refund Amount:</label>
@@ -40,7 +40,7 @@
 			</div>
 		</div>
 	</form>
-	<div class="row">
+	<div class="row-fluid">
 		<div class="col-sm-4 col-sm-offset-4">
 			<button class="btn btn-danger btn-block" ng-click="vm.refund()" ng-disabled="vm.refundDisabled"><em class="fa fa-warning"></em>&nbsp;Issue Refund</button>
 		</div>

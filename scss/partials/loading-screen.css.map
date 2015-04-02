@@ -1,7 +1,0 @@
-{
-"version": 3,
-"mappings": ";;;AAGA,oBAAqB;EACnB,UAAU,EAAC,IAAI;;AAEjB,wBAAyB;EACvB,MAAM,EAAC,MAAM;;AAEf,0BAA2B;EACzB,MAAM,EAAE,SAAS",
-"sources": ["loading-screen.scss"],
-"names": [],
-"file": "loading-screen.css"
-}

@@ -7,33 +7,32 @@ module.exports = function (grunt) {
 					style: 'compressed'
 				},
 				files: {
-					'scss/rawcss/dashboard.css': 'scss/dashboard.scss',
-					'scss/rawcss/registration.css': 'scss/registration.scss'
+					'scss/frameworkcss/dashboard.css': 'scss/partials/dashboard/dashboard.scss',
+					'scss/frameworkcss/registration.css': 'scss/partials/registration/registration.scss'
 				}
 			}
 		},
 		cssmin: {
 			target: {
 				files: {
-					'scss/rawcss/framework.css': ['scss/rawcss/kendo.common.min.css',
-	  'scss/rawcss/kendo.common-material.core.min.css',
-	  'scss/rawcss/kendo.common-material.min.css',
-	  'scss/rawcss/kendo.material.min.css',
-	  'scss/rawcss/kendo.material.mobile.min.css',
-	  'scss/rawcss/kendo.mobile.material.min.css',
-	  'scss/rawcss/kendo.dataviz.min.css',
-	  'scss/rawcss/kendo.dataviz.default.min.css',
-	  'scss/rawcss/kendo.dataviz.material.min.css',
-	  'scss/rawcss/bootstrap.css',
-	  'scss/rawcss/breeze.directives.css',
-	  'scss/rawcss/toastr.css',
-	  'scss/rawcss/nsPopover.custom.css',
-	  'scss/rawcss/font-awesome.min.css',
-	  'scss/rawcss/social-buttons.css'],
-					'Content/css/reg-style.css': ['scss/rawcss/framework.css',
-	  'scss/rawcss/registration.css'],
-					'Content/css/dash-style.css': ['scss/rawcss/framework.css',
-      'scss/rawcss/dashboard.css']
+					'scss/frameworkcss/framework.css': ['scss/rawcss/kendo.common.min.css',
+	  'scss/frameworkcss/kendo.common-material.core.min.css',
+	  'scss/frameworkcss/kendo.common-material.min.css',
+	  'scss/frameworkcss/kendo.material.min.css',
+	  'scss/frameworkcss/kendo.material.mobile.min.css',
+	  'scss/frameworkcss/kendo.mobile.material.min.css',
+	  'scss/frameworkcss/kendo.dataviz.min.css',
+	  'scss/frameworkcss/kendo.dataviz.default.min.css',
+	  'scss/frameworkcss/kendo.dataviz.material.min.css',
+	  'scss/frameworkcss/breeze.directives.css',
+	  'scss/frameworkcss/toastr.css',
+	  'scss/frameworkcss/nsPopover.custom.css',
+	  'scss/frameworkcss/font-awesome.min.css'],
+					'Content/css/registration.css': ['scss/frameworkcss/framework.css',
+	  'scss/frameworkcss/registration.css'],
+					'Content/css/dashboard.css': ['scss/frameworkcss/framework.css',
+      'scss/frameworkcss/dashboard.css',
+			'scss/frameworkcss/registration.css']
 				}
 			}
 		},
