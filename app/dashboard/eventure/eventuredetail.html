@@ -1,29 +1,29 @@
 <section data-ng-controller="eventuredetail as vm">
-	<div class="row">
+	<div class="row-fluid">
 		<div class="col-lg-12">
 			<a ng-href="#/eventurecenter" class="btn btn-info btn-sm"><em class="glyphicon glyphicon-circle-arrow-left"></em>&nbsp;Back</a>
 			<a class="btn btn-warning btn-sm" ng-href="#/seteventure/{{vm.eventureId}}"><em class="glyphicon glyphicon-edit"></em>&nbsp;Edit Event</a>
 			<a class="btn btn-danger btn-sm" ng-click="vm.clone()"><em class="glyphicon glyphicon-arrow-down"></em>&nbsp;Clone</a>
 		</div>
 	</div>
-	<div class="row">
+	<div class="row-fluid">
 		<div class="col-lg-12">
 			<h1>{{ vm.eventure.name }}&nbsp;<small>{{ vm.eventure.displayDate }}</small></h1>
 			<br>
 		</div>
 	</div>
 	<br>
-	<div class="row">
+	<div class="row-fluid">
 		<div class="col-xs-12">
 			<tabset justified="true">
 				<tab heading="Dashboard">
-					<div class="row">
+					<div class="row-fluid">
 						<div class="col-lg-12">
 							<br>
 							<p class="text-muted">Here's the important information for this event.</p>
 						</div>
 					</div>
-					<div class="row">
+					<div class="row-fluid">
 						<div class="col-md-4">
 							<div id="snapshotdata">
 								<h3 class="text-center">Registration Trends</h3>
@@ -49,7 +49,7 @@
 							<div id="regchart" kendo-chart k-options="vm.registrations" class="hidden-xs"></div>
 						</div>
 					</div>
-					<div class="row">
+					<div class="row-fluid">
 						<div class="col-lg-12">
 							<h3>Listings</h3>
 							<div class="table-responsive">
@@ -62,7 +62,7 @@
 				</tab>
 				<!-- end Dashboard -->
 				<tab heading="Expenses">
-					<div class="row">
+					<div class="row-fluid">
 						<div class="col-lg-12">
 							<section id="expensescontent">
 								<br>
@@ -78,7 +78,7 @@
 				</tab>
 				<!-- end Expenses -->
 				<tab heading="Event Plan">
-					<div class="row">
+					<div class="row-fluid">
 						<div class="col-lg-12">
 							<section id="plancontent">
 								<br>
@@ -94,7 +94,7 @@
 				</tab>
 				<!-- end Event Plan -->
 				<tab heading="Participants">
-					<div class="row">
+					<div class="row-fluid">
 						<div class="col-lg-12">
 							<section id="participantscontent">
 								<br>
@@ -108,7 +108,7 @@
 				</tab>
 				<!-- end Participants -->
 				<tab heading="Volunteers">
-					<div class="row">
+					<div class="row-fluid">
 						<div class="col-lg-12">
 							<section id="volunteercontent">
 								<br>
