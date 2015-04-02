@@ -58,6 +58,25 @@
 			<ng-include src="'/app/registration/profile/participantForm.part.html'"></ng-include>
 		</div>
 	</div>
+	<div class="row">
+		<div class="col-lg-6 col-lg-offset-3">
+			<form name="bourbonRulesForm">
+				<h3>I understand:</h3>
+				<div class="checkbox">
+					<label><input type="checkbox" ng-model="qAlochol" required><strong>Consumption of alcohol during the race is prohibited.</strong></label>
+				</div>
+				<div class="checkbox">
+					<label><input type="checkbox" ng-model="q21" required><strong>Must be at least 21 years old by race day</strong></label>
+				</div>
+				<div class="checkbox">
+					<label><input type="checkbox" ng-model="qOpenRoad" required><strong>That The Bourbon Chase is an Open Road Race</strong></label>
+				</div>
+				<div class="checkbox">
+					<label><input type="checkbox" ng-model="qGuideBook" required><strong>That I must read and follow The Bourbon Chase Guide Book</strong></label>
+				</div>
+			</form>
+		</div>
+	</div>
 
 	<!-- <div class="row">
         <div class="col-sm-12">
@@ -84,8 +103,7 @@
 			<button type="button" class="btn btn-warning btn-block pull-right" ng-disabled="(!$parent.waiverSigned) || ($parent.userPaying == 0 && !$parent.fullPaymentRequired) || ($parent.submitDisabled)" ng-click="checkout()">Join Team
 			</button>
 -->
-
-			<button type="button" class="btn btn-warning btn-block pull-right" ng-click="open()">Join Team
+			<button type="button" class="btn btn-warning btn-block pull-right" ng-click="open()" ng-disabled="bourbonRulesForm.$invalid">Join Team
 			</button>
 		</div>
 	</div>

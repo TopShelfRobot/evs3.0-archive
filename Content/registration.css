@@ -324,6 +324,24 @@ div.popover.fade.bottom.in {
 	opacity: 1;
 }
 
+.nav-tabs > li {
+  background-color: #E3F2FD;
+  border-radius:4px 4px 0 0;
+}
+
+.nav-tabs-justified > .active > a, .nav-tabs.nav-justified > .active > a,
+.nav-tabs-justified > .active > a:hover,
+.nav-tabs.nav-justified > .active > a:hover, .nav-tabs-justified > .active > a:focus,
+.nav-tabs.nav-justified > .active > a:focus {
+
+  border: 1px solid #90CAF9;
+  border-bottom:1px solid white;
+}
+
+.nav-tabs-justified > li > a, .nav-tabs.nav-justified > li > a {
+  border-bottom: 1px solid #90CAF9;
+}
+
 @media (max-width:768px) {
   .table-responsive .input-group {
     width:200px;

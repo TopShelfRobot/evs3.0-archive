@@ -17,7 +17,11 @@
                 teamId: model.teamId,
                 teamMemberId: model.teamMemberId,
                 ownerId: 1,         // config.owner.ownerId,
-                participantId: partId
+                participantId: partId,
+                qAlcohol: true,
+        				q21: true,
+        				qOpenRoad: true,
+        				qGuideBook: true
             };
             return order;
         };

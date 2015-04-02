@@ -17,6 +17,14 @@
 		$scope.isSponsorPayVisible = false;
 		// $scope.tryoutFee = 150; whg not sure what this is.
 
+		$scope.qAlcohol = false;
+		$scope.q21 = false;
+		$scope.qOpenRoad = false;
+		$scope.qGuideBook = false;
+
+		$scope.formHolder = {};
+
+
 		$scope.regSettings = cartRegSettings.regSettings;
 		console.log($scope.regSettings);
 
@@ -285,6 +293,7 @@
        datacontext.participant.createProfile()])
 				.then(function (data) {
 					if (data) {
+						//TODO whg Check for existing participant record
 						var payment = data[0];
 						var count = data[1];
 						var sum = data[2];
@@ -345,23 +354,28 @@
 		$scope.format = $scope.formats[0];
 
 		$scope.open = function () {
-			$scope.age = dt.age($scope.date.dateBirth);
-			console.log('age', $scope.age);
-			console.log($scope.age < $scope.minAge);
-			console.log($scope.minAge);
-			if ($scope.age < $scope.minAge) {
-				alert("You do not meet the age restrictions for this event. You must be between " + $scope.minAge + " and " + $scope.maxAge);
+			if($scope.formHolder.participantForm.$invalid) {
+				toastr.error('Please verify that you have completed all required information.')
 			} else {
-				var modalInstance = $modal.open({
-					templateUrl: 'termsModalInstance.html',
-					size: 'lg',
-					backdrop: 'static',
-					controller: 'TermsModalInstance'
-				});
-				modalInstance.result.then(function () {
-					$scope.checkout();
-				});
+				$scope.age = dt.age($scope.date.dateBirth);
+				console.log('age', $scope.age);
+				console.log($scope.age < $scope.minAge);
+				console.log($scope.minAge);
+				if ($scope.age < $scope.minAge) {
+					alert("You do not meet the age restrictions for this event. You must be between " + $scope.minAge + " and " + $scope.maxAge);
+				} else {
+					var modalInstance = $modal.open({
+						templateUrl: 'termsModalInstance.html',
+						size: 'lg',
+						backdrop: 'static',
+						controller: 'TermsModalInstance'
+					});
+					modalInstance.result.then(function () {
+						$scope.checkout();
+					});
+				}
 			}
+
 		};
 
 		$scope.checkout = function () {
@@ -374,6 +388,12 @@
 
 			datacontext.save().then(function () {
 				//For Lottery $scope.userPaying = 0 set in switch statement
+
+				cartModel.qAlcohol = $scope.qAlcohol;
+				cartModel.q21 = $scope.q21;
+				cartModel.qOpenRoad = $scope.qOpenRoad;
+				cartModel.qGuideBook = $scope.qGuideBook;
+
 				var cartOrder = cartModel.order($scope.userPaying, $scope.participant.id);
 				cartOrder.participantId = $scope.participant.id;
 				console.table(cartOrder);

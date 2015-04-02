@@ -634,9 +634,9 @@
 					format: "{0:c}",
 					width: 100
 				}, {
-					title: "",
+					title: "Team Edit",
 					width: 120,
-					template: '<a class="btn btn-default btn-block" href="\\\#/editteam/#=id#"><em class="glyphicon glyphicon-edit"></em>&nbsp;Edit</a>'
+					template: '<a class="btn btn-default btn-block" href="\\\#/editteam/#=id#"><em class="glyphicon glyphicon-edit"></em>&nbsp;Team Edit</a>'
 				}, {
 					title: "",
 					width: 140,
