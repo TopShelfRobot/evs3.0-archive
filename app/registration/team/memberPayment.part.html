@@ -1,84 +1,99 @@
 <div class="container" id="content" ng-controller="MemberPaymentController">
-	<div class="row">
-		<div class="col-lg-12 text-center">
-			<img class="logo" src="content/images/logo.png">
-			<h3>{{ listName }}.</h3>
-			<hr>
-		</div>
-	</div>
-	<!-- Suggested Pay Form -->
-	<div ng-show="isSuggestPayVisible">
-		<div class="row">
-			<div class="col-lg-12 text-center">
-				<h3>Your team, {{teamName}},
+    <div class="row">
+        <div class="col-lg-12 text-center">
+            <img class="logo" src="content/images/logo.png">
+            <h3>{{ listName }}.</h3>
+            <hr>
+        </div>
+    </div>
+    <!-- Suggested Pay Form -->
+    <div ng-show="isSuggestPayVisible">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h3>Your team, {{teamName}},
                     <br> has a remaining balance of {{remaining || 1000 | currency}}.</h3>
-				<p class="text-muted">You can pay whatever you desire, but your team must have the balanced paid in full in order to participate.</p>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-xs-8 col-md-4 col-xs-offset-2 col-md-offset-4">
-				<div class="form-group">
-					<label for="Amount">What would you like to pay?</label>
-					<p class="input-group">
-						<span class="input-group-addon">$</span>
-						<input ng-model="userPaying" type="text" class="form-control" name="Amount" id="Amount" placeholder="0.00" />
-					</p>
-					<p class="help-block">We suggest you pay {{ suggested | currency }}.</p>
-				</div>
-			</div>
-		</div>
-		<hr>
-	</div>
-	<!-- Individual Fixed Pay -->
-	<div class="row" ng-show="isIndividualVisible">
-		<div class="col-xs-8 col-md-4 col-xs-offset-2 col-md-offset-4">
-			<h3>You have been invited to join {{ teamName }}.</h3>
-			<p>Please enter your information below.</p>
-			<!--Your card will be charged {{ userPaying | currency }}.-->
-		</div>
-	</div>
-	<!-- Sponsored Pay -->
-	<div class="row" ng-show="isSponsorPayVisible">
-		<div class="col-xs-8 col-md-4 col-xs-offset-2 col-md-offset-4">
-			<h3>Team {{ teamName }}</h3>
-			<p>You been asked to join team: {{ teamName }}. The team has been paid for, you just need to sign up and accept the waiver.</p>
-		</div>
-	</div>
+                <p class="text-muted">You can pay whatever you desire, but your team must have the balanced paid in full in order to participate.</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-8 col-md-4 col-xs-offset-2 col-md-offset-4">
+                <div class="form-group">
+                    <label for="Amount">What would you like to pay?</label>
+                    <p class="input-group">
+                        <span class="input-group-addon">$</span>
+                        <input ng-model="userPaying" type="text" class="form-control" name="Amount" id="Amount" placeholder="0.00" />
+                    </p>
+                    <p class="help-block">We suggest you pay {{ suggested | currency }}.</p>
+                </div>
+            </div>
+        </div>
+        <hr>
+    </div>
+    <!-- Individual Fixed Pay -->
+    <div class="row" ng-show="isIndividualVisible">
+        <div class="col-xs-8 col-md-4 col-xs-offset-2 col-md-offset-4">
+            <h3>You have been invited to join {{ teamName }}.</h3>
+            <p>Please enter your information below.</p>
+            <!--Your card will be charged {{ userPaying | currency }}.-->
+        </div>
+    </div>
+    <!-- Sponsored Pay -->
+    <div class="row" ng-show="isSponsorPayVisible">
+        <div class="col-xs-8 col-md-4 col-xs-offset-2 col-md-offset-4">
+            <h3>Team {{ teamName }}</h3>
+            <p>You been asked to join team: {{ teamName }}. The team has been paid for, you just need to sign up and accept the waiver.</p>
+        </div>
+    </div>
 
-	<!-- Lottery Pay -->
-	<div class="row" ng-show="isLotteryVisible">
-		<div class="col-lg-12 text-center">
-			<h1>Team {{ teamName }}</h1>
-			<h3>You been invited to join team:&nbsp;<strong>{{ teamName }}</strong>&nbsp;for The Bourbon Chase.</h3>
-			<p><strong>As a Team Participant, you understand that you and all team members (including drivers) are required to read and follow The Bourbon Chase Guidebook.</strong>
-			</p>
-			<p><strong>All participants must be at least 21 years of age on race day and all teams must be capable of covering the course in under 35 hours.</strong>
-			</p>
-			<hr>
-			<ng-include src="'/app/registration/profile/participantForm.part.html'"></ng-include>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-lg-6 col-lg-offset-3">
-			<form name="bourbonRulesForm">
-				<h3>I understand:</h3>
-				<div class="checkbox">
-					<label><input type="checkbox" ng-model="qAlochol" required><strong>Consumption of alcohol during the race is prohibited.</strong></label>
-				</div>
-				<div class="checkbox">
-					<label><input type="checkbox" ng-model="q21" required><strong>Must be at least 21 years old by race day</strong></label>
-				</div>
-				<div class="checkbox">
-					<label><input type="checkbox" ng-model="qOpenRoad" required><strong>That The Bourbon Chase is an Open Road Race</strong></label>
-				</div>
-				<div class="checkbox">
-					<label><input type="checkbox" ng-model="qGuideBook" required><strong>That I must read and follow The Bourbon Chase Guide Book</strong></label>
-				</div>
-			</form>
-		</div>
-	</div>
+    <!-- Lottery Pay -->
+    <div class="row" ng-show="isLotteryVisible">
+        <div class="col-lg-12 text-center">
+            <h1>Team {{ teamName }}</h1>
+            <h3>You been invited to join team:&nbsp;
+                <strong>{{ teamName }}</strong>&nbsp;for The Bourbon Chase.</h3>
+            <p>
+                <strong>As a Team Participant, you understand that you and all team members (including drivers) are required to read and follow The Bourbon Chase Guidebook.</strong>
+            </p>
+            <p>
+                <strong>All participants must be at least 21 years of age on race day and all teams must be capable of covering the course in under 35 hours.</strong>
+            </p>
+            <hr>
+            <ng-include src="'/app/registration/profile/participantForm.part.html'"></ng-include>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6 col-lg-offset-3">
+            <form name="bourbonRulesForm">
+                <h3>I understand:</h3>
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" ng-model="qAlochol" required>
+                        <strong>Consumption of alcohol during the race is prohibited.</strong>
+                    </label>
+                </div>
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" ng-model="q21" required>
+                        <strong>Must be at least 21 years old by race day</strong>
+                    </label>
+                </div>
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" ng-model="qOpenRoad" required>
+                        <strong>That The Bourbon Chase is an Open Road Race</strong>
+                    </label>
+                </div>
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" ng-model="qGuideBook" required>
+                        <strong>That I must read and follow The Bourbon Chase Guide Book</strong>
+                    </label>
+                </div>
+            </form>
+        </div>
+    </div>
 
-	<!-- <div class="row">
+    <!-- <div class="row">
         <div class="col-sm-12">
             <h3>Participant Information</h3>
             <p class="text-muted">Please enter your information below</p>
@@ -86,28 +101,25 @@
     </div>
     <ng-include src="'/app/registration/profile/participantForm.part.html'"></ng-include> -->
 
-	<div class="row">
-		<div class="col-sm-6 col-sm-offset-3">
-			<br>
-			<!--
-			<label class="checkbox agreement hidden-md hidden-lg">
-				<input type="checkbox" data-bind="checked: isTerms" ng-model="$parent.waiverSigned"> I have read and agree to the Terms and Conditions.
-			</label>
--->
+    <div class="row">
+        <div class="col-sm-6 col-sm-offset-3">
+            <br>
 
-			<!--
+            <!--
 			<button type="button" class="btn btn-warning btn-block pull-right hidden-xs hidden-sm" ng-disabled="($parent.userPaying == 0 && !$parent.fullPaymentRequired)" ng-click="open()">Join Team
 			</button>
 -->
-			<!--
+            <!--
 			<button type="button" class="btn btn-warning btn-block pull-right" ng-disabled="(!$parent.waiverSigned) || ($parent.userPaying == 0 && !$parent.fullPaymentRequired) || ($parent.submitDisabled)" ng-click="checkout()">Join Team
 			</button>
 -->
-			<button type="button" class="btn btn-warning btn-block pull-right" ng-click="open()" ng-disabled="bourbonRulesForm.$invalid">Join Team
-			</button>
-		</div>
-	</div>
-	<!-- <div class="row">
+            <button type="button" class="btn btn-warning btn-block pull-right" ng-click="open()" ng-disabled="bourbonRulesForm.$invalid">Join Team
+            </button>
+
+        </div>
+    </div>
+		
+    <!-- <div class="row">
 		<div class="col-lg-12 text-center">
 			<br>
 			<br>
@@ -118,41 +130,96 @@
 </div>
 
 <script type="text/ng-template" id="termsModalInstance.html">
-	<div class="modal-header">
-		<h3 class="modal-title">Waiver</h3>
-	</div>
-	<div class="modal-body">
-		<p>
-			THE BOURBON CHASE PARTICIPANT WAIVER AND RELEASE OF LIABILITY ASSUMPTION OF RISK AND INDEMNITY AGREEMENT Event Name: THE BOURBON CHASE Event Date(s): October 16, 2015 through October 17, 2015 Event Location: Kentucky Sanction #:
-		</p>
-		<p>
-			For and in consideration of Sauma, LLC (“The Bourbon Chase”) and USA Track & Field, Inc. (“USA Track & Field”) allowing me, the undersigned, to participate in the USA Track & Field sanctioned event described above (the “Event” ); I, for myself, and on behalf of my spouse, children, guardians, heirs and next of kin, and any legal and personal representatives, executors, administrators, successors and assigns, hereby agree to and make the following contractual representations pursuant to this Waiver and Release of Liability, Assumption of Risk and Indemnity Agreement (the “Agreement”);
-		</p>
-		<ol>
-			<li>
-				I hereby represent that (i) I am at least twenty-one (21) years of age or older; (ii) I am in good health and in proper physical condition to participate in the Event; and (iii) I am not under the influence of alcohol or any illicit or prescription drugs which would in any way impair my ability to safely participate in the Event. I agree that it is my sole responsibility to determine whether I am sufficiently fit and healthy enough to participate in the Event, that I am responsible for my own safety and well being at all times and under all circumstances while at the Event site.
-			</li>
-			<br>
-			<li>
-				I understand and acknowledge that participation in a road running Event is inherently dangerous and represents an extreme test of a person’s physical and mental limits. I UNDERSTAND THAT THE EVENT IS AN OPEN ROAD COURSE AND THAT I MUST OBEY TRAFFIC SIGNALS AND STANDARD PEDESTRIAN TRAFFIC RULES UNLESS INSTRUCTED TO DO OTHERWISE BY EVENT OFFICIALS. I FURTHER UNDERSTAND THAT THE CONSUMPTION OF ALCOHOLIC BEVERAGES IS STRICTLY FORBIDDEN DURING MY PARTICIPATION IN THE EVENT. I understand and acknowledge the risks and dangers associated with participation in the Event and related activities, including without limitation, those arising out of driving and running on public and private roads, during the day and night, which are open to traffic and which Event Organizers do not control; the potential for serious bodily injury, sickness and disease, permanent disability, paralysis and loss of life; injury or death resulting from traffic accidents, being struck by vehicles while running, being struck by vehicles while at exchange zones; loss of or damage to equipment/property; exposure to extreme conditions and circumstances; contact with other participants, spectators, animals or other natural or manmade objects; dangers arising from adverse weather conditions; imperfect course conditions; land, water and surface hazards; equipment failure; inadequate safety measures; participants of varying skill levels; situations beyond the immediate control of the Event Organizers; and other undefined, not readily foreseeable and presently unknown risks and dangers (“Risks”). I understand that these Risks may be caused in whole or in part by my own actions or inactions, the actions or inactions of others participating in the Event, or the negligent acts or omissions of the Released Parties defined below, and I hereby expressly assume all such Risks and responsibility for any damages, liabilities, losses or expenses which I incur as a result of my participation in any Event. I further understand and acknowledge that, because of the nature of the Event, in the event that I am injured, I may not be capable of obtaining help, it may be a long time before I am found by another person, and I may not receive any aid.
-			</li>
-			<br>
-			<li>
-				I agree to be familiar with and to abide by the Rules and Regulations established for the Event, including but not limited to the Competitive Rules adopted by USA Track & Field and any safety regulations established for the benefit of all participants. I accept sole responsibility for my own conduct and actions while participating in the Event, and the condition and adequacy of my equipment.
-			</li>
-			<br>
-			<li>
-				I HEREBY RELEASE, WAIVE AND COVENANT NOT TO SUE, AND FURTHER AGREE TO INDEMNIFY, DEFEND AND HOLD HARMLESS the following parties: USA Track & Field, Inc., its members, member clubs, associations, sport disciplines and divisions; United States Olympic Committee (USOC); The Bourbon Chase, the Event Directors, Organizers and Promoters, Sponsors, Advertisers, Officials; the Host Organization and the Facility, Venue and Property Owners or Operators upon which the Event takes place, including but not limited to all organizations hosting exchange zones; Volunteers, Law Enforcement Agencies and other Public Entities providing support for the Event; and each of their respective parent, subsidiary and affiliated companies, officers, directors, partners, shareholders, members, agents, employees and volunteers (Individually and Collectively, the “Released Parties” or “Event Organizers”), with respect to any liability, claim(s), demand(s), cause(s) of action, damage(s), loss or expense (including court costs and reasonable attorney’s fees) of any kind or nature (“Liability”) which may arise out of, result from, or relate in any way to my participation in the Event, including claims for Liability caused in whole or in part by the negligent acts or omissions of the Released Parties, whether ordinary or gross. I further agree that if, despite this Agreement, I, or anyone on my behalf, makes a claim for Liability against any of the Released Parties, I will indemnify, defend and hold harmless each of the Released Parties from any such Liabilities which any may be incurred as the result of such claim.
-			</li>
-			<br>
-			<li>
-				Image and Statement Release. I grant The Bourbon Chase permission to interview me and use my image in photographs and video in any publications and other media in perpetuity. I will make no monetary or other claim against The Bourbon Chase or the Event Organizers for the use of my statements and images. </li>
-		</ol>
-		<p>
-			I hereby warrant that I am over 21 years of age and competent to enter into this Agreement, that I have read this Agreement and the Event Rules and Regulations carefully, understand their terms and conditions, acknowledge that I will be giving up substantial legal rights by signing this Agreement (including the rights of my spouse, children, guardians, heirs and next of kin, and any legal and personal representatives, executors, administrators, successors and assigns), acknowledge that I have signed this Agreement without any inducement, assurance or guarantee, and intend for my signature to serve as confirmation of my complete and unconditional acceptance of the terms, conditions and provisions of this Agreement. This Agreement represents the complete understanding between the parties regarding these issues and no oral representations, statements or inducements have been made apart from this Agreement. If any provision of this Agreement is held to be unlawful, void, or for any reason unenforceable, then that provision shall be deemed severable from this Agreement and shall not affect the validity and enforceability of any remaining provisions.
-		</p>
-	</div>
-	<div class="modal-footer">
-		<button class="btn btn-warning" ng-click="ok()">I Accept The Terms & Conditions</button>
-	</div>
+    <div class="modal-header">
+        <div class="row">
+            <div class="col-lg-10 col-lg-offset-1 text-justify">
+                <h4 class="modal-title">THE BOURBON CHASE PARTICIPANT WAIVER AND RELEASE OF LIABILITY ASSUMPTION OF RISK AND INDEMNITY AGREEMENT</h4>
+            </div>
+        </div>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-lg-6">
+                <p>Event Name:
+                    <strong>THE BOURBON CHASE</strong>
+                </p>
+                <p>Event Location:
+                    <strong>Kentucky</strong>
+                </p>
+            </div>
+            <div class="col-lg-6">
+                <p>Event Date(s):
+                    <strong>October 15, 2015 through October 18, 2015</strong>
+                </p>
+                <p>Sanction #:
+                    <strong>15-41-435</strong>
+                </p>
+            </div>
+        </div>
+        <p>
+            For and in consideration of Sauma, LLC (“
+            <strong>The Bourbon Chase</strong>”) and USA Track & Field, Inc. (“
+            <strong>USA Track & Field</strong>”) allowing me, the undersigned, to participate in the USA Track & Field sanctioned event described above (the “Event” ); I, for myself, and on behalf of my spouse, children, guardians, heirs and next of kin, and
+            any legal and personal representatives, executors, administrators, successors and assigns, hereby agree to and make the following contractual representations pursuant to this Waiver and Release of Liability, Assumption of Risk and Indemnity
+            Agreement (
+            <strong>the “Agreement”</strong>);
+        </p>
+        <ol>
+            <li>
+                I hereby represent that (i) I am at least twenty-one (21) years of age or older; (ii) I am in good health and in proper physical condition to participate in the Event; and (iii) I am not under the influence of alcohol or any illicit or prescription drugs
+                which would in any way impair my ability to safely participate in the Event. I agree that it is my sole responsibility to determine whether I am sufficiently fit and healthy enough to participate in the Event, that I am responsible for
+                my own safety and well being at all times and under all circumstances while at the Event site.
+            </li>
+            <br>
+            <li>
+                <strong style="text-decoration:underline;">I UNDERSTAND THAT THE EVENT IS AN OPEN ROAD COURSE AND THAT I MUST OBEY TRAFFIC SIGNALS AND STANDARD PEDESTRIAN TRAFFIC RULES UNLESS INSTRUCTED TO DO OTHERWISE BY EVENT OFFICIALS. I FURTHER UNDERSTAND THAT THE CONSUMPTION OF ALCOHOLIC
+                    BEVERAGES IS STRICTLY FORBIDDEN DURING MY PARTICIPATION IN THE EVENT.</strong>
+            </li>
+            <br>
+            <li>
+                I understand and acknowledge that participation in a road running Event is inherently dangerous and represents an extreme test of a person’s physical and mental limits. I understand and acknowledge the risks and dangers associated with participation in
+                the Event and related activities, including without limitation,
+                <strong>those arising out of driving and running on public and private roads, during the day and night, which are open to traffic</strong> and which Event Organizers do not control; the potential for serious bodily injury, sickness and disease,
+                permanent disability, paralysis and loss of life; injury or death resulting from traffic accidents, being struck by vehicles while running, being struck by vehicles while at exchange zones; loss of or damage to equipment/property; exposure
+                to extreme conditions and circumstances; contact with other participants, spectators, animals or other natural or manmade objects; dangers arising from adverse weather conditions; imperfect course conditions; land, water and surface hazards;
+                equipment failure; inadequate safety measures; participants of varying skill levels; situations beyond the immediate control of the Event Organizers; and other undefined, not readily foreseeable and presently unknown risks and dangers
+                (“
+                <strong>Risks</strong>”). I understand that these Risks may be caused in whole or in part by my own actions or inactions, the actions or inactions of others participating in the Event, or the negligent acts or omissions of the Released Parties
+                defined below, and I hereby expressly assume all such Risks and responsibility for any damages, liabilities, losses or expenses which I incur as a result of my participation in any Event. I further understand and acknowledge that, because
+                of the nature of the Event, in the event that I am injured, I may not be capable of obtaining help, it may be a long time before I am found by another person, and I may not receive any aid.
+            </li>
+            <br>
+            <li>
+                I agree to be familiar with and to abide by the Rules and Regulations established for the Event, including but not limited to the Competitive Rules adopted by USA Track & Field and any safety regulations established for the benefit of all participants.
+                I accept sole responsibility for my own conduct and actions while participating in the Event, and the condition and adequacy of my equipment.
+            </li>
+            <br>
+            <li>
+                I
+                <strong style="text-decoration:underline;">HEREBY RELEASE, WAIVE AND COVENANT NOT TO SUE, AND FURTHER AGREE TO INDEMNIFY, DEFEND AND HOLD HARMLESS</strong> the following parties: USA Track & Field, Inc., its members, member clubs, associations, sport disciplines and divisions;
+                United States Olympic Committee (USOC); The Bourbon Chase, the Event Directors, Organizers and Promoters, Sponsors, Advertisers, Officials; the Host Organization and the Facility, Venue and Property Owners or Operators upon which the Event
+                takes place, including but not limited to all persons or organizations hosting exchange zones; Volunteers, Law Enforcement Agencies and other Public Entities providing support for the Event; and each of their respective parent, subsidiary
+                and affiliated companies, officers, directors, partners, shareholders, members, agents, employees and volunteers (
+                <strong>Individually and Collectively, the “Released Parties” or “Event Organizers”</strong>), with respect to any liability, claim(s), demand(s), cause(s) of action, damage(s), loss or expense (including court costs and reasonable attorney’s
+                fees) of any kind or nature (“
+                <strong>Liability</strong>”) which may arise out of, result from, or relate in any way to my participation in the Event, including claims for Liability caused in whole or in part by the negligent acts or omissions of the Released Parties, whether
+                ordinary or gross. I further agree that if, despite this Agreement, I, or anyone on my behalf, makes a claim for Liability against any of the Released Parties, I will indemnify, defend and hold harmless each of the Released Parties from
+                any such Liabilities which any may be incurred as the result of such claim.
+            </li>
+            <li>
+                <span style="text-decoration:underline;">Image and Statement Release.</span> I grant The Bourbon Chase permission to interview me and use my image in photographs and video in any publications and other media in perpetuity. I will make no monetary or other claim against The Bourbon
+                Chase or the Event Organizers for the use of my statements and images.
+            </li>
+        </ol>
+        <p>
+            I hereby warrant that I am over 21 years of age and competent to enter into this Agreement, that I have read this Agreement and the Event Rules and Regulations carefully, understand their terms and conditions, acknowledge that I will be giving up substantial
+            legal rights by signing this Agreement (including the rights of my spouse, children, guardians, heirs and next of kin, and any legal and personal representatives, executors, administrators, successors and assigns), acknowledge that I have
+            signed this Agreement without any inducement, assurance or guarantee, and intend for my signature to serve as confirmation of my complete and unconditional acceptance of the terms, conditions and provisions of this Agreement. This Agreement
+            represents the complete understanding between the parties regarding these issues and no oral representations, statements or inducements have been made apart from this Agreement. If any provision of this Agreement is held to be unlawful, void,
+            or for any reason unenforceable, then that provision shall be deemed severable from this Agreement and shall not affect the validity and enforceability of any remaining provisions.
+        </p>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-warning" ng-click="ok()">I Accept The Terms & Conditions</button>
+    </div>
 </script>
