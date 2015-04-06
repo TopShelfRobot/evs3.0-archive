@@ -572,7 +572,7 @@
 			};
 
 			$scope.resendInvitation = function (teamMemberId) {
-				http.post(config.apiPath + 'api/mail/SendTeamPlayerInviteMail/' + teamMemberId).then(function() {
+				$http.post(config.apiPath + 'api/mail/SendTeamPlayerInviteMail/' + teamMemberId).then(function() {
 					toastr.success('The invitation has been resent!');
 				})
 

@@ -3,7 +3,7 @@
 
 	var controllerId = "AddUserProfile";
 
-	function Controller($scope, $location, config, datacontext, cart, authService, common) {
+	function Controller($scope, $location, datacontext, cart, authService, common) {
 
 		$scope.participant = {};
 
