@@ -252,3 +252,5 @@ bower_components/*
 node_modules/*
 
 Content/images/*
+
+scss/*
