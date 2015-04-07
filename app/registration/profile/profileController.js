@@ -673,7 +673,7 @@
 						serverPaging: false,
 						serverSorting: false,
 						serverFiltering: false,
-						pageSize: 5
+						pageSize: 14
 					},
 					sortable: true,
 					pageable: true,
