@@ -20,5 +20,5 @@
 </section>
 
 <script type="text/x-kendo-template" id="rosterNameTemplate">
-  #if(memberName !== null){# inviteName #}else{#memberName#}#
+  #if(memberName === null){#=inviteName#}else{#=memberName#}#
 </script>
