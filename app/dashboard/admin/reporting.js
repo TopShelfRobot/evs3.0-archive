@@ -108,7 +108,7 @@
 				},
 				columns: [{
 					title: 'Member Name',
-          template: kendo.template($("#rosterNameTemplate").html())
+					template: kendo.template($("#rosterNameTemplate").html())
 					width: 250
 				}, {
 					field: 'email',
