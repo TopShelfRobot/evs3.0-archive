@@ -25,21 +25,22 @@
 		this.resolved = false;
 
 		function activate() {
+		    //console.log('activate shell');
 			self.showSplash = true;
 			self.progBar = 30;
 			
 			var promises = [];
 			
-			if(authService.authentication.userName){
-	            promises.push(
-	                datacontext.participant.getParticipantByEmailAddress(authService.authentication.userName, config.owner.ownerId)
-	                    .then(function (data) {
-	                        cart.houseId = data.id;
-							self.progBar += 20;
-							return data;
-	                    })
-	            );
-			}
+			//if(authService.authentication.userName){
+	        //    promises.push(
+	        //        datacontext.participant.getParticipantByEmailAddress(authService.authentication.userName, config.owner.ownerId)
+	        //            .then(function (data) {
+	        //                cart.houseId = data.id;
+			//				self.progBar += 20;
+			//				return data;
+	        //            })
+	        //    );
+			//}
 			
 			promises.push(
 				datacontext.owner.setOwnerSettings(config.owner.ownerId)

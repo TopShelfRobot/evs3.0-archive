@@ -8,17 +8,17 @@
 				<h2 class="form-login-heading">Sign ups are currently closed</h2>
 				<div class="form-group">
 					<label for="UserName">Email Address</label>
-					<input type="text" class="form-control" placeholder="Email Address" data-ng-model="registration.userName" required autofocus disabled>
+					<input type="text" class="form-control" placeholder="Email Address" data-ng-model="registration.userName" required autofocus >
 				</div>
 				<div class="form-group">
 					<label for="Password">Password</label>
-					<input type="password" class="form-control" placeholder="Password" data-ng-model="registration.password" required disabled>
+					<input type="password" class="form-control" placeholder="Password" data-ng-model="registration.password" required >
 				</div>
 				<div class="form-group">
 					<label for="ConfirmPassword">Confirm Password</label>
-					<input type="password" class="form-control" placeholder="Confirm Password" data-ng-model="registration.confirmPassword" required disabled>
+					<input type="password" class="form-control" placeholder="Confirm Password" data-ng-model="registration.confirmPassword" required >
 				</div>
-				<button class="btn btn-lg btn-success btn-block" type="submit" data-ng-click="signUp()" disabled>Create Account</button>
+				<button class="btn btn-lg btn-success btn-block" type="submit" data-ng-click="signUp()" >Create Account</button>
 				<div data-ng-hide="message == ''" data-ng-class="(savedSuccessfully) ? 'alert alert-success' : 'alert alert-danger'">
 					{{message}}
 				</div>

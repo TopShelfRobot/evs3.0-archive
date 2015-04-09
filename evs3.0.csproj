@@ -361,6 +361,8 @@
     <Content Include="Content\bootstrap\sprite.png" />
     <Content Include="Content\bootstrap\sprite_2x.png" />
     <Content Include="Content\breeze.directives.css" />
+    <Content Include="Content\EmailTemplates\order-confirmation.min.html" />
+    <Content Include="Content\EmailTemplates\reset-password.min.html" />
     <Content Include="Content\images\AngularJS-small.png" />
     <Content Include="Content\images\back.png" />
     <Content Include="Content\images\breezelogo.png" />

@@ -107,8 +107,9 @@
 					mode: "row"
 				},
 				columns: [{
+                    field: 'memberName',
 					title: 'Member Name',
-					template: kendo.template($("#rosterNameTemplate").html())
+					template: kendo.template($("#rosterNameTemplate").html()),
 					width: 250
 				}, {
 					field: 'email',
@@ -123,12 +124,13 @@
 					title: 'Team Name',
 					width: 250
 				}, {
-					field: 'postion',
+					field: 'position',
 					title: 'Team Role',
 					width: 150
 				}, {
 					field: 'shirtSize',
 					title: 'Shirt Size',
+                    filterable: false,
 					width: 100
 				}, {
 					field: 'emergencyContact',

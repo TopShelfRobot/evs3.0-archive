@@ -1,24 +1,28 @@
 <section data-ng-controller="reporting as vm">
-  <!--  <pre data-ng-bind="vm | json"></pre>-->
-  <div class="row">
-    <div class="col-lg-12">
-      <h1>Your Reports</h1>
-      <p class="text-muted">Access the reports you need.</p>
-      <hr>
-      <h2>Team Payments</h2>
-      <div class="table-responsive">
-        <div kendo-grid="vm.paymentGrid" k-options="vm.paymentGridOptions" id="paymentgrid"></div>
-      </div>
-      <hr>
-      <h2>Team Rosters</h2>
-      <div class="table-reponsive">
-        <div kendo-grid="vm.rosterGrid" k-options="vm.rosterGridOptions" id="rostergrid"></div>
-      </div>
+    <!--  <pre data-ng-bind="vm | json"></pre>-->
+    <div class="row">
+        <div class="col-lg-12">
+            <h1>Your Reports</h1>
+            <p class="text-muted">Access the reports you need.</p>
+            <hr>
+            <h2>Team Payments</h2>
+            <div class="table-responsive">
+                <div kendo-grid="vm.paymentGrid" k-options="vm.paymentGridOptions" id="paymentgrid"></div>
+            </div>
+            <hr>
+            <h2>Team Rosters</h2>
+            <div class="table-reponsive">
+                <div kendo-grid="vm.rosterGrid" k-options="vm.rosterGridOptions" id="rostergrid"></div>
+            </div>
+        </div>
     </div>
-  </div>
-  </div>
+    </div>
 </section>
 
 <script type="text/x-kendo-template" id="rosterNameTemplate">
-  #if(memberName === null){#=inviteName#}else{#=memberName#}#
+    # if(memberName === ' '){ #
+        #= inviteName #
+    # } else { #
+    #= memberName #
+    # }#
 </script>

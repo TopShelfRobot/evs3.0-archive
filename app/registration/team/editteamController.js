@@ -32,9 +32,10 @@
         }
 
         var promises = [
-       getTeam(),
-       getPlayers()
+           getTeam(),
+           getPlayers()
         ];
+
         common.activateController(promises, controllerId)
           .then(function () { })
           .finally(function () { });
@@ -63,11 +64,11 @@
                     }
                 }
             }
-            console.log(datacontext);
+            //console.log(datacontext);
             datacontext.save()
                   .then(function () {
-                     for (var i = 0; i < item.length; i++) {
-                         $http.post(config.apiPath + 'api/mail/SendTeamPlayerInviteMail/' + item[i].id);
+                      for (var i = 0; i < item.length; i++) {
+                          $http.post(config.apiPath + 'api/mail/SendTeamPlayerInviteMail/' + item[i].id);
                       }
                   })
             .then(function () {
@@ -76,5 +77,5 @@
         };
     }
 
-    angular.module("evReg").controller(controllerId, ["$scope", "$location", "$routeParams", "$window", "$http","config", "common", "datacontext", Controller]);
+    angular.module("evReg").controller(controllerId, ["$scope", "$location", "$routeParams", "$window", "$http", "config", "common", "datacontext", Controller]);
 })();

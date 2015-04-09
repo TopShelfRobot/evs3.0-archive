@@ -54,7 +54,6 @@ angular.module('evReg').factory('authService', ['$http', '$q', 'localStorageServ
 
 
     var _login = function (loginData) {
-
         var data = "grant_type=password&username=" + loginData.userName + "&password=" + loginData.password;
 
         if (loginData.useRefreshTokens) {
@@ -75,7 +74,8 @@ angular.module('evReg').factory('authService', ['$http', '$q', 'localStorageServ
 					userName: loginData.userName, 
 					refreshToken: response.refresh_token, 
 					useRefreshTokens: true,
-					roles: response.roles
+					roles: response.roles,
+                    isAuth: true
 				});
             }
             else {
@@ -132,6 +132,7 @@ angular.module('evReg').factory('authService', ['$http', '$q', 'localStorageServ
     };
 
     var _refreshToken = function () {
+        alert('hellp');
         var deferred = $q.defer();
 
         var authData = localStorageService.get('authorizationData');

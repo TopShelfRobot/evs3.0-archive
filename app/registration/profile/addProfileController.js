@@ -3,9 +3,11 @@
 
 	var controllerId = "AddUserProfile";
 
-	function Controller($scope, $location, datacontext, cart, authService, common) {
+	function Controller($scope, $location, config, datacontext, cart, authService, common) {
 
-		$scope.participant = {};
+	    $scope.participant = {};
+
+	    console.log('auth serv', authService.authentication);
 
 		$scope.participant.email = authService.authentication.userName;
 
@@ -295,4 +297,4 @@
 	}
 
 	angular.module("evReg").controller(controllerId, ["$scope", "$location", "config", "datacontext", "CartModel", "authService", "common", Controller]);
-})();
+})(); 
