@@ -6,6 +6,8 @@
 
         //console.log('activate header');
 
+        var requestPath = window.location.pathname;
+
         $scope.cart = cart;
 
         $scope.eventureName = cart.regSettings.eventureName;
