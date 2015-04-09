@@ -4,14 +4,13 @@
 
 	function Controller($scope, $routeParams, $location, $http, config, datacontext, common, cart, stripe) {
 
-		$scope.participant = {};
+	    console.log(' $routeParams.participantGuid: ', $routeParams.participantGuid);
+	    console.log('cart.participantGuid: ', cart.participantGuid);
 
+	    $scope.participant = {};
 		$scope.disableEmail = true;
-
 		$scope.participantGuid = $routeParams.participantGuid || cart.participantGuid;
-
 		$scope.partButton = cart.regSettings.partButtonText;
-
 		$scope.ownerId = config.owner.ownerId;
 
 		$scope.social = {
@@ -68,13 +67,19 @@
 			}
 		];
 
-		var promises = [getParticipant(), Registrations(), Participants(), Team(), Coach()];
+		//var promises = [getParticipant(), Registrations(), Participants(), Team(), Coach()];    //TODO:  put back in rael code
+		var promises = [getParticipant(), Coach()];
 
 		common.activateController(promises, controllerId)
-			.then(function () {});
+			.then(function () {
+			    //alert('hallo');
+			    //Coach();
+			    //$scope.coachGridOptions.dataSource.read();
+			});
 
 		function getParticipant() {
-			return datacontext.participant.getParticipantByGuid($scope.participantGuid)
+		    console.log($scope.participantGuid);
+			return datacontext.participant.getParticipantByGuid(cart.participantGuid)
 				.then(function (participant) {
 					$scope.participant = participant;
 					$scope.date.dateBirth = moment($scope.participant.dateBirth).format('YYYY-MM-DD');
@@ -558,6 +563,7 @@
 
 
 		function Coach() {
+		    alert('why wont you call me');
 
 			$scope.remove = function (teamMemberId, teamId) {
 				var source = {
@@ -607,8 +613,8 @@
 							});
 					});
 			};
-
-			var coachapi = config.remoteApiName + 'widget/GetTeamRegistrationsByCoachId/' + $scope.participantId;
+			//console.log('partid', $scope.participant.id);
+			var coachapi = config.remoteApiName + 'widget/GetTeamRegistrationsByCoachGuid/' + $scope.participantGuid;
 
 			$scope.coachGridOptions = {
 				dataSource: new kendo.data.DataSource({

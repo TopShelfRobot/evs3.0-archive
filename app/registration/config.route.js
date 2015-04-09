@@ -145,7 +145,7 @@
 					templateUrl: 'app/registration/profile/profile.part.html'
 				}
 			}, {
-				url: 'user-profile',
+				url: '/user-profile',
 				config: {
 					title: 'User Profile',
 					templateUrl: 'app/registration/profile/profile.part.html'
