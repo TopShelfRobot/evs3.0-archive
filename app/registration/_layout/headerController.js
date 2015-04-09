@@ -53,8 +53,9 @@
                             }
                             else {
                                 cart.houseId = data.id;
+                                cart.participantGuid = data.participantGuid;
                                 $location.path(cart.navUrl);
-                                //this is wil's trying to pass in path
+                                // this is wil's trying to pass in path
                                 //if (typeof $scope.requestPath === 'undefined') {
                                 //    cart.houseId = 
                                 //    $location.path('/eventure');
