@@ -30,6 +30,7 @@
 			this.getOwnerInfo = getOwnerInfo;
 			this.getParticipantsBySearchingEmail = getParticipantsBySearchingEmail;
 			this.getParticipantsBySearchingName = getParticipantsBySearchingName;
+      this.getParticipantByGuid = getParticipantByGuid; 
 		}
 
 		// Allow this repo to have access to the Abstract Repo's functions,
@@ -109,6 +110,19 @@
 			var self = this;
 			var query = entityQuery.from('Participants')
 				.where('id', '==', partId);
+
+			return self.manager.executeQuery(query)
+			   .then(querySucceeded, self._queryFailed);
+
+			function querySucceeded(data) {
+				return data.results[0];
+			}
+		}
+
+		function getParticipantByGuid(partGuid) {
+			var self = this;
+			var query = entityQuery.from('Participants')
+				.where('participantGuid', '==', partGuid);
 
 			return self.manager.executeQuery(query)
 			   .then(querySucceeded, self._queryFailed);

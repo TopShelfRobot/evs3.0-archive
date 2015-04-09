@@ -8,7 +8,7 @@
 
 		$scope.disableEmail = true;
 
-		$scope.participantId = $routeParams.participantId || cart.participantId;
+		$scope.participantGuid = $routeParams.participantGuid || cart.participantGuid;
 
 		$scope.partButton = cart.regSettings.partButtonText;
 
@@ -74,7 +74,7 @@
 			.then(function () {});
 
 		function getParticipant() {
-			return datacontext.participant.getParticipantById($scope.participantId)
+			return datacontext.participant.getParticipantByGuid($scope.participantGuid)
 				.then(function (participant) {
 					$scope.participant = participant;
 					$scope.date.dateBirth = moment($scope.participant.dateBirth).format('YYYY-MM-DD');

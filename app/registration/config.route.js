@@ -140,7 +140,7 @@
 					templateUrl: 'app/registration/profile/addProfile.part.html'
 				}
    }, {
-				url: '/user-profile/:participantId',
+				url: '/user-profile/:participantGuid',
 				config: {
 					title: 'User Profile',
 					templateUrl: 'app/registration/profile/profile.part.html'
