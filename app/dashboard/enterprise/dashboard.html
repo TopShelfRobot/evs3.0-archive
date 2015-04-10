@@ -1,21 +1,65 @@
-<section data-ng-controller="dashboard as vm">
-  <div class="row">
-    <div class="col-sm-4"></div>
-    <div class="col-sm-4"></div>
+<section ng-controller="dashboard as vm">
+  <h1>Dashboard</h1>
+  <hr>
+  <div class="row-fluid">
     <div class="col-sm-4">
-      <div class="gauge-container">
-        <span kendo-radialgauge ng-model="selectedNumber"></span>
+      <div class="panel panel-info capacity-radial-info">
+        <div class="panel-heading"><strong>{{vm.radialEventOneName}}</strong>
+        </div>
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-sm-7">
+              <div class="gauge-container">
+                <span kendo-radialgauge k-scale="{ max: vm.capacityEventOne }" ng-model="vm.regsEventOne"></span>
+              </div>
+            </div>
+            <div class="col-sm-5 text-center">
+              <h3>Total</h3>
+              <h1>{{vm.regsEventOne}}</h1>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-  <!-- 2 Column Layout -->
-  <div class="row">
-    <div class="col-sm-8"></div>
     <div class="col-sm-4">
-      <!--Gender & Age -->
-      <div class="gauge-container">
-        <span kendo-radialgauge ng-model="selectedNumber"></span>
+      <div class="panel panel-info capacity-radial-info">
+        <div class="panel-heading"><strong>{{vm.radialEventTwoName}}</strong>
+        </div>
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-sm-7">
+              <div class="gauge-container">
+                <span kendo-radialgauge k-scale="{ max: vm.capacityEventTwo }" ng-model="vm.regsEventTwo"></span>
+              </div>
+            </div>
+            <div class="col-sm-5 text-center">
+              <h3>Total</h3>
+              <h1>{{vm.regsEventTwo}}</h1>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
+    <div class="col-sm-4">
+      <div class="panel panel-info capacity-radial-info">
+        <div class="panel-heading"><strong>{{vm.radialEventThreeName}}</strong>
+        </div>
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-sm-7">
+              <div class="gauge-container">
+                <span kendo-radialgauge k-scale="{ max: vm.capacityEventThree }" ng-model="vm.regsEventThree"></span>
+              </div>
+            </div>
+            <div class="col-sm-5 text-center">
+              <h3>Total</h3>
+              <h1>{{vm.regsEventThree}}</h1>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
+  <!-- End Row -->
 </section>

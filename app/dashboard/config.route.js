@@ -2,7 +2,7 @@
   'use strict';
 
   var app = angular.module('app');
-	
+
   // Collect the routes
   app.constant('routes', getRoutes());
 
@@ -12,7 +12,7 @@
       {
         url: '/dash',
         config: {
-          templateUrl: 'app/admin/dashboard.html'
+          templateUrl: 'app/dashboard/enterprise/dashboard.html'
         }
     }, {
         url: '/admin',
