@@ -559,13 +559,9 @@
 				};
 			};
 		}
-
-
-
+        
 		function Coach() {
-		    alert('why wont you call me');
-
-			$scope.remove = function (teamMemberId, teamId) {
+		    $scope.remove = function (teamMemberId, teamId) {
 				var source = {
 					teamId: teamId,
 					teamMemberId: teamMemberId
