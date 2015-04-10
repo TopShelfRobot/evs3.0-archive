@@ -75,7 +75,6 @@ angular.module('evReg').factory('authService', ['$http', '$q', 'localStorageServ
 					refreshToken: response.refresh_token, 
 					useRefreshTokens: true,
 					roles: response.roles,
-                    isAuth: true
 				});
             }
             else {
