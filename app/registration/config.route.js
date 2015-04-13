@@ -193,6 +193,12 @@
 					templateUrl: 'app/registration/authentication/login.part.html'
 				}
 			}, {
+				url: '/loggedout',
+				config: {
+					title: 'Logged Out',
+					templateUrl: 'app/registration/authentication/loggedOut.part.html'
+				}
+			}, {
 				url: '/signup',
 				config: {
 					title: 'Sign-Up',

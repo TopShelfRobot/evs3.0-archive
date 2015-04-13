@@ -15,7 +15,7 @@
 
         $scope.logOut = function () {
             authService.logOut();
-            $location.path('/eventure');
+            $location.path('/loggedout');
         }
 
         //console.log($scope.authentication.isAuth);
