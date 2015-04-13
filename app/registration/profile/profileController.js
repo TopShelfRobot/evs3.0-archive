@@ -502,14 +502,15 @@
 
 			};
 
-			$scope.checkout = function(balance, id) {
+			$scope.checkout = function(balance, id, participantId, listId) {
 
 				var order = {
 					amount: balance,
 					teamId: id,
-					participantId: $scope.participantId,
+					participantId: participantId,
 					stripeToken: '',
-					ownerId: $scope.ownerId
+					ownerId: $scope.ownerId,
+          eventureListId: listId
 				}
 
 				stripe.checkout(balance)
@@ -575,7 +576,7 @@
 				}, {
 					title: "",
 					width: 140,
-					template: '<button class="btn btn-info btn-block" ng-click="checkout(#=balance#, #=id#)">Pay Balance</button>'
+					template: '<button class="btn btn-info btn-block" ng-click="checkout(#=balance#, #=id#, #=participantId#, #=listId#)">Pay Balance</button>'
 				}]
 			};
 
