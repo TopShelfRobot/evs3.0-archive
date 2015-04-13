@@ -53,10 +53,6 @@
             },
             detailTemplate: kendo.template($("#template").html()),
             columns: [{
-                title: "Invited",
-                width: "170px",
-                template:'<div class="btn-group"><button type="button" class="btn btn-default" btn-radio="true">Yes</button><button type="button" class="btn btn-default" btn-radio="false">No</button></div>'
-            },{
                 field: "name",
                 title: "Team Name",
                 width: "200px"

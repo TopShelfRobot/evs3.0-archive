@@ -1,15 +1,15 @@
-(function () {
+(function() {
 
 	var controllerId = "UserProfile";
 
 	function Controller($scope, $routeParams, $location, $http, config, datacontext, common, cart, stripe) {
 
-	    console.log(' $routeParams.participantGuid: ', $routeParams.participantGuid);
-	    console.log('cart.participantGuid: ', cart.participantGuid);
+		console.log(' $routeParams.participantGuid: ', $routeParams.participantGuid);
+		console.log('cart.participantGuid: ', cart.participantGuid);
 
-	    $scope.participant = {};
+		$scope.participant = {};
 		$scope.disableEmail = true;
-		$scope.participantGuid = $routeParams.participantGuid || cart.participantGuid;
+		$scope.participantGuid = $routeParams.participantGuid; // || cart.participantGuid;
 		$scope.partButton = cart.regSettings.partButtonText;
 		$scope.ownerId = config.owner.ownerId;
 
@@ -23,81 +23,75 @@
 			isActive: true
 		};
 
-		$scope.positions = [
-			{
-				name: 'Captain'
-			},
-			{
-				name: 'Driver Only'
-			},
-			{
-				name: 'Runner'
-			}
-		];
+		$scope.positions = [{
+			name: 'Captain'
+		}, {
+			name: 'Driver Only'
+		}, {
+			name: 'Runner'
+		}];
 
-		$scope.sizes = [
-			{
-				size: 'XS'
-			},
-			{
-				size: 'S'
-			},
-			{
-				size: 'M'
-			},
-			{
-				size: 'L'
-			},
-			{
-				size: 'XL'
-			},
-			{
-				size: 'XXL'
-			}
-		];
+		$scope.sizes = [{
+			size: 'XS'
+		}, {
+			size: 'S'
+		}, {
+			size: 'M'
+		}, {
+			size: 'L'
+		}, {
+			size: 'XL'
+		}, {
+			size: 'XXL'
+		}];
 
-		$scope.genders = [
-			{
-				value: 'M',
-				name: 'Male'
-			},
-			{
-				value: 'F',
-				name: 'Female'
-			}
-		];
+		$scope.genders = [{
+			value: 'M',
+			name: 'Male'
+		}, {
+			value: 'F',
+			name: 'Female'
+		}];
 
 		//var promises = [getParticipant(), Registrations(), Participants(), Team(), Coach()];    //TODO:  put back in rael code
 		var promises = [getParticipant(), Coach()];
 
 		common.activateController(promises, controllerId)
-			.then(function () {
-			    //alert('hallo');
-			    //Coach();
-			    //$scope.coachGridOptions.dataSource.read();
+			.then(function() {
+				//alert('hallo');
+				//Coach();
+				//$scope.coachGridOptions.dataSource.read();
 			});
 
 		function getParticipant() {
-		    console.log($scope.participantGuid);
-			return datacontext.participant.getParticipantByGuid(cart.participantGuid)
-				.then(function (participant) {
-					$scope.participant = participant;
-					$scope.date.dateBirth = moment($scope.participant.dateBirth).format('YYYY-MM-DD');
-				});
+			console.log($scope.participantGuid);
+			if ($scope.participantGuid === null || typeof $scope.participantGuid === 'undefined') {
+				return datacontext.participant.getParticipantByGuid(cart.participantGuid)
+					.then(function(participant) {
+						$scope.participant = participant;
+						$scope.date.dateBirth = moment($scope.participant.dateBirth).format('YYYY-MM-DD');
+					});
+			} else {
+				return datacontext.participant.getParticipantByGuid($scope.participantGuid)
+					.then(function(participant) {
+						$scope.participant = participant;
+						$scope.date.dateBirth = moment($scope.participant.dateBirth).format('YYYY-MM-DD');
+					});
+			}
 		}
 
 		function Registrations() {
 
-			$scope.resendReceipt = function (e) {
+			$scope.resendReceipt = function(e) {
 				console.log('Order Id: ' + e);
 				$http.post(config.apiPath + "api/mail/SendConfirmMail", e) //mjb
-					.success(function (result) {
+					.success(function(result) {
 						alert('Receipt Sent');
 					})
-					.error(function (err) {
+					.error(function(err) {
 						alert('Resend failed');
 					})
-					.finally(function () {
+					.finally(function() {
 						//Do NOthing
 					});
 			};
@@ -120,13 +114,13 @@
 				columns: [{
 						field: "displayName",
 						title: "Listing"
-				},
-//                  {
-  //            field: "totalAmount",
-  //            title: "Amount",
-  //            format: "{0:c}",
-  //            width: 110
-  //    },
+					},
+					//                  {
+					//            field: "totalAmount",
+					//            title: "Amount",
+					//            format: "{0:c}",
+					//            width: 110
+					//    },
 					{
 						field: "quantity",
 						title: "Qty",
@@ -147,11 +141,11 @@
 						title: '',
 						template: '<button ng-click="Receipt(#=eventureOrderId#)" class="btn btn-success btn-block"> Receipt</button>',
 					}
-	//	, {
-	//	field: '',
-	//	title: '',
-	//	template: '<a href="\\\#registration/#=id#" class="btn btn-default btn-block"><em class="glyphicon glyphicon-edit"></em>&nbsp;Edit</a>'
-	//}
+					//	, {
+					//	field: '',
+					//	title: '',
+					//	template: '<a href="\\\#registration/#=id#" class="btn btn-default btn-block"><em class="glyphicon glyphicon-edit"></em>&nbsp;Edit</a>'
+					//}
 				]
 			};
 		}
@@ -160,231 +154,160 @@
 			dateBirth: '1993-07-03'
 		};
 
-		$scope.save = function () {
+		$scope.save = function() {
 			$scope.date.dateBirth = moment($scope.date.dateBirth).toISOString();
 			$scope.participant.dateBirth = $scope.date.dateBirth;
 			datacontext.save()
-				.then(function () {
+				.then(function() {
 					console.log("saved");
 				});
 		};
 
-		$scope.return = function () {
+		$scope.return = function() {
 			$location.path(cart.navUrl);
 		};
 
-		$scope.stateProvince = [
-			{
-				name: 'AK'
-			},
-			{
-				name: 'AL'
-			},
-			{
-				name: 'AR'
-			},
-			{
-				name: 'AZ'
-			},
-			{
-				name: 'CA'
-			},
-			{
-				name: 'CO'
-			},
-			{
-				name: 'CT'
-			},
-			{
-				name: 'DC'
-			},
-			{
-				name: 'DE'
-			},
-			{
-				name: 'FL'
-			},
-			{
-				name: 'GA'
-			},
-			{
-				name: 'HI'
-			},
-			{
-				name: 'IA'
-			},
-			{
-				name: 'ID'
-			},
-			{
-				name: 'IL'
-			},
-			{
-				name: 'IN'
-			},
-			{
-				name: 'KS'
-			},
-			{
-				name: 'KY'
-			},
-			{
-				name: 'LA'
-			},
-			{
-				name: 'MA'
-			},
-			{
-				name: 'MD'
-			},
-			{
-				name: 'ME'
-			},
-			{
-				name: 'MI'
-			},
-			{
-				name: 'MN'
-			},
-			{
-				name: 'MO'
-			},
-			{
-				name: 'MS'
-			},
-			{
-				name: 'MT'
-			},
-			{
-				name: 'NC'
-			},
-			{
-				name: 'ND'
-			},
-			{
-				name: 'NE'
-			},
-			{
-				name: 'NH'
-			},
-			{
-				name: 'NJ'
-			},
-			{
-				name: 'NM'
-			},
-			{
-				name: 'NV'
-			},
-			{
-				name: 'NY'
-			},
-			{
-				name: 'OH'
-			},
-			{
-				name: 'OK'
-			},
-			{
-				name: 'OR'
-			},
-			{
-				name: 'PA'
-			},
-			{
-				name: 'RI'
-			},
-			{
-				name: 'SC'
-			},
-			{
-				name: 'SD'
-			},
-			{
-				name: 'TN'
-			},
-			{
-				name: 'TX'
-			},
-			{
-				name: 'UT'
-			},
-			{
-				name: 'VA'
-			},
-			{
-				name: 'VT'
-			},
-			{
-				name: 'WA'
-			},
-			{
-				name: 'WI'
-			},
-			{
-				name: 'WV'
-			},
-			{
-				name: 'WY'
-			},
-			{
-				name: 'AS'
-			},
-			{
-				name: 'GU'
-			},
-			{
-				name: 'MP'
-			},
-			{
-				name: 'PR'
-			},
-			{
-				name: 'VI'
-			},
-			{
-				name: 'CZ'
-			},
-			{
-				name: 'AB'
-			},
-			{
-				name: 'BC'
-			},
-			{
-				name: 'MB'
-			},
-			{
-				name: 'NB'
-			},
-			{
-				name: 'NL'
-			},
-			{
-				name: 'NT'
-			},
-			{
-				name: 'NS'
-			},
-			{
-				name: 'NU'
-			},
-			{
-				name: 'ON'
-			},
-			{
-				name: 'PE'
-			},
-			{
-				name: 'QC'
-			},
-			{
-				name: 'SK'
-			},
-			{
-				name: 'YT'
-			}
-		];
+		$scope.stateProvince = [{
+			name: 'AK'
+		}, {
+			name: 'AL'
+		}, {
+			name: 'AR'
+		}, {
+			name: 'AZ'
+		}, {
+			name: 'CA'
+		}, {
+			name: 'CO'
+		}, {
+			name: 'CT'
+		}, {
+			name: 'DC'
+		}, {
+			name: 'DE'
+		}, {
+			name: 'FL'
+		}, {
+			name: 'GA'
+		}, {
+			name: 'HI'
+		}, {
+			name: 'IA'
+		}, {
+			name: 'ID'
+		}, {
+			name: 'IL'
+		}, {
+			name: 'IN'
+		}, {
+			name: 'KS'
+		}, {
+			name: 'KY'
+		}, {
+			name: 'LA'
+		}, {
+			name: 'MA'
+		}, {
+			name: 'MD'
+		}, {
+			name: 'ME'
+		}, {
+			name: 'MI'
+		}, {
+			name: 'MN'
+		}, {
+			name: 'MO'
+		}, {
+			name: 'MS'
+		}, {
+			name: 'MT'
+		}, {
+			name: 'NC'
+		}, {
+			name: 'ND'
+		}, {
+			name: 'NE'
+		}, {
+			name: 'NH'
+		}, {
+			name: 'NJ'
+		}, {
+			name: 'NM'
+		}, {
+			name: 'NV'
+		}, {
+			name: 'NY'
+		}, {
+			name: 'OH'
+		}, {
+			name: 'OK'
+		}, {
+			name: 'OR'
+		}, {
+			name: 'PA'
+		}, {
+			name: 'RI'
+		}, {
+			name: 'SC'
+		}, {
+			name: 'SD'
+		}, {
+			name: 'TN'
+		}, {
+			name: 'TX'
+		}, {
+			name: 'UT'
+		}, {
+			name: 'VA'
+		}, {
+			name: 'VT'
+		}, {
+			name: 'WA'
+		}, {
+			name: 'WI'
+		}, {
+			name: 'WV'
+		}, {
+			name: 'WY'
+		}, {
+			name: 'AS'
+		}, {
+			name: 'GU'
+		}, {
+			name: 'MP'
+		}, {
+			name: 'PR'
+		}, {
+			name: 'VI'
+		}, {
+			name: 'CZ'
+		}, {
+			name: 'AB'
+		}, {
+			name: 'BC'
+		}, {
+			name: 'MB'
+		}, {
+			name: 'NB'
+		}, {
+			name: 'NL'
+		}, {
+			name: 'NT'
+		}, {
+			name: 'NS'
+		}, {
+			name: 'NU'
+		}, {
+			name: 'ON'
+		}, {
+			name: 'PE'
+		}, {
+			name: 'QC'
+		}, {
+			name: 'SK'
+		}, {
+			name: 'YT'
+		}];
 
 		//$scope.today = function () {
 		//	$scope.participant.dateBirth = new Date();
@@ -445,7 +368,7 @@
 				}]
 			};
 
-			$scope.partDetailGridOptions = function (e) {
+			$scope.partDetailGridOptions = function(e) {
 
 				var regapi = config.remoteApiName + 'widget/GetRegistrationsByPartId/' + e.id;
 
@@ -463,35 +386,34 @@
 					sortable: true,
 					pageable: true,
 					columns: [{
-							field: "displayName",
-							title: "Listing",
-							width: 300
+						field: "displayName",
+						title: "Listing",
+						width: 300
 					}, {
-							field: "totalAmount",
-							title: "Amount",
-							format: "{0:c}",
-							width: 100
+						field: "totalAmount",
+						title: "Amount",
+						format: "{0:c}",
+						width: 100
 					}, {
-							field: "quantity",
-							title: "Qty",
-							width: 67
+						field: "quantity",
+						title: "Qty",
+						width: 67
 					}, {
-							field: "dateCreated",
-							title: "Registration Date",
-							type: "date",
-							format: "{0:MM/dd/yyyy}",
-							width: 170
+						field: "dateCreated",
+						title: "Registration Date",
+						type: "date",
+						format: "{0:MM/dd/yyyy}",
+						width: 170
 					}, {
-							field: '',
-							title: '',
-							template: '<a href="\\\#viewreceipt/#=eventureOrderId#" class="btn btn-success btn-block"><em class="glyphicon glyphicon-tags"></em>&nbsp;Receipt</a>',
-							width: 110
+						field: '',
+						title: '',
+						template: '<a href="\\\#viewreceipt/#=eventureOrderId#" class="btn btn-success btn-block"><em class="glyphicon glyphicon-tags"></em>&nbsp;Receipt</a>',
+						width: 110
 					}, {
-							field: '',
-							title: '',
-							template: '<a href="\\\#registration/#=id#" class="btn btn-default btn-block"><em class="glyphicon glyphicon-edit"></em>&nbsp;Edit</a>'
-					}
-					]
+						field: '',
+						title: '',
+						template: '<a href="\\\#registration/#=id#" class="btn btn-default btn-block"><em class="glyphicon glyphicon-edit"></em>&nbsp;Edit</a>'
+					}]
 				};
 			};
 		}
@@ -532,7 +454,7 @@
 				}]
 			};
 
-			$scope.teamDetailGridOptions = function (e) {
+			$scope.teamDetailGridOptions = function(e) {
 
 				var teamdetailapi = config.remoteApiName + 'widget/GetTeamMembersByTeamId/' + e.id;
 
@@ -559,28 +481,28 @@
 				};
 			};
 		}
-        
+
 		function Coach() {
-		    $scope.remove = function (teamMemberId, teamId) {
+			$scope.remove = function(teamMemberId, teamId) {
 				var source = {
 					teamId: teamId,
 					teamMemberId: teamMemberId
 				};
 
-				$http.post(config.apiPath + 'api/transaction/TeamRemove', source).then(function () {
+				$http.post(config.apiPath + 'api/transaction/TeamRemove', source).then(function() {
 					$scope.coachGridOptions.dataSource.read();
 				});
 
 			};
 
-			$scope.resendInvitation = function (teamMemberId) {
+			$scope.resendInvitation = function(teamMemberId) {
 				$http.post(config.apiPath + 'api/mail/SendTeamPlayerInviteMail/' + teamMemberId).then(function() {
 					toastr.success('The invitation has been resent!');
 				})
 
 			};
 
-			$scope.checkout = function (balance, id) {
+			$scope.checkout = function(balance, id) {
 
 				var order = {
 					amount: balance,
@@ -591,26 +513,26 @@
 				}
 
 				stripe.checkout(balance)
-					.then(function (res) {
+					.then(function(res) {
 						console.log(res);
 						$.blockUI({
 							message: 'Processing order...'
 						});
 						order.stripeToken = res.id;
 						$http.post(config.apiPath + "api/payment/PostTeamBalance", order)
-							.success(function (result) {
+							.success(function(result) {
 								$scope.coachGridOptions.dataSource.read();
 							})
-							.error(function (err) {
+							.error(function(err) {
 								console.error("ERROR:", err.toString());
 							})
-							.finally(function () {
+							.finally(function() {
 								$.unblockUI();
 							});
 					});
 			};
 			//console.log('partid', $scope.participant.id);
-			var coachapi = config.remoteApiName + 'widget/GetTeamRegistrationsByCoachGuid/' + $scope.participantGuid;
+			var coachapi = config.remoteApiName + 'widget/GetTeamRegistrationsByCoachGuid/' + cart.participantGuid;
 
 			$scope.coachGridOptions = {
 				dataSource: new kendo.data.DataSource({
@@ -625,7 +547,7 @@
 				sortable: true,
 				pageable: true,
 				filterable: true,
-				dataBound: function () {
+				dataBound: function() {
 					this.expandRow(this.tbody.find("tr.k-master-row").first());
 				},
 				detailTemplate: kendo.template($("#coachtemplate").html()),
@@ -657,7 +579,7 @@
 				}]
 			};
 
-			$scope.coachDetailGridOptions = function (e) {
+			$scope.coachDetailGridOptions = function(e) {
 
 				var coachdetailapi = config.remoteApiName + 'widget/GetTeamMembersByTeamId/' + e.id;
 				return {
@@ -680,43 +602,42 @@
 					sortable: true,
 					pageable: true,
 					columns: [{
-							title: "Status",
-							width: 160,
-							template: kendo.template($("#teamMemberTemplate").html())
+						title: "Status",
+						width: 160,
+						template: kendo.template($("#teamMemberTemplate").html())
 					}, {
-							title: "",
-							width: 110,
-							template: '<button class="btn btn-danger btn-block" ng-click="remove(#=id#, #=teamId#)">Remove</button>'
-					},
-						{
-							field: "teamName",
-							title: "Team Name",
-							width: 200
-						}, {
-							field: "name",
-							title: "Name",
-							width: 200
-						}, {
-							field: "position",
-							title: "Role",
-							width: 130
-						}, {
-							field: "phoneMobile",
-							title: "Phone",
-							width: 140
-						}, {
-							field: "email",
-							title: "Email",
-							width: 210
-						}, {
-							field: "emergencyContact",
-							title: "Emergency Contact",
-							width: 180
-						}, {
-							field: "emergencyPhone",
-							title: "Emergency Phone",
-							width: 140
-						}]
+						title: "",
+						width: 110,
+						template: '<button class="btn btn-danger btn-block" ng-click="remove(#=id#, #=teamId#)">Remove</button>'
+					}, {
+						field: "teamName",
+						title: "Team Name",
+						width: 200
+					}, {
+						field: "name",
+						title: "Name",
+						width: 200
+					}, {
+						field: "position",
+						title: "Role",
+						width: 130
+					}, {
+						field: "phoneMobile",
+						title: "Phone",
+						width: 140
+					}, {
+						field: "email",
+						title: "Email",
+						width: 210
+					}, {
+						field: "emergencyContact",
+						title: "Emergency Contact",
+						width: 180
+					}, {
+						field: "emergencyPhone",
+						title: "Emergency Phone",
+						width: 140
+					}]
 				};
 			};
 		}
