@@ -399,7 +399,7 @@
 
 				var cartOrder = cartModel.order($scope.userPaying, $scope.participant.id);
 				cartOrder.participantId = $scope.participant.id;
-				console.table(cartOrder);
+				// console.table(cartOrder);
 
 				$http.post(config.apiPath + 'api/payment/PostTeamPayment', cartOrder)
 					.success(function (result) {
