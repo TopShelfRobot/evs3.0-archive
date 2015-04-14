@@ -11,7 +11,6 @@
 		vm.title = 'app';
 		vm.ownerId = config.owner.ownerId;
 		vm.year = new Date().getFullYear();
-
 		//Graph Apis
 		var overviewOwnerApi = config.remoteApiName + 'widget/GetOwnerGraph/' + vm.ownerId;
 		var genderByYearApi = config.remoteApi + 'widget/GetGenderInfoByYear/' + vm.year;
@@ -27,7 +26,8 @@
 			];
 
 			common.activateController(promises, controllerId)
-				.then(function() {});
+				.then(function() {
+				});
 		}
 
 		function CapacityByYearRadial() {
@@ -42,6 +42,10 @@
 					vm.capacityEventThree = events.data[2].capacity;
 					vm.regsEventThree = events.data[2].regs;
 					vm.radialEventThreeName = events.data[2].name
+				}).then(function () {
+					vm.radialOne.redraw();
+					vm.radialTwo.redraw();
+					vm.radialThree.redraw();
 				});
 		}
 
