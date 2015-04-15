@@ -11,9 +11,12 @@
 		vm.title = 'app';
 		vm.ownerId = config.owner.ownerId;
 		vm.year = new Date().getFullYear();
-		//Graph Apis
+		vm.chartOptions = {
+				theme: 'material'
+			}
+			//Graph Apis
 		var overviewOwnerApi = config.remoteApiName + 'widget/GetOwnerGraph/' + vm.ownerId;
-		var genderByYearApi = config.remoteApi + 'widget/GetGenderInfoByYear/' + vm.year;
+		var genderByYearApi = config.remoteApiName + 'widget/GetGenderInfoByYear/' + vm.year;
 		var ageByYearApi = config.remoteApiName + 'widget/GetAgeInfoByYear/' + vm.year;
 		var zipByYearApi = config.remoteApiName + 'widget/GetZipHeatMapByYear/' + vm.year;
 		var capacityByYearApi = config.remoteApiName + 'widget/GetCapacityRegDialsByYear/' + vm.year;
@@ -27,11 +30,10 @@
 			];
 
 			common.activateController(promises, controllerId)
-				.then(function() {
-				});
+				.then(function() {});
 		}
 
-		function CapacityByYearRadial () {
+		function CapacityByYearRadial() {
 			$http.get(capacityByYearApi).then(
 				function(events) {
 					vm.capacityEventOne = events.data[0].capacity;
@@ -43,15 +45,15 @@
 					vm.capacityEventThree = events.data[2].capacity;
 					vm.regsEventThree = events.data[2].regs;
 					vm.radialEventThreeName = events.data[2].name;
-				}).then(function () {
-					vm.radialOne.redraw();
-					vm.radialTwo.redraw();
-					vm.radialThree.redraw();
-				});
+				}).then(function() {
+				vm.radialOne.redraw();
+				vm.radialTwo.redraw();
+				vm.radialThree.redraw();
+			});
 		}
 
-		function GenderByYearSparkPies () {
-			$http.get(genderByYearApi).then( function (gender) {
+		function GenderByYearSparkPies() {
+			$http.get(genderByYearApi).then(function(gender) {
 				vm.gender = gender;
 			})
 		}
