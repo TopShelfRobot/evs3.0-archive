@@ -25,4 +25,14 @@
     </div>
   </div>
   <!-- End Row -->
+  <div class="row-fluid">
+    <div class="col-lg-8"></div>
+    <div class="col-lg-4">
+      <div kendo-sparkline k-series="[{
+			type: 'pie',
+			field: 'amount',
+			categoryField: 'gender'
+			}]" k-data-source="vm.gender" style="height:30px"></div>
+    </div>
+  </div>
 </section>

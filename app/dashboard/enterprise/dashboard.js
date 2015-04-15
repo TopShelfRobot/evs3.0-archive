@@ -22,7 +22,8 @@
 
 		function activate() {
 			var promises = [
-				CapacityByYearRadial()
+				CapacityByYearRadial(),
+				GenderByYearSparkPies(),
 			];
 
 			common.activateController(promises, controllerId)
@@ -30,7 +31,7 @@
 				});
 		}
 
-		function CapacityByYearRadial() {
+		function CapacityByYearRadial () {
 			$http.get(capacityByYearApi).then(
 				function(events) {
 					vm.capacityEventOne = events.data[0].capacity;
@@ -41,7 +42,7 @@
 					vm.radialEventTwoName = events.data[1].name;
 					vm.capacityEventThree = events.data[2].capacity;
 					vm.regsEventThree = events.data[2].regs;
-					vm.radialEventThreeName = events.data[2].name
+					vm.radialEventThreeName = events.data[2].name;
 				}).then(function () {
 					vm.radialOne.redraw();
 					vm.radialTwo.redraw();
@@ -49,55 +50,71 @@
 				});
 		}
 
+		function GenderByYearSparkPies () {
+			$http.get(genderByYearApi).then( function (gender) {
+				vm.gender = gender;
+			})
+		}
+
+
+
+
+
+
+
+
+
+
+
 		function ownerOverviewChart() {}
 
 		vm.OverviewOwnerChart = {
-			theme: "material",
+			theme: 'material',
 			dataSource: {
 				transport: {
 					read: {
 						url: overviewOwnerApi,
-						dataType: "json"
+						dataType: 'json'
 					}
 				}
 			},
 			title: {
-				text: "Eventure Overview"
+				text: 'Eventure Overview'
 			},
 			legend: {
-				position: "bottom"
+				position: 'bottom'
 			},
 			series: [{
-				type: "column",
-				field: "Rev",
-				name: "Revenue",
-				axis: "Revenue"
+				type: 'column',
+				field: 'Rev',
+				name: 'Revenue',
+				axis: 'Revenue'
 			}, {
-				type: "line",
-				field: "Regs",
-				name: "Registrations",
-				axis: "Registrations"
+				type: 'line',
+				field: 'Regs',
+				name: 'Registrations',
+				axis: 'Registrations'
 			}],
 			valueAxis: [{
-				name: "Revenue",
+				name: 'Revenue',
 				title: {
-					text: "Revenue"
+					text: 'Revenue'
 				}
 			}, {
-				name: "Registrations",
+				name: 'Registrations',
 				title: {
-					text: "Registrations"
+					text: 'Registrations'
 				}
 			}],
 			categoryAxis: {
-				field: "Month",
+				field: 'Month',
 				majorGridLines: {
 					visible: false
 				}
 			},
 			tooltip: {
 				visible: true,
-				template: "#= series.name #: #= value #"
+				template: '#= series.name #: #= value #'
 			}
 		};
 
