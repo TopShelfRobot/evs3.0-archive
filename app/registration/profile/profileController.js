@@ -576,7 +576,7 @@
 				}, {
 					title: "",
 					width: 140,
-					template: '<button class="btn btn-info btn-block" ng-click="checkout(#=balance#, #=id#, #=participantId#, #=listId#)">Pay Balance</button>'
+					template: kendo.template($("#balanceTemplate").html())
 				}]
 			};
 

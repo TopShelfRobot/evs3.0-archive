@@ -208,6 +208,12 @@
   <div kendo-grid k-options="coachDetailGridOptions(dataItem)"></div>
 </script>
 
+<script type="text/x-kendo-template" id="balanceTemplate">
+	#if(balance > 0 ){#
+		<button class="btn btn-info btn-block" ng-click="checkout(#=balance#, #=id#, #=participantId#, #=listId#)">Pay Balance</button>#}else{#
+		<strong class="success">Balance Paid</strong>#}#
+</script>
+
 <script type="text/x-kendo-template" id="teamMemberTemplate">
   #if(participantId !== null){#
   <a class="btn btn-default btn-block" href="\\\#user-profile/#=participantGuid#"><em class="glyphicon glyphicon-edit"></em>&nbsp;Edit</a>#}else{#
