@@ -77,7 +77,10 @@
     ],
 		"toastr": [
       "toastr.js"
-    ]
+    ],
+		"ngmap": [
+		"build/scripts/ng-map.js"
+		]
 	},
 	"dependencies": {
 		"angular": "~1.3.15"

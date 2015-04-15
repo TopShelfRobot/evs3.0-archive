@@ -63,7 +63,8 @@ module.exports = function (grunt) {
 					'bower_components/angular-moment/angular-moment.js',
 					'bower_components/angulartics/src/angulartics.js',
 					'bower_components/angulartics/src/angulartics-ga.js',
-					'bower_components/ng-role-auth/dist/ng-role-auth.js'],
+					'bower_components/ng-role-auth/dist/ng-role-auth.js',
+					'bower_components/ngmap/build/scripts/ng-map.js'],
 				dest: 'Scripts/concat.js'
 			},
 		},
