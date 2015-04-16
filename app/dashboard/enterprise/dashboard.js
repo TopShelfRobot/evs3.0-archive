@@ -37,7 +37,6 @@
 
 			common.activateController(promises, controllerId)
 				.then(function() {
-					alert('Then of Activate Controller');
 					uiGmapGoogleMapApi.then(function(map) {
 						google.maps.event.trigger(map, 'resize');
 					});
