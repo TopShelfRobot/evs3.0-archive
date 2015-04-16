@@ -21,7 +21,6 @@
 			},
 			zoom: 8
 		};
-		vm.showMap = false;
 		//Graph Apis
 		var overviewOwnerApi = config.remoteApiName + 'widget/GetOwnerGraph/' + vm.ownerId;
 		var genderByYearApi = config.remoteApiName + 'widget/GetGenderInfoByYear/' + vm.year;
@@ -39,7 +38,6 @@
 			common.activateController(promises, controllerId)
 				.then(function() {
 					alert('Then of Activate Controller');
-					vm.showMap = true;
 					uiGmapGoogleMapApi.then(function(map) {
 						google.maps.event.trigger(map, 'resize');
 					});
