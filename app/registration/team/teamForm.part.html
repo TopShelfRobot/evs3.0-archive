@@ -7,25 +7,27 @@
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-lg-6 col-lg-offset-3">
-			<h4>2015 Team Name</h4>
-			<input type="text" class="form-control" name="TeamName" id="TeamName" placeholder="Choose a name for your team." ng-model="team.name">
-			<h4>Division</h4>
-			<select class="form-control" name="Division" ng-model="team.division">
-				<option value="">Please Select A Division</option>
-				<option>Open Male</option>
-				<option>Open Female (Must Be All Female)</option>
-				<option>Open Mixed (Must Have At Least 4 Females)</option>
-				<option>Male Masters (40 Years and Older)</option>
-				<option>Female Masters (40 Years and Older)</option>
-				<option>Mixed Masters (40 Years and Older)(at least 4 females)</option>
-				<option>Ultra (6 Runners, No More No Less)</option>
-				<option>Corporate</option>
-			</select>
-			<h4>Estimated Time Of Finish</h4>
-			<input type="text" class="form-control" name="TimeFinish" mask="99:99:99" placeholder="HH:MM:SS" restrict="reject" ng-model="team.timeFinish" required>
-		</div>
-	</div>
+        <form class="form-horizontal" name="formholder.teamNameForm">
+            <div class="col-lg-6 col-lg-offset-3">
+                <h4>2015 Team Name</h4>
+                <input type="text" class="form-control" name="TeamName" id="TeamName" placeholder="Choose a name for your team." ng-model="team.name" required>
+                <h4>Division</h4>
+                <select class="form-control" name="Division" ng-model="team.division" required>
+                    <option value="">Please Select A Division</option>
+                    <option>Open Male</option>
+                    <option>Open Female (Must Be All Female)</option>
+                    <option>Open Mixed (Must Have At Least 4 Females)</option>
+                    <option>Male Masters (40 Years and Older)</option>
+                    <option>Female Masters (40 Years and Older)</option>
+                    <option>Mixed Masters (40 Years and Older)(at least 4 females)</option>
+                    <option>Ultra (6 Runners, No More No Less)</option>
+                    <option>Corporate</option>
+                </select>
+                <h4>Estimated Time Of Finish (Must be entered HH:MM:SS)</h4>
+                <input type="text" class="form-control" name="TimeFinish" mask="99:99:99" placeholder="HH:MM:SS" restrict="reject" ng-model="team.timeFinish" required>
+            </div>
+            </form>
+</div>
 	<br>
 	<div class="row">
 		<form class="form-horizontal">

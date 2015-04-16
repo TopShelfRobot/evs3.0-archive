@@ -21,6 +21,8 @@
       position: ""
     }];
 
+    $scope.formholder = {};
+
     $scope.addPlayer = function () {
       $scope.players.push({
         name: "",
