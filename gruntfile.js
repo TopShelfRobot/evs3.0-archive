@@ -63,7 +63,8 @@ module.exports = function (grunt) {
 					'bower_components/angulartics/src/angulartics.js',
 					'bower_components/angulartics/src/angulartics-ga.js',
 					'bower_components/ng-role-auth/dist/ng-role-auth.js',
-					'bower_components/ngmap/build/scripts/ng-map.js'],
+					'bower_components/angular-google-maps/dist/angular-google-maps.js',
+					'bower_components/lodash/dist/lodash.js'],
 				dest: 'Scripts/concat.js'
 			},
 		},
@@ -127,7 +128,6 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks('grunt-contrib-jshint');
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-preen');
-	grunt.loadNpmTasks('grunt-bower-concat');
 	grunt.loadNpmTasks('grunt-contrib-copy');
 	//Watch task
 	grunt.loadNpmTasks('grunt-contrib-watch');

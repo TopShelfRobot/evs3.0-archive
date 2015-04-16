@@ -3,27 +3,28 @@
 
 	var app = angular.module('app', [
 		// Angular modules
-		//'ngAnimate', // animations
-		'ngRoute', // routing
-		'ngSanitize', // sanitizes html bindings (ex: sidebar.js)
+		//'ngAnimate',
+		'ngRoute', 						 // routing
+		'ngSanitize', 					 // sanitizes html bindings (ex: sidebar.js)
 		'ngResource',
 
 		// Custom modules
-		'common', // common functions, logger, spinner
-		'common.bootstrap', // bootstrap dialog wrapper functions
-		'LocalStorageModule',
+		'common', 						 // common functions, logger, spinner
+		'common.bootstrap', 			 // bootstrap dialog wrapper functions
+		'LocalStorageModule',			 // localStorage for Authentication
 
 		// 3rd Party Modules
-		'breeze.angular', // configures breeze for an angular app
-		'breeze.directives', // contains the breeze validation directive (zValidate)
-		'ui.bootstrap', // ui-bootstrap (ex: carousel, pagination, dialog)
-		'kendo.directives', // kendo-angular (grid, dataviz)
-		'angularMoment', // Date and Time Format
-		'angulartics',  //analytics
-		'angulartics.google.analytics', //analytics
-		'evReg',
-		'ngRoleAuth',
-		'angularFileUpload' //File Upload
+		'breeze.angular', 				 // configures breeze for an angular app
+		'breeze.directives', 			 // contains the breeze validation directive (zValidate)
+		'ui.bootstrap', 				 // ui-bootstrap (ex: carousel, pagination, dialog)
+		'kendo.directives', 			 // kendo-angular (grid, dataviz)
+		'angularMoment', 				 // Date and Time Format
+		'angulartics',  				 // analytics
+		'angulartics.google.analytics',  // analytics
+		'evReg',						 // Our Registration Module
+		'ngRoleAuth',					 // Authentication Roles
+		'angularFileUpload', 			 // File Upload
+		'uiGmapgoogle-maps'				 // Google Maps
 	]);
 
 	app.config(['$httpProvider', function ($httpProvider) {

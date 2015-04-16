@@ -12,21 +12,29 @@
 		vm.ownerId = config.owner.ownerId;
 		vm.year = new Date().getFullYear();
 		vm.chartOptions = {
-				theme: 'material'
-			}
-			//Graph Apis
+			theme: 'material'
+		};
+		//Graph Apis
 		var overviewOwnerApi = config.remoteApiName + 'widget/GetOwnerGraph/' + vm.ownerId;
 		var genderByYearApi = config.remoteApiName + 'widget/GetGenderInfoByYear/' + vm.year;
 		var ageByYearApi = config.remoteApiName + 'widget/GetAgeInfoByYear/' + vm.year;
 		var zipByYearApi = config.remoteApiName + 'widget/GetZipHeatMapByYear/' + vm.year;
 		var capacityByYearApi = config.remoteApiName + 'widget/GetCapacityRegDialsByYear/' + vm.year;
+		//Map Object
+		vm.map = { 
+			center: { 
+				latitude: 45, 
+				longitude: -73 
+			}, 
+			zoom: 8 
+		};
 
 		activate();
 
 		function activate() {
 			var promises = [
 				CapacityByYearRadial(),
-				GenderByYearSparkPies(),
+				GenderByYearSparkPies()
 			];
 
 			common.activateController(promises, controllerId)
@@ -45,24 +53,14 @@
 					vm.capacityEventThree = events.data[2].capacity;
 					vm.regsEventThree = events.data[2].regs;
 					vm.radialEventThreeName = events.data[2].name;
-				}).then(function() {
-				vm.radialOne.redraw();
-				vm.radialTwo.redraw();
-				vm.radialThree.redraw();
-			});
+				});
 		}
 
 		function GenderByYearSparkPies() {
 			$http.get(genderByYearApi).then(function(gender) {
 				vm.gender = gender;
-			})
+			});
 		}
-
-
-
-
-
-
 
 
 
