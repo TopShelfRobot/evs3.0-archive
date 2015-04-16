@@ -1,9 +1,9 @@
 (function() {
 	'use strict';
 	var controllerId = 'dashboard';
-	angular.module('app').controller(controllerId, ['$http', 'common', 'config', dashboard]);
+	angular.module('app').controller(controllerId, ['$http', 'common', 'config', 'uiGmapGoogleMapApi', dashboard]);
 
-	function dashboard($http, common, config) {
+	function dashboard($http, common, config, uiGmapGoogleMapApi) {
 		var getLogFn = common.logger.getLogFn;
 		var log = getLogFn(controllerId);
 
@@ -14,21 +14,20 @@
 		vm.chartOptions = {
 			theme: 'material'
 		};
+		vm.map = {
+			center: {
+				latitude: 45,
+				longitude: -73
+			},
+			zoom: 8
+		};
+		vm.showMap = false;
 		//Graph Apis
 		var overviewOwnerApi = config.remoteApiName + 'widget/GetOwnerGraph/' + vm.ownerId;
 		var genderByYearApi = config.remoteApiName + 'widget/GetGenderInfoByYear/' + vm.year;
 		var ageByYearApi = config.remoteApiName + 'widget/GetAgeInfoByYear/' + vm.year;
 		var zipByYearApi = config.remoteApiName + 'widget/GetZipHeatMapByYear/' + vm.year;
 		var capacityByYearApi = config.remoteApiName + 'widget/GetCapacityRegDialsByYear/' + vm.year;
-		//Map Object
-		vm.map = { 
-			center: { 
-				latitude: 45, 
-				longitude: -73 
-			}, 
-			zoom: 8 
-		};
-
 		activate();
 
 		function activate() {
@@ -38,8 +37,15 @@
 			];
 
 			common.activateController(promises, controllerId)
-				.then(function() {});
+				.then(function() {
+					alert('Then of Activate Controller');
+					vm.showMap = true;
+					uiGmapGoogleMapApi.then(function(map) {
+						google.maps.event.trigger(map, 'resize');
+					});
+				});
 		}
+
 
 		function CapacityByYearRadial() {
 			$http.get(capacityByYearApi).then(
