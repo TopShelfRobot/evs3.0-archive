@@ -39,6 +39,7 @@
 				.then(function() {
 					uiGmapGoogleMapApi.then(function(map) {
 						google.maps.event.trigger(map, 'resize');
+
 					});
 				});
 		}

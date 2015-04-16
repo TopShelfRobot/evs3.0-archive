@@ -27,7 +27,10 @@
   <!-- End Row -->
   <div class="row-fluid">
     <div class="col-lg-9">
-		<ui-gmap-google-map center='vm.map.center' zoom='vm.map.zoom'></ui-gmap-google-map>
+      <ui-gmap-google-map center='vm.map.center' zoom='vm.map.zoom'>
+        <ui-gmap-layer>
+        </ui-gmap-layer>
+      </ui-gmap-google-map>
     </div>
     <div class="col-lg-3">
       <div kendo-sparkline k-options="vm.chartOptions" k-series="[{
