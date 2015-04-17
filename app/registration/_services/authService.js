@@ -291,7 +291,7 @@ angular.module('evReg').factory('authService', ['$http', '$q', "$timeout", "$loc
 		var _registerExternal = function (registerExternalData) {
 
 			var deferred = $q.defer();
-			var roles;
+			// var roles;
 
 			//$http.get(config.remoteApiName + 'Account/GetUserRolesByUserIdInArray/' + registerExternalData.userName + '/')
 			//    .then(function (returnedRoles) {
@@ -310,13 +310,13 @@ angular.module('evReg').factory('authService', ['$http', '$q', "$timeout", "$loc
 					userName: response.userName,
 					refreshToken: '',
 					useRefreshTokens: false,
-					roles: roles
+					// roles: roles
 				});
 
 				_authentication.isAuth = true;
 				_authentication.userName = response.userName;
 				_authentication.useRefreshTokens = false;
-				_authentication.roles = roles;
+				// _authentication.roles = roles;
 
 				deferred.resolve(response);
 
