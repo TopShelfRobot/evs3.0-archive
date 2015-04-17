@@ -220,10 +220,6 @@ pip-log.txt
 #Mr Developer
 .mr.developer.cfg
 
-#Config Files
-app/dashboard/config.js
-app/registration/config.js
-
 .idea/
 
 .idea/dictionaries/wgoolsby.xml
