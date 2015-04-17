@@ -41,6 +41,7 @@
 									$location.path('/new-user/add');
 								} else {
 									cart.houseId = data.id;
+									cart.participantGuid = data.participantGuid;
 									userAgent.logAgentInfo(config.owner.ownerId, data.id, 'requestToken'); //log browner/ip
 									$location.path(cart.navUrl);
 								}

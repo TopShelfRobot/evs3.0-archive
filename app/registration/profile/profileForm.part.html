@@ -1,113 +1,59 @@
 <form>
-    <div class="row">
-        <div class="col-sm-6">
-            <div class="form-group">
-                <label for="FirstName">First Name</label>
-                <input type="text" name="FirstName" class="form-control" ng-model="participant.firstName" required>
-            </div>
-            <div class="form-group">
-                <label for="LastName">Last Name</label>
-                <input type="text" class="form-control" name="LastName" ng-model="participant.lastName" required>
-            </div>
-            <div class="form-group">
-                <label for="Birthdate">Date Of Birth</label>
-                <div sb-date-select ng-model="date.dateBirth"></div>
-            </div>
-            <div class="form-group">
-                <label for="Gender">Gender</label>
-                <select class="form-control" name="Gender" ng-model="participant.gender" required>
-                    <option value="F">Female</option>
-                    <option value="M">Male</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="EmailAddress">Email Address</label>
-                <input type="email" class="form-control" id="EmailAddress" name="EmailAddress"
-                       ng-model="participant.email" required disabled>
-            </div>
-        </div>
-        <div class="col-sm-6">
-            <div class="form-group">
-                <label for="StreetAddress">Street Address</label>
-                <input type="text" class="form-control" id="StreetAddress" name="StreetAddress"
-                       ng-model="participant.street1" required>
-            </div>
-            <div class="form-group">
-                <label for="City">City</label>
-                <input type="text" class="form-control" id="City" name="City" data-bind="value: city"
-                       ng-model="participant.city" required>
-            </div>
-            <div class="form-group">
-                <label for="State">State</label>
-                <select class="form-control" name="State" data-bind="value: state" ng-model="participant.state" required>
-                    <option value="AK">AK</option>
-                    <option value="AL">AL</option>
-                    <option value="AR">AR</option>
-                    <option value="AZ">AZ</option>
-                    <option value="CA">CA</option>
-                    <option value="CO">CO</option>
-                    <option value="CT">CT</option>
-                    <option value="DC">DC</option>
-                    <option value="DE">DE</option>
-                    <option value="FL">FL</option>
-                    <option value="GA">GA</option>
-                    <option value="HI">HI</option>
-                    <option value="IA">IA</option>
-                    <option value="ID">ID</option>
-                    <option value="IL">IL</option>
-                    <option value="IN">IN</option>
-                    <option value="KS">KS</option>
-                    <option value="KY">KY</option>
-                    <option value="LA">LA</option>
-                    <option value="MA">MA</option>
-                    <option value="MD">MD</option>
-                    <option value="ME">ME</option>
-                    <option value="MI">MI</option>
-                    <option value="MN">MN</option>
-                    <option value="MO">MO</option>
-                    <option value="MS">MS</option>
-                    <option value="MT">MT</option>
-                    <option value="NC">NC</option>
-                    <option value="ND">ND</option>
-                    <option value="NE">NE</option>
-                    <option value="NH">NH</option>
-                    <option value="NJ">NJ</option>
-                    <option value="NM">NM</option>
-                    <option value="NV">NV</option>
-                    <option value="NY">NY</option>
-                    <option value="OH">OH</option>
-                    <option value="OK">OK</option>
-                    <option value="OR">OR</option>
-                    <option value="PA">PA</option>
-                    <option value="RI">RI</option>
-                    <option value="SC">SC</option>
-                    <option value="SD">SD</option>
-                    <option value="TN">TN</option>
-                    <option value="TX">TX</option>
-                    <option value="UT">UT</option>
-                    <option value="VA">VA</option>
-                    <option value="VT">VT</option>
-                    <option value="WA">WA</option>
-                    <option value="WI">WI</option>
-                    <option value="WV">WV</option>
-                    <option value="WY">WY</option>
-                    <option value="AS">AS</option>
-                    <option value="GU">GU</option>
-                    <option value="MP">MP</option>
-                    <option value="PR">PR</option>
-                    <option value="VI">VI</option>
-                    <option value="CZ">CZ</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="ZipCode">Zip Code</label>
-                <input type="text" class="form-control" id="ZipCode" name="ZipCode" minlength="5"
-                       ng-model="participant.zip" required>
-            </div>
-            <div class="form-group">
-                <label for="CellPhone">Cell Phone</label>
-                <input type="tel" class="form-control" id="CellPhone" name="CellPhone" mask="(999) 999-9999" restrict="reject" ng-model="participant.phoneMobile" required>
-            </div>
-        </div>
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="form-group">
+        <label for="FirstName">First Name</label>
+        <input type="text" name="FirstName" class="form-control" ng-model="participant.firstName"
+        required>
+      </div>
+      <div class="form-group">
+        <label for="LastName">Last Name</label>
+        <input type="text" class="form-control" name="LastName" ng-model="participant.lastName"
+        required>
+      </div>
+      <div class="form-group">
+        <label for="Birthdate">Date Of Birth</label>
+        <div sb-date-select ng-model="date.dateBirth"></div>
+      </div>
+      <div class="form-group">
+        <label for="Gender">Gender</label>
+        <select class="form-control" name="Gender" ng-model="participant.gender" required>
+          <option value="F">Female</option>
+          <option value="M">Male</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="EmailAddress">Email Address</label>
+        <input type="email" class="form-control" id="EmailAddress" name="EmailAddress"
+        ng-model="participant.email" required disabled>
+      </div>
     </div>
+    <div class="col-sm-6">
+      <div class="form-group">
+        <label for="StreetAddress">Street Address</label>
+        <input type="text" class="form-control" id="StreetAddress" name="StreetAddress"
+        ng-model="participant.street1" required>
+      </div>
+      <div class="form-group">
+        <label for="City">City</label>
+        <input type="text" class="form-control" id="City" name="City" data-bind="value: city"
+        ng-model="participant.city" required>
+      </div>
+      <div class="form-group">
+        <label for="State">State</label>
+        <input type="text" class="form-control" mask="@@" name="State" data-bind="value: state" ng-model="participant.state"
+        required>
+      </div>
+      <div class="form-group">
+        <label for="ZipCode">Zip Code</label>
+        <input type="text" class="form-control" id="ZipCode" name="ZipCode" minlength="5"
+        ng-model="participant.zip" required>
+      </div>
+      <div class="form-group">
+        <label for="CellPhone">Cell Phone</label>
+        <input type="tel" class="form-control" id="CellPhone" name="CellPhone" mask="(999) 999-9999"
+        restrict="reject" ng-model="participant.phoneMobile" required>
+      </div>
+    </div>
+  </div>
 </form>
