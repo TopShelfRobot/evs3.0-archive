@@ -22,7 +22,7 @@
                 name: cart.regSettings.name,
                 description: cart.regSettings.stripeOrderDescription,
                 panelLabel: cart.regSettings.stripeCheckoutButtonText,
-                email: authService.userName,
+                email: authService.authentication.userName,
                 //image: cart.regSettings.stripeLogoPath,
                 token: token
             });
