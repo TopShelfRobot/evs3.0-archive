@@ -1,39 +1,56 @@
 <!-- Custom Questions -->
 <div ng-repeat="(key, question) in combined | orderBy:'order'">
-	<div ng-switch on="question.questionType" ng-if="question.active">
-		<div class="form-group" ng-switch-when="dropdown" ng-if "question.active">
-			<label class="col-md-6 col-lg-6 control-label">{{question.questionText}}</label>
-			<div class="col-md-6 col-lg-6">
-				<select class="form-control" ng-model="question.answer" ng-change="onChange(question)" ng-options="o for o in question.options" ng-required="question.isRequired">
-					<option value="">-- choose --</option>
-				</select>
-			</div>
-		</div>
+  <div ng-switch on="question.questionType" ng-if="question.active">
 
-		<div class="form-group" ng-switch-when="radio" ng-if "question.active">
-			<label class="col-md-6 col-lg-6 control-label">{{question.questionText}}</label>
-			<div class="col-md-6 col-lg-6">
-				<div ng-repeat="o in question.options">
-					<label class="radio-inline">
-						<input type="radio" name="raiod-{{question.id}}" ng-model="question.answer" ng-change="onChange(question)" ng-value="o" ng-required="question.isRequired" />
-						<span>{{o}}</span>
-					</label>
-				</div>
-			</div>
-		</div>
+    <div class="form-group" ng-switch-when="dropdown" ng-if="question.active">
+      <label class="col-md-6 col-lg-6 control-label">{{question.questionText}}</label>
+      <div class="col-md-6 col-lg-6">
+        <select class="form-control" ng-model="question.answer" ng-change="onChange(question)"
+        ng-options="o for o in question.options" ng-required="question.isRequired">
+          <option value="">Select An Option</option>
+        </select>
+      </div>
+    </div>
 
-		<div class="form-group" ng-switch-when="text" ng-if "question.active">
-			<label class="col-md-6 col-lg-6 control-label">{{question.questionText}}</label>
-			<div class="col-md-6 col-lg-6">
-				<input type="text" class="form-control" ng-model="question.answer" ng-change="onChange(question)" ng-required="question.isRequired">
-				</input>
-			</div>
-		</div>
+    <div class="form-group" ng-switch-when="radio" ng-if="question.active">
+      <label class="col-md-6 col-lg-6 control-label">{{question.questionText}}</label>
+      <div class="col-md-6 col-lg-6">
+        <div ng-repeat="o in question.options">
+          <label class="radio-inline">
+            <input type="radio" name="radio-{{question.id}}" ng-model="question.answer" ng-change="onChange(question)"
+            ng-value="o" ng-required="question.isRequired" />
+            <span>{{o}}</span>
+          </label>
+        </div>
+      </div>
+    </div>
 
-		<div class="checkbox" ng-switch-when="checkbox">
-			<label>
-				<input type="checkbox" ng-model="question.answer" ng-change="onChange(question)" ng-required="question.isRequired">
-				</input>{{question.questionText}}&nbsp;&nbsp;</label>
-		</div>
-	</div>
+    <div class="form-group" ng-switch-when="text" ng-if="question.active">
+      <label class="col-md-6 col-lg-6 control-label">{{question.questionText}}</label>
+      <div class="col-md-6 col-lg-6">
+        <input type="text" class="form-control" ng-model="question.answer" ng-change="onChange(question)"
+        ng-required="question.isRequired">
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6 col-lg-6"></div>
+      <div class="col-md-6 col-lg-6">
+        <div class="checkbox" ng-switch-when="checkbox" ng-if="question.active">
+          <label>
+            <input type="checkbox" ng-model="question.answer" ng-change="onChange(question)"
+            ng-required="question.isRequired">
+            </input>{{question.questionText}}&nbsp;&nbsp;
+			<br><br>
+          </label>
+        </div>
+      </div>
+    </div>
+    <!-- <div class="checkbox" ng-switch-when="checkbox" ng-if="question.active"> -->
+    <!-- 	<label> -->
+    <!-- 		<input type="checkbox" ng-model="question.answer" ng-change="onChange(question)" ng-required="question.isRequired"> -->
+    <!-- 		</input>{{question.questionText}}&nbsp;&nbsp; -->
+    <!-- 	</label> -->
+    <!-- </div> -->
+  </div>
 </div>
