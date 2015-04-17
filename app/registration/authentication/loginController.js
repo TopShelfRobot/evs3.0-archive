@@ -80,14 +80,14 @@
 					//console.log('authService.externalAuthData', authService.externalAuthData);
 
 					authService.registerExternal(authService.externalAuthData)
-						.success(function (response) {
+						.then(function (response) {
 							//console.table(response);
 							authService.startTimer(authService.externalAuthData);
-						}).error(function (err) {
-							//console.log('trying to defer error');
-							//console.log(err);
-							//console.table(response);
-							authService.startTimer(authService.externalAuthData);
+						//}).error(function (err) {
+						//	//console.log('trying to defer error');
+						//	//console.log(err);
+						//	//console.table(response);
+						//	authService.startTimer(authService.externalAuthData);
 						});
 				} else {
 					//Obtain access token and redirect
