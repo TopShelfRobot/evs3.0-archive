@@ -100,10 +100,10 @@
 // }
 
 .tile-container {
-	float: left;
 	width:25%;
 	padding: 1%;
 	margin: 0 auto;
+	display:inline-block;
 }
 
 .event-tile {
@@ -118,7 +118,7 @@
   -moz-box-shadow: inset 0 0 10px #eee;
   -webkit-box-shadow: inset 0 0 10px #eee;
   box-shadow: inset 0 0 10px #eee;
-  margin:10px 0;
+  margin:10px auto;
   height:361px;
 
   h4 {
