@@ -78,11 +78,10 @@
 						userName: externalAuthData.username,
 						externalAccessToken: externalAuthData.external_access_token
 					};
-					console.log('authService.externalAuthData', authService.externalAuthData);
+					//console.log('authService.externalAuthData', authService.externalAuthData);
 
 					authService.registerExternal(authService.externalAuthData)
 						.then(function (response) {
-							console.log('looking goood');
 							//mjb authService.startTimer(authService.externalAuthData);
 							var externalData = {
 							    provider: externalAuthData.provider,

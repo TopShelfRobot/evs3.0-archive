@@ -50,13 +50,12 @@ angular.module('evReg').factory('authService', ['$http', '$q', "$timeout", "$loc
 		};
 
 		var _login = function (loginData) {
-		    console.log('wtf');
-			var requestPath = window.location.pathname;
+		    var requestPath = window.location.pathname;
 			var roles;
 			var deferred = $q.defer();
 			var data = 'grant_type=password&username=' + loginData.userName + '&password=' + loginData.password;
 
-			console.log(loginData);
+			//console.log(loginData);
 
 			if (loginData.useRefreshTokens) {
 				data = data + '&client_id=' + ngAuthSettings.clientId;
@@ -106,15 +105,14 @@ angular.module('evReg').factory('authService', ['$http', '$q', "$timeout", "$loc
 						});
 					});
 			} else {
-			    console.log('calling toke');
-			    console.log(data);
+			   //console.log(data);
 			    $http.post(config.apiPath + 'token', data, {
 					headers: {
 						'Content-Type': 'application/x-www-form-urlencoded'
 					}
 			    }).success(function (response) {
-			        console.log('what is coeming back from this thing');
-			        console.log(response);
+			        //console.log('what is coeming back from this thing');
+			        //console.log(response);
 				    if (loginData.useRefreshTokens) {
 				        //console.log('token success:  useRefreshTokens');
 						localStorageService.set('authorizationData', {
@@ -233,8 +231,6 @@ angular.module('evReg').factory('authService', ['$http', '$q', "$timeout", "$loc
 			//    .then(function (returnedRoles) {
 		    //        roles = returnedRoles.data;
 
-			console.log('trying to obtain token');
-
 		    $http.get(config.apiPath + 'api/account/ObtainLocalAccessToken', {
 				params: {
 					provider: externalData.provider,
@@ -273,17 +269,14 @@ angular.module('evReg').factory('authService', ['$http', '$q', "$timeout", "$loc
 		    var returnMessage;
 		    
 		    var timer = $timeout(function () {
-		        console.log('am i starting?');
-		        //$timeout.cancel(timer);
-		        console.log('still going??');
-		        console.log(regObject);
+		        //console.log('start');
+		        //$timeout.cancel(timer);     //mjb
+		        //console.log('still going??');
+		        //console.log(regObject);
 				//authService.login($scope.registration).then(function () {
 				_login(regObject).then(function () {
 				    //$scope.authentication = authService.authentication;
-				    console.log('whats up?');
-				    console.log(_authentication.userNam)
-				    console.log(cart.ownerId)
-						datacontext.participant.getParticipantByEmailAddress(_authentication.userName, cart.ownerId)
+				    datacontext.participant.getParticipantByEmailAddress(_authentication.userName, cart.ownerId)
 							.then(function (data) {
 								//console.log('after part call');
 								//console.table(data);
@@ -315,7 +308,7 @@ angular.module('evReg').factory('authService', ['$http', '$q', "$timeout", "$loc
 
 		    $http.post(config.apiPath + 'api/account/RegisterExternal', registerExternalData)
 				.success(function (response) {
-				    console.log('register extranl seems to have succeeded');
+				    //console.log('register extranl seems to have succeeded');
 				    //TODO: remove this
 				    //response.roles = testRoles;
 
@@ -331,7 +324,7 @@ angular.module('evReg').factory('authService', ['$http', '$q', "$timeout", "$loc
 				_authentication.userName = response.userName;
 				_authentication.useRefreshTokens = false;
 				// _authentication.roles = roles;
-				console.log('geting ready to resolve');
+				//console.log('geting ready to resolve');
 				deferred.resolve(response);
 
 			}).error(function (err, status) {
