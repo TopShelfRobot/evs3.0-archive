@@ -56,7 +56,7 @@ angular.module('evReg').factory('authService', ['$http', '$q', "$timeout", "$loc
 			var deferred = $q.defer();
 			var data = 'grant_type=password&username=' + loginData.userName + '&password=' + loginData.password;
 
-			console.log('refreh');
+			console.log(loginData);
 
 			if (loginData.useRefreshTokens) {
 				data = data + '&client_id=' + ngAuthSettings.clientId;

@@ -83,8 +83,21 @@
 					authService.registerExternal(authService.externalAuthData)
 						.then(function (response) {
 							console.log('looking goood');
-							authService.startTimer(authService.externalAuthData);
-						//}).error(function (err) {
+							//mjb authService.startTimer(authService.externalAuthData);
+							var externalData = {
+							    provider: externalAuthData.provider,
+							    userName: externalAuthData.username,
+							    externalAccessToken: externalAuthData.external_access_token
+							};
+							authService.obtainAccessToken(externalData).then(function (response) {
+							    $location.path(cart.navUrl);
+							},
+						        function (err) {
+						            $scope.message = err.error_description;
+						    });
+
+
+						    //}).error(function (err) {
 						//	//console.log('trying to defer error');
 						//	//console.log(err);
 						//	//console.table(response);
