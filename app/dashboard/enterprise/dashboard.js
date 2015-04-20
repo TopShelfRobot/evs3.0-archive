@@ -32,7 +32,8 @@
 		function activate() {
 			var promises = [
 				CapacityByYearRadial(),
-				GenderByYearSparkPies()
+				GenderByYearSparkPies(),
+				AmountByZipBubble()
 			];
 
 			common.activateController(promises, controllerId)
@@ -65,6 +66,18 @@
 				vm.gender = gender;
 			});
 		}
+
+		function AmountByZipBubble() {
+			vm.zipDataSource = new kendo.data.DataSource({
+				transport: {
+					read: {
+						url: zipByYearApi,
+						dataType: 'json'
+					}
+				}
+			});
+		}
+
 
 
 

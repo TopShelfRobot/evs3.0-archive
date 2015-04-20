@@ -27,12 +27,42 @@
   <!-- End Row -->
   <div class="row-fluid">
     <div class="col-lg-9">
-      <ui-gmap-google-map center='vm.map.center' zoom='vm.map.zoom'>
-        <ui-gmap-layer>
-        </ui-gmap-layer>
-      </ui-gmap-google-map>
+      <!-- <ui-gmap-google-map center='vm.map.center' zoom='vm.map.zoom'> -->
+      <!--   <ui-gmap-layer> -->
+      <!--   </ui-gmap-layer> -->
+      <!-- </ui-gmap-google-map> -->
+
+	  <div kendo-chart
+			k-legend="{ position: 'top' }"
+			k-series="[{ type: 'bubble',
+				xField: 'amount',
+				yField: 'amount',
+				sizeField: 'amount',
+				categoryField: 'zip'
+				}]" k-data-source="vm.zipDataSource" k-tooltip="{visible: true}"></div>
+		<!-- <div kendo-chart -->
+		<!-- 	k-legend="{ position: 'top' }" -->
+		<!-- 	k-series="[{ type: 'pie', -->
+		<!-- 		sizeField: 'amount', -->
+		<!-- 		categoryField: 'zip' -->
+		<!-- 	}]" k-data-source="vm.zipDataSource"></div> -->
+
+
     </div>
     <div class="col-lg-3">
+
+		<div kendo-chart 
+			k-title="{ text: '1024x768 screen resolution trends for 2009', position: 'bottom' }"
+			k-series-defaults="{ type: 'pie' } 
+			k-series="[{
+			field: 'share',
+			categoryField: 'resolution',
+			padding: 0
+			}]"
+			k-data-source="screenResolution"
+			k-series-hover="onSeriesHover"
+			></div>
+
       <div kendo-sparkline k-options="vm.chartOptions" k-series="[{
 			type: 'pie',
 			field: 'amount',
