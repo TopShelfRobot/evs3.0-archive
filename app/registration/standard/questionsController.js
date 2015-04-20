@@ -52,23 +52,8 @@
 				return data;
 			})
 		);
-    
-    // $scope.addons.push({
-//       "id":2,
-//       "name":"Best Dad Coffee Cup",
-//       "active":true,
-//       "amount":13.00,
-//       "addonType":"owner",
-//       "addonDesc":"This is a best dad coffee cup",
-//       "eventureId":null,
-//       "ownerId":1,
-//       "imagePath":"download.jpeg",
-//       "dateCreated":"1900-01-01T05:00:00.000",
-//       "eventure":null,
-//       quantity: 0
-//     });
-//
-    promises.push(
+
+		promises.push(
       datacontext.surcharge.getAddonsByEventureId($routeParams.eventureId)
         .then(function(data){
           data.forEach(function(item){

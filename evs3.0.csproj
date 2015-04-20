@@ -390,7 +390,7 @@
     <Content Include="Content\images\eventure-default.jpg" />
     <Content Include="Content\images\Female-Icon.png" />
     <Content Include="Content\images\list-default.jpg" />
-    <Content Include="Content\images\logo.png" />
+    <Content Include="Content\images\evs-logo.png" />
     <Content Include="Content\images\Male-Icon.png" />
     <Content Include="Content\images\white-logo.png" />
     <Content Include="Content\js\built.min.js" />

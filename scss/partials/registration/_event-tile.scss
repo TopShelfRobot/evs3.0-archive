@@ -112,14 +112,20 @@
   -webkit-box-shadow: inset 0 0 10px #eee;
   box-shadow: inset 0 0 10px #eee;
   margin:10px 0;
+  height:361px;
 
-    .img-container {
-      width:75%;
-      min-width:75%;
-      margin: 0 auto;
+  h4 {
+	height:60px;
+	overflow: hidden;
+  }
 
-      img { height:150px; width: 150px; }
-    }
+  .img-container {
+    width:75%;
+    min-width:75%;
+    margin: 0 auto;
 
-    .event-info { line-height: 1.5em; }
+    img { height:150px; width: 150px; }
+  }
+
+  .event-info { line-height: 1.5em; }
 }

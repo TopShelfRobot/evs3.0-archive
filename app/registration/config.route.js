@@ -117,7 +117,7 @@
 					authorized : ['super-user'],
 				}
 			}, {
-				url: '/user-profile/:participantId',
+				url: '/user-profile/:participantGuid',
 				config: {
 					title: 'User Profile',
 					templateUrl: 'app/registration/profile/profile.part.html',
