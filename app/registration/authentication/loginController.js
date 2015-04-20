@@ -26,7 +26,7 @@
 		$scope.login = function() {
 			authService.login($scope.loginData)
 				.then(function(response) {
-					//console.log(response);
+					console.log(response);
 					$scope.authentication = authService.authentication;
 					authService.startTimer($scope.authentication);
 				});
