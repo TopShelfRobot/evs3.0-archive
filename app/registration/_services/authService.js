@@ -134,27 +134,22 @@ angular.module('evReg').factory('authService', ['$http', '$q', "$timeout", "$loc
 							useRefreshTokens: false
 						});
 					}
-
 					_authentication.isAuth = true;
 					_authentication.userName = loginData.userName;
 					_authentication.useRefreshTokens = loginData.useRefreshTokens;
-
 					deferred.resolve(response);
-
 				}).error(function(err, status) {
 					//console.log('bad password');
 				    //TODO:  wil put in generic login failed here!!
-				    console.log('password no bueno');
-				    console.log(err);
-				    console.log(status);
+				    //console.log('password no bueno');
+				    //console.log(err);
+				    //console.log(status);
 				    _logOut();
 				    deferred.reject(err);
 				    return err;
 				});
 			}
-
 			return deferred.promise;
-
 		};
 
 		var _logOut = function() {
