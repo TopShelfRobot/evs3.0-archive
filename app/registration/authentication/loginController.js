@@ -78,11 +78,11 @@
 						userName: externalAuthData.username,
 						externalAccessToken: externalAuthData.external_access_token
 					};
-					//console.log('authService.externalAuthData', authService.externalAuthData);
+					console.log('authService.externalAuthData', authService.externalAuthData);
 
 					authService.registerExternal(authService.externalAuthData)
 						.then(function (response) {
-							//console.table(response);
+							console.log('looking goood');
 							authService.startTimer(authService.externalAuthData);
 						//}).error(function (err) {
 						//	//console.log('trying to defer error');
