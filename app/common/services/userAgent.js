@@ -10,7 +10,7 @@
 
             vm.userAgent.browserCodeName = navigator.appCodeName;
             vm.userAgent.browserName = navigator.appName;
-            vm.userAgent.browserVersion = navigator.appVersion;
+            vm.userAgent.browserVersion = navigator.appVersion.substring(0,149);
             vm.userAgent.cookiesEnabled = navigator.cookieEnabled || false;
             vm.userAgent.platform = navigator.platform;
             vm.userAgent.header = navigator.userAgent;
