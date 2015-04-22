@@ -44,8 +44,8 @@
 		vm.selectedRoles = [];
 		vm.roleOptions = {
 			placeholder: 'Select roles...',
-			dataTextField: 'data',
-			dataValueField: 'data',
+			dataTextField: 'name',
+			dataValueField: 'name',
 			dataSource: {
 				type: "json",
 				transport: {
