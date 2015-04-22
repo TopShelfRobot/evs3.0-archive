@@ -62,9 +62,14 @@
 		}
 
 		function GenderByYearPie() {
-			$http.get(genderByYearApi).then(function(gender) {
-				vm.gender = gender;
-			});
+			vm.gender = new kendo.data.DataSource({
+				transport: {
+					read: {
+						url: genderByYearApi,
+						dataType: 'json'
+					}
+				}
+			})	
 		}
 
 		function AmountByZipBubble() {

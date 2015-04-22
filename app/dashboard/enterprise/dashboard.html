@@ -52,11 +52,12 @@
     <div class="col-lg-3">
 
 		<div kendo-chart 
-			k-series-defaults="{ type: 'pie' } 
+			k-series-defaults="{ type: 'pie' }"
 			k-series="[{
 			field: 'amount',
 			categoryField: 'gender',
 			}]"
+			k-options="vm.chartOptions"
 			k-data-source="vm.gender"
 			></div>
 
