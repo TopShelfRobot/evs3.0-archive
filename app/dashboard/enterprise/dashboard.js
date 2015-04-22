@@ -32,7 +32,7 @@
 		function activate() {
 			var promises = [
 				CapacityByYearRadial(),
-				GenderByYearSparkPies(),
+				GenderByYearPie(),
 				AmountByZipBubble()
 			];
 
@@ -61,7 +61,7 @@
 				});
 		}
 
-		function GenderByYearSparkPies() {
+		function GenderByYearPie() {
 			$http.get(genderByYearApi).then(function(gender) {
 				vm.gender = gender;
 			});

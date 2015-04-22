@@ -52,23 +52,20 @@
     <div class="col-lg-3">
 
 		<div kendo-chart 
-			k-title="{ text: '1024x768 screen resolution trends for 2009', position: 'bottom' }"
 			k-series-defaults="{ type: 'pie' } 
 			k-series="[{
-			field: 'share',
-			categoryField: 'resolution',
-			padding: 0
+			field: 'amount',
+			categoryField: 'gender',
 			}]"
-			k-data-source="screenResolution"
-			k-series-hover="onSeriesHover"
+			k-data-source="vm.gender"
 			></div>
 
-      <div kendo-sparkline k-options="vm.chartOptions" k-series="[{
-			type: 'pie',
-			field: 'amount',
-			categoryField: 'gender'
-			}]" k-data-source="vm.gender" k-tooltip="{template: '${value} - ${category}'}"
-      style="height:100px"></div>
+      <!-- <div kendo-sparkline k-options="vm.chartOptions" k-series="[{ -->
+			<!-- type: 'pie', -->
+			<!-- field: 'amount', -->
+			<!-- categoryField: 'gender' -->
+			<!-- }]" k-data-source="vm.gender" k-tooltip="{template: '${value} - ${category}'}" -->
+      <!-- style="height:100px"></div> -->
     </div>
   </div>
 </section>
