@@ -30,9 +30,7 @@
 
 		function activate() {
 			common.activateController(promises, controllerId)
-				.then(function() {
-					// getAllRoles();
-				});
+				.then(function() {});
 		}
 
 		function CreateEmployee() {
@@ -56,34 +54,6 @@
 			}
 		};
 
-		// function getAllRoles() {
-		// 	$http.get(config.remoteApiName + 'Account/GetAllRoles').
-		// 	success(function(data) {
-		// 		// populateMultiSelect(data);
-		// 	}).
-		// 	error(function(data, status, headers, config) {
-		// 		// called asynchronously if an error occurs
-		// 	});
-		// }
-
-		//     function populateMultiSelect(roles) {
-		//       for (var i = 0; i < roles.length; i++) {
-		//         console.log(roles[i]);
-		//         vm.multiSelect.dataSource.add({
-		//           name: roles[i] //,
-		//             //roleId: roles[i].roleId
-		//         });
-		//       }
-		//     }
-
-		//     vm.selectedRoles = [];
-
-		//     vm.roleOptions = {
-		//       placeholder: 'Select roles...',
-		//       dataTextField: 'name',
-		//       dataValueField: 'name',
-		//     };
-
 		vm.cancel = function() {
 			return datacontext.cancel()
 				.then(complete);
@@ -94,32 +64,48 @@
 		};
 
 		vm.saveAndNav = function() {
-
+			vm.savedSuccessfully = false;
 			/* TODO Error handling
 
 			 Process below is as follows:
-			1) Creates the ASP User Account
+			0) Check if user account exists.. If
+			1) Creates the ASP User Account   Else
 			2) If vm.savedSuccessfully === true then it does an $http post to save the user roles by user id (vm.registration.userId)
 			3) If that is successful it will then save the employee.
 			*/
 
-			authService.saveRegistration(vm.registration, false).then(function(response) {
-					vm.savedSuccessfully = true;
-					vm.message = 'Employee has been created successfully, you will be redirected.';
-				},
-				function(response) {
-					var errors = [];
-					for (var key in response.data.modelState) {
-						//TODO whg added this. might explode
-						if (response.data.modelState.hasOwnProperty(key)) {
-							for (var i = 0; i < response.data.modelState[key].length; i++) {
-								errors.push(response.data.modelState[key][i]);
+			$http.get(config.apiPath + 'api/Account/UserExists', vm.registration).
+			success(function(response) {
+				if (!response.userFound) {
+					//User Not Found
+					//Create Account
+					authService.saveRegistration(vm.registration, false).then(function(response) {
+							vm.savedSuccessfully = true;
+							vm.message = 'Employee account has been created successfully.';
+							createEmployee(vm.savedSuccessfully);
+						},
+						function(response) {
+							var errors = [];
+							for (var key in response.data.modelState) {
+								if (response.data.modelState.hasOwnProperty(key)) {
+									for (var i = 0; i < response.data.modelState[key].length; i++) {
+										errors.push(response.data.modelState[key][i]);
+									}
+								}
 							}
-						}
-					}
-					vm.message = 'Failed to register user due to: ' + errors.join(' ');
-				}).then(function() {
-				if (vm.savedSuccessfully === true) {
+							vm.message = 'Failed to register user due to: ' + errors.join(' ');
+						});
+				} else if (response.userFound) {
+					createEmployee(true);
+				}
+			}).
+			error(function(data, status, headers, config) {
+				// Unable to check for account
+				vm.message = 'An error has occurred. Please try again.';
+			});
+
+			function createEmployee(saved) {
+				if (saved === true) {
 					vm.employee.email = vm.registration.userName; /* Set employee email address if registration === successful */
 					var source = {
 						'userName': vm.employee.email,
@@ -138,11 +124,11 @@
 
 					}).
 					error(function(data, status, headers, config) {
-						// called asynchronously if an error occurs
-						// or server returns response with an error status.
+						// Roles could not be assigned
+						vm.message = 'Roles were unable to be assigned. Please try again.';
 					});
 				}
-			});
+			}
 		};
 
 	}
