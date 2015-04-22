@@ -31,7 +31,7 @@
 		function activate() {
 			common.activateController(promises, controllerId)
 				.then(function() {
-				getAllRoles();
+					// getAllRoles();
 				});
 		}
 
@@ -55,15 +55,16 @@
 				}
 			}
 		};
-		    function getAllRoles() {
-		      $http.get(config.remoteApiName + 'Account/GetAllRoles').
-		      success(function (data) {
-		       // populateMultiSelect(data);
-		      }).
-		      error(function (data, status, headers, config) {
-		        // called asynchronously if an error occurs
-		      });
-		    }
+
+		// function getAllRoles() {
+		// 	$http.get(config.remoteApiName + 'Account/GetAllRoles').
+		// 	success(function(data) {
+		// 		// populateMultiSelect(data);
+		// 	}).
+		// 	error(function(data, status, headers, config) {
+		// 		// called asynchronously if an error occurs
+		// 	});
+		// }
 
 		//     function populateMultiSelect(roles) {
 		//       for (var i = 0; i < roles.length; i++) {
