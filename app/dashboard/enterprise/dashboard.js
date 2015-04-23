@@ -12,7 +12,10 @@
 		vm.ownerId = config.owner.ownerId;
 		vm.year = new Date().getFullYear();
 		vm.chartOptions = {
-			theme: 'material'
+			theme: 'material',
+			legend: {
+				visible: false
+			},
 		};
 		vm.map = {
 			center: {
@@ -25,22 +28,22 @@
 		var overviewOwnerApi = config.remoteApiName + 'widget/GetOwnerGraph/' + vm.ownerId;
 		var genderByYearApi = config.remoteApiName + 'widget/GetGenderInfoByYear/' + vm.year;
 		var ageByYearApi = config.remoteApiName + 'widget/GetAgeInfoByYear/' + vm.year;
-		var zipByYearApi = config.remoteApiName + 'widget/GetZipHeatMapByYear/' + vm.year;
+		var zipByYearApi = config.remoteApiName + 'widget/GetZip/' + vm.year;
 		var capacityByYearApi = config.remoteApiName + 'widget/GetCapacityRegDialsByYear/' + vm.year;
+		var trendByOwnerApi = config.remoteApiName + 'widget/GetTrendByOwnerId/' + vm.ownerId;
+		var revenueByOwnerApi = config.remoteApiName + 'widget/GetRevenueByOwnerId/' + vm.ownerId;
+
 		activate();
 
 		function activate() {
 			var promises = [
-				CapacityByYearRadial(),
-				GenderByYearPie(),
-				AmountByZipBubble()
+				CapacityByYearRadial()
 			];
 
 			common.activateController(promises, controllerId)
 				.then(function() {
 					uiGmapGoogleMapApi.then(function(map) {
 						google.maps.event.trigger(map, 'resize');
-
 					});
 				});
 		}
@@ -61,35 +64,74 @@
 				});
 		}
 
-		function GenderByYearPie() {
-			vm.gender = new kendo.data.DataSource({
+		vm.gender = new kendo.data.DataSource({
+			transport: {
+				read: {
+					url: genderByYearApi,
+					dataType: 'json'
+				}
+			}
+		});
+
+		vm.ageGroup = new kendo.data.DataSource({
+			transport: {
+				read: {
+					url: ageByYearApi,
+					dataType: 'json'
+				}
+			}
+		});
+
+		vm.zip = new kendo.data.DataSource({
+			transport: {
+				read: {
+					url: zipByYearApi,
+					dataType: 'json'
+				}
+			}
+		});
+
+		vm.treeOptions = {
+			dataSource: {
 				transport: {
 					read: {
-						url: genderByYearApi,
-						dataType: 'json'
+						url: "app/dashboard/enterprise/zipcode.json",
+						dataType: "json"
+					}
+				},
+				schema: {
+					model: {
+						children: "items"
 					}
 				}
-			})	
-		}
+			},
+			valueField: "value",
+			textField: "name"
+		};
 
-		function AmountByZipBubble() {
-			vm.zipDataSource = new kendo.data.DataSource({
+		function TrendsByOwner() {
+			vm.trend = new kendo.dataDataSource({
 				transport: {
 					read: {
-						url: zipByYearApi,
+						url: trendByOwnerApi,
 						dataType: 'json'
 					}
 				}
 			});
 		}
 
-
-
-
-
+		function RevenueByOwner() {
+			vm.revenue = new kendo.dataDataSource({
+				transport: {
+					read: {
+						url: revenueByOwnerApi,
+						dataType: 'json'
+					}
+				}
+			});
+		}
 
 		function ownerOverviewChart() {}
-
 		vm.OverviewOwnerChart = {
 			theme: 'material',
 			dataSource: {

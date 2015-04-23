@@ -1,13 +1,6 @@
 /*************************************************************
 Dashboard Radial Gauges
 **************************************************************/
-.reg-gauge {
-	display:block;
-	width: 300px;
-	height: 250px;
-	margin: 0 auto;
-}
-
 .gauge-container {
 	background: transparent url("../images/gauge-container-partial.png") no-repeat 50% 50% ;
 	width: 336px;
@@ -15,14 +8,33 @@ Dashboard Radial Gauges
 	text-align: center;
 	margin: 0 auto 30px auto;
 	padding-top:10px;
+	
+	.reg-gauge {
+		display:block;
+		width: 300px;
+		height: 250px;
+		margin: 0 auto;
+	}
+	.capacity-radial-info {
+		color:#0D47A1;
+		font-size:1.2em;
+		display:inline-block;
+		width:160px;
+		margin-top:-30px;
+	}
 }
 
-.capacity-radial-info {
-	color:#0D47A1;
-	font-size:1.2em;
-	display:inline-block;
-	width:160px;
-	margin-top:-30px;
+/*************************************************************
+Dashboard Pie
+**************************************************************/
+
+.pie-container {
+	height:250px;
+	margin: 0 auto 20px;
+	
+	.k-chart {
+		height:220px;
+	}
 }
 /*************************************************************
 Google Maps Container

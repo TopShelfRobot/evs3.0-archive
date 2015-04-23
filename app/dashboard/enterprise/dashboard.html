@@ -1,22 +1,22 @@
 <section ng-controller="dashboard as vm">
-  <h1>Dashboard</h1>
-  <hr>
+  <br>
+  <br>
   <div class="row-fluid text-center">
-    <div class="col-lg-4">
+    <div class="col-md-4">
       <div class="gauge-container">
         <span class="reg-gauge" kendo-radialgauge="vm.radialOne" k-scale="{ max: vm.capacityEventOne }"
         ng-model="vm.regsEventOne"></span>
         <span class="capacity-radial-info">{{vm.radialEventOneName}}</span>
       </div>
     </div>
-    <div class="col-lg-4">
+    <div class="col-md-4">
       <div class="gauge-container">
         <span class="reg-gauge" kendo-radialgauge="vm.radialTwo" k-scale="{ max: vm.capacityEventTwo }"
         ng-model="vm.regsEventTwo"></span>
         <span class="capacity-radial-info">{{vm.radialEventTwoName}}</span>
       </div>
     </div>
-    <div class="col-lg-4">
+    <div class="col-md-4">
       <div class="gauge-container">
         <span class="reg-gauge" kendo-radialgauge="vm.radialThree" k-scale="{ max: vm.capacityEventThree }"
         ng-model="vm.regsEventThree"></span>
@@ -24,49 +24,59 @@
       </div>
     </div>
   </div>
+  <br>
+  <br>
+  <hr>
+  <br>
+  <br>
   <!-- End Row -->
   <div class="row-fluid">
-    <div class="col-lg-9">
-      <!-- <ui-gmap-google-map center='vm.map.center' zoom='vm.map.zoom'> -->
-      <!--   <ui-gmap-layer> -->
-      <!--   </ui-gmap-layer> -->
-      <!-- </ui-gmap-google-map> -->
+    <div class="col-lg-8">
+      <!-- <div kendo-chart k-legend="{ position: 'bottom' }" k-series-defaults="{ type: 'bar' }" -->
+      <!-- k-series="[{ field: 'amount' }]" k-data-source="vm.zip" k-category-axis="{ field: 'zip'}" -->
+      <!-- k-options="vm.chartOptions"></div> -->
 
-	  <div kendo-chart
-			k-legend="{ position: 'top' }"
-			k-series="[{ type: 'bubble',
-				xField: 'amount',
-				yField: 'amount',
-				sizeField: 'amount',
-				categoryField: 'zip'
-				}]" k-data-source="vm.zipDataSource" k-tooltip="{visible: true}"></div>
-		<!-- <div kendo-chart -->
-		<!-- 	k-legend="{ position: 'top' }" -->
-		<!-- 	k-series="[{ type: 'pie', -->
-		<!-- 		sizeField: 'amount', -->
-		<!-- 		categoryField: 'zip' -->
-		<!-- 	}]" k-data-source="vm.zipDataSource"></div> -->
+
+      <div kendo-treemap k-options="vm.treeOptions" style="height: 400px; font-size: 12px;"></div>
 
 
     </div>
-    <div class="col-lg-3">
-
-		<div kendo-chart 
-			k-series-defaults="{ type: 'pie' }"
-			k-series="[{
+    <div class="col-lg-4">
+      <div class="row">
+        <div class="col-lg-6">
+          <div class="pie-container">
+            <h4 class="text-center">Gender</h4>
+            <div kendo-chart k-series-defaults="{ type: 'pie' }" k-series="[{
 			field: 'amount',
 			categoryField: 'gender',
-			}]"
-			k-options="vm.chartOptions"
-			k-data-source="vm.gender"
-			></div>
-
-      <!-- <div kendo-sparkline k-options="vm.chartOptions" k-series="[{ -->
-			<!-- type: 'pie', -->
-			<!-- field: 'amount', -->
-			<!-- categoryField: 'gender' -->
-			<!-- }]" k-data-source="vm.gender" k-tooltip="{template: '${value} - ${category}'}" -->
-      <!-- style="height:100px"></div> -->
+			padding: 0
+			}]" k-options="vm.chartOptions" k-data-source="vm.gender" k-tooltip="{visible: true, template: '${category} - ${value}'}"></div>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="pie-container">
+            <h4 class="text-center">Age Groups</h4>
+            <div kendo-chart k-series-defaults="{ type: 'pie' }" k-series="[{
+			field: 'amount',
+			categoryField: 'ageGroup',
+			padding: 0
+			}]" k-options="vm.chartOptions" k-data-source="vm.ageGroup" k-tooltip="{visible: true, template: '${category} - ${value}'}"></div>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
+    <!-- End Row -->
+    <br>
+    <br>
+    <br>
+    <br>
+    <div class="row-fluid">
+      <div class="col-lg-6">
+
+      </div>
+      <div class="col-lg-6">
+
+      </div>
+    </div>
+
 </section>
