@@ -1,4 +1,29 @@
 /*************************************************************
+Fancy Chart Titles
+**************************************************************/
+.dashboard-chart-title {
+	color: #42A5F5;
+	margin-bottom:1.125em;
+	line-height:0;
+	font-weight:bold;
+	span {
+		display:inline-block;
+		position: relative;
+		&:after {
+			content: "";
+			position: absolute;
+			height: 5px;
+			top: 0;
+			width:100%;
+			border-bottom: 5px solid #009688;
+		}
+		&:after {
+			left: 100%;
+			margin-left: 5px;
+		}
+	}
+}
+/*************************************************************
 Dashboard Radial Gauges
 **************************************************************/
 .gauge-container {
