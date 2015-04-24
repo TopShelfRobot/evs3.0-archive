@@ -49,7 +49,8 @@
               toolbar: ['excel'],
               excel: {
                   fileName: 'Listings.xlsx',
-                  filterable: true
+                  filterable: true,
+                  allPages: true
               },
               dataSource: {
                 type: "json",
