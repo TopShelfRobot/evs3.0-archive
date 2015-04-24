@@ -6,7 +6,7 @@
 	function controller($scope, $location, $routeParams, $http, config, cart, datacontext, common, dt) {
 
 		$scope.cart = cart;
-		$scope.usatMembershipId;
+		$scope.usatMembershipId = '';
 
 		var promises = [];
 
@@ -65,9 +65,9 @@
 		        }
 		    }
 		};
-			$scope.verifyUSAT = function () {
+			$scope.verifyUSAT = function (id) {
 				var usatObj = {
-					'USATNumber': $scope.usatMembershipId,
+					'USATNumber': id,
 					'email': $scope.selectedParticipant.email
 				};
 				console.log('USAT', usatObj);
