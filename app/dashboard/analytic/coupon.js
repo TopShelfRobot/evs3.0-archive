@@ -1,4 +1,4 @@
-(function () {
+(function() {
 	'use strict';
 	var controllerId = 'couponAnalytics';
 	angular.module('app').controller(controllerId, ['$routeParams', 'config', 'common', 'datacontext', couponAnalytics]);
@@ -18,14 +18,14 @@
 			var promises = [couponInfo()];
 
 			common.activateController(promises, controllerId)
-				.then(function () {
+				.then(function() {
 					//log('Activated Coupon Addon Center View');
 				});
 		}
 
 		function getListing() {
 			return datacontext.surcharge.getCouponTotalsByOwnerId(vm.ownerId)
-				.then(function (data) {
+				.then(function(data) {
 					vm.couponTotals = data;
 					return vm.couponTotals;
 				});
@@ -49,10 +49,10 @@
 			var status = [{
 				'value': true,
 				'text': 'Active',
-      }, {
+			}, {
 				'value': false,
 				'text': 'Inactive'
-      }];
+			}];
 
 			var couponapi = config.remoteApiName + 'widget/GetCouponsByOwnerId/' + vm.ownerId;
 			vm.couponGridOptions = {
@@ -79,20 +79,25 @@
 				columns: [{
 					title: 'Coupon',
 					template: '<a href="\\\#coupondetail/#=id#">#=code#</a>',
-					width: '400px'
-        }, {
+					width: '300px'
+				}, {
 					field: 'amount',
 					title: 'Amount',
 					width: '220px'
-        }, {
+				}, {
+					field: 'amountType',
+					title: 'Type',
+					width: 200
+				}, {
 					field: 'active',
 					width: '100px',
-					values: status
-        }, {
+					values: status,
+					filterable: false
+				}, {
 					title: '',
 					width: '120px',
 					template: '<a class="btn btn-default btn-block" href="\\#setcoupon/#=id#"><em class="glyphicon glyphicon-edit"></em>&nbsp;Edit</a>'
-        }]
+				}]
 			};
 		}
 

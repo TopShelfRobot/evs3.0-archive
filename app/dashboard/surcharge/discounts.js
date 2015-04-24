@@ -1,4 +1,4 @@
-(function () {
+(function() {
 	'use strict';
 	var controllerId = 'discounts';
 	angular.module('app').controller(controllerId, ['config', 'common', 'datacontext', discounts]);
@@ -22,20 +22,27 @@
 		function activate() {
 			var promises = [couponGrid(), addonGrid(), getOwner(), getAmountTypes()];
 			common.activateController(promises, controllerId)
-				.then(function () {
+				.then(function() {
 					//log('Activated Coupon Addon Center View');
 				});
 		}
 
 		function couponGrid() {
+			var amountType = [{
+				'value': 0,
+				'text': 'Dollars',
+			}, {
+				'value': 1,
+				'text': 'Percent'
+			}];
 
 			var status = [{
 				'value': true,
 				'text': 'Active',
-          }, {
+			}, {
 				'value': false,
 				'text': 'Inactive'
-          }];
+			}];
 
 			var couponApi = config.remoteApiName + 'widget/GetCouponsByOwnerId/' + config.owner.ownerId;
 			vm.couponGridOptions = {
@@ -63,24 +70,29 @@
 				columns: [{
 					field: 'code',
 					title: 'Coupon',
-					width: 400
-            }, {
+					width: 300
+				}, {
 					field: 'amount',
 					title: 'Amount',
-					format: '{0:c}',
-					width: 220
-            }, {
+					width: 80,
+					filterable: false
+				}, {
+					field: 'amountType',
+					title: 'Type',
+					width: 220,
+					values: amountType
+				}, {
 					field: 'active',
-					width: 100,
-					values: status
-            }, {
+					width: 150,
+					values: status,
+				}, {
 					title: '',
 					width: 120,
 					template: '<a class="btn btn-default btn-block" href="\\\#setcoupon/#=id#"><em class="glyphicon glyphicon-edit"></em>&nbsp;Edit</a>'
-            }]
+				}]
 			};
 
-			vm.detailGridOptions = function (e) {
+			vm.detailGridOptions = function(e) {
 				var couponUseApi = config.remoteApiName + 'widget/GetCouponUseByCouponId/' + e.id;
 
 				return {
@@ -102,27 +114,26 @@
 					},
 					sortable: true,
 					pageable: true,
-					columns: [
-						{
-							field: 'name',
-							title: 'List',
-							width: 300
-                   }, {
-							field: 'amount',
-							title: 'Amount',
-							format: '{0:c}',
-							width: 150
-                   }, {
-							field: 'description',
-							title: 'Coupon',
-							width: 225
-                   }, {
-							field: 'firstName',
-							title: 'First Name'
-                   }, {
-							field: 'lastName',
-							title: 'Last Name'
-                   }]
+					columns: [{
+						field: 'name',
+						title: 'List',
+						width: 300
+					}, {
+						field: 'amount',
+						title: 'Amount',
+						format: '{0:c}',
+						width: 150
+					}, {
+						field: 'description',
+						title: 'Coupon',
+						width: 225
+					}, {
+						field: 'firstName',
+						title: 'First Name'
+					}, {
+						field: 'lastName',
+						title: 'Last Name'
+					}]
 				};
 			};
 		}
@@ -156,27 +167,27 @@
 					field: 'name',
 					title: 'Addon',
 					width: 250
-            }, {
+				}, {
 					field: 'eventureName',
 					title: 'Eventure',
 					width: 250
-            }, {
+				}, {
 					field: 'addonType',
 					title: 'Addon Type',
 					width: 110
-            }, {
+				}, {
 					field: 'amount',
 					title: 'Amount',
 					width: 110,
 					format: '{0:c}'
-            }, {
+				}, {
 					title: '',
 					width: 90,
 					template: '<a class="btn btn-default btn-block" href="\\\#setaddon/#=id#"><em class="glyphicon glyphicon-edit"></em>&nbsp;Edit</a>'
-            }]
+				}]
 			};
 
-			vm.addonDetailGridOptions = function (e) {
+			vm.addonDetailGridOptions = function(e) {
 				var addonUseApi = config.remoteApiName + 'widget/GetAddonsUseByAddonId/' + e.id;
 
 				return {
@@ -201,30 +212,30 @@
 					columns: [{
 						field: 'participant',
 						title: 'Participant'
-                 }, {
+					}, {
 						field: 'eventureName',
 						title: 'Eventure'
-                 }, {
+					}, {
 						field: 'qty',
 						title: 'Qty',
 						width: 120
-                 }, {
+					}, {
 						field: 'eventureOrderId',
 						title: 'Order Id',
 						width: 150
-                 }, {
+					}, {
 						field: 'amount',
 						title: 'Amount',
 						format: '{0:c}',
 						width: 150
-         }]
+					}]
 				};
 			};
 		}
 
 		function getOwner() {
 			return datacontext.participant.getOwnerById(vm.ownerId)
-				.then(function (data) {
+				.then(function(data) {
 					vm.owner = data;
 					return vm.owner;
 				});
@@ -232,15 +243,15 @@
 
 		function getAmountTypes() {
 			return datacontext.participant.getAmountTypes()
-				.then(function (data) {
+				.then(function(data) {
 					vm.amountTypes = data;
 					return vm.amountTypes;
 				});
 		}
 
-		vm.saveDiscounts = function () {
+		vm.saveDiscounts = function() {
 			datacontext.save()
-				.then(function () {
+				.then(function() {
 					console.log('saved');
 				});
 		};
