@@ -66,20 +66,19 @@
 			}
 
 			$scope.verifyUSAT = function () {
-				//alert('we in');
-				var source = {
+				var usatObj = {
 					'USATNumber': $scope.usatMembershipId
+					'email': $scope.selectedParticipant.email
 				};
-				$http.post(config.apiPath + 'api/transaction/USATVerification', source)
+				console.log('USAT', usatObj);
+				$http.post(config.apiPath + 'api/transaction/USATVerification', usatObj)
 					.success(function (result) {
-						console.log('Success', result);
+						toastr.success('Your USAT Number has been verified!');
 					})
 					.error(function (data, status, headers, config) {
 						console.log('Error', data);
+						toastr.error('Your USAT Number could not be verified. Please try again.');
 					})
-					.finally(function () {
-
-					});
 			};
 
 			//if (eventureList.eventureListType == config.eventureListType.standard) {   //enum? mjb
