@@ -142,7 +142,15 @@
 
 		cart.processCartRules = function () {
 			//clear all rules
-			cart.surcharges = [];
+		    //cart.surcharges = [];
+		    for (var j = 0; j < cart.surcharges.length; j++) {
+		        var currCharge = cart.surcharges[j];
+		        if (currCharge.chargeType != 'usat') {
+		            cart.surcharges.splice(j, 1);
+		            break;
+		        }
+		    }
+
 			var regCount = 0;
 			var regTotalAmount = 0;
 			var i, key;
