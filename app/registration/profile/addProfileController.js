@@ -16,8 +16,13 @@
 		$scope.participant.email = authService.authentication.userName;
 
 		$scope.formHolder = {};
-		
-		$scope.isAdmin = config.owner.isAdmin;
+		$scope.isAdmin = false;
+		var pathName = location.pathname;
+		console.log('PathName', pathName);
+		if (pathName === '/dash.html') {
+			console.log('pathName evaulated to true');
+			$scope.isAdmin = true;
+		}
 
 		$scope.submit = function(){
 
