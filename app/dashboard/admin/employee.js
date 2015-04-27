@@ -13,7 +13,7 @@
         activate();
 
         function activate() {
-            var promises = [getAllRoles()];
+            var promises = [];
             common.activateController(promises, controllerId)
               .then(function () {
                   //log('Activated Coupon Addon Center View');
@@ -43,32 +43,20 @@
 
         vm.selectedUser = null;
 
-        function getAllRoles() {
-            $http.get(config.remoteApiName + 'Account/GetAllRoles').
-            success(function (data) {
-               populateMultiSelect(data);
-            }).
-            error(function (data, status, headers, config) {
-                // called asynchronously if an error occurs
-            });
-        }
-
-        function populateMultiSelect(roles) {
-            for (var i = 0; i < roles.length; i++) {
-                console.log(roles[i]);
-                vm.multiSelect.dataSource.add({
-                    name: roles[i]   //,
-                    //roleId: roles[i].roleId
-                });
-            }
-        }
-
+        var rolesApi = config.remoteApiName + 'Account/GetAllRoles';
         vm.selectedRoles = [];
-
         vm.roleOptions = {
             placeholder: 'Select roles...',
             dataTextField: 'name',
             dataValueField: 'name',
+            dataSource: {
+                type: "json",
+                transport: {
+                    read: {
+                        url: rolesApi
+                    }
+                }
+            }
         };
 
         vm.updateUserRoles = function () {

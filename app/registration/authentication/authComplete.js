@@ -49,9 +49,9 @@ window.common = (function () {
 var fragment = common.getFragment();
 
 //alert(fragment);
-console.table(fragment);
-console.log(window);
-console.log(window.opener);
+//console.table(fragment);
+//console.log(window);
+//console.log(window.opener);
 
 window.location.hash = fragment.state || '';
 

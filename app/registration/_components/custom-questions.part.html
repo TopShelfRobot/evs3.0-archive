@@ -13,7 +13,7 @@
     </div>
 
     <div class="form-group" ng-switch-when="radio" ng-if="question.active">
-      <label class="col-md-6 col-lg-6 control-label">{{question.questionText}}</label>
+		<label class="col-md-6 col-lg-6 control-label">{{question.questionText}}</label>
       <div class="col-md-6 col-lg-6">
         <div ng-repeat="o in question.options">
           <label class="radio-inline">
@@ -34,8 +34,8 @@
     </div>
 
     <div class="row">
-      <div class="col-md-6 col-lg-6"></div>
-      <div class="col-md-6 col-lg-6">
+      <div class="col-md-4 col-lg-4"></div>
+      <div class="col-md-8 col-lg-8">
         <div class="checkbox" ng-switch-when="checkbox" ng-if="question.active">
           <label>
             <input type="checkbox" ng-model="question.answer" ng-change="onChange(question)"

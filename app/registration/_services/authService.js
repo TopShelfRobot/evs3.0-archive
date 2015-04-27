@@ -71,7 +71,8 @@ angular.module('evReg').factory('authService', ['$http', '$q', "$timeout", "$loc
 							headers: {
 								'Content-Type': 'application/x-www-form-urlencoded'
 							}
-						}).success(function(response) {
+						}).success(function (response) {
+						    //console.log('success');
 							if (loginData.useRefreshTokens) {
 								localStorageService.set('authorizationData', {
 									token: response.access_token,
@@ -99,7 +100,10 @@ angular.module('evReg').factory('authService', ['$http', '$q', "$timeout", "$loc
 
 							deferred.resolve(response);
 
-						}).error(function(err, status) {
+						}).error(function (err, status) {
+						    //console.log('password no bueno');
+						    //console.log(err);
+						    //console.log(status);
 							_logOut();
 							deferred.reject(err);
 						});
@@ -130,23 +134,22 @@ angular.module('evReg').factory('authService', ['$http', '$q', "$timeout", "$loc
 							useRefreshTokens: false
 						});
 					}
-
 					_authentication.isAuth = true;
 					_authentication.userName = loginData.userName;
 					_authentication.useRefreshTokens = loginData.useRefreshTokens;
-
 					deferred.resolve(response);
-
 				}).error(function(err, status) {
 					//console.log('bad password');
-					//TODO:  wil put in generic login failed here!!
-					_logOut();
-					deferred.reject(err);
+				    //TODO:  wil put in generic login failed here!!
+				    //console.log('password no bueno');
+				    //console.log(err);
+				    //console.log(status);
+				    _logOut();
+				    deferred.reject(err);
+				    return err;
 				});
 			}
-
 			return deferred.promise;
-
 		};
 
 		var _logOut = function() {
