@@ -8,7 +8,7 @@
 
 		$scope.disableEmail = true;
 
-		$scope.participantGuid = cart.participantGuid;
+		$scope.participantGuid = cart.participantGuid || $routeParams.participantGuid;
 
 		$scope.partButton = cart.regSettings.partButtonText;
 
