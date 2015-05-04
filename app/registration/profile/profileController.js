@@ -22,6 +22,15 @@
 			isActive: true
 		};
 
+		$scope.isAdmin = false;
+		var pathName = location.pathname;
+		console.log('PathName', pathName);
+		if (pathName === '/dash.html') {
+			console.log('pathName evaulated to true');
+			$scope.isAdmin = true;
+		}
+
+
 		$scope.isRegistrationOnProfile = cart.regSettings.isRegistrationOnProfile;
 		$scope.isTeamRegistrationOnProfile = cart.regSettings.isTeamRegistrationOnProfile;
 		$scope.isParticipantOnProfile = cart.regSettings.isParticipantOnProfile;
