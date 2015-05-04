@@ -25,7 +25,7 @@
       <div class="form-group">
         <label for="EmailAddress">Email Address</label>
         <input type="email" class="form-control" id="EmailAddress" name="EmailAddress"
-        ng-model="participant.email" required disabled>
+        ng-model="participant.email" required ng-disabled="!isAdmin">
       </div>
     </div>
     <div class="col-sm-6">
