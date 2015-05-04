@@ -14,7 +14,7 @@
     </div>
   </div>
 
-  <div ng-hide="vm.showSplash">
+  <div ng-if="!vm.showSplash">
 
     <div ng-show="vm.isBusy" style="position: absolute; top: 50%; left: 50%; right: 50%; z-index: 1000000">
       <div data-cc-spinner="vm.spinnerOptions" style="z-index: 1001"></div>

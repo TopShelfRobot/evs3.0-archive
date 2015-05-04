@@ -220,30 +220,6 @@ pip-log.txt
 #Mr Developer
 .mr.developer.cfg
 
-.idea/
-
-.idea/dictionaries/wgoolsby.xml
-
-.idea/encodings.xml
-
-.idea/evs3.0.iml
-
-.idea/inspectionProfiles/profiles_settings.xml
-
-.idea/inspectionProfiles/Project_Default.xml
-
-.idea/misc.xml
-
-.idea/modules.xml
-
-.idea/scopes/scope_settings.xml
-
-.idea/vcs.xml
-
-.idea/workspace.xml
-
-.idea/jsLinters/jshint.xml
-
 .sass-cache/*
 
 Content/Images/*
@@ -251,3 +227,7 @@ Content/Images/*
 node_modules/*
 
 bower_components/*
+
+Content/*
+
+Scripts/*

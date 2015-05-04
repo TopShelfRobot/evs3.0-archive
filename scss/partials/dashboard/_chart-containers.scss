@@ -1,0 +1,82 @@
+/*************************************************************
+Fancy Chart Titles
+**************************************************************/
+.dashboard-chart-title {
+	color: #42A5F5;
+	margin-bottom:1.125em;
+	line-height:0;
+	font-weight:bold;
+	span {
+		display:inline-block;
+		position: relative;
+		&:after {
+			content: "";
+			position: absolute;
+			height: 5px;
+			top: 0;
+			width:100%;
+			border-bottom: 3px solid #009688;
+		}
+		&:after {
+			left: 100%;
+			margin-left: 5px;
+		}
+	}
+}
+/*************************************************************
+Dashboard Radial Gauges
+**************************************************************/
+.gauge-container {
+	background: transparent url("../images/gauge-container-partial.png") no-repeat 50% 50% ;
+	width: 336px;
+	height: 336px;
+	text-align: center;
+	margin: 0 auto 30px auto;
+	padding-top:10px;
+	
+	.reg-gauge {
+		display:block;
+		width: 300px;
+		height: 250px;
+		margin: 0 auto;
+	}
+	.capacity-radial-info {
+		color:#0D47A1;
+		font-size:1.2em;
+		display:inline-block;
+		width:160px;
+		margin-top:-30px;
+	}
+}
+
+/*************************************************************
+Dashboard Pie
+**************************************************************/
+
+.pie-container {
+	height:250px;
+	margin: 0 auto 20px;
+	
+	.k-chart {
+		height:220px;
+	}
+}
+/*************************************************************
+Charts
+**************************************************************/
+.chart-container {
+	height:500px;
+	.k-chart {
+		height:500px;
+	}
+}
+.owner-chart-container {
+	height: 300px;
+	.k-chart {
+		height:300px;
+	}
+}
+/*************************************************************
+Google Maps Container
+**************************************************************/
+.angular-google-map-container { height: 300px; }

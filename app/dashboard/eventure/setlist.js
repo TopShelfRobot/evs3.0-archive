@@ -36,7 +36,7 @@
 					vm.listTypes = data;
 					return vm.listTypes;
 				}).then(function () {
-					getEventureList()
+					getEventureList();
 				});
 		}
 

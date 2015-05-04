@@ -74,13 +74,13 @@
 				$http.post(config.apiPath + 'api/transaction/USATVerification', usatObj)
 					.success(function (result) {
 					    toastr.success('Your USAT Number has been verified!');
-					    cart.addSurcharge('USAT Discount', $scope.selection.usatDiscountAmount, 'usat', $scope.selection.id, $scope.selectedParticipant, null)
+					    cart.addSurcharge('USAT Discount', $scope.selection.usatDiscountAmount, 'usat', $scope.selection.id, $scope.selectedParticipant, null);
 					    // cart.addSurcharge('USAT Discount',10.00, 'usat', $scope.selection.id, $scope.selectedParticipant, null)
 					})
 					.error(function (data, status, headers, config) {
 						console.log('Error', data);
 						toastr.error('Your USAT Number could not be verified. Please try again.');
-					})
+					});
 			};
 
 			//if (eventureList.eventureListType == config.eventureListType.standard) {   //enum? mjb
