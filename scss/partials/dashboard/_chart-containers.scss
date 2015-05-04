@@ -62,6 +62,21 @@ Dashboard Pie
 	}
 }
 /*************************************************************
+Charts
+**************************************************************/
+.chart-container {
+	height:500px;
+	.k-chart {
+		height:500px;
+	}
+}
+.owner-chart-container {
+	height: 300px;
+	.k-chart {
+		height:300px;
+	}
+}
+/*************************************************************
 Google Maps Container
 **************************************************************/
 .angular-google-map-container { height: 300px; }

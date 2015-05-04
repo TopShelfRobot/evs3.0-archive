@@ -13,7 +13,7 @@
 		//Graph Apis
 		var genderByYearApi = config.remoteApiName + 'widget/GetGenderInfoByYear/' + year;
 		var ageByYearApi = config.remoteApiName + 'widget/GetAgeInfoByYear/' + year;
-		var zipByYearApi = config.remoteApiName + 'widget/GetZip/' + year;
+		var zipByYearApi = config.remoteApiName + 'widget/GetZipHeatMapByYear/' + year;
 		var capacityByYearApi = config.remoteApiName + 'widget/GetCapacityRegDialsByYear/' + year;
 		var trendByOwnerApi = config.remoteApiName + 'widget/GetTrendByOwnerId/' + ownerId;
 		var revenueByOwnerApi = config.remoteApiName + 'widget/GetRevenueByOwnerId/' + ownerId;
@@ -23,6 +23,9 @@
 			legend: {
 				visible: false
 			},
+			tooltip: {
+				visible: true
+			}
 		};
 		// vm.map = {
 		// 	center: {
@@ -86,44 +89,22 @@
 			}
 		});
 
-		vm.treeOptions = {
-			dataSource: {
-				transport: {
-					read: {
-						url: 'app/dashboard/enterprise/zipcode.json',
-						dataType: 'json'
-					}
-				},
-				schema: {
-					model: {
-						children: 'items'
-					}
+		vm.trend = new kendo.data.DataSource({
+			transport: {
+				read: {
+					url: trendByOwnerApi,
+					dataType: 'json'
 				}
-			},
-			valueField: 'value',
-			textField: 'name'
-		};
+			}
+		});
 
-		function TrendsByOwner() {
-			vm.trend = new kendo.dataDataSource({
-				transport: {
-					read: {
-						url: trendByOwnerApi,
-						dataType: 'json'
-					}
+		vm.revenue = new kendo.data.DataSource({
+			transport: {
+				read: {
+					url: revenueByOwnerApi,
+					dataType: 'json'
 				}
-			});
-		}
-
-		function RevenueByOwner() {
-			vm.revenue = new kendo.dataDataSource({
-				transport: {
-					read: {
-						url: revenueByOwnerApi,
-						dataType: 'json'
-					}
-				}
-			});
-		}
+			}
+		});
 	}
 })();
