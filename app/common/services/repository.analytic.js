@@ -124,6 +124,21 @@
             }
         }
 
+        function getYearTrendsByOwnerId(id) {
+            var self = this;
+            var query = entityQuery.from('GetYearTrendsByOwnerId')
+                .withParameters({
+                    id: id
+                });
+
+            return self.manager.executeQuery(query)
+                .then(querySucceeded, self._queryFailed);
+
+            function querySucceeded(data) {
+                return data.results[0];
+            }
+        }
+
        function getReportsByOwnerId(ownerId) {
             var self = this;
             var pred = predicate.create("active", "==", true)
