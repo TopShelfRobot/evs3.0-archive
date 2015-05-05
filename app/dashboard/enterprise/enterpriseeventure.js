@@ -33,7 +33,7 @@
 		var serviceApi = config.remoteApiName + 'widget/getEventureServiceByEventureId/' + eventureId;
 		var listApi = config.remoteApiName + 'widget/getEventureListsByEventureId/' + eventureId;
 		var genderApi = config.remoteApiName + 'widget/getGenderInfoByEventureId/' + eventureId;
-		var revByListApi = config.remoteApiName + 'widget/getRevenueByListByEventureId' + eventureId;
+		var revByListApi = config.remoteApiName + 'widget/getRevenueByListByEventureId/' + eventureId;
 
 		activate();
 
