@@ -62,7 +62,7 @@
 		}
 
 		function TrendsByOwnerId() {
-			return datacontext.analytic.getYearTrendsByOwnerId(vm.ownerId)
+			return datacontext.analytic.getYearTrendsByOwnerId(ownerId)
 				.then(function(data) {
 					vm.trend = data;
 					return vm.trend;
