@@ -8,7 +8,7 @@
 		var log = getLogFn(controllerId);
 
 		var vm = this;
-		var eventureId = $routeParams.eventureId;
+		vm.eventureId = $routeParams.eventureId;
 		var ownerId = 1;
 		var status = [{
 			"value": true,
@@ -29,11 +29,11 @@
 		};
 
 		//APIs
-		var ownerByEventApi = config.remoteApiName + 'widget/getEventureGraph/' + eventureId;
-		var serviceApi = config.remoteApiName + 'widget/getEventureServiceByEventureId/' + eventureId;
-		var listApi = config.remoteApiName + 'widget/getEventureListsByEventureId/' + eventureId;
-		var genderApi = config.remoteApiName + 'widget/getGenderInfoByEventureId/' + eventureId;
-		var revByListApi = config.remoteApiName + 'widget/getRevenueByListByEventureId/' + eventureId;
+		var ownerByEventApi = config.remoteApiName + 'widget/getEventureGraph/' + vm.eventureId;
+		var serviceApi = config.remoteApiName + 'widget/getEventureServiceByEventureId/' + vm.eventureId;
+		var listApi = config.remoteApiName + 'widget/getEventureListsByEventureId/' + vm.eventureId;
+		var genderApi = config.remoteApiName + 'widget/getGenderInfoByEventureId/' + vm.eventureId;
+		var revByListApi = config.remoteApiName + 'widget/getRevenueByListByEventureId/' + vm.eventureId;
 
 		activate();
 
