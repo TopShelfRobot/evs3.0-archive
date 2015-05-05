@@ -15,7 +15,7 @@
 		var ageByYearApi = config.remoteApiName + 'widget/GetAgeInfoByYear/' + year;
 		var zipByYearApi = config.remoteApiName + 'widget/GetZipHeatMapByYear/' + year;
 		var capacityByYearApi = config.remoteApiName + 'widget/GetCapacityRegDialsByYear/' + year;
-		var trendByOwnerApi = config.remoteApiName + 'dashboard/GetTrendsByOwnerId/' + ownerId;
+		var trendByOwnerApi = config.remoteApiName + 'dashboard/GetYearTrendsByOwnerId/' + ownerId;
 		var revenueByOwnerApi = config.remoteApiName + 'widget/GetRevenueByOwnerId/' + ownerId;
 		//Set Default Chart Options
 		vm.chartOptions = {
@@ -37,7 +37,7 @@
 		activate();
 
 		function activate() {
-			var promises = [CapacityByYearRadial()];
+			var promises = [CapacityByYearRadial(), TrendsByOwnerId()];
 
 			common.activateController(promises, controllerId)
 				.then(function() {
@@ -62,6 +62,19 @@
 				});
 		}
 
+		function TrendsByOwnerId() {
+			$http.get(trendByOwnerApi).then(
+				function(trends) {
+					// vm.trend.last30Count;
+					// vm.trend.last30Amount;
+					// vm.trend.last7Count;
+					// vm.trend.last7Amount;
+					// vm.trend.last1Count;
+					// vm.trend.last1Amount;
+					// vm.trend.totalCount;
+					// vm.trend.totalAmount;
+				});
+		}
 		vm.gender = new kendo.data.DataSource({
 			transport: {
 				read: {
@@ -84,15 +97,6 @@
 			transport: {
 				read: {
 					url: zipByYearApi,
-					dataType: 'json'
-				}
-			}
-		});
-
-		vm.trend = new kendo.data.DataSource({
-			transport: {
-				read: {
-					url: trendByOwnerApi,
 					dataType: 'json'
 				}
 			}

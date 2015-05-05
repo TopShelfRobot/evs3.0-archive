@@ -226,6 +226,6 @@ node_modules/**
 
 bower_components/*
 
-Content/*
+Content/js/*
 
 Scripts/*
