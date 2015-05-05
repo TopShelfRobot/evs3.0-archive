@@ -81,7 +81,7 @@
                     title: { text: "Registrations" }
                 }],
                 categoryAxis: {
-                    field: "Month",
+                    field: "month",
                     majorGridLines: {
                         visible: false
                     }
