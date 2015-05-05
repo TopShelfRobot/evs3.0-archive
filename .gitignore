@@ -227,5 +227,7 @@ node_modules/**
 bower_components/*
 
 Content/js/*
+Content/css/*
+scss/frameworkcss/*
 
 Scripts/*

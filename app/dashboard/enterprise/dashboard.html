@@ -23,7 +23,7 @@
       <h3 class="dashboard-chart-title"><span>Revenue</span></h3>
       <div class="owner-chart-container">
         <div kendo-chart k-series-defaults="{ type: 'line' }" k-series="[{ field: 'amount', name: 'year' }]"
-        k-options="vm.chartOptions" k-data-source="vm.revenue"></div>
+        k-options="vm.chartOptions" k-data-source="vm.regRev"></div>
       </div>
     </div>
   </div>
@@ -66,8 +66,7 @@
       <h3 class="dashboard-chart-title"><span>Zipcodes</span></h3>
       <div class="chart-container">
         <div kendo-chart k-legend="{ position: 'bottom' }" k-series-defaults="{ type: 'column' }"
-        k-series="[{field: 'amount'}]" k-data-source="vm.zip" k-category-axis="{ field: 'zip'}"
-        k-options="vm.chartOptions"></div>
+        k-series="[{field: 'amount'}]" k-data-source="vm.zip" k-options="vm.rotatedChartOptions"></div>
 
       </div>
     </div>
@@ -96,37 +95,4 @@
     <br>
     <br>
     <br>
-  </div>
-  <div class="row-fluid">
-    <div class="col-lg-6">
-      <h3 class="dashboard-chart-title"><span>Trending</span></h3>
-      <div id="snapshotdata">
-        <h3 class="text-center">Registration Trends</h3>
-        <ul class="list-group">
-          <li class="list-group-item">
-            <h4>Last 30 Days: <span>{{vm.trend.last30Count}} - {{vm.trend.last30Amount | currency}}</span> </h4>
-          </li>
-          <li class="list-group-item">
-            <h4>Last 7 Days: <span>{{vm.trend.last7Count}} - {{vm.trend.last7Amount | currency}}</span> </h4>
-          </li>
-          <li class="list-group-item">
-            <h4>Last 24 Hours: <span>{{vm.trend.last1Count}} - {{vm.trend.last1Amount | currency}}</span> </h4>
-          </li>
-          <li class="list-group-item">
-            <h4>Total: <span>{{vm.trend.totalCount}} - {{vm.trend.totalAmount | currency}}</span> </h4>
-          </li>
-        </ul>
-        <h3 class="text-center">Capacity: <small>{{ vm.capacity.regs }}&nbsp;/&nbsp;{{ vm.capacity.capacity }}</small></h3>
-        <br>
-      </div>
-    </div>
-    <div class="col-lg-6">
-      <h3 class="dashboard-chart-title"><span>Revenue</span></h3>
-      <div class="owner-chart-container">
-        <div kendo-chart k-series-defaults="{ type: 'line' }" k-series="[{ field: 'amount', name: 'year' }]"
-        k-options="vm.chartOptions" k-data-source="vm.revenue"></div>
-      </div>
-    </div>
-  </div>
-
 </section>
