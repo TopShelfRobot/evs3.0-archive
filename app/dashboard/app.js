@@ -23,8 +23,8 @@
 		'angulartics.google.analytics', // analytics
 		'evReg', // Our Registration Module
 		'ngRoleAuth', // Authentication Roles
-		'angularFileUpload', // File Upload
-		'uiGmapgoogle-maps' // Google Maps
+		'angularFileUpload' // File Upload
+		// 'uiGmapgoogle-maps' // Google Maps
 	]);
 
 	app.config(['$httpProvider',
@@ -66,12 +66,12 @@
 		}
 	]);
 
-	app.config(function(uiGmapGoogleMapApiProvider) {
-		uiGmapGoogleMapApiProvider.configure({
-			v: '3.17',
-			libraries: 'weather,geometry,visualization'
-		});
-	});
+	// app.config(function(uiGmapGoogleMapApiProvider) {
+	// 	uiGmapGoogleMapApiProvider.configure({
+	// 		v: '3.17',
+	// 		libraries: 'weather,geometry,visualization'
+	// 	});
+	// });
 	//app.run(['$route', '$rootScope', '$q', 'routemediator',
 	//function ($route, $rootScope, $q, routemediator) {
 	//    // Include $route to kick start the router.

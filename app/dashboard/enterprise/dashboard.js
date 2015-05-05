@@ -1,9 +1,9 @@
 (function() {
 	'use strict';
 	var controllerId = 'dashboard';
-	angular.module('app').controller(controllerId, ['$http', 'common', 'config', 'uiGmapGoogleMapApi', dashboard]);
+	angular.module('app').controller(controllerId, ['$http', 'common', 'config', 'datacontext', dashboard]);
 
-	function dashboard($http, common, config, uiGmapGoogleMapApi) {
+	function dashboard($http, common, config, datacontext) {
 		var getLogFn = common.logger.getLogFn;
 		var log = getLogFn(controllerId);
 
@@ -15,7 +15,6 @@
 		var ageByYearApi = config.remoteApiName + 'widget/GetAgeInfoByYear/' + year;
 		var zipByYearApi = config.remoteApiName + 'widget/GetZipHeatMapByYear/' + year;
 		var capacityByYearApi = config.remoteApiName + 'widget/GetCapacityRegDialsByYear/' + year;
-		var trendByOwnerApi = config.remoteApiName + 'dashboard/GetYearTrendsByOwnerId/' + ownerId;
 		var revenueByOwnerApi = config.remoteApiName + 'widget/GetRevenueByOwnerId/' + ownerId;
 		//Set Default Chart Options
 		vm.chartOptions = {
@@ -63,18 +62,14 @@
 		}
 
 		function TrendsByOwnerId() {
-			$http.get(trendByOwnerApi).then(
-				function(trends) {
-					// vm.trend.last30Count;
-					// vm.trend.last30Amount;
-					// vm.trend.last7Count;
-					// vm.trend.last7Amount;
-					// vm.trend.last1Count;
-					// vm.trend.last1Amount;
-					// vm.trend.totalCount;
-					// vm.trend.totalAmount;
+			return datacontext.analytic.getYearTrendsByOwnerId(vm.ownerId)
+				.then(function(data) {
+					vm.trend = data;
+					return vm.trend;
 				});
+
 		}
+
 		vm.gender = new kendo.data.DataSource({
 			transport: {
 				read: {
