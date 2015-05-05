@@ -23,6 +23,10 @@ Fancy Chart Titles
 		}
 	}
 }
+.gender-text {
+	font-size: 3.5em;
+	font-weight: bold;
+}
 /*************************************************************
 Dashboard Radial Gauges
 **************************************************************/
@@ -74,6 +78,12 @@ Charts
 	height: 300px;
 	.k-chart {
 		height:300px;
+	}
+}
+.event-chart-container {
+	height:550px;
+	.k-chart {
+		height:550px;
 	}
 }
 /*************************************************************

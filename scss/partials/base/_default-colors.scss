@@ -99,3 +99,15 @@ Sidebar Nav
 
   h4 { color: $primary; }
 }
+/************************************
+Icon Colors
+*************************************/
+.fa-male {
+	color: #2962FF;
+}
+.fa-female {
+	color: #FF69B4;
+}
+.fa-male, .fa-female {
+	font-size:8em !important;
+}

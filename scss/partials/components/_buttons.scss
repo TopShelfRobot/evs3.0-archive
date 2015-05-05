@@ -4,6 +4,16 @@
 .btn {
   background:none;
   color:black;
+  border:2px solid;
+  font-weight:bold;
+}
+
+.input-group-btn .btn {
+	border: none;
+}
+
+.btn-group .btn {
+	border: 1px solid;
 }
 
 .k-grid-content .btn.btn-block {
@@ -27,7 +37,7 @@
 
 .btn.btn-primary {
   color:darken($primary, 20);;
-  background:lighten($primary, 40);
+  // background:lighten($primary, 40);
 }
 
 .btn.btn-primary:hover, .btn.btn-primary.active, .btn.btn-primary.focus,
@@ -38,7 +48,7 @@
 
 .btn.btn-success {
   color:darken($success, 20);
-  background:lighten($success, 40);
+  // background:lighten($success, 40);
 }
 
 .btn.btn-success:hover, .btn.btn-success.active, .btn.btn-success.focus,
@@ -49,7 +59,7 @@
 
 .btn.btn-info {
   color:darken($info, 20);
-  background:lighten($info, 30);
+  // background:lighten($info, 30);
 }
 
 .btn.btn-info:hover, .btn.btn-info.active, .btn.btn-info.focus,
@@ -60,7 +70,7 @@
 
 .btn.btn-warning {
   color:darken($warning, 20);
-  background:lighten($warning, 25);
+  // background:lighten($warning, 25);
 }
 
 .btn.btn-warning:hover, .btn.btn-warning.active, .btn.btn-warning.focus,
@@ -71,7 +81,7 @@
 
 .btn.btn-danger {
   color:darken($danger, 20);
-  background:lighten($danger, 35);
+  // background:lighten($danger, 35);
 }
 
 .btn.btn-danger:hover, .btn.btn-danger.active, .btn.btn-danger.focus,
