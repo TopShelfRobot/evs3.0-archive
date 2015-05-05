@@ -15,7 +15,7 @@
 		var ageByYearApi = config.remoteApiName + 'widget/GetAgeInfoByYear/' + year;
 		var zipByYearApi = config.remoteApiName + 'widget/GetZipHeatMapByYear/' + year;
 		var capacityByYearApi = config.remoteApiName + 'widget/GetCapacityRegDialsByYear/' + year;
-		var trendByOwnerApi = config.remoteApiName + 'widget/GetTrendByOwnerId/' + ownerId;
+		var trendByOwnerApi = config.remoteApiName + 'dashboard/GetTrendsByOwnerId/' + ownerId;
 		var revenueByOwnerApi = config.remoteApiName + 'widget/GetRevenueByOwnerId/' + ownerId;
 		//Set Default Chart Options
 		vm.chartOptions = {
