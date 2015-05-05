@@ -47,6 +47,37 @@
               </div>
             </div>
           </div>
+          <div class="row-fluid-">
+            <div class="col-lg-6">
+              <section id="demographics" class="text-center">
+                <h3 class="dashboard-chart-title">Total Number of Participants</h3>
+                <h1 class="gender-text">{{vm.genderTotal}}</h1>
+                <div class="row-fluid">
+                  <div class="col-xs-3 col-xs-offset-3">
+                    <p><i class="fa fa-male"></i>
+                    </p>
+                    <h1 class="gender-text">{{vm.female}}</h1>
+                  </div>
+                  <div class="col-xs-3">
+                    <p><i class="fa fa-female"></i>
+                    </p>
+                    <h1 class="gender-text">{{vm.male}}</h1>
+                  </div>
+                </div>
+              </section>
+            </div>
+            <div class="col-lg-4 col-lg-offset-2">
+              <h3 class="dashboard-chart-title text-center">Listing Revenue</h3>
+              <div class="pie-container">
+                <div kendo-chart k-series-defaults="{ type: 'pie' }" k-series="[{
+			field: 'amount',
+			categoryField: 'list',
+			padding: 0
+			}]" k-options="vm.chartOptions" k-data-source="vm.revByList" k-tooltip="{visible: true, template: '${category} - ${value}'}">
+                </div>
+              </div>
+            </div>
+          </div>
         </tab>
         <tab heading="Listings">
           <br>
@@ -64,37 +95,4 @@
       <hr>
     </div>
   </div>
-  <div class="row-fluid-">
-    <div class="col-lg-6">
-      <section id="demographics" class="text-center">
-        <h3 class="dashboard-chart-title">Total Number of Participants</h3>
-        <h1 class="gender-text">{{vm.genderTotal}}</h1>
-        <div class="row-fluid">
-          <div class="col-xs-3 col-xs-offset-3">
-            <p><i class="fa fa-male"></i>
-            </p>
-            <h1 class="gender-text">{{vm.female}}</h1>
-          </div>
-          <div class="col-xs-3">
-            <p><i class="fa fa-female"></i>
-            </p>
-            <h1 class="gender-text">{{vm.male}}</h1>
-          </div>
-        </div>
-      </section>
-    </div>
-    <div class="col-lg-4 col-lg-offset-2">
-      <h3 class="dashboard-chart-title text-center">Listing Revenue</h3>
-      <div class="pie-container">
-        <div kendo-chart k-series-defaults="{ type: 'pie' }" k-series="[{
-			field: 'amount',
-			categoryField: 'list',
-			padding: 0
-			}]" k-options="vm.chartOptions" k-data-source="vm.revByList" k-tooltip="{visible: true, template: '${category} - ${value}'}">
-        </div>
-      </div>
-    </div>
-</section>
-</div>
-</div>
 </section>
