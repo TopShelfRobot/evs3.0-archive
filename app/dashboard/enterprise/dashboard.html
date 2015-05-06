@@ -1,12 +1,12 @@
 <section ng-controller="dashboard as vm">
-<div class="row-fluid">
-	<div class="col-lg-12">
-		<a class="btn btn-primary btn-xs" href="#/enterprise"><i class="glyphicon glyphicon-circle-arrow-left"></i>&nbsp;Back</a>
-		<br>
-		<h1>Your Yearly Snapshot</h1>
-		<hr>
-	</div>
-</div>
+  <div class="row-fluid">
+    <div class="col-lg-12">
+      <a class="btn btn-primary btn-xs" href="#/enterprise"><i class="glyphicon glyphicon-circle-arrow-left"></i>&nbsp;Back</a>
+      <br>
+      <h1>Your Yearly Snapshot</h1>
+      <hr>
+    </div>
+  </div>
   <div class="row-fluid">
     <div class="col-lg-4">
       <h3 class="dashboard-chart-title"><span>Trending</span></h3>
@@ -30,10 +30,9 @@
     <div class="col-lg-8">
       <h3 class="dashboard-chart-title"><span>Revenue</span></h3>
       <div class="owner-chart-container">
-		  <div kendo-chart k-series="[{ type:'line', field: 'regs', categoryField: 'month', axis: 'regs' },
-			  {type: 'column', field: 'rev', categoryField: 'month', axis: 'rev' }]"
-			  k-value-axes="[{name: 'regs'},{name: 'rev'}]" k-options="vm.chartOptions"
-			  k-data-source="vm.regRev"></div>
+        <div kendo-chart k-series="[{ type:'line', field: 'regs', categoryField: 'month', axis: 'regs' },
+			  {type: 'column', field: 'rev', categoryField: 'month', axis: 'rev' }]" k-value-axes="[{name: 'regs'},{name: 'rev'}]"
+        k-options="vm.chartOptions" k-data-source="vm.regRev"></div>
       </div>
     </div>
   </div>
@@ -44,21 +43,27 @@
         <div class="col-md-4">
           <div class="gauge-container">
             <span class="reg-gauge" kendo-radialgauge="vm.radialOne" k-scale="{ max: vm.capacityEventOne }"
-            ng-model="vm.regsEventOne"></span>
+            ng-model="vm.regsEventOne" k-rebind="vm.capacityEventOne"></span>
+            <strong class="capacity-radial-info">{{vm.regsEventOne}}</strong>
+            <br>
             <span class="capacity-radial-info">{{vm.radialEventOneName}}</span>
           </div>
         </div>
         <div class="col-md-4">
           <div class="gauge-container">
             <span class="reg-gauge" kendo-radialgauge="vm.radialTwo" k-scale="{ max: vm.capacityEventTwo }"
-            ng-model="vm.regsEventTwo"></span>
+            ng-model="vm.regsEventTwo" k-rebind="vm.capacityEventTwo"></span>
+            <strong class="capacity-radial-info">{{vm.regsEventTwo}}</strong>
+            <br>
             <span class="capacity-radial-info">{{vm.radialEventTwoName}}</span>
           </div>
         </div>
         <div class="col-md-4">
           <div class="gauge-container">
             <span class="reg-gauge" kendo-radialgauge="vm.radialThree" k-scale="{ max: vm.capacityEventThree }"
-            ng-model="vm.regsEventThree"></span>
+            ng-model="vm.regsEventThree" k-rebind="vm.capacityEventThree"></span>
+            <strong class="capacity-radial-info">{{vm.regsEventThree}}</strong>
+            <br>
             <span class="capacity-radial-info">{{vm.radialEventThreeName}}</span>
           </div>
         </div>
@@ -77,7 +82,7 @@
       <div class="chart-container">
         <div kendo-chart k-legend="{ position: 'bottom' }" k-series-defaults="{ type: 'column' }"
         k-series="[{field: 'amount'}]" k-data-source="vm.zip" k-options="vm.rotatedChartOptions"
-		k-tooltip="{visible:true}"></div>
+        k-tooltip="{visible:true}"></div>
       </div>
     </div>
     <div class="col-lg-4">
