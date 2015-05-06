@@ -48,6 +48,8 @@
 					});
 			} else {
 				vm.coupon = datacontext.surcharge.createCoupon();
+				vm.coupon.dateStart = new Date();
+				vm.coupon.dateEnd = new Date();
 				return vm.coupon;
 			}
 		}
