@@ -27,6 +27,27 @@ Fancy Chart Titles
 	font-size: 3.5em;
 	font-weight: bold;
 }
+.grid-title {
+	color: #000000;
+	margin-bottom:1.125em;
+	line-height:0;
+	span {
+		display:inline-block;
+		position: relative;
+		&:after {
+			content: "";
+			position: absolute;
+			height: 5px;
+			top: 0;
+			width:100%;
+			border-bottom: 3px solid #3343a4;
+		}
+		&:after {
+			left: 100%;
+			margin-left: 5px;
+		}
+	}
+}
 /*************************************************************
 Dashboard Radial Gauges
 **************************************************************/
@@ -36,12 +57,12 @@ Dashboard Radial Gauges
 	height: 336px;
 	text-align: center;
 	margin: 0 auto 30px auto;
-	padding-top:10px;
+	padding-top:20px;
 	
 	.reg-gauge {
 		display:block;
 		width: 300px;
-		height: 250px;
+		height: 220px;
 		margin: 0 auto;
 	}
 	.capacity-radial-info {
@@ -49,7 +70,6 @@ Dashboard Radial Gauges
 		font-size:.9em;
 		display:inline-block;
 		width:160px;
-		margin-top:-30px;
 	}
 }
 
