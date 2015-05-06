@@ -108,50 +108,7 @@
 			sort: {
 				field: 'month',
 				dir: 'asc'
-			},
-
+			}
 		});
-
-		function Chart() {
-
-			vm.yearOverYear = {
-				theme: "material",
-				dataSource: {
-					transport: {
-						read: yearApi,
-						dataType: 'json'
-					},
-					group: {
-						field: 'year'
-					},
-					sort: {
-						field: 'month',
-						dir: 'asc'
-					},
-					schema: {
-						model: {
-							fields: {
-								month: {
-									type: 'date'
-								}
-							}
-						}
-					}
-				},
-				legend: {
-					position: 'bottom'
-				},
-				series: [{
-					type: 'column',
-					field: 'registrations'
-				}],
-				categoryAxis: {
-					field: 'month',
-					labels: {
-						format: 'MMM'
-					}
-				}
-			};
-		}
 	}
 })();
