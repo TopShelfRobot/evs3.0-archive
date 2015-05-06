@@ -2,7 +2,7 @@
 
 	var controllerId = "EventureController";
 
-	function controller($scope, $location, $anchorScroll, config, datacontext, cart, common) {
+	function controller($scope, $location, $anchorScroll, $http, config, datacontext, cart, common) {
 
 		//$scope.cart = cartModel;
 
@@ -11,7 +11,7 @@
 		var currentPage = 0;
 		$scope.cart = cart;
 		//alert('heryhr');
-	    //datacontext.getEventuresByOwnerId(config.owner.ownerId)
+		//datacontext.getEventuresByOwnerId(config.owner.ownerId)
 
 		$scope.isPaginationVisible = false;
 
@@ -24,24 +24,25 @@
 		var promises = [];
 		promises.push(
 			datacontext.eventure.getEventuresByOwnerId(cart.ownerId)
-				.then(function (list) {
-					all = list;
-					$scope.eventures = all.slice(0, viewLength);
-				})
+			.then(function (list) {
+				all = list;
+				if (all.length > viewLength) {
+					$scope.isPaginationVisible = true;
+				}
+				$scope.eventures = all.slice(0, viewLength);
+			})
 		);
 
-		if(all.length > viewLength) {
-			$scope.isPaginationVisible = true;
-		}
+
 
 		common.activateController(promises, controllerId);
 
 		$scope.NavigateToList = function (listId) {
-		    //#/eventure/{{eventure.id}}/list
-		    //alert(listId);
-		    listpath = '/eventure/' + listId + '/list';
-		    cart.navUrl = listpath;
-		    $location.path(listpath);
+			//#/eventure/{{eventure.id}}/list
+			//alert(listId);
+			listpath = '/eventure/' + listId + '/list';
+			cart.navUrl = listpath;
+			$location.path(listpath);
 		};
 
 		$scope.nextPage = function () {
@@ -65,6 +66,6 @@
 		};
 	}
 
-	angular.module("evReg").controller(controllerId, ["$scope", "$location", "$anchorScroll", "config", "datacontext", "CartModel", "common", controller]);
+	angular.module("evReg").controller(controllerId, ["$scope", "$location", "$anchorScroll", "$http", "config", "datacontext", "CartModel", "common", controller]);
 
 })();

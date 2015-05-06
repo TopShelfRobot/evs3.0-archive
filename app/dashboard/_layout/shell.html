@@ -1,10 +1,10 @@
 <div data-ng-controller="shell as vm">
   <div class="container">
     <div id="splash-page" ng-show="vm.showSplash">
-      <div class="row">
+      <div class="row-fluid">
         <div class="page-splash col-lg-12">
           <div class="page-splash-message text-center">
-            <img class="logo img-responsive" ng-src="content/images/{{vm.logo || 'logo.png'}}" />
+            <img class="logo img-responsive" ng-src="content/images/{{vm.logo || 'evs-logo.png'}}" />
             <br>
             <h1>Loading...</h1>
           </div>
@@ -14,7 +14,7 @@
     </div>
   </div>
 
-  <div ng-hide="vm.showSplash">
+  <div ng-if="!vm.showSplash">
 
     <div ng-show="vm.isBusy" style="position: absolute; top: 50%; left: 50%; right: 50%; z-index: 1000000">
       <div data-cc-spinner="vm.spinnerOptions" style="z-index: 1001"></div>
@@ -23,7 +23,7 @@
 
     <div class="wrapper" ng-if="vm.resolved">
 
-      <div class="box">
+      <div class="container-fluid box">
 
 
         <div class="row row-offcanvas row-offcanvas-left">

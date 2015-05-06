@@ -1,70 +1,72 @@
 <section ng-controller="yearsummary as vm">
-  <div class="row">
+  <div class="row-fluid">
     <div class="col-lg-12">
       <a ng-href="#/enterpriseeventure/{{vm.eventureId}}" class="btn btn-info btn-sm"><em class="glyphicon glyphicon-circle-arrow-left"></em>&nbsp;Back</a>
     </div>
   </div>
-  <div class="row">
+  <div class="row-fluid">
     <div class="col-lg-12">
       <h1>Summary Data</h1>
       <p class="text-muted">Choose your parameters below and click "Generate Summary Chart".</p>
-      <div kendo-chart="vm.summaryChart" k-options="vm.yearOverYear"></div>
+      <div kendo-chart="vm.summaryChart" k-series-defaults="{ type: 'column' }" k-series="[
+		  { field: 'registrations', name: 'year' }
+		  ]" k-data-source="vm.yearSummary" k-options="vm.chartOptions"></div>
     </div>
   </div>
   <br>
   <form class="form-horizontal">
-    <div class="row">
-        <div class="col-sm-3">
-            <div class="form-group">
-                <label for="year1dropdown" class="col-lg-4 control-label">Start Year:</label>
-                <div class="col-lg-8">
-                    <select class="form-control" id="year1dropdown" ng-model="vm.chart.startYear" ng-options="y for y in vm.years">
-                        <option value="">Please Select</option>
-                    </select>
-                </div>
-            </div>
-            <!-- /field -->
-        </div>
-        <div class="col-sm-3">
-            <div class="form-group">
-                <label for="year2dropdown" class="col-lg-4 control-label">End Year:</label>
-                <div class="col-lg-8">
-                    <select class="form-control" id="year2dropdown" ng-model="vm.chart.endYear" ng-options="y for y in vm.years">
-                        <option value="">Please Select</option>
-                    </select>
-                </div>
-            </div>
-            <!-- /field -->
-        </div>
-        <div class="col-sm-3">
-            <div class="form-group">
-                <label for="eventuredropdown" class="col-lg-4 control-label">Event:</label>
-                <div class="col-lg-8">
-                    <select class="form-control" id="eventuredropdown" ng-model="vm.eventureId" ng-options="e.id as e.name for e in vm.eventures">
-                        <option value="">Please Select</option>
-                    </select>
-                </div>
-            </div>
+    <div class="row-fluid">
+      <div class="col-sm-3">
+        <div class="form-group">
+          <label for="year1dropdown" class="col-lg-4 control-label">Start Year:</label>
+          <div class="col-lg-8">
+            <select class="form-control" id="year1dropdown" ng-model="vm.chart.startYear" ng-options="y for y in vm.years">
+              <option value="">Please Select</option>
+            </select>
+          </div>
         </div>
         <!-- /field -->
-        <div class="col-sm-3">
-            <div class="form-group">
-                <label for="typedropdown" class="col-lg-4 control-label">Type:</label>
-                <div class="col-lg-8">
-                    <select class="form-control" id="typedropdown" ng-model="vm.chart.type">
-                        <option value="">Please Select</option>
-                        <option value="0">Registrations</option>
-                        <option value="1">Revenue</option>
-                    </select>
-                </div>
-            </div>
+      </div>
+      <div class="col-sm-3">
+        <div class="form-group">
+          <label for="year2dropdown" class="col-lg-4 control-label">End Year:</label>
+          <div class="col-lg-8">
+            <select class="form-control" id="year2dropdown" ng-model="vm.chart.endYear" ng-options="y for y in vm.years">
+              <option value="">Please Select</option>
+            </select>
+          </div>
         </div>
         <!-- /field -->
+      </div>
+      <div class="col-sm-3">
+        <div class="form-group">
+          <label for="eventuredropdown" class="col-lg-4 control-label">Event:</label>
+          <div class="col-lg-8">
+            <select class="form-control" id="eventuredropdown" ng-model="vm.eventureId" ng-options="e.id as e.name for e in vm.eventures">
+              <option value="">Please Select</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <!-- /field -->
+      <div class="col-sm-3">
+        <div class="form-group">
+          <label for="typedropdown" class="col-lg-4 control-label">Type:</label>
+          <div class="col-lg-8">
+            <select class="form-control" id="typedropdown" ng-model="vm.chart.type">
+              <option value="">Please Select</option>
+              <option value="0">Registrations</option>
+              <option value="1">Revenue</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <!-- /field -->
     </div>
-     <div class="row">
-         <div class="col-sm-6 col-sm-offset-6">
-             <button class="btn btn-success btn-block" ng-click="vm.generateChart()"><em class="glyphicon glyphicon-refresh"></em>&nbsp;Generate Summary Chart</button>
-         </div>
-     </div>
+    <div class="row-fluid">
+      <div class="col-sm-6 col-sm-offset-6">
+        <button class="btn btn-success btn-block" ng-click="vm.generateChart()"><em class="glyphicon glyphicon-refresh"></em>&nbsp;Generate Summary Chart</button>
+      </div>
+    </div>
   </form>
 </section>

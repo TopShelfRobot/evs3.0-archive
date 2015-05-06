@@ -30,6 +30,7 @@
         .then(function (data) {
           if (typeof data !== 'undefined') {
             cart.houseId = data.id;
+			cart.participantGuid = data.participantGuid;
           } else {
             authService.logOut();
           }

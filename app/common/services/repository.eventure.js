@@ -159,8 +159,8 @@
         function getEventureListsByEventureId(eventureId) {
             var self = this;
             var query = entityQuery.from('EventureListsByEventureId')
-                .withParameters({ eventureId: eventureId })
-                .orderBy('sortOrder');
+                .withParameters({ eventureId: eventureId });
+                //.orderBy('sortOrder');
 
             return self.manager.executeQuery(query)
                 .then(querySucceeded, self._queryFailed);

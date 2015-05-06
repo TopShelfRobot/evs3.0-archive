@@ -1,0 +1,36 @@
+
+/******************************
+Email Console
+*******************************/
+
+.console-panel {
+  background-color: #f9f9f9;
+  border: 1px solid #e5e5e5;
+  padding: 0 25px 25px;
+  .delivery-log-heading {
+    font-weight: bold;
+    font-size: 14px;
+    margin-bottom: 10px;
+  }
+}
+
+.console {
+  background-color: transparent;
+  color: #333;
+  font: 12px 'Source Code Pro', 'Bitstream Vera Sans Mono', 'Courier New', Courier, monospace;
+  font-weight: bold;
+  margin: 0;
+  overflow-x: hidden;
+  text-align: left;
+  height: 200px;
+  min-width: 300px;
+  border: 1px solid rgba(20, 53, 80, 0.3);
+  background-color: #ffffff;
+  div {
+    padding: 5px;
+    border-bottom: 1px solid #E1F5FE;
+  }
+  div:nth-child(even) {
+    background-color: #B3E5FC!important;
+  }
+}

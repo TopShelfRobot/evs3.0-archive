@@ -64,12 +64,12 @@
                 },
                 series: [{
                     type: "column",
-                    field: "Rev",
+                    field: "rev",
                     name: "Revenue",
                     axis: "Revenue"
                 }, {
                     type: "line",
-                    field: "Regs",
+                    field: "regs",
                     name: "Registrations",
                     axis: "Registrations"
                 }],
@@ -81,7 +81,7 @@
                     title: { text: "Registrations" }
                 }],
                 categoryAxis: {
-                    field: "Month",
+                    field: "month",
                     majorGridLines: {
                         visible: false
                     }

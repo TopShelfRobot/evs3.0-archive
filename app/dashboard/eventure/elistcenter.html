@@ -1,12 +1,12 @@
 <section data-ng-controller="listingdetail as vm">
-	<div class="row">
+	<div class="row-fluid">
 		<div class="col-lg-12">
-			<a ng-href="#/eventuredetail/{{vm.listing.eventureId}}" class="btn btn-info btn-sm"><em class="glyphicon glyphicon-circle-arrow-left"></em>&nbsp;Back</a>
+			<a ng-href="#/eventuredetail/{{vm.listing.eventureId}}" class="btn btn-info btn-sm"><em class="glyphicon glyphicon-circle-arrow-fluid-left"></em>&nbsp;Back</a>
 			<a ng-href="#/setlist/{{vm.listingId}}" class="btn btn-warning btn-sm"><em class="glyphicon glyphicon-edit"></em>&nbsp;Edit Listing</a>
-			<a class="btn btn-danger btn-sm" ng-click="vm.clone()"><em class="glyphicon glyphicon-arrow-down"></em>&nbsp;Clone</a>
+			<a class="btn btn-danger btn-sm" ng-click="vm.clone()"><em class="glyphicon glyphicon-arrow-fluid-down"></em>&nbsp;Clone</a>
 		</div>
 	</div>
-	<div class="row">
+	<div class="row-fluid">
 		<div class="col-lg-10">
 			<h1>{{vm.listing.name}}&nbsp;<small>{{vm.listing.dateEventureList | amDateFormat:'dddd, MMMM Do YYYY'}}</small></h1>
 		</div>
@@ -18,7 +18,7 @@
 	<tabset justified="true">
 		<tab heading="Dashboard">
 			<br>
-			<div class="row">
+			<div class="row-fluid">
 				<div class="col-lg-12">
 					<section id="registrationscontent">
 						<div id="regchart" kendo-chart k-options="vm.registrations"></div>
@@ -28,7 +28,7 @@
 		</tab>
 		<tab heading="Groups" ng-click="vm.Groups()">
 			<br>
-			<div class="row">
+			<div class="row-fluid">
 				<div class="col-lg-12">
 					<section id="groupcontent">
 						<div id="groupchart" kendo-chart k-options="vm.groups" k-ng-delay="vm.groups"></div>
@@ -38,7 +38,7 @@
 		</tab>
 		<tab heading="Participants">
 			<br>
-			<div class="row">
+			<div class="row-fluid">
 				<div class="col-lg-12">
 					<section id="participantcontent">
 						<div class="table-responsive">
@@ -49,7 +49,7 @@
 			</div>
 		</tab>
 	</tabset>
-	<div class="row">
+	<div class="row-fluid">
 		<div class="col-lg-6">
 			<h3>Capacity: {{vm.capacity.regs}}&nbsp;/&nbsp;{{vm.capacity.capacity}}</h3>
 		</div>

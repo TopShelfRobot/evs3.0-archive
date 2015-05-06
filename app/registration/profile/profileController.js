@@ -1,4 +1,4 @@
-(function () {
+(function() {
 
 	var controllerId = "UserProfile";
 
@@ -8,7 +8,7 @@
 
 		$scope.disableEmail = true;
 
-		$scope.participantId = $routeParams.participantId || cart.participantId;
+		$scope.participantGuid = cart.participantGuid || $routeParams.participantGuid;
 
 		$scope.partButton = cart.regSettings.partButtonText;
 
@@ -22,6 +22,15 @@
 			isActive: true
 		};
 
+		$scope.isAdmin = false;
+		var pathName = location.pathname;
+		console.log('PathName', pathName);
+		if (pathName === '/dash.html') {
+			console.log('pathName evaulated to true');
+			$scope.isAdmin = true;
+		}
+
+
 		$scope.isRegistrationOnProfile = cart.regSettings.isRegistrationOnProfile;
 		$scope.isTeamRegistrationOnProfile = cart.regSettings.isTeamRegistrationOnProfile;
 		$scope.isParticipantOnProfile = cart.regSettings.isParticipantOnProfile;
@@ -30,19 +39,19 @@
 		var promises = [getParticipant(), Registrations(), Participants(), Team(), Coach()];
 
 		common.activateController(promises, controllerId)
-			.then(function () {});
+			.then(function() {});
 
 		function getParticipant() {
-			return datacontext.participant.getParticipantById($scope.participantId)
-				.then(function (participant) {
+			return datacontext.participant.getParticipantByGuid($scope.participantGuid)
+				.then(function(participant) {
 					$scope.participant = participant;
 					$scope.date.dateBirth = moment($scope.participant.dateBirth).format('YYYY-MM-DD');
 				});
 		}
 
 		function Registrations() {
-
-			var regapi = config.remoteApiName + 'widget/GetRegistrationsByPartId/' + $scope.participantId;
+			
+			var regapi = config.remoteApiName + 'widget/GetRegistrationsByPartGuid/' + $scope.participantGuid;
 
 			$scope.registrationGridOptions = {
 				dataSource: {
@@ -93,11 +102,11 @@
 			dateBirth: '1993-07-03'
 		};
 
-		$scope.save = function () {
+		$scope.save = function() {
 			$scope.date.dateBirth = moment($scope.date.dateBirth).toISOString();
 			$scope.participant.dateBirth = $scope.date.dateBirth;
 			datacontext.save()
-				.then(function () {
+				.then(function() {
 					console.log("saved");
 				});
 		};
@@ -126,7 +135,7 @@
 
 
 		function Participants() {
-			var partapi = config.remoteApiName + 'widget/GetParticipantsByHouseId/' + $scope.participantId;
+			var partapi = config.remoteApiName + 'widget/GetParticipantsByHouseGuid/' + $scope.participantGuid;
 
 			$scope.participantGridOptions = {
 				dataSource: {
@@ -161,7 +170,7 @@
 				}]
 			};
 
-			$scope.partDetailGridOptions = function (e) {
+			$scope.partDetailGridOptions = function(e) {
 
 				var regapi = config.remoteApiName + 'widget/GetRegistrationsByPartId/' + e.id;
 
@@ -182,39 +191,39 @@
 							field: "displayName",
 							title: "Listing",
 							width: 300
-					}, {
+						}, {
 							field: "totalAmount",
 							title: "Amount",
 							format: "{0:c}",
 							width: 100
-					}, {
+						}, {
 							field: "quantity",
 							title: "Qty",
 							width: 67
-					}, {
+						}, {
 							field: "dateCreated",
 							title: "Registration Date",
 							type: "date",
 							format: "{0:MM/dd/yyyy}",
 							width: 170
-					}, {
+						}, {
 							field: '',
 							title: '',
 							template: '<a href="\\\#orderreceipt/#=eventureOrderId#" class="btn btn-success btn-block"><em class="glyphicon glyphicon-tags"></em>&nbsp;Receipt</a>',
 							width: 110
-					}
-					// , {
-					// 		field: '',
-					// 		title: '',
-					// 		template: '<a href="\\\#registration/#=id#" class="btn btn-default btn-block"><em class="glyphicon glyphicon-edit"></em>&nbsp;Edit</a>'
-					// }
+						}
+						// , {
+						// 		field: '',
+						// 		title: '',
+						// 		template: '<a href="\\\#registration/#=id#" class="btn btn-default btn-block"><em class="glyphicon glyphicon-edit"></em>&nbsp;Edit</a>'
+						// }
 					]
 				};
 			};
 		}
 
 		function Team() {
-			var teamapi = config.remoteApiName + 'widget/GetTeamRegistrationsByHouseId/' + $scope.participantId;
+			var teamapi = config.remoteApiName + 'widget/GetTeamRegistrationsByHouseGuid/' + $scope.participantGuid;
 
 			$scope.teamGridOptions = {
 				dataSource: {
@@ -249,7 +258,7 @@
 				}]
 			};
 
-			$scope.teamDetailGridOptions = function (e) {
+			$scope.teamDetailGridOptions = function(e) {
 
 				var teamdetailapi = config.remoteApiName + 'widget/GetTeamMembersByTeamId/' + e.id;
 
@@ -278,7 +287,7 @@
 		}
 
 		function Coach() {
-			var coachapi = config.remoteApiName + 'widget/GetTeamRegistrationsByCoachId/' + $scope.participantId;
+			var coachapi = config.remoteApiName + 'widget/GetTeamRegistrationsByCoachGuid/' + $scope.participantGuid;
 
 			$scope.coachGridOptions = {
 				dataSource: {
@@ -295,43 +304,43 @@
 				filterable: true,
 				detailTemplate: kendo.template($("#coachtemplate").html()),
 				columns: [{
-						field: "name",
-						title: "Team Name",
-						width: "200px"
+					field: "name",
+					title: "Team Name",
+					width: "200px"
 				}, {
-						field: "eventName",
-						title: "Eventure",
+					field: "eventName",
+					title: "Eventure",
 				}, {
-						field: "listName",
-						title: "Listing",
-						width: 150
+					field: "listName",
+					title: "Listing",
+					width: 150
 				}, {
-						field: "amount",
-						title: "Total Paid",
-						//width: "120px",
-						format: "{0:c}"
+					field: "amount",
+					title: "Total Paid",
+					//width: "120px",
+					format: "{0:c}"
 				}, {
-						field: "balance",
-						title: "Balance",
-						//width: "120px",
-						format: "{0:c}"
+					field: "balance",
+					title: "Balance",
+					//width: "120px",
+					format: "{0:c}"
 				}, {
-						title: "",
-						width: "120px",
-						template: '<a class="btn btn-default btn-block" href="\\\#/editteam/#=id#"><em class="glyphicon glyphicon-edit"></em>&nbsp;Edit</a>'
+					title: "",
+					width: "120px",
+					template: '<a class="btn btn-default btn-block" href="\\\#/editteam/#=id#"><em class="glyphicon glyphicon-edit"></em>&nbsp;Edit</a>'
 				}]
 			};
 
-			$scope.coachDetailGridOptions = function (e) {
+			$scope.coachDetailGridOptions = function(e) {
 
 				var coachdetailapi = config.remoteApiName + 'widget/GetTeamMembersByTeamId/' + e.id;
 
-				$scope.remove = function () {
+				$scope.remove = function() {
 					alert('Removing: ' + e.Id);
 					$scope.vm.coachgrid.refresh();
 				};
 
-				$scope.resend = function () {
+				$scope.resend = function() {
 					alert('Resending: ' + e.Id);
 				};
 

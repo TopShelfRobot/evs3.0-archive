@@ -27,6 +27,7 @@
 							item.questionId = questions[i].id;
 							item.order = questions[i].order;
 							item.foundAnswer = false;
+							item.isRequired = questions[i].isRequired;
 							for(var j = 0; j < answers.length; j++){
 								if(answers[j].questionId == item.questionId){
 									item.answer = answers[j].answerText;

@@ -6,34 +6,6 @@
 	// Collect the routes
 	app.constant('reg.routes', getRoutes());
 
-	// Configure the routes and route resolvers
-	app.config(['$routeProvider', 'reg.routes', routeConfigurator]);
-
-	function routeConfigurator($routeProvider, routes) {
-		routes.forEach(function (r) {
-			// $routeProvider.when(r.url, r.config);
-			setRoute(r.url, r.config);
-		});
-		$routeProvider.otherwise({ redirectTo: '/eventure' });
-
-
-		function setRoute(url, definition) {
-			// Sets resolvers for all of the routes
-			// by extending any existing resolvers (or creating a new one).
-			definition.resolve = angular.extend(definition.resolve || {}, {
-				prime: prime
-			});
-			$routeProvider.when(url, definition);
-			return $routeProvider;
-		}
-	}
-
-	prime.$inject = ['datacontext'];
-
-	function prime(dc) {
-		return dc.prime();
-	}
-
 	// Define the routes
 	function getRoutes() {
 		return [
@@ -42,16 +14,18 @@
 				config: {
 					title: 'Eventure',
 					templateUrl: 'app/registration/standard/eventure.part.html',
+					authorized : ['super-user'],
 					settings: {
 						nav: 2,
 						content: 'Events'
-					}
+					},
 				}
 			}, {
 				url: '/eventure/:eventureId/list/',
 				config: {
 					title: 'Eventure List',
 					templateUrl: 'app/registration/standard/eventurelist.part.html',
+					authorized : ['super-user'],
 					settings: {
 						nav: 3,
 						content: 'Participants'
@@ -62,6 +36,7 @@
 				config: {
 					title: 'Create Team',
 					templateUrl: 'app/registration/team/createteam.part.html',
+					authorized : ['super-user'],
 					settings: {
 						nav: 1,
 						content: 'Enterprise'
@@ -72,6 +47,7 @@
 				config: {
 					title: 'Team Payment',
 					templateUrl: 'app/registration/team/teamPayment.part.html',
+					authorized : ['super-user'],
 					settings: {
 						nav: 4,
 						content: 'Coupons & Addons'
@@ -81,91 +57,106 @@
 				url: '/team/:teamGuid/member/:teamMemberGuid/payment',
 				config: {
 					title: 'Member Payment',
-					templateUrl: 'app/registration/team/memberPayment.part.html'
+					templateUrl: 'app/registration/team/memberPayment.part.html',
+					authorized : ['super-user'],
 				}
 			}, {
 				url: '/participant',
 				config: {
 					title: 'Participant',
-					templateUrl: 'app/registration/profile/setparticipant.part.html'
+					templateUrl: 'app/registration/profile/setparticipant.part.html',
+					authorized : ['super-user'],
 				}
 			}, {
 				url: '/participant/add',
 				config: {
 					title: 'Add Participant',
-					templateUrl: 'app/registration/profile/addparticipant.part.html'
+					templateUrl: 'app/registration/profile/addparticipant.part.html',
+					authorized : ['super-user'],
 				}
 			}, {
 				url: '/participant/:partId',
 				config: {
 					title: 'Edit Participant',
-					templateUrl: 'app/registration/profile/setparticipant.part.html'
+					templateUrl: 'app/registration/profile/setparticipant.part.html',
+					authorized : ['super-user'],
 				}
 			}, {
 				url: '/eventure/:eventureId/list/:listId/questions',
 				config: {
 					title: 'Questions',
-					templateUrl: 'app/registration/standard/questions.part.html'
+					templateUrl: 'app/registration/standard/questions.part.html',
+					authorized : ['super-user'],
 				}
 			}, {
 				url: '/confirm',
 				config: {
 					title: 'Confirm',
-					templateUrl: 'app/registration/payment/confirm.part.html'
+					templateUrl: 'app/registration/payment/confirm.part.html',
+					authorized : ['super-user'],
 				}
 			}, {
 				url: '/receipt/:registrationId',
 				config: {
 					title: 'Receipt',
-					templateUrl: 'app/registration/payment/teamMemberReceipt.part.html'
+					templateUrl: 'app/registration/payment/teamMemberReceipt.part.html',
+					authorized : ['super-user'],
 				}
 			}, {
 				url: '/orderreceipt/:orderId',
 				config: {
 					title: 'Receipt Cart',
-					templateUrl: 'app/registration/payment/orderreceipt.part.html'
+					templateUrl: 'app/registration/payment/orderreceipt.part.html',
+					authorized : ['super-user'],
 				}
 			}, {
 				url: '/new-user/add',
 				config: {
 					title: 'Add User Profile',
-					templateUrl: 'app/registration/profile/addProfile.part.html'
+					templateUrl: 'app/registration/profile/addProfile.part.html',
+					authorized : ['super-user'],
 				}
 			}, {
-				url: '/user-profile/:participantId',
+				url: '/user-profile/:participantGuid',
 				config: {
 					title: 'User Profile',
-					templateUrl: 'app/registration/profile/profile.part.html'
+					templateUrl: 'app/registration/profile/profile.part.html',
+					authorized : ['super-user'],
 				}
 			},{
 				url: '/editteam/:teamId',
 				config: {
 					title: 'Edit Team',
-					templateUrl: 'app/registration/team/editteam.part.html'
+					templateUrl: 'app/registration/team/editteam.part.html',
+					authorized : ['super-user'],
 				}
 			}, {
 				url: '/registration/:regId',
 				config: {
 					title: 'Edit Registration',
-					templateUrl: 'app/registration/profile/registrationedit.part.html'
+					templateUrl: 'app/registration/profile/registrationedit.part.html',
+					authorized : ['super-user'],
 				}
 			}, {
 				url: '/registration/:regId/edit',
 				config: {
 					title: 'Edit Registration',
-					templateUrl: 'app/registration/profile/registrationEditConfirm.part.html'
+					templateUrl: 'app/registration/profile/registrationEditConfirm.part.html',
+					authorized : ['super-user'],
 				}
 			}, {
 				url: '/registration/:regId/transferQuestions',
 				config: {
 					title: 'Edit Registration',
-					templateUrl: 'app/registration/profile/transferQuestions.part.html'
+					templateUrl: 'app/registration/profile/transferQuestions.part.html',
+					authorized : ['super-user'],
 				}
 			}, {
 				url: '/shoppingcart',
 				config: {
 					title: 'Shopping Cart',
-					templateUrl: 'app/registration/_layout/shoppingcart.part.html'
+					templateUrl: 'app/registration/_layout/shoppingcart.part.html',
+					authorized : ['super-user'],
 				}
 			}, {
 				url: '/login',

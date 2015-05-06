@@ -125,7 +125,7 @@
                         field: "timeEnd",
                         title: "Shift End",
                         type: "date",
-                        format: "{0:h:mm tt}", 
+                        format: "{0:h:mm tt}",
 						width: 125
                     }, {
                         title: "",

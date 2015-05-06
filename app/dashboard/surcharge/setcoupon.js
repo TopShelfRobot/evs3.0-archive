@@ -2,7 +2,7 @@
 	'use strict';
 
 	var controllerId = 'setcoupon';
-	angular.module('app').controller(controllerId, ['$routeParams','$location', '$scope', 'common', 'datacontext', setcoupon]);
+	angular.module('app').controller(controllerId, ['$routeParams', '$location', '$scope', 'common', 'datacontext', setcoupon]);
 
 	function setcoupon($routeParams, $location, $scope, common, datacontext) {
 
@@ -23,9 +23,9 @@
 
 		function activate() {
 			onDestroy();
-			common.activateController(getCoupon(), getEventures(), getEventureLists(), getAmountTypes(), controllerId)
+			common.activateController(getEventures(), getEventureLists(), getAmountTypes(), controllerId)
 				.then(function() {
-				    //log('Activated set coupon');
+					getCoupon();
 				});
 		}
 
@@ -48,13 +48,15 @@
 					});
 			} else {
 				vm.coupon = datacontext.surcharge.createCoupon();
+				vm.coupon.dateStart = new Date();
+				vm.coupon.dateEnd = new Date();
 				return vm.coupon;
 			}
 		}
 
 		function onDestroy() {
-			$scope.$on('$destroy', function () {
-			    //autoStoreWip(true);
+			$scope.$on('$destroy', function() {
+				//autoStoreWip(true);
 				datacontext.cancel();
 			});
 		}
@@ -77,9 +79,9 @@
 				});
 		}
 
-		vm.today = function () {
-		   vm.coupon.dateStart = new Date();
-		   vm.coupon.dateEnd = new Date();
+		vm.today = function() {
+			vm.coupon.dateStart = new Date();
+			vm.coupon.dateEnd = new Date();
 		};
 
 		vm.today();
@@ -102,7 +104,7 @@
 		vm.cancel = function() {
 			$location.path("/discounts");
 		};
-	  
+
 		vm.saveAndNav = function() {
 			return datacontext.save(vm.coupon)
 				.then(complete);

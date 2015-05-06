@@ -4,11 +4,18 @@
 
 	function Controller($routeParams, $location, $q, model, common, config){
 		var self = this;
+		var requestPath = window.location.pathname;
+
+        if (requestPath === '/dash.html') {
+            self.isDash = true;
+        }
+
 		this.showDefer = false;
 		this.showTransfer = false;
 		this.newListing = null;
 		this.model = model;
 		this.regId = $routeParams.regId;
+
 
 		this.saveAnswers = function(){
 			self.model.saveAnswers()
