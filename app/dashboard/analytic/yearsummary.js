@@ -1,146 +1,157 @@
-(function () {
-    'use strict';
-    var controllerId = 'yearsummary';
-    angular.module('app').controller(controllerId, ['$routeParams', 'config', 'common', 'datacontext', yearsummary]);
+(function() {
+	'use strict';
+	var controllerId = 'yearsummary';
+	angular.module('app').controller(controllerId, ['$routeParams', 'config', 'common', 'datacontext', yearsummary]);
 
-    function yearsummary($routeParams, config, common, datacontext) {
-        var getLogFn = common.logger.getLogFn;
-        var log = getLogFn(controllerId);
+	function yearsummary($routeParams, config, common, datacontext) {
+		var getLogFn = common.logger.getLogFn;
+		var log = getLogFn(controllerId);
 
-        var vm = this;
+		var vm = this;
 
-        vm.title = 'app';
+		vm.title = 'app';
 
-        vm.eventureId = $routeParams.eventureId;
+		vm.eventureId = $routeParams.eventureId;
 
-        vm.chart = {
-            startYear: 2012,
-            endYear: 2014,
-            //eventureId: 1,
-            type: 0
-        };
+		vm.chart = {
+			startYear: 2012,
+			endYear: 2014,
+			//eventureId: 1,
+			type: 0
+		};
+		vm.chartOptions = {
+			theme: 'material',
+			legend: {
+				position: 'bottom'
+			},
+			tooltip: {
+				visible: true
+			},
+			categoryAxis: {
+				field: 'month',
+				labels: {
+					format: 'MMM'
+				}
+			}
 
-        vm.eventures = [];
+		};
+		vm.eventures = [];
+		vm.ownerId = config.owner.ownerId;
+		var yearSummaryApi = config.remoteApiName + 'analytic/GetYearOverYearData/' + vm.ownerId + '/' + vm.eventureId + '/' + vm.chart.startYear + '/' + vm.chart.endYear + '/' + vm.chart.type;
+		activate();
 
-        vm.ownerId = config.owner.ownerId;
+		function activate() {
+			var promises = [getEventures()];
+			common.activateController(promises, controllerId)
+				.then(function() {});
+		}
 
-        activate();
+		var min = vm.min = moment('2000-01-01');
+		var max = vm.max = moment(new Date());
+		vm.years = [];
 
-        function activate() {
-            var promises = [getEventures(), Chart()];
-            //var promises = [];
-            common.activateController(promises, controllerId)
-                .then(function () {
-                    //log('Activated Coupon Addon Center View');
-                });
-        }
+		for (var i = max.year(); i >= min.year(); i--) {
+			vm.years.push(i);
+		}
 
-        var min = vm.min = moment('2000-01-01');
-        var max = vm.max = moment(new Date()); // Defaults to now
+		function getEventures() {
+			return datacontext.eventure.getEventuresByOwnerId(vm.ownerId)
+				.then(function(data) {
+					//applyFilter();
+					vm.eventures = data;
+					return vm.eventures;
+				});
+		}
 
-        vm.years = [];
+		vm.generateChart = function() {
+			var chart = vm.summaryChart;
+			var dataSource = new kendo.data.DataSource({
+				transport: {
+					read: {
+						url: function() {
+							return config.remoteApiName + 'analytic/GetYearOverYearData/' + vm.ownerId + '/' + vm.eventureId + '/' + vm.chart.startYear + '/' + vm.chart.endYear + '/' + vm.chart.type;
+							//return 'http://dev30.eventuresports.info/' + 'analytic/GetYearOverYearData/' + vm.ownerId + '/' + vm.eventureId + '/' + vm.chart.startYear + '/' + vm.chart.endYear + '/' + vm.chart.type;
+						},
+						dataType: "json"
+					}
+				},
+				group: {
+					field: "year"
+				},
+				sort: {
+					field: "month",
+					dir: "asc"
+				},
+				schema: {
+					model: {
+						fields: {
+							month: {
+								type: "date"
+							}
+						}
+					}
+				}
+			});
+			chart.setDataSource(dataSource);
+		};
 
-        for (var i=max.years(); i>=min.years(); i--) {
-            vm.years.push(i);
-        }
+		vm.yearSummary = new kendo.data.DataSource({
+			transport: {
+				read: {
+					url: yearSummaryApi,
+					dataType: 'json'
+				}
+			},
+			group: {
+				field: 'year'
+			},
+			sort: {
+				field: 'month',
+				dir: 'asc'
+			},
 
-        function getEventures() {
-            return datacontext.eventure.getEventuresByOwnerId(vm.ownerId)
-                .then(function(data) {
-                    //applyFilter();
-                    vm.eventures = data;
-                    return vm.eventures;
-                });
-        }
+		});
 
-        vm.generateChart = function () {
-                    
-            var chart = vm.summaryChart;
-            
-            var dataSource = new kendo.data.DataSource({
-                 transport: {
-                     read: {
-                         url: function () {
-                             return config.remoteApiName + 'analytic/GetYearOverYearData/' + vm.ownerId + '/' + vm.eventureId + '/' + vm.chart.startYear + '/' + vm.chart.endYear + '/' + vm.chart.type;
-                             //return 'http://dev30.eventuresports.info/' + 'analytic/GetYearOverYearData/' + vm.ownerId + '/' + vm.eventureId + '/' + vm.chart.startYear + '/' + vm.chart.endYear + '/' + vm.chart.type;
-                         },
-                         dataType: "json"
-                     }
-                 },
-                 group: {
-                     field: "year"
-                 },
-                 sort: {
-                     field: "month",
-                     dir: "asc"
-                 },
-                 schema: {
-                     model: {
-                         fields: {
-                             month: {
-                                 type: "date"
-                             }
-                         }
-                     }
-                 }
-               });
-            
-            chart.setDataSource(dataSource);
-           
-            //.refresh();
-        };
+		function Chart() {
 
-         function Chart() {
-
-            //var yearapi = config.remoteApiName + 'analytic/GetYearOverYearData/1/1/2013/2014/0';
-
-             var yearapi = config.remoteApiName + 'analytic/GetYearOverYearData/' + vm.ownerId + '/' + vm.eventureId + '/' + vm.chart.startYear + '/' + vm.chart.endYear + '/' + vm.chart.type;
-
-            vm.yearOverYear = {
-                theme: "material",
-                 dataSource: {
-                     transport: {
-                         read: yearapi,
-                         dataType: "json"
-                     },
-                     group: {
-                        field: "year"
-                     },
-                     sort: {
-                         field: "month",
-                         dir: "asc"
-                     },
-                     schema: {
-                         model: {
-                             fields: {
-                                 month: {
-                                     type: "date"
-                                 }
-                             }
-                         }
-                     }
-                 },
-                 
-                legend: {
-                    position: "bottom"
-                },
-                series: [{
-                    type: "column",
-                    field: "registrations"   //,
-                    //name: "#= group.value # (close)"   //tool tips
-                }],
-                valueAxis: {
-                    line: {
-                        visible: false
-                    }
-                },
-                categoryAxis: {
-                    field: "month",
-                    labels: {
-                        format: "MMM"
-                    }
-                }
-            };
-        }
-    }
+			vm.yearOverYear = {
+				theme: "material",
+				dataSource: {
+					transport: {
+						read: yearApi,
+						dataType: 'json'
+					},
+					group: {
+						field: 'year'
+					},
+					sort: {
+						field: 'month',
+						dir: 'asc'
+					},
+					schema: {
+						model: {
+							fields: {
+								month: {
+									type: 'date'
+								}
+							}
+						}
+					}
+				},
+				legend: {
+					position: 'bottom'
+				},
+				series: [{
+					type: 'column',
+					field: 'registrations'
+				}],
+				categoryAxis: {
+					field: 'month',
+					labels: {
+						format: 'MMM'
+					}
+				}
+			};
+		}
+	}
 })();

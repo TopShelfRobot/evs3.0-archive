@@ -31,7 +31,7 @@
 				authorized: ['money', 'super-user'],
 				settings: {
 					nav: 2,
-					content: 'Enterprise'
+					content: 'Analytic'
 				}
 			}
 		}, {
