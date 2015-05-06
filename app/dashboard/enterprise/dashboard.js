@@ -16,6 +16,7 @@
 		var zipByYearApi = config.remoteApiName + 'widget/GetZipHeatMapByYear/' + year;
 		var capacityByYearApi = config.remoteApiName + 'widget/GetCapacityRegDialsByYear/' + year;
 		var regRevByOwnerApi = config.remoteApiName + 'widget/getOwnerGraphByYear/' + ownerId;
+		var yearSummaryApi = config.remoteApiName + 'analytic/GetYearOverYearData/' + vm.ownerId;
 		//Set Default Chart Options
 		vm.chartOptions = {
 			theme: 'material',
@@ -106,14 +107,30 @@
 			}
 		});
 
-		vm.regRev = new kendo.data.DataSource({
+		vm.yearSummary = new kendo.data.DataSource({
 			transport: {
 				read: {
-					url: regRevByOwnerApi,
+					url: yearSummaryApi,
 					dataType: 'json'
 				}
+			},
+			group: {
+				field: 'year'
+			},
+			sort: {
+				field: 'month',
+				dir: 'asc'
 			}
 		});
+
+		// vm.regRev = new kendo.data.DataSource({
+		// 	transport: {
+		// 		read: {
+		// 			url: regRevByOwnerApi,
+		// 			dataType: 'json'
+		// 		}
+		// 	}
+		// });
 
 	}
 })();

@@ -1,4 +1,4 @@
-module.exports = function (grunt) {
+module.exports = function(grunt) {
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
 		sass: {
@@ -16,23 +16,26 @@ module.exports = function (grunt) {
 			target: {
 				files: {
 					'scss/frameworkcss/framework.css': ['scss/rawcss/kendo.common.min.css',
-	  'scss/frameworkcss/kendo.common-material.core.min.css',
-	  'scss/frameworkcss/kendo.common-material.min.css',
-	  'scss/frameworkcss/kendo.material.min.css',
-	  'scss/frameworkcss/kendo.material.mobile.min.css',
-	  'scss/frameworkcss/kendo.mobile.material.min.css',
-	  'scss/frameworkcss/kendo.dataviz.min.css',
-	  'scss/frameworkcss/kendo.dataviz.default.min.css',
-	  'scss/frameworkcss/kendo.dataviz.material.min.css',
-	  'scss/frameworkcss/breeze.directives.css',
-	  'scss/frameworkcss/toastr.css',
-	  'scss/frameworkcss/nsPopover.custom.css',
-	  'scss/frameworkcss/font-awesome.min.css'],
+						'scss/frameworkcss/kendo.common-material.core.min.css',
+						'scss/frameworkcss/kendo.common-material.min.css',
+						'scss/frameworkcss/kendo.material.min.css',
+						'scss/frameworkcss/kendo.material.mobile.min.css',
+						'scss/frameworkcss/kendo.mobile.material.min.css',
+						'scss/frameworkcss/kendo.dataviz.min.css',
+						'scss/frameworkcss/kendo.dataviz.default.min.css',
+						'scss/frameworkcss/kendo.dataviz.material.min.css',
+						'scss/frameworkcss/breeze.directives.css',
+						'scss/frameworkcss/toastr.css',
+						'scss/frameworkcss/nsPopover.custom.css',
+						'scss/frameworkcss/font-awesome.min.css'
+					],
 					'Content/css/registration.css': ['scss/frameworkcss/framework.css',
-	  'scss/frameworkcss/registration.css'],
+						'scss/frameworkcss/registration.css'
+					],
 					'Content/css/dashboard.css': ['scss/frameworkcss/framework.css',
-      'scss/frameworkcss/dashboard.css',
-			'scss/frameworkcss/registration.css']
+						'scss/frameworkcss/dashboard.css',
+						'scss/frameworkcss/registration.css'
+					]
 				}
 			}
 		},
@@ -64,7 +67,8 @@ module.exports = function (grunt) {
 					'bower_components/angulartics/src/angulartics-ga.js',
 					'bower_components/ng-role-auth/dist/ng-role-auth.js',
 					'bower_components/angular-google-maps/dist/angular-google-maps.js',
-					'bower_components/lodash/dist/lodash.js'],
+					'bower_components/lodash/dist/lodash.js'
+				],
 				dest: 'Scripts/concat.js'
 			},
 		},
@@ -132,5 +136,5 @@ module.exports = function (grunt) {
 	//Watch task
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	// Default grunt tasks
-	grunt.registerTask('default', ['preen', 'jshint', 'sass', 'cssmin', 'copy', 'concat', 'uglify']);
+	grunt.registerTask('default', ['preen', 'jshint', 'copy', 'concat', 'uglify', 'sass', 'cssmin', ]);
 };
