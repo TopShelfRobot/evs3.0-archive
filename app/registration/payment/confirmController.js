@@ -28,7 +28,7 @@
 		//console.log(cart.regSettings);
 
 		var promises = [
-			$q.all([datacontext.participant.getParticipantById(cart.ownerId)]) //datacontext.participant.getOwnerById(cart.ownerId),
+			$q.all([datacontext.participant.getParticipantById(cart.ownerId)]) //datacontext.participant.getOwnerById(cart.ownerId),  //TODO:  wtf is this???
 				.then(function (output) {
 				//var owner = output[0];
 				//$scope.owner = owner;
@@ -90,9 +90,11 @@
 						console.log($scope.couponCode);
 						console.log(result.Amount);
 						console.log(result.CouponId);
+						console.log(result.LinkId);
+                        //console.log(result.LinkId);
 						//cart.addSurcharge('Coupon: ' + couponCode, result.Amount, 'coupon', cart.currentEventureListId(), cart.currentPartId, result.CouponId);
 						//(desc, amount, chargeType, listid, partid, couponId)
-						cart.addSurcharge('Coupon: ' + $scope.couponCode, result.Amount, 'coupon', 0, 0, result.CouponId);
+						cart.addSurcharge('Coupon: ' + $scope.couponCode, result.Amount, 'coupon', result.LinkId, 0, result.CouponId);
 						$scope.couponErrors = "";
 					} else {
 						$scope.couponErrors = result.Message;
