@@ -28,11 +28,14 @@
       </div>
     </div>
     <div class="col-lg-8">
-      <h3 class="dashboard-chart-title"><span>Revenue</span></h3>
+      <h3 class="dashboard-chart-title"><span>Year Over Year</span></h3>
       <div class="owner-chart-container">
-        <div kendo-chart k-series="[{ type:'line', field: 'regs', categoryField: 'month', axis: 'regs' },
-			  {type: 'column', field: 'rev', categoryField: 'month', axis: 'rev' }]" k-value-axes="[{name: 'regs'},{name: 'rev'}]"
-        k-options="vm.chartOptions" k-data-source="vm.regRev"></div>
+<div kendo-chart="vm.summaryChart" k-series-defaults="{ type: 'column' }" k-series="[
+		  { field: 'registrations', name: 'year' }
+		  ]" k-data-source="vm.yearSummary" k-options="vm.chartOptions"></div>
+        <!-- <div kendo-chart k-series="[{ type:'line', field: 'regs', categoryField: 'month', axis: 'regs' }, -->
+			  <!-- {type: 'column', field: 'rev', categoryField: 'month', axis: 'rev' }]" k-value-axes="[{name: 'regs'},{name: 'rev'}]" -->
+        <!-- k-options="vm.chartOptions" k-data-source="vm.regRev"></div> -->
       </div>
     </div>
   </div>
