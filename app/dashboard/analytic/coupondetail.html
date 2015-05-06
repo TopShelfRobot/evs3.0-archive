@@ -1,41 +1,41 @@
 <section ng-controller="couponDetailAnalytics as vm">
-	<div class="row-fluid">
-		<div class="col-lg-12">
-			<a ng-href="#/enterpriseeventure/{{vm.eventureId}}" class="btn btn-info btn-sm">
-				<em class="glyphicon glyphicon-circle-arrow-left"></em>&nbsp;Back</a>
-		</div>
-	</div>
-	<div class="row-fluid">
-		<div class="col-lg-12">
-			<h1></h1>
-		</div>
-	</div>
-	<div class="row-fluid">
-		<div class="col-sm-8">
-			<!--//All Coupons Pie Chart-->
-			<div kendo-chart k-title="{ text: 'All Coupons', position: 'top' }" k-series-defaults="{ type: 'pie' }" k-series="[{
-                                field: 'value',
-                                categoryField: 'key',
-                                padding: 0
-                              }]" k-data-source="vm.couponUse"></div>
-		</div>
-		<div class="col-sm-4">
-			<!-- Total Numbers -->
-			<ul class="list-group">
-				<li class="list-group-item list-group-item-info">
-					<h4 class="list-group-item-heading">Total Coupon Use</h4>
-				</li>
-				<li class="list-group-item">Total Coupons Used:&nbsp;{{vm.couponTotals.used || 0}}</li>
-				<li class="list-group-item"> {{vm.couponTotals.value || 0 | currency}}</li>
-			</ul>
-
-		</div>
-	</div>
-	<div class="row-fluid">
-		<div class="col-lg-12">
-			<div class="table-responsive">
-				<div id="coupongrid" kendo-grid="vm.coupongrid" k-options="vm.couponGridOptions"></div>
-			</div>
-		</div>
-	</div>
+  <div class="row-fluid">
+    <div class="col-lg-12">
+      <a ng-href="#/enterpriseeventure/{{vm.eventureId}}" class="btn btn-info btn-sm">
+        <em class="glyphicon glyphicon-circle-arrow-left"></em>&nbsp;Back</a>
+    </div>
+  </div>
+  <div class="row-fluid">
+    <div class="col-lg-12">
+      <h1></h1>
+    </div>
+  </div>
+  <div class="row-fluid">
+    <div class="col-sm-8">
+      <!--//All Coupons Pie Chart-->
+      <h3 class="dashboard-chart-title">Coupon Use</h3>
+      <div class="chart-container">
+        <div kendo-chart k-series-defaults="{ type: 'pie' }" k-series="[{ field: 'count', categoryField: 'code', padding: 0}]"
+        k-data-source="vm.couponUse" k-options="vm.chartOptions" k-tooltip="{visible: true, template: '${category} - ${value}'}"></div>
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <!-- Total Numbers -->
+      <ul class="list-group coupon-totals">
+        <li class="list-group-item list-group-item-info">
+		<h2 class="list-group-item-heading"><span class="dashboard-chart-title">Total Coupon Use</span></h2>
+        </li>
+		<li class="list-group-item"><strong>Total Coupons Used:&nbsp;{{vm.couponTotal.count || 0}}</strong></li>
+		<li class="list-group-item"><strong>Total Coupon Value:&nbsp;{{vm.couponTotal.amount || 0 | currency}}</strong></li>
+      </ul>
+    </div>
+  </div>
+  <div class="row-fluid">
+    <div class="col-lg-12">
+      <hr>
+      <div class="table-responsive">
+        <div id="coupongrid" kendo-grid="vm.coupongrid" k-options="vm.couponGridOptions"></div>
+      </div>
+    </div>
+  </div>
 </section>

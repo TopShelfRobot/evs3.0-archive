@@ -1,27 +1,28 @@
 (function() {
 	'use strict';
 	var controllerId = 'couponDetailAnalytics';
-	angular.module('app').controller(controllerId, ['$routeParams', 'config', 'common', 'datacontext', couponDetailAnalytics]);
+	angular.module('app').controller(controllerId, ['$routeParams', '$http', 'config', 'common', 'datacontext', couponDetailAnalytics]);
 
-	function couponDetailAnalytics($routeParams, config, common, datacontext) {
+	function couponDetailAnalytics($routeParams, $http, config, common, datacontext) {
 		var getLogFn = common.logger.getLogFn;
 		var log = getLogFn(controllerId);
 
 		var vm = this;
 
 		vm.coupons = [];
+		vm.couponTotal = {};
 		vm.ownerId = config.owner.ownerId;
-		vm.couponId = $routeParams.couponId;
-		var status = [{
-			'value': true,
-			'text': 'Active',
-		}, {
-			'value': false,
-			'text': 'Inactive'
-		}];
+		vm.eventureId = $routeParams.eventureId;
+		vm.chartOptions = {
+			theme: 'material',
+			legend: {
+				visible: false
+			}
+		};
 		//Apis
-		var couponPartsApi = config.remoteApiName + 'widget/getPartsByCouponId/' + vm.ownerId;
-		var couponUseEventApi = config.remoteApiName + 'analytic/getCouponUseByEventureId/' + vm.ownerId;
+		var couponPartsApi = config.remoteApiName + 'analytic/getCouponsByEventureId/' + vm.eventureId;
+		var couponUseEventApi = config.remoteApiName + 'analytic/getCouponGroupingsByEventureId/' + vm.eventureId;
+		var couponTotalsApi = config.remoteApiName + 'analytic/getCouponTotalsByEventureId/' + vm.eventureId;
 
 		activate();
 
@@ -35,11 +36,10 @@
 		}
 
 		function getCouponTotals() {
-			return datacontext.surcharge.getCouponTotalsByCouponId(vm.couponId)
-				.then(function(data) {
-					vm.couponTotals = data;
-					return vm.couponTotals;
-				});
+			$http.get(couponTotalsApi).then(function(totals) {
+				vm.couponTotal.amount = Math.abs(totals.data[0].amount);
+				vm.couponTotal.count = totals.data[0].count;
+			});
 		}
 
 		vm.couponUse = new kendo.data.DataSource({
@@ -63,6 +63,15 @@
 				transport: {
 					read: couponPartsApi
 				},
+				schema: {
+					model: {
+						fields: {
+							dateCouponRedeemed: {
+								type: 'date'
+							}
+						}
+					}
+				},
 				pageSize: 10,
 				serverPaging: false,
 				serverSorting: false
@@ -73,21 +82,23 @@
 				mode: 'row'
 			},
 			columns: [{
-				field: 'name',
+				field: 'lastName',
 				title: 'Name',
-				width: '400px'
+				template: '#= firstName # #= lastName #',
+				width: 300
 			}, {
 				field: 'email',
-				title: 'Email Address'
+				title: 'Email Address',
+				width: 200
 			}, {
-				field: 'amount',
+				field: 'couponAmount',
 				title: 'Amount',
-				width: '220px'
+				width: 120,
+				format: '{0:c}'
 			}, {
-				field: 'couponUsed',
-				title: 'DateUsed',
-				width: '100px',
-				values: status
+				field: 'code',
+				title: 'Coupon',
+				width: '170px',
 			}]
 		};
 	}
