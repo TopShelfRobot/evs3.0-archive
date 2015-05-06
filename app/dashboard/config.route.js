@@ -371,7 +371,7 @@
 				authorized: ['money', 'admin', 'super-user']
 			}
 		}, {
-			url: '/coupondetail/:couponId',
+			url: '/coupondetail/:eventureId',
 			config: {
 				title: 'Coupon Detail',
 				templateUrl: 'app/dashboard/analytic/coupondetail.html',
@@ -427,6 +427,13 @@
 				authorized: ['money', 'admin', 'super-user']
 			}
 		}, {
+			url: '/lapsedrunner/:eventureId',
+			config: {
+				title: 'Lapsed Runners',
+				templateUrl: 'app/dashboard/analytic/lapsedrunner.html',
+				authorized: ['money', 'admin', 'super-user']
+			}
+		},{
 			url: '/employee',
 			config: {
 				title: 'Employee Management',
