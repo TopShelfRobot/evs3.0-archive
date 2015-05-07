@@ -1,4 +1,4 @@
-(function () {
+(function() {
 	angular.module('evReg').service('CartModel', ['config', Model]);
 
 	function Model(config) {
@@ -23,6 +23,7 @@
 		cart.registrations = [];
 		cart.surcharges = [];
 		cart.addons = [];
+		cart.charities = [];
 
 		cart.regSettings = {
 			isGroupRequired: false, //this comes from list
@@ -71,7 +72,7 @@
 			supportPhone: ''
 		};
 
-		cart.order = function () {
+		cart.order = function() {
 			var order = {
 				orderAmount: cart.getTotalPrice(),
 				orderHouseId: cart.houseId,
@@ -85,7 +86,7 @@
 			return order;
 		};
 
-		cart.addRegistration = function (eventure, eventureList, participant, answers, groupId, group2Id, quantity) {
+		cart.addRegistration = function(eventure, eventureList, participant, answers, groupId, group2Id, quantity) {
 			var isRegDupe = false;
 			if (!cart.regSettings.isDuplicateOrderAllowed) {
 				for (var i = 0; i < cart.registrations.length; i++) {
@@ -103,11 +104,18 @@
 			}
 		};
 
-		cart.addSurcharge = function (desc, amount, chargeType, listid, partid, couponId) {
+		cart.addSurcharge = function(desc, amount, chargeType, listid, partid, couponId) {
 			cart.surcharges.push(new surcharge(desc, amount, chargeType, listid, partid, couponId));
 		};
 
-		cart.addAddon = function (addon, quantity) {
+		cart.addCharity = function(amount, listId) {
+			cart.charities.push({
+				amount: amount,
+				listId: listId
+			});
+		}
+
+		cart.addAddon = function(addon, quantity) {
 			function updateQuantity(item) {
 				var found = false;
 				if (item.addonId == addon.id) {
@@ -127,7 +135,7 @@
 			}
 		};
 
-		cart.removeAddon = function (addon) {
+		cart.removeAddon = function(addon) {
 
 			function removeMatching(item, index, array) {
 				var found = false;
@@ -140,16 +148,16 @@
 			return cart.addons.some(removeMatching);
 		};
 
-		cart.processCartRules = function () {
+		cart.processCartRules = function() {
 			//clear all rules
-		    //cart.surcharges = [];
-		    for (var j = 0; j < cart.surcharges.length; j++) {
-		        var currCharge = cart.surcharges[j];
-		        if (currCharge.chargeType != 'usat') {
-		            cart.surcharges.splice(j, 1);
-		            break;
-		        }
-		    }
+			//cart.surcharges = [];
+			for (var j = 0; j < cart.surcharges.length; j++) {
+				var currCharge = cart.surcharges[j];
+				if (currCharge.chargeType != 'usat') {
+					cart.surcharges.splice(j, 1);
+					break;
+				}
+			}
 
 			var regCount = 0;
 			var regTotalAmount = 0;
@@ -167,21 +175,21 @@
 			if (cart.regSettings.isAddSingleFeeForAllRegs) {
 				var feeAmount = 0;
 				switch (cart.regSettings.addSingleFeeType) {
-				case '0':
-					feeAmount = cart.regSettings.addSingleFeeForAllRegsPercent * regTotalAmount / 100; ///this is a hack fix it //mjb
-					break;
-				case 'percent':
-					feeAmount = cart.regSettings.addSingleFeeForAllRegsPercent * regTotalAmount / 100;
-					break;
-				case 'flat':
-					feeAmount = regCount * cart.regSettings.addSingleFeeForAllRegsFlat;
-					break;
-				case 'both':
-					feeAmount = (cart.regSettings.addSingleFeeForAllRegsPercent * regTotalAmount / 100) + (regCount * cart.regSettings.addSingleFeeForAllRegsFlat);
-					break;
-				default:
-					feeAmount = 0;
-					break;
+					case '0':
+						feeAmount = cart.regSettings.addSingleFeeForAllRegsPercent * regTotalAmount / 100; ///this is a hack fix it //mjb
+						break;
+					case 'percent':
+						feeAmount = cart.regSettings.addSingleFeeForAllRegsPercent * regTotalAmount / 100;
+						break;
+					case 'flat':
+						feeAmount = regCount * cart.regSettings.addSingleFeeForAllRegsFlat;
+						break;
+					case 'both':
+						feeAmount = (cart.regSettings.addSingleFeeForAllRegsPercent * regTotalAmount / 100) + (regCount * cart.regSettings.addSingleFeeForAllRegsFlat);
+						break;
+					default:
+						feeAmount = 0;
+						break;
 				}
 				cart.surcharges.push(new surcharge('Online Service Fee', feeAmount.toFixed(2), 'cartRule', 0, 0, 0));
 			}
@@ -206,14 +214,14 @@
 						// multiParticipantDiscountAmount: 0,
 						// multiParticipantDiscountAmountType: 0,
 						switch (cart.regSettings.multiParticipantDiscountAmountType) {
-						case 'Percent': // precentage
-							discount = -1 * items[key].cost * (cart.regSettings.multiParticipantDiscountAmount / 100);
-							cart.surcharges.push(new surcharge('percentage based multi-participant discount', discount.toFixed(2), 'cartRule', key, 0, 0));
-							break;
-						case 'Dollars': // flat rate
-							discount = -1 * cart.regSettings.multiParticipantDiscountAmount;
-							cart.surcharges.push(new surcharge('flat fee based multi-participant discount', discount.toFixed(2), 'cartRule', key, 0, 0));
-							break;
+							case 'Percent': // precentage
+								discount = -1 * items[key].cost * (cart.regSettings.multiParticipantDiscountAmount / 100);
+								cart.surcharges.push(new surcharge('percentage based multi-participant discount', discount.toFixed(2), 'cartRule', key, 0, 0));
+								break;
+							case 'Dollars': // flat rate
+								discount = -1 * cart.regSettings.multiParticipantDiscountAmount;
+								cart.surcharges.push(new surcharge('flat fee based multi-participant discount', discount.toFixed(2), 'cartRule', key, 0, 0));
+								break;
 						}
 					}
 				}
@@ -236,21 +244,21 @@
 						// multiRegistrationDiscountAmount: 0,
 						// multiRegistrationDiscountAmountType: 0,
 						switch (cart.regSettings.multiRegistrationDiscountAmountType) {
-						case 'Percent': // precentage
-							discount = -1 * items[key].cost * (cart.regSettings.multiRegistrationDiscountAmount / 100);
-							cart.surcharges.push(new surcharge('percentage based multi-registration discount', discount.toFixed(2), 'cartRule', key, 0, 0));
-							break;
-						case 'Dollars': // flat rate
-							discount = -1 * cart.regSettings.multiRegistrationDiscountAmount;
-							cart.surcharges.push(new surcharge('flat fee based multi-registration discount', discount.toFixed(2), 'cartRule', key, 0, 0));
-							break;
+							case 'Percent': // precentage
+								discount = -1 * items[key].cost * (cart.regSettings.multiRegistrationDiscountAmount / 100);
+								cart.surcharges.push(new surcharge('percentage based multi-registration discount', discount.toFixed(2), 'cartRule', key, 0, 0));
+								break;
+							case 'Dollars': // flat rate
+								discount = -1 * cart.regSettings.multiRegistrationDiscountAmount;
+								cart.surcharges.push(new surcharge('flat fee based multi-registration discount', discount.toFixed(2), 'cartRule', key, 0, 0));
+								break;
 						}
 					}
 				}
 			}
 		};
 
-		cart.removeCoupons = function () {
+		cart.removeCoupons = function() {
 			//mjb need to check for surcharges and remove them
 			for (var j = 0; j < cart.surcharges.length; j++) {
 				var currCharge = cart.surcharges[j];
@@ -261,7 +269,7 @@
 			}
 		};
 
-		cart.removeRegistration = function (selectedItem) {
+		cart.removeRegistration = function(selectedItem) {
 			for (var i = 0; i < cart.registrations.length; i++) {
 				var current = cart.registrations[i];
 				if (current === selectedItem) {
@@ -271,15 +279,21 @@
 			}
 		};
 
-		cart.emptyCart = function () {
+		cart.emptyCart = function() {
 			var length = this.registrations.length;
 			this.registrations.splice(0, length);
 
 			var chargeLength = this.surcharges.length;
 			this.surcharges.splice(0, chargeLength);
+
+			var addonsLength = this.addons.length;
+			this.addons.splice(0, addonsLength);
+
+			var charityLength = this.charities.lenth;
+			this.charities.splice(0, charitiesLength);
 		};
 
-		cart.getTotalPrice = function () {
+		cart.getTotalPrice = function() {
 			var me = this;
 			var price = 0,
 				chargelength = me.surcharges.length,
@@ -300,10 +314,15 @@
 				price += parseFloat(cart.addons[i].amount) * parseFloat(cart.addons[i].quantity);
 			}
 
+			i = 0;
+			for (; i < cart.charities.length; i++) {
+				price += parseFloat(cart.charities[i].amount));
+			}
+
 			return price;
 		};
 
-		cart.configureSettings = function (data) {
+		cart.configureSettings = function(data) {
 
 			cart.regSettings.isDuplicateOrderAllowed = data.isDuplicateOrderAllowed;
 			cart.regSettings.isAddSingleFeeForAllRegs = data.isAddSingleFeeForAllRegs;

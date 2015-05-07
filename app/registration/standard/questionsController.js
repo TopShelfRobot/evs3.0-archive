@@ -1,4 +1,4 @@
-(function () {
+(function() {
 
 	var controllerId = "QuestionsController";
 
@@ -6,11 +6,11 @@
 
 		$scope.cart = cartModel;
 
-		$scope.notAllowedToContinue = function () {
+		$scope.notAllowedToContinue = function() {
 			return !$scope.isWaiverChecked;
 		};
 
-		$scope.setWaiverChecked = function (val) {
+		$scope.setWaiverChecked = function(val) {
 			console.log("setWaiverChecked:", val);
 			$scope.isWaiverChecked = val;
 		};
@@ -18,14 +18,15 @@
 		$scope.groups = [];
 		$scope.isWaiverChecked = false;
 		$scope.quantity = 1;
-    
-    $scope.addons = [];
+
+		$scope.addons = [];
+		$scope.charity = [];
 
 		var promises = [];
 
 		promises.push(
 			datacontext.question.getCustomQuestionSetByEventureListId($routeParams.listId)
-			.then(function (results) {
+			.then(function(results) {
 				//alert(results.length);
 				$scope.customQuestions = results;
 				$scope.customAnswers = [];
@@ -43,7 +44,7 @@
 
 		promises.push(
 			datacontext.eventure.getGroupsActiveByEventureListId($routeParams.listId)
-			.then(function (data) {
+			.then(function(data) {
 				$scope.groups = data;
 				if (config.isGroupRequired && groups().length < 1) {
 					alert('There are currently no spaces available');
@@ -54,37 +55,37 @@
 		);
 
 		promises.push(
-      datacontext.surcharge.getAddonsByEventureId($routeParams.eventureId)
-        .then(function(data){
-          data.forEach(function(item){
-            item.quantity = 0;
-            $scope.addons.push(item);
-          });
-          return $scope.addons;
-        })
-    );
+			datacontext.surcharge.getAddonsByEventureId($routeParams.eventureId)
+			.then(function(data) {
+				data.forEach(function(item) {
+					item.quantity = 0;
+					$scope.addons.push(item);
+				});
+				return $scope.addons;
+			})
+		);
 
-    promises.push(
-      datacontext.surcharge.getAddonsByOwnerId(config.owner.ownerId)
-        .then(function(data){
-          data.forEach(function(item){
-            item.quantity = 0;
-            $scope.addons.push(item);
-          });
-          return $scope.addons;
-        })
-    );
+		promises.push(
+			datacontext.surcharge.getAddonsByOwnerId(config.owner.ownerId)
+			.then(function(data) {
+				data.forEach(function(item) {
+					item.quantity = 0;
+					$scope.addons.push(item);
+				});
+				return $scope.addons;
+			})
+		);
 
-    // promises.push(
- //       datacontext.question.getStockQuestionSetByEventureListId($routeParams.listId)
- //        .then(function(data){
- //          return data;
- //        })
- //    );
+		// promises.push(
+		//       datacontext.question.getStockQuestionSetByEventureListId($routeParams.listId)
+		//        .then(function(data){
+		//          return data;
+		//        })
+		//    );
 
 		promises.push(
 			datacontext.eventure.getEventureListById($routeParams.listId)
-			.then(function (data) {
+			.then(function(data) {
 				$scope.eventureList = data;
 				return data;
 			})
@@ -92,20 +93,20 @@
 
 		promises.push(
 			datacontext.eventure.getEventureById($routeParams.eventureId)
-			.then(function (data) {
+			.then(function(data) {
 				$scope.eventure = data;
 				return data;
 			})
 		);
 
 		promises.push(
-			(function () {
+			(function() {
 				var partId = $location.search().uid;
 				if (!partId) {
 					partId = cart.houseId;
 				}
 				return datacontext.participant.getParticipantById(partId)
-					.then(function (result) {
+					.then(function(result) {
 						$scope.participant = result;
 						return result;
 					});
@@ -114,15 +115,18 @@
 
 		common.activateController(promises, controllerId);
 
-		$scope.next = function () {
+		$scope.next = function() {
 			if ($scope.questionsForm.$valid) {
 				// Submit as normal
 				cartModel.addRegistration($scope.eventure, $scope.eventureList, $scope.participant, $scope.customAnswers, $scope.groupId, $scope.group2Id, $scope.quantity);
-        $scope.addons.forEach(function(item){
-          if(item.quantity > 0){
-            cartModel.addAddon(item, item.quantity);
-          }
-        });
+				$scope.addons.forEach(function(item) {
+					if (item.quantity > 0) {
+						cartModel.addAddon(item, item.quantity);
+					}
+					if ($scope.charity.amount > 0) {
+						cartModel.addCharity($scope.charity.amount, $scope.eventureList);
+					}
+				});
 				$location.$$search = {};
 				$location.path("/eventure");
 			} else {
