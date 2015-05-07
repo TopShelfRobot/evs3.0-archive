@@ -35,7 +35,7 @@
     owner: {
       ownerId: 1,
       authEmail: '',
-      isAdmin: true,
+      isAdmin: false,
       mr_houseId: 0
     }
   };

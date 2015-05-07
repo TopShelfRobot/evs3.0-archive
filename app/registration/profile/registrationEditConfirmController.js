@@ -8,19 +8,18 @@
 		
 		this.regId = $routeParams.regId;
 		model.load(self.regId);
-		this.isAdmin = config.owner.isAdmin;
-		this.paymentEnabled = 'credit';
 		
 		console.log("model:", model);
 		this.model = model;
+				
+		this.stripeError = "";
 		
-		this.otherPaymentAdjustment = 0;
-		this.otherPaymentAmmount = 0;
-		
-		this.otherPaymentChange = function(){
-			self.otherPaymentAmmount = Number(model.getTotalPrice()) + Number(self.otherPaymentAdjustment);
+		// initialize it
+		this.paymentOptions = {
+			showSelector : config.owner.isAdmin,
+			allowZeroPayment : false,
+			submitDisabled : false,
 		};
-		this.otherPaymentChange();
 		
 		var process = function (token, total, type){
 			$.blockUI({ message: 'Processing order...' });
@@ -31,39 +30,42 @@
 					.then(function (result) {
 						nextUrl = "/receipt/" + result;
 						return null;
-	                });
+          });
 			}else{
 				def =  model.submitTransfer(token, total, type)
 					.then(function (result) {
 						nextUrl = "/receipt/" + result;
 						return model.transferAnswers();
 						// return model.saveAnswers();
-	                });
+          });
 			}
 			
-            def.then(function(){
-				$location.path(nextUrl);
-				return null;
-			})
-			.catch(function (err) {
-				console.error("ERROR:", err.toString());
-			})
-			.finally(function () {
-				$.unblockUI();
-			});
+      def
+				.then(function(){
+					$location.path(nextUrl);
+					return null;
+				})
+				.catch(function (err) {
+					console.error("ERROR:", err.data.message.toString());
+					self.stripeError = "ERROR:" + err.data.message.toString();
+				})
+				.finally(function () {
+					$.unblockUI();
+				});
 			return def;
 		};
 				
-		this.submitPayment = function(type){
-			var total = self.otherPaymentAmmount;
+		this.submitPayment = function(opts){
+			var total = opts.amount;
+			var type = opts.type;
 			
 			switch(type){
 			case "credit":
 				if(total > 0){
 					stripe.checkout(total)
-		                .then(function(res){
-		                	return process(res.id, total, type);
-		                });
+            .then(function(res){
+            	return process(res.id, total, type);
+            });
 				}else{
 					return process(null, total, type);
 				}

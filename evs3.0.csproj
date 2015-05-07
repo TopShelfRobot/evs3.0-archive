@@ -79,6 +79,8 @@
     <Content Include="app\common\services\repository.owner.js" />
     <Content Include="app\common\services\routemediator.js" />
     <Content Include="app\dashboard\config.js" />
+    <Content Include="app\dashboard\enterprise\dashboard.html" />
+    <Content Include="app\dashboard\enterprise\dashboard.js" />
     <Content Include="app\dashboard\order\ordercenter.html" />
     <Content Include="app\dashboard\order\ordercenter.js" />
     <Content Include="app\dashboard\surcharge\discounts.html" />

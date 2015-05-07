@@ -104,29 +104,37 @@
         </div>
     </div>
     <br>
-    <div class="row">
-        <div class="col-sm-12 text-center">
-            <h3>Payment Information</h3>
-            <p class="text-muted">We accept all major credit and debit cards</p>
-            <img src="/Content/images/creditcards.png" />
-            <hr>
-            <p class="text-muted">Your card will be charged for the amount of
-                <strong>{{ cart.getTotalPrice() | currency }}</strong>.</p>
-            <p class="has-error">{{stripeError}}</p>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-xs-8 col-xs-offset-2 col-sm-6 col-sm-offset-3">
+		
+   <payment-options 
+	 		payment-price="cart.getTotalPrice()" 
+			payment-error="stripeError" 
+			payment-submit="checkout" 
+			payment-opts="paymentOptions">
+		</payment-options>
+</div>
 
-            <label class="checkbox agreement">
-                <input type="checkbox" data-bind="checked: isTerms" ng-model="$parent.waiverSigned">
-                <a ng-href="#/terms" target="_blank">I accept the Terms and Conditions and the Refund Policy</a>
-            </label>
-            <button type="button" class="btn btn-success btn-block" ng-disabled="(!$parent.waiverSigned) || ($parent.userPaying == 0 && !$parent.fullPaymentRequired) || ($parent.submitDisabled)" ng-click="checkout()">{{confirmButtonText}}
-            </button>
-        </div>
+<!-- <div class="row">
+    <div class="col-sm-12 text-center">
+        <h3>Payment Information</h3>
+        <p class="text-muted">We accept all major credit and debit cards</p>
+        <img src="/Content/images/creditcards.png" />
+        <hr>
+        <p class="text-muted">Your card will be charged for the amount of
+            <strong>{{ cart.getTotalPrice() | currency }}</strong>.</p>
+        <p class="has-error">{{stripeError}}</p>
     </div>
 </div>
+<div class="row">
+    <div class="col-xs-8 col-xs-offset-2 col-sm-6 col-sm-offset-3">
+
+        <label class="checkbox agreement">
+            <input type="checkbox" data-bind="checked: isTerms" ng-model="$parent.waiverSigned">
+            <a ng-href="#/terms" target="_blank">I accept the Terms and Conditions and the Refund Policy</a>
+        </label>
+        <button type="button" class="btn btn-success btn-block" ng-disabled="(!$parent.waiverSigned) || ($parent.userPaying == 0 && !$parent.fullPaymentRequired) || ($parent.submitDisabled)" ng-click="checkout()">{{confirmButtonText}}
+        </button>
+    </div>
+</div> -->
 
 <script type="text/ng-template" id="termsAndConditions.html">
     <div class="modal-header">
