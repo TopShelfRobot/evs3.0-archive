@@ -25,7 +25,6 @@
 			showSelector: config.owner.isAdmin,
 			allowZeroPayment: false,
 			buttonText: cart.regSettings.confirmButtonText,
-			submitDisabled: true,
 		};
 
 		var promises = [

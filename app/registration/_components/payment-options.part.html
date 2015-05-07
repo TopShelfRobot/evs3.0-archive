@@ -75,7 +75,7 @@
               <input type="checkbox" ng-model="waiverSigned">
               <a ng-href="#/terms" target="_blank">I accept the Terms and Conditions and the Refund Policy</a>
             </label>
-            <button type="button" class="btn btn-success btn-block pull-right" ng-disabled="(!waiverSigned) || (paymentAmmount == 0 && !fullPaymentUnderstanding) || (opts.submitDisabled)" ng-click="checkout()">
+            <button type="button" class="btn btn-success btn-block pull-right" ng-disabled="(!waiverSigned) || (paymentAmount == 0 && !fullPaymentUnderstanding)" ng-click="checkout()">
               {{opts.buttonText || 'Complete'}}
             </button>
           </div>
