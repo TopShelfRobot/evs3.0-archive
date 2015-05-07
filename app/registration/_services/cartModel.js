@@ -316,7 +316,7 @@
 
 			i = 0;
 			for (; i < cart.charities.length; i++) {
-				price += parseFloat(cart.charities[i].amount));
+				price += parseFloat(cart.charities[i].amount);
 			}
 
 			return price;
