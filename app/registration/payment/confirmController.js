@@ -28,7 +28,7 @@
 		};
 
 		var promises = [
-			$q.all([datacontext.participant.getParticipantById(cart.ownerId)]) //datacontext.participant.getOwnerById(cart.ownerId),  //TODO:  wtf is this???
+			$q.all([datacontext.participant.getParticipantByHouseId(cart.houseId)]) //datacontext.participant.getOwnerById(cart.ownerId),  //TODO:  wtf is this???
 			.then(function(output) {
 				//var owner = output[0];
 				//$scope.owner = owner;
@@ -139,7 +139,7 @@
 			var order = cart.order();
 
 			if (order.orderAmount > 0) {
-				stripe.checkout(cart.getTotalPrice())
+				stripe.checkout(cart.getTotalPrice(), $scope.house.email)
 					.then(function(res) {
 						console.log(res);
 						$.blockUI({

@@ -1,33 +1,34 @@
-(function () {
-    angular.module("evReg").service("StripeService", ["$q", "config", "CartModel", "authService",  Service]);
-    function Service($q, config, cart, authService) {
+(function() {
+	angular.module("evReg").service("StripeService", ["$q", "config", "CartModel", Service]);
 
-        var service = {};
+	function Service($q, config, cart) {
 
-        service.checkout = function (userPaying) {
+		var service = {};
 
-            var deferred = $q.defer();
+		service.checkout = function(userPaying, email) {
 
-            var token = function (res) {
-                var $input = $('<input type=hidden name=stripeToken />').val(res.id);
-                deferred.resolve(res);
-            };
+			var deferred = $q.defer();
 
-            //console.log(cart.regSettings.stripePublishableKey);
-            StripeCheckout.open({
-                key: cart.regSettings.stripePublishableKey, 
-                address: false,
-                amount: userPaying * 100,  //** expects an integer **/
-                currency: 'usd',
-                name: cart.regSettings.name,
-                description: cart.regSettings.stripeOrderDescription,
-                panelLabel: cart.regSettings.stripeCheckoutButtonText,
-                email: authService.authentication.userName,
-                //image: cart.regSettings.stripeLogoPath,
-                token: token
-            });
-            return deferred.promise;
-        };
-        return service;
-    }
+			var token = function(res) {
+				var $input = $('<input type=hidden name=stripeToken />').val(res.id);
+				deferred.resolve(res);
+			};
+
+			//console.log(cart.regSettings.stripePublishableKey);
+			StripeCheckout.open({
+				key: cart.regSettings.stripePublishableKey,
+				address: false,
+				amount: userPaying * 100, //** expects an integer **/
+				currency: 'usd',
+				name: cart.regSettings.name,
+				description: cart.regSettings.stripeOrderDescription,
+				panelLabel: cart.regSettings.stripeCheckoutButtonText,
+				email: email,
+				//image: cart.regSettings.stripeLogoPath,
+				token: token
+			});
+			return deferred.promise;
+		};
+		return service;
+	}
 })();
