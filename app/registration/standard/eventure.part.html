@@ -1,7 +1,7 @@
 <div id="content" ng-controller="EventureController">
   <div class="row">
     <div class="col-lg-12">
-      <div class="shopping-cart-control">
+      <div class="shopping-cart-control" ng-if="isDash">
         <a class="btn btn-warning" href="#/shoppingcart">View Cart&nbsp;<span class="badge">{{cart.registrations.length}}</span></a>
       </div>
       <div class="clearfix"></div>

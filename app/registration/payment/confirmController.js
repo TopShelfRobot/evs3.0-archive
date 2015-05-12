@@ -1,4 +1,4 @@
-(function () {
+(function() {
 	'use strict';
 
 	var controllerId = "ConfirmController";
@@ -21,15 +21,15 @@
 		$scope.refundsText = cart.regSettings.refundsText;
 
 		// initialize it
-		$scope.submitDisabled = true;
-		//console.log('in confirm');
-		//console.log(cart.ownerId);
-		//console.log(cart.regSettings.eventureName);
-		//console.log(cart.regSettings);
+		$scope.paymentOptions = {
+			showSelector: config.owner.isAdmin,
+			allowZeroPayment: false,
+			buttonText: cart.regSettings.confirmButtonText,
+		};
 
 		var promises = [
 			$q.all([datacontext.participant.getParticipantById(cart.ownerId)]) //datacontext.participant.getOwnerById(cart.ownerId),  //TODO:  wtf is this???
-				.then(function (output) {
+			.then(function(output) {
 				//var owner = output[0];
 				//$scope.owner = owner;
 				var house = output[0];
@@ -38,7 +38,7 @@
 				$('#terms').popover({
 					title: "Terms and Conditions",
 					html: true,
-					content: function () {
+					content: function() {
 						msg = '<div id="popover_content_wrapper"><p>' + cart.regSettings.termsText + '</p></div>';
 						return $(msg).html();
 					},
@@ -49,7 +49,7 @@
 				$('#refund').popover({
 					title: "Refund Policy",
 					html: true,
-					content: function () {
+					content: function() {
 						msg = '<div id="popover_content_wrapper"><p>' + cart.regSettings.refundsText + '</p></div>';
 						return $(msg).html();
 					},
@@ -58,7 +58,7 @@
 					trigger: 'click'
 				});
 			})
-				.finally(function () {
+			.finally(function() {
 				//alert('getting ready to process cart ruls');
 				cart.processCartRules();
 				//console.log(cart.registrations);
@@ -69,7 +69,7 @@
 
 		common.activateController(promises, controllerId);
 
-		$scope.applyCoupon = function () {
+		$scope.applyCoupon = function() {
 
 			$scope.submitDisabled = true;
 			var apiUrl = config.apiPath + "api/coupon/Post"; //mjb
@@ -82,7 +82,7 @@
 			//$http.post(config.apiPath + "api/coupon/Post", source)   //mjb
 			//$http({ type: "POST", url: apiUrl, data: source })
 			$http.post(config.apiPath + "api/coupon/Post", source)
-				.success(function (result) {
+				.success(function(result) {
 					console.log(result);
 					//alert('suc');
 					if (result.Amount !== 0) {
@@ -91,7 +91,7 @@
 						console.log(result.Amount);
 						console.log(result.CouponId);
 						console.log(result.LinkId);
-                        //console.log(result.LinkId);
+						//console.log(result.LinkId);
 						//cart.addSurcharge('Coupon: ' + couponCode, result.Amount, 'coupon', cart.currentEventureListId(), cart.currentPartId, result.CouponId);
 						//(desc, amount, chargeType, listid, partid, couponId)
 						cart.addSurcharge('Coupon: ' + $scope.couponCode, result.Amount, 'coupon', result.LinkId, 0, result.CouponId);
@@ -100,22 +100,22 @@
 						$scope.couponErrors = result.Message;
 					}
 				})
-				.error(function (data, status, headers, config) {
+				.error(function(data, status, headers, config) {
 					//alert('err');
 					$scope.couponErrors = "Coupon Not Found(E1)";
 				})
-				.finally(function () {
+				.finally(function() {
 					//alert('fin');
 					$scope.submitDisabled = false;
 				});
 		};
 
-		$scope.removeCoupons = function () {
+		$scope.removeCoupons = function() {
 			cart.removeCoupons();
 			$scope.couponCode = "";
 		};
 
-		$scope.openTerms = function () {
+		$scope.openTerms = function() {
 			var modalInstance = $modal.open({
 				templateUrl: 'termsAndConditions.html',
 				size: 'lg',
@@ -125,7 +125,7 @@
 			modalInstance.result.then();
 		};
 
-		$scope.openRefund = function () {
+		$scope.openRefund = function() {
 			var modalInstance = $modal.open({
 				templateUrl: 'refundPolicy.html',
 				size: 'lg',
@@ -135,12 +135,12 @@
 			modalInstance.result.then();
 		};
 
-		$scope.checkout = function () {
+		$scope.checkout = function() {
 			var order = cart.order();
 
 			if (order.orderAmount > 0) {
 				stripe.checkout(cart.getTotalPrice())
-					.then(function (res) {
+					.then(function(res) {
 						console.log(res);
 						$.blockUI({
 							message: 'Processing order...'
@@ -148,38 +148,38 @@
 						order.stripeToken = res.id;
 						//$http.post(config.apiPath + "/api/Payment/Post", order)
 						$http.post(config.apiPath + "api/order/Post", order) //mjb
-							.success(function (result) {
+							.success(function(result) {
 								//console.log("result: " + result);
 								$location.path("/orderreceipt/" + result);
 								cart.emptyCart();
 							})
-							.error(function (err) {
+							.error(function(err) {
 								console.log("ERROR:", err.toString());
 								$scope.stripeError = 'ERROR: ' + err.toString();
 							})
-							.finally(function () {
+							.finally(function() {
 								$.unblockUI();
 							});
 					});
 			} else {
 				$http.post(config.apiPath + "api/order/PostZero", order) //mjb
-					.success(function (result) {
+					.success(function(result) {
 						//console.log("result: " + result);
 						$location.path("/orderreceipt/" + result);
 						cart.emptyCart();
 					})
-					.error(function (err) {
+					.error(function(err) {
 						console.log('ERROR:', err.toString());
 						$scope.stripeError = 'ERROR: ' + err.toString();
 					})
-					.finally(function () {
+					.finally(function() {
 						$.unblockUI();
 					});
 			}
 
 		};
 
-		$scope.isConfirm = function () {
+		$scope.isConfirm = function() {
 			return $scope.isTerms && $scope.isRefund;
 		};
 		$scope.title = 'Event';
