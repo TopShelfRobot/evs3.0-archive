@@ -28,7 +28,7 @@
 		};
 
 		var promises = [
-			$q.all([datacontext.participant.getParticipantById(cart.ownerId)]) //datacontext.participant.getOwnerById(cart.ownerId),  //TODO:  wtf is this???
+			$q.all([datacontext.participant.getParticipantByHouseId(cart.houseId)]) //datacontext.participant.getOwnerById(cart.ownerId),  //TODO:  wtf is this???
 			.then(function(output) {
 				//var owner = output[0];
 				//$scope.owner = owner;
@@ -135,49 +135,107 @@
 			modalInstance.result.then();
 		};
 
-		$scope.checkout = function() {
+		$scope.checkout = function(opts) {
 			var order = cart.order();
 
-			if (order.orderAmount > 0) {
-				stripe.checkout(cart.getTotalPrice())
-					.then(function(res) {
-						console.log(res);
-						$.blockUI({
-							message: 'Processing order...'
-						});
-						order.stripeToken = res.id;
-						//$http.post(config.apiPath + "/api/Payment/Post", order)
-						$http.post(config.apiPath + "api/order/Post", order) //mjb
-							.success(function(result) {
-								//console.log("result: " + result);
-								$location.path("/orderreceipt/" + result);
-								cart.emptyCart();
-							})
-							.error(function(err) {
-								console.log("ERROR:", err.toString());
-								$scope.stripeError = 'ERROR: ' + err.toString();
-							})
-							.finally(function() {
-								$.unblockUI();
-							});
-					});
-			} else {
-				$http.post(config.apiPath + "api/order/PostZero", order) //mjb
-					.success(function(result) {
-						//console.log("result: " + result);
-						$location.path("/orderreceipt/" + result);
-						cart.emptyCart();
-					})
-					.error(function(err) {
-						console.log('ERROR:', err.toString());
-						$scope.stripeError = 'ERROR: ' + err.toString();
-					})
-					.finally(function() {
-						$.unblockUI();
-					});
+			order.orderAmount = opts.amount;
+			order.paymentType = opts.type;
+
+			if (config.owner.isAdmin) {
+				order.manualPayment = true;
+				order.notes = opts.notes;
 			}
 
+			var def = $q.when(order);
+			switch (opts.type) {
+				case "credit":
+					if (order.orderAmount > 0) {
+						def = stripe.checkout(order.orderAmount, $scope.house.email)
+							.then(function(res) {
+								order.stripeToken = res.id;
+								return order;
+							});
+					}
+					break;
+				default:
+					break;
+			}
+
+			if (order.orderAmount > 0) {
+				def = def.then(function() {
+					$.blockUI({
+						message: 'Processing order...'
+					});
+					return $http.post(config.apiPath + "api/order/Post", order);
+				});
+			} else {
+				def = def.then(function() {
+					$.blockUI({
+						message: 'Processing order...'
+					});
+					return $http.post(config.apiPath + "api/order/PostZero", order); //mjb
+				});
+			}
+
+			def = def.then(function(reply) {
+					var result = reply.data;
+					cart.emptyCart();
+					$location.path("/orderreceipt/" + result);
+				})
+				.catch(function(reply) {
+					console.log("ERROR:", reply.data.toString());
+					$scope.stripeError = 'ERROR: ' + reply.data.toString();
+				})
+				.finally(function() {
+					$.unblockUI();
+				});
+
+			return def;
 		};
+
+		// $scope.checkout = function() {
+		// 	var order = cart.order();
+
+		// 	if (order.orderAmount > 0) {
+		// 		stripe.checkout(cart.getTotalPrice(), $scope.house.email)
+		// 			.then(function(res) {
+		// 				console.log(res);
+		// 				$.blockUI({
+		// 					message: 'Processing order...'
+		// 				});
+		// 				order.stripeToken = res.id;
+		// 				//$http.post(config.apiPath + "/api/Payment/Post", order)
+		// 				$http.post(config.apiPath + "api/order/Post", order) //mjb
+		// 					.success(function(result) {
+		// 						//console.log("result: " + result);
+		// 						$location.path("/orderreceipt/" + result);
+		// 						cart.emptyCart();
+		// 					})
+		// 					.error(function(err) {
+		// 						console.log("ERROR:", err.toString());
+		// 						$scope.stripeError = 'ERROR: ' + err.toString();
+		// 					})
+		// 					.finally(function() {
+		// 						$.unblockUI();
+		// 					});
+		// 			});
+		// 	} else {
+		// 		$http.post(config.apiPath + "api/order/PostZero", order) //mjb
+		// 			.success(function(result) {
+		// 				//console.log("result: " + result);
+		// 				$location.path("/orderreceipt/" + result);
+		// 				cart.emptyCart();
+		// 			})
+		// 			.error(function(err) {
+		// 				console.log('ERROR:', err.toString());
+		// 				$scope.stripeError = 'ERROR: ' + err.toString();
+		// 			})
+		// 			.finally(function() {
+		// 				$.unblockUI();
+		// 			});
+		// 	}
+
+		// };
 
 		$scope.isConfirm = function() {
 			return $scope.isTerms && $scope.isRefund;
