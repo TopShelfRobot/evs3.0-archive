@@ -100,14 +100,25 @@
 					content: 'Resources'
 				}
 			}
-		}, {
+		},{
+			url: '/reporting',
+			config: {
+				title: 'Reporting',
+				templateUrl: 'app/dashboard/admin/reporting.html',
+				authorized: ['user', 'super-user'],
+				settings: {
+					nav: 9,
+					content: 'Reporting'
+				}
+			}
+		},{
 			url: '/orders',
 			config: {
 				title: 'Orders',
 				templateUrl: 'app/dashboard/order/ordercenter.html',
 				authorized: ['user', 'super-user'],
 				settings: {
-					nav: 9,
+					nav: 10,
 					content: 'Orders'
 				}
 			}
