@@ -337,7 +337,8 @@
 						title: "",
 						width: 100,
 						filterable: false,
-						template: '<a href="\\\#partedit/#=id#" class="btn btn-default btn-block "><em class="glyphicon glyphicon-edit"></em>&nbsp;Edit</a>'
+					    //template: '<a href="\\\#partedit/#=id#" class="btn btn-default btn-block "><em class="glyphicon glyphicon-edit"></em>&nbsp;Edit</a>'
+						template: '<a class="btn btn-default btn-block" href="\\\#user-profile/#=participantGuid#"><em class="glyphicon glyphicon-edit"></em>&nbsp;Edit</a>'
 			}]
 		  };
 		}
@@ -396,7 +397,7 @@
 
 			vm.volunteerDetailGridOptions = function(e) {
 
-				var volunteerApi = config.remoteApiName + 'widget/GetVolunteersByVolunteerJobId/' + e.Id;
+				var volunteerApi = config.remoteApiName + 'widget/GetVolunteersByVolunteerJobId/' + e.id;
 
 				return {
 				  //toolbar: '<a download="download.xlsx" class="k-button" ng-click="vm.excel(vm.detailgrid)"><em class="glyphicon glyphicon-save"></em>&nbsp;Export</a>',
