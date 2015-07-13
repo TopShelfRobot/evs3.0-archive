@@ -116,7 +116,7 @@
 					pageable: true,
 					columns: [{
 						field: 'name',
-						title: 'List',
+						title: 'Event',
 						width: 300
 					}, {
 						field: 'amount',

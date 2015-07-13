@@ -136,46 +136,70 @@
 		};
 
 		$scope.checkout = function(opts) {
-			var order = cart.order();
+		    var order = cart.order();
 
-			order.orderAmount = opts.amount;
-			order.paymentType = opts.type;
+		    order.orderAmount = opts.amount;
+		    order.paymentType = opts.type;
 
-			if (config.owner.isAdmin) {
-				order.manualPayment = true;
-				order.notes = opts.notes;
-			}
+		    if (config.owner.isAdmin) {
+		        order.manualPayment = true;
+		        order.notes = opts.notes;
+		    }
 
-			var def = $q.when(order);
-			switch (opts.type) {
-				case "credit":
-					if (order.orderAmount > 0) {
-						def = stripe.checkout(order.orderAmount, $scope.house.email)
+		    var def = $q.when(order);
+		    switch (opts.type) {
+		        case "credit":
+		            if (order.orderAmount > 0) {
+		                def = stripe.checkout(order.orderAmount, $scope.house.email)
 							.then(function(res) {
-								order.stripeToken = res.id;
-								return order;
+							    order.stripeToken = res.id;
+							    return order;
 							});
-					}
-					break;
-				default:
-					break;
-			}
+		            }
+		            break;
+		        default:
+		            break;
+		    }
 
-			if (order.orderAmount > 0) {
-				def = def.then(function() {
-					$.blockUI({
-						message: 'Processing order...'
-					});
-					return $http.post(config.apiPath + "api/order/Post", order);
-				});
-			} else {
-				def = def.then(function() {
-					$.blockUI({
-						message: 'Processing order...'
-					});
-					return $http.post(config.apiPath + "api/order/PostZero", order); //mjb
-				});
-			}
+		    //alert('boone1');
+		    //alert(opts.type);
+		    console.log(order.manualPayment);
+		    //alert(opts.manualPayment);
+		    //console.table(opts);
+			
+
+		    //if (&&  == 'false')
+
+		    if (order.manualPayment)
+		    {
+		        alert('ManReg');
+		        def = def.then(function () {
+		            $.blockUI({
+		                message: 'Processing order...'
+		            });
+		            return $http.post(config.apiPath + "api/order/PostMan", order);
+		        });
+		    }
+		    else {
+		        if (order.orderAmount > 0) {
+		            alert('Reg');
+		            def = def.then(function () {
+		                $.blockUI({
+		                    message: 'Processing order...'
+		                });
+		                return $http.post(config.apiPath + "api/order/Post", order);
+		            });
+		        } else {
+		            alert('ZeroReg');
+		            def = def.then(function () {
+		                $.blockUI({
+		                    message: 'Processing order...'
+		                });
+		                return $http.post(config.apiPath + "api/order/PostZero", order); //mjb
+		            });
+		        }
+		    }
+			
 
 			def = def.then(function(reply) {
 					var result = reply.data;
